@@ -58,8 +58,9 @@ DEPENDENCY_LINKS = []
 
 # General Requirements
 INSTALL_REQUIRES += [
-    "PyYAML", # Used in mathics.core.characters
-    "ujson", # Used in mathics.core.characters
+    "chardet", # Used in mathics_scanner.feed
+    "PyYAML", # Used in mathics_scanner.characters
+    "ujson", # Used in mathics_scanner.characters
 ]
 
 
