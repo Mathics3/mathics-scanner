@@ -16,16 +16,6 @@ RM  ?= rm
    rmChangeLog \
    test
 
-SANDBOX	?=
-ifeq ($(OS),Windows_NT)
-	SANDBOX = t
-else
-	UNAME_S := $(shell uname -s)
-	ifeq ($(UNAME_S),Darwin)
-		SANDBOX = t
-	endif
-endif
-
 #: Default target - same as "develop"
 all: develop
 
@@ -41,7 +31,7 @@ develop:
 install:
 	$(PYTHON) setup.py install
 
-check: pytest
+test check: pytest
 
 
 #: Remove derived files
