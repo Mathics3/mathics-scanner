@@ -1,3 +1,5 @@
+|Workflows|
+
 Mathics Scanner
 ===============
 
@@ -22,3 +24,5 @@ License
 -------
 
 Mathics is released under the GNU General Public License Version 3 (GPL3).
+
+.. |Workflows| image:: https://github.com/Mathics3/mathics-scanner/workflows/Mathics%20(ubuntu)/badge.svg
