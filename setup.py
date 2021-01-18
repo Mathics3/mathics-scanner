@@ -32,7 +32,7 @@ from setuptools import setup, Command, Extension
 
 # Ensure user has the correct Python version
 if sys.version_info < (3, 6):
-    print("Mathics does not support Python %d.%d" % sys.version_info[:2])
+    print("mathics-scanner does not support Python %d.%d" % sys.version_info[:2])
     sys.exit(-1)
 
 def get_srcdir():
@@ -45,7 +45,7 @@ def read(*rnames):
 
 
 # stores __version__ in the current namespace
-exec(compile(open("mathics/version.py").read(), "mathics/version.py", "exec"))
+exec(compile(open("mathics_scanner/version.py").read(), "mathics_scanner/version.py", "exec"))
 
 # Get/set VERSION and long_description from files
 long_description = read("README.rst") + "\n"
@@ -56,41 +56,10 @@ is_PyPy = platform.python_implementation() == "PyPy"
 INSTALL_REQUIRES = []
 DEPENDENCY_LINKS = []
 
-try:
-    if is_PyPy:
-        raise ImportError
-    from Cython.Distutils import build_ext
-except ImportError:
-    EXTENSIONS = []
-    CMDCLASS = {}
-else:
-    EXTENSIONS = {
-        "core": ["expression", "numbers", "rules", "pattern"],
-        "builtin": ["arithmetic", "numeric", "patterns", "graphics"],
-    }
-    EXTENSIONS = [
-        Extension(
-            "mathics.%s.%s" % (parent, module), ["mathics/%s/%s.py" % (parent, module)]
-        )
-        for parent, modules in EXTENSIONS.items()
-        for module in modules
-    ]
-    CMDCLASS = {"build_ext": build_ext}
-    INSTALL_REQUIRES += ["cython>=0.15.1"]
-
 # General Requirements
 INSTALL_REQUIRES += [
-    "sympy>=1.7, <= 1.8dev",
-    "mpmath>=1.1.0",
-    "numpy",
-    "palettable",
-    "pint",
-    "python-dateutil",
-    "llvmlite",
-    "requests",
-    "scikit-image",
-    "wordcloud", # Used in builtin/image.py by WordCloud()
     "PyYAML", # Used in mathics.core.characters
+    "ujson", # Used in mathics.core.characters
 ]
 
 
@@ -98,86 +67,23 @@ def subdirs(root, file="*.*", depth=10):
     for k in range(depth):
         yield root + "*/" * k + file
 
-
-class test(Command):
-    """
-    Run the unittests
-    """
-
-    description = "run the unittests"
-    user_options = []
-
-    def __init__(self, *args):
-        self.args = args[0]  # so we can pass it to other classes
-        Command.__init__(self, *args)
-
-    def initialize_options(self):  # distutils wants this
-        pass
-
-    def finalize_options(self):  # this too
-        pass
-
-    def run(self):
-        import unittest
-
-        test_loader = unittest.defaultTestLoader
-        test_runner = unittest.TextTestRunner(verbosity=3)
-        test_suite = test_loader.discover("test/")
-        test_result = test_runner.run(test_suite)
-
-        if not test_result.wasSuccessful():
-            sys.exit(1)
-
-
-CMDCLASS["test"] = test
-
-mathjax_files = list(subdirs("media/js/mathjax/"))
-
 setup(
-    name="Mathics3",
-    cmdclass=CMDCLASS,
-    ext_modules=EXTENSIONS,
+    name="Mathics-Scanner",
     version=__version__,
     packages=[
-        "mathics",
-        "mathics.algorithm",
-        "mathics.core",
-        "mathics.core.parser",
-        "mathics.builtin",
-        "mathics.builtin.pymimesniffer",
-        "mathics.builtin.numpy_utils",
-        "mathics.builtin.pympler",
-        "mathics.builtin.compile",
-        "mathics.doc",
+        "mathics_scanner",
     ],
     install_requires=INSTALL_REQUIRES,
     dependency_links=DEPENDENCY_LINKS,
     package_data={
-        "mathics": [
+        "mathics_scanner": [
             "data/*.csv",
             "data/*.yml",
             "data/*.yaml",
+            "data/*.json",
             "data/ExampleData/*",
-            "doc/xml/data",
-            "doc/tex/data",
-            "autoload/formats/*/Import.m",
-            "autoload/formats/*/Export.m",
-            "packages/*/*.m",
-            "packages/*/Kernel/init.m",
-        ],
-        "mathics.doc": ["documentation/*.mdoc", "xml/data"],
-        "mathics.builtin.pymimesniffer": ["mimetypes.xml"],
-        "pymathics": ["doc/documentation/*.mdoc", "doc/xml/data"],
-    },
-    entry_points={
-        "console_scripts": [
-            "mathics = mathics.main:main",
         ],
     },
-    scripts = [
-        "script/dmathicsserver",
-        "script/dmathicsscript",
-    ],
     long_description=long_description,
     long_description_content_type="text/x-rst",
     # don't pack Mathics in egg because of media files, etc.
@@ -187,7 +93,6 @@ setup(
     description="A general-purpose computer algebra system.",
     license="GPL",
     url="https://mathics.org/",
-    download_url="https://github.com/mathics/Mathics/tarball/v1.1dev",
     keywords=["Mathematica", "Wolfram", "Interpreter", "Shell", "Math", "CAS"],
     classifiers=[
         "Intended Audience :: Developers",

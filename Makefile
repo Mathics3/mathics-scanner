@@ -41,7 +41,7 @@ develop:
 install:
 	$(PYTHON) setup.py install
 
-check: pytest gstest doctest
+check: pytest
 
 
 #: Remove derived files
@@ -55,23 +55,6 @@ clean:
 pytest:
 	py.test test $o
 
-
-#: Run a more extensive pattern-matching test
-gstest:
-	(cd examples/symbolic_logic/gries_schneider && $(PYTHON) test_gs.py)
-
-
-#: Create data that is used to in Django docs and to build TeX PDF
-doc-data mathics/doc/tex/data: mathics/builtin/*.py mathics/doc/documentation/*.mdoc mathics/doc/documentation/images/*
-	$(PYTHON) mathics/test.py -ot -k
-
-#: Run tests that appear in docstring in the code.
-doctest:
-	SANDBOX=$(SANDBOX) $(PYTHON) mathics/test.py $o
-
-#: Make Mathics PDF manual
-doc mathics.pdf: mathics/doc/tex/data
-	(cd mathics/doc/tex && $(MAKE) mathics.pdf)
 
 #: Remove ChangeLog
 rmChangeLog:

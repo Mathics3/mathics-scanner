@@ -1,34 +1,16 @@
-Welcome to Mathics!
-===================
+Mathics Scanner
+===============
 
-|Pypi Installs| |Latest Version| |Supported Python Versions| |Travis|_ |SlackStatus|_
+This is the tokeniser or scanner portion for the Wolfram Language.
 
-|Packaging status|
+As such also contains a full set of translation between WL Character names, their Unicode names and code points,
+and other character metadata such as whether the character is "letter like".
 
+Uses
+====
 
-Mathics is a general-purpose computer algebra system (CAS). It is an open-source alternative to Mathematica. It is free both as in "free beer" and as in "freedom".
+This is used as the scanner inside `Mathics <https://mathics.org>`_ but it can also be used for tokenizing and formatting WL code. In fact we intend to write one.
 
-The home page of Mathics is https://mathics.org.
-
-
-ScreenShots
------------
-
-mathicsscript: a text interface
-+++++++++++++++++++++++++++++++
-
-|mathicsscript|
-
-mathicsserver: a Django-based Web interface
-+++++++++++++++++++++++++++++++++++++++++++
-
-|mathicssserver|
-
-
-Installing and Running
-----------------------
-
-See the `readthe docs guide <https://mathics-development-guide.readthedocs.io/en/latest/>`_ for instructions on `installing <https://mathics-development-guide.readthedocs.io/en/latest/installing.html>`_ and `running <https://mathics-development-guide.readthedocs.io/en/latest/running.html>`_.
 
 Contributing
 ------------
@@ -40,17 +22,3 @@ License
 -------
 
 Mathics is released under the GNU General Public License Version 3 (GPL3).
-
-.. |SlackStatus| image:: https://mathics-slackin.herokuapp.com/badge.svg
-.. _SlackStatus: https://mathics-slackin.herokuapp.com/
-.. |Travis| image:: https://secure.travis-ci.org/mathics/Mathics.svg?branch=master
-.. _Travis: https://travis-ci.org/mathics/Mathics
-.. _PyPI: https://pypi.org/project/Mathics/
-.. |mathicsscript| image:: https://mathics.org/screenshots/mathicsscript.png
-.. |mathicssserver| image:: https://mathics.org/screenshots/mathicsserver.png
-.. |Latest Version| image:: https://badge.fury.io/py/Mathics3.svg
-		 :target: https://badge.fury.io/py/Mathics3
-.. |Pypi Installs| image:: https://pepy.tech/badge/Mathics3
-.. |Supported Python Versions| image:: https://img.shields.io/pypi/pyversions/Mathics3.svg
-.. |Packaging status| image:: https://repology.org/badge/vertical-allrepos/mathics.svg
-			    :target: https://repology.org/project/mathics/versions

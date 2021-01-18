@@ -1,4 +1,4 @@
-name: Mathics (OSX)
+name: Mathics (ubuntu)
 
 on:
   push:
@@ -11,7 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        os: [macOS]
         python-version: [3.6, 3.7, 3.8]
     steps:
     - uses: actions/checkout@v2
@@ -22,7 +21,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-    - name: Install Mathics Scanner
+    - name: Install Mathics-Scanner
       run: |
         make
     - name: Test Mathics Scanner
