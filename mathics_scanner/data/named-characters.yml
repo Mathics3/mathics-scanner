@@ -1347,6 +1347,9 @@ DifferenceDelta:
   unicode-equivalent-name: INCREMENT
   wl-unicode: "\u2206"
   wl-unicode-name: INCREMENT
+
+# There was been some discussion as to what to use
+# here. The concensus was this.
 DifferentialD:
   esc-alias: dd
   has-unicode-inverse: true
@@ -2543,6 +2546,11 @@ FormalA:
   unicode-equivalent: "\u1EA1"
   unicode-equivalent-name: LATIN SMALL LETTER A WITH DOT BELOW
   wl-unicode: "\uF800"
+
+# There are a number of "formal" letters - letters with a dot
+# underneath - that do not have a single-character Unicode entry.  In
+# these cases we use a Unicode combining symbol to render an
+# equivalent.
 FormalAlpha:
   esc-alias: .Alpha
   has-unicode-inverse: true
@@ -5135,6 +5143,9 @@ Paragraph:
   unicode-equivalent-name: PILCROW SIGN
   wl-unicode: "\xB6"
   wl-unicode-name: PILCROW SIGN
+
+# https://en.wikipedia.org/wiki/%E2%88%82 seems
+# to agree here.
 PartialD:
   esc-alias: pd
   has-unicode-inverse: false
@@ -6919,6 +6930,12 @@ Upsilon:
   unicode-equivalent-name: GREEK SMALL LETTER UPSILON
   wl-unicode: "\u03C5"
   wl-unicode-name: GREEK SMALL LETTER UPSILON
+
+# The rendering of Uranus at https://reference.wolfram.com/language/ref/character/Uranus.html
+# looks more like U+26E2 (Astronomical Symbol for Uranus) than the Standard Unicode equavalent
+# seen at https://www.compart.com/en/unicode/U+2645.
+# As with the Earth, we are going off of the name and the code point rather than the
+# visual representation of the symbo.
 Uranus:
   has-unicode-inverse: false
   is-letter-like: false
@@ -7010,6 +7027,10 @@ Wedge:
   unicode-equivalent-name: N-ARY LOGICAL AND
   wl-unicode: "\u22C0"
   wl-unicode-name: N-ARY LOGICAL AND
+
+# https://en.wikipedia.org/wiki/Weierstrass%27s_elliptic_functions
+# also confirms this choice as being the right one in both
+# cases.
 WeierstrassP:
   esc-alias: wp
   has-unicode-inverse: false
@@ -7133,4 +7154,3 @@ Zeta:
   unicode-equivalent-name: GREEK SMALL LETTER ZETA
   wl-unicode: "\u03B6"
   wl-unicode-name: GREEK SMALL LETTER ZETA
-
