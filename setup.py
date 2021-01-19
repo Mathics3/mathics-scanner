@@ -29,6 +29,8 @@ import sys
 import os.path as osp
 import platform
 import re
+import json
+import yaml
 from setuptools import setup, Command, Extension
 from setuptools.command.develop import develop
 from setuptools.command.install import install
@@ -130,41 +132,20 @@ def compile_tables(data: dict) -> dict:
         "aliased-characters": aliased_characters,
     }
 
-def pre_install():
-    """Compiles the translation tables and store them on disk"""
-    root_dir = osp.join(osp.abspath(osp.dirname(__file__)), "mathics_scanner/data")
-    print(root_dir)
+with open("mathics_scanner/data/named-characters.yml", "r") as i, open("mathics_scanner/data/characters.json", "w") as o:
+    # Load the YAML data
+    data = yaml.load(i, Loader=yaml.FullLoader)
 
-    with open(osp.join(root_dir, "named-characters.yml"), "r") as i, open(osp.join(root_dir, "characters.json"), "w") as o:
-        import yaml
-        import ujson
+    # Precompile the tables
+    data = compile_tables(data)
 
-        # Load the YAML data
-        data = yaml.load(i, Loader=yaml.FullLoader)
-
-        # Precompile the tables
-        data = compile_tables(data)
-
-        # Dump the proprocessed dictioanries to disk as JSON
-        ujson.dump(data, o)
+    # Dump the proprocessed dictioanries to disk as JSON
+    json.dump(data, o)
 
 
 # NOTE: Calling install.run after self.execute is essencial to make sure that 
 # the JSON files are stored on disk before setuptools copies the files to the
 # installation path
-
-class DevelopCommand(develop):
-    """Installation for development mode."""
-    def run(self):
-        self.execute(pre_install, args=[], msg=pre_install.__doc__)
-        install.run(self)
-
-class InstallCommand(install):
-    """Installation script."""
-    def run(self):
-        self.execute(pre_install, args=[], msg=pre_install.__doc__)
-        install.run(self)
-
 
 setup(
     name="Mathics-Scanner",
@@ -177,8 +158,6 @@ setup(
     package_data={
         "mathics_scanner": [
             "data/*.csv",
-            "data/*.yml",
-            "data/*.yaml",
             "data/*.json",
             "data/ExampleData/*",
         ],
@@ -193,10 +172,6 @@ setup(
     license="GPL",
     url="https://mathics.org/",
     keywords=["Mathematica", "Wolfram", "Interpreter", "Shell", "Math", "CAS"],
-    cmdclass={
-        'install': InstallCommand,
-        'develop': DevelopCommand,
-    },
     classifiers=[
         "Intended Audience :: Developers",
         "Intended Audience :: Science/Research",
