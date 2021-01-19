@@ -29,10 +29,10 @@ import sys
 import os.path as osp
 import platform
 import re
-from setuptools import setup, Command, Extension
+from setuptools import Command, Extension
+from distutils.core import setup
 from setuptools.command.develop import develop
 from setuptools.command.install import install
-from pkg_resources import resource_filename
 
 # Ensure user has the correct Python version
 if sys.version_info < (3, 6):
