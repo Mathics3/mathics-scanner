@@ -20,9 +20,7 @@ jobs:
       - name: Pull the repo locally
         run: git clone "https://github.com/${GITHUB_REPOSITORY}.git" .
       - name: Compile the translation tables
-        run: |
-          ls
-          python admin-tools/compile-translation-tables.py
+        run: python admin-tools/compile-translation-tables.py
       - name: Commit to the repository
         run: |
           git config user.name "GitHub Actions Robot"
