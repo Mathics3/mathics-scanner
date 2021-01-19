@@ -11,11 +11,12 @@ jobs:
   compile:
     runs-on: ubuntu-latest
     steps:
-      - name: Install Dependencies
+      - name: Install Python
         uses: actions/setup-python@v2
         with:
           python-version: 3.9
-        run: pip3 install PyYAML
+      - name: Install PyYAML
+        run: pip install PyYAML
       - name: Compile the translation tables
         run: admin-tools/compile-translation-tables.py
       - name: Commit to the repository
