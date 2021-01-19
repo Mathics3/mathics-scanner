@@ -24,5 +24,4 @@ _Database_/
 build/
 /mathics_scanner/data/characters.json
 dist/
-mathics_scanner/data/characters.json
 tmp
