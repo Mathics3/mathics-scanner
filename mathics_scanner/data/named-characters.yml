@@ -5365,7 +5365,10 @@ RawDot:
 RawDoubleQuote:
   has-unicode-inverse: false
   is-letter-like: false
+  unicode-equivalent: '"'
+  unicode-equivalent-name: QUOTATION MARK
   wl-unicode: '"'
+  wl-unicode-name: QUOTATION MARK
 RawEqual:
   has-unicode-inverse: false
   is-letter-like: false
@@ -5478,6 +5481,8 @@ RawRightParenthesis:
 RawSemicolon:
   has-unicode-inverse: false
   is-letter-like: false
+  unicode-equivalent: ;
+  unicode-equivalent-name: SEMICOLON
   wl-unicode: ;
   wl-unicode-name: SEMICOLON
 RawSlash:
@@ -5504,7 +5509,10 @@ RawStar:
 RawTab:
   has-unicode-inverse: false
   is-letter-like: false
+  unicode-equivalent: "\t"
+  unicode-equivalent-name: HORIZONTAL TABULATION
   wl-unicode: "\t"
+  wl-unicode-name: HORIZONTAL TABULATION
 RawTilde:
   has-unicode-inverse: false
   is-letter-like: false
