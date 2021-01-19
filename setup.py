@@ -28,7 +28,10 @@ mathics-users@googlegroups.com and ask for help.
 import sys
 import os.path as osp
 import platform
+import re
 from setuptools import setup, Command, Extension
+from setuptools.command.develop import develop
+from setuptools.command.install import install
 
 # Ensure user has the correct Python version
 if sys.version_info < (3, 6):
@@ -68,6 +71,88 @@ def subdirs(root, file="*.*", depth=10):
     for k in range(depth):
         yield root + "*/" * k + file
 
+def re_from_keys(d: dict) -> str:
+    return "|".join(re.escape(k) for k in d.keys())
+
+def compile_tables(data: dict) -> dict:
+    """
+    Compiles the general table into the tables used internally by the library
+    for fast access
+    """
+
+    # Conversion from WL to the fully qualified names
+    wl_to_ascii_dict = {v["wl-unicode"]: f"\\[{k}]" for k, v in data.items()}
+    wl_to_ascii_re = re_from_keys(wl_to_ascii_dict)
+
+    # Conversion from wl to unicode
+    wl_to_unicode_dict = {v["wl-unicode"]: v.get("unicode-equivalent") or f"\\[{k}]"
+                         for k, v in data.items()
+                         if "unicode-equivalent" not in v
+                         or v["unicode-equivalent"] != v["wl-unicode"]}
+    wl_to_unicode_re = re_from_keys(wl_to_unicode_dict)
+
+    # Conversion from unicode to wl
+    unicode_to_wl_dict = {v["unicode-equivalent"]: v["wl-unicode"]
+                         for v in data.values()
+                         if "unicode-equivalent" in v
+                         and v["has-unicode-inverse"]}
+    unicode_to_wl_re = re_from_keys(unicode_to_wl_dict)
+
+    # Character ranges of letterlikes
+    letterlikes = "".join(v["wl-unicode"] for v in data.values()
+                          if v["is-letter-like"])
+
+    # All supported named characters
+    named_characters = {k: v["wl-unicode"] for k, v in data.items()}
+
+    # ESC sequence aliases
+    aliased_characters = {v["esc-alias"]: v["wl-unicode"]
+                         for v in data.values() if "esc-alias" in v}
+
+    return {
+        "wl-to-ascii-dict": wl_to_ascii_dict,
+        "wl-to-ascii-re": wl_to_ascii_re,
+        "wl-to-unicode-dict": wl_to_unicode_dict,
+        "wl-to-unicode-re": wl_to_unicode_re,
+        "unicode-to-wl-dict": unicode_to_wl_dict,
+        "unicode-to-wl-re": unicode_to_wl_re,
+        "letterlikes": letterlikes,
+        "named-characters": named_characters,
+        "aliased-characters": aliased_characters,
+    }
+
+def post_install():
+    """Compiles the translation tables and store them on disk"""
+    root_dir = osp.abspath(osp.dirname(__file__))
+    print(root_dir)
+
+    with open(osp.join(root_dir, "mathics_scanner/data/named-characters.yml"), "r") as i, open(osp.join(root_dir, "mathics_scanner/data/characters.json"), "w") as o:
+        import yaml
+        import ujson
+
+        # Load the YAML data
+        data = yaml.load(i, Loader=yaml.FullLoader)
+
+        # Precompile the tables
+        data = compile_tables(data)
+
+        # Dump the proprocessed dictioanries to disk as JSON
+        ujson.dump(data, o)
+
+
+class PostDevelopCommand(develop):
+    """Post-installation for development mode."""
+    def run(self):
+        install.run(self)
+        self.execute(post_install, args=[], msg=post_install.__doc__)
+
+class PostInstallCommand(install):
+    """Post-installation."""
+    def run(self):
+        install.run(self)
+        self.execute(post_install, args=[], msg=post_install.__doc__)
+
+
 setup(
     name="Mathics-Scanner",
     version=__version__,
@@ -95,6 +180,10 @@ setup(
     license="GPL",
     url="https://mathics.org/",
     keywords=["Mathematica", "Wolfram", "Interpreter", "Shell", "Math", "CAS"],
+    cmdclass={
+        'install': PostInstallCommand,
+        'develop': PostDevelopCommand,
+    },
     classifiers=[
         "Intended Audience :: Developers",
         "Intended Audience :: Science/Research",
