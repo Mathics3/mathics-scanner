@@ -2,7 +2,7 @@ name: Compile the translation tables
 env:
   GITHUB_TOKEN: ${{ secrets.github_token }}
   COMMIT_MSG: Compiled the translation tables
-    skip-checks: true
+  skip-checks: true
 on: 
   push:
     branches:
