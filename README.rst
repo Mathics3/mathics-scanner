@@ -5,7 +5,7 @@ Mathics Scanner
 
 This is the tokeniser or scanner portion for the Wolfram Language.
 
-As such also contains a full set of translation between WL Character names, their Unicode names and code points,
+As such, it also contains a full set of translation between WL Character names, their Unicode names and code points,
 and other character metadata such as whether the character is "letter like".
 
 Uses
