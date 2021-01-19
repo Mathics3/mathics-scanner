@@ -17,9 +17,10 @@ jobs:
           python-version: 3.9
       - name: Install PyYAML
         run: pip install PyYAML
+      - name: Pull the repo locally
+        run: git clone "https://github.com/${GITHUB_REPOSITORY}.git" .
       - name: Compile the translation tables
         run: |
-          pwd
           ls
           python admin-tools/compile-translation-tables.py
       - name: Commit to the repository
