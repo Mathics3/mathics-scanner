@@ -32,6 +32,7 @@ import re
 from setuptools import setup, Command, Extension
 from setuptools.command.develop import develop
 from setuptools.command.install import install
+from pkg_resources import resource_filename
 
 # Ensure user has the correct Python version
 if sys.version_info < (3, 6):
@@ -130,12 +131,11 @@ def compile_tables(data: dict) -> dict:
         "aliased-characters": aliased_characters,
     }
 
-def post_install():
+def pre_install():
     """Compiles the translation tables and store them on disk"""
-    root_dir = osp.abspath(osp.dirname(__file__))
-    print(root_dir)
+    root_dir = resource_filename('mathics_scanner', 'data')
 
-    with open(osp.join(root_dir, "mathics_scanner/data/named-characters.yml"), "r") as i, open(osp.join(root_dir, "mathics_scanner/data/characters.json"), "w") as o:
+    with open(osp.join(root_dir, "named-characters.yml"), "r") as i, open(osp.join(root_dir, "characters.json"), "w") as o:
         import yaml
         import ujson
 
@@ -149,17 +149,21 @@ def post_install():
         ujson.dump(data, o)
 
 
-class PostDevelopCommand(develop):
-    """Post-installation for development mode."""
-    def run(self):
-        install.run(self)
-        self.execute(post_install, args=[], msg=post_install.__doc__)
+# NOTE: Calling install.run after self.execute is essencial to make sure that 
+# the JSON files are stored on disk before setuptools copies the files to the
+# installation path
 
-class PostInstallCommand(install):
-    """Post-installation."""
+class DevelopCommand(develop):
+    """Installation for development mode."""
     def run(self):
+        self.execute(pre_install, args=[], msg=pre_install.__doc__)
         install.run(self)
-        self.execute(post_install, args=[], msg=post_install.__doc__)
+
+class InstallCommand(install):
+    """Installation script."""
+    def run(self):
+        self.execute(pre_install, args=[], msg=pre_install.__doc__)
+        install.run(self)
 
 
 setup(
@@ -190,8 +194,8 @@ setup(
     url="https://mathics.org/",
     keywords=["Mathematica", "Wolfram", "Interpreter", "Shell", "Math", "CAS"],
     cmdclass={
-        'install': PostInstallCommand,
-        'develop': PostDevelopCommand,
+        'install': InstallCommand,
+        'develop': DevelopCommand,
     },
     classifiers=[
         "Intended Audience :: Developers",
