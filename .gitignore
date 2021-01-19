@@ -22,6 +22,7 @@ Test/
 _Copies_/
 _Database_/
 build/
+/mathics_scanner/data/characters.json
 dist/
 mathics/Makefile
 tmp
