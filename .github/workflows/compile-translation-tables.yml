@@ -19,7 +19,8 @@ jobs:
         run: pip install PyYAML
       - name: Compile the translation tables
         run: |
-          ls admin-tools
+          pwd
+          ls
           python admin-tools/compile-translation-tables.py
       - name: Commit to the repository
         run: |
