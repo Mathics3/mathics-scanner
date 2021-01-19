@@ -6,8 +6,6 @@ Wolfram-language scanner
 from mathics_scanner.version import __version__
 
 from mathics_scanner.characters import (
-    letterlikes,
-    letters,
     replace_unicode_with_wl,
     replace_wl_with_plain_text,
 )

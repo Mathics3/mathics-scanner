@@ -7,7 +7,7 @@ import string
 
 from mathics_scanner.errors import ScanError
 from mathics_scanner.prescanner import Prescanner
-from mathics_scanner.characters import letters, letterlikes
+from mathics_scanner.characters import _letters, _letterlikes
 
 
 # special patterns
@@ -19,7 +19,7 @@ number_pattern = r"""
 (``?(\+|-)?(\d+\.?\d*|\d*\.?\d+)|`)?        (?# Precision / Accuracy)
 (\*\^(\+|-)?\d+)?                           (?# Exponent)
 """
-base_symbol_pattern = r"((?![0-9])([0-9${0}{1}])+)".format(letters, letterlikes)
+base_symbol_pattern = r"((?![0-9])([0-9${0}{1}])+)".format(_letters, _letterlikes)
 full_symbol_pattern = r"(`?{0}(`{0})*)".format(base_symbol_pattern)
 pattern_pattern = r"{0}?_(\.|(__?)?{0}?)?".format(full_symbol_pattern)
 slot_pattern = r"\#(\d+|{0})?".format(base_symbol_pattern)
@@ -28,6 +28,11 @@ filename_pattern = r"""
     [a-zA-Z0-9\`/\.\\\!\-\:\_\$\*\~\?]+     (?# Literal characters)
 (?P=quote)                                  (?# Closing quotation mark)
 """
+names_wildcards = "@*"
+base_names_pattern = r"((?![0-9])([0-9${0}{1}{2}])+)".format(
+        _letters, _letterlikes, names_wildcards
+)
+full_names_pattern = r"(`?{0}(`{0})*)".format(base_names_pattern)
 
 tokens = [
     ("Definition", r"\? "),
