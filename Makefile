@@ -19,18 +19,20 @@ RM  ?= rm
 #: Default target - same as "develop"
 all: develop
 
+mathics_scanner/data/characters.json: mathics_scanner/data/named-characters.yml
+	$(PIP) install PyYAML
+	$(PYTHON) admin-tools/compile-translation-tables.py
+
 #: build everything needed to install
-build:
+build: mathics_scanner/data/characters.json
 	$(PYTHON) ./setup.py build
 
 #: Set up to run from the source tree
-develop:
-	$(PIP) install PyYAML
+develop: mathics_scanner/data/characters.json
 	$(PIP) install -e .
 
 #: Install mathics
-install:
-	$(PIP) install PyYAML
+install: build
 	$(PYTHON) setup.py install
 
 test check: pytest
