@@ -21,16 +21,19 @@ all: develop
 
 #: build everything needed to install
 build:
+	$(PIP) install PyYAML
 	$(PYTHON) admin-tools/compile-translation-tables.py
 	$(PYTHON) ./setup.py build
 
 #: Set up to run from the source tree
 develop:
+	$(PIP) install PyYAML
 	$(PYTHON) admin-tools/compile-translation-tables.py
 	$(PIP) install -e .
 
 #: Install mathics
 install:
+	$(PIP) install PyYAML
 	$(PYTHON) admin-tools/compile-translation-tables.py
 	$(PYTHON) setup.py install
 
