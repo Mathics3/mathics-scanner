@@ -29,8 +29,7 @@ import sys
 import os.path as osp
 import platform
 import re
-from setuptools import Command, Extension
-from distutils.core import setup
+from setuptools import setup, Command, Extension
 from setuptools.command.develop import develop
 from setuptools.command.install import install
 

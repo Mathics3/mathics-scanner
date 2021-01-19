@@ -25,7 +25,8 @@ build:
 
 #: Set up to run from the source tree
 develop:
-	$(PIP) install -e .
+	$(PYTHON) setup.py install --old-and-unmanageable
+	#$(PIP) install -e .
 
 #: Install mathics
 install:
