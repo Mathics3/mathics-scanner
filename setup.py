@@ -133,7 +133,8 @@ def compile_tables(data: dict) -> dict:
 
 def pre_install():
     """Compiles the translation tables and store them on disk"""
-    root_dir = resource_filename('mathics_scanner', 'data')
+    root_dir = osp.join(osp.abspath(osp.dirname(__file__)), "mathics_scanner/data")
+    print(root_dir)
 
     with open(osp.join(root_dir, "named-characters.yml"), "r") as i, open(osp.join(root_dir, "characters.json"), "w") as o:
         import yaml
