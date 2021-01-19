@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import re
-import yaml
 import ujson
 import os
 import pkg_resources
