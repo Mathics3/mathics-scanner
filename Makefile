@@ -25,11 +25,12 @@ build:
 
 #: Set up to run from the source tree
 develop:
-	$(PYTHON) setup.py install --old-and-unmanageable
-	#$(PIP) install -e .
+	$(PIP) install PyYAML
+	$(PIP) install -e .
 
 #: Install mathics
 install:
+	$(PIP) install PyYAML
 	$(PYTHON) setup.py install
 
 test check: pytest

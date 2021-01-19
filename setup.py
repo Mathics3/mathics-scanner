@@ -30,7 +30,6 @@ import os.path as osp
 import platform
 import re
 import json
-import yaml
 from setuptools import setup, Command, Extension
 from setuptools.command.develop import develop
 from setuptools.command.install import install
@@ -38,6 +37,12 @@ from setuptools.command.install import install
 # Ensure user has the correct Python version
 if sys.version_info < (3, 6):
     print("mathics-scanner does not support Python %d.%d" % sys.version_info[:2])
+    sys.exit(-1)
+
+try:
+    import yaml
+except ImportError:
+    print("mathics-scanner requires PyYAML to be installed before installation")
     sys.exit(-1)
 
 def get_srcdir():
