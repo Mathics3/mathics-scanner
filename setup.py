@@ -72,7 +72,16 @@ def subdirs(root, file="*.*", depth=10):
         yield root + "*/" * k + file
 
 def re_from_keys(d: dict) -> str:
-    return "|".join(re.escape(k) for k in d.keys())
+    """
+    Takes dictionary whose keys are all strings and returns a regex that 
+    matches any of the keys
+    """
+
+    # The sorting is necessary to prevent the shorter keys from obscuring the 
+    # longer ones when pattern-matchig
+    return "|".join(
+        sorted(map(re.escape, d.keys()), key=lambda k: (-len(k), k))
+    )
 
 def compile_tables(data: dict) -> dict:
     """
