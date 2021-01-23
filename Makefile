@@ -40,10 +40,7 @@ test check: pytest
 
 #: Remove derived files
 clean:
-	rm mathics/*/*.so; \
-	for dir in mathics/doc ; do \
-	   ($(MAKE) -C "$$dir" clean); \
-	done;
+	@find . -name *.pyc -type f -delete;
 
 #: Run py.test tests. Use environment variable "o" for pytest options
 pytest:
