@@ -69,7 +69,7 @@ def subdirs(root, file="*.*", depth=10):
 
 
 setup(
-    name="Mathics-Scanner",
+    name="Mathics_Scanner",
     version=__version__,
     packages=[
         "mathics_scanner",
