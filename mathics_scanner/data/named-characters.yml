@@ -6943,7 +6943,7 @@ Upsilon:
 # looks more like U+26E2 (Astronomical Symbol for Uranus) than the Standard Unicode equavalent
 # seen at https://www.compart.com/en/unicode/U+2645.
 # As with the Earth, we are going off of the name and the code point rather than the
-# visual representation of the symbo.
+# visual representation of the symbol.
 Uranus:
   has-unicode-inverse: false
   is-letter-like: false
