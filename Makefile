@@ -20,8 +20,8 @@ RM  ?= rm
 all: develop
 
 mathics_scanner/data/characters.json: mathics_scanner/data/named-characters.yml
-	$(PIP) install PyYAML
-	$(PYTHON) admin-tools/compile-translation-tables.py
+	$(PIP) install -r requirements-dev.txt
+	$(PYTHON) mathics_scanner/build_tables.py
 
 #: build everything needed to install
 build: mathics_scanner/data/characters.json
@@ -40,10 +40,11 @@ test check: pytest
 
 #: Remove derived files
 clean:
-	@find . -name *.pyc -type f -delete;
+	@find . -name *.pyc -type f -delete; \
+	$(RM) -f mathics_scanner/data/characters.json || true
 
 #: Run py.test tests. Use environment variable "o" for pytest options
-pytest:
+pytest: mathics_scanner/data/characters.json
 	py.test test $o
 
 
