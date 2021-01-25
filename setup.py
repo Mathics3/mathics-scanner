@@ -28,6 +28,7 @@ mathics-users@googlegroups.com and ask for help.
 import sys
 import os.path as osp
 import platform
+import subprocess
 from setuptools import setup, Command, Extension
 
 # Ensure user has the correct Python version
@@ -43,6 +44,7 @@ def get_srcdir():
 def read(*rnames):
     return open(osp.join(get_srcdir(), *rnames)).read()
 
+subprocess.run(["make", "mathics_scanner/data/characters.json"])
 
 # stores __version__ in the current namespace
 exec(compile(open("mathics_scanner/version.py").read(), "mathics_scanner/version.py", "exec"))
