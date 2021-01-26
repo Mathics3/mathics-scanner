@@ -4426,7 +4426,7 @@ LongDash:
   wl-unicode-name: EM DASH
 LongEqual:
   esc-alias: l=
-  has-unicode-inverse: true
+  has-unicode-inverse: false
   is-letter-like: false
   unicode-equivalent: '='
   unicode-equivalent-name: EQUALS SIGN
