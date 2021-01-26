@@ -4428,8 +4428,8 @@ LongEqual:
   esc-alias: l=
   has-unicode-inverse: true
   is-letter-like: false
-  unicode-equivalent: '＝'
-  unicode-equivalent-name: FULLWIDTH EQUALS SIGN
+  unicode-equivalent: '=='
+  unicode-equivalent-name: EQUALS SIGN + EQUALS SIGN
   wl-unicode: "\uF7D9"
 LongLeftArrow:
   esc-alias: <--
