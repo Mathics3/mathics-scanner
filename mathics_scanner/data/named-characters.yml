@@ -4426,10 +4426,10 @@ LongDash:
   wl-unicode-name: EM DASH
 LongEqual:
   esc-alias: l=
-  has-unicode-inverse: false
+  has-unicode-inverse: true
   is-letter-like: false
-  unicode-equivalent: '='
-  unicode-equivalent-name: EQUALS SIGN
+  unicode-equivalent: '＝'
+  unicode-equivalent-name: FULLWIDTH EQUALS SIGN
   wl-unicode: "\uF7D9"
 LongLeftArrow:
   esc-alias: <--
