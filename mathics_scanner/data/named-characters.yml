@@ -1096,7 +1096,7 @@ Conditioned:
   is-letter-like: false
   wl-unicode: "\uF3D3"
 Congruent:
-  esc-alias: Err:510
+  esc-alias: ===
   has-unicode-inverse: false
   is-letter-like: false
   unicode-equivalent: "\u2261"
@@ -1526,7 +1526,7 @@ DoubleLongLeftRightArrow:
   wl-unicode: "\u27FA"
   wl-unicode-name: LONG LEFT RIGHT DOUBLE ARROW
 DoubleLongRightArrow:
-  esc-alias: Err:510
+  esc-alias: ==>
   has-unicode-inverse: false
   is-letter-like: false
   unicode-equivalent: "\u27F9"
@@ -1542,7 +1542,7 @@ DoublePrime:
   wl-unicode: "\u2033"
   wl-unicode-name: DOUBLE PRIME
 DoubleRightArrow:
-  esc-alias: =>
+  esc-alias: ' =>'
   has-unicode-inverse: false
   is-letter-like: false
   unicode-equivalent: "\u21D2"
@@ -4007,7 +4007,7 @@ ImplicitPlus:
   is-letter-like: false
   wl-unicode: "\uF39E"
 Implies:
-  esc-alias: Err:510
+  esc-alias: =>
   has-unicode-inverse: true
   is-letter-like: false
   unicode-equivalent: "\u27F9"
