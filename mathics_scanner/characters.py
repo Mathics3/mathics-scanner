@@ -9,7 +9,7 @@ import pkg_resources
 ROOT_DIR = pkg_resources.resource_filename("mathics_scanner", "")
 
 # Load the conversion tables from disk
-with open(os.path.join(ROOT_DIR, "data/characters.json"), "r") as f:
+with open(os.path.join(ROOT_DIR, "data", "characters.json"), "r") as f:
     _data = ujson.load(f)
 
 # Character ranges of letters
