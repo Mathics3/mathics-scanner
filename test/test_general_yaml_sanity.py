@@ -49,7 +49,7 @@ def check_unicode_name(yaml_data: dict):
     for k, v in yaml_data.items():
         # Hack to skip characters that are correct but that doesn't show up in 
         # unicodedata.name
-        if k, v["unicode-equivalent-name"] == "RawTab", "HORIZONTAL TABULATION":
+        if k == "RawTab" and v["unicode-equivalent-name"] == "HORIZONTAL TABULATION":
             continue
 
         if "unicode-equivalent" in v:
