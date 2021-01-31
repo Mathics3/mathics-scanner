@@ -44,8 +44,21 @@ def compile_tables(data: dict) -> dict:
     for fast access
     """
 
+    # Multiple entries in the YAML table are redundant in the following sence:
+    # when a character has a plain-text equivalent but the plain-text
+    # equivalent is equal to it's WL unicode representation (i.e. the
+    # "wl-unicode" field is the same as the "unicode-equivalent" field) then it
+    # is considered rendundant for us, since no conversion is needed.
+    # 
+    # As an optimization, we explicit remove any redundant characters from all
+    # JSON tables. This makes the tables smaller (therefore easier to load), as
+    # well as the correspond regex patterns. This implies that not all
+    # characters that have a unicode equivalent are included in `wl_to_ascii`
+    # or `wl_to_unicode_dict`. Furthermore, this implies that not all
+    # characters that have a unicode inverse are included in
+    # `unicode_to_wl_dict`
+
     # Conversion from WL to the fully qualified names
-    # We filter the dictionary after it's first created to redundant entries
     wl_to_ascii_dict = {v["wl-unicode"]: get_plain_text(k, v, False)
                         for k, v in data.items()}
     wl_to_ascii_dict = {k: v for k, v in wl_to_ascii_dict.items() if k != v}
