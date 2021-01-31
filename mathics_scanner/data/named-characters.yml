@@ -4047,7 +4047,7 @@ InvisibleApplication:
   unicode-equivalent-name: ''
   wl-unicode: "\uF76D"
 InvisibleComma:
-  has-unicode-inverse: false
+  has-unicode-inverse: true
   is-letter-like: false
   unicode-equivalent: "\u2063"
   unicode-equivalent-name: INVISIBLE SEPARATOR
