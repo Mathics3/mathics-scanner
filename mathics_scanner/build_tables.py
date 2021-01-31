@@ -43,6 +43,7 @@ def compile_tables(data: dict) -> dict:
     """
 
     # Conversion from WL to the fully qualified names
+    # We filter the dictionary after it's first created to redundant entries
     wl_to_ascii_dict = {v["wl-unicode"]: get_plain_text(k, v, False)
                         for k, v in data.items()}
     wl_to_ascii_dict = {k: v for k, v in wl_to_ascii_dict.items() if k != v}
@@ -57,6 +58,7 @@ def compile_tables(data: dict) -> dict:
     wl_to_unicode_re = re_from_keys(wl_to_unicode_dict)
 
     # Conversion from unicode to wl
+    # We filter the dictionary after it's first created to redundant entries
     unicode_to_wl_dict = {v["unicode-equivalent"]: v["wl-unicode"]
                           for v in data.values()
                           if "unicode-equivalent" in v
