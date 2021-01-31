@@ -6,8 +6,8 @@ import json
 
 
 def check_roundtrip(yaml_data: dict, json_data: dict):
-    wl_to_unicode_dict = json_data["wl-to-unicode"]
-    unicode_to_wl_dict = json_data["unicode-to-wl"]
+    wl_to_unicode_dict = json_data["wl-to-unicode-dict"]
+    unicode_to_wl_dict = json_data["unicode-to-wl-dict"]
 
     for k, v in yaml_data.items():
         if v["has-unicode-inverse"]:

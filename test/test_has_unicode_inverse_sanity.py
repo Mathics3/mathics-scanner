@@ -29,7 +29,7 @@ def check_has_unicode_inverse_sanity(yaml_data: dict, json_data: dict):
 
     for uni, wl in unicode_to_wl_dict.items():
         assert (
-            any(v["wl-unicode"] == wl and v.get("unicode-equivalent") == uni and v["has-unicode-inveser"] for v in yaml_data.values())
+            any(v["wl-unicode"] == wl and v.get("unicode-equivalent") == uni and v["has-unicode-inverse"] for v in yaml_data.values())
         ), f"key {uni} is in unicode-to-wl-dict but there is not corresponding entry in the YAML table"
 
                 
