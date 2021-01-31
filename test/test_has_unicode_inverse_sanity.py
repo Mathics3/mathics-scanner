@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from mathics_scanner.generate.build_tables import DEFAULT_DATA_DIR
-from mathics_scanner.characters import replace_wl_with_plain_text as wl_to_unicode
-from mathics_scanner.characters import replace_unicode_with_wl as unicode_to_wl
 import yaml
 
 def check_has_unicode_inverse_sanity(yaml_data: dict):
