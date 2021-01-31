@@ -42,7 +42,7 @@ def check_wl_unicode_name(yaml_data: dict):
 
         assert (
             real_name == expected_name
-        ), f"{k} has wl-unicode-name set to {real_name} but it should be {expected name}"
+        ), f"{k} has wl-unicode-name set to {real_name} but it should be {expected_name}"
 
 
 def check_unicode_name(yaml_data: dict):
@@ -62,7 +62,7 @@ def check_unicode_name(yaml_data: dict):
 
             assert (
                 real_name == expected_name
-            ), f"{k} has wl-unicode-name set to {real_name} but it should be {expected name}"
+            ), f"{k} has wl-unicode-name set to {real_name} but it should be {expected_name}"
         else:
             assert (
                 "unicode-equivalent-name" not in v
