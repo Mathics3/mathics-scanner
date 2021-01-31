@@ -18,6 +18,24 @@ def re_from_keys(d: dict) -> str:
         sorted(map(re.escape, d.keys()), key=lambda k: (-len(k), k))
     )
 
+def get_plain_text(char_name: str, char_data: dict, use_unicode: bool) -> str:
+    """
+    Takes in data about a named character and returns the appropriate
+    plain text representation according to use_unicode
+    """
+    uni = char_data.get("unicode-equivalent")
+
+    if uni is not None:
+        if use_unicode:
+            return uni
+
+        # If all of the characters in the unicode representation are valid
+        # ASCII then return the unicode representation
+        elif all(ord(c) < 127 for c in uni): 
+            return uni
+
+    return f"\\[{char_name}]"
+
 def compile_tables(data: dict) -> dict:
     """
     Compiles the general table into the tables used internally by the library
@@ -25,21 +43,28 @@ def compile_tables(data: dict) -> dict:
     """
 
     # Conversion from WL to the fully qualified names
-    wl_to_ascii_dict = {v["wl-unicode"]: f"\\[{k}]" for k, v in data.items()}
+    # We filter the dictionary after it's first created to redundant entries
+    wl_to_ascii_dict = {v["wl-unicode"]: get_plain_text(k, v, False)
+                        for k, v in data.items()}
+    wl_to_ascii_dict = {k: v for k, v in wl_to_ascii_dict.items() if k != v}
     wl_to_ascii_re = re_from_keys(wl_to_ascii_dict)
 
     # Conversion from wl to unicode
-    wl_to_unicode_dict = {v["wl-unicode"]: v.get("unicode-equivalent") or f"\\[{k}]"
-                         for k, v in data.items()
-                         if "unicode-equivalent" not in v
-                         or v["unicode-equivalent"] != v["wl-unicode"]}
+    # We filter the dictionary after it's first created to redundant entries
+    wl_to_unicode_dict = {v["wl-unicode"]: get_plain_text(k, v, True)
+                          for k, v in data.items()}
+    wl_to_unicode_dict = {k: v for k, v in wl_to_unicode_dict.items() 
+                          if k != v}
     wl_to_unicode_re = re_from_keys(wl_to_unicode_dict)
 
     # Conversion from unicode to wl
+    # We filter the dictionary after it's first created to redundant entries
     unicode_to_wl_dict = {v["unicode-equivalent"]: v["wl-unicode"]
-                         for v in data.values()
-                         if "unicode-equivalent" in v
-                         and v["has-unicode-inverse"]}
+                          for v in data.values()
+                          if "unicode-equivalent" in v
+                          and v["has-unicode-inverse"]}
+    unicode_to_wl_dict = {k: v for k, v in unicode_to_wl_dict.items() 
+                          if k != v}
     unicode_to_wl_re = re_from_keys(unicode_to_wl_dict)
 
     # Character ranges of letterlikes
@@ -51,7 +76,7 @@ def compile_tables(data: dict) -> dict:
 
     # ESC sequence aliases
     aliased_characters = {v["esc-alias"]: v["wl-unicode"]
-                         for v in data.values() if "esc-alias" in v}
+                          for v in data.values() if "esc-alias" in v}
 
     return {
         "wl-to-ascii-dict": wl_to_ascii_dict,

@@ -1096,7 +1096,7 @@ Conditioned:
   is-letter-like: false
   wl-unicode: "\uF3D3"
 Congruent:
-  esc-alias: Err:510
+  esc-alias: ===
   has-unicode-inverse: false
   is-letter-like: false
   unicode-equivalent: "\u2261"
@@ -1526,7 +1526,7 @@ DoubleLongLeftRightArrow:
   wl-unicode: "\u27FA"
   wl-unicode-name: LONG LEFT RIGHT DOUBLE ARROW
 DoubleLongRightArrow:
-  esc-alias: Err:510
+  esc-alias: ==>
   has-unicode-inverse: false
   is-letter-like: false
   unicode-equivalent: "\u27F9"
@@ -1542,7 +1542,7 @@ DoublePrime:
   wl-unicode: "\u2033"
   wl-unicode-name: DOUBLE PRIME
 DoubleRightArrow:
-  esc-alias: =>
+  esc-alias: ' =>'
   has-unicode-inverse: false
   is-letter-like: false
   unicode-equivalent: "\u21D2"
@@ -4003,11 +4003,13 @@ ImaginaryJ:
   wl-unicode: "\uF74F"
 ImplicitPlus:
   esc-alias: +
-  has-unicode-inverse: false
+  has-unicode-inverse: true
   is-letter-like: false
+  unicode-equivalent: "\u2064"
+  unicode-equivalent-name: INVISIBLE PLUS
   wl-unicode: "\uF39E"
 Implies:
-  esc-alias: Err:510
+  esc-alias: =>
   has-unicode-inverse: true
   is-letter-like: false
   unicode-equivalent: "\u27F9"
@@ -4041,29 +4043,41 @@ InvisibleApplication:
   esc-alias: '@'
   has-unicode-inverse: false
   is-letter-like: false
+  unicode-equivalent: ''
+  unicode-equivalent-name: ''
   wl-unicode: "\uF76D"
 InvisibleComma:
-  has-unicode-inverse: false
+  has-unicode-inverse: true
   is-letter-like: false
+  unicode-equivalent: "\u2063"
+  unicode-equivalent-name: INVISIBLE SEPARATOR
   wl-unicode: "\uF765"
 InvisiblePostfixScriptBase:
   esc-alias: -i
   has-unicode-inverse: false
   is-letter-like: false
+  unicode-equivalent: ''
+  unicode-equivalent-name: ''
   wl-unicode: "\uF3B4"
 InvisiblePrefixScriptBase:
   esc-alias: i-
   has-unicode-inverse: false
   is-letter-like: false
+  unicode-equivalent: ''
+  unicode-equivalent-name: ''
   wl-unicode: "\uF3B3"
 InvisibleSpace:
   esc-alias: is
   has-unicode-inverse: false
   is-letter-like: false
+  unicode-equivalent: ''
+  unicode-equivalent-name: ''
   wl-unicode: "\uF360"
 InvisibleTimes:
-  has-unicode-inverse: false
+  has-unicode-inverse: true
   is-letter-like: false
+  unicode-equivalent: "\u2062"
+  unicode-equivalent-name: INVISIBLE TIMES
   wl-unicode: "\u2062"
   wl-unicode-name: INVISIBLE TIMES
 Iota:
@@ -4428,8 +4442,8 @@ LongEqual:
   esc-alias: l=
   has-unicode-inverse: true
   is-letter-like: false
-  unicode-equivalent: '='
-  unicode-equivalent-name: EQUALS SIGN
+  unicode-equivalent: '=='
+  unicode-equivalent-name: EQUALS SIGN + EQUALS SIGN
   wl-unicode: "\uF7D9"
 LongLeftArrow:
   esc-alias: <--
