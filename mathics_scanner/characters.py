@@ -46,8 +46,20 @@ aliased_characters = _data["aliased-characters"]
 
 def replace_wl_with_plain_text(wl_input: str, use_unicode=True) -> str:
     """
-    WL uses some non-unicode character for various things.
-    Replace them with the unicode equivalent.
+    The Wolfram Language uses specific Unicode characters to represent Wolfram
+    Language named characters. This functions replaces all occurrences of such
+    characters with their corresponding Unicode/ASCII equivalents.
+
+    @param: wl_input    The string whose characters will be replaced. 
+    @param: use_unicode A flag that indicates whether to use Unicode or ASCII 
+                        for the conversion.
+
+    Note that the occurrences of named characters in ``wl_input`` are expect to
+    be represented by Wolfram's internal scheme. For more information Wolfram's
+    representation scheme and on our own conversion scheme please see `Listing
+    of Named Characters
+    <https://reference.wolfram.com/language/guide/ListingOfNamedCharacters.html>`_
+    and ``implementation.rst`` respectively.
     """
     r = _wl_to_unicode_re if use_unicode else _wl_to_ascii_re
     d = _wl_to_unicode if use_unicode else _wl_to_ascii
@@ -56,8 +68,19 @@ def replace_wl_with_plain_text(wl_input: str, use_unicode=True) -> str:
 
 def replace_unicode_with_wl(unicode_input: str) -> str:
     """
-    WL uses some non-unicode character for various things.
-    Replace their unicode equivalent with them.
+    The Wolfram Language uses specific Unicode characters to represent Wolfram
+    Language named characters. This functions replaces all occurrences of the
+    corresponding Unicode equivalents of such characters with the characters
+    themselves.
+
+    @param: unicode_input The string whose characters will be replaced. 
+
+    Note that the occurrences of named characters in the output of
+    ``replace_unicode_with_wl`` are represented using Wolfram's internal
+    scheme. For more information Wolfram's representation scheme and on our own
+    conversion scheme please see `Listing of Named Characters
+    <https://reference.wolfram.com/language/guide/ListingOfNamedCharacters.html>`_
+    and ``implementation.rst`` respectively.
     """
     return _unicode_to_wl_re.sub(
         lambda m: _unicode_to_wl[m.group(0)], unicode_input

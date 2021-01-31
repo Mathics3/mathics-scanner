@@ -5,40 +5,40 @@ Mathics Scanner
 
 This is the tokeniser or scanner portion for the Wolfram Language.
 
-As such, it also contains a full set of translation between WL Character names, their Unicode names and code points,
-and other character metadata such as whether the character is "letter like".
+As such, it also contains a full set of translation between Wolfram Language
+named characters, their Unicode/ASCII equivalents and code-points.
 
 Uses
-====
+----
 
-This is used as the scanner inside `Mathics <https://mathics.org>`_ but it can also be used for tokenizing and formatting WL code. In fact we intend to write one.
+This is used as the scanner inside `Mathics <https://mathics.org>`_ but it can
+also be used for tokenizing and formatting Wolfram Language code. In fact we
+intend to write one. This library is also quite usefull if you need to work
+with Wolfram Language named character and convert them to various formats.
+
+Usage
+-----
+
+- For tokenizing and scanning Wolfram Language code, use the
+  ``mathics_scanner.tokenizer.Tokenizer`` class.
+- To convert between Wolfram Language named characters and Unicode/ASCII, use
+  the ``mathics_scanner.characters.replace_wl_with_plain_text`` and
+  ``mathics_scanner.characters.replace_unicode_with_wl`` functions. 
+- To convert between qualified names of named characters (such ``FormalA`` for
+  ``\[FormalA]``) and Wolfram's internal representation use the
+  ``m̀athics_scanner.characters.named_characters`` dictionary.
 
 Implementation
-==============
+--------------
 
-mathics_scaner.characters
--------------------------
-
-This module consists mostly of translation tables between WL and unicode/ascii. 
-Because of the large size of this tables, it was decided to store them in a
-file and read them from disk at runtime (when the module is imported). Our
-tests showed that storing the tables as JSON and using
-`ujson <https://github.com/ultrajson/ultrajson>`_ to read them is the most
-efficient way to access them. However, this is merelly an implementation
-detail and consumers of this library should not relly on this assumption.
-
-For maintainability and effeciency, we decided to store this data in a
-human-readable YAML file (`data/named-characters.yml`) and compile them into
-the JSON tables used internally by the library (`data/characters.json`) for
-faster access at runtime. The conversion of the data is performed by the
-script `mathics_scanner/build-tables.py`.
-
+For notes on the implementation of the packages or details on the conversion
+scheme please read ``implementation.rst``.
 
 Contributing
 ------------
 
-Please feel encouraged to contribute to Mathics! Create your own fork, make the desired changes, commit, and make a pull request.
-
+Please feel encouraged to contribute to this package or Mathics! Create your
+own fork, make the desired changes, commit, and make a pull request.
 
 License
 -------
@@ -46,3 +46,4 @@ License
 Mathics is released under the GNU General Public License Version 3 (GPL3).
 
 .. |Workflows| image:: https://github.com/Mathics3/mathics-scanner/workflows/Mathics%20(ubuntu)/badge.svg
+
