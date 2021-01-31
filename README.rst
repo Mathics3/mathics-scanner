@@ -23,7 +23,7 @@ This module consists mostly of translation tables between WL and unicode/ascii.
 Because of the large size of this tables, it was decided to store them in a
 file and read them from disk at runtime (when the module is imported). Our
 tests showed that storing the tables as JSON and using
-[ujson](https://github.com/ultrajson/ultrajson) to read them is the most
+`ujson <https://github.com/ultrajson/ultrajson>`_ to read them is the most
 efficient way to access them. However, this is merelly an implementation
 detail and consumers of this library should not relly on this assumption.
 
