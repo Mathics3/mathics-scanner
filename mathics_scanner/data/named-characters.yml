@@ -1046,7 +1046,7 @@ ClockwiseContourIntegral:
   wl-unicode: "\u2232"
   wl-unicode-name: CLOCKWISE CONTOUR INTEGRAL
 CloseCurlyDoubleQuote:
-  esc-alias: ']'
+  esc-alias: ']"'
   has-unicode-inverse: false
   is-letter-like: false
   unicode-equivalent: "\u201D"
@@ -1296,11 +1296,9 @@ Del:
   wl-unicode: "\u2207"
   wl-unicode-name: NABLA
 DeleteKey:
-  esc-alias: del
+  esc-alias: ' del'
   has-unicode-inverse: false
   is-letter-like: false
-  unicode-equivalent: "\uF7D0"
-  unicode-equivalent-name: "\uF7D0"
   wl-unicode: "\uF7D0"
 Delta:
   esc-alias: d
@@ -1487,7 +1485,7 @@ DoubleDownArrow:
   wl-unicode: "\u21D3"
   wl-unicode-name: DOWNWARDS DOUBLE ARROW
 DoubleLeftArrow:
-  esc-alias: <=
+  esc-alias: ' <='
   has-unicode-inverse: false
   is-letter-like: false
   unicode-equivalent: "\u21D0"
@@ -2005,7 +2003,7 @@ DoubleUpDownArrow:
   wl-unicode: "\u21D5"
   wl-unicode-name: UP DOWN DOUBLE ARROW
 DoubleVerticalBar:
-  esc-alias: '||'
+  esc-alias: ' ||'
   has-unicode-inverse: false
   is-letter-like: false
   unicode-equivalent: "\u2225"
@@ -2052,7 +2050,7 @@ DownBreve:
   has-unicode-inverse: true
   is-letter-like: true
   unicode-equivalent: " \u0311"
-  unicode-equivalent-name: COMBINING INVERTED BREVE
+  unicode-equivalent-name: SPACE + COMBINING INVERTED BREVE
   wl-unicode: "\uF755"
 DownExclamation:
   esc-alias: d!
@@ -2201,7 +2199,7 @@ Earth:
   has-unicode-inverse: false
   is-letter-like: false
   unicode-equivalent: "\u2641"
-  unicode-equivalent-name: CIRCLED PLUS
+  unicode-equivalent-name: EARTH
   wl-unicode: "\u2641"
   wl-unicode-name: EARTH
 EighthNote:
@@ -2360,7 +2358,7 @@ ErrorIndicator:
   is-letter-like: false
   wl-unicode: "\uF767"
 EscapeKey:
-  esc-alias: esc
+  esc-alias: ' esc'
   has-unicode-inverse: false
   is-letter-like: true
   wl-unicode: "\uF769"
@@ -2703,8 +2701,7 @@ FormalCapitalIota:
   has-unicode-inverse: false
   is-letter-like: false
   unicode-equivalent: "\u0399\u0323"
-  unicode-equivalent-name: GREEK CAPITAL LETTER IOTA + COMBINING DOT BELOW + COMBINING
-    DOT BELOW
+  unicode-equivalent-name: GREEK CAPITAL LETTER IOTA + COMBINING DOT BELOW
   wl-unicode: "\uF83C"
 FormalCapitalJ:
   esc-alias: .J
@@ -3103,8 +3100,7 @@ FormalIota:
   has-unicode-inverse: true
   is-letter-like: false
   unicode-equivalent: "\u0399\u0323"
-  unicode-equivalent-name: GREEK CAPITAL LETTER IOTA + COMBINING DOT BELOW + COMBINING
-    DOT BELOW
+  unicode-equivalent-name: GREEK CAPITAL LETTER IOTA + COMBINING DOT BELOW
   wl-unicode: "\uF85C"
 FormalJ:
   esc-alias: .j
@@ -3911,10 +3907,10 @@ HeartSuit:
   wl-unicode-name: WHITE HEART SUIT
 HermitianConjugate:
   esc-alias: hc
-  has-unicode-inverse: false
+  has-unicode-inverse: true
   is-letter-like: false
-  unicode-equivalent: "\uF3CE"
-  unicode-equivalent-name: "\uF3CE"
+  unicode-equivalent: "\u22B9"
+  unicode-equivalent-name: HERMITIAN CONJUGATE MATRIX
   wl-unicode: "\uF3CE"
 HorizontalLine:
   esc-alias: hline
@@ -5098,7 +5094,7 @@ Omicron:
   wl-unicode: "\u03BF"
   wl-unicode-name: GREEK SMALL LETTER OMICRON
 OpenCurlyDoubleQuote:
-  esc-alias: '['
+  esc-alias: '["'
   has-unicode-inverse: false
   is-letter-like: false
   unicode-equivalent: "\u201C"
@@ -5572,7 +5568,7 @@ ReturnIndicator:
   wl-unicode: "\u21B5"
   wl-unicode-name: DOWNWARDS ARROW WITH CORNER LEFTWARDS
 ReturnKey:
-  esc-alias: ret
+  esc-alias: ' ret'
   has-unicode-inverse: false
   is-letter-like: true
   unicode-equivalent: "\uF766"
@@ -5642,7 +5638,7 @@ RightAngleBracket:
   wl-unicode: "\u232A"
   wl-unicode-name: RIGHT-POINTING ANGLE BRACKET
 RightArrow:
-  esc-alias: ->
+  esc-alias: ' ->'
   has-unicode-inverse: false
   is-letter-like: false
   unicode-equivalent: "\u2192"
@@ -6980,7 +6976,7 @@ Venus:
   wl-unicode: "\u2640"
   wl-unicode-name: FEMALE SIGN
 VerticalBar:
-  esc-alias: '|'
+  esc-alias: ' |'
   has-unicode-inverse: true
   is-letter-like: false
   unicode-equivalent: '|'

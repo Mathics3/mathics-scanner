@@ -33,7 +33,7 @@ def check_wl_unicode_name(yaml_data: dict):
                 "wl-unicode-name" not in v
             ), f"{k} has wl-unicode-name set to {v['wl-unicode-name']} but {wl} has no unicode name"
 
-            return
+            continue
 
         real_name = v.get("wl-unicode-name")
 
@@ -47,6 +47,11 @@ def check_wl_unicode_name(yaml_data: dict):
 
 def check_unicode_name(yaml_data: dict):
     for k, v in yaml_data.items():
+        # Hack to skip characters that are correct but that doesn't show up in 
+        # unicodedata.name
+        if k, v["unicode-equivalent-name"] == "RawTab", "HORIZONTAL TABULATION":
+            continue
+
         if "unicode-equivalent" in v:
             uni = v["unicode-equivalent"]
 
