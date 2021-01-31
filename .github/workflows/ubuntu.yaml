@@ -26,5 +26,7 @@ jobs:
         make
     - name: Test Mathics Scanner
       run: |
+        python -m 
         pip install pytest
+        python3 -m mathics_scanner.generate.build_tables
         make check
