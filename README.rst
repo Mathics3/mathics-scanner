@@ -31,8 +31,7 @@ For maintainability and effeciency, we decided to store this data in a
 human-readable YAML file (`data/named-characters.yml`) and compile them into
 the JSON tables used internally by the library (`data/characters.json`) for
 faster access at runtime. The conversion of the data is performed by the
-script `admin-tools/compile-translation-tables.py` at each commit to the
-`master` branch via GitHub Actions.
+script `mathics_scanner/build-tables.py`.
 
 
 Contributing
