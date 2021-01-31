@@ -2,6 +2,7 @@ from mathics_scanner.generate.build_tables import DEFAULT_DATA_DIR
 from mathics_scanner.characters import replace_wl_with_plain_text as wl_to_unicode
 from mathics_scanner.characters import replace_unicode_with_wl as unicode_to_wl
 import yaml
+import json
 
 
 def check_roundtrip(yaml_data: dict, json_data: dict):
