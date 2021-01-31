@@ -1,18 +1,20 @@
-#!/usr/bin/env python3 
-# This scripts reads the data from named-characters and converts it to the 
+#!/usr/bin/env python3
+# This scripts reads the data from named-characters and converts it to the
 # format used by the library internally
 
 import json
 import yaml
 import re
+import os.path as osp
+from pathlib import Path
 
 def re_from_keys(d: dict) -> str:
     """
-    Takes dictionary whose keys are all strings and returns a regex that 
+    Takes dictionary whose keys are all strings and returns a regex that
     matches any of the keys
     """
 
-    # The sorting is necessary to prevent the shorter keys from obscuring the 
+    # The sorting is necessary to prevent the shorter keys from obscuring the
     # longer ones when pattern-matchig
     return "|".join(
         sorted(map(re.escape, d.keys()), key=lambda k: (-len(k), k))
@@ -90,13 +92,18 @@ def compile_tables(data: dict) -> dict:
         "aliased-characters": aliased_characters,
     }
 
-with open("mathics_scanner/data/named-characters.yml", "r") as i, open("mathics_scanner/data/characters.json", "w") as o:
-    # Load the YAML data
-    data = yaml.load(i, Loader=yaml.FullLoader)
+DEFAULT_DATA_DIR = Path(osp.normpath(osp.dirname(__file__)), "..", "data")
 
-    # Precompile the tables
-    data = compile_tables(data)
+def create_json_file(data_dir=DEFAULT_DATA_DIR):
+    with open(data_dir / "named-characters.yml", "r") as i, open(data_dir / "characters.json", "w") as o:
+        # Load the YAML data
+        data = yaml.load(i, Loader=yaml.FullLoader)
 
-    # Dump the proprocessed dictioanries to disk as JSON
-    json.dump(data, o)
+        # Precompile the tables
+        data = compile_tables(data)
 
+        # Dump the proprocessed dictioanries to disk as JSON
+        json.dump(data, o)
+
+if __name__ == "__main__":
+    create_json_file()

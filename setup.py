@@ -75,6 +75,7 @@ setup(
     version=__version__,
     packages=[
         "mathics_scanner",
+        "mathics_scanner.generate",
     ],
     install_requires=INSTALL_REQUIRES,
     dependency_links=DEPENDENCY_LINKS,
