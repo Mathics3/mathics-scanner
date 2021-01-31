@@ -5,7 +5,7 @@ import json
 def check_letterlikes_sanity(yaml_data: dict, json_data: dict):
     letterlikes = json_data["letterlikes"]
 
-    yaml_llc = list(yaml_data.values()).count(lambda v: v["is-letter-like"])
+    yaml_llc = [v["is-letter-like"] for c in yaml_data.values()].count(True)
     json_llc = len(letterlikes)
 
     assert (
