@@ -5571,8 +5571,6 @@ ReturnKey:
   esc-alias: ' ret'
   has-unicode-inverse: false
   is-letter-like: true
-  unicode-equivalent: "\uF766"
-  unicode-equivalent-name: "\uF766"
   wl-unicode: "\uF766"
 ReverseDoublePrime:
   esc-alias: '``'
@@ -7026,8 +7024,6 @@ VirgoSign:
 WarningSign:
   has-unicode-inverse: false
   is-letter-like: true
-  unicode-equivalent: "\uF725"
-  unicode-equivalent-name: "\uF725"
   wl-unicode: "\uF725"
 WatchIcon:
   has-unicode-inverse: false

@@ -26,6 +26,10 @@ def check_wl_unicode_name(yaml_data: dict):
     for k, v in yaml_data.items():
         wl = v["wl-unicode"]
 
+        # Hack to skip characters that are correct but that doesn't show up in 
+        # unicodedata.name
+        if k == "RawTab" and v["wl-unicode-name"] == "HORIZONTAL TABULATION":
+            continue
         try:
             expected_name = unicodedata.name(wl)
         except ValueError:
