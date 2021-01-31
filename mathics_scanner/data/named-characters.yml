@@ -5901,8 +5901,8 @@ Sampi:
   is-letter-like: false
   unicode-equivalent: "\u03E1"
   unicode-equivalent-name: GREEK SMALL LETTER SAMPI
-  wl-unicode: "\u03E0"
-  wl-unicode-name: GREEK LETTER SAMPI
+  wl-unicode: "\u03E1"
+  wl-unicode-name: GREEK SMALL LETTER SAMPI
 Saturn:
   has-unicode-inverse: false
   is-letter-like: false
@@ -6056,8 +6056,7 @@ ScriptCapitalP:
   is-letter-like: false
   unicode-equivalent: "\U0001D4AB"
   unicode-equivalent-name: MATHEMATICAL SCRIPT CAPITAL P
-  wl-unicode: "\u2118"
-  wl-unicode-name: SCRIPT CAPITAL P
+  wl-unicode: "\uf770"
 ScriptCapitalQ:
   esc-alias: scQ
   has-unicode-inverse: true
