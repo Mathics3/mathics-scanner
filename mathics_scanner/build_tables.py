@@ -45,6 +45,7 @@ def compile_tables(data: dict) -> dict:
     # Conversion from WL to the fully qualified names
     wl_to_ascii_dict = {v["wl-unicode"]: get_plain_text(k, v, False)
                         for k, v in data.items()}
+    wl_to_ascii_dict = {k: v for k, v in wl_to_ascii_dict.items() if k != v}
     wl_to_ascii_re = re_from_keys(wl_to_ascii_dict)
 
     # Conversion from wl to unicode
@@ -60,6 +61,8 @@ def compile_tables(data: dict) -> dict:
                           for v in data.values()
                           if "unicode-equivalent" in v
                           and v["has-unicode-inverse"]}
+    unicode_to_wl_dict = {k: v for k, v in unicode_to_wl_dict.items() 
+                          if k != v}
     unicode_to_wl_re = re_from_keys(unicode_to_wl_dict)
 
     # Character ranges of letterlikes
