@@ -25,7 +25,7 @@ def check_wl_to_ascii(yaml_data: dict):
 
         if uni is not None and is_ascii(uni):
             assert (
-                uni == ascii_wl
+                uni == ascii_c
             ), f"{k}'s unicode equivalent could be used as it's ASCII equivalent but it isn't"
 
 
