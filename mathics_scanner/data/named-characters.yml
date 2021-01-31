@@ -5901,8 +5901,8 @@ Sampi:
   is-letter-like: false
   unicode-equivalent: "\u03E1"
   unicode-equivalent-name: GREEK SMALL LETTER SAMPI
-  wl-unicode: "\u03E0"
-  wl-unicode-name: GREEK LETTER SAMPI
+  wl-unicode: "\u03E1"
+  wl-unicode-name: GREEK SMALL LETTER SAMPI
 Saturn:
   has-unicode-inverse: false
   is-letter-like: false
