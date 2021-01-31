@@ -5,7 +5,7 @@ This module consists mostly of translation tables between Wolfram's internal
 representation and Unicode/ASCII. For maintainability, it was decided to store
 this data in a human-readable YAML table (in ``data/named-characters.yml``).
 
-The YAML table contains mainly contains information about how to convert a
+The YAML table mainly contains information about how to convert a
 named character to Unicode and back. If a given character has a direct Unicode
 equivalent (a Unicode character whose description is similar as the named
 character's), this is specified by the ``unicode-equivalent`` field in the YAML
@@ -60,12 +60,12 @@ Unicode to Wolfram's internal representation is the following:
 
 - If a Unicode character sequence happens to match the ``unicode-equivalent``
   of a Wolfram Language named character whose ``has-unicode-inverse`` field is
-  set to ``true``, then the Unicode character is replaced by Wolfram's internal
+  set to ``true``, then the Unicode character is replaced by the Wolfram's internal
   representation of such named character. Note that the YAML table is
   maintained in such a way that there is always *at most* one character that
   fits such description.
 - Otherwise the character is left unchanged. Note that fully qualified names
-  (such as ``"\[Alpha]"`` are *not* replaced at all.
+  (such as the Python string ``"\\[Alpha]"`` or the Python string ``"Alpha"``) are *not* replaced at all.
 
 Optimizations
 -------------
