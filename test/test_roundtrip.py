@@ -1,16 +1,15 @@
 from mathics_scanner.generate.build_tables import DEFAULT_DATA_DIR
+from mathics_scanner.characters import replace_wl_with_plain_text as wl_to_unicode
+from mathics_scanner.characters import replace_unicode_with_wl as unicode_to_wl
 import yaml
-import json
 
 
-def check_roundtrip(yaml_data: dict, json_data: dict):
-    wl_to_unicode = json_data["wl-to-unicode-dict"]
-    unicode_to_wl = json_data["unicode-to-wl-dict"]
+def check_roundtrip(yaml_data: dict):
     for k, v in yaml_data.items():
         if v["has-unicode-inverse"]:
             u = v["wl-unicode"]
             assert (
-                unicode_to_wl[wl_to_unicode[u]] == u
+                unicode_to_wl(wl_to_unicode(u)) == u
             ), f"key {k} unicode {u}, {wl_to_unicode[u]}"
 
 
@@ -19,5 +18,4 @@ def test_roundtrip():
         DEFAULT_DATA_DIR / "characters.json", "r"
     ) as json_file:
         yaml_data = yaml.load(yaml_file, Loader=yaml.FullLoader)
-        json_data = json.load(json_file)
-        check_roundtrip(yaml_data, json_data)
+        check_roundtrip(yaml_data)
