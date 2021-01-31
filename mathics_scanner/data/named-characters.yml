@@ -6056,7 +6056,7 @@ ScriptCapitalP:
   is-letter-like: false
   unicode-equivalent: "\U0001D4AB"
   unicode-equivalent-name: MATHEMATICAL SCRIPT CAPITAL P
-  wl-unicode: "\uf770"
+  wl-unicode: "\uF77F"
 ScriptCapitalQ:
   esc-alias: scQ
   has-unicode-inverse: true

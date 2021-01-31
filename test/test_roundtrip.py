@@ -14,13 +14,13 @@ def check_roundtrip(yaml_data: dict, json_data: dict):
             wl = v["wl-unicode"]
             assert (
                 unicode_to_wl(wl_to_unicode(wl)) == wl
-            ), f"key {k} unicode {uni}, {wl_to_unicode(u)}"
+            ), f"key {k} unicode {uni}, {wl_to_unicode(uni)}"
 
             uni = v["unicode-equivalent"]
             if uni != wl:
                 assert (
                     uni == wl_to_unicode_dict[wl]
-                ), f"key {k} unicode {uni}, {wl_to_unicode[u]}"
+                ), f"key {k} unicode {uni}, {wl_to_unicode[uni]}"
 
                 assert (
                     uni in unicode_to_wl_dict
@@ -28,7 +28,7 @@ def check_roundtrip(yaml_data: dict, json_data: dict):
 
                 assert (
                     unicode_to_wl_dict[uni] == wl
-                ), f"key {k} unicode {uni}, {wl_to_unicode[u]}"
+                ), f"key {k} unicode {uni}, {wl_to_unicode[uni]}"
 
 
 def test_roundtrip():
