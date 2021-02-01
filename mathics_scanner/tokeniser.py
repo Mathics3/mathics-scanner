@@ -338,7 +338,7 @@ class Token(object):
 
 class Tokeniser(object):
     """
-    A tokenizer for the Wolfram Language.
+    A tokeniser for the Wolfram Language.
 
     When subclassing ``Tokeniser``, custom tokenisation rules can be defined by 
     declaring methods whose names are preceded by ``t_``, such as in the 
@@ -361,7 +361,7 @@ class Tokeniser(object):
     def __init__(self, feeder):
         """
         @param: feeder An instance of ``LineFeeder`` which will feed characters
-                       to the tokenizer.
+                       to the tokeniser.
         """
         self.pos = 0
         self.feeder = feeder
@@ -372,7 +372,7 @@ class Tokeniser(object):
     # TODO: Turn this into a setter in the future?
     def change_mode(self, mode):
         """
-        Set the mode of the tokenizer
+        Set the mode of the tokeniser
         """
         self.mode = mode
         self.tokens, self.token_indices = self.modes[mode]
@@ -455,7 +455,7 @@ class Tokeniser(object):
                 break
 
     def t_String(self, match):
-        "``String`` tokenizer"
+        "String rule"
         start, end = self.pos, None
         self.pos += 1  # skip opening '"'
         newlines = []
@@ -483,7 +483,7 @@ class Tokeniser(object):
         return Token("String", result, start)
 
     def t_Number(self, match):
-        "Number tag"
+        "Number rule"
         text = match.group(0)
         pos = match.end(0)
         if self.code[pos - 1 : pos + 1] == "..":
@@ -503,18 +503,18 @@ class Tokeniser(object):
         return Token(tag, text, match.start(0))
 
     def t_Get(self, match):
-        "Get tag"
+        "Get rule"
         return self._token_mode(match, "Get", "filename")
 
     def t_Put(self, match):
-        "Put tag"
+        "Put rule"
         return self._token_mode(match, "Put", "filename")
 
     def t_PutAppend(self, match):
-        "PutAppend tag"
+        "PutAppend rule"
         return self._token_mode(match, "PutAppend", "filename")
 
     def t_Filename(self, match):
-        "Filename tag"
+        "Filename rule"
         return self._token_mode(match, "Filename", "expr")
 
