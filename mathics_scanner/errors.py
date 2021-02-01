@@ -3,17 +3,21 @@
 
 
 class TranslateError(Exception):
-    def __init__(self):
-        pass
+    """A generic class of tokenizing errors"""
+    pass
 
 
 class ScanError(TranslateError):
+    """A generic scanning error"""
     pass
 
 
 class InvalidSyntaxError(TranslateError):
+    """Invalid syntax"""
     pass
 
 
 class IncompleteSyntaxError(TranslateError):
+    """More characters were expected to form a valid token"""
     pass
+
