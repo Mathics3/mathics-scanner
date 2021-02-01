@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from util import yaml_data
+from mathics_scanner.characters import replace_wl_with_plain_text
+from test.util import yaml_data
 
 def wl_to_ascii(wl_input: str) -> str:
     return replace_wl_with_plain_text(wl_input, use_unicode=False)

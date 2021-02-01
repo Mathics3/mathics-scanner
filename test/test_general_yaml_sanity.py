@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from util import yaml_data
+from test.util import yaml_data
 import unicodedata
 
 def check_attr_is_invertible(attr: str):

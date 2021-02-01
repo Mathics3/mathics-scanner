@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from util import yaml_data, json_data
+from test.util import yaml_data, json_data
 
 def test_has_unicode_inverse_sanity():
     inverses = set()

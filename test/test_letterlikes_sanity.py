@@ -1,4 +1,4 @@
-from util import yaml_data, json_data
+from test.util import yaml_data, json_data
 
 def test_letterlikes_sanity():
     letterlikes = json_data["letterlikes"]
