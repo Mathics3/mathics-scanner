@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from mathics_scanner.generate.build_tables import DEFAULT_DATA_DIR
-from mathics_scanner.characters import replace_wl_with_plain_text
-import yaml
-import json
+from util import yaml_data
 
 def wl_to_ascii(wl_input: str) -> str:
     return replace_wl_with_plain_text(wl_input, use_unicode=False)
@@ -11,7 +8,7 @@ def wl_to_ascii(wl_input: str) -> str:
 def is_ascii(s: str) -> bool:
     return all(ord(c) < 127 for c in s)
 
-def check_wl_to_ascii(yaml_data: dict):
+def test_wl_to_ascii():
     for k, v in yaml_data.items():
         wl = v["wl-unicode"]
 
@@ -27,11 +24,4 @@ def check_wl_to_ascii(yaml_data: dict):
             assert (
                 uni == ascii_c
             ), f"{k}'s unicode equivalent could be used as it's ASCII equivalent but it isn't"
-
-
-
-def test_wl_to_ascii():
-    with open(DEFAULT_DATA_DIR / "named-characters.yml", "r") as yaml_file:
-        yaml_data = yaml.load(yaml_file, Loader=yaml.FullLoader)
-        check_wl_to_ascii(yaml_data)
 

@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from mathics_scanner.generate.build_tables import DEFAULT_DATA_DIR
-import yaml
+from util import yaml_data
 import unicodedata
 
-def check_attr_is_invertible(yaml_data: dict, attr: str):
+def check_attr_is_invertible(attr: str):
     for v in yaml_data.values():
         if attr in v:
             attr_v = v[attr]
@@ -17,12 +16,12 @@ def check_attr_is_invertible(yaml_data: dict, attr: str):
             ), f"{attr_vs} all have the same {attr} field set to {attr_v}"
 
 
-def check_has_attr(yaml_data: dict, attr: str):
+def check_has_attr(attr: str):
     for k, v in yaml_data.items():
         assert attr in v, f"{k} has no {attr} attribute"
 
 
-def check_wl_unicode_name(yaml_data: dict):
+def check_wl_unicode_name():
     for k, v in yaml_data.items():
         wl = v["wl-unicode"]
 
@@ -49,7 +48,7 @@ def check_wl_unicode_name(yaml_data: dict):
         ), f"{k} has wl-unicode-name set to {real_name} but it should be {expected_name}"
 
 
-def check_unicode_name(yaml_data: dict):
+def check_unicode_name():
     for k, v in yaml_data.items():
         # Hack to skip characters that are correct but that doesn't show up in 
         # unicodedata.name
@@ -79,19 +78,16 @@ def check_unicode_name(yaml_data: dict):
 
 
 def test_general_yaml_sanity():
-    with open(DEFAULT_DATA_DIR / "named-characters.yml", "r") as yaml_file:
-        yaml_data = yaml.load(yaml_file, Loader=yaml.FullLoader)
+    # Check if required attributes are in place
+    check_has_attr("wl-unicode")
+    check_has_attr("is-letter-like")
+    check_has_attr("has-unicode-inverse")
 
-        # Check if required attributes are in place
-        check_has_attr(yaml_data, "wl-unicode")
-        check_has_attr(yaml_data, "is-letter-like")
-        check_has_attr(yaml_data, "has-unicode-inverse")
+    # Check if attributes that should be invertible are in fact invertible
+    check_attr_is_invertible("wl-unicode")
+    check_attr_is_invertible("esc-alias")
 
-        # Check if attributes that should be invertible are in fact invertible
-        check_attr_is_invertible(yaml_data, "wl-unicode")
-        check_attr_is_invertible(yaml_data, "esc-alias")
-
-        # Check the consistency of the unicode names in the table
-        check_wl_unicode_name(yaml_data)
-        check_unicode_name(yaml_data)
+    # Check the consistency of the unicode names in the table
+    check_wl_unicode_name()
+    check_unicode_name()
 
