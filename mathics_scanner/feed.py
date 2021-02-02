@@ -8,7 +8,16 @@ from chardet import detect
 
 
 class LineFeeder(metaclass=ABCMeta):
+    """
+    An abstract representation for a feeder. The purpose of a feeder is to 
+    mediate the consumption of characters between the tokeniser and the actual 
+    file being scaned, as well to store messages regarding tokenization errors.
+    """
     def __init__(self, filename):
+        """
+        @param: filename A string that describes the source of the feeder, i.e.
+                         the filename that is being feed.
+        """
         self.messages = []
         self.lineno = 0
         self.filename = filename
@@ -29,6 +38,9 @@ class LineFeeder(metaclass=ABCMeta):
         return
 
     def message(self, sym, tag, *args):
+        """
+        Append a generic message of type ``sym`` to the message queue.
+        """
         if sym == "Syntax":
             message = self.syntax_message(sym, tag, *args)
         else:
@@ -36,6 +48,9 @@ class LineFeeder(metaclass=ABCMeta):
         self.messages.append(message)
 
     def syntax_message(self, sym, tag, *args):
+        """
+        Append a message concerning syntax errors to the message queue.
+        """
         if len(args) > 3:
             raise ValueError("Too many args.")
         message = [sym, tag]
@@ -49,6 +64,7 @@ class LineFeeder(metaclass=ABCMeta):
         assert len(message) == 7
         return message
 
+    # TODO: Rethink this (this is only usefull for core, not anyone else)
     def send_messages(self, evaluation):
         for message in self.messages:
             evaluation.message(*message)
@@ -56,9 +72,14 @@ class LineFeeder(metaclass=ABCMeta):
 
 
 class MultiLineFeeder(LineFeeder):
-    "Feeds one line at a time."
+    "A feeder that feeds one line at a time."
 
     def __init__(self, lines, filename=""):
+        """
+        @param: lines    The source of the feeder (a string).
+        @param: filename A string that describes the source of the feeder, i.e.
+                         the filename that is being feed.
+        """
         super(MultiLineFeeder, self).__init__(filename)
         self.lineno = 0
         if isinstance(lines, str):
@@ -79,9 +100,14 @@ class MultiLineFeeder(LineFeeder):
 
 
 class SingleLineFeeder(LineFeeder):
-    "Feeds all the code as a single line."
+    "A feeder that feeds all the code as a single line."
 
     def __init__(self, code, filename=""):
+        """
+        @param: code     The source of the feeder (a string).
+        @param: filename A string that describes the source of the feeder, i.e.
+                         the filename that is being feed.
+        """
         super().__init__(filename)
         self.code = code
         self._empty = False
@@ -98,9 +124,14 @@ class SingleLineFeeder(LineFeeder):
 
 
 class FileLineFeeder(LineFeeder):
-    "Feeds lines from an open file object"
+    "A feeder that feeds lines from an open ``File`` object"
 
     def __init__(self, fileobject, trace_fn=None):
+        """
+        @param: fileobject The source of the feeder (a string).
+        @param: filename   A string that describes the source of the feeder,
+                           i.e.  the filename that is being feed.
+        """
         super().__init__(fileobject.name)
         self.fileobject = fileobject
         self.lineno = 0
@@ -122,3 +153,4 @@ class FileLineFeeder(LineFeeder):
 
     def empty(self):
         return self.eof
+
