@@ -367,10 +367,9 @@ class Tokeniser(object):
         self.feeder = feeder
         self.prescanner = Prescanner(feeder)
         self.code = self.prescanner.scan()
-        self.change_mode("expr")
+        self._change_mode("expr")
 
-    # TODO: Turn this into a setter in the future?
-    def change_mode(self, mode):
+    def _change_mode(self, mode):
         """
         Set the mode of the tokeniser
         """
@@ -396,7 +395,7 @@ class Tokeniser(object):
     # TODO: Convert this to __next__ in the future?
     def next(self):
         "Returns the next token"
-        self.skip_blank()
+        self._skip_blank()
         if self.pos >= len(self.code):
             return Token("END", "", len(self.code))
 
@@ -428,7 +427,7 @@ class Tokeniser(object):
             self.pos = match.end(0)
             return Token(tag, text, match.start(0))
 
-    def skip_blank(self):
+    def _skip_blank(self):
         "Skip whitespace and comments"
         comment = []  # start positions of comments
         while True:
@@ -499,7 +498,7 @@ class Tokeniser(object):
         "consume a token and switch mode"
         text = match.group(0)
         self.pos = match.end(0)
-        self.change_mode(mode)
+        self._change_mode(mode)
         return Token(tag, text, match.start(0))
 
     def t_Get(self, match):
