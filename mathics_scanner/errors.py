@@ -3,7 +3,7 @@
 
 
 class TranslateError(Exception):
-    """A generic class of tokenizing errors"""
+    """A generic class of tokenization errors"""
     pass
 
 
