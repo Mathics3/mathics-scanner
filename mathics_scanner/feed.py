@@ -1,5 +1,6 @@
+# -*- coding: utf-8 -*-
 """
-Rather than trying to parse all the code at once this module implements methods
+Rather than trying to parse all the lines of code at once, this module implements methods
 for returning one line code at a time.
 """
 
@@ -8,14 +9,15 @@ from chardet import detect
 
 
 class LineFeeder(metaclass=ABCMeta):
+    """An abstract representation for reading lines of characters, a
+    "feeder". The purpose of a feeder is to mediate the consumption of
+    characters between the tokeniser and the actual file being scaned,
+    as well to store messages regarding tokenization errors.
     """
-    An abstract representation for a feeder. The purpose of a feeder is to 
-    mediate the consumption of characters between the tokeniser and the actual 
-    file being scaned, as well to store messages regarding tokenization errors.
-    """
-    def __init__(self, filename):
+
+    def __init__(self, filename: str):
         """
-        @param: filename A string that describes the source of the feeder, i.e.
+        :param filename: A string that describes the source of the feeder, i.e.
                          the filename that is being feed.
         """
         self.messages = []
@@ -28,16 +30,16 @@ class LineFeeder(metaclass=ABCMeta):
         Consume and return next line of code. Each line should be followed by a
         newline character. Returns '' after all lines are consumed.
         """
-        return
+        return ""
 
     @abstractmethod
     def empty(self):
         """
         Return True once all lines have been consumed.
         """
-        return
+        return True
 
-    def message(self, sym, tag, *args):
+    def message(self, sym: str, tag, *args):
         """
         Append a generic message of type ``sym`` to the message queue.
         """
@@ -47,7 +49,7 @@ class LineFeeder(metaclass=ABCMeta):
             message = [sym, tag] + list(args)
         self.messages.append(message)
 
-    def syntax_message(self, sym, tag, *args):
+    def syntax_message(self, sym: str, tag, *args):
         """
         Append a message concerning syntax errors to the message queue.
         """
@@ -64,11 +66,11 @@ class LineFeeder(metaclass=ABCMeta):
         assert len(message) == 7
         return message
 
-    # TODO: Rethink this (this is only usefull for core, not anyone else)
-    def send_messages(self, evaluation):
-        for message in self.messages:
-            evaluation.message(*message)
-        self.messages = []
+    # # TODO: Rethink this?
+    # def syntax_message(self, sym: str, tag, *args):
+    #     for message in self.messages:
+    #         evaluation.message(*message)
+    #     self.messages = []
 
 
 class MultiLineFeeder(LineFeeder):
@@ -138,7 +140,7 @@ class FileLineFeeder(LineFeeder):
         self.eof = False
         self.trace_fn = trace_fn
 
-    def feed(self):
+    def feed(self) -> str:
         result = self.fileobject.readline()
         while result == "\n":
             result = self.fileobject.readline()
@@ -151,6 +153,5 @@ class FileLineFeeder(LineFeeder):
             self.eof = True
         return result
 
-    def empty(self):
+    def empty(self) -> bool:
         return self.eof
-
