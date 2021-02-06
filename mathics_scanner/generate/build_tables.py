@@ -21,9 +21,19 @@ def re_from_keys(d: dict) -> str:
     )
 
 def get_plain_text(char_name: str, char_data: dict, use_unicode: bool) -> str:
-    """
-    Takes in data about a named character and returns the appropriate
-    plain text representation according to use_unicode
+    """:param char_name: named character to look up.
+    :param char_data: translation dictionary.
+
+    :returns: if use_unicode is True, then return the standard unicode equivalent
+    of the name if there is one.
+
+    Note that this may sometimes be different than the WL unicode
+    value. An example of this is DifferentialD.
+
+    If use_unicode is False, return char_name if it consists of only
+    ASCII characters.
+
+    Failing above, return \\[char_name]]
     """
     uni = char_data.get("unicode-equivalent")
 
@@ -33,7 +43,7 @@ def get_plain_text(char_name: str, char_data: dict, use_unicode: bool) -> str:
 
         # If all of the characters in the unicode representation are valid
         # ASCII then return the unicode representation
-        elif all(ord(c) < 127 for c in uni): 
+        elif all(ord(c) < 127 for c in uni):
             return uni
 
     return f"\\[{char_name}]"
@@ -49,7 +59,7 @@ def compile_tables(data: dict) -> dict:
     # equivalent is equal to it's WL unicode representation (i.e. the
     # "wl-unicode" field is the same as the "unicode-equivalent" field) then it
     # is considered rendundant for us, since no conversion is needed.
-    # 
+    #
     # As an optimization, we explicit remove any redundant characters from all
     # JSON tables. This makes the tables smaller (therefore easier to load), as
     # well as the correspond regex patterns. This implies that not all
@@ -59,16 +69,16 @@ def compile_tables(data: dict) -> dict:
     # `unicode_to_wl_dict`
 
     # Conversion from WL to the fully qualified names
-    wl_to_ascii_dict = {v["wl-unicode"]: get_plain_text(k, v, False)
+    wl_to_ascii_dict = {v["wl-unicode"]: get_plain_text(k, v, use_unicode=False)
                         for k, v in data.items()}
     wl_to_ascii_dict = {k: v for k, v in wl_to_ascii_dict.items() if k != v}
     wl_to_ascii_re = re_from_keys(wl_to_ascii_dict)
 
     # Conversion from wl to unicode
     # We filter the dictionary after it's first created to redundant entries
-    wl_to_unicode_dict = {v["wl-unicode"]: get_plain_text(k, v, True)
+    wl_to_unicode_dict = {v["wl-unicode"]: get_plain_text(k, v, use_unicode=True)
                           for k, v in data.items()}
-    wl_to_unicode_dict = {k: v for k, v in wl_to_unicode_dict.items() 
+    wl_to_unicode_dict = {k: v for k, v in wl_to_unicode_dict.items()
                           if k != v}
     wl_to_unicode_re = re_from_keys(wl_to_unicode_dict)
 
@@ -78,11 +88,11 @@ def compile_tables(data: dict) -> dict:
                           for v in data.values()
                           if "unicode-equivalent" in v
                           and v["has-unicode-inverse"]}
-    unicode_to_wl_dict = {k: v for k, v in unicode_to_wl_dict.items() 
+    unicode_to_wl_dict = {k: v for k, v in unicode_to_wl_dict.items()
                           if k != v}
     unicode_to_wl_re = re_from_keys(unicode_to_wl_dict)
 
-    # Character ranges of letterlikes
+    # Unicode string containing all letterlikes values
     letterlikes = "".join(v["wl-unicode"] for v in data.values()
                           if v["is-letter-like"])
 

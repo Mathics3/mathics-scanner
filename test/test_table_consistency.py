@@ -28,3 +28,14 @@ def test_roundtrip():
                     unicode_to_wl_dict[uni] == wl
                 ), f"key {k} unicode {uni}, {wl_to_unicode[uni]}"
 
+
+def test_counts():
+    letterlikes_len = len(set(json_data["letterlikes"]))
+    named_characters_set = set(json_data["named-characters"].keys())
+    assert letterlikes_len <= len(
+        named_characters_set
+    ), "Number of letter-likes should be less than the number of all named characters"
+
+    assert set(yaml_data.keys()) == set(
+        json_data["named-characters"].keys()
+    ), "There should be a named character for each WL symbol"
