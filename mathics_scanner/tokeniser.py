@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 
@@ -340,8 +339,8 @@ class Tokeniser(object):
     """
     A tokeniser for the Wolfram Language.
 
-    When subclassing ``Tokeniser``, custom tokenisation rules can be defined by 
-    declaring methods whose names are preceded by ``t_``, such as in the 
+    When subclassing ``Tokeniser``, custom tokenisation rules can be defined by
+    declaring methods whose names are preceded by ``t_``, such as in the
     following example: ::
 
         class MyTokeniser(Tokeniser):
@@ -349,8 +348,8 @@ class Tokeniser(object):
                 # Your logic goes here...
                 pass
 
-    In this example, ``t_MyWeirdRule`` is supposed to update the internal state 
-    of the tokeniser and return a ``Token`` with an appropriate tag. ``m̀atch`` 
+    In this example, ``t_MyWeirdRule`` is supposed to update the internal state
+    of the tokeniser and return a ``Token`` with an appropriate tag. ``m̀atch``
     is expected to be an instance of ``re.Match``.
     """
     modes = {
@@ -516,4 +515,3 @@ class Tokeniser(object):
     def t_Filename(self, match):
         "Filename rule"
         return self._token_mode(match, "Filename", "expr")
-

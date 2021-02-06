@@ -1,3 +1,4 @@
+#!/bin/bash
 PACKAGE=mathics-scanner
 
 # FIXME put some of the below in a common routine
