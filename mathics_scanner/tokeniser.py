@@ -305,11 +305,22 @@ full_symbol_pattern = compile_pattern(full_symbol_pattern)
 
 
 def is_symbol_name(text):
+    """
+    Returns ``True`` if ``text`` is a valid identifier. Otherwise returns
+    ``False``.
+    """
+    # Can't we just call match here?
     return full_symbol_pattern.sub("", text) == ""
 
 
 class Token(object):
+    "A representation of a Wolfram Language token"
     def __init__(self, tag, text, pos):
+        """
+        @param: tag  A string that indicates which type of token this is.
+        @param: text The actual contents of the token.
+        @param: pos  The position of the token in the input feed.
+        """
         self.tag = tag
         self.text = text
         self.pos = pos
@@ -326,28 +337,53 @@ class Token(object):
 
 
 class Tokeniser(object):
+    """
+    A tokeniser for the Wolfram Language.
+
+    When subclassing ``Tokeniser``, custom tokenisation rules can be defined by 
+    declaring methods whose names are preceded by ``t_``, such as in the 
+    following example: ::
+
+        class MyTokeniser(Tokeniser):
+            def t_MyWeirdRule(self, match):
+                # Your logic goes here...
+                pass
+
+    In this example, ``t_MyWeirdRule`` is supposed to update the internal state 
+    of the tokeniser and return a ``Token`` with an appropriate tag. ``m̀atch`` 
+    is expected to be an instance of ``re.Match``.
+    """
     modes = {
         "expr": (tokens, token_indices),
         "filename": (filename_tokens, {}),
     }
 
     def __init__(self, feeder):
+        """
+        @param: feeder An instance of ``LineFeeder`` which will feed characters
+                       to the tokeniser.
+        """
         self.pos = 0
         self.feeder = feeder
         self.prescanner = Prescanner(feeder)
         self.code = self.prescanner.scan()
-        self.change_mode("expr")
+        self._change_mode("expr")
 
-    def change_mode(self, mode):
+    def _change_mode(self, mode):
+        """
+        Set the mode of the tokeniser
+        """
         self.mode = mode
         self.tokens, self.token_indices = self.modes[mode]
 
+    # TODO: Rename this to something that remotetly makes sense?
     def incomplete(self):
-        "get more code from the prescanner and continue"
+        "Get more code from the prescanner and continue"
         self.prescanner.incomplete()
         self.code += self.prescanner.scan()
 
     def sntx_message(self, pos=None):
+        """Send a message to the feeder."""
         if pos is None:
             pos = self.pos
         pre, post = self.code[:pos], self.code[pos:].rstrip("\n")
@@ -356,9 +392,10 @@ class Tokeniser(object):
         else:
             self.feeder.message("Syntax", "sntxf", pre, post)
 
+    # TODO: Convert this to __next__ in the future?
     def next(self):
-        "return next token"
-        self.skip_blank()
+        "Returns the next token"
+        self._skip_blank()
         if self.pos >= len(self.code):
             return Token("END", "", len(self.code))
 
@@ -390,8 +427,8 @@ class Tokeniser(object):
             self.pos = match.end(0)
             return Token(tag, text, match.start(0))
 
-    def skip_blank(self):
-        "skip whitespace and comments"
+    def _skip_blank(self):
+        "Skip whitespace and comments"
         comment = []  # start positions of comments
         while True:
             if self.pos >= len(self.code):
@@ -417,6 +454,7 @@ class Tokeniser(object):
                 break
 
     def t_String(self, match):
+        "String rule"
         start, end = self.pos, None
         self.pos += 1  # skip opening '"'
         newlines = []
@@ -444,6 +482,7 @@ class Tokeniser(object):
         return Token("String", result, start)
 
     def t_Number(self, match):
+        "Number rule"
         text = match.group(0)
         pos = match.end(0)
         if self.code[pos - 1 : pos + 1] == "..":
@@ -454,21 +493,27 @@ class Tokeniser(object):
             self.pos = pos
         return Token("Number", text, match.start(0))
 
-    def token_mode(self, match, tag, mode):
+    # This isn't outside of here so it's considered internal
+    def _token_mode(self, match, tag, mode):
         "consume a token and switch mode"
         text = match.group(0)
         self.pos = match.end(0)
-        self.change_mode(mode)
+        self._change_mode(mode)
         return Token(tag, text, match.start(0))
 
     def t_Get(self, match):
-        return self.token_mode(match, "Get", "filename")
+        "Get rule"
+        return self._token_mode(match, "Get", "filename")
 
     def t_Put(self, match):
-        return self.token_mode(match, "Put", "filename")
+        "Put rule"
+        return self._token_mode(match, "Put", "filename")
 
     def t_PutAppend(self, match):
-        return self.token_mode(match, "PutAppend", "filename")
+        "PutAppend rule"
+        return self._token_mode(match, "PutAppend", "filename")
 
     def t_Filename(self, match):
-        return self.token_mode(match, "Filename", "expr")
+        "Filename rule"
+        return self._token_mode(match, "Filename", "expr")
+
