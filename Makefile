@@ -31,6 +31,10 @@ build: mathics_scanner/data/characters.json
 develop: mathics_scanner/data/characters.json
 	$(PIP) install -e .
 
+#: Build distribution
+dist: admin-tools/make-dist.sh
+	$(ShelL) admin-tools/make-dist.sh
+
 #: Install mathics
 install: build
 	$(PYTHON) setup.py install

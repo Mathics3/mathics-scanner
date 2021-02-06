@@ -23,10 +23,16 @@ Usage
   ``mathics_scanner.tokenizer.Tokenizer`` class.
 - To convert between Wolfram Language named characters and Unicode/ASCII, use
   the ``mathics_scanner.characters.replace_wl_with_plain_text`` and
-  ``mathics_scanner.characters.replace_unicode_with_wl`` functions. 
+  ``mathics_scanner.characters.replace_unicode_with_wl`` functions.
 - To convert between qualified names of named characters (such ``FormalA`` for
   ``\[FormalA]``) and Wolfram's internal representation use the
   ``m̀athics_scanner.characters.named_characters`` dictionary.
+
+To regenerate scanner tables run:
+
+::
+
+   $ python -m mathics_scanner.generate.build_tables
 
 Implementation
 --------------
@@ -46,4 +52,3 @@ License
 Mathics is released under the GNU General Public License Version 3 (GPL3).
 
 .. |Workflows| image:: https://github.com/Mathics3/mathics-scanner/workflows/Mathics%20(ubuntu)/badge.svg
-

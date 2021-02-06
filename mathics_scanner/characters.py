@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 import re
@@ -50,8 +49,8 @@ def replace_wl_with_plain_text(wl_input: str, use_unicode=True) -> str:
     Language named characters. This functions replaces all occurrences of such
     characters with their corresponding Unicode/ASCII equivalents.
 
-    @param: wl_input    The string whose characters will be replaced. 
-    @param: use_unicode A flag that indicates whether to use Unicode or ASCII 
+    @param: wl_input    The string whose characters will be replaced.
+    @param: use_unicode A flag that indicates whether to use Unicode or ASCII
                         for the conversion.
 
     Note that the occurrences of named characters in ``wl_input`` are expect to
@@ -73,7 +72,7 @@ def replace_unicode_with_wl(unicode_input: str) -> str:
     corresponding Unicode equivalents of such characters with the characters
     themselves.
 
-    @param: unicode_input The string whose characters will be replaced. 
+    @param: unicode_input The string whose characters will be replaced.
 
     Note that the occurrences of named characters in the output of
     ``replace_unicode_with_wl`` are represented using Wolfram's internal
@@ -85,4 +84,3 @@ def replace_unicode_with_wl(unicode_input: str) -> str:
     return _unicode_to_wl_re.sub(
         lambda m: _unicode_to_wl[m.group(0)], unicode_input
     )
-
