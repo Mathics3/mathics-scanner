@@ -21,7 +21,7 @@ all: develop
 
 mathics_scanner/data/characters.json: mathics_scanner/data/named-characters.yml
 	$(PIP) install -r requirements-dev.txt
-	$(PYTHON) mathics_scanner/build_tables.py
+	$(PYTHON) mathics_scanner/generate/build_tables.py
 
 #: build everything needed to install
 build: mathics_scanner/data/characters.json
@@ -47,6 +47,13 @@ clean:
 pytest: mathics_scanner/data/characters.json
 	py.test test $o
 
+#: Print to stdout a GNU Readline inputrc without Unicode
+inputrc-no-unicode:
+	$(PYTHON) -m mathics_scanner.generate.rl_inputrc inputrc-no-unicode
+
+#: Print to stdout a GNU Readline inputrc with Unicode
+inputrc-unicode:
+	$(PYTHON) -m mathics_scanner.generate.rl_inputrc inputrc-unicode
 
 #: Remove ChangeLog
 rmChangeLog:
