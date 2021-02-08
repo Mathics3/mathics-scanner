@@ -41,9 +41,9 @@ install: build
 
 test check: pytest
 
-# Compile the Sphix documentation
-doc:
-	cd docs && make html
+#: Build Sphinx HTML documentation
+doc:  mathics_scanner/data/characters.json
+	make -C docs html
 
 #: Remove derived files
 clean:
