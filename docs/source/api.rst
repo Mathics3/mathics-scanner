@@ -3,6 +3,7 @@ API
 ===
 
 .. automodule:: mathics_scanner
+  :members: is_symbol_name
 
 Tokenization
 ============
@@ -17,7 +18,7 @@ raised.
 
 The tokens returned by ``next`` are instances of the ``Token`` class:
 
-.. autoclass:: mathics_scanner.tokeniser.Token(object)
+.. autoclass:: Token(object)
   :members: __init__
   :special-members:
 
