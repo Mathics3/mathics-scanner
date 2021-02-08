@@ -316,9 +316,9 @@ class Token(object):
     "A representation of a Wolfram Language token"
     def __init__(self, tag, text, pos):
         """
-        @param: tag  A string that indicates which type of token this is.
-        @param: text The actual contents of the token.
-        @param: pos  The position of the token in the input feed.
+        :param tag: A string that indicates which type of token this is.
+        :param text: The actual contents of the token.
+        :param pos: The position of the token in the input feed.
         """
         self.tag = tag
         self.text = text
@@ -346,7 +346,7 @@ class Tokeniser(object):
 
     def __init__(self, feeder):
         """
-        @param: feeder An instance of ``LineFeeder`` which will feed characters
+        :param feeder: An instance of ``LineFeeder`` which will feed characters
                        to the tokeniser.
         """
         self.pos = 0
