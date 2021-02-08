@@ -41,6 +41,9 @@ install: build
 
 test check: pytest
 
+# Compile the Sphix documentation
+doc:
+	cd docs && make html
 
 #: Remove derived files
 clean:

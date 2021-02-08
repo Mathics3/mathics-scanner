@@ -313,7 +313,7 @@ def is_symbol_name(text):
 
 
 class Token(object):
-    "A representation of a Wolfram Language token"
+    "A representation of a Wolfram Language token."
     def __init__(self, tag, text, pos):
         """
         :param tag: A string that indicates which type of token this is.
@@ -357,14 +357,14 @@ class Tokeniser(object):
 
     def _change_mode(self, mode):
         """
-        Set the mode of the tokeniser
+        Set the mode of the tokeniser.
         """
         self.mode = mode
         self.tokens, self.token_indices = self.modes[mode]
 
     # TODO: Rename this to something that remotetly makes sense?
     def incomplete(self):
-        "Get more code from the prescanner and continue"
+        "Get more code from the prescanner and continue."
         self.prescanner.incomplete()
         self.code += self.prescanner.scan()
 
@@ -380,7 +380,7 @@ class Tokeniser(object):
 
     # TODO: Convert this to __next__ in the future?
     def next(self):
-        "Returns the next token"
+        "Returns the next token."
         self._skip_blank()
         if self.pos >= len(self.code):
             return Token("END", "", len(self.code))

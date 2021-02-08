@@ -1,4 +1,10 @@
 # -*- coding: utf-8 -*-
+"""
+The ``mathics_scanner.characters`` module consists mostly of translation tables
+between Wolfram's internal representation of `named characters
+<https://reference.wolfram.com/language/tutorial/InputAndOutputInNotebooks.html#4718>`_
+and Unicode/ASCII.
+"""
 
 import re
 import ujson

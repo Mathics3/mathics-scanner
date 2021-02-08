@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Wolfram-language scanner
+Wolfram-language scanner.
 """
 
 from mathics_scanner.version import __version__
