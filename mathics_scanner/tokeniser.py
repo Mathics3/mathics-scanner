@@ -338,19 +338,6 @@ class Token(object):
 class Tokeniser(object):
     """
     A tokeniser for the Wolfram Language.
-
-    When subclassing ``Tokeniser``, custom tokenisation rules can be defined by
-    declaring methods whose names are preceded by ``t_``, such as in the
-    following example: ::
-
-        class MyTokeniser(Tokeniser):
-            def t_MyWeirdRule(self, match):
-                # Your logic goes here...
-                pass
-
-    In this example, ``t_MyWeirdRule`` is supposed to update the internal state
-    of the tokeniser and return a ``Token`` with an appropriate tag. ``m̀atch``
-    is expected to be an instance of ``re.Match``.
     """
     modes = {
         "expr": (tokens, token_indices),
