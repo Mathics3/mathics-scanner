@@ -1,15 +1,24 @@
-# Information about named characters, indexed by their fully qualified names
+# Information about named characters, indexed by their fully qualified names.
 #
-# esc-alias: The ESC sequence aliais of the named character, if it exists
-# has-unicode-inverse: Whether or not this named character has a unicode
-#                      equivalent to should replaced by it
-# is-letter-like: Whether or not this named-character is "letter-like"
-# unicode-equivalent: A unicode equivalent for the named-character, if it
-#                     exists
-# unicode-equivalent-name: The name of the unicode equivalent, if it exists
-# wl-unicode: The unicode code point used by Mathics internally to represent
-#             the named character
-# wl-unicode-name: The name of the character corresponding to `wl-unicode`
+#   esc-alias: The ESC sequence alias of the named character, if it exists.
+#
+#   has-unicode-inverse: Whether or not this named character has a unicode
+#                        equivalent to should replaced by it.
+#
+#   is-letter-like: Whether or not this named-character is "letter-like".
+#
+#   operator-name: If present, this symbol is an operator with the given name.
+#
+#   unicode-equivalent: A unicode equivalent for the named-character, if it
+#                       exists.
+#
+#   unicode-equivalent-name: The name of the unicode equivalent, if it exists.
+#
+#   wl-unicode: The unicode code point used by Mathics internally to represent
+#               the named character.
+#
+#   wl-unicode-name: The name of the character corresponding to `wl-unicode`.
+
 AAcute:
   esc-alias: a'
   has-unicode-inverse: false
@@ -1097,7 +1106,7 @@ Conditioned:
   wl-unicode: "\uF3D3"
 Congruent:
   esc-alias: ===
-  has-unicode-inverse: false
+  has-unicode-inverse: true
   is-letter-like: false
   unicode-equivalent: "\u2261"
   unicode-equivalent-name: IDENTICAL TO
@@ -1414,8 +1423,9 @@ Distributed:
   wl-unicode: "\uF3D2"
 Divide:
   esc-alias: div
-  has-unicode-inverse: false
+  has-unicode-inverse: true
   is-letter-like: false
+  operator-name: Divide
   unicode-equivalent: "\xF7"
   unicode-equivalent-name: DIVISION SIGN
   wl-unicode: "\xF7"
@@ -1428,6 +1438,14 @@ Divides:
   unicode-equivalent-name: DIVIDES
   wl-unicode: "\u2223"
   wl-unicode-name: DIVIDES
+Dot:
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: Dot
+  unicode-equivalent: .
+  unicode-equivalent-name: FULL STOP
+  wl-unicode: .
+  wl-unicode-name: FULL STOP
 DotEqual:
   esc-alias: .=
   has-unicode-inverse: false
@@ -2400,6 +2418,14 @@ ExponentialE:
   unicode-equivalent: "\u2147"
   unicode-equivalent-name: DOUBLE-STRUCK ITALIC SMALL E
   wl-unicode: "\uF74D"
+Factorial:
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: Factorial
+  unicode-equivalent: '!'
+  unicode-equivalent-name: EXCLAMATION MARK
+  wl-unicode: '!'
+  wl-unicode-name: EXCLAMATION MARK
 FiLigature:
   has-unicode-inverse: false
   is-letter-like: false
@@ -3824,8 +3850,9 @@ GraySquare:
   wl-unicode: "\uF752"
 GreaterEqual:
   esc-alias: '>='
-  has-unicode-inverse: false
+  has-unicode-inverse: true
   is-letter-like: false
+  operator-name: GreaterEqual
   unicode-equivalent: "\u2265"
   unicode-equivalent-name: GREATER-THAN OR EQUAL TO
   wl-unicode: "\u2265"
@@ -4358,10 +4385,19 @@ LeoSign:
   unicode-equivalent-name: LEO
   wl-unicode: "\u264C"
   wl-unicode-name: LEO
+Less:
+  has-unicode-inverse: true
+  is-letter-like: false
+  operator-name: Less
+  unicode-equivalent: <
+  unicode-equivalent-name: LESS-THAN SIGN
+  wl-unicode: <
+  wl-unicode-name: LESS-THAN SIGN
 LessEqual:
   esc-alias: <=
-  has-unicode-inverse: false
+  has-unicode-inverse: true
   is-letter-like: false
+  operator-name: LessEqual
   unicode-equivalent: "\u2264"
   unicode-equivalent-name: LESS-THAN OR EQUAL TO
   wl-unicode: "\u2264"
@@ -4526,6 +4562,14 @@ Micro:
   unicode-equivalent-name: MICRO SIGN
   wl-unicode: "\xB5"
   wl-unicode-name: MICRO SIGN
+Minus:
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: Minus
+  unicode-equivalent: '-'
+  unicode-equivalent-name: HYPHEN-MINUS
+  wl-unicode: '-'
+  wl-unicode-name: HYPHEN-MINUS
 MinusPlus:
   esc-alias: -+
   has-unicode-inverse: false
@@ -5212,6 +5256,14 @@ Placeholder:
   unicode-equivalent: "\u2395"
   unicode-equivalent-name: APL FUNCTIONAL SYMBOL QUAD
   wl-unicode: "\uF528"
+Plus:
+  has-unicode-inverse: true
+  is-letter-like: false
+  operator-name: Plus
+  unicode-equivalent: +
+  unicode-equivalent-name: PLUS SIGN
+  wl-unicode: +
+  wl-unicode-name: PLUS SIGN
 PlusMinus:
   esc-alias: +-
   has-unicode-inverse: false
@@ -5227,6 +5279,14 @@ Pluto:
   unicode-equivalent-name: PLUTO
   wl-unicode: "\u2647"
   wl-unicode-name: PLUTO
+Power:
+  has-unicode-inverse: true
+  is-letter-like: false
+  operator-name: Power
+  unicode-equivalent: ^
+  unicode-equivalent-name: CIRCUMFLEX ACCENT
+  wl-unicode: ^
+  wl-unicode-name: CIRCUMFLEX ACCENT
 Precedes:
   has-unicode-inverse: false
   is-letter-like: false
@@ -5351,13 +5411,6 @@ RawComma:
   unicode-equivalent-name: COMMA
   wl-unicode: ','
   wl-unicode-name: COMMA
-RawDash:
-  has-unicode-inverse: false
-  is-letter-like: false
-  unicode-equivalent: '-'
-  unicode-equivalent-name: HYPHEN-MINUS
-  wl-unicode: '-'
-  wl-unicode-name: HYPHEN-MINUS
 RawDollar:
   has-unicode-inverse: false
   is-letter-like: true
@@ -5365,13 +5418,6 @@ RawDollar:
   unicode-equivalent-name: DOLLAR SIGN
   wl-unicode: $
   wl-unicode-name: DOLLAR SIGN
-RawDot:
-  has-unicode-inverse: false
-  is-letter-like: false
-  unicode-equivalent: .
-  unicode-equivalent-name: FULL STOP
-  wl-unicode: .
-  wl-unicode-name: FULL STOP
 RawDoubleQuote:
   has-unicode-inverse: false
   is-letter-like: false
@@ -5379,24 +5425,10 @@ RawDoubleQuote:
   unicode-equivalent-name: QUOTATION MARK
   wl-unicode: '"'
   wl-unicode-name: QUOTATION MARK
-RawEqual:
-  has-unicode-inverse: false
-  is-letter-like: false
-  unicode-equivalent: '='
-  unicode-equivalent-name: EQUALS SIGN
-  wl-unicode: '='
-  wl-unicode-name: EQUALS SIGN
 RawEscape:
   has-unicode-inverse: false
   is-letter-like: false
   wl-unicode: "\e"
-RawExclamation:
-  has-unicode-inverse: false
-  is-letter-like: false
-  unicode-equivalent: '!'
-  unicode-equivalent-name: EXCLAMATION MARK
-  wl-unicode: '!'
-  wl-unicode-name: EXCLAMATION MARK
 RawGreater:
   has-unicode-inverse: false
   is-letter-like: false
@@ -5425,13 +5457,6 @@ RawLeftParenthesis:
   unicode-equivalent-name: LEFT PARENTHESIS
   wl-unicode: (
   wl-unicode-name: LEFT PARENTHESIS
-RawLess:
-  has-unicode-inverse: false
-  is-letter-like: false
-  unicode-equivalent: <
-  unicode-equivalent-name: LESS-THAN SIGN
-  wl-unicode: <
-  wl-unicode-name: LESS-THAN SIGN
 RawNumberSign:
   has-unicode-inverse: false
   is-letter-like: false
@@ -5446,13 +5471,6 @@ RawPercent:
   unicode-equivalent-name: PERCENT SIGN
   wl-unicode: '%'
   wl-unicode-name: PERCENT SIGN
-RawPlus:
-  has-unicode-inverse: false
-  is-letter-like: false
-  unicode-equivalent: +
-  unicode-equivalent-name: PLUS SIGN
-  wl-unicode: +
-  wl-unicode-name: PLUS SIGN
 RawQuestion:
   has-unicode-inverse: false
   is-letter-like: false
@@ -5496,8 +5514,9 @@ RawSemicolon:
   wl-unicode: ;
   wl-unicode-name: SEMICOLON
 RawSlash:
-  has-unicode-inverse: false
+  has-unicode-inverse: true
   is-letter-like: false
+  operator-name: Divide
   unicode-equivalent: /
   unicode-equivalent-name: SOLIDUS
   wl-unicode: /
@@ -5544,13 +5563,6 @@ RawVerticalBar:
   unicode-equivalent-name: VERTICAL LINE
   wl-unicode: '|'
   wl-unicode-name: VERTICAL LINE
-RawWedge:
-  has-unicode-inverse: false
-  is-letter-like: false
-  unicode-equivalent: ^
-  unicode-equivalent-name: CIRCUMFLEX ACCENT
-  wl-unicode: ^
-  wl-unicode-name: CIRCUMFLEX ACCENT
 RegisteredTrademark:
   esc-alias: rtm
   has-unicode-inverse: false
@@ -5848,12 +5860,14 @@ Rule:
   esc-alias: ->
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: Rule
   unicode-equivalent: "\u2192"
   unicode-equivalent-name: RIGHTWARDS ARROW
   wl-unicode: "\uF522"
 RuleDelayed:
   esc-alias: :>
   has-unicode-inverse: true
+  operator-name: RuleDelayed
   is-letter-like: false
   unicode-equivalent: "\u29F4"
   unicode-equivalent-name: RULE-DELAYED
@@ -6361,6 +6375,14 @@ SelectionPlaceholder:
   has-unicode-inverse: false
   is-letter-like: true
   wl-unicode: "\uF527"
+Set:
+  has-unicode-inverse: true
+  is-letter-like: false
+  operator-name: Set
+  unicode-equivalent: "="
+  unicode-equivalent-name: EQUALS SIGN
+  wl-unicode: "="
+  wl-unicode-name: EQUALS SIGN
 Sharp:
   has-unicode-inverse: false
   is-letter-like: true

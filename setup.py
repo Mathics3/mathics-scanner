@@ -49,7 +49,7 @@ subprocess.run(["make", "mathics_scanner/data/characters.json"])
 # stores __version__ in the current namespace
 exec(compile(open("mathics_scanner/version.py").read(), "mathics_scanner/version.py", "exec"))
 
-# Get/set VERSION and long_description from files
+# Get/set __version__ and long_description from files
 long_description = read("README.rst") + "\n"
 
 

@@ -1,6 +1,6 @@
 from mathics_scanner.characters import replace_wl_with_plain_text as wl_to_unicode
 from mathics_scanner.characters import replace_unicode_with_wl as unicode_to_wl
-from test.util import yaml_data, json_data
+from .util import yaml_data, json_data
 
 
 def test_roundtrip():
