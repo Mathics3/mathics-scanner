@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from .util import yaml_data
+from mathics_scanner.load import load_mathics_character_yaml
 import unicodedata
 
+yaml_data = load_mathics_character_yaml()
 
 def check_attr_is_invertible(attr: str):
     for v in yaml_data.values():

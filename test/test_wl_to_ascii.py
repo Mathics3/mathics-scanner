@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 
 from mathics_scanner.characters import replace_wl_with_plain_text
-from test.util import yaml_data
+from mathics_scanner.load import load_mathics_character_yaml
+
+yaml_data = load_mathics_character_yaml()
 
 def wl_to_ascii(wl_input: str) -> str:
     return replace_wl_with_plain_text(wl_input, use_unicode=False)
@@ -25,4 +27,3 @@ def test_wl_to_ascii():
             assert (
                 uni == ascii_c
             ), f"{k}'s unicode equivalent could be used as it's ASCII equivalent but it isn't"
-

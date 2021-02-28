@@ -1,7 +1,12 @@
+# -*- coding: utf-8 -*-
+
 from mathics_scanner.characters import replace_wl_with_plain_text as wl_to_unicode
 from mathics_scanner.characters import replace_unicode_with_wl as unicode_to_wl
-from .util import yaml_data, json_data
 
+from mathics_scanner.load import load_mathics_character_yaml, load_mathics_character_json
+
+yaml_data = load_mathics_character_yaml()
+json_data = load_mathics_character_json()
 
 def test_roundtrip():
     wl_to_unicode_dict = json_data["wl-to-unicode-dict"]

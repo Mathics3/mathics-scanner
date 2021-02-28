@@ -32,7 +32,7 @@ To regenerate scanner tables run:
 
 ::
 
-   $ python -m mathics_scanner.generate.build_tables
+   $ mathics-generate-json-table
 
 Implementation
 --------------

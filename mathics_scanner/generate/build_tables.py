@@ -2,11 +2,28 @@
 # This scripts reads the data from named-characters and converts it to the
 # format used by the library internally
 
+import click
+
 import json
 import yaml
 import re
+import sys
 import os.path as osp
 from pathlib import Path
+
+
+def get_srcdir():
+    filename = osp.normcase(osp.dirname(osp.abspath(__file__)))
+    return osp.realpath(filename)
+
+
+def read(*rnames):
+    return open(osp.join(get_srcdir(), *rnames)).read()
+
+
+# stores __version__ in the current namespace
+exec(compile(open(Path(get_srcdir()) / ".." / "version.py").read(), "mathics_scanner/version.py", "exec"))
+
 
 def re_from_keys(d: dict) -> str:
     """
@@ -16,9 +33,8 @@ def re_from_keys(d: dict) -> str:
 
     # The sorting is necessary to prevent the shorter keys from obscuring the
     # longer ones when pattern-matchig
-    return "|".join(
-        sorted(map(re.escape, d.keys()), key=lambda k: (-len(k), k))
-    )
+    return "|".join(sorted(map(re.escape, d.keys()), key=lambda k: (-len(k), k)))
+
 
 def get_plain_text(char_name: str, char_data: dict, use_unicode: bool) -> str:
     """:param char_name: named character to look up.
@@ -48,6 +64,7 @@ def get_plain_text(char_name: str, char_data: dict, use_unicode: bool) -> str:
 
     return f"\\[{char_name}]"
 
+
 def compile_tables(data: dict) -> dict:
     """
     Compiles the general table into the tables used internally by the library
@@ -69,64 +86,112 @@ def compile_tables(data: dict) -> dict:
     # `unicode_to_wl_dict`
 
     # Conversion from WL to the fully qualified names
-    wl_to_ascii_dict = {v["wl-unicode"]: get_plain_text(k, v, use_unicode=False)
-                        for k, v in data.items()}
+    wl_to_ascii_dict = {
+        v["wl-unicode"]: get_plain_text(k, v, use_unicode=False)
+        for k, v in data.items()
+    }
     wl_to_ascii_dict = {k: v for k, v in wl_to_ascii_dict.items() if k != v}
     wl_to_ascii_re = re_from_keys(wl_to_ascii_dict)
 
     # Conversion from wl to unicode
     # We filter the dictionary after it's first created to redundant entries
-    wl_to_unicode_dict = {v["wl-unicode"]: get_plain_text(k, v, use_unicode=True)
-                          for k, v in data.items()}
-    wl_to_unicode_dict = {k: v for k, v in wl_to_unicode_dict.items()
-                          if k != v}
+    wl_to_unicode_dict = {
+        v["wl-unicode"]: get_plain_text(k, v, use_unicode=True) for k, v in data.items()
+    }
+    wl_to_unicode_dict = {k: v for k, v in wl_to_unicode_dict.items() if k != v}
     wl_to_unicode_re = re_from_keys(wl_to_unicode_dict)
 
     # Conversion from unicode to wl
     # We filter the dictionary after it's first created to redundant entries
-    unicode_to_wl_dict = {v["unicode-equivalent"]: v["wl-unicode"]
-                          for v in data.values()
-                          if "unicode-equivalent" in v
-                          and v["has-unicode-inverse"]}
-    unicode_to_wl_dict = {k: v for k, v in unicode_to_wl_dict.items()
-                          if k != v}
+    unicode_to_wl_dict = {
+        v["unicode-equivalent"]: v["wl-unicode"]
+        for v in data.values()
+        if "unicode-equivalent" in v and v["has-unicode-inverse"]
+    }
+    unicode_to_wl_dict = {k: v for k, v in unicode_to_wl_dict.items() if k != v}
     unicode_to_wl_re = re_from_keys(unicode_to_wl_dict)
 
     # Unicode string containing all letterlikes values
-    letterlikes = "".join(v["wl-unicode"] for v in data.values()
-                          if v["is-letter-like"])
+    letterlikes = "".join(v["wl-unicode"] for v in data.values() if v["is-letter-like"])
 
     # All supported named characters
     named_characters = {k: v["wl-unicode"] for k, v in data.items()}
 
     # ESC sequence aliases
-    aliased_characters = {v["esc-alias"]: v["wl-unicode"]
-                          for v in data.values() if "esc-alias" in v}
+    aliased_characters = {
+        v["esc-alias"]: v["wl-unicode"] for v in data.values() if "esc-alias" in v
+    }
+
+    # operator-to-unicode dictionary
+    operator_to_unicode = {
+        v["operator-name"]: v["unicode-equivalent"]
+        for k, v in data.items()
+        if "operator-name" in v
+    }
 
     return {
+        "aliased-characters": aliased_characters,
+        "letterlikes": letterlikes,
+        "named-characters": named_characters,
+        "operator-to-unicode": operator_to_unicode,
+        "unicode-to-wl-dict": unicode_to_wl_dict,
+        "unicode-to-wl-re": unicode_to_wl_re,
         "wl-to-ascii-dict": wl_to_ascii_dict,
         "wl-to-ascii-re": wl_to_ascii_re,
         "wl-to-unicode-dict": wl_to_unicode_dict,
         "wl-to-unicode-re": wl_to_unicode_re,
-        "unicode-to-wl-dict": unicode_to_wl_dict,
-        "unicode-to-wl-re": unicode_to_wl_re,
-        "letterlikes": letterlikes,
-        "named-characters": named_characters,
-        "aliased-characters": aliased_characters,
     }
+
 
 DEFAULT_DATA_DIR = Path(osp.normpath(osp.dirname(__file__)), "..", "data")
 
-def create_json_file(data_dir=DEFAULT_DATA_DIR):
-    with open(data_dir / "named-characters.yml", "r") as i, open(data_dir / "characters.json", "w") as o:
-        # Load the YAML data
+ALL_FIELDS = [
+    "aliased-characters",
+    "letterlikes",
+    "named-characters",
+    "operator-to-unicode",
+    "unicode-to-wl-dict",
+    "unicode-to-wl-re",
+    "wl-to-ascii-dict",
+    "wl-to-ascii-re",
+    "wl-to-unicode-dict",
+    "wl-to-unicode-re",
+]
+
+
+@click.command()
+@click.version_option(version=__version__)
+@click.option("--field", "-f", multiple=True, required=False,
+              help="Select which fields to include in JSON.",
+              show_default=True,
+              type=click.Choice(ALL_FIELDS),
+              default=ALL_FIELDS)
+@click.option(
+    "--output",
+    "-o",
+    show_default=True,
+    type=click.Path(writable=True),
+    default=DEFAULT_DATA_DIR / "characters.json",
+)
+@click.argument(
+    "data_dir", type=click.Path(readable=True), default=DEFAULT_DATA_DIR, required=False
+)
+def main(field, output, data_dir):
+    with open(data_dir / "named-characters.yml", "r") as i, open(output, "w") as o:
+        # Load the YAML data.
         data = yaml.load(i, Loader=yaml.FullLoader)
 
-        # Precompile the tables
+        # Precompile the tables.
         data = compile_tables(data)
 
-        # Dump the proprocessed dictioanries to disk as JSON
+        # Remove the fields that aren't wanted
+        for f in ALL_FIELDS:
+            if f not in field:
+                del data[f]
+
+        # Dump the proprocessed dictionaries to disk as JSON.
         json.dump(data, o)
 
+
 if __name__ == "__main__":
-    create_json_file()
+    main(sys.argv[1:])
