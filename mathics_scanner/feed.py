@@ -78,8 +78,8 @@ class MultiLineFeeder(LineFeeder):
 
     def __init__(self, lines, filename=""):
         """
-        @param: lines    The source of the feeder (a string).
-        @param: filename A string that describes the source of the feeder, i.e.
+        :param lines: The source of the feeder (a string).
+        :param filename: A string that describes the source of the feeder, i.e.
                          the filename that is being feed.
         """
         super(MultiLineFeeder, self).__init__(filename)
@@ -106,8 +106,8 @@ class SingleLineFeeder(LineFeeder):
 
     def __init__(self, code, filename=""):
         """
-        @param: code     The source of the feeder (a string).
-        @param: filename A string that describes the source of the feeder, i.e.
+        :param code: The source of the feeder (a string).
+        :param filename: A string that describes the source of the feeder, i.e.
                          the filename that is being feed.
         """
         super().__init__(filename)
@@ -130,8 +130,8 @@ class FileLineFeeder(LineFeeder):
 
     def __init__(self, fileobject, trace_fn=None):
         """
-        @param: fileobject The source of the feeder (a string).
-        @param: filename   A string that describes the source of the feeder,
+        :param fileobject: The source of the feeder (a string).
+        :param filename: A string that describes the source of the feeder,
                            i.e.  the filename that is being feed.
         """
         super().__init__(fileobject.name)

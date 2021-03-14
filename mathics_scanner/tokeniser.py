@@ -313,12 +313,12 @@ def is_symbol_name(text):
 
 
 class Token(object):
-    "A representation of a Wolfram Language token"
+    "A representation of a Wolfram Language token."
     def __init__(self, tag, text, pos):
         """
-        @param: tag  A string that indicates which type of token this is.
-        @param: text The actual contents of the token.
-        @param: pos  The position of the token in the input feed.
+        :param tag: A string that indicates which type of token this is.
+        :param text: The actual contents of the token.
+        :param pos: The position of the token in the input feed.
         """
         self.tag = tag
         self.text = text
@@ -338,19 +338,6 @@ class Token(object):
 class Tokeniser(object):
     """
     A tokeniser for the Wolfram Language.
-
-    When subclassing ``Tokeniser``, custom tokenisation rules can be defined by
-    declaring methods whose names are preceded by ``t_``, such as in the
-    following example: ::
-
-        class MyTokeniser(Tokeniser):
-            def t_MyWeirdRule(self, match):
-                # Your logic goes here...
-                pass
-
-    In this example, ``t_MyWeirdRule`` is supposed to update the internal state
-    of the tokeniser and return a ``Token`` with an appropriate tag. ``m̀atch``
-    is expected to be an instance of ``re.Match``.
     """
     modes = {
         "expr": (tokens, token_indices),
@@ -359,7 +346,7 @@ class Tokeniser(object):
 
     def __init__(self, feeder):
         """
-        @param: feeder An instance of ``LineFeeder`` which will feed characters
+        :param feeder: An instance of ``LineFeeder`` which will feed characters
                        to the tokeniser.
         """
         self.pos = 0
@@ -370,14 +357,14 @@ class Tokeniser(object):
 
     def _change_mode(self, mode):
         """
-        Set the mode of the tokeniser
+        Set the mode of the tokeniser.
         """
         self.mode = mode
         self.tokens, self.token_indices = self.modes[mode]
 
     # TODO: Rename this to something that remotetly makes sense?
     def incomplete(self):
-        "Get more code from the prescanner and continue"
+        "Get more code from the prescanner and continue."
         self.prescanner.incomplete()
         self.code += self.prescanner.scan()
 
@@ -393,7 +380,7 @@ class Tokeniser(object):
 
     # TODO: Convert this to __next__ in the future?
     def next(self):
-        "Returns the next token"
+        "Returns the next token."
         self._skip_blank()
         if self.pos >= len(self.code):
             return Token("END", "", len(self.code))

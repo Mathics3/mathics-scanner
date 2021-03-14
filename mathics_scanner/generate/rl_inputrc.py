@@ -1,7 +1,10 @@
 #!/bin python3
 """
-Creates GNU Readline inputrc tables for converting WL escape sequences to either
-unicode symbols or WL Character strings
+Creates GNU Readline inputrc tables for converting Wolfram Language escape
+sequences to either unicode symbols or Wolfram Language fully qualified named
+characters. See `Named Characters
+<https://reference.wolfram.com/language/tutorial/InputAndOutputInNotebooks.html#4718>`_
+for more information on character aliases.
 """
 import sys
 
@@ -21,8 +24,9 @@ def _format(c: str, use_unicode: bool) -> str:
 
 def generate_inputrc(fd=sys.stdout, use_unicode=True) -> None:
     """
-    Generates inputrc files that maps WL ESC sequence aliases to their 
-    corresponding plain-text representation (full Unicode or strick ASCII)
+    Generates inputrc files that maps Wolfram Language ESC sequence aliases to
+    their corresponding plain-text representation (full Unicode or strick
+    ASCII)
     """
     for alias in aliased_characters:
         fd.write(_format(alias, use_unicode))
