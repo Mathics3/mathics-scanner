@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-Wolfram-language scanner
+This is the tokeniser or scanner portion for the Wolfram Language.
+
+As such, it also contains a full set of translation between Wolfram Language
+named characters, their Unicode/ASCII equivalents and code-points.
 """
 
 from mathics_scanner.version import __version__
@@ -11,7 +14,8 @@ from mathics_scanner.characters import (
     replace_unicode_with_wl,
     replace_wl_with_plain_text,
 )
-from mathics_scanner.tokeniser import is_symbol_name, Tokeniser
+# TODO: Move is_symbol_name to the characters module
+from mathics_scanner.tokeniser import is_symbol_name, Tokeniser, Token
 from mathics_scanner.errors import (
     InvalidSyntaxError,
     IncompleteSyntaxError,

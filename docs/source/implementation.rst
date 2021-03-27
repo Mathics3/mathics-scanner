@@ -1,9 +1,54 @@
-mathics_scanner.characters
-==========================
+==============
+Implementation
+==============
 
-This module consists mostly of translation tables between Wolfram's internal
-representation and Unicode/ASCII. For maintainability, it was decided to store
-this data in a human-readable YAML table (in ``data/named-characters.yml``).
+The Tokeniser
+=============
+
+Tokenization is performed by the ``Tokeniser`` class. The most important
+method in this class is by far the ``next`` method. This method consumes
+characters from the feeder and returns a token (if the tokenization succeeds).
+
+Tokenization Rules
+------------------
+
+Tokenization rules can are defined by declaring methods (in the ``Tokeniser``
+class) whose names are preceded by ``t_``, such as in the following example: ::
+
+   def t_SomeRule(self, match):
+       # Some logic goes here...
+       pass
+
+A tokenization rule is supposed to take a regular expression match (the 
+``match`` parameter of type ``re.Match``) and convert it to an appropriate 
+token, which is then returned by the method. The rule is also responsible for 
+updating the internal state of the tokeniser, such as incrementing the ``pos`` 
+counter.
+
+A rule is always expected to receive sane input. In other words, deciding which
+rule to call is a responsibility of the caller. Rules are are also
+automatically called from inside of ``next``.
+
+Messaging Functionality
+-----------------------
+
+Warnings and errors encountered during scanning and tokenization are collected
+in a message queue and stored in the feeders using the ``message`` and
+``syntax_message`` methods of ``LineFeeder``. The message queue is therefore a
+property of the feeder. The ``Tokeniser`` class also has a method to append
+messages to the message queue of it's feeder, the ``syntax_message`` method.
+
+The messages are stored using Mathics' internal format, but this is going to be
+revised in the next release (in fact, we plan to replace messages by errors
+entirely).
+
+Character Conversions
+=====================
+
+The ``mathics_scanner.characters`` module consists mostly of translation tables
+between Wolfram's internal representation and Unicode/ASCII. For
+maintainability, it was decided to store this data in a human-readable YAML
+table (in ``data/named-characters.yml``).
 
 The YAML table mainly contains information about how to convert a
 named character to Unicode and back. If a given character has a direct Unicode

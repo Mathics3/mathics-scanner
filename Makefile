@@ -11,8 +11,10 @@ RM  ?= rm
 
 .PHONY: all build \
    check clean \
-   develop dist doc doc-data djangotest \
-   gstest pytest \
+   develop dist doc \
+   inputrc-no-unicode \
+   inputrc-unicode \
+   pytest \
    rmChangeLog \
    test
 
@@ -41,6 +43,9 @@ install: build
 
 test check: pytest
 
+#: Build Sphinx HTML documentation
+doc:  mathics_scanner/data/characters.json
+	make -C docs html
 
 #: Remove derived files
 clean:
