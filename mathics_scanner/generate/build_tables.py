@@ -22,7 +22,13 @@ def read(*rnames):
 
 
 # stores __version__ in the current namespace
-exec(compile(open(Path(get_srcdir()) / ".." / "version.py").read(), "mathics_scanner/version.py", "exec"))
+exec(
+    compile(
+        open(Path(get_srcdir()) / ".." / "version.py").read(),
+        "mathics_scanner/version.py",
+        "exec",
+    )
+)
 
 
 def re_from_keys(d: dict) -> str:
@@ -89,6 +95,7 @@ def compile_tables(data: dict) -> dict:
     wl_to_ascii_dict = {
         v["wl-unicode"]: get_plain_text(k, v, use_unicode=False)
         for k, v in data.items()
+        if "wl-unicode" in v
     }
     wl_to_ascii_dict = {k: v for k, v in wl_to_ascii_dict.items() if k != v}
     wl_to_ascii_re = re_from_keys(wl_to_ascii_dict)
@@ -96,7 +103,9 @@ def compile_tables(data: dict) -> dict:
     # Conversion from wl to unicode
     # We filter the dictionary after it's first created to redundant entries
     wl_to_unicode_dict = {
-        v["wl-unicode"]: get_plain_text(k, v, use_unicode=True) for k, v in data.items()
+        v["wl-unicode"]: get_plain_text(k, v, use_unicode=True)
+        for k, v in data.items()
+        if "wl-unicode" in v
     }
     wl_to_unicode_dict = {k: v for k, v in wl_to_unicode_dict.items() if k != v}
     wl_to_unicode_re = re_from_keys(wl_to_unicode_dict)
@@ -115,7 +124,9 @@ def compile_tables(data: dict) -> dict:
     letterlikes = "".join(v["wl-unicode"] for v in data.values() if v["is-letter-like"])
 
     # All supported named characters
-    named_characters = {k: v["wl-unicode"] for k, v in data.items()}
+    named_characters = {
+        k: v["wl-unicode"] for k, v in data.items() if "wl-unicode" in v
+    }
 
     # ESC sequence aliases
     aliased_characters = {
@@ -126,7 +137,7 @@ def compile_tables(data: dict) -> dict:
     operator_to_unicode = {
         v["operator-name"]: v["unicode-equivalent"]
         for k, v in data.items()
-        if "operator-name" in v
+        if "operator-name" in v and "unicode-equivalent" in v
     }
 
     return {
@@ -161,11 +172,16 @@ ALL_FIELDS = [
 
 @click.command()
 @click.version_option(version=__version__)
-@click.option("--field", "-f", multiple=True, required=False,
-              help="Select which fields to include in JSON.",
-              show_default=True,
-              type=click.Choice(ALL_FIELDS),
-              default=ALL_FIELDS)
+@click.option(
+    "--field",
+    "-f",
+    multiple=True,
+    required=False,
+    help="Select which fields to include in JSON.",
+    show_default=True,
+    type=click.Choice(ALL_FIELDS),
+    default=ALL_FIELDS,
+)
 @click.option(
     "--output",
     "-o",

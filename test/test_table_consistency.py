@@ -14,7 +14,10 @@ def test_roundtrip():
 
     for k, v in yaml_data.items():
         if v["has-unicode-inverse"]:
-            wl = v["wl-unicode"]
+            try:
+                wl = v["wl-unicode"]
+            except:
+                import pdb; pdb.set_trace()
             assert (
                 unicode_to_wl(wl_to_unicode(wl)) == wl
             ), f"key {k} unicode {uni}, {wl_to_unicode(uni)}"
@@ -41,6 +44,6 @@ def test_counts():
         named_characters_set
     ), "Number of letter-likes should be less than the number of all named characters"
 
-    assert set(yaml_data.keys()) == set(
+    assert set(yaml_data.keys()) >= set(
         json_data["named-characters"].keys()
     ), "There should be a named character for each WL symbol"

@@ -13,6 +13,8 @@ def is_ascii(s: str) -> bool:
 
 def test_wl_to_ascii():
     for k, v in yaml_data.items():
+        if "wl-unicode" not in v:
+            continue
         wl = v["wl-unicode"]
 
         ascii_c = wl_to_ascii(wl)

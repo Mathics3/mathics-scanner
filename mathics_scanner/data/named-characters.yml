@@ -1,5 +1,8 @@
 # Information about named characters, indexed by their fully qualified names.
 #
+#   ascii: If present, the ASCII equivalent. In some cases this may be more
+#          than one character. For example "->" or "===".
+#
 #   esc-alias: The ESC sequence alias of the named character, if it exists.
 #
 #   has-unicode-inverse: Whether or not this named character has a unicode
@@ -7,17 +10,22 @@
 #
 #   is-letter-like: Whether or not this named-character is "letter-like".
 #
-#   operator-name: If present, this symbol is an operator with the given name.
+#   operator-name: If present, this symbol is a Mathics operator with
+#                  whose class name is the given name. For example Divide.
 #
 #   unicode-equivalent: A unicode equivalent for the named-character, if it
 #                       exists.
 #
 #   unicode-equivalent-name: The name of the unicode equivalent, if it exists.
+#                            The Python module unicodedata contains a list of
+#                            unicode names that we check against. So if the character
+#                            or unicode symbol is not in that, don't use it here.
 #
 #   wl-unicode: The unicode code point used by Mathics internally to represent
 #               the named character.
 #
-#   wl-unicode-name: The name of the character corresponding to `wl-unicode`.
+#   wl-unicode-name: The name of the character corresponding to `wl-unicode`, if it exists.
+#                    It will mentioned in Wolfram Language docs if it exists.
 
 AAcute:
   esc-alias: a'
@@ -1439,12 +1447,13 @@ Divides:
   wl-unicode: "\u2223"
   wl-unicode-name: DIVIDES
 Dot:
+  ascii: "."
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Dot
-  unicode-equivalent: .
+  unicode-equivalent: "."
   unicode-equivalent-name: FULL STOP
-  wl-unicode: .
+  wl-unicode: "."
   wl-unicode-name: FULL STOP
 DotEqual:
   esc-alias: .=
@@ -2341,9 +2350,11 @@ Epsilon:
   wl-unicode: "\u03F5"
   wl-unicode-name: GREEK LUNATE EPSILON SYMBOL
 Equal:
-  esc-alias: ==
+  ascii: "=="
+  esc-alias: "=="
   has-unicode-inverse: true
   is-letter-like: false
+  operator-name: Equal
   unicode-equivalent: "\u2A75"
   unicode-equivalent-name: TWO CONSECUTIVE EQUALS SIGNS
   wl-unicode: "\uF431"
@@ -2419,12 +2430,13 @@ ExponentialE:
   unicode-equivalent-name: DOUBLE-STRUCK ITALIC SMALL E
   wl-unicode: "\uF74D"
 Factorial:
+  ascii: "!"
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Factorial
-  unicode-equivalent: '!'
+  unicode-equivalent: "!"
   unicode-equivalent-name: EXCLAMATION MARK
-  wl-unicode: '!'
+  wl-unicode: "!"
   wl-unicode-name: EXCLAMATION MARK
 FiLigature:
   has-unicode-inverse: false
@@ -4038,6 +4050,12 @@ Implies:
   unicode-equivalent: "\u27F9"
   unicode-equivalent-name: LONG RIGHTWARDS DOUBLE ARROW
   wl-unicode: "\uF523"
+IndentingNewLine:
+  esc-alias: nl
+  has-unicode-inverse: false
+  is-letter-like: false
+  unicode-equivalent: "\u000A"
+  wl-unicode: "\uF3A3"
 Infinity:
   esc-alias: inf
   has-unicode-inverse: false
@@ -4563,12 +4581,13 @@ Micro:
   wl-unicode: "\xB5"
   wl-unicode-name: MICRO SIGN
 Minus:
+  ascii: "-"
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Minus
-  unicode-equivalent: '-'
+  unicode-equivalent: "-"
   unicode-equivalent-name: HYPHEN-MINUS
-  wl-unicode: '-'
+  wl-unicode: "-"
   wl-unicode-name: HYPHEN-MINUS
 MinusPlus:
   esc-alias: -+
@@ -4663,6 +4682,11 @@ NeutralSmiley:
   has-unicode-inverse: false
   is-letter-like: true
   wl-unicode: "\uF722"
+NewLine:
+  has-unicode-inverse: true
+  is-letter-like: false
+  unicode-equivalent: "\u000A"
+  wl-unicode: "\u000A"
 NoBreak:
   esc-alias: nb
   has-unicode-inverse: false
@@ -4675,6 +4699,11 @@ NonBreakingSpace:
   is-letter-like: false
   wl-unicode: "\_"
   wl-unicode-name: NO-BREAK SPACE
+NonCommutativeMultiply:
+  ascii: "**"
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: NonCommutativeMultiply
 Nor:
   esc-alias: nor
   has-unicode-inverse: false
@@ -4721,9 +4750,11 @@ NotElement:
   wl-unicode: "\u2209"
   wl-unicode-name: NOT AN ELEMENT OF
 NotEqual:
+  ascii: "!="
   esc-alias: '!='
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: NotEqual
   unicode-equivalent: "\u2260"
   unicode-equivalent-name: NOT EQUAL TO
   wl-unicode: "\u2260"
@@ -5257,12 +5288,13 @@ Placeholder:
   unicode-equivalent-name: APL FUNCTIONAL SYMBOL QUAD
   wl-unicode: "\uF528"
 Plus:
+  ascii: "+"
   has-unicode-inverse: true
   is-letter-like: false
   operator-name: Plus
-  unicode-equivalent: +
+  unicode-equivalent: "+"
   unicode-equivalent-name: PLUS SIGN
-  wl-unicode: +
+  wl-unicode: "+"
   wl-unicode-name: PLUS SIGN
 PlusMinus:
   esc-alias: +-
@@ -5280,12 +5312,13 @@ Pluto:
   wl-unicode: "\u2647"
   wl-unicode-name: PLUTO
 Power:
+  ascii: "^"
   has-unicode-inverse: true
   is-letter-like: false
   operator-name: Power
-  unicode-equivalent: ^
+  unicode-equivalent: "^"
   unicode-equivalent-name: CIRCUMFLEX ACCENT
-  wl-unicode: ^
+  wl-unicode: "^"
   wl-unicode-name: CIRCUMFLEX ACCENT
 Precedes:
   has-unicode-inverse: false
@@ -5485,6 +5518,11 @@ RawQuote:
   unicode-equivalent-name: APOSTROPHE
   wl-unicode: ''''
   wl-unicode-name: APOSTROPHE
+RawReturn:
+  has-unicode-inverse: true
+  is-letter-like: false
+  unicode-equivalent: "\u000D"
+  wl-unicode: "\u000D"
 RawRightBrace:
   has-unicode-inverse: false
   is-letter-like: false
@@ -5539,9 +5577,7 @@ RawTab:
   has-unicode-inverse: false
   is-letter-like: false
   unicode-equivalent: "\t"
-  unicode-equivalent-name: HORIZONTAL TABULATION
   wl-unicode: "\t"
-  wl-unicode-name: HORIZONTAL TABULATION
 RawTilde:
   has-unicode-inverse: false
   is-letter-like: false
@@ -5903,6 +5939,11 @@ SagittariusSign:
   unicode-equivalent-name: SAGITTARIUS
   wl-unicode: "\u2650"
   wl-unicode-name: SAGITTARIUS
+SameQ:
+  ascii: "==="
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: SameQ
 Sampi:
   esc-alias: sa
   has-unicode-inverse: true
@@ -6764,9 +6805,11 @@ TildeTilde:
   wl-unicode: "\u2248"
   wl-unicode-name: ALMOST EQUAL TO
 Times:
+  ascii: '*'
   esc-alias: '*'
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: Times
   unicode-equivalent: "\xD7"
   unicode-equivalent-name: MULTIPLICATION SIGN
   wl-unicode: "\xD7"
