@@ -31,9 +31,21 @@ def generate_inputrc(fd=sys.stdout, use_unicode=True) -> None:
     for alias in aliased_characters:
         fd.write(_format(alias, use_unicode))
 
+def usage():
+    sys.stderr.write("usage: %s {inputrc-unicode | inputrc-no-unicode}\n" % sys.argv[0])
+    sys.exit(1)
+
 if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        usage()
+
     if sys.argv[1] == "inputrc-unicode":
+        default_encoding = sys.getdefaultencoding()
+        if  default_encoding != "utf-8":
+            sys.stderr.write("sys.defaultencoding() is %s so we can't generate unicode output\n" % (default_encoding))
+            sys.exit(2)
         generate_inputrc(use_unicode=True)
     elif sys.argv[1] == "inputrc-no-unicode":
         generate_inputrc(use_unicode=False)
-
+    else:
+        usage()
