@@ -75,6 +75,19 @@ AGrave:
   unicode-equivalent-name: LATIN SMALL LETTER A WITH GRAVE
   wl-unicode: "\xE0"
   wl-unicode-name: LATIN SMALL LETTER A WITH GRAVE
+Apply:
+  ascii: "@@"
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: Apply
+# @@@ replaces heads at level 1 of expr by f.
+# We add "1" at the end so keys are unique, but
+# the WL operator is still "Apply".
+Apply1:
+  ascii: "@@@"
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: Apply
 AHat:
   esc-alias: a^
   has-unicode-inverse: false
@@ -107,6 +120,7 @@ Aleph:
   unicode-equivalent-name: ALEF SYMBOL
   wl-unicode: "\u2135"
   wl-unicode-name: ALEF SYMBOL
+# Note: the unicode ofr AliasDelimiter doesn't look like "-"
 AliasDelimiter:
   has-unicode-inverse: false
   is-letter-like: false
@@ -1430,6 +1444,7 @@ Distributed:
   is-letter-like: false
   wl-unicode: "\uF3D2"
 Divide:
+  ascii: "/"
   esc-alias: div
   has-unicode-inverse: true
   is-letter-like: false
@@ -4065,6 +4080,12 @@ Infinity:
   unicode-equivalent-name: INFINITY
   wl-unicode: "\u221E"
   wl-unicode-name: INFINITY
+# Infix isn't really an operator
+# Infix:
+#  ascii: "~"
+#  has-unicode-inverse: false
+#  is-letter-like: false
+#  operator-name: Infix
 Integral:
   esc-alias: int
   has-unicode-inverse: false
@@ -4405,12 +4426,13 @@ LeoSign:
   wl-unicode: "\u264C"
   wl-unicode-name: LEO
 Less:
+  ascii: "<"
   has-unicode-inverse: true
   is-letter-like: false
   operator-name: Less
-  unicode-equivalent: <
+  unicode-equivalent: "<"
   unicode-equivalent-name: LESS-THAN SIGN
-  wl-unicode: <
+  wl-unicode: "<"
   wl-unicode-name: LESS-THAN SIGN
 LessEqual:
   ascii: "<="
@@ -5313,6 +5335,11 @@ Pluto:
   unicode-equivalent-name: PLUTO
   wl-unicode: "\u2647"
   wl-unicode-name: PLUTO
+Postfix:
+  ascii: "//"
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: Postfix
 Power:
   ascii: "^"
   has-unicode-inverse: true
@@ -5350,6 +5377,12 @@ PrecedesTilde:
   unicode-equivalent-name: PRECEDES OR EQUIVALENT TO
   wl-unicode: "\u227E"
   wl-unicode-name: PRECEDES OR EQUIVALENT TO
+# Prefix isn't really an operator
+# Prefix:
+#  ascii: "@"
+#  has-unicode-inverse: false
+#  is-letter-like: false
+#  operator-name: Prefix
 Prime:
   esc-alias: ''''
   has-unicode-inverse: false
@@ -5556,10 +5589,11 @@ RawSemicolon:
   unicode-equivalent-name: SEMICOLON
   wl-unicode: ;
   wl-unicode-name: SEMICOLON
+# RawSlash is not an operator. Divide which
+# looks the same, however is.
 RawSlash:
   has-unicode-inverse: true
   is-letter-like: false
-  operator-name: Divide
   unicode-equivalent: /
   unicode-equivalent-name: SOLIDUS
   wl-unicode: /
@@ -5898,7 +5932,8 @@ RoundSpaceIndicator:
   is-letter-like: false
   wl-unicode: "\uF3B2"
 Rule:
-  esc-alias: ->
+  ascii: "->"
+  esc-alias: "->"
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Rule
@@ -5906,7 +5941,8 @@ Rule:
   unicode-equivalent-name: RIGHTWARDS ARROW
   wl-unicode: "\uF522"
 RuleDelayed:
-  esc-alias: :>
+  ascii: ":>"
+  esc-alias: ":>"
   has-unicode-inverse: true
   operator-name: RuleDelayed
   is-letter-like: false
@@ -6722,6 +6758,11 @@ TabKey:
   has-unicode-inverse: false
   is-letter-like: false
   wl-unicode: "\uF7BE"
+TagSet:
+  ascii: "/:"
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: TagSet
 Tau:
   esc-alias: t
   has-unicode-inverse: false
@@ -6930,11 +6971,6 @@ UnSameQ:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: UnSameQ
-UnSet:
-  ascii: "=."
-  has-unicode-inverse: false
-  is-letter-like: false
-  operator-name: UnSet
 Union:
   esc-alias: un
   has-unicode-inverse: false
@@ -6950,6 +6986,11 @@ UnionPlus:
   unicode-equivalent-name: MULTISET UNION
   wl-unicode: "\u228E"
   wl-unicode-name: MULTISET UNION
+Unset:
+  ascii: "=."
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: Unset
 UpArrow:
   has-unicode-inverse: false
   is-letter-like: false
@@ -7031,6 +7072,16 @@ Upsilon:
   unicode-equivalent-name: GREEK SMALL LETTER UPSILON
   wl-unicode: "\u03C5"
   wl-unicode-name: GREEK SMALL LETTER UPSILON
+UpSet:
+  ascii: "^="
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: UpSet
+UpSetDelayed:
+  ascii: "^:="
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: UpSetDelayed
 
 # The rendering of Uranus at https://reference.wolfram.com/language/ref/character/Uranus.html
 # looks more like U+26E2 (Astronomical Symbol for Uranus) than the Standard Unicode equavalent
