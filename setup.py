@@ -36,6 +36,7 @@ if sys.version_info < (3, 6):
     print("mathics-scanner does not support Python %d.%d" % sys.version_info[:2])
     sys.exit(-1)
 
+
 def get_srcdir():
     filename = osp.normcase(osp.dirname(osp.abspath(__file__)))
     return osp.realpath(filename)
@@ -44,24 +45,25 @@ def get_srcdir():
 def read(*rnames):
     return open(osp.join(get_srcdir(), *rnames)).read()
 
-subprocess.run(["make", "mathics_scanner/data/characters.json"])
 
 # stores __version__ in the current namespace
-exec(compile(open("mathics_scanner/version.py").read(), "mathics_scanner/version.py", "exec"))
+exec(
+    compile(
+        open("mathics_scanner/version.py").read(), "mathics_scanner/version.py", "exec"
+    )
+)
 
-# Get/set VERSION and long_description from files
+# Get/set __version__ and long_description from files
 long_description = read("README.rst") + "\n"
 
 
 is_PyPy = platform.python_implementation() == "PyPy"
 
-INSTALL_REQUIRES = []
-DEPENDENCY_LINKS = []
-
 # General Requirements
-INSTALL_REQUIRES += [
-    "chardet", # Used in mathics_scanner.feed
-    "ujson", # Used in mathics_scanner.characters
+INSTALL_REQUIRES = [
+    "chardet",  # Used in mathics_scanner.feed
+    "ujson",  # Used in mathics_scanner.characters
+    "click",  # Usin in CLI: mathics-generate-json-table
 ]
 
 
@@ -78,7 +80,11 @@ setup(
         "mathics_scanner.generate",
     ],
     install_requires=INSTALL_REQUIRES,
-    dependency_links=DEPENDENCY_LINKS,
+    entry_points={
+        "console_scripts": [
+            "mathics-generate-json-table=mathics_scanner.generate.build_tables:main"
+        ]
+    },
     package_data={
         "mathics_scanner": [
             "data/*.csv",

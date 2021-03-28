@@ -35,7 +35,7 @@ develop: mathics_scanner/data/characters.json
 
 #: Build distribution
 dist: admin-tools/make-dist.sh
-	$(ShelL) admin-tools/make-dist.sh
+	$(SHELL) admin-tools/make-dist.sh
 
 #: Install mathics
 install: build
