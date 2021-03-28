@@ -6,6 +6,7 @@
 *.nix
 *.py[cod]
 *.so
+*.stackdump
 .coverage
 .idea/
 .mypy_cache

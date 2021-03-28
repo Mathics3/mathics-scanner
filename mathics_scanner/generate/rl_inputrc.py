@@ -29,7 +29,11 @@ def generate_inputrc(fd=sys.stdout, use_unicode=True) -> None:
     ASCII)
     """
     for alias in aliased_characters:
-        fd.write(_format(alias, use_unicode))
+        try:
+            fd.write(_format(alias, use_unicode))
+        except UnicodeEncodeError:
+            sys.stderr.write("Error trying to convert alias %s; skipping\n" % alias)
+
 
 def usage():
     sys.stderr.write("usage: %s {inputrc-unicode | inputrc-no-unicode}\n" % sys.argv[0])
