@@ -140,11 +140,18 @@ def compile_tables(data: dict) -> dict:
         if "operator-name" in v and "unicode-equivalent" in v
     }
 
+    # operator-to-unicode dictionary
+    unicode_to_operator = {
+        v["unicode-equivalent"]: v["operator-name"]
+        for k, v in data.items()
+        if "operator-name" in v and "unicode-equivalent" in v
+    }
     return {
         "aliased-characters": aliased_characters,
         "letterlikes": letterlikes,
         "named-characters": named_characters,
         "operator-to-unicode": operator_to_unicode,
+        "unicode-to-operator": operator_to_unicode,
         "unicode-to-wl-dict": unicode_to_wl_dict,
         "unicode-to-wl-re": unicode_to_wl_re,
         "wl-to-ascii-dict": wl_to_ascii_dict,
@@ -161,6 +168,7 @@ ALL_FIELDS = [
     "letterlikes",
     "named-characters",
     "operator-to-unicode",
+    "unicode-to-operator",
     "unicode-to-wl-dict",
     "unicode-to-wl-re",
     "wl-to-ascii-dict",

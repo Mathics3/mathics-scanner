@@ -120,7 +120,7 @@ Aleph:
   unicode-equivalent-name: ALEF SYMBOL
   wl-unicode: "\u2135"
   wl-unicode-name: ALEF SYMBOL
-# Note: the unicode ofr AliasDelimiter doesn't look like "-"
+# Note: the unicode for AliasDelimiter doesn't look like "-"
 AliasDelimiter:
   has-unicode-inverse: false
   is-letter-like: false

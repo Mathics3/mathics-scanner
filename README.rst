@@ -56,7 +56,7 @@ Mathics is released under the GNU General Public License Version 3 (GPL3).
 .. |Workflows| image:: https://github.com/Mathics3/mathics-scanner/workflows/Mathics%20(ubuntu)/badge.svg
 .. |Packaging status| image:: https://repology.org/badge/vertical-allrepos/mathics-scanner.svg
 			    :target: https://repology.org/project/mathics-scanner/versions
-.. |Latest Version| image:: https://badge.fury.io/py/mathics-scanner.svg
-		 :target: https://badge.fury.io/py/mathics-scanner
-.. |Pypi Installs| image:: https://pepy.tech/badge/mathics-scanner
-.. |Supported Python Versions| image:: https://img.shields.io/pypi/pyversions/mathics-scanner.svg
+.. |Latest Version| image:: https://badge.fury.io/py/Mathics-Scanner.svg
+		 :target: https://badge.fury.io/py/Mathics-Scanner
+.. |Pypi Installs| image:: https://pepy.tech/badge/Mathics-Scanner
+.. |Supported Python Versions| image:: https://img.shields.io/pypi/pyversions/Mathics-Scanner.svg

@@ -1,6 +1,18 @@
 CHANGES
 =======
 
+1.1.0
+-----
+
+* Add operator-name, and ascii fields. See named-characters.yml for a description of these
+* Add some whitespace characters like IndentingNewLine and RawReadLine
+* Improve testing
+* Fix some small tagging based on testing
+* Add unicode-to-operator generation
+
+Note: not all operators have been tagged, so expect another release soon when that's done.
+
+
 1.0.0
 -----
 
