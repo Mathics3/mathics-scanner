@@ -3861,7 +3861,8 @@ GraySquare:
   unicode-equivalent-name: BLACK SQUARE
   wl-unicode: "\uF752"
 GreaterEqual:
-  esc-alias: '>='
+  ascii: ">="
+  esc-alias: ">="
   has-unicode-inverse: true
   is-letter-like: false
   operator-name: GreaterEqual
@@ -4412,7 +4413,8 @@ Less:
   wl-unicode: <
   wl-unicode-name: LESS-THAN SIGN
 LessEqual:
-  esc-alias: <=
+  ascii: "<="
+  esc-alias: "<="
   has-unicode-inverse: true
   is-letter-like: false
   operator-name: LessEqual
@@ -5462,12 +5464,15 @@ RawEscape:
   has-unicode-inverse: false
   is-letter-like: false
   wl-unicode: "\e"
+# Note: RawGreater WL's name for Mathics Greater or ASCII ">"
 RawGreater:
-  has-unicode-inverse: false
+  ascii: ">"
+  has-unicode-inverse: true
   is-letter-like: false
-  unicode-equivalent: '>'
+  operator-name: Greater
+  unicode-equivalent: "\u003e"
   unicode-equivalent-name: GREATER-THAN SIGN
-  wl-unicode: '>'
+  wl-unicode: "\u003e"
   wl-unicode-name: GREATER-THAN SIGN
 RawLeftBrace:
   has-unicode-inverse: false
@@ -6417,6 +6422,7 @@ SelectionPlaceholder:
   is-letter-like: true
   wl-unicode: "\uF527"
 Set:
+  ascii: "="
   has-unicode-inverse: true
   is-letter-like: false
   operator-name: Set
@@ -6424,6 +6430,11 @@ Set:
   unicode-equivalent-name: EQUALS SIGN
   wl-unicode: "="
   wl-unicode-name: EQUALS SIGN
+SetDelayed:
+  ascii: ":="
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: SetDelayed
 Sharp:
   has-unicode-inverse: false
   is-letter-like: true
@@ -6914,6 +6925,16 @@ UndirectedEdge:
   unicode-equivalent: "\u2194"
   unicode-equivalent-name: LEFT RIGHT ARROW
   wl-unicode: "\uF3D4"
+UnSameQ:
+  ascii: "=!="
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: UnSameQ
+UnSet:
+  ascii: "=."
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: UnSet
 Union:
   esc-alias: un
   has-unicode-inverse: false
