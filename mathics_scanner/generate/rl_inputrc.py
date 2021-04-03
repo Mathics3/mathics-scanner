@@ -18,7 +18,10 @@ def _escape(s: str) -> str:
 def _format(c: str, use_unicode: bool) -> str:
     """Formats a single key-value pair"""
     key = _escape(c)
-    val = _escape(r(aliased_characters[c], use_unicode=use_unicode))
+    if key == "nl":
+        val = "\\n"
+    else:
+        val = _escape(r(aliased_characters[c], use_unicode=use_unicode))
 
     return f'"\\e{key}\\e": "{val}"\n'
 
