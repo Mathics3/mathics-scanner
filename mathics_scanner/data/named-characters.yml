@@ -22,9 +22,10 @@
 #                            or unicode symbol is not in that, don't use it here.
 #
 #   wl-unicode: The unicode code point used by Mathics internally to represent
-#               the named character.
+#               the named character. If it is the same as unicode-equivalent
+#               it can be omitted
 #
-#   wl-unicode-name: The name of the character corresponding to `wl-unicode`, if it exists.
+#   wl-unicode-name: The name of the character corresponding to `wl-unicode`, if it exists. If it is the same as unicode-equivalent-name it can be omitted.
 #                    It will mentioned in Wolfram Language docs if it exists.
 
 AAcute:
@@ -51,6 +52,11 @@ ACup:
   unicode-equivalent-name: LATIN SMALL LETTER A WITH BREVE
   wl-unicode: "\u0103"
   wl-unicode-name: LATIN SMALL LETTER A WITH BREVE
+AddTo:
+  ascii: "+="
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: AddTo
 ADoubleDot:
   esc-alias: a"
   has-unicode-inverse: false
@@ -75,6 +81,14 @@ AGrave:
   unicode-equivalent-name: LATIN SMALL LETTER A WITH GRAVE
   wl-unicode: "\xE0"
   wl-unicode-name: LATIN SMALL LETTER A WITH GRAVE
+AHat:
+  esc-alias: a^
+  has-unicode-inverse: false
+  is-letter-like: false
+  unicode-equivalent: "\xE2"
+  unicode-equivalent-name: LATIN SMALL LETTER A WITH CIRCUMFLEX
+  wl-unicode: "\xE2"
+  wl-unicode-name: LATIN SMALL LETTER A WITH CIRCUMFLEX
 Apply:
   ascii: "@@"
   has-unicode-inverse: false
@@ -88,14 +102,6 @@ Apply1:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Apply
-AHat:
-  esc-alias: a^
-  has-unicode-inverse: false
-  is-letter-like: false
-  unicode-equivalent: "\xE2"
-  unicode-equivalent-name: LATIN SMALL LETTER A WITH CIRCUMFLEX
-  wl-unicode: "\xE2"
-  wl-unicode-name: LATIN SMALL LETTER A WITH CIRCUMFLEX
 ARing:
   esc-alias: ao
   has-unicode-inverse: false
@@ -299,6 +305,21 @@ BlackRook:
   unicode-equivalent-name: BLACK CHESS ROOK
   wl-unicode: "\u265C"
   wl-unicode-name: BLACK CHESS ROOK
+Blank:
+  ascii: "_"
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: Blank
+BlankNullSequence:
+  ascii: "___"
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: BlankNullSequence
+BlankSequence:
+  ascii: "__"
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: BlankSequence
 Breve:
   esc-alias: bv
   has-unicode-inverse: false
@@ -1320,6 +1341,12 @@ Decrement:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Decrement
+# See also RawQuestion
+Definition:
+  ascii: "?"
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: Definition
 Degree:
   esc-alias: deg
   has-unicode-inverse: false
@@ -1349,6 +1376,11 @@ Delta:
   unicode-equivalent-name: GREEK SMALL LETTER DELTA
   wl-unicode: "\u03B4"
   wl-unicode-name: GREEK SMALL LETTER DELTA
+Derivative:
+  ascii: "'"
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: Derivative
 DescendingEllipsis:
   has-unicode-inverse: false
   is-letter-like: false
@@ -1463,6 +1495,11 @@ Divide:
   unicode-equivalent-name: DIVISION SIGN
   wl-unicode: "\xF7"
   wl-unicode-name: DIVISION SIGN
+DivideBy:
+  ascii: "/="
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: DivideBy
 Divides:
   esc-alias: divides
   has-unicode-inverse: false
@@ -3422,13 +3459,24 @@ FreakedSmiley:
   has-unicode-inverse: false
   is-letter-like: true
   wl-unicode: "\uF721"
+# See also RawAmpersand
+# Function:
+#   ascii: "&"
+#   has-unicode-inverse: false
+#   is-letter-like: false
+#   operator-name: Function
+#   wl-unicode: "&"
+# Alternative form of Function
+# See also RightTeeArrow
 Function:
-  esc-alias: '|->'
-  has-unicode-inverse: true
+  ascii: "|->"
+  has-unicode-inverse: false
   is-letter-like: false
+  operator-name: Function
   unicode-equivalent: "\u21A6"
   unicode-equivalent-name: RIGHTWARDS ARROW FROM BAR
   wl-unicode: "\uF4A1"
+  wl-unicode-name: RIGHTWARDS ARROW FROM BAR
 Gamma:
   esc-alias: g
   has-unicode-inverse: false
@@ -3444,6 +3492,11 @@ GeminiSign:
   unicode-equivalent-name: GEMINI
   wl-unicode: "\u264A"
   wl-unicode-name: GEMINI
+Get:
+  ascii: "<<"
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: Get
 Gimel:
   esc-alias: gi
   has-unicode-inverse: false
@@ -4101,6 +4154,11 @@ Infinity:
 #  has-unicode-inverse: false
 #  is-letter-like: false
 #  operator-name: Infix
+Information:
+  ascii: "??"
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: Information
 Integral:
   esc-alias: int
   has-unicode-inverse: false
@@ -5447,6 +5505,16 @@ Psi:
   unicode-equivalent-name: GREEK SMALL LETTER PSI
   wl-unicode: "\u03C8"
   wl-unicode-name: GREEK SMALL LETTER PSI
+Put:
+  ascii: ">>"
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: Put
+PutAppend:
+  ascii: ">>>"
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: PutAppend
 QuarterNote:
   has-unicode-inverse: false
   is-letter-like: false
@@ -5462,10 +5530,11 @@ RHacek:
   unicode-equivalent-name: LATIN SMALL LETTER R WITH CARON
   wl-unicode: "\u0159"
   wl-unicode-name: LATIN SMALL LETTER R WITH CARON
+# See also Function
 RawAmpersand:
   has-unicode-inverse: false
   is-letter-like: false
-  unicode-equivalent: '&'
+  unicode-equivalent: "&"
   unicode-equivalent-name: AMPERSAND
   wl-unicode: '&'
   wl-unicode-name: AMPERSAND
@@ -5570,16 +5639,16 @@ RawPercent:
 RawQuestion:
   has-unicode-inverse: false
   is-letter-like: false
-  unicode-equivalent: '?'
+  unicode-equivalent: "?"
   unicode-equivalent-name: QUESTION MARK
-  wl-unicode: '?'
+  wl-unicode: "?"
   wl-unicode-name: QUESTION MARK
 RawQuote:
   has-unicode-inverse: false
   is-letter-like: false
-  unicode-equivalent: ''''
+  unicode-equivalent: "'"
   unicode-equivalent-name: APOSTROPHE
-  wl-unicode: ''''
+  wl-unicode: "'"
   wl-unicode-name: APOSTROPHE
 RawReturn:
   has-unicode-inverse: true
@@ -5671,6 +5740,16 @@ RegisteredTrademark:
   unicode-equivalent-name: REGISTERED SIGN
   wl-unicode: "\xAE"
   wl-unicode-name: REGISTERED SIGN
+Repeated:
+  ascii: ".."
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: Repeated
+RepeatedNull:
+  ascii: "..."
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: RepeatedNull
 ReplaceAll:
   ascii: "/."
   has-unicode-inverse: false
@@ -6701,6 +6780,16 @@ Stigma:
   unicode-equivalent-name: GREEK SMALL LETTER STIGMA
   wl-unicode: "\u03DB"
   wl-unicode-name: GREEK SMALL LETTER STIGMA
+StringExpression:
+  ascii: "~~"
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: StringExpression
+StringJoin:
+  ascii: "<>"
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: StringJoin
 Subset:
   esc-alias: sub
   has-unicode-inverse: false
@@ -6717,6 +6806,11 @@ SubsetEqual:
   unicode-equivalent-name: SUBSET OF OR EQUAL TO
   wl-unicode: "\u2286"
   wl-unicode-name: SUBSET OF OR EQUAL TO
+SubtractFrom:
+  ascii: "-="
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: SubtractFrom
 Succeeds:
   has-unicode-inverse: false
   is-letter-like: false
@@ -6906,6 +7000,11 @@ Times:
   unicode-equivalent-name: MULTIPLICATION SIGN
   wl-unicode: "\xD7"
   wl-unicode-name: MULTIPLICATION SIGN
+TimesBy:
+  ascii: "*="
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: TimesBy
 Trademark:
   esc-alias: tm
   has-unicode-inverse: false

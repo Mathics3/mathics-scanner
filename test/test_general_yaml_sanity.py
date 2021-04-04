@@ -55,8 +55,7 @@ def test_operators():
                 pass
         else:
             assert "wl-unicode" in v, (
-                "In %s: there must be either an ascii name or have a wl-unicode"
-                % k
+                "In %s: there must be either an ascii name or have a wl-unicode" % k
             )
         if "operator-name" not in v:
             continue
@@ -86,9 +85,6 @@ def test_wl_unicode_name():
         try:
             expected_name = unicodedata.name(wl)
         except ValueError:
-            assert (
-                "wl-unicode-name" not in v
-            ), f"{k} has wl-unicode-name set to {v['wl-unicode-name']} but {wl} has no unicode name"
             continue
 
         real_name = v.get("wl-unicode-name")
@@ -141,11 +137,14 @@ def test_unicode_name():
 def test_wl_unicode():
     for k, v in yaml_data.items():
         if "operator-name" in v:
-            if "ascii" in v and len(v["ascii"]) > 1:
-                # Multi-character operators like "**" don't need to
-                # have a wl-unicode equivalent.
+            if "ascii" in v:
+                # Operators like "**" or "?" don't need to
+                # have a wl-unicode equivalent and might not have a
+                # unique equivalent
                 continue
-        assert "wl-unicode" in v, f"{k} has no wl-unicode attribute"
+        assert (
+            "wl-unicode" in v or "unicode-equivalent" in v
+        ), f"{k} has neither wl-unicode nor unicode-equivalent attribute"
 
 
 def test_general_yaml_sanity():
