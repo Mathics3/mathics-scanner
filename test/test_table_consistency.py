@@ -14,6 +14,7 @@ def test_roundtrip():
 
     for k, v in yaml_data.items():
         if v["has-unicode-inverse"]:
+            uni = v["unicode-equivalent"]
             try:
                 wl = v["wl-unicode"]
             except:
@@ -22,7 +23,6 @@ def test_roundtrip():
                 unicode_to_wl(wl_to_unicode(wl)) == wl
             ), f"key {k} unicode {uni}, {wl_to_unicode(uni)}"
 
-            uni = v["unicode-equivalent"]
             if uni != wl:
                 assert (
                     uni == wl_to_unicode_dict[wl]

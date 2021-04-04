@@ -1310,6 +1310,11 @@ Dash:
   unicode-equivalent-name: EN DASH
   wl-unicode: "\u2013"
   wl-unicode-name: EN DASH
+Decrement:
+  ascii: "--"
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: Decrement
 Degree:
   esc-alias: deg
   has-unicode-inverse: false
@@ -4066,6 +4071,11 @@ Implies:
   unicode-equivalent: "\u27F9"
   unicode-equivalent-name: LONG RIGHTWARDS DOUBLE ARROW
   wl-unicode: "\uF523"
+Increment:
+  ascii: "++"
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: Increment
 IndentingNewLine:
   esc-alias: nl
   has-unicode-inverse: false
@@ -4248,6 +4258,11 @@ LeftCeiling:
   unicode-equivalent-name: LEFT CEILING
   wl-unicode: "\u2308"
   wl-unicode-name: LEFT CEILING
+LeftComposition:
+  ascii: "/*"
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: LeftComposition
 LeftDoubleBracket:
   esc-alias: '[['
   has-unicode-inverse: false
@@ -4557,6 +4572,16 @@ LowerRightArrow:
   unicode-equivalent-name: SOUTH EAST ARROW
   wl-unicode: "\u2198"
   wl-unicode-name: SOUTH EAST ARROW
+Map:
+  ascii: "/@"
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: Map
+MapAll:
+  ascii: "//@"
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: MapAll
 Mars:
   has-unicode-inverse: false
   is-letter-like: false
@@ -5646,6 +5671,16 @@ RegisteredTrademark:
   unicode-equivalent-name: REGISTERED SIGN
   wl-unicode: "\xAE"
   wl-unicode-name: REGISTERED SIGN
+ReplaceAll:
+  ascii: "/."
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: ReplaceAll
+ReplaceRepeated:
+  ascii: "//."
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: ReplaceRepeated
 ReturnIndicator:
   esc-alias: ret
   has-unicode-inverse: false
@@ -5764,6 +5799,11 @@ RightCeiling:
   unicode-equivalent-name: RIGHT CEILING
   wl-unicode: "\u2309"
   wl-unicode-name: RIGHT CEILING
+RightComposition:
+  ascii: "@*"
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: RightComposition
 RightDoubleBracket:
   esc-alias: ']]'
   has-unicode-inverse: false
@@ -7111,10 +7151,11 @@ Venus:
   wl-unicode: "\u2640"
   wl-unicode-name: FEMALE SIGN
 VerticalBar:
+  ascii: "|"
   esc-alias: ' |'
   has-unicode-inverse: true
   is-letter-like: false
-  unicode-equivalent: '|'
+  unicode-equivalent: "\u007C"
   unicode-equivalent-name: VERTICAL LINE
   wl-unicode: "\uF3D0"
 VerticalEllipsis:
