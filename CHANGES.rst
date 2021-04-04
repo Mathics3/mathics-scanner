@@ -1,10 +1,17 @@
 CHANGES
 =======
 
+1.1.1
+-----
+
+* Finish adding operator names.
+* Generate ``IndentingNewline`` (``\n``) properly in GNU Readline inputrc tables.
+* Adjust expectation on test since there can be duplicate function operators (for ``Apply`` and ``Function``).
+
 1.1.0
 -----
 
-* Add operator-name, and ascii fields. See named-characters.yml for a description of these
+* Add operator-name, and ASCII fields. See named-characters.yml for a description of these
 * Add some whitespace characters like IndentingNewLine and RawReadLine
 * Improve testing
 * Fix some small tagging based on testing

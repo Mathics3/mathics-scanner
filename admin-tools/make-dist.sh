@@ -14,9 +14,8 @@ if ! source ./pyenv-versions ; then
     exit $?
 fi
 
-
 cd ..
-source $PACKAGE/version.py
+source mathics_scanner/version.py
 echo $__version__
 
 for pyversion in $PYVERSIONS; do
