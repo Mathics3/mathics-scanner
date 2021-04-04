@@ -1148,6 +1148,16 @@ Composition:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Composition
+CompoundExpression:
+  ascii: ";"
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: CompoundExpression
+Condition:
+  ascii: "/;"
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: Condition
 Conditioned:
   has-unicode-inverse: false
   is-letter-like: false
@@ -3460,15 +3470,14 @@ FreakedSmiley:
   is-letter-like: true
   wl-unicode: "\uF721"
 # See also RawAmpersand
-# Function:
-#   ascii: "&"
-#   has-unicode-inverse: false
-#   is-letter-like: false
-#   operator-name: Function
-#   wl-unicode: "&"
+Function:
+  ascii: "&"
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: Function
 # Alternative form of Function
 # See also RightTeeArrow
-Function:
+Function1:
   ascii: "|->"
   has-unicode-inverse: false
   is-letter-like: false
@@ -4671,6 +4680,11 @@ Mercury:
   unicode-equivalent-name: MERCURY
   wl-unicode: "\u263F"
   wl-unicode-name: MERCURY
+Message:
+  ascii: "::"
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: Message
 Mho:
   esc-alias: mho
   has-unicode-inverse: false
@@ -5291,6 +5305,11 @@ OpenCurlyQuote:
   unicode-equivalent-name: LEFT SINGLE QUOTATION MARK
   wl-unicode: "\u2018"
   wl-unicode-name: LEFT SINGLE QUOTATION MARK
+Option:
+  ascii: ":"
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: Option
 OptionKey:
   esc-alias: opt
   has-unicode-inverse: false
@@ -6672,6 +6691,11 @@ SpadeSuit:
   unicode-equivalent-name: BLACK SPADE SUIT
   wl-unicode: "\u2660"
   wl-unicode-name: BLACK SPADE SUIT
+Span:
+  ascii: ";;"
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: Span
 SpanFromAbove:
   esc-alias: sfa
   has-unicode-inverse: false
@@ -7099,9 +7123,11 @@ UnderParenthesis:
   wl-unicode: "\uFE36"
   wl-unicode-name: PRESENTATION FORM FOR VERTICAL RIGHT PARENTHESIS
 UndirectedEdge:
+  ascii: "<->"
   esc-alias: ue
   has-unicode-inverse: true
   is-letter-like: false
+  operator-name: UndirectedEdge
   unicode-equivalent: "\u2194"
   unicode-equivalent-name: LEFT RIGHT ARROW
   wl-unicode: "\uF3D4"

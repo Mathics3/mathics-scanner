@@ -43,7 +43,7 @@ def test_yaml_field_names():
 def test_operators():
     ascii_seen = set()
     operator_name_seen = set()
-    dup_operators = set(["Apply"])
+    dup_operators = set(["Apply", "Function"])
     for k, v in yaml_data.items():
         if "ascii" in v:
             if len(v["ascii"]) > 1:
