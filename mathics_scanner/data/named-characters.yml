@@ -1122,6 +1122,11 @@ CommandKey:
   unicode-equivalent: "\u2318"
   unicode-equivalent-name: PLACE OF INTEREST SIGN
   wl-unicode: "\uF76A"
+Composition:
+  ascii: "@*"
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: Composition
 Conditioned:
   has-unicode-inverse: false
   is-letter-like: false
@@ -4258,11 +4263,6 @@ LeftCeiling:
   unicode-equivalent-name: LEFT CEILING
   wl-unicode: "\u2308"
   wl-unicode-name: LEFT CEILING
-LeftComposition:
-  ascii: "/*"
-  has-unicode-inverse: false
-  is-letter-like: false
-  operator-name: LeftComposition
 LeftDoubleBracket:
   esc-alias: '[['
   has-unicode-inverse: false
@@ -5800,7 +5800,7 @@ RightCeiling:
   wl-unicode: "\u2309"
   wl-unicode-name: RIGHT CEILING
 RightComposition:
-  ascii: "@*"
+  ascii: "/*"
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: RightComposition
@@ -7155,6 +7155,7 @@ VerticalBar:
   esc-alias: ' |'
   has-unicode-inverse: true
   is-letter-like: false
+  operator-name: Alternatives
   unicode-equivalent: "\u007C"
   unicode-equivalent-name: VERTICAL LINE
   wl-unicode: "\uF3D0"
