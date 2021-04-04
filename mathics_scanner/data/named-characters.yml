@@ -95,9 +95,9 @@ Apply:
   is-letter-like: false
   operator-name: Apply
 # @@@ replaces heads at level 1 of expr by f.
-# We add "1" at the end so keys are unique, but
+# We add "3Ats" at the end so keys are unique, but
 # the WL operator is still "Apply".
-Apply1:
+Apply3Ats:
   ascii: "@@@"
   has-unicode-inverse: false
   is-letter-like: false
@@ -3469,15 +3469,22 @@ FreakedSmiley:
   has-unicode-inverse: false
   is-letter-like: true
   wl-unicode: "\uF721"
-# See also RawAmpersand
-Function:
-  ascii: "&"
-  has-unicode-inverse: false
-  is-letter-like: false
-  operator-name: Function
-# Alternative form of Function
+
 # See also RightTeeArrow
-Function1:
+
+# IMPORTANT!
+# ----------
+# For the Mathics Parser to work circa 2021...
+# If an operator name like "Function" has unicode associated with it, then
+# the YAML key *has* to be the operator name.
+# This is because we are doing weird Function-name to unicode translation
+# in the parse.
+#
+# The auto-unicode translation might not be a good thing to do.
+#
+# The ASCII-only version of the Function operator therefore has a
+# different (from the operator) YAML key name.
+Function:
   ascii: "|->"
   has-unicode-inverse: false
   is-letter-like: false
@@ -3486,6 +3493,15 @@ Function1:
   unicode-equivalent-name: RIGHTWARDS ARROW FROM BAR
   wl-unicode: "\uF4A1"
   wl-unicode-name: RIGHTWARDS ARROW FROM BAR
+
+# Alternative form of Function. We use FunctionAmpersand
+# since Function is already taken. See note above.
+# See also RawAmpersand.
+FunctionAmpersand:
+  ascii: "&"
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: Function
 Gamma:
   esc-alias: g
   has-unicode-inverse: false
