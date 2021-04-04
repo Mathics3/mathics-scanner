@@ -1,6 +1,20 @@
 CHANGES
 =======
 
+1.1.2
+-----
+
+Release 1.1.1 introduced a small bad interaction with Mathics and the
+unicode infix form of ``Function[]``.
+
+In our master table, when there is a unicode operator like there is for "Function",
+(uF4A1), the operator name to be YAML key name.
+
+There is an alternate ASCII Function operator ``&``. And for that we
+used the name Function which precluded using it for the unicode, where
+it is mandiatory. For ASCII operators it isn't necessary, but still
+nice to do when there is no conflict.
+
 1.1.1
 -----
 

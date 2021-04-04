@@ -3475,15 +3475,13 @@ FreakedSmiley:
 # IMPORTANT!
 # ----------
 # For the Mathics Parser to work circa 2021...
-# If an operator name like "Function" has unicode associated with it, then
-# the YAML key *has* to be the operator name.
-# This is because we are doing weird Function-name to unicode translation
-# in the parse.
+# If there is a unicode operator, as we have here for "Function", then
+# the YAML key *has* to be the operator name. ("Function" here).
 #
-# The auto-unicode translation might not be a good thing to do.
-#
-# The ASCII-only version of the Function operator therefore has a
-# different (from the operator) YAML key name.
+# There is an ASCII operator "&" for the Function as well, but
+# the YAML name doesn't have to match since there is just ASCII for that.
+# Since we use the name Function as the key here, the YAML name for "&" has
+# to be different, since YAML keys need to be unique.
 Function:
   ascii: "|->"
   has-unicode-inverse: false
