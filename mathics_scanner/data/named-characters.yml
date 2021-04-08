@@ -5218,10 +5218,11 @@ Nu:
   wl-unicode: "\uF3A0"
 NumberSign:
   esc-alias: '#'
-  has-unicode-inverse: true
+  has-unicode-inverse: false
   is-letter-like: false
-  unicode-equivalent: '#'
-  unicode-equivalent-name: NUMBER SIGN
+  # Leave out equvalent here so scanner will match this as a Slot
+  # unicode-equivalent: '#'
+  # unicode-equivalent-name: NUMBER SIGN
   wl-unicode: "\uF724"
 OAcute:
   esc-alias: o'
