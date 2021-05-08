@@ -156,9 +156,11 @@ AltKey:
   is-letter-like: false
   wl-unicode: "\uF7D1"
 And:
+  ascii: '&&'
   esc-alias: '&&'
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: And
   unicode-equivalent: "\u2227"
   unicode-equivalent-name: LOGICAL AND
   wl-unicode: "\u2227"
@@ -5927,9 +5929,11 @@ RightDoubleBracket:
   wl-unicode: "\u301B"
   wl-unicode-name: RIGHT WHITE SQUARE BRACKET
 RightDoubleBracketingBar:
+  ascii: "||"
   esc-alias: r||
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: Or
   unicode-equivalent: "\u2016"
   unicode-equivalent-name: DOUBLE VERTICAL LINE
   wl-unicode: "\uF606"
@@ -7000,8 +7004,10 @@ Thorn:
   wl-unicode-name: LATIN SMALL LETTER THORN
 Tilde:
   esc-alias: '~'
+  ascii: "~"
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: Tilde
   unicode-equivalent: "\u223C"
   unicode-equivalent-name: TILDE OPERATOR
   wl-unicode: "\u223C"
