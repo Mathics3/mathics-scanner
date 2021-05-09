@@ -128,9 +128,9 @@ def compile_tables(data: dict) -> dict:
         k: v["wl-unicode"] for k, v in data.items() if "wl-unicode" in v
     }
 
-    # ESC sequence aliases
+    # Operators with ASCII sequences
     ascii_operators = sorted([
-        v["ascii"] for v in data.values() if "operator-name" in v
+        v["ascii"] for v in data.values() if "operator-name" in v and "ascii" in v
     ])
 
     # ESC sequence aliases
@@ -145,6 +145,12 @@ def compile_tables(data: dict) -> dict:
         if "operator-name" in v and "unicode-equivalent" in v
     }
 
+    # ESC sequence aliases
+    unicode_operators = sorted([
+        v["unicode-equivalent"] for v in data.values() if "operator-name" in v and "unicode-equivalent" in v
+    ])
+
+
     # operator-to-unicode dictionary
     unicode_to_operator = {
         v["unicode-equivalent"]: v["operator-name"]
@@ -157,6 +163,7 @@ def compile_tables(data: dict) -> dict:
         "letterlikes": letterlikes,
         "named-characters": named_characters,
         "operator-to-unicode": operator_to_unicode,
+        "unicode-operators": unicode_operators,
         "unicode-to-operator": unicode_to_operator,
         "unicode-to-wl-dict": unicode_to_wl_dict,
         "unicode-to-wl-re": unicode_to_wl_re,
@@ -175,6 +182,7 @@ ALL_FIELDS = [
     "letterlikes",
     "named-characters",
     "operator-to-unicode",
+    "unicode-operators",
     "unicode-to-operator",
     "unicode-to-wl-dict",
     "unicode-to-wl-re",
