@@ -90,6 +90,15 @@ AHat:
   unicode-equivalent-name: LATIN SMALL LETTER A WITH CIRCUMFLEX
   wl-unicode: "\xE2"
   wl-unicode-name: LATIN SMALL LETTER A WITH CIRCUMFLEX
+Alternative:
+  ascii: "|"
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: Alternative
+  unicode-equivalent: "|"
+  unicode-equivalent-name: VERTICAL LINE
+  wl-unicode: "|"
+  wl-unicode-name: VERTICAL LINE
 Apply:
   ascii: "@@"
   has-unicode-inverse: false
@@ -246,6 +255,7 @@ BeamedSixteenthNote:
 Because:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: Because
   unicode-equivalent: "\u2235"
   unicode-equivalent-name: BECAUSE
   wl-unicode: "\u2235"
@@ -1083,7 +1093,7 @@ CirclePlus:
   esc-alias: c+
   has-unicode-inverse: false
   is-letter-like: false
-  operator-name: CircleMinus
+  operator-name: CirclePlus
   unicode-equivalent: "\u2295"
   unicode-equivalent-name: CIRCLED PLUS
   wl-unicode: "\u2295"
@@ -1371,7 +1381,7 @@ Definition:
 Degree:
   esc-alias: deg
   has-unicode-inverse: false
-  is-letter-like: true
+  is-letter-like: false
   operator-name: Degree
   unicode-equivalent: "\xB0"
   unicode-equivalent-name: DEGREE SIGN
@@ -4325,6 +4335,7 @@ LeftArrow:
   esc-alias: <-
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: LeftArrow
   unicode-equivalent: "\u2190"
   unicode-equivalent-name: LEFTWARDS ARROW
   wl-unicode: "\u2190"
@@ -4332,6 +4343,7 @@ LeftArrow:
 LeftArrowBar:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: LeftArrowBar
   unicode-equivalent: "\u21E4"
   unicode-equivalent-name: LEFTWARDS ARROW TO BAR
   wl-unicode: "\u21E4"
@@ -4359,6 +4371,7 @@ LeftCeiling:
   esc-alias: lc
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: LeftCeiling
   unicode-equivalent: "\u2308"
   unicode-equivalent-name: LEFT CEILING
   wl-unicode: "\u2308"
@@ -4381,6 +4394,7 @@ LeftDoubleBracketingBar:
 LeftDownTeeVector:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: LeftDownTeeVector
   unicode-equivalent: "\u2961"
   unicode-equivalent-name: DOWNWARDS HARPOON WITH BARB LEFT FROM BAR
   wl-unicode: "\u2961"
@@ -4388,6 +4402,7 @@ LeftDownTeeVector:
 LeftDownVector:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: LeftDownVector
   unicode-equivalent: "\u21C3"
   unicode-equivalent-name: DOWNWARDS HARPOON WITH BARB LEFTWARDS
   wl-unicode: "\u21C3"
@@ -4395,6 +4410,7 @@ LeftDownVector:
 LeftDownVectorBar:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: LeftDownVectorBar
   unicode-equivalent: "\u2959"
   unicode-equivalent-name: DOWNWARDS HARPOON WITH BARB LEFT TO BAR
   wl-unicode: "\u2959"
@@ -4403,6 +4419,7 @@ LeftFloor:
   esc-alias: lf
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: LeftFloor
   unicode-equivalent: "\u230A"
   unicode-equivalent-name: LEFT FLOOR
   wl-unicode: "\u230A"
@@ -4423,6 +4440,7 @@ LeftModified:
 LeftPointer:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: LeftPointer
   unicode-equivalent: "\u25C2"
   unicode-equivalent-name: BLACK LEFT-POINTING SMALL TRIANGLE
   wl-unicode: "\u25C2"
@@ -4431,6 +4449,7 @@ LeftRightArrow:
   esc-alias: <->
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: LeftRightArrow
   unicode-equivalent: "\u2194"
   unicode-equivalent-name: LEFT RIGHT ARROW
   wl-unicode: "\u2194"
@@ -4438,6 +4457,7 @@ LeftRightArrow:
 LeftRightVector:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: LeftRightVector
   unicode-equivalent: "\u294E"
   unicode-equivalent-name: LEFT BARB UP RIGHT BARB UP HARPOON
   wl-unicode: "\u294E"
@@ -4452,6 +4472,7 @@ LeftTee:
   esc-alias: lT
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: LeftTee
   unicode-equivalent: "\u22A3"
   unicode-equivalent-name: LEFT TACK
   wl-unicode: "\u22A3"
@@ -4459,6 +4480,7 @@ LeftTee:
 LeftTeeArrow:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: LeftTeeArrow
   unicode-equivalent: "\u21A4"
   unicode-equivalent-name: LEFTWARDS ARROW FROM BAR
   wl-unicode: "\u21A4"
@@ -4466,6 +4488,7 @@ LeftTeeArrow:
 LeftTeeVector:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: LeftTeeVector
   unicode-equivalent: "\u295A"
   unicode-equivalent-name: LEFTWARDS HARPOON WITH BARB UP FROM BAR
   wl-unicode: "\u295A"
@@ -4473,6 +4496,7 @@ LeftTeeVector:
 LeftTriangle:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: LeftTriangle
   unicode-equivalent: "\u22B2"
   unicode-equivalent-name: NORMAL SUBGROUP OF
   wl-unicode: "\u22B2"
@@ -4480,6 +4504,7 @@ LeftTriangle:
 LeftTriangleBar:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: LeftTriangleBar
   unicode-equivalent: "\u29CF"
   unicode-equivalent-name: LEFT TRIANGLE BESIDE VERTICAL BAR
   wl-unicode: "\u29CF"
@@ -4487,6 +4512,7 @@ LeftTriangleBar:
 LeftTriangleEqual:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: LeftTriangleEqual
   unicode-equivalent: "\u22B4"
   unicode-equivalent-name: NORMAL SUBGROUP OF OR EQUAL TO
   wl-unicode: "\u22B4"
@@ -4494,6 +4520,7 @@ LeftTriangleEqual:
 LeftUpDownVector:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: LeftUpDownVector
   unicode-equivalent: "\u2951"
   unicode-equivalent-name: UP BARB LEFT DOWN BARB LEFT HARPOON
   wl-unicode: "\u2951"
@@ -4501,6 +4528,7 @@ LeftUpDownVector:
 LeftUpTeeVector:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: LeftUpTeeVector
   unicode-equivalent: "\u2960"
   unicode-equivalent-name: UPWARDS HARPOON WITH BARB LEFT FROM BAR
   wl-unicode: "\u2960"
@@ -4508,6 +4536,7 @@ LeftUpTeeVector:
 LeftUpVector:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: LeftUpVector
   unicode-equivalent: "\u21BF"
   unicode-equivalent-name: UPWARDS HARPOON WITH BARB LEFTWARDS
   wl-unicode: "\u21BF"
@@ -4515,6 +4544,7 @@ LeftUpVector:
 LeftUpVectorBar:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: LeftUpVectorBar
   unicode-equivalent: "\u2958"
   unicode-equivalent-name: UPWARDS HARPOON WITH BARB LEFT TO BAR
   wl-unicode: "\u2958"
@@ -4522,6 +4552,7 @@ LeftUpVectorBar:
 LeftVector:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: LeftVector
   unicode-equivalent: "\u21BC"
   unicode-equivalent-name: LEFTWARDS HARPOON WITH BARB UPWARDS
   wl-unicode: "\u21BC"
@@ -4562,6 +4593,7 @@ LessEqual:
 LessEqualGreater:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: LessEqualGreater
   unicode-equivalent: "\u22DA"
   unicode-equivalent-name: LESS-THAN EQUAL TO OR GREATER-THAN
   wl-unicode: "\u22DA"
@@ -4569,6 +4601,7 @@ LessEqualGreater:
 LessFullEqual:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: LessFullEqual
   unicode-equivalent: "\u2266"
   unicode-equivalent-name: LESS-THAN OVER EQUAL TO
   wl-unicode: "\u2266"
@@ -4576,6 +4609,7 @@ LessFullEqual:
 LessGreater:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: LessGreater
   unicode-equivalent: "\u2276"
   unicode-equivalent-name: LESS-THAN OR GREATER-THAN
   wl-unicode: "\u2276"
@@ -4583,6 +4617,7 @@ LessGreater:
 LessLess:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: LessLess
   unicode-equivalent: "\u226A"
   unicode-equivalent-name: MUCH LESS-THAN
   wl-unicode: "\u226A"
@@ -4590,6 +4625,7 @@ LessLess:
 LessSlantEqual:
   esc-alias: </
   has-unicode-inverse: false
+  operator-name: LessSlantEqual
   is-letter-like: false
   unicode-equivalent: "\u2A7D"
   unicode-equivalent-name: LESS-THAN OR SLANTED EQUAL TO
@@ -4599,6 +4635,7 @@ LessTilde:
   esc-alias: <~
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: LessTilde
   unicode-equivalent: "\u2272"
   unicode-equivalent-name: LESS-THAN OR EQUIVALENT TO
   wl-unicode: "\u2272"
@@ -4622,7 +4659,8 @@ LightBulb:
 LongDash:
   esc-alias: --
   has-unicode-inverse: false
-  is-letter-like: true
+  is-letter-like: false
+  operator-name: LongDash
   unicode-equivalent: "\u2014"
   unicode-equivalent-name: EM DASH
   wl-unicode: "\u2014"
@@ -4638,6 +4676,7 @@ LongLeftArrow:
   esc-alias: <--
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: LongLeftArrow
   unicode-equivalent: "\u27F5"
   unicode-equivalent-name: LONG LEFTWARDS ARROW
   wl-unicode: "\u27F5"
@@ -4646,6 +4685,7 @@ LongLeftRightArrow:
   esc-alias: <-->
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: LongLeftRightArrow
   unicode-equivalent: "\u27F7"
   unicode-equivalent-name: LONG LEFT RIGHT ARROW
   wl-unicode: "\u27F7"
@@ -4654,6 +4694,7 @@ LongRightArrow:
   esc-alias: -->
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: LongRightArrow
   unicode-equivalent: "\u27F6"
   unicode-equivalent-name: LONG RIGHTWARDS ARROW
   wl-unicode: "\u27F6"
@@ -4661,6 +4702,7 @@ LongRightArrow:
 LowerLeftArrow:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: LowerLeftArrow
   unicode-equivalent: "\u2199"
   unicode-equivalent-name: SOUTH WEST ARROW
   wl-unicode: "\u2199"
@@ -4668,6 +4710,7 @@ LowerLeftArrow:
 LowerRightArrow:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: LowerRightArrow
   unicode-equivalent: "\u2198"
   unicode-equivalent-name: SOUTH EAST ARROW
   wl-unicode: "\u2198"
@@ -5136,6 +5179,7 @@ NotSquareSubset:
 NotSquareSubsetEqual:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: NotSquareSubsetEqual
   unicode-equivalent: "\u22E2"
   unicode-equivalent-name: NOT SQUARE IMAGE OF OR EQUAL TO
   wl-unicode: "\u22E2"
@@ -5147,6 +5191,7 @@ NotSquareSuperset:
 NotSquareSupersetEqual:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: NotSquareSupersetEqual
   unicode-equivalent: "\u22E3"
   unicode-equivalent-name: NOT SQUARE ORIGINAL OF OR EQUAL TO
   wl-unicode: "\u22E3"
@@ -5155,6 +5200,7 @@ NotSubset:
   esc-alias: '!sub'
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: NotSubset
   unicode-equivalent: "\u2284"
   unicode-equivalent-name: NOT A SUBSET OF
   wl-unicode: "\u2284"
@@ -5163,6 +5209,7 @@ NotSubsetEqual:
   esc-alias: '!sub='
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: NotSubsetEqual
   unicode-equivalent: "\u2288"
   unicode-equivalent-name: NEITHER A SUBSET OF NOR EQUAL TO
   wl-unicode: "\u2288"
@@ -5170,6 +5217,7 @@ NotSubsetEqual:
 NotSucceeds:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: NotSucceeds
   unicode-equivalent: "\u2281"
   unicode-equivalent-name: DOES NOT SUCCEED
   wl-unicode: "\u2281"
@@ -5181,6 +5229,7 @@ NotSucceedsEqual:
 NotSucceedsSlantEqual:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: NotSucceedsSlantEqual
   unicode-equivalent: "\u22E1"
   unicode-equivalent-name: DOES NOT SUCCEED OR EQUAL
   wl-unicode: "\u22E1"
@@ -5188,6 +5237,7 @@ NotSucceedsSlantEqual:
 NotSucceedsTilde:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: NotSucceedsTilde
   unicode-equivalent: "\u22E9"
   unicode-equivalent-name: SUCCEEDS BUT NOT EQUIVALENT TO
   wl-unicode: "\u22E9"
@@ -5196,6 +5246,7 @@ NotSuperset:
   esc-alias: '!sup'
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: NotSuperset
   unicode-equivalent: "\u2285"
   unicode-equivalent-name: NOT A SUPERSET OF
   wl-unicode: "\u2285"
@@ -5204,6 +5255,7 @@ NotSupersetEqual:
   esc-alias: '!sup='
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: NotSupersetEqual
   unicode-equivalent: "\u2289"
   unicode-equivalent-name: NEITHER A SUPERSET OF NOR EQUAL TO
   wl-unicode: "\u2289"
@@ -5212,6 +5264,7 @@ NotTilde:
   esc-alias: '!~'
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: NotTilde
   unicode-equivalent: "\u2241"
   unicode-equivalent-name: NOT TILDE
   wl-unicode: "\u2241"
@@ -5220,6 +5273,7 @@ NotTildeEqual:
   esc-alias: '!~='
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: NotTildeEqual
   unicode-equivalent: "\u2244"
   unicode-equivalent-name: NOT ASYMPTOTICALLY EQUAL TO
   wl-unicode: "\u2244"
@@ -5228,6 +5282,7 @@ NotTildeFullEqual:
   esc-alias: '!~=='
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: NotTildeFullEqual
   unicode-equivalent: "\u2247"
   unicode-equivalent-name: NEITHER APPROXIMATELY NOR ACTUALLY EQUAL TO
   wl-unicode: "\u2247"
@@ -5236,6 +5291,7 @@ NotTildeTilde:
   esc-alias: '!~~'
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: NotTildeTilde
   unicode-equivalent: "\u2249"
   unicode-equivalent-name: NOT ALMOST EQUAL TO
   wl-unicode: "\u2249"
@@ -5511,6 +5567,7 @@ Power:
 Precedes:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: Precedes
   unicode-equivalent: "\u227A"
   unicode-equivalent-name: PRECEDES
   wl-unicode: "\u227A"
@@ -5518,6 +5575,7 @@ Precedes:
 PrecedesEqual:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: PrecedesEqual
   unicode-equivalent: "\u2AAF"
   unicode-equivalent-name: PRECEDES ABOVE SINGLE-LINE EQUALS SIGN
   wl-unicode: "\u2AAF"
@@ -5554,6 +5612,7 @@ Product:
   esc-alias: prod
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: Product
   unicode-equivalent: "\u220F"
   unicode-equivalent-name: N-ARY PRODUCT
   wl-unicode: "\u220F"
@@ -5672,7 +5731,7 @@ RawGreater:
   ascii: ">"
   has-unicode-inverse: true
   is-letter-like: false
-  operator-name: Greater
+  operator-name: RawGreater
   unicode-equivalent: "\u003e"
   unicode-equivalent-name: GREATER-THAN SIGN
   wl-unicode: "\u003e"
@@ -5801,7 +5860,9 @@ RawUnderscore:
   unicode-equivalent-name: LOW LINE
   wl-unicode: _
   wl-unicode-name: LOW LINE
+# RawVerticalBar is the same thing as Alternative. Go figure.
 RawVerticalBar:
+  ascii: "|"
   has-unicode-inverse: false
   is-letter-like: false
   unicode-equivalent: '|'
@@ -5861,6 +5922,7 @@ ReverseElement:
   esc-alias: mem
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: ReverseElement
   unicode-equivalent: "\u220B"
   unicode-equivalent-name: CONTAINS AS MEMBER
   wl-unicode: "\u220B"
@@ -5868,6 +5930,7 @@ ReverseElement:
 ReverseEquilibrium:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: ReverseEquilibrium
   unicode-equivalent: "\u21CB"
   unicode-equivalent-name: LEFTWARDS HARPOON OVER RIGHTWARDS HARPOON
   wl-unicode: "\u21CB"
@@ -5883,6 +5946,7 @@ ReversePrime:
 ReverseUpEquilibrium:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: ReverseUpEquilibrium
   unicode-equivalent: "\u296F"
   unicode-equivalent-name: DOWNWARDS HARPOON WITH BARB LEFT BESIDE UPWARDS HARPOON
     WITH BARB RIGHT
@@ -5916,6 +5980,7 @@ RightArrow:
   esc-alias: ' ->'
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: RightArrow
   unicode-equivalent: "\u2192"
   unicode-equivalent-name: RIGHTWARDS ARROW
   wl-unicode: "\u2192"
@@ -5923,6 +5988,7 @@ RightArrow:
 RightArrowBar:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: RightArrowBar
   unicode-equivalent: "\u21E5"
   unicode-equivalent-name: RIGHTWARDS ARROW TO BAR
   wl-unicode: "\u21E5"
@@ -5930,6 +5996,7 @@ RightArrowBar:
 RightArrowLeftArrow:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: RightArrowLeftArrow
   unicode-equivalent: "\u21C4"
   unicode-equivalent-name: RIGHTWARDS ARROW OVER LEFTWARDS ARROW
   wl-unicode: "\u21C4"
@@ -5950,6 +6017,7 @@ RightCeiling:
   esc-alias: rc
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: RightCeiling
   unicode-equivalent: "\u2309"
   unicode-equivalent-name: RIGHT CEILING
   wl-unicode: "\u2309"
@@ -5969,16 +6037,16 @@ RightDoubleBracket:
   wl-unicode-name: RIGHT WHITE SQUARE BRACKET
 RightDoubleBracketingBar:
   ascii: "||"
-  esc-alias: r||
   has-unicode-inverse: false
   is-letter-like: false
-  operator-name: Or
+  operator-name: RightDoubleBracketingBar
   unicode-equivalent: "\u2016"
   unicode-equivalent-name: DOUBLE VERTICAL LINE
   wl-unicode: "\uF606"
 RightDownTeeVector:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: RightDownTeeVector
   unicode-equivalent: "\u295D"
   unicode-equivalent-name: DOWNWARDS HARPOON WITH BARB RIGHT FROM BAR
   wl-unicode: "\u295D"
@@ -5986,6 +6054,7 @@ RightDownTeeVector:
 RightDownVector:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: RightDownVector
   unicode-equivalent: "\u21C2"
   unicode-equivalent-name: DOWNWARDS HARPOON WITH BARB RIGHTWARDS
   wl-unicode: "\u21C2"
@@ -5993,6 +6062,7 @@ RightDownVector:
 RightDownVectorBar:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: RightDownVectorBar
   unicode-equivalent: "\u2955"
   unicode-equivalent-name: DOWNWARDS HARPOON WITH BARB RIGHT TO BAR
   wl-unicode: "\u2955"
@@ -6001,6 +6071,7 @@ RightFloor:
   esc-alias: rf
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: RightFloor
   unicode-equivalent: "\u230B"
   unicode-equivalent-name: RIGHT FLOOR
   wl-unicode: "\u230B"
@@ -6021,6 +6092,7 @@ RightModified:
 RightPointer:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: RightPointer
   unicode-equivalent: "\u25B8"
   unicode-equivalent-name: BLACK RIGHT-POINTING SMALL TRIANGLE
   wl-unicode: "\u25B8"
@@ -6034,6 +6106,7 @@ RightSkeleton:
 RightTee:
   esc-alias: rT
   has-unicode-inverse: false
+  operator-name: RightTee
   is-letter-like: false
   unicode-equivalent: "\u22A2"
   unicode-equivalent-name: RIGHT TACK
@@ -6049,6 +6122,7 @@ RightTeeArrow:
 RightTeeVector:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: RightTeeVector
   unicode-equivalent: "\u295B"
   unicode-equivalent-name: RIGHTWARDS HARPOON WITH BARB UP FROM BAR
   wl-unicode: "\u295B"
@@ -6056,6 +6130,7 @@ RightTeeVector:
 RightTriangle:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: RightTriangle
   unicode-equivalent: "\u22B3"
   unicode-equivalent-name: CONTAINS AS NORMAL SUBGROUP
   wl-unicode: "\u22B3"
@@ -6063,6 +6138,7 @@ RightTriangle:
 RightTriangleBar:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: RightTriangleBar
   unicode-equivalent: "\u29D0"
   unicode-equivalent-name: VERTICAL BAR BESIDE RIGHT TRIANGLE
   wl-unicode: "\u29D0"
@@ -6070,12 +6146,14 @@ RightTriangleBar:
 RightTriangleEqual:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: RightTriangleEqual
   unicode-equivalent: "\u22B5"
   unicode-equivalent-name: CONTAINS AS NORMAL SUBGROUP OR EQUAL TO
   wl-unicode: "\u22B5"
   wl-unicode-name: CONTAINS AS NORMAL SUBGROUP OR EQUAL TO
 RightUpDownVector:
   has-unicode-inverse: false
+  operator-name: RightUpDownVector
   is-letter-like: false
   unicode-equivalent: "\u294F"
   unicode-equivalent-name: UP BARB RIGHT DOWN BARB RIGHT HARPOON
@@ -6084,6 +6162,7 @@ RightUpDownVector:
 RightUpTeeVector:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: RightUpTeeVector
   unicode-equivalent: "\u295C"
   unicode-equivalent-name: UPWARDS HARPOON WITH BARB RIGHT FROM BAR
   wl-unicode: "\u295C"
@@ -6091,6 +6170,7 @@ RightUpTeeVector:
 RightUpVector:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: RightUpVector
   unicode-equivalent: "\u21BE"
   unicode-equivalent-name: UPWARDS HARPOON WITH BARB RIGHTWARDS
   wl-unicode: "\u21BE"
@@ -6098,6 +6178,7 @@ RightUpVector:
 RightUpVectorBar:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: RightUpVectorBar
   unicode-equivalent: "\u2954"
   unicode-equivalent-name: UPWARDS HARPOON WITH BARB RIGHT TO BAR
   wl-unicode: "\u2954"
@@ -6106,6 +6187,7 @@ RightVector:
   esc-alias: vec
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: RightVector
   unicode-equivalent: "\u21C0"
   unicode-equivalent-name: RIGHTWARDS HARPOON WITH BARB UPWARDS
   wl-unicode: "\u21C0"
@@ -6113,6 +6195,7 @@ RightVector:
 RightVectorBar:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: RightVectorBar
   unicode-equivalent: "\u2953"
   unicode-equivalent-name: RIGHTWARDS HARPOON WITH BARB UP TO BAR
   wl-unicode: "\u2953"
@@ -6120,6 +6203,7 @@ RightVectorBar:
 RoundImplies:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: RoundImplies
   unicode-equivalent: "\u2970"
   unicode-equivalent-name: RIGHT DOUBLE ARROW WITH ROUNDED HEAD
   wl-unicode: "\u2970"
@@ -6787,6 +6871,7 @@ Sqrt:
   esc-alias: sqrt
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: Sqrt
   unicode-equivalent: "\u221A"
   unicode-equivalent-name: SQUARE ROOT
   wl-unicode: "\u221A"
@@ -6801,6 +6886,7 @@ Square:
 SquareIntersection:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: SquareIntersection
   unicode-equivalent: "\u2293"
   unicode-equivalent-name: SQUARE CAP
   wl-unicode: "\u2293"
@@ -6808,6 +6894,7 @@ SquareIntersection:
 SquareSubset:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: SquareSubset
   unicode-equivalent: "\u228F"
   unicode-equivalent-name: SQUARE IMAGE OF
   wl-unicode: "\u228F"
@@ -6815,6 +6902,7 @@ SquareSubset:
 SquareSubsetEqual:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: SquareSubsetEqual
   unicode-equivalent: "\u2291"
   unicode-equivalent-name: SQUARE IMAGE OF OR EQUAL TO
   wl-unicode: "\u2291"
@@ -6822,6 +6910,7 @@ SquareSubsetEqual:
 SquareSuperset:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: SquareSuperset
   unicode-equivalent: "\u2290"
   unicode-equivalent-name: SQUARE ORIGINAL OF
   wl-unicode: "\u2290"
@@ -6829,6 +6918,7 @@ SquareSuperset:
 SquareSupersetEqual:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: SquareSupersetEqual
   unicode-equivalent: "\u2292"
   unicode-equivalent-name: SQUARE ORIGINAL OF OR EQUAL TO
   wl-unicode: "\u2292"
@@ -6836,6 +6926,7 @@ SquareSupersetEqual:
 SquareUnion:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: SquareUnion
   unicode-equivalent: "\u2294"
   unicode-equivalent-name: SQUARE CUP
   wl-unicode: "\u2294"
@@ -6877,6 +6968,7 @@ Subset:
   esc-alias: sub
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: Subset
   unicode-equivalent: "\u2282"
   unicode-equivalent-name: SUBSET OF
   wl-unicode: "\u2282"
@@ -6885,6 +6977,7 @@ SubsetEqual:
   esc-alias: sub=
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: SubsetEqual
   unicode-equivalent: "\u2286"
   unicode-equivalent-name: SUBSET OF OR EQUAL TO
   wl-unicode: "\u2286"
@@ -6899,11 +6992,13 @@ Succeeds:
   is-letter-like: false
   unicode-equivalent: "\u227B"
   unicode-equivalent-name: SUCCEEDS
+  operator-name: Succeeds
   wl-unicode: "\u227B"
   wl-unicode-name: SUCCEEDS
 SucceedsEqual:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: SucceedsEqual
   unicode-equivalent: "\u2AB0"
   unicode-equivalent-name: SUCCEEDS ABOVE SINGLE-LINE EQUALS SIGN
   wl-unicode: "\u2AB0"
@@ -6911,6 +7006,7 @@ SucceedsEqual:
 SucceedsSlantEqual:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: SucceedsSlantEqual
   unicode-equivalent: "\u227D"
   unicode-equivalent-name: SUCCEEDS OR EQUAL TO
   wl-unicode: "\u227D"
@@ -6918,6 +7014,7 @@ SucceedsSlantEqual:
 SucceedsTilde:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: SucceedsTilde
   unicode-equivalent: "\u227F"
   unicode-equivalent-name: SUCCEEDS OR EQUIVALENT TO
   wl-unicode: "\u227F"
@@ -6926,6 +7023,7 @@ SuchThat:
   esc-alias: st
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: SuchThat
   unicode-equivalent: "\u220D"
   unicode-equivalent-name: SMALL CONTAINS AS MEMBER
   wl-unicode: "\u220D"
@@ -6934,6 +7032,7 @@ Sum:
   esc-alias: sum
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: Sum
   unicode-equivalent: "\u2211"
   unicode-equivalent-name: N-ARY SUMMATION
   wl-unicode: "\u2211"
@@ -6942,6 +7041,7 @@ Superset:
   esc-alias: sup
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: Superset
   unicode-equivalent: "\u2283"
   unicode-equivalent-name: SUPERSET OF
   wl-unicode: "\u2283"
@@ -6950,6 +7050,7 @@ SupersetEqual:
   esc-alias: sup=
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: SupersetEqual
   unicode-equivalent: "\u2287"
   unicode-equivalent-name: SUPERSET OF OR EQUAL TO
   wl-unicode: "\u2287"
@@ -7009,6 +7110,7 @@ Therefore:
   esc-alias: tf
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: Therefore
   unicode-equivalent: "\u2234"
   unicode-equivalent-name: THEREFORE
   wl-unicode: "\u2234"
@@ -7055,6 +7157,7 @@ TildeEqual:
   esc-alias: ~=
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: TildeEqual
   unicode-equivalent: "\u2243"
   unicode-equivalent-name: ASYMPTOTICALLY EQUAL TO
   wl-unicode: "\u2243"
@@ -7063,6 +7166,7 @@ TildeFullEqual:
   esc-alias: ~==
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: TildeFullEqual
   unicode-equivalent: "\u2245"
   unicode-equivalent-name: APPROXIMATELY EQUAL TO
   wl-unicode: "\u2245"
@@ -7071,6 +7175,7 @@ TildeTilde:
   esc-alias: ~~
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: TildeTilde
   unicode-equivalent: "\u2248"
   unicode-equivalent-name: ALMOST EQUAL TO
   wl-unicode: "\u2248"
@@ -7201,6 +7306,7 @@ Union:
   esc-alias: un
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: Union
   unicode-equivalent: "\u22C3"
   unicode-equivalent-name: N-ARY UNION
   wl-unicode: "\u22C3"
@@ -7208,6 +7314,7 @@ Union:
 UnionPlus:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: UnionPlus
   unicode-equivalent: "\u228E"
   unicode-equivalent-name: MULTISET UNION
   wl-unicode: "\u228E"
@@ -7337,14 +7444,13 @@ Venus:
   wl-unicode: "\u2640"
   wl-unicode-name: FEMALE SIGN
 VerticalBar:
-  ascii: "|"
   esc-alias: ' |'
   has-unicode-inverse: true
   is-letter-like: false
-  operator-name: Alternatives
-  unicode-equivalent: "\u007C"
-  unicode-equivalent-name: VERTICAL LINE
+  unicode-equivalent: "\u2758"
+  unicode-equivalent-name: VERTICAL BAR
   wl-unicode: "\uF3D0"
+  wl-unicode-name: LIGHT VERTICAL BAR
 VerticalEllipsis:
   has-unicode-inverse: false
   is-letter-like: false

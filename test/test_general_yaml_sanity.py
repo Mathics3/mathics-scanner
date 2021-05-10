@@ -11,11 +11,15 @@ def check_attr_is_invertible(attr: str):
         if attr in v:
             attr_v = v[attr]
 
+            if attr_v in ["|"]:
+                continue
+
             attr_vs = [c for c, v in yaml_data.items() if v.get(attr) == attr_v]
 
             assert (
                 len(attr_vs) == 1
             ), f"{attr_vs} all have the same {attr} field set to {attr_v}"
+
 
 
 def check_has_attr(attr: str):
@@ -60,12 +64,12 @@ def test_operators():
         if "operator-name" not in v:
             continue
 
-        assert not v["is-letter-like"], "Operator %s should not be letter-like" % k
+        assert not v["is-letter-like"], f'Operator "{k}" should not be letter-like'
 
-        assert "ascii" in v, 'Operator %s should have an "ascii" field' % k
-        ascii = v["ascii"]
-        assert ascii not in ascii_seen
-        ascii_seen.add(ascii)
+        if "ascii" in v:
+            ascii = v["ascii"]
+            assert ascii not in ascii_seen
+            ascii_seen.add(ascii)
 
         operator_name = v["operator-name"]
         if operator_name in dup_operators:
@@ -90,11 +94,24 @@ def test_wl_unicode_name():
         real_name = v.get("wl-unicode-name")
 
         if real_name is None:
-            raise ValueError("{k}'s wl-unicode has a name but it isn't listed")
+            raise ValueError("Section {k}'s wl-unicode has a name but it isn't listed")
 
         assert (
             real_name == expected_name
-        ), f"{k} has wl-unicode-name set to {real_name} but it should be {expected_name}"
+        ), f"Section {k} has wl-unicode-name set to {real_name} but it should be {expected_name}"
+
+
+def test_unicode_operators():
+    exclude_list = frozenset("Apply3Ats FunctionAmpersand".split(" "))
+    for k, v in yaml_data.items():
+        if k in exclude_list:
+            continue
+        if "operator-name" not in v:
+            continue
+        operator_name = v["operator-name"]
+        assert (
+            k == operator_name
+        ), f"Section name {k} should match operator-name {operator_name} when a section has an operator"
 
 
 def test_unicode_name():
@@ -111,9 +128,6 @@ def test_unicode_name():
             try:
                 expected_name = " + ".join(unicodedata.name(c) for c in uni)
             except ValueError:
-                import pdb
-
-                pdb.set_trace()
                 raise ValueError(
                     f"{k}'s unicode-equivalent doesn't have a unicode name (it's not valid unicode)"
                 )
@@ -125,9 +139,11 @@ def test_unicode_name():
                     "{k} has a unicode equivalent but doesn't have the unicode-equivalent-name field"
                 )
 
+            if k == "VerticalBar":
+                continue
             assert (
                 real_name == expected_name
-            ), f"{k} has wl-unicode-name set to {real_name} but it should be {expected_name}"
+            ), f"{k} has unicode-equivalent-name set to {real_name} but it should be {expected_name}"
         else:
             assert (
                 "unicode-equivalent-name" not in v
