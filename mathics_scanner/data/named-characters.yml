@@ -6,7 +6,8 @@
 #   esc-alias: The ESC sequence alias of the named character, if it exists.
 #
 #   has-unicode-inverse: Whether or not this named character has a unicode
-#                        equivalent to should replaced by it.
+#                        equivalent that should replace other variants of it, 
+#                        e.g. named character or ascii equivalent.
 #
 #   is-letter-like: Whether or not this named-character is "letter-like".
 #
