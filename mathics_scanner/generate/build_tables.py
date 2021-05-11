@@ -151,7 +151,7 @@ def compile_tables(data: dict) -> dict:
         "letterlikes": letterlikes,
         "named-characters": named_characters,
         "operator-to-unicode": operator_to_unicode,
-        "unicode-to-operator": operator_to_unicode,
+        "unicode-to-operator": unicode_to_operator,
         "unicode-to-wl-dict": unicode_to_wl_dict,
         "unicode-to-wl-re": unicode_to_wl_re,
         "wl-to-ascii-dict": wl_to_ascii_dict,
