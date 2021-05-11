@@ -1378,11 +1378,14 @@ Definition:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Definition
+# Using Degree as an operator messes up parsing.
+# mathics-pygments would like this to be an operator.
+# We adjust for that in that code
 Degree:
   esc-alias: deg
   has-unicode-inverse: false
   is-letter-like: false
-  operator-name: Degree
+  # operator-name: Degree
   unicode-equivalent: "\xB0"
   unicode-equivalent-name: DEGREE SIGN
   wl-unicode: "\xB0"
