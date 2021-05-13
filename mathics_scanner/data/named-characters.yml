@@ -6,7 +6,7 @@
 #   esc-alias: The ESC sequence alias of the named character, if it exists.
 #
 #   has-unicode-inverse: Whether or not this named character has a unicode
-#                        equivalent that should replace other variants of it, 
+#                        equivalent that should replace other variants of it,
 #                        e.g. named character or ascii equivalent.
 #
 #   is-letter-like: Whether or not this named-character is "letter-like".
@@ -1378,13 +1378,18 @@ Definition:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Definition
-# Using Degree as an operator messes up parsing.
-# mathics-pygments would like this to be an operator.
-# We adjust for that in that code
+
+ # Using Degree as an operator messes up parsing,
+# but mathics-pygments would like this to be an operator.
+# We adjust for that in the mathics-pygments code
+
+# Also, in order for theto be able to write:
+# \[Degree] == Degree,
+# \Degree has to be letter-like.
 Degree:
   esc-alias: deg
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   # operator-name: Degree
   unicode-equivalent: "\xB0"
   unicode-equivalent-name: DEGREE SIGN
