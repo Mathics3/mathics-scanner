@@ -1386,22 +1386,30 @@ Definition:
   is-letter-like: false
   operator-name: Definition
 
-# Using \[Degree] as an operator messes up Mathics parsing,
-# But mathics-pygments would like this to be an operator.
-# We adjust for that in the mathics-pygments code.
+# \[Degree] is letter-like, not an operator, which is
+# mutually exclusive.
 
-# Also, in order too be able to write:
-#   \[Degree] == Degree,
-# \Degree has to be letter-like.
+# Therefore, when we write 360° that is analogous to 2π, pun intended,
+# it this interpreted as: 360 times "degree", and analogous to: 2 times
+# "pi".
+
+# Note that writing:
+#  \[Degree] == Degree
+# is valid, and this would not be the case if this symbol were
+# not letterlike.
+
+# However mathics-pygments currently would like this to be an
+# operator, (which might be wrong). At any rate, adjust for that in
+# the mathics-pygments code as desired.
 Degree:
   esc-alias: deg
   has-unicode-inverse: false
   is-letter-like: true
-  # operator-name: Degree
   unicode-equivalent: "\xB0"
   unicode-equivalent-name: DEGREE SIGN
   wl-unicode: "\xB0"
   wl-unicode-name: DEGREE SIGN
+
 Del:
   esc-alias: del
   has-unicode-inverse: false
