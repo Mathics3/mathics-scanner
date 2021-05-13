@@ -1399,13 +1399,17 @@ Definition:
 # "pi".
 
 # Note that writing:
-#  \[Degree] == Degree
+#  N[\[Degree]] == N[Degree]
 # is valid, and this would not be the case if this symbol were
 # not letterlike.
 
-# However mathics-pygments currently would like this to be an
-# operator, (which might be wrong). At any rate, adjust for that in
-# the mathics-pygments code as desired.
+# On some keyboards 186 can sometimes appear as the keyboad symbol,
+# but according to
+# https://reference.wolfram.com/language/ref/character/Degree.html the
+# right value is 176 which is the same as the Unicode value. These
+# are what are used here.
+
+
 Degree:
   esc-alias: deg
   has-unicode-inverse: false
