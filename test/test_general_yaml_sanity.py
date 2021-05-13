@@ -88,7 +88,7 @@ def test_wl_unicode_name():
 
         try:
             expected_name = unicodedata.name(wl)
-        except ValueError:
+        except (ValueError, TypeError):
             continue
 
         real_name = v.get("wl-unicode-name")

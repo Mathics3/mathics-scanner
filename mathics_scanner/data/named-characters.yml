@@ -138,11 +138,16 @@ Aleph:
   unicode-equivalent-name: ALEF SYMBOL
   wl-unicode: "\u2135"
   wl-unicode-name: ALEF SYMBOL
+
 # Note: the unicode for AliasDelimiter doesn't look like "-"
+# https://reference.wolfram.com/language/ref/character/AliasDelimiter.html
+# says this is a textual representation for the ASCI "esc" character with code 27
 AliasDelimiter:
   has-unicode-inverse: false
+  unicode-equivalent: "\u0027"
   is-letter-like: false
   wl-unicode: "\uF764"
+
 AliasIndicator:
   esc-alias: esc
   has-unicode-inverse: false
@@ -2528,7 +2533,7 @@ Equivalent:
   is-letter-like: false
   operator-name: Equivalent
   unicode-equivalent: "\u29E6"
-  unicode-equivalent-name: LEFT RIGHT DOUBLE ARROW
+  unicode-equivalent-name: GLEICH STARK
   wl-unicode: "\u29E6"
   wl-unicode-name: GLEICH STARK
 ErrorIndicator:
