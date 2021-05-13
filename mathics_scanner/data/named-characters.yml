@@ -2527,7 +2527,7 @@ Equivalent:
   has-unicode-inverse: true
   is-letter-like: false
   operator-name: Equivalent
-  unicode-equivalent: "\u21D4"
+  unicode-equivalent: "\u29E6"
   unicode-equivalent-name: LEFT RIGHT DOUBLE ARROW
   wl-unicode: "\u29E6"
   wl-unicode-name: GLEICH STARK
@@ -4077,6 +4077,7 @@ GreaterGreater:
 GreaterLess:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: GreaterLess
   unicode-equivalent: "\u2277"
   unicode-equivalent-name: GREATER-THAN OR LESS-THAN
   wl-unicode: "\u2277"
@@ -4410,6 +4411,7 @@ LeftArrowBar:
 LeftArrowRightArrow:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: LeftArrowRightArrow
   unicode-equivalent: "\u21C6"
   unicode-equivalent-name: LEFTWARDS ARROW OVER RIGHTWARDS ARROW
   wl-unicode: "\u21C6"
@@ -4619,6 +4621,7 @@ LeftVector:
 LeftVectorBar:
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: LeftVectorBar
   unicode-equivalent: "\u2952"
   unicode-equivalent-name: LEFTWARDS HARPOON WITH BARB UP TO BAR
   wl-unicode: "\u2952"
@@ -4976,8 +4979,9 @@ Not:
   esc-alias: '!'
   has-unicode-inverse: false
   is-letter-like: false
+  unicode-equivalent: "\u00AC"
   operator-name: Not
-  wl-unicode: "\xAC"
+  wl-unicode: "\00AC"
   wl-unicode-name: NOT SIGN
 NotCongruent:
   esc-alias: '!==='
@@ -5167,6 +5171,7 @@ NotLessTilde:
   esc-alias: '!<~'
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: NotLessTilde
   unicode-equivalent: "\u2274"
   unicode-equivalent-name: NEITHER LESS-THAN NOR EQUIVALENT TO
   wl-unicode: "\u2274"
