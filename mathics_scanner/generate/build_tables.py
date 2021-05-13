@@ -128,6 +128,11 @@ def compile_tables(data: dict) -> dict:
         k: v["wl-unicode"] for k, v in data.items() if "wl-unicode" in v
     }
 
+    # Operators with ASCII sequences
+    ascii_operators = sorted([
+        v["ascii"] for v in data.values() if "operator-name" in v and "ascii" in v
+    ])
+
     # ESC sequence aliases
     aliased_characters = {
         v["esc-alias"]: v["wl-unicode"] for v in data.values() if "esc-alias" in v
@@ -140,6 +145,12 @@ def compile_tables(data: dict) -> dict:
         if "operator-name" in v and "unicode-equivalent" in v
     }
 
+    # ESC sequence aliases
+    unicode_operators = sorted([
+        v["unicode-equivalent"] for v in data.values() if "operator-name" in v and "unicode-equivalent" in v
+    ])
+
+
     # operator-to-unicode dictionary
     unicode_to_operator = {
         v["unicode-equivalent"]: v["operator-name"]
@@ -148,9 +159,11 @@ def compile_tables(data: dict) -> dict:
     }
     return {
         "aliased-characters": aliased_characters,
+        "ascii-operators": ascii_operators,
         "letterlikes": letterlikes,
         "named-characters": named_characters,
         "operator-to-unicode": operator_to_unicode,
+        "unicode-operators": unicode_operators,
         "unicode-to-operator": unicode_to_operator,
         "unicode-to-wl-dict": unicode_to_wl_dict,
         "unicode-to-wl-re": unicode_to_wl_re,
@@ -165,9 +178,11 @@ DEFAULT_DATA_DIR = Path(osp.normpath(osp.dirname(__file__)), "..", "data")
 
 ALL_FIELDS = [
     "aliased-characters",
+    "ascii-operators",
     "letterlikes",
     "named-characters",
     "operator-to-unicode",
+    "unicode-operators",
     "unicode-to-operator",
     "unicode-to-wl-dict",
     "unicode-to-wl-re",
