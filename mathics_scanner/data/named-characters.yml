@@ -9,7 +9,9 @@
 #                        equivalent that should replace other variants of it,
 #                        e.g. named character or ascii equivalent.
 #
-#   is-letter-like: Whether or not this named-character is "letter-like".
+#   is-letter-like: Whether or not this named-character is "letter-like", or
+#                   can be used as part of a symbol. For example \[alpha]
+#                   is letter-like. Therefore we can write: \[alpha]5 = "testing"
 #
 #   operator-name: If present, this symbol is a Mathics operator with
 #                  whose class name is the given name. For example Divide.
@@ -1379,12 +1381,12 @@ Definition:
   is-letter-like: false
   operator-name: Definition
 
- # Using Degree as an operator messes up parsing,
-# but mathics-pygments would like this to be an operator.
-# We adjust for that in the mathics-pygments code
+# Using \[Degree] as an operator messes up Mathics parsing,
+# But mathics-pygments would like this to be an operator.
+# We adjust for that in the mathics-pygments code.
 
-# Also, in order for theto be able to write:
-# \[Degree] == Degree,
+# Also, in order too be able to write:
+#   \[Degree] == Degree,
 # \Degree has to be letter-like.
 Degree:
   esc-alias: deg
