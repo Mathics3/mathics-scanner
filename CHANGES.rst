@@ -1,6 +1,12 @@
 CHANGES
 =======
 
+1.2.0
+-----
+
+Tag unicode operators which have no definition and add the ability to dump them. This is useful for mathics-pygments.
+
+
 1.1.2
 -----
 
