@@ -62,7 +62,7 @@ is_PyPy = platform.python_implementation() == "PyPy"
 # General Requirements
 INSTALL_REQUIRES = [
     "chardet",  # Used in mathics_scanner.feed
-    "ujson",  # Used in mathics_scanner.characters
+    # "ujson",  # Used in mathics_scanner.characters
     "click",  # Usin in CLI: mathics-generate-json-table
 ]
 
