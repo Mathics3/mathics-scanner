@@ -7,9 +7,13 @@ and Unicode/ASCII.
 """
 
 import re
-import ujson
 import os
 import pkg_resources
+
+try:
+    import ujson
+except ImportError:
+    import json as ujson
 
 ROOT_DIR = pkg_resources.resource_filename("mathics_scanner", "")
 

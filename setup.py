@@ -25,11 +25,11 @@ Or, if all else fails, feel free to write to the mathics users list at
 mathics-users@googlegroups.com and ask for help.
 """
 
+import re
 import sys
 import os.path as osp
 import platform
-import subprocess
-from setuptools import setup, Command, Extension
+from setuptools import setup
 
 # Ensure user has the correct Python version
 if sys.version_info < (3, 6):
@@ -62,10 +62,21 @@ is_PyPy = platform.python_implementation() == "PyPy"
 # General Requirements
 INSTALL_REQUIRES = [
     "chardet",  # Used in mathics_scanner.feed
-    "ujson",  # Used in mathics_scanner.characters
+    "PyYAML",   # Used in mathics-generate-json-table
+    # "ujson",  # Optional Used in mathics_scanner.characters
     "click",  # Usin in CLI: mathics-generate-json-table
 ]
 
+
+extra_requires = []
+for line in open("requirements-extra.txt").read().split("\n"):
+    if line and not line.startswith("#"):
+        requires = re.sub(r"([^#]+)(\s*#.*$)?", r"\1", line)
+        extra_requires.append(requires)
+
+EXTRA_REQUIRES = {
+    "full": extra_requires
+}
 
 def subdirs(root, file="*.*", depth=10):
     for k in range(depth):
@@ -80,6 +91,7 @@ setup(
         "mathics_scanner.generate",
     ],
     install_requires=INSTALL_REQUIRES,
+    extra_requires=EXTRA_REQUIRES,
     entry_points={
         "console_scripts": [
             "mathics-generate-json-table=mathics_scanner.generate.build_tables:main"
