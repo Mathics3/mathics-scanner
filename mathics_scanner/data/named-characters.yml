@@ -4245,8 +4245,8 @@ Implies:
   esc-alias: =>
   has-unicode-inverse: true
   is-letter-like: false
-  unicode-equivalent: "\u27F9"
-  unicode-equivalent-name: LONG RIGHTWARDS DOUBLE ARROW
+  unicode-equivalent: "\u21D2"
+  unicode-equivalent-name: RIGHTWARDS DOUBLE ARROW
   wl-unicode: "\uF523"
 Increment:
   ascii: "++"

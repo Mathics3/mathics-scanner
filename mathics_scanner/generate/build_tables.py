@@ -194,7 +194,7 @@ ALL_FIELDS = [
 
 
 @click.command()
-@click.version_option(version=__version__)
+@click.version_option(version=__version__)  # NOQA
 @click.option(
     "--field",
     "-f",
