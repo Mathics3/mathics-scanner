@@ -1,5 +1,10 @@
 # Information about named characters, indexed by their fully qualified names.
 #
+#   amslatex: If present, the AMSLaTeX name of the symbol. AMSLaTeX symbols
+#             are a superset of normal LaTeX symbols. If the replacement
+#             is surrounded in "$" then this symbol can only be used in
+#             Math mode.
+#
 #   ascii: If present, the ASCII equivalent. In some cases this may be more
 #          than one character. For example "->" or "===".
 #
@@ -32,6 +37,7 @@
 #                    It will mentioned in Wolfram Language docs if it exists.
 
 AAcute:
+  amslatex: "\\'{a}"
   esc-alias: a'
   has-unicode-inverse: false
   is-letter-like: false
@@ -40,6 +46,7 @@ AAcute:
   wl-unicode: "\xE1"
   wl-unicode-name: LATIN SMALL LETTER A WITH ACUTE
 ABar:
+  amslatex: "\\={a}"
   esc-alias: a-
   has-unicode-inverse: false
   is-letter-like: false
@@ -48,6 +55,7 @@ ABar:
   wl-unicode: "\u0101"
   wl-unicode-name: LATIN SMALL LETTER A WITH MACRON
 ACup:
+  amslatex: "\\u{a}"
   esc-alias: au
   has-unicode-inverse: false
   is-letter-like: false
@@ -77,6 +85,7 @@ AE:
   wl-unicode: "\xE6"
   wl-unicode-name: LATIN SMALL LETTER AE
 AGrave:
+  amslatex: "\\`{a}"
   esc-alias: a`
   has-unicode-inverse: false
   is-letter-like: false
@@ -357,6 +366,7 @@ Bullet:
   wl-unicode: "\u2022"
   wl-unicode-name: BULLET
 CAcute:
+  amslatex: "\\'{c}"
   esc-alias: c'
   has-unicode-inverse: false
   is-letter-like: false
@@ -365,6 +375,7 @@ CAcute:
   wl-unicode: "\u0107"
   wl-unicode-name: LATIN SMALL LETTER C WITH ACUTE
 CCedilla:
+  amslatex: "\\c{c}"
   esc-alias: c
   has-unicode-inverse: false
   is-letter-like: false
@@ -373,6 +384,7 @@ CCedilla:
   wl-unicode: "\xE7"
   wl-unicode-name: LATIN SMALL LETTER C WITH CEDILLA
 CHacek:
+  amslatex: "\\v{c}"
   esc-alias: cv
   has-unicode-inverse: false
   is-letter-like: false
@@ -395,6 +407,7 @@ Cap:
   wl-unicode: "\u2322"
   wl-unicode-name: FROWN
 CapitalAAcute:
+  amslatex: "\\'{A}"
   esc-alias: A'
   has-unicode-inverse: false
   is-letter-like: false
@@ -403,6 +416,7 @@ CapitalAAcute:
   wl-unicode: "\xC1"
   wl-unicode-name: LATIN CAPITAL LETTER A WITH ACUTE
 CapitalABar:
+  amslatex: "\\={A}"
   esc-alias: A-
   has-unicode-inverse: false
   is-letter-like: false
@@ -411,6 +425,7 @@ CapitalABar:
   wl-unicode: "\u0100"
   wl-unicode-name: LATIN CAPITAL LETTER A WITH MACRON
 CapitalACup:
+  amslatex: "\\u{A}"
   esc-alias: Au
   has-unicode-inverse: false
   is-letter-like: false
@@ -435,6 +450,7 @@ CapitalAE:
   wl-unicode: "\xC6"
   wl-unicode-name: LATIN CAPITAL LETTER AE
 CapitalAGrave:
+  amslatex: "\\`{A}"
   esc-alias: A`
   has-unicode-inverse: false
   is-letter-like: false
@@ -483,6 +499,7 @@ CapitalBeta:
   wl-unicode: "\u0392"
   wl-unicode-name: GREEK CAPITAL LETTER BETA
 CapitalCAcute:
+  amslatex: "\\'{C}"
   esc-alias: C'
   has-unicode-inverse: false
   is-letter-like: false
@@ -499,6 +516,7 @@ CapitalCCedilla:
   wl-unicode: "\xC7"
   wl-unicode-name: LATIN CAPITAL LETTER C WITH CEDILLA
 CapitalCHacek:
+  amslatex: "\\v{C}"
   esc-alias: Cv
   has-unicode-inverse: false
   is-letter-like: false
@@ -515,6 +533,7 @@ CapitalChi:
   wl-unicode: "\u03A7"
   wl-unicode-name: GREEK CAPITAL LETTER CHI
 CapitalDHacek:
+  amslatex: "\\v{D}"
   esc-alias: Dv
   has-unicode-inverse: false
   is-letter-like: false
@@ -546,6 +565,7 @@ CapitalDigamma:
   wl-unicode: "\u03DC"
   wl-unicode-name: GREEK LETTER DIGAMMA
 CapitalEAcute:
+  amslatex: "\\'{E}"
   esc-alias: E'
   has-unicode-inverse: false
   is-letter-like: false
@@ -554,6 +574,7 @@ CapitalEAcute:
   wl-unicode: "\xC9"
   wl-unicode-name: LATIN CAPITAL LETTER E WITH ACUTE
 CapitalEBar:
+  amslatex: "\\={E}"
   esc-alias: E-
   has-unicode-inverse: false
   is-letter-like: false
@@ -562,6 +583,7 @@ CapitalEBar:
   wl-unicode: "\u0112"
   wl-unicode-name: LATIN CAPITAL LETTER E WITH MACRON
 CapitalECup:
+  amslatex: "\\u{E}"
   esc-alias: Eu
   has-unicode-inverse: false
   is-letter-like: false
@@ -578,6 +600,7 @@ CapitalEDoubleDot:
   wl-unicode: "\xCB"
   wl-unicode-name: LATIN CAPITAL LETTER E WITH DIAERESIS
 CapitalEGrave:
+  amslatex: "\\`{E}"
   esc-alias: E`
   has-unicode-inverse: false
   is-letter-like: false
@@ -586,6 +609,7 @@ CapitalEGrave:
   wl-unicode: "\xC8"
   wl-unicode-name: LATIN CAPITAL LETTER E WITH GRAVE
 CapitalEHacek:
+  amslatex: "\\v{E}"
   esc-alias: Ev
   has-unicode-inverse: false
   is-letter-like: false
@@ -634,6 +658,7 @@ CapitalGamma:
   wl-unicode: "\u0393"
   wl-unicode-name: GREEK CAPITAL LETTER GAMMA
 CapitalIAcute:
+  amslatex: "\\'{I}"
   esc-alias: I'
   has-unicode-inverse: false
   is-letter-like: false
@@ -642,6 +667,7 @@ CapitalIAcute:
   wl-unicode: "\xCD"
   wl-unicode-name: LATIN CAPITAL LETTER I WITH ACUTE
 CapitalICup:
+  amslatex: "\\u{I}"
   esc-alias: Iu
   has-unicode-inverse: false
   is-letter-like: false
@@ -658,6 +684,7 @@ CapitalIDoubleDot:
   wl-unicode: "\xCF"
   wl-unicode-name: LATIN CAPITAL LETTER I WITH DIAERESIS
 CapitalIGrave:
+  amslatex: "\\`{I}"
   esc-alias: I`
   has-unicode-inverse: false
   is-letter-like: false
@@ -698,6 +725,7 @@ CapitalKoppa:
   wl-unicode: "\u03DE"
   wl-unicode-name: GREEK LETTER KOPPA
 CapitalLSlash:
+  amslatex: "\\L{}"
   esc-alias: L/
   has-unicode-inverse: false
   is-letter-like: false
@@ -722,6 +750,7 @@ CapitalMu:
   wl-unicode: "\u039C"
   wl-unicode-name: GREEK CAPITAL LETTER MU
 CapitalNHacek:
+  amslatex: "\\v{N}"
   esc-alias: Nv
   has-unicode-inverse: false
   is-letter-like: false
@@ -746,6 +775,7 @@ CapitalNu:
   wl-unicode: "\u039D"
   wl-unicode-name: GREEK CAPITAL LETTER NU
 CapitalOAcute:
+  amslatex: "\\'{O}"
   esc-alias: O'
   has-unicode-inverse: false
   is-letter-like: false
@@ -778,6 +808,7 @@ CapitalOE:
   wl-unicode: "\u0152"
   wl-unicode-name: LATIN CAPITAL LIGATURE OE
 CapitalOGrave:
+  amslatex: "\\`{O}"
   esc-alias: O`
   has-unicode-inverse: false
   is-letter-like: false
@@ -786,6 +817,7 @@ CapitalOGrave:
   wl-unicode: "\xD2"
   wl-unicode-name: LATIN CAPITAL LETTER O WITH GRAVE
 CapitalOHat:
+  amslatex: "\\^{O}"
   esc-alias: O^
   has-unicode-inverse: false
   is-letter-like: false
@@ -794,6 +826,7 @@ CapitalOHat:
   wl-unicode: "\xD4"
   wl-unicode-name: LATIN CAPITAL LETTER O WITH CIRCUMFLEX
 CapitalOSlash:
+  amslatex: "\\O{}"
   esc-alias: O/
   has-unicode-inverse: false
   is-letter-like: false
@@ -850,6 +883,7 @@ CapitalPsi:
   wl-unicode: "\u03A8"
   wl-unicode-name: GREEK CAPITAL LETTER PSI
 CapitalRHacek:
+  amslatex: "\\v{R}"
   esc-alias: Rv
   has-unicode-inverse: false
   is-letter-like: false
@@ -866,6 +900,7 @@ CapitalRho:
   wl-unicode: "\u03A1"
   wl-unicode-name: GREEK CAPITAL LETTER RHO
 CapitalSHacek:
+  amslatex: "\\v{S}"
   esc-alias: Sv
   has-unicode-inverse: false
   is-letter-like: false
@@ -898,6 +933,7 @@ CapitalStigma:
   wl-unicode: "\u03DA"
   wl-unicode-name: GREEK LETTER STIGMA
 CapitalTHacek:
+  amslatex: "\\v{T}"
   esc-alias: Tv
   has-unicode-inverse: false
   is-letter-like: false
@@ -930,6 +966,7 @@ CapitalThorn:
   wl-unicode: "\xDE"
   wl-unicode-name: LATIN CAPITAL LETTER THORN
 CapitalUAcute:
+  amslatex: "\\'{U}"
   esc-alias: U'
   has-unicode-inverse: false
   is-letter-like: false
@@ -954,6 +991,7 @@ CapitalUDoubleDot:
   wl-unicode: "\xDC"
   wl-unicode-name: LATIN CAPITAL LETTER U WITH DIAERESIS
 CapitalUGrave:
+  amslatex: "\\`{U}"
   esc-alias: U`
   has-unicode-inverse: false
   is-letter-like: false
@@ -994,6 +1032,7 @@ CapitalXi:
   wl-unicode: "\u039E"
   wl-unicode-name: GREEK CAPITAL LETTER XI
 CapitalYAcute:
+  amslatex: "\\'{Y}"
   esc-alias: Y'
   has-unicode-inverse: false
   is-letter-like: false
@@ -1002,6 +1041,7 @@ CapitalYAcute:
   wl-unicode: "\xDD"
   wl-unicode-name: LATIN CAPITAL LETTER Y WITH ACUTE
 CapitalZHacek:
+  amslatex: "\\v{Z}"
   esc-alias: Zv
   has-unicode-inverse: false
   is-letter-like: false
@@ -1190,6 +1230,7 @@ Conditioned:
   is-letter-like: false
   wl-unicode: "\uF3D3"
 Congruent:
+  amslatex: "===" # FIXME: can we do better here?
   esc-alias: ===
   has-unicode-inverse: true
   is-letter-like: false
@@ -1348,6 +1389,7 @@ Currency:
   wl-unicode: "\xA4"
   wl-unicode-name: CURRENCY SIGN
 DHacek:
+  amslatex: "\\v{D}"
   esc-alias: dv
   has-unicode-inverse: false
   is-letter-like: false
@@ -1487,6 +1529,7 @@ DifferenceDelta:
 # There was been some discussion as to what to use
 # here. The concensus was this.
 DifferentialD:
+  amslatex: "d"  # FIXME: There is probably something better here.
   esc-alias: dd
   has-unicode-inverse: true
   is-letter-like: false
@@ -1592,6 +1635,7 @@ DotEqual:
   wl-unicode: "\u2250"
   wl-unicode-name: APPROACHES THE LIMIT
 DotlessI:
+  amslatex: "{\\i}"
   has-unicode-inverse: false
   is-letter-like: false
   unicode-equivalent: "\u0131"
@@ -1703,6 +1747,7 @@ DoublePrime:
   wl-unicode: "\u2033"
   wl-unicode-name: DOUBLE PRIME
 DoubleRightArrow:
+  amslatex: "$\\Rightarrow$"
   esc-alias: ' =>'
   has-unicode-inverse: false
   is-letter-like: false
@@ -2321,6 +2366,7 @@ DownTeeArrow:
   wl-unicode: "\u21A7"
   wl-unicode-name: DOWNWARDS ARROW FROM BAR
 EAcute:
+  amslatex: "\\'{e}"
   esc-alias: e'
   has-unicode-inverse: false
   is-letter-like: false
@@ -2329,6 +2375,7 @@ EAcute:
   wl-unicode: "\xE9"
   wl-unicode-name: LATIN SMALL LETTER E WITH ACUTE
 EBar:
+  amslatex: "\\={e}"
   esc-alias: e-
   has-unicode-inverse: false
   is-letter-like: false
@@ -2337,6 +2384,7 @@ EBar:
   wl-unicode: "\u0113"
   wl-unicode-name: LATIN SMALL LETTER E WITH MACRON
 ECup:
+  amslatex: "\\u{e}"
   esc-alias: eu
   has-unicode-inverse: false
   is-letter-like: false
@@ -2353,6 +2401,7 @@ EDoubleDot:
   wl-unicode: "\xEB"
   wl-unicode-name: LATIN SMALL LETTER E WITH DIAERESIS
 EGrave:
+  amslatex: "\\`{e}"
   esc-alias: e`
   has-unicode-inverse: false
   is-letter-like: false
@@ -2361,6 +2410,7 @@ EGrave:
   wl-unicode: "\xE8"
   wl-unicode-name: LATIN SMALL LETTER E WITH GRAVE
 EHacek:
+  amslatex: "\\v{E}"
   esc-alias: ev
   has-unicode-inverse: false
   is-letter-like: false
@@ -2400,6 +2450,7 @@ Element:
   wl-unicode: "\u2208"
   wl-unicode-name: ELEMENT OF
 Ellipsis:
+  amslatex: "$\\dots$"
   esc-alias: '...'
   has-unicode-inverse: false
   is-letter-like: true
@@ -3273,6 +3324,7 @@ FormalG:
   unicode-equivalent-name: LATIN SMALL LETTER G + COMBINING DOT BELOW
   wl-unicode: "\uF806"
 FormalGamma:
+  amslatex: "$\\gamma$"
   esc-alias: .Gamma
   has-unicode-inverse: true
   is-letter-like: false
@@ -4050,6 +4102,7 @@ GraySquare:
   unicode-equivalent-name: BLACK SQUARE
   wl-unicode: "\uF752"
 GreaterEqual:
+  amslatex: "$\\ge$"
   ascii: ">="
   esc-alias: ">="
   has-unicode-inverse: true
@@ -4110,6 +4163,7 @@ GreaterTilde:
   wl-unicode: "\u2273"
   wl-unicode-name: GREATER-THAN OR EQUIVALENT TO
 HBar:
+  amslatex: "\\hbar"
   esc-alias: hb
   has-unicode-inverse: false
   is-letter-like: true
@@ -4181,6 +4235,7 @@ Hyphen:
   wl-unicode: "\u2010"
   wl-unicode-name: HYPHEN
 IAcute:
+  amslatex: "\\'{i}"
   esc-alias: i'
   has-unicode-inverse: false
   is-letter-like: false
@@ -4189,6 +4244,7 @@ IAcute:
   wl-unicode: "\xED"
   wl-unicode-name: LATIN SMALL LETTER I WITH ACUTE
 ICup:
+  amslatex: "\\u{i}"
   esc-alias: iu
   has-unicode-inverse: false
   is-letter-like: false
@@ -4205,6 +4261,7 @@ IDoubleDot:
   wl-unicode: "\xEF"
   wl-unicode-name: LATIN SMALL LETTER I WITH DIAERESIS
 IGrave:
+  amslatex: "\\`{i}"
   esc-alias: i`
   has-unicode-inverse: false
   is-letter-like: false
@@ -4279,6 +4336,7 @@ Information:
   is-letter-like: false
   operator-name: Information
 Integral:
+  amslatex: "\\int"
   esc-alias: int
   has-unicode-inverse: false
   is-letter-like: false
@@ -4373,6 +4431,7 @@ Koppa:
   wl-unicode: "\u03DF"
   wl-unicode-name: GREEK SMALL LETTER KOPPA
 LSlash:
+  amslatex: "\\l{}"
   esc-alias: l/
   has-unicode-inverse: false
   is-letter-like: false
@@ -4652,6 +4711,7 @@ Less:
   wl-unicode: "<"
   wl-unicode-name: LESS-THAN SIGN
 LessEqual:
+  amslatex: "$\\le$"
   ascii: "<="
   esc-alias: "<="
   has-unicode-inverse: true
@@ -4866,6 +4926,7 @@ MinusPlus:
   wl-unicode: "\u2213"
   wl-unicode-name: MINUS-OR-PLUS SIGN
 Mu:
+  amslatex: "$\\mu"
   esc-alias: m
   has-unicode-inverse: false
   is-letter-like: false
@@ -4874,6 +4935,7 @@ Mu:
   wl-unicode: "\u03BC"
   wl-unicode-name: GREEK SMALL LETTER MU
 NHacek:
+  amslatex: "\\v{n}"
   esc-alias: nv
   has-unicode-inverse: false
   is-letter-like: false
@@ -4890,6 +4952,7 @@ NTilde:
   wl-unicode: "\xF1"
   wl-unicode-name: LATIN SMALL LETTER N WITH TILDE
 Nand:
+  amslatex: "$\\barwedge$"
   esc-alias: nand
   has-unicode-inverse: false
   is-letter-like: false
@@ -4975,6 +5038,7 @@ NonCommutativeMultiply:
   is-letter-like: false
   operator-name: NonCommutativeMultiply
 Nor:
+  amslatex: "$\\veebar$"
   esc-alias: nor
   has-unicode-inverse: false
   is-letter-like: false
@@ -5028,6 +5092,7 @@ NotElement:
   wl-unicode: "\u2209"
   wl-unicode-name: NOT AN ELEMENT OF
 NotEqual:
+  amslatex: "$\ne$"
   ascii: "!="
   esc-alias: '!='
   has-unicode-inverse: false
@@ -5401,6 +5466,7 @@ NumberSign:
   # unicode-equivalent-name: NUMBER SIGN
   wl-unicode: "\uF724"
 OAcute:
+  amslatex: "\\'{o}"
   esc-alias: o'
   has-unicode-inverse: false
   is-letter-like: false
@@ -5433,6 +5499,7 @@ OE:
   wl-unicode: "\u0153"
   wl-unicode-name: LATIN SMALL LIGATURE OE
 OGrave:
+  amslatex: "\\`{o}"
   esc-alias: o`
   has-unicode-inverse: false
   is-letter-like: false
@@ -5441,6 +5508,7 @@ OGrave:
   wl-unicode: "\xF2"
   wl-unicode-name: LATIN SMALL LETTER O WITH GRAVE
 OHat:
+  amslatex: "\\^{o}"
   esc-alias: o^
   has-unicode-inverse: false
   is-letter-like: false
@@ -5449,6 +5517,7 @@ OHat:
   wl-unicode: "\xF4"
   wl-unicode-name: LATIN SMALL LETTER O WITH CIRCUMFLEX
 OSlash:
+  amslatex: "\\o{}"
   esc-alias: o/
   has-unicode-inverse: false
   is-letter-like: false
@@ -5578,6 +5647,7 @@ Phi:
   wl-unicode: "\u03D5"
   wl-unicode-name: GREEK PHI SYMBOL
 Pi:
+  amslatex: "$pi$"
   esc-alias: p
   has-unicode-inverse: false
   is-letter-like: false
@@ -5742,6 +5812,7 @@ QuarterNote:
   wl-unicode: "\u2669"
   wl-unicode-name: QUARTER NOTE
 RHacek:
+  amslatex: "\\v{r}"
   esc-alias: rv
   has-unicode-inverse: false
   is-letter-like: false
@@ -6315,6 +6386,7 @@ RuleDelayed:
   unicode-equivalent-name: RULE-DELAYED
   wl-unicode: "\uF51F"
 SHacek:
+  amslatex: "\v{s}"
   esc-alias: sv
   has-unicode-inverse: false
   is-letter-like: false
@@ -7148,6 +7220,7 @@ SystemsModelDelay:
   is-letter-like: false
   wl-unicode: "\uF3AF"
 THacek:
+  amslatex: "\\v{t}"
   esc-alias: tv
   has-unicode-inverse: false
   is-letter-like: false
@@ -7228,6 +7301,7 @@ Thorn:
   wl-unicode: "\xFE"
   wl-unicode-name: LATIN SMALL LETTER THORN
 Tilde:
+  amslatex: "\textasciitilde"
   esc-alias: '~'
   ascii: "~"
   has-unicode-inverse: false
@@ -7238,6 +7312,7 @@ Tilde:
   wl-unicode: "\u223C"
   wl-unicode-name: TILDE OPERATOR
 TildeEqual:
+  amslatex: "$\\simeq$"
   esc-alias: ~=
   has-unicode-inverse: false
   is-letter-like: false
@@ -7301,6 +7376,7 @@ TripleDot:
   unicode-equivalent-name: MIDLINE HORIZONTAL ELLIPSIS
   wl-unicode: "\uF758"
 UAcute:
+  amslatex: "\\'{u}"
   esc-alias: u'
   has-unicode-inverse: false
   is-letter-like: false
@@ -7325,6 +7401,7 @@ UDoubleDot:
   wl-unicode: "\xFC"
   wl-unicode-name: LATIN SMALL LETTER U WITH DIAERESIS
 UGrave:
+  amslatex: "\\`{u}"
   esc-alias: u`
   has-unicode-inverse: false
   is-letter-like: false
@@ -7688,6 +7765,7 @@ Xnor:
   is-letter-like: false
   wl-unicode: "\uF4A2"
 Xor:
+  amslatex: "$\\oplus$" # The WL veebar-looking symbol isn't in AMSLaTeX
   esc-alias: xor
   has-unicode-inverse: false
   is-letter-like: false
@@ -7697,6 +7775,7 @@ Xor:
   wl-unicode: "\u22BB"
   wl-unicode-name: XOR
 YAcute:
+  amslatex: "\\'{y}"
   esc-alias: y'
   has-unicode-inverse: false
   is-letter-like: false
@@ -7720,6 +7799,7 @@ Yen:
   wl-unicode: "\xA5"
   wl-unicode-name: YEN SIGN
 ZHacek:
+  amslatex: "\v{z}"
   esc-alias: zv
   has-unicode-inverse: false
   is-letter-like: false

@@ -31,6 +31,7 @@ def test_yaml_field_names():
     for k, v in yaml_data.items():
 
         diff = set(v.keys()) - {
+            "amslatex",
             "ascii",
             "esc-alias",
             "has-unicode-inverse",
