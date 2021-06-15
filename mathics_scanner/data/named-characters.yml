@@ -21,6 +21,9 @@
 #   operator-name: If present, this symbol is a Mathics operator with
 #                  whose class name is the given name. For example Divide.
 #
+#   precedence: If present, this symbol is a Mathics operator with the
+#               specific numeric precidence value.
+#
 #   unicode-equivalent: A unicode equivalent for the named-character, if it
 #                       exists.
 #
@@ -1243,6 +1246,7 @@ CompoundExpression:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: CompoundExpression
+  precedence: 10
 Condition:
   ascii: "/;"
   has-unicode-inverse: false
@@ -1453,12 +1457,14 @@ Decrement:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Decrement
+  precedence: 660
 # See also RawQuestion
 Definition:
   ascii: "?"
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Definition
+  precedence: 670
 
 # \[Degree] is letter-like, not an operator, which is
 # mutually exclusive.
@@ -1631,6 +1637,7 @@ Divide:
   has-unicode-inverse: true
   is-letter-like: false
   operator-name: Divide
+  precedence: 470
   unicode-equivalent: "\xF7"
   unicode-equivalent-name: DIVISION SIGN
   wl-unicode: "\xF7"
@@ -2694,6 +2701,7 @@ Factorial:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Factorial
+  precedence: 610
   unicode-equivalent: "!"
   unicode-equivalent-name: EXCLAMATION MARK
   wl-unicode: "!"
@@ -3711,6 +3719,7 @@ Get:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Get
+  precedence: 720
 Gimel:
   amslatex: "\\gimel"
   esc-alias: gi
@@ -4366,6 +4375,7 @@ Increment:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Increment
+  precedence: 660
 IndentingNewLine:
   esc-alias: nl
   has-unicode-inverse: false
@@ -4392,6 +4402,7 @@ Information:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Information
+  precedence: 0
 Integral:
   amslatex: "\\int"
   esc-alias: int
@@ -4978,6 +4989,7 @@ Minus:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Minus
+  precedence: 480
   unicode-equivalent: "-"
   unicode-equivalent-name: HYPHEN-MINUS
   wl-unicode: "-"
@@ -5751,6 +5763,7 @@ Plus:
   has-unicode-inverse: true
   is-letter-like: false
   operator-name: Plus
+  precedence: 310
   unicode-equivalent: "+"
   unicode-equivalent-name: PLUS SIGN
   wl-unicode: "+"
@@ -5780,6 +5793,7 @@ Power:
   has-unicode-inverse: true
   is-letter-like: false
   operator-name: Power
+  precedence: 590
   unicode-equivalent: "^"
   unicode-equivalent-name: CIRCUMFLEX ACCENT
   wl-unicode: "^"
@@ -5873,11 +5887,13 @@ Put:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Put
+  precedence: 30
 PutAppend:
   ascii: ">>>"
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: PutAppend
+  precedence: 30
 QuarterNote:
   has-unicode-inverse: false
   is-letter-like: false
@@ -6501,6 +6517,7 @@ SameQ:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: SameQ
+  precedence: 290
 Sampi:
   esc-alias: sa
   has-unicode-inverse: true
@@ -6984,6 +7001,7 @@ Set:
   has-unicode-inverse: true
   is-letter-like: false
   operator-name: Set
+  precedence: 40
   unicode-equivalent: "="
   unicode-equivalent-name: EQUALS SIGN
   wl-unicode: "="
@@ -7434,6 +7452,7 @@ Times:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Times
+  precedence: 400
   unicode-equivalent: "\xD7"
   unicode-equivalent-name: MULTIPLICATION SIGN
   wl-unicode: "\xD7"
@@ -7574,6 +7593,7 @@ Unset:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Unset
+  precedence: 670
 UpArrow:
   amslatex: "\\uparrow"
   has-unicode-inverse: false
@@ -7675,6 +7695,7 @@ UpSet:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: UpSet
+  precedence: 40
 UpSetDelayed:
   ascii: "^:="
   has-unicode-inverse: false
