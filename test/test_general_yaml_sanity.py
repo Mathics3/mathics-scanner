@@ -45,6 +45,28 @@ def test_yaml_field_names():
         assert diff == set(), f"Item {k} has unknown fields {diff}"
 
 
+def test_amslatex():
+    amslatex_seen = set()
+    dup_amslatex = set(["\\Rightarrow", "\\rightarrow", "\\uparrow"])
+    for k, v in yaml_data.items():
+        a = v.get("amslatex", None)
+        if a is None:
+            continue
+        msg_prefix = f"In {k} with amslatex {a}, "
+        if a.startswith("$"):
+            assert a.endswith("$"), (
+                msg_prefix + "if something starts in math mode, it must end with '$'"
+                )
+        if a.endswith("$"):
+            assert a.startswith("$"), (
+                msg_prefix + "if something ends in math mode, it must start with '$'"
+                )
+        if a in dup_amslatex:
+            continue
+        assert a not in amslatex_seen, msg_prefix + "value seen before"
+        amslatex_seen.add(a)
+
+
 def test_operators():
     ascii_seen = set()
     operator_name_seen = set()
