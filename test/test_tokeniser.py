@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 """
 Tests translation from trings to sequences of tokens.
 """

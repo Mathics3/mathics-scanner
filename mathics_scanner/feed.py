@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 """
 Rather than trying to parse all the lines of code at once, this module implements methods
 for returning one line code at a time.
@@ -9,7 +10,8 @@ from chardet import detect
 
 
 class LineFeeder(metaclass=ABCMeta):
-    """An abstract representation for reading lines of characters, a
+    """
+    An abstract representation for reading lines of characters, a
     "feeder". The purpose of a feeder is to mediate the consumption of
     characters between the tokeniser and the actual file being scaned,
     as well to store messages regarding tokenization errors.
@@ -30,29 +32,33 @@ class LineFeeder(metaclass=ABCMeta):
         Consume and return next line of code. Each line should be followed by a
         newline character. Returns '' after all lines are consumed.
         """
+
         return ""
 
     @abstractmethod
-    def empty(self):
+    def empty(self) -> bool:
         """
         Return True once all lines have been consumed.
         """
+
         return True
 
-    def message(self, sym: str, tag, *args):
+    def message(self, sym: str, tag: str, *args) -> None:
         """
         Append a generic message of type ``sym`` to the message queue.
         """
+
         if sym == "Syntax":
             message = self.syntax_message(sym, tag, *args)
         else:
             message = [sym, tag] + list(args)
         self.messages.append(message)
 
-    def syntax_message(self, sym: str, tag, *args):
+    def syntax_message(self, sym: str, tag: str, *args):
         """
         Append a message concerning syntax errors to the message queue.
         """
+
         if len(args) > 3:
             raise ValueError("Too many args.")
         message = [sym, tag]
@@ -62,7 +68,7 @@ class LineFeeder(metaclass=ABCMeta):
             else:
                 message.append('""')
         message.append(self.lineno)
-        message.append('"' + self.filename + '"')
+        message.append('"%s"' % self.filename)
         assert len(message) == 7
         return message
 
@@ -97,7 +103,7 @@ class MultiLineFeeder(LineFeeder):
             result = ""
         return result
 
-    def empty(self):
+    def empty(self) -> bool:
         return self.lineno >= len(self.lines)
 
 
@@ -121,7 +127,7 @@ class SingleLineFeeder(LineFeeder):
         self.lineno += 1
         return self.code
 
-    def empty(self):
+    def empty(self) -> bool:
         return self._empty
 
 
