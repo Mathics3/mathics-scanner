@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 """
 Rather than trying to parse all the lines of code at once, this module implements methods
 for returning one line code at a time.
@@ -9,7 +10,8 @@ from chardet import detect
 
 
 class LineFeeder(metaclass=ABCMeta):
-    """An abstract representation for reading lines of characters, a
+    """
+    An abstract representation for reading lines of characters, a
     "feeder". The purpose of a feeder is to mediate the consumption of
     characters between the tokeniser and the actual file being scaned,
     as well to store messages regarding tokenization errors.
@@ -25,34 +27,36 @@ class LineFeeder(metaclass=ABCMeta):
         self.filename = filename
 
     @abstractmethod
-    def feed(self):
+    def feed(self) -> str:
         """
         Consume and return next line of code. Each line should be followed by a
         newline character. Returns '' after all lines are consumed.
         """
+
         return ""
 
     @abstractmethod
-    def empty(self):
+    def empty(self) -> bool:
         """
         Return True once all lines have been consumed.
         """
+
         return True
 
-    def message(self, sym: str, tag, *args):
+    def message(self, sym: str, tag: str, *args) -> None:
         """
         Append a generic message of type ``sym`` to the message queue.
         """
+
         if sym == "Syntax":
             message = self.syntax_message(sym, tag, *args)
         else:
             message = [sym, tag] + list(args)
         self.messages.append(message)
 
-    def syntax_message(self, sym: str, tag, *args):
-        """
-        Append a message concerning syntax errors to the message queue.
-        """
+    def syntax_message(self, sym: str, tag: str, *args):
+        "Append a message concerning syntax errors to the message queue."
+
         if len(args) > 3:
             raise ValueError("Too many args.")
         message = [sym, tag]
@@ -62,7 +66,7 @@ class LineFeeder(metaclass=ABCMeta):
             else:
                 message.append('""')
         message.append(self.lineno)
-        message.append('"' + self.filename + '"')
+        message.append('"%s"' % self.filename)
         assert len(message) == 7
         return message
 
@@ -76,12 +80,13 @@ class LineFeeder(metaclass=ABCMeta):
 class MultiLineFeeder(LineFeeder):
     "A feeder that feeds one line at a time."
 
-    def __init__(self, lines, filename=""):
+    def __init__(self, lines, filename: str = ""):
         """
         :param lines: The source of the feeder (a string).
         :param filename: A string that describes the source of the feeder, i.e.
                          the filename that is being feed.
         """
+
         super(MultiLineFeeder, self).__init__(filename)
         self.lineno = 0
         if isinstance(lines, str):
@@ -89,7 +94,7 @@ class MultiLineFeeder(LineFeeder):
         else:
             self.lines = lines
 
-    def feed(self):
+    def feed(self) -> str:
         if self.lineno < len(self.lines):
             result = self.lines[self.lineno]
             self.lineno += 1
@@ -97,14 +102,14 @@ class MultiLineFeeder(LineFeeder):
             result = ""
         return result
 
-    def empty(self):
+    def empty(self) -> bool:
         return self.lineno >= len(self.lines)
 
 
 class SingleLineFeeder(LineFeeder):
     "A feeder that feeds all the code as a single line."
 
-    def __init__(self, code, filename=""):
+    def __init__(self, code: str, filename: str = ""):
         """
         :param code: The source of the feeder (a string).
         :param filename: A string that describes the source of the feeder, i.e.
@@ -114,14 +119,14 @@ class SingleLineFeeder(LineFeeder):
         self.code = code
         self._empty = False
 
-    def feed(self):
+    def feed(self) -> str:
         if self._empty:
             return ""
         self._empty = True
         self.lineno += 1
         return self.code
 
-    def empty(self):
+    def empty(self) -> bool:
         return self._empty
 
 

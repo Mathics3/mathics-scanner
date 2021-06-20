@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-
 from mathics_scanner.characters import named_characters
 from mathics_scanner.errors import ScanError, IncompleteSyntaxError
 
@@ -27,17 +26,17 @@ class Prescanner(object):
         self.code = feeder.feed()  # input code
         self.pos = 0  # current position within code
 
-    def feed(self):
+    def feed(self) -> str:
         return self.feeder.feed()
 
-    def incomplete(self):
+    def incomplete(self) -> None:
         line = self.feed()
         if not line:
             self.feeder.message("Syntax", "sntxi", self.code[self.pos :].rstrip())
             raise IncompleteSyntaxError()
         self.code += line
 
-    def scan(self):
+    def scan(self) -> str:
         # main loop
         self.stubs = []  # stubs of code to be joined
         self.start = self.pos  # start of current stub
@@ -67,11 +66,16 @@ class Prescanner(object):
         # reduce
         return "".join(self.stubs)
 
-    def newstub(self, pos):
+    def newstub(self, pos: int) -> None:
         self.pos = pos
         self.start = pos
 
-    def try_parse_base(self, start_shift, end_shift, base):
+    def try_parse_base(
+        self,
+        start_shift: int,
+        end_shift: int,
+        base: int,
+    ) -> None:
         start, end = self.pos + start_shift, self.pos + end_shift
         result = None
         if end <= len(self.code):
@@ -96,7 +100,7 @@ class Prescanner(object):
         self.stubs.append(chr(result))
         self.newstub(end)
 
-    def try_parse_longname(self, start_shift):
+    def try_parse_longname(self, start_shift: int) -> None:
         i = self.pos + start_shift
         while True:
             if i == len(self.code):

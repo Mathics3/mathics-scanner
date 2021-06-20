@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-
 import re
 import string
 
@@ -18,20 +17,18 @@ number_pattern = r"""
 (``?(\+|-)?(\d+\.?\d*|\d*\.?\d+)|`)?        (?# Precision / Accuracy)
 (\*\^(\+|-)?\d+)?                           (?# Exponent)
 """
-base_symbol_pattern = r"((?![0-9])([0-9${0}{1}])+)".format(_letters, _letterlikes)
+base_symbol_pattern = rf"((?![0-9])([0-9${_letters}{_letterlikes}])+)"
 full_symbol_pattern = r"(`?{0}(`{0})*)".format(base_symbol_pattern)
 pattern_pattern = r"{0}?_(\.|(__?)?{0}?)?".format(full_symbol_pattern)
-slot_pattern = r"\#(\d+|{0})?".format(base_symbol_pattern)
+slot_pattern = rf"\#(\d+|{base_symbol_pattern})?"
 filename_pattern = r"""
 (?P<quote>\"?)                              (?# Opening quotation mark)
     [a-zA-Z0-9\`/\.\\\!\-\:\_\$\*\~\?]+     (?# Literal characters)
 (?P=quote)                                  (?# Closing quotation mark)
 """
 names_wildcards = "@*"
-base_names_pattern = r"((?![0-9])([0-9${0}{1}{2}])+)".format(
-        _letters, _letterlikes, names_wildcards
-)
-full_names_pattern = r"(`?{0}(`{0})*)".format(base_names_pattern)
+base_names_pattern = r"((?![0-9])([0-9${_letters}{_letterlikes}{names_wildcards}])+)"
+full_names_pattern = rf"(`?{0}(`{0})*)".format(base_names_pattern)
 
 tokens = [
     ("Definition", r"\? "),
@@ -272,8 +269,9 @@ for c in string.digits:
     literal_tokens[c] = ["Number"]
 
 
-def find_indices(literals):
+def find_indices(literals) -> dict:
     "find indices of literal tokens"
+
     literal_indices = {}
     for key, tags in literals.items():
         indices = []
@@ -282,8 +280,8 @@ def find_indices(literals):
                 if tag == tag2:
                     indices.append(i)
                     break
-        literal_indices[key] = tuple(indices)
         assert len(indices) == len(tags)
+        literal_indices[key] = tuple(indices)
     return literal_indices
 
 
@@ -291,7 +289,7 @@ def compile_pattern(pattern):
     return re.compile(pattern, re.VERBOSE)
 
 
-def compile_tokens(token_list):
+def compile_tokens(token_list) -> list:
     return [(tag, compile_pattern(pattern)) for tag, pattern in token_list]
 
 
@@ -305,18 +303,19 @@ filename_tokens = compile_tokens(filename_tokens)
 full_symbol_pattern = compile_pattern(full_symbol_pattern)
 
 
-def is_symbol_name(text):
+def is_symbol_name(text) -> bool:
     """
-    Returns ``True`` if ``text`` is a valid identifier. Otherwise returns
-    ``False``.
+    Returns ``True`` if ``text`` is a valid identifier.
+    Otherwise returns ``False``.
     """
-    # Can't we just call match here?
-    return full_symbol_pattern.sub("", text) == ""
+
+    return full_symbol_pattern.match(text)
 
 
 class Token(object):
     "A representation of a Wolfram Language token."
-    def __init__(self, tag, text, pos):
+
+    def __init__(self, tag: str, text: str, pos: int):
         """
         :param tag: A string that indicates which type of token this is.
         :param text: The actual contents of the token.
@@ -326,21 +325,20 @@ class Token(object):
         self.text = text
         self.pos = pos
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if not isinstance(other, Token):
             raise TypeError()
         return (
             self.tag == other.tag and self.text == other.text and self.pos == other.pos
         )
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return "Token(%s, %s, %i)" % (self.tag, self.text, self.pos)
 
 
 class Tokeniser(object):
-    """
-    A tokeniser for the Wolfram Language.
-    """
+    "A tokeniser for the Wolfram Language."
+
     modes = {
         "expr": (tokens, token_indices),
         "filename": (filename_tokens, {}),
@@ -351,27 +349,29 @@ class Tokeniser(object):
         :param feeder: An instance of ``LineFeeder`` which will feed characters
                        to the tokeniser.
         """
+
         self.pos = 0
         self.feeder = feeder
         self.prescanner = Prescanner(feeder)
         self.code = self.prescanner.scan()
         self._change_mode("expr")
 
-    def _change_mode(self, mode):
-        """
-        Set the mode of the tokeniser.
-        """
+    def _change_mode(self, mode: str) -> None:
+        "Set the mode of the tokeniser."
+
         self.mode = mode
         self.tokens, self.token_indices = self.modes[mode]
 
     # TODO: Rename this to something that remotetly makes sense?
-    def incomplete(self):
+    def incomplete(self) -> None:
         "Get more code from the prescanner and continue."
+
         self.prescanner.incomplete()
         self.code += self.prescanner.scan()
 
-    def sntx_message(self, pos=None):
-        """Send a message to the feeder."""
+    def sntx_message(self, pos=None) -> None:
+        "Send a message to the feeder."
+
         if pos is None:
             pos = self.pos
         pre, post = self.code[:pos], self.code[pos:].rstrip("\n")
@@ -381,8 +381,9 @@ class Tokeniser(object):
             self.feeder.message("Syntax", "sntxf", pre, post)
 
     # TODO: Convert this to __next__ in the future?
-    def next(self):
+    def next(self) -> Token:
         "Returns the next token."
+
         self._skip_blank()
         if self.pos >= len(self.code):
             return Token("END", "", len(self.code))
@@ -415,8 +416,9 @@ class Tokeniser(object):
             self.pos = match.end(0)
             return Token(tag, text, match.start(0))
 
-    def _skip_blank(self):
+    def _skip_blank(self) -> None:
         "Skip whitespace and comments"
+
         comment = []  # start positions of comments
         while True:
             if self.pos >= len(self.code):
@@ -441,10 +443,11 @@ class Tokeniser(object):
             else:
                 break
 
-    def t_String(self, match):
+    def t_String(self, match) -> Token:
         "String rule"
+
         start, end = self.pos, None
-        self.pos += 1  # skip opening '"'
+        self.pos += 1  # skip opening quote
         newlines = []
         while True:
             if self.pos >= len(self.code):
@@ -469,8 +472,9 @@ class Tokeniser(object):
         )
         return Token("String", result, start)
 
-    def t_Number(self, match):
+    def t_Number(self, match) -> Token:
         "Number rule"
+
         text = match.group(0)
         pos = match.end(0)
         if self.code[pos - 1 : pos + 1] == "..":
@@ -482,25 +486,30 @@ class Tokeniser(object):
         return Token("Number", text, match.start(0))
 
     # This isn't outside of here so it's considered internal
-    def _token_mode(self, match, tag, mode):
-        "consume a token and switch mode"
+    def _token_mode(self, match, tag: str, mode: str) -> Token:
+        "Consume a token and switch mode."
+
         text = match.group(0)
         self.pos = match.end(0)
         self._change_mode(mode)
         return Token(tag, text, match.start(0))
 
-    def t_Get(self, match):
+    def t_Get(self, match) -> Token:
         "Get rule"
+
         return self._token_mode(match, "Get", "filename")
 
-    def t_Put(self, match):
+    def t_Put(self, match) -> Token:
         "Put rule"
+
         return self._token_mode(match, "Put", "filename")
 
-    def t_PutAppend(self, match):
+    def t_PutAppend(self, match) -> Token:
         "PutAppend rule"
+
         return self._token_mode(match, "PutAppend", "filename")
 
-    def t_Filename(self, match):
+    def t_Filename(self, match) -> Token:
         "Filename rule"
+
         return self._token_mode(match, "Filename", "expr")

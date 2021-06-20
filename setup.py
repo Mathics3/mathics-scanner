@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-"""Setuptools based setup script for Mathics.
+"""
+Setuptools based setup script for Mathics.
 
 For the easiest installation just type the following command (you'll probably
 need root privileges):
