@@ -7,6 +7,7 @@ from mathics_scanner.feed import SingleLineFeeder, MultiLineFeeder, FileLineFeed
 
 def test_multi():
     """Test MultiLineFeeder class"""
+
     feeder = MultiLineFeeder("abc\ndef")
     feeder.feed() == "abc\n", "MultiLineFeeder reads first line"
     feeder.feed() == "def", "reads second line"
@@ -16,6 +17,7 @@ def test_multi():
 
 def test_single():
     """Test SingleLineFeeder class"""
+
     feeder = SingleLineFeeder("abc\ndef")
     assert feeder.feed() == "abc\ndef", "SingleLineFeeder returns multiple lines"
     assert feeder.empty(), "SingleLineFeeder detects feeder empty condition"
@@ -24,6 +26,7 @@ def test_single():
 
 def test_file():
     """Test FileLineFeeder class"""
+
     with tempfile.TemporaryFile("w+") as f:
         f.write("abc\ndef\n")
         f.seek(0)

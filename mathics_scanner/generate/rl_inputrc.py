@@ -1,4 +1,5 @@
 #!/bin python3
+
 """
 Creates GNU Readline inputrc tables for converting Wolfram Language escape
 sequences to either unicode symbols or Wolfram Language fully qualified named
@@ -6,6 +7,7 @@ characters. See `Named Characters
 <https://reference.wolfram.com/language/tutorial/InputAndOutputInNotebooks.html#4718>`_
 for more information on character aliases.
 """
+
 import sys
 
 from mathics_scanner.characters import replace_wl_with_plain_text as r

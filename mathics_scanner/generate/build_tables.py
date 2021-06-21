@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
-# This scripts reads the data from named-characters and converts it to the
-# format used by the library internally
+
+"""
+This scripts reads the data from named-characters and converts it to the
+format used by the library internally
+"""
 
 import click
 

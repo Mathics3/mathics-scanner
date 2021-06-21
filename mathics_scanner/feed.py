@@ -21,6 +21,7 @@ class LineFeeder(metaclass=ABCMeta):
         :param filename: A string that describes the source of the feeder, i.e.
                          the filename that is being feed.
         """
+
         self.messages = []
         self.lineno = 0
         self.filename = filename
@@ -36,16 +37,12 @@ class LineFeeder(metaclass=ABCMeta):
 
     @abstractmethod
     def empty(self) -> bool:
-        """
-        Return True once all lines have been consumed.
-        """
+        "Return True once all lines have been consumed."
 
         return True
 
     def message(self, sym: str, tag: str, *args) -> None:
-        """
-        Append a generic message of type ``sym`` to the message queue.
-        """
+        "Append a generic message of type ``sym`` to the message queue."
 
         if sym == "Syntax":
             message = self.syntax_message(sym, tag, *args)
@@ -54,9 +51,7 @@ class LineFeeder(metaclass=ABCMeta):
         self.messages.append(message)
 
     def syntax_message(self, sym: str, tag: str, *args):
-        """
-        Append a message concerning syntax errors to the message queue.
-        """
+        "Append a message concerning syntax errors to the message queue."
 
         if len(args) > 3:
             raise ValueError("Too many args.")

@@ -321,6 +321,7 @@ class Token(object):
         :param text: The actual contents of the token.
         :param pos: The position of the token in the input feed.
         """
+
         self.tag = tag
         self.text = text
         self.pos = pos
@@ -349,6 +350,7 @@ class Tokeniser(object):
         :param feeder: An instance of ``LineFeeder`` which will feed characters
                        to the tokeniser.
         """
+
         self.pos = 0
         self.feeder = feeder
         self.prescanner = Prescanner(feeder)
