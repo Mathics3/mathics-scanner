@@ -8,7 +8,7 @@ import pytest
 import random
 import sys
 
-from mathics_scanner.tokeniser import Tokeniser, Token
+from mathics_scanner.tokeniser import Tokeniser, Token, is_symbol_name
 from mathics_scanner.errors import ScanError, IncompleteSyntaxError, InvalidSyntaxError
 from mathics_scanner.feed import SingleLineFeeder
 
@@ -227,3 +227,7 @@ def testAssociation():
         Token("Symbol", "m", 7),
         Token("RawRightAssociation", "|>", 8),
     ]
+
+def testIsSymbol():
+    assert is_symbol_name("Derivative")
+    assert not is_symbol_name("98") # symbols can't start with numbers
