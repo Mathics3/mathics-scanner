@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-
 import re
 import string
 
@@ -18,20 +17,18 @@ number_pattern = r"""
 (``?(\+|-)?(\d+\.?\d*|\d*\.?\d+)|`)?        (?# Precision / Accuracy)
 (\*\^(\+|-)?\d+)?                           (?# Exponent)
 """
-base_symbol_pattern = r"((?![0-9])([0-9${0}{1}])+)".format(_letters, _letterlikes)
+base_symbol_pattern = rf"((?![0-9])([0-9${_letters}{_letterlikes}])+)"
 full_symbol_pattern = r"(`?{0}(`{0})*)".format(base_symbol_pattern)
 pattern_pattern = r"{0}?_(\.|(__?)?{0}?)?".format(full_symbol_pattern)
-slot_pattern = r"\#(\d+|{0})?".format(base_symbol_pattern)
+slot_pattern = rf"\#(\d+|{base_symbol_pattern})?"
 filename_pattern = r"""
 (?P<quote>\"?)                              (?# Opening quotation mark)
     [a-zA-Z0-9\`/\.\\\!\-\:\_\$\*\~\?]+     (?# Literal characters)
 (?P=quote)                                  (?# Closing quotation mark)
 """
 names_wildcards = "@*"
-base_names_pattern = r"((?![0-9])([0-9${0}{1}{2}])+)".format(
-        _letters, _letterlikes, names_wildcards
-)
-full_names_pattern = r"(`?{0}(`{0})*)".format(base_names_pattern)
+base_names_pattern = r"((?![0-9])([0-9${_letters}{_letterlikes}{names_wildcards}])+)"
+full_names_pattern = rf"(`?{0}(`{0})*)".format(base_names_pattern)
 
 tokens = [
     ("Definition", r"\? "),
@@ -272,8 +269,9 @@ for c in string.digits:
     literal_tokens[c] = ["Number"]
 
 
-def find_indices(literals):
+def find_indices(literals) -> dict:
     "find indices of literal tokens"
+
     literal_indices = {}
     for key, tags in literals.items():
         indices = []
@@ -282,8 +280,8 @@ def find_indices(literals):
                 if tag == tag2:
                     indices.append(i)
                     break
-        literal_indices[key] = tuple(indices)
         assert len(indices) == len(tags)
+        literal_indices[key] = tuple(indices)
     return literal_indices
 
 
@@ -307,11 +305,11 @@ full_symbol_pattern = compile_pattern(full_symbol_pattern)
 
 def is_symbol_name(text):
     """
-    Returns ``True`` if ``text`` is a valid identifier. Otherwise returns
-    ``False``.
+    Returns ``True`` if ``text`` is a valid identifier.
+    Otherwise returns ``False``.
     """
-    # Can't we just call match here?
-    return full_symbol_pattern.sub("", text) == ""
+
+    return full_symbol_pattern.match("", text)
 
 
 class Token(object):
@@ -338,9 +336,8 @@ class Token(object):
 
 
 class Tokeniser(object):
-    """
-    A tokeniser for the Wolfram Language.
-    """
+    "A tokeniser for the Wolfram Language."
+
     modes = {
         "expr": (tokens, token_indices),
         "filename": (filename_tokens, {}),
@@ -358,20 +355,21 @@ class Tokeniser(object):
         self._change_mode("expr")
 
     def _change_mode(self, mode):
-        """
-        Set the mode of the tokeniser.
-        """
+        "Set the mode of the tokeniser."
+
         self.mode = mode
         self.tokens, self.token_indices = self.modes[mode]
 
     # TODO: Rename this to something that remotetly makes sense?
     def incomplete(self):
         "Get more code from the prescanner and continue."
+
         self.prescanner.incomplete()
         self.code += self.prescanner.scan()
 
     def sntx_message(self, pos=None):
-        """Send a message to the feeder."""
+        "Send a message to the feeder."
+
         if pos is None:
             pos = self.pos
         pre, post = self.code[:pos], self.code[pos:].rstrip("\n")
@@ -383,6 +381,7 @@ class Tokeniser(object):
     # TODO: Convert this to __next__ in the future?
     def next(self):
         "Returns the next token."
+
         self._skip_blank()
         if self.pos >= len(self.code):
             return Token("END", "", len(self.code))
@@ -417,6 +416,7 @@ class Tokeniser(object):
 
     def _skip_blank(self):
         "Skip whitespace and comments"
+
         comment = []  # start positions of comments
         while True:
             if self.pos >= len(self.code):
@@ -443,8 +443,9 @@ class Tokeniser(object):
 
     def t_String(self, match):
         "String rule"
+
         start, end = self.pos, None
-        self.pos += 1  # skip opening '"'
+        self.pos += 1  # skip opening quote
         newlines = []
         while True:
             if self.pos >= len(self.code):
@@ -471,6 +472,7 @@ class Tokeniser(object):
 
     def t_Number(self, match):
         "Number rule"
+
         text = match.group(0)
         pos = match.end(0)
         if self.code[pos - 1 : pos + 1] == "..":
@@ -483,7 +485,8 @@ class Tokeniser(object):
 
     # This isn't outside of here so it's considered internal
     def _token_mode(self, match, tag, mode):
-        "consume a token and switch mode"
+        "Consume a token and switch mode."
+
         text = match.group(0)
         self.pos = match.end(0)
         self._change_mode(mode)
@@ -491,16 +494,20 @@ class Tokeniser(object):
 
     def t_Get(self, match):
         "Get rule"
+
         return self._token_mode(match, "Get", "filename")
 
     def t_Put(self, match):
         "Put rule"
+
         return self._token_mode(match, "Put", "filename")
 
     def t_PutAppend(self, match):
         "PutAppend rule"
+
         return self._token_mode(match, "PutAppend", "filename")
 
     def t_Filename(self, match):
         "Filename rule"
+
         return self._token_mode(match, "Filename", "expr")

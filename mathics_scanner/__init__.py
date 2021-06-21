@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 """
 This is the tokeniser or scanner portion for the Wolfram Language.
 
