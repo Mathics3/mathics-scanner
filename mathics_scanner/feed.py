@@ -6,7 +6,6 @@ for returning one line code at a time.
 """
 
 from abc import abstractmethod, ABCMeta
-from chardet import detect
 
 
 class LineFeeder(metaclass=ABCMeta):

@@ -15,6 +15,7 @@ from mathics_scanner.characters import (
     replace_unicode_with_wl,
     replace_wl_with_plain_text,
 )
+
 # TODO: Move is_symbol_name to the characters module
 from mathics_scanner.tokeniser import is_symbol_name, Tokeniser, Token
 from mathics_scanner.errors import (
@@ -29,3 +30,22 @@ from mathics_scanner.feed import (
     FileLineFeeder,
     MultiLineFeeder,
 )
+
+all = [
+    FileLineFeeder,
+    IncompleteSyntaxError,
+    InvalidSyntaxError,
+    LineFeeder,
+    MultiLineFeeder,
+    ScanError,
+    SingleLineFeeder,
+    TranslateError,
+    aliased_characters,
+    is_symbol_name,
+    Tokeniser,
+    Token,
+    named_characters,
+    replace_unicode_with_wl,
+    replace_wl_with_plain_text,
+    __version__,
+]

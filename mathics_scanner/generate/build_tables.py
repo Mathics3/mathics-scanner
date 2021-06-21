@@ -129,9 +129,9 @@ def compile_tables(data: dict) -> dict:
     }
 
     # Operators with ASCII sequences
-    ascii_operators = sorted([
-        v["ascii"] for v in data.values() if "operator-name" in v and "ascii" in v
-    ])
+    ascii_operators = sorted(
+        [v["ascii"] for v in data.values() if "operator-name" in v and "ascii" in v]
+    )
 
     # ESC sequence aliases
     aliased_characters = {
@@ -146,10 +146,13 @@ def compile_tables(data: dict) -> dict:
     }
 
     # ESC sequence aliases
-    unicode_operators = sorted([
-        v["unicode-equivalent"] for v in data.values() if "operator-name" in v and "unicode-equivalent" in v
-    ])
-
+    unicode_operators = sorted(
+        [
+            v["unicode-equivalent"]
+            for v in data.values()
+            if "operator-name" in v and "unicode-equivalent" in v
+        ]
+    )
 
     # operator-to-unicode dictionary
     unicode_to_operator = {

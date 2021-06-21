@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+
 class TranslateError(Exception):
     """A generic class of tokenization errors. This exception is subclassed by other tokenization errors"""
 

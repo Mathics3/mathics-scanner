@@ -314,6 +314,7 @@ def is_symbol_name(text):
 
 class Token(object):
     "A representation of a Wolfram Language token."
+
     def __init__(self, tag, text, pos):
         """
         :param tag: A string that indicates which type of token this is.

@@ -54,6 +54,7 @@ named_characters = _data["named-characters"]
 # ESC sequence aliases
 aliased_characters = _data["aliased-characters"]
 
+
 def replace_wl_with_plain_text(wl_input: str, use_unicode: bool = True) -> str:
     """
     The Wolfram Language uses specific Unicode characters to represent Wolfram
@@ -77,6 +78,7 @@ def replace_wl_with_plain_text(wl_input: str, use_unicode: bool = True) -> str:
 
     return r.sub(lambda m: d[m.group(0)], wl_input)
 
+
 def replace_unicode_with_wl(unicode_input: str) -> str:
     """
     The Wolfram Language uses specific Unicode characters to represent Wolfram
@@ -94,6 +96,4 @@ def replace_unicode_with_wl(unicode_input: str) -> str:
     and ``implementation.rst`` respectively.
     """
 
-    return _unicode_to_wl_re.sub(
-        lambda m: _unicode_to_wl[m.group(0)], unicode_input
-    )
+    return _unicode_to_wl_re.sub(lambda m: _unicode_to_wl[m.group(0)], unicode_input)
