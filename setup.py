@@ -63,7 +63,7 @@ is_PyPy = platform.python_implementation() == "PyPy"
 # General Requirements
 INSTALL_REQUIRES = [
     "chardet",  # Used in mathics_scanner.feed
-    "PyYAML",   # Used in mathics-generate-json-table
+    "PyYAML",  # Used in mathics-generate-json-table
     # "ujson",  # Optional Used in mathics_scanner.characters
     "click",  # Usin in CLI: mathics-generate-json-table
 ]
@@ -75,9 +75,8 @@ for line in open("requirements-extra.txt").read().split("\n"):
         requires = re.sub(r"([^#]+)(\s*#.*$)?", r"\1", line)
         extra_requires.append(requires)
 
-EXTRA_REQUIRES = {
-    "full": extra_requires
-}
+EXTRA_REQUIRES = {"full": extra_requires}
+
 
 def subdirs(root, file="*.*", depth=10):
     for k in range(depth):
@@ -87,10 +86,7 @@ def subdirs(root, file="*.*", depth=10):
 setup(
     name="Mathics_Scanner",
     version=__version__,
-    packages=[
-        "mathics_scanner",
-        "mathics_scanner.generate",
-    ],
+    packages=["mathics_scanner", "mathics_scanner.generate"],
     install_requires=INSTALL_REQUIRES,
     extra_requires=EXTRA_REQUIRES,
     entry_points={
@@ -99,11 +95,7 @@ setup(
         ]
     },
     package_data={
-        "mathics_scanner": [
-            "data/*.csv",
-            "data/*.json",
-            "data/ExampleData/*",
-        ],
+        "mathics_scanner": ["data/*.csv", "data/*.json", "data/ExampleData/*"]
     },
     long_description=long_description,
     long_description_content_type="text/x-rst",
