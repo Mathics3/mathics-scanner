@@ -29,7 +29,7 @@ filename_pattern = r"""
 """
 names_wildcards = "@*"
 base_names_pattern = r"((?![0-9])([0-9${0}{1}{2}])+)".format(
-        _letters, _letterlikes, names_wildcards
+    _letters, _letterlikes, names_wildcards
 )
 full_names_pattern = r"(`?{0}(`{0})*)".format(base_names_pattern)
 
@@ -295,9 +295,7 @@ def compile_tokens(token_list):
     return [(tag, compile_pattern(pattern)) for tag, pattern in token_list]
 
 
-filename_tokens = [
-    ("Filename", filename_pattern),
-]
+filename_tokens = [("Filename", filename_pattern)]
 
 token_indices = find_indices(literal_tokens)
 tokens = compile_tokens(tokens)
@@ -316,6 +314,7 @@ def is_symbol_name(text):
 
 class Token(object):
     "A representation of a Wolfram Language token."
+
     def __init__(self, tag, text, pos):
         """
         :param tag: A string that indicates which type of token this is.
@@ -341,10 +340,8 @@ class Tokeniser(object):
     """
     A tokeniser for the Wolfram Language.
     """
-    modes = {
-        "expr": (tokens, token_indices),
-        "filename": (filename_tokens, {}),
-    }
+
+    modes = {"expr": (tokens, token_indices), "filename": (filename_tokens, {})}
 
     def __init__(self, feeder):
         """
