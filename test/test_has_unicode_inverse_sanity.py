@@ -31,5 +31,6 @@ def test_has_unicode_inverse_sanity():
             v["wl-unicode"] == wl
             and v.get("unicode-equivalent") == uni
             and v["has-unicode-inverse"]
-            for v in yaml_data.values() if "wl-unicode" in v
+            for v in yaml_data.values()
+            if "wl-unicode" in v
         ), f"key {uni} is in unicode-to-wl-dict but there is not corresponding entry in the YAML table"

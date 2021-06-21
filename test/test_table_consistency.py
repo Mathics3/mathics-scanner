@@ -3,10 +3,14 @@
 from mathics_scanner.characters import replace_wl_with_plain_text as wl_to_unicode
 from mathics_scanner.characters import replace_unicode_with_wl as unicode_to_wl
 
-from mathics_scanner.load import load_mathics_character_yaml, load_mathics_character_json
+from mathics_scanner.load import (
+    load_mathics_character_yaml,
+    load_mathics_character_json,
+)
 
 yaml_data = load_mathics_character_yaml()
 json_data = load_mathics_character_json()
+
 
 def test_roundtrip():
     wl_to_unicode_dict = json_data["wl-to-unicode-dict"]
@@ -18,7 +22,9 @@ def test_roundtrip():
             try:
                 wl = v["wl-unicode"]
             except:
-                import pdb; pdb.set_trace()
+                import pdb
+
+                pdb.set_trace()
             assert (
                 unicode_to_wl(wl_to_unicode(wl)) == wl
             ), f"key {k} unicode {uni}, {wl_to_unicode(uni)}"
