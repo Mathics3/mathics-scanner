@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from mathics_scanner.load import load_mathics_character_yaml
 import unicodedata
+
+from mathics_scanner.load import load_mathics_character_yaml
 
 yaml_data = load_mathics_character_yaml()
 
@@ -21,7 +22,6 @@ def check_attr_is_invertible(attr: str):
             ), f"{attr_vs} all have the same {attr} field set to {attr_v}"
 
 
-
 def check_has_attr(attr: str):
     for k, v in yaml_data.items():
         assert attr in v, f"{k} has no {attr} attribute"
@@ -37,6 +37,7 @@ def test_yaml_field_names():
             "has-unicode-inverse",
             "is-letter-like",
             "operator-name",
+            "precedence",
             "unicode-equivalent",
             "unicode-equivalent-name",
             "wl-unicode",
@@ -56,11 +57,11 @@ def test_amslatex():
         if a.startswith("$"):
             assert a.endswith("$"), (
                 msg_prefix + "if something starts in math mode, it must end with '$'"
-                )
+            )
         if a.endswith("$"):
             assert a.startswith("$"), (
                 msg_prefix + "if something ends in math mode, it must start with '$'"
-                )
+            )
         if a in dup_amslatex:
             continue
         assert a not in amslatex_seen, msg_prefix + "value seen before"
@@ -103,38 +104,14 @@ def test_operators():
         operator_name_seen.add(operator_name)
 
 
-def test_wl_unicode_name():
+def test_precedence():
     for k, v in yaml_data.items():
-        if "wl-unicode" not in v:
-            continue
-        wl = v["wl-unicode"]
-
-        try:
-            expected_name = unicodedata.name(wl)
-        except (ValueError, TypeError):
-            continue
-
-        real_name = v.get("wl-unicode-name")
-
-        if real_name is None:
-            raise ValueError("Section {k}'s wl-unicode has a name but it isn't listed")
-
-        assert (
-            real_name == expected_name
-        ), f"Section {k} has wl-unicode-name set to {real_name} but it should be {expected_name}"
-
-
-def test_unicode_operators():
-    exclude_list = frozenset("Apply3Ats FunctionAmpersand".split(" "))
-    for k, v in yaml_data.items():
-        if k in exclude_list:
-            continue
-        if "operator-name" not in v:
-            continue
-        operator_name = v["operator-name"]
-        assert (
-            k == operator_name
-        ), f"Section name {k} should match operator-name {operator_name} when a section has an operator"
+        if "precedence" in v:
+            p = v.get("precedence", None)
+            msg_prefix = f"In {k} with precedence {p}, "
+            assert isinstance(p, int), msg_prefix + "must be an integer"
+            assert p >= 0, msg_prefix + "must be a positive integer"
+            assert "operator-name" in v, msg_prefix + "must have an operator name"
 
 
 def test_unicode_name():
@@ -184,6 +161,40 @@ def test_wl_unicode():
         assert (
             "wl-unicode" in v or "unicode-equivalent" in v
         ), f"{k} has neither wl-unicode nor unicode-equivalent attribute"
+
+
+def test_unicode_operators():
+    exclude_list = frozenset("Apply3Ats FunctionAmpersand".split(" "))
+    for k, v in yaml_data.items():
+        if k in exclude_list:
+            continue
+        if "operator-name" not in v:
+            continue
+        operator_name = v["operator-name"]
+        assert (
+            k == operator_name
+        ), f"Section name {k} should match operator-name {operator_name} when a section has an operator"
+
+
+def test_wl_unicode_name():
+    for k, v in yaml_data.items():
+        if "wl-unicode" not in v:
+            continue
+        wl = v["wl-unicode"]
+
+        try:
+            expected_name = unicodedata.name(wl)
+        except (ValueError, TypeError):
+            continue
+
+        real_name = v.get("wl-unicode-name")
+
+        if real_name is None:
+            raise ValueError("Section {k}'s wl-unicode has a name but it isn't listed")
+
+        assert (
+            real_name == expected_name
+        ), f"Section {k} has wl-unicode-name set to {real_name} but it should be {expected_name}"
 
 
 def test_general_yaml_sanity():
