@@ -309,7 +309,7 @@ def is_symbol_name(text):
     Otherwise returns ``False``.
     """
 
-    return full_symbol_pattern.match("", text)
+    return full_symbol_pattern.match(text)
 
 
 class Token(object):
