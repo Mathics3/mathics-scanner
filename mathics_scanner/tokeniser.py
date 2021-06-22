@@ -272,8 +272,9 @@ for c in string.digits:
     literal_tokens[c] = ["Number"]
 
 
-def find_indices(literals):
+def find_indices(literals) -> dict:
     "find indices of literal tokens"
+
     literal_indices = {}
     for key, tags in literals.items():
         indices = []
@@ -282,8 +283,8 @@ def find_indices(literals):
                 if tag == tag2:
                     indices.append(i)
                     break
-        literal_indices[key] = tuple(indices)
         assert len(indices) == len(tags)
+        literal_indices[key] = tuple(indices)
     return literal_indices
 
 

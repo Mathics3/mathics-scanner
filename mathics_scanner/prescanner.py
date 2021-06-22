@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-
 from mathics_scanner.characters import named_characters
 from mathics_scanner.errors import ScanError, IncompleteSyntaxError
 
@@ -67,11 +66,11 @@ class Prescanner(object):
         # reduce
         return "".join(self.stubs)
 
-    def newstub(self, pos):
+    def newstub(self, pos: int) -> None:
         self.pos = pos
         self.start = pos
 
-    def try_parse_base(self, start_shift, end_shift, base):
+    def try_parse_base(self, start_shift: int, end_shift: int, base: int) -> None:
         start, end = self.pos + start_shift, self.pos + end_shift
         result = None
         if end <= len(self.code):
