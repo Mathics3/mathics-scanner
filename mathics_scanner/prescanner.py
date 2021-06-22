@@ -80,12 +80,12 @@ class Prescanner(object):
             except ValueError:
                 pass  # result remains None
         if result is None:
-            l = end - start
-            if l == 2:
+            last = end - start
+            if last == 2:
                 self.feeder.message("Syntax", "sntoct2")
-            elif l == 3:
+            elif last == 3:
                 self.feeder.message("Syntax", "sntoct1")
-            elif l == 4:
+            elif last == 4:
                 self.feeder.message("Syntax", "snthex")
             else:
                 raise ValueError()
