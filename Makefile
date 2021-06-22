@@ -64,6 +64,10 @@ inputrc-no-unicode:
 inputrc-unicode:
 	$(PYTHON) -m mathics_scanner.generate.rl_inputrc inputrc-unicode
 
+#: Run Mathics core checks
+check-mathics::
+	$(PYTHON) -m mathics.docpipeline $o
+
 #: Remove ChangeLog
 rmChangeLog:
 	$(RM) ChangeLog || true
