@@ -10,7 +10,7 @@ PIP ?= pip3
 RM  ?= rm
 
 .PHONY: all build \
-   check clean \
+   check check-full check-mathics clean \
    develop dist doc \
    inputrc-no-unicode \
    inputrc-unicode \
@@ -41,7 +41,14 @@ dist: admin-tools/make-dist.sh
 install: build
 	$(PYTHON) setup.py install
 
-test check: pytest
+#: Run unit tests and Mathics doctest
+check-full: pytest check-mathics
+
+#: Run unit tests and Mathics doctest
+check: pytest
+
+#: Same as check
+test: check
 
 #: Build Sphinx HTML documentation
 doc:  mathics_scanner/data/characters.json
