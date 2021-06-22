@@ -46,12 +46,7 @@ def read(*rnames):
     return open(osp.join(get_srcdir(), *rnames)).read()
 
 
-# stores __version__ in the current namespace
-exec(
-    compile(
-        open("mathics_scanner/version.py").read(), "mathics_scanner/version.py", "exec"
-    )
-)
+from mathics_scanner.version import __version__
 
 # Get/set __version__ and long_description from files
 long_description = read("README.rst") + "\n"

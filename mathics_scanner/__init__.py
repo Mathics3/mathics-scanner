@@ -29,3 +29,22 @@ from mathics_scanner.feed import (
     FileLineFeeder,
     MultiLineFeeder,
 )
+
+__all__ = [
+    FileLineFeeder,
+    IncompleteSyntaxError,
+    InvalidSyntaxError,
+    LineFeeder,
+    MultiLineFeeder,
+    ScanError,
+    SingleLineFeeder,
+    Token,
+    Tokeniser,
+    TranslateError,
+    __version__,
+    aliased_characters,
+    is_symbol_name,
+    named_characters,
+    replace_unicode_with_wl,
+    replace_wl_with_plain_text,
+]
