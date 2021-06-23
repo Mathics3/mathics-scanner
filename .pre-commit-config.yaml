@@ -5,6 +5,8 @@ repos:
     -   id: check-yaml
     -   id: end-of-file-fixer
     -   id: trailing-whitespace
+    -   id: check-json
+        exclude: mathics_scanner/data/characters.json
 -   repo: https://github.com/psf/black
     rev: 19.3b0
     hooks:
