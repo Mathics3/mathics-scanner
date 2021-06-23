@@ -109,20 +109,27 @@ AHat:
   unicode-equivalent-name: LATIN SMALL LETTER A WITH CIRCUMFLEX
   wl-unicode: "\xE2"
   wl-unicode-name: LATIN SMALL LETTER A WITH CIRCUMFLEX
+
+# See also RawVerticalBar.
 Alternative:
   ascii: "|"
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Alternative
+  precedence: 160
   unicode-equivalent: "|"
   unicode-equivalent-name: VERTICAL LINE
   wl-unicode: "|"
   wl-unicode-name: VERTICAL LINE
+
 Apply:
   ascii: "@@"
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Apply
+  precedence: 620
+
+
 # @@@ replaces heads at level 1 of expr by f.
 # We add "3Ats" at the end so keys are unique, but
 # the WL operator is still "Apply".
@@ -131,6 +138,8 @@ Apply3Ats:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Apply
+  precedence: 620
+
 ARing:
   esc-alias: ao
   has-unicode-inverse: false
@@ -197,6 +206,7 @@ And:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: And
+  precedence: 215
   unicode-equivalent: "\u2227"
   unicode-equivalent-name: LOGICAL AND
   wl-unicode: "\u2227"
@@ -1252,6 +1262,8 @@ Condition:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Condition
+  precedence: 130
+
 Conditioned:
   has-unicode-inverse: false
   is-letter-like: false
@@ -1458,13 +1470,16 @@ Decrement:
   is-letter-like: false
   operator-name: Decrement
   precedence: 660
-# See also RawQuestion
+
+# See also PatternTest and RawQuestion
 Definition:
   ascii: "?"
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Definition
   precedence: 670
+  unicode-equivalent: "?"
+  unicode-equivalent-name: QUESTION MARK
 
 # \[Degree] is letter-like, not an operator, which is
 # mutually exclusive.
@@ -1483,8 +1498,6 @@ Definition:
 # https://reference.wolfram.com/language/ref/character/Degree.html the
 # right value is 176 which is the same as the Unicode value. These
 # are what are used here.
-
-
 Degree:
   esc-alias: deg
   has-unicode-inverse: false
@@ -1523,6 +1536,7 @@ Derivative:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Derivative
+  precedence: 670
 DescendingEllipsis:
   has-unicode-inverse: false
   is-letter-like: false
@@ -1622,15 +1636,18 @@ DiscretionaryPageBreakBelow:
   has-unicode-inverse: false
   is-letter-like: false
   wl-unicode: "\uF3C6"
+
 DiscretionaryParagraphSeparator:
   esc-alias: dpsep
   has-unicode-inverse: false
   is-letter-like: false
   wl-unicode: "\uF76F"
+
 Distributed:
   has-unicode-inverse: false
   is-letter-like: false
   wl-unicode: "\uF3D2"
+
 Divide:
   ascii: "/"
   esc-alias: div
@@ -1642,11 +1659,13 @@ Divide:
   unicode-equivalent-name: DIVISION SIGN
   wl-unicode: "\xF7"
   wl-unicode-name: DIVISION SIGN
+
 DivideBy:
   ascii: "/="
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: DivideBy
+
 Divides:
   amslatex: "\\mid"
   esc-alias: divides
@@ -1656,15 +1675,18 @@ Divides:
   unicode-equivalent-name: DIVIDES
   wl-unicode: "\u2223"
   wl-unicode-name: DIVIDES
+
 Dot:
   ascii: "."
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Dot
+  precedence: 490
   unicode-equivalent: "."
   unicode-equivalent-name: FULL STOP
   wl-unicode: "."
   wl-unicode-name: FULL STOP
+
 DotEqual:
   esc-alias: .=
   has-unicode-inverse: false
@@ -1674,6 +1696,7 @@ DotEqual:
   unicode-equivalent-name: APPROACHES THE LIMIT
   wl-unicode: "\u2250"
   wl-unicode-name: APPROACHES THE LIMIT
+
 DotlessI:
   amslatex: "{\\i}"
   has-unicode-inverse: false
@@ -1682,18 +1705,21 @@ DotlessI:
   unicode-equivalent-name: LATIN SMALL LETTER DOTLESS I
   wl-unicode: "\u0131"
   wl-unicode-name: LATIN SMALL LETTER DOTLESS I
+
 DotlessJ:
   has-unicode-inverse: true
   is-letter-like: false
   unicode-equivalent: "\u0237"
   unicode-equivalent-name: LATIN SMALL LETTER DOTLESS J
   wl-unicode: "\uF700"
+
 DottedSquare:
   has-unicode-inverse: true
   is-letter-like: true
   unicode-equivalent: "\u26F6"
   unicode-equivalent-name: SQUARE FOUR CORNERS
   wl-unicode: "\uF751"
+
 DoubleContourIntegral:
   amslatex: "\\oiint"
   has-unicode-inverse: false
@@ -1703,6 +1729,7 @@ DoubleContourIntegral:
   unicode-equivalent-name: SURFACE INTEGRAL
   wl-unicode: "\u222F"
   wl-unicode-name: SURFACE INTEGRAL
+
 DoubleDagger:
   amslatex: "\\ddagger"
   esc-alias: ddg
@@ -1712,6 +1739,7 @@ DoubleDagger:
   unicode-equivalent-name: DOUBLE DAGGER
   wl-unicode: "\u2021"
   wl-unicode-name: DOUBLE DAGGER
+
 DoubleDot:
   has-unicode-inverse: false
   is-letter-like: false
@@ -1719,6 +1747,7 @@ DoubleDot:
   unicode-equivalent-name: DIAERESIS
   wl-unicode: "\xA8"
   wl-unicode-name: DIAERESIS
+
 DoubleDownArrow:
   amslatex: "\\Downarrow"
   has-unicode-inverse: false
@@ -1728,6 +1757,7 @@ DoubleDownArrow:
   unicode-equivalent-name: DOWNWARDS DOUBLE ARROW
   wl-unicode: "\u21D3"
   wl-unicode-name: DOWNWARDS DOUBLE ARROW
+
 DoubleLeftArrow:
   amslatex: "\\Leftarrow"
   esc-alias: ' <='
@@ -1738,6 +1768,7 @@ DoubleLeftArrow:
   unicode-equivalent-name: LEFTWARDS DOUBLE ARROW
   wl-unicode: "\u21D0"
   wl-unicode-name: LEFTWARDS DOUBLE ARROW
+
 DoubleLeftRightArrow:
   amslatex: "\\Leftrightarrow"
   esc-alias: <=>
@@ -1797,6 +1828,7 @@ DoubleRightArrow:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: DoubleRightArrow
+  precedence: 200
   unicode-equivalent: "\u21D2"
   unicode-equivalent-name: RIGHTWARDS DOUBLE ARROW
   wl-unicode: "\u21D2"
@@ -2642,6 +2674,7 @@ Equivalent:
   has-unicode-inverse: true
   is-letter-like: false
   operator-name: Equivalent
+  precedence: 205
   unicode-equivalent: "\u29E6"
   unicode-equivalent-name: GLEICH STARK
   wl-unicode: "\u29E6"
@@ -2696,6 +2729,8 @@ ExponentialE:
   unicode-equivalent: "\u2147"
   unicode-equivalent-name: DOUBLE-STRUCK ITALIC SMALL E
   wl-unicode: "\uF74D"
+
+# See also Not
 Factorial:
   ascii: "!"
   has-unicode-inverse: false
@@ -3699,6 +3734,7 @@ FunctionAmpersand:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Function
+  precedence: 90
 Gamma:
   esc-alias: g
   has-unicode-inverse: false
@@ -4355,6 +4391,7 @@ ImaginaryJ:
   unicode-equivalent: "\u2149"
   unicode-equivalent-name: DOUBLE-STRUCK ITALIC SMALL J
   wl-unicode: "\uF74F"
+
 ImplicitPlus:
   esc-alias: +
   has-unicode-inverse: true
@@ -4362,6 +4399,7 @@ ImplicitPlus:
   unicode-equivalent: "\u2064"
   unicode-equivalent-name: INVISIBLE PLUS
   wl-unicode: "\uF39E"
+
 Implies:
   amslatex: "\\Rightarrow"
   esc-alias: =>
@@ -4370,18 +4408,21 @@ Implies:
   unicode-equivalent: "\u21D2"
   unicode-equivalent-name: RIGHTWARDS DOUBLE ARROW
   wl-unicode: "\uF523"
+
 Increment:
   ascii: "++"
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Increment
   precedence: 660
+
 IndentingNewLine:
   esc-alias: nl
   has-unicode-inverse: false
   is-letter-like: false
   unicode-equivalent: "\u000A"
   wl-unicode: "\uF3A3"
+
 Infinity:
   amslatex: "\\infty"
   esc-alias: inf
@@ -4391,6 +4432,7 @@ Infinity:
   unicode-equivalent-name: INFINITY
   wl-unicode: "\u221E"
   wl-unicode-name: INFINITY
+
 # Infix isn't really an operator
 # Infix:
 #  ascii: "~"
@@ -4403,6 +4445,7 @@ Information:
   is-letter-like: false
   operator-name: Information
   precedence: 0
+
 Integral:
   amslatex: "\\int"
   esc-alias: int
@@ -4413,15 +4456,24 @@ Integral:
   unicode-equivalent-name: INTEGRAL
   wl-unicode: "\u222B"
   wl-unicode-name: INTEGRAL
+
+InterpretedBox:
+  ascii: "\\!"
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: InterpretedBox
+  precedence: 670
+
 Intersection:
   esc-alias: inter
   has-unicode-inverse: false
-  operator-name: Intersection
   is-letter-like: false
+  operator-name: Intersection
   unicode-equivalent: "\u22C2"
   unicode-equivalent-name: N-ARY INTERSECTION
   wl-unicode: "\u22C2"
   wl-unicode-name: N-ARY INTERSECTION
+
 InvisibleApplication:
   esc-alias: '@'
   has-unicode-inverse: false
@@ -4921,11 +4973,14 @@ LowerRightArrow:
   unicode-equivalent-name: SOUTH EAST ARROW
   wl-unicode: "\u2198"
   wl-unicode-name: SOUTH EAST ARROW
+
 Map:
   ascii: "/@"
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Map
+  precedence: 620
+
 MapAll:
   ascii: "//@"
   has-unicode-inverse: false
@@ -4968,6 +5023,7 @@ Message:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Message
+  precedence: 750
 Mho:
   esc-alias: mho
   has-unicode-inverse: false
@@ -5115,23 +5171,28 @@ NonCommutativeMultiply:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: NonCommutativeMultiply
+
 Nor:
   amslatex: "$\\veebar$"
   esc-alias: nor
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Nor
+  # No precedences since this gets transformed to Not[Or[expr]]
   unicode-equivalent: "\u22BD"
   unicode-equivalent-name: NOR
-  operator-name: Nor
   wl-unicode: "\u22BD"
   wl-unicode-name: NOR
+
+# See also Factorial
 Not:
+  ascii: "!"
   esc-alias: '!'
   has-unicode-inverse: false
   is-letter-like: false
   unicode-equivalent: "\u00AC"
   operator-name: Not
+  precedence: 230
   wl-unicode: "\00AC"
   wl-unicode-name: NOT SIGN
 NotCongruent:
@@ -5647,11 +5708,14 @@ OpenCurlyQuote:
   unicode-equivalent-name: LEFT SINGLE QUOTATION MARK
   wl-unicode: "\u2018"
   wl-unicode-name: LEFT SINGLE QUOTATION MARK
+
 Option:
   ascii: ":"
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Option
+  precedence: 140
+
 OptionKey:
   esc-alias: opt
   has-unicode-inverse: false
@@ -5709,6 +5773,16 @@ PartialD:
   unicode-equivalent-name: PARTIAL DIFFERENTIAL
   wl-unicode: "\u2202"
   wl-unicode-name: PARTIAL DIFFERENTIAL
+# See also Definition and RawQuestion
+PatternTest:
+  ascii: "?"
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: PatternTest
+  precedence: 660
+  unicode-equivalent: "?"
+  unicode-equivalent-name: QUESTION MARK
+
 PermutationProduct:
   has-unicode-inverse: true
   is-letter-like: false
@@ -5971,6 +6045,7 @@ RawEscape:
   has-unicode-inverse: false
   is-letter-like: false
   wl-unicode: "\e"
+
 # Note: RawGreater WL's name for Mathics Greater or ASCII ">"
 RawGreater:
   ascii: ">"
@@ -6016,7 +6091,10 @@ RawPercent:
   unicode-equivalent-name: PERCENT SIGN
   wl-unicode: '%'
   wl-unicode-name: PERCENT SIGN
+
+# See also Definition and PatternTest
 RawQuestion:
+  ascii: "?"
   has-unicode-inverse: false
   is-letter-like: false
   unicode-equivalent: "?"
@@ -6063,6 +6141,7 @@ RawSemicolon:
   unicode-equivalent-name: SEMICOLON
   wl-unicode: ;
   wl-unicode-name: SEMICOLON
+
 # RawSlash is not an operator. Divide which
 # looks the same, however is.
 RawSlash:
@@ -6105,6 +6184,7 @@ RawUnderscore:
   unicode-equivalent-name: LOW LINE
   wl-unicode: _
   wl-unicode-name: LOW LINE
+
 # RawVerticalBar is the same thing as Alternative. Go figure.
 RawVerticalBar:
   ascii: "|"
@@ -6122,26 +6202,33 @@ RegisteredTrademark:
   unicode-equivalent-name: REGISTERED SIGN
   wl-unicode: "\xAE"
   wl-unicode-name: REGISTERED SIGN
+
 Repeated:
   ascii: ".."
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Repeated
+  precedence: 170
+
 RepeatedNull:
   ascii: "..."
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: RepeatedNull
+  precedence: 170
+
 ReplaceAll:
   ascii: "/."
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: ReplaceAll
+  precedence: 110
 ReplaceRepeated:
   ascii: "//."
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: ReplaceRepeated
+  precedence: 110
 ReturnIndicator:
   esc-alias: ret
   has-unicode-inverse: false
@@ -6289,6 +6376,7 @@ RightDoubleBracketingBar:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: RightDoubleBracketingBar
+  precedence: 215
   unicode-equivalent: "\u2016"
   unicode-equivalent-name: DOUBLE VERTICAL LINE
   wl-unicode: "\uF606"
@@ -6468,6 +6556,7 @@ Rule:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Rule
+  precedence: 120
   unicode-equivalent: "\u2192"
   unicode-equivalent-name: RIGHTWARDS ARROW
   wl-unicode: "\uF522"
@@ -6476,6 +6565,7 @@ RuleDelayed:
   esc-alias: ":>"
   has-unicode-inverse: true
   operator-name: RuleDelayed
+  precedence: 120
   is-letter-like: false
   unicode-equivalent: "\u29F4"
   unicode-equivalent-name: RULE-DELAYED
@@ -7099,6 +7189,7 @@ Span:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Span
+  precedence: 305
 SpanFromAbove:
   esc-alias: sfa
   has-unicode-inverse: false
@@ -7216,16 +7307,21 @@ Stigma:
   unicode-equivalent-name: GREEK SMALL LETTER STIGMA
   wl-unicode: "\u03DB"
   wl-unicode-name: GREEK SMALL LETTER STIGMA
+
 StringExpression:
   ascii: "~~"
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: StringExpression
+  precedence: 135
+
 StringJoin:
   ascii: "<>"
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: StringJoin
+  precedence: 600
+
 Subset:
   esc-alias: sub
   has-unicode-inverse: false
@@ -7886,6 +7982,7 @@ Xor:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Xor
+  precedence: 215
   unicode-equivalent: "\u22BB"
   unicode-equivalent-name: XOR
   wl-unicode: "\u22BB"
