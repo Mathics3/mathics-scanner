@@ -71,7 +71,13 @@ def test_amslatex():
 def test_operators():
     ascii_seen = set()
     operator_name_seen = set()
+
+    # These names have more than one operator symbol
     dup_operators = set(["Apply", "Function"])
+
+    # These symbols have more than one operator name
+    dup_operator_symbols = set(["?", "!"])
+
     for k, v in yaml_data.items():
         if "ascii" in v:
             if len(v["ascii"]) > 1:
@@ -92,8 +98,10 @@ def test_operators():
 
         if "ascii" in v:
             ascii = v["ascii"]
+            if ascii in dup_operator_symbols:
+                ascii_seen.add(ascii)
+                continue
             assert ascii not in ascii_seen
-            ascii_seen.add(ascii)
 
         operator_name = v["operator-name"]
         if operator_name in dup_operators:
