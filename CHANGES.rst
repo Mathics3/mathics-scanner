@@ -1,6 +1,16 @@
 CHANGES
 =======
 
+1.2.1
+-----
+
+* Add tables for operator precedence.
+* Start to add AMSLaTeX symbols. (A future release will finish this)
+* Revise ``README.rst``.
+* Some small corrections: ``Implies``
+* Make ``ujson`` optional
+
+
 1.2.0
 -----
 

@@ -97,7 +97,7 @@ setup(
     zip_safe=False,
     # metadata for upload to PyPI
     maintainer="Mathics Group",
-    description="A general-purpose computer algebra system.",
+    description="Characters Tables and Tokenizer for Mathics and the Wolfram Language.",
     license="GPL",
     url="https://mathics.org/",
     keywords=["Mathematica", "Wolfram", "Interpreter", "Shell", "Math", "CAS"],

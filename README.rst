@@ -2,21 +2,34 @@
 
 |Packaging status|
 
-Mathics Scanner
-===============
+Mathics Character Tables and Scanner
+=====================================
 
-This is the tokeniser or scanner portion for the Wolfram Language.
+This repository really contains two things:
 
-As such, it also contains a full set of translation between Wolfram Language
-named characters, their Unicode/ASCII equivalents and code-points.
+* extensive tables describing WL symbols and operators their properties
+* a tokenizer or scanner portion for the Wolfram Language.
+
+With respect to the first item, there is a commented YAML that contains a
+full set of translation between:
+
+* Wolfram Language named characters,
+* their Unicode/ASCII equivalents and Unicode and WL code-points,
+* Operator name (if symbol is an operator),
+* Operator precedence (if an operator)
+* Keyboard escape sequences for the symbol
 
 Uses
 ----
 
-This is used as the scanner inside `Mathics <https://mathics.org>`_ but it can
-also be used for tokenizing and formatting Wolfram Language code. In fact we
-intend to write one. This library is also quite usefull if you need to work
-with Wolfram Language named character and convert them to various formats.
+The scanner and character tables are used inside `Mathics <https://mathics.org>`_. However information can
+also be used by other programs for tokenizing and formatting Wolfram Language code.
+
+For example, tables are used in `mathics-pygments <https://pypi.org/project/Mathics-Scanner/>`_, a Pygments-based
+lexer and highlighter for Mathematica/Wolfram Language source code.
+
+This library may be useful if you need to work with Wolfram Language
+named character and convert them to various formats.
 
 Usage
 -----
@@ -30,17 +43,24 @@ Usage
   ``\[FormalA]``) and Wolfram's internal representation use the
   ``m̀athics_scanner.characters.named_characters`` dictionary.
 
-To regenerate scanner tables run:
+To regenerate JSON-format tables run:
 
 ::
 
    $ mathics-generate-json-table
 
+Without options ``mathics-generate-json-table`` produces the maximum set of correspondences.
+
+In most applications though you may need just a few of these. The
+``--field`` option can be used to narrow the list of entries to output in JSON. Run
+``mathics-generate-json-table --help`` for a full list of fields.
+
+
 Implementation
 --------------
 
 For notes on the implementation of the packages or details on the conversion
-scheme please read ``implementation.rst``.
+scheme please read `Implementation <https://mathics-scanner.readthedocs.io/en/latest/implementation.html>`_.
 
 Contributing
 ------------
