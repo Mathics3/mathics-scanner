@@ -11,6 +11,8 @@ import sys
 import os.path as osp
 from pathlib import Path
 
+from mathics_scanner.version import __version__
+
 
 def get_srcdir():
     filename = osp.normcase(osp.dirname(osp.abspath(__file__)))
@@ -19,16 +21,6 @@ def get_srcdir():
 
 def read(*rnames):
     return open(osp.join(get_srcdir(), *rnames)).read()
-
-
-# stores __version__ in the current namespace
-exec(
-    compile(
-        open(Path(get_srcdir()) / ".." / "version.py").read(),
-        "mathics_scanner/version.py",
-        "exec",
-    )
-)
 
 
 def re_from_keys(d: dict) -> str:
@@ -73,8 +65,9 @@ def get_plain_text(char_name: str, char_data: dict, use_unicode: bool) -> str:
 
 def compile_tables(data: dict) -> dict:
     """
-    Compiles the general table into the tables used internally by the library
-    for fast access
+    Compiles the general table into the tables used internally by the library.
+    This facilitates fast access of this information by clients needing this
+    information.
     """
 
     # Multiple entries in the YAML table are redundant in the following sence:
@@ -91,26 +84,26 @@ def compile_tables(data: dict) -> dict:
     # characters that have a unicode inverse are included in
     # `unicode_to_wl_dict`
 
-    # Conversion from WL to the fully qualified names
-    wl_to_ascii_dict = {
-        v["wl-unicode"]: get_plain_text(k, v, use_unicode=False)
-        for k, v in data.items()
-        if "wl-unicode" in v
+    # ESC sequence aliases dictionary entry
+    aliased_characters = {
+        v["esc-alias"]: v["wl-unicode"] for v in data.values() if "esc-alias" in v
     }
-    wl_to_ascii_dict = {k: v for k, v in wl_to_ascii_dict.items() if k != v}
-    wl_to_ascii_re = re_from_keys(wl_to_ascii_dict)
 
-    # Conversion from wl to unicode
-    # We filter the dictionary after it's first created to redundant entries
-    wl_to_unicode_dict = {
-        v["wl-unicode"]: get_plain_text(k, v, use_unicode=True)
+    # operator-to-unicode dictionary entry
+    operator_to_precedence = {
+        v["operator-name"]: v["precedence"]
         for k, v in data.items()
-        if "wl-unicode" in v
+        if "operator-name" in v and "precedence" in v
     }
-    wl_to_unicode_dict = {k: v for k, v in wl_to_unicode_dict.items() if k != v}
-    wl_to_unicode_re = re_from_keys(wl_to_unicode_dict)
 
-    # Conversion from unicode to wl
+    # operator-to-unicode dictionary entry
+    operator_to_unicode = {
+        v["operator-name"]: v["unicode-equivalent"]
+        for k, v in data.items()
+        if "operator-name" in v and "unicode-equivalent" in v
+    }
+
+    # Conversion from unicode to wl dictionary entry.
     # We filter the dictionary after it's first created to redundant entries
     unicode_to_wl_dict = {
         v["unicode-equivalent"]: v["wl-unicode"]
@@ -120,32 +113,20 @@ def compile_tables(data: dict) -> dict:
     unicode_to_wl_dict = {k: v for k, v in unicode_to_wl_dict.items() if k != v}
     unicode_to_wl_re = re_from_keys(unicode_to_wl_dict)
 
-    # Unicode string containing all letterlikes values
+    # Unicode string containing all letterlikes values dictionarhy entry
     letterlikes = "".join(v["wl-unicode"] for v in data.values() if v["is-letter-like"])
 
-    # All supported named characters
+    # All supported named characters dictionary entry
     named_characters = {
         k: v["wl-unicode"] for k, v in data.items() if "wl-unicode" in v
     }
 
-    # Operators with ASCII sequences
+    # Operators with ASCII sequences list entry
     ascii_operators = sorted(
         [v["ascii"] for v in data.values() if "operator-name" in v and "ascii" in v]
     )
 
-    # ESC sequence aliases
-    aliased_characters = {
-        v["esc-alias"]: v["wl-unicode"] for v in data.values() if "esc-alias" in v
-    }
-
-    # operator-to-unicode dictionary
-    operator_to_unicode = {
-        v["operator-name"]: v["unicode-equivalent"]
-        for k, v in data.items()
-        if "operator-name" in v and "unicode-equivalent" in v
-    }
-
-    # ESC sequence aliases
+    # unicode-equivalent list entry
     unicode_operators = sorted(
         [
             v["unicode-equivalent"]
@@ -154,19 +135,40 @@ def compile_tables(data: dict) -> dict:
         ]
     )
 
-    # operator-to-unicode dictionary
+    # unicode-to-operator dictionary entry
     unicode_to_operator = {
         v["unicode-equivalent"]: v["operator-name"]
         for k, v in data.items()
         if "operator-name" in v and "unicode-equivalent" in v
     }
+    # Conversion from WL to the fully qualified names dictionary entry
+    wl_to_ascii_dict = {
+        v["wl-unicode"]: get_plain_text(k, v, use_unicode=False)
+        for k, v in data.items()
+        if "wl-unicode" in v
+    }
+    wl_to_ascii_dict = {k: v for k, v in wl_to_ascii_dict.items() if k != v}
+    wl_to_ascii_re = re_from_keys(wl_to_ascii_dict)
+
+    # Conversion from wl to unicode dictionary entry
+    # We filter the dictionary after it's first created to redundant entries
+    wl_to_unicode_dict = {
+        v["wl-unicode"]: get_plain_text(k, v, use_unicode=True)
+        for k, v in data.items()
+        if "wl-unicode" in v
+    }
+    wl_to_unicode_dict = {k: v for k, v in wl_to_unicode_dict.items() if k != v}
+    wl_to_unicode_re = re_from_keys(wl_to_unicode_dict)
+
     return {
         "aliased-characters": aliased_characters,
         "ascii-operators": ascii_operators,
         "letterlikes": letterlikes,
         "named-characters": named_characters,
+        "operator-to-precedence": operator_to_precedence,
         "operator-to-unicode": operator_to_unicode,
-        "unicode-operators": unicode_operators,
+        "unicode-equivalent": unicode_operators,
+        "unicode-operators": unicode_to_operator,
         "unicode-to-operator": unicode_to_operator,
         "unicode-to-wl-dict": unicode_to_wl_dict,
         "unicode-to-wl-re": unicode_to_wl_re,
@@ -184,7 +186,9 @@ ALL_FIELDS = [
     "ascii-operators",
     "letterlikes",
     "named-characters",
+    "operator-to-precedence",
     "operator-to-unicode",
+    "unicode-equivalent",
     "unicode-operators",
     "unicode-to-operator",
     "unicode-to-wl-dict",

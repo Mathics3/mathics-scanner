@@ -18,8 +18,12 @@ except ImportError:
 ROOT_DIR = pkg_resources.resource_filename("mathics_scanner", "")
 
 # Load the conversion tables from disk
-with open(os.path.join(ROOT_DIR, "data", "characters.json"), "r") as f:
-    _data = ujson.load(f)
+characters_path = os.path.join(ROOT_DIR, "data", "characters.json")
+if os.path.exists(characters_path):
+    with open(characters_path, "r") as f:
+        _data = ujson.load(f)
+else:
+    _data = {}
 
 # Character ranges of letters
 _letters = "a-zA-Z\u00c0-\u00d6\u00d8-\u00f6\u00f8-\u0103\u0106\u0107\
@@ -33,25 +37,25 @@ _letters = "a-zA-Z\u00c0-\u00d6\u00d8-\u00f6\u00f8-\u0103\u0106\u0107\
 \uf793-\uf79a\uf79c-\uf7a2\uf7a4-\uf7bd\uf800-\uf833\ufb01\ufb02"
 
 # Character ranges of letterlikes
-_letterlikes = _data["letterlikes"]
+_letterlikes = _data.get("letterlikes", {})
 
 # Conversion from WL to the fully qualified names
-_wl_to_ascii = _data["wl-to-ascii-dict"]
-_wl_to_ascii_re = re.compile(_data["wl-to-ascii-re"])
+_wl_to_ascii = _data.get("wl-to-ascii-dict", {})
+_wl_to_ascii_re = re.compile(_data.get("wl-to-ascii-re", ""))
 
 # Conversion from WL to unicode
-_wl_to_unicode = _data["wl-to-unicode-dict"]
-_wl_to_unicode_re = re.compile(_data["wl-to-unicode-re"])
+_wl_to_unicode = _data.get("wl-to-unicode-dict", {})
+_wl_to_unicode_re = re.compile(_data.get("wl-to-unicode-re", ""))
 
 # Conversion from unicode to WL
-_unicode_to_wl = _data["unicode-to-wl-dict"]
-_unicode_to_wl_re = re.compile(_data["unicode-to-wl-re"])
+_unicode_to_wl = _data.get("unicode-to-wl-dict", {})
+_unicode_to_wl_re = re.compile(_data.get("unicode-to-wl-re", ""))
 
 # All supported named characters
-named_characters = _data["named-characters"]
+named_characters = _data.get("named-characters", {})
 
 # ESC sequence aliases
-aliased_characters = _data["aliased-characters"]
+aliased_characters = _data.get("aliased-characters", {})
 
 
 def replace_wl_with_plain_text(wl_input: str, use_unicode=True) -> str:
