@@ -64,7 +64,7 @@ INSTALL_REQUIRES = [
 
 
 extra_requires = []
-for line in open("requirements-extra.txt").read().split("\n"):
+for line in open("requirements-full.txt").read().split("\n"):
     if line and not line.startswith("#"):
         requires = re.sub(r"([^#]+)(\s*#.*$)?", r"\1", line)
         extra_requires.append(requires)

@@ -1,6 +1,13 @@
 CHANGES
 =======
 
+1.2.2
+-----
+
+Redo for packaging problems.
+
+Many thanks to Victor the packager for AUR for pointing this out.
+
 1.2.1
 -----
 

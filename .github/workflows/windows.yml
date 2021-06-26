@@ -29,6 +29,6 @@ jobs:
     - name: Test Mathics
       run: |
         pip install -r requirements-dev.txt
-        pip install -r requirements-extra.txt
+        pip install -r requirements-full.txt
         python mathics_scanner/generate/build_tables.py
         py.test test
