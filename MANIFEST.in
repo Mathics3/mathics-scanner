@@ -5,5 +5,6 @@ include COPYING.txt
 include FUTURE.rst
 include Makefile
 include mathics_scanner/Makefile
+include requirements-full.txt
 recursive-include mathics_scanner *.py
 recursive-include test *.py

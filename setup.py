@@ -82,7 +82,7 @@ setup(
     version=__version__,
     packages=["mathics_scanner", "mathics_scanner.generate"],
     install_requires=INSTALL_REQUIRES,
-    extra_requires=EXTRA_REQUIRES,
+    extras_require=EXTRA_REQUIRES,
     entry_points={
         "console_scripts": [
             "mathics-generate-json-table=mathics_scanner.generate.build_tables:main"
