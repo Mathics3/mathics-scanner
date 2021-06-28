@@ -2741,6 +2741,13 @@ Factorial:
   unicode-equivalent-name: EXCLAMATION MARK
   wl-unicode: "!"
   wl-unicode-name: EXCLAMATION MARK
+Factorial2:
+  amslatex: "{!}{!}"
+  ascii: "!!"
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: Factorial2
+  precedence: 610
 FiLigature:
   has-unicode-inverse: false
   is-letter-like: false
