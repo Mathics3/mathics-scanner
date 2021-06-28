@@ -25,7 +25,7 @@
 #               specific numeric precidence value.
 #
 #   unicode-equivalent: A unicode equivalent for the named-character, if it
-#                       exists.
+#                       exists. If it is the same as "ascii", please omit.
 #
 #   unicode-equivalent-name: The name of the unicode equivalent, if it exists.
 #                            The Python module unicodedata contains a list of
@@ -34,7 +34,7 @@
 #
 #   wl-unicode: The unicode code point used by Mathics internally to represent
 #               the named character. If it is the same as unicode-equivalent
-#               it can be omitted
+#               it should be omitted
 #
 #   wl-unicode-name: The name of the character corresponding to `wl-unicode`, if it exists. If it is the same as unicode-equivalent-name it can be omitted.
 #                    It will mentioned in Wolfram Language docs if it exists.
@@ -2732,15 +2732,15 @@ ExponentialE:
 
 # See also Not
 Factorial:
+  amslatex: "{!}"  # Probably not right and doesn't handle thin space properly
   ascii: "!"
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Factorial
   precedence: 610
-  unicode-equivalent: "!"
-  unicode-equivalent-name: EXCLAMATION MARK
-  wl-unicode: "!"
-  wl-unicode-name: EXCLAMATION MARK
+
+# Double Factorial
+# https://en.wikipedia.org/wiki/Double_factorial
 Factorial2:
   amslatex: "{!}{!}"
   ascii: "!!"
