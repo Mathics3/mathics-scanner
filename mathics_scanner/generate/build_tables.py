@@ -84,6 +84,12 @@ def compile_tables(data: dict) -> dict:
     # characters that have a unicode inverse are included in
     # `unicode_to_wl_dict`
 
+    for k, v in data.items():
+        if "esc-alias" in v:
+            assert "wl-unicode" in v, f"esc-alias {k} needs wl-unicode"
+        if v.get("is-letter-like"):
+            assert "wl-unicode" in v, f"is-letter-like {k} needs wl-unicode"
+
     # ESC sequence aliases dictionary entry
     aliased_characters = {
         v["esc-alias"]: v["wl-unicode"] for v in data.values() if "esc-alias" in v

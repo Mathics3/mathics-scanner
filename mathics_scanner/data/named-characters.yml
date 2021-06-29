@@ -71,11 +71,13 @@ ACup:
   unicode-equivalent-name: LATIN SMALL LETTER A WITH BREVE
   wl-unicode: "\u0103"
   wl-unicode-name: LATIN SMALL LETTER A WITH BREVE
+
 AddTo:
   ascii: "+="
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: AddTo
+
 ADoubleDot:
   esc-alias: a"
   has-unicode-inverse: false
@@ -117,10 +119,6 @@ Alternative:
   is-letter-like: false
   operator-name: Alternative
   precedence: 160
-  unicode-equivalent: "|"
-  unicode-equivalent-name: VERTICAL LINE
-  wl-unicode: "|"
-  wl-unicode-name: VERTICAL LINE
 
 Apply:
   ascii: "@@"
@@ -138,6 +136,13 @@ Apply3Ats:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Apply
+  precedence: 620
+
+ApplyTo:
+  ascii: "//="
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: ApplyTo
   precedence: 620
 
 ARing:
@@ -1478,8 +1483,6 @@ Definition:
   is-letter-like: false
   operator-name: Definition
   precedence: 670
-  unicode-equivalent: "?"
-  unicode-equivalent-name: QUESTION MARK
 
 # \[Degree] is letter-like, not an operator, which is
 # mutually exclusive.
@@ -1682,10 +1685,6 @@ Dot:
   is-letter-like: false
   operator-name: Dot
   precedence: 490
-  unicode-equivalent: "."
-  unicode-equivalent-name: FULL STOP
-  wl-unicode: "."
-  wl-unicode-name: FULL STOP
 
 DotEqual:
   esc-alias: .=
@@ -4441,11 +4440,14 @@ Infinity:
   wl-unicode-name: INFINITY
 
 # Infix isn't really an operator
-# Infix:
-#  ascii: "~"
-#  has-unicode-inverse: false
-#  is-letter-like: false
-#  operator-name: Infix
+# See also Tilde
+Infix:
+  ascii: "~"
+  amslatex: "\\textasciitilde"
+  has-unicode-inverse: false
+  is-letter-like: false
+# operator-name: Infix
+
 Information:
   ascii: "??"
   has-unicode-inverse: false
@@ -4833,16 +4835,14 @@ LeoSign:
   unicode-equivalent-name: LEO
   wl-unicode: "\u264C"
   wl-unicode-name: LEO
+
 Less:
   ascii: "<"
   has-unicode-inverse: true
   is-letter-like: false
   operator-name: Less
-  unicode-equivalent: "<"
-  unicode-equivalent-name: LESS-THAN SIGN
-  wl-unicode: "<"
-  wl-unicode-name: LESS-THAN SIGN
 LessEqual:
+
   amslatex: "$\\le$"
   ascii: "<="
   esc-alias: "<="
@@ -4908,6 +4908,7 @@ LetterSpace:
   has-unicode-inverse: false
   is-letter-like: true
   wl-unicode: "\uF754"
+
 LibraSign:
   has-unicode-inverse: false
   is-letter-like: false
@@ -4919,6 +4920,7 @@ LightBulb:
   has-unicode-inverse: false
   is-letter-like: true
   wl-unicode: "\uF723"
+
 LongDash:
   esc-alias: --
   has-unicode-inverse: false
@@ -4928,6 +4930,7 @@ LongDash:
   unicode-equivalent-name: EM DASH
   wl-unicode: "\u2014"
   wl-unicode-name: EM DASH
+
 LongEqual:
   esc-alias: l=
   has-unicode-inverse: true
@@ -4935,6 +4938,7 @@ LongEqual:
   unicode-equivalent: '=='
   unicode-equivalent-name: EQUALS SIGN + EQUALS SIGN
   wl-unicode: "\uF7D9"
+
 LongLeftArrow:
   esc-alias: <--
   has-unicode-inverse: false
@@ -5047,16 +5051,14 @@ Micro:
   unicode-equivalent-name: MICRO SIGN
   wl-unicode: "\xB5"
   wl-unicode-name: MICRO SIGN
+
 Minus:
   ascii: "-"
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Minus
   precedence: 480
-  unicode-equivalent: "-"
-  unicode-equivalent-name: HYPHEN-MINUS
-  wl-unicode: "-"
-  wl-unicode-name: HYPHEN-MINUS
+
 MinusPlus:
   amslatex: "\\mp"
   esc-alias: -+
@@ -5607,6 +5609,7 @@ Nu:
   has-unicode-inverse: false
   is-letter-like: true
   wl-unicode: "\uF3A0"
+
 NumberSign:
   esc-alias: '#'
   has-unicode-inverse: false
@@ -5615,6 +5618,7 @@ NumberSign:
   # unicode-equivalent: '#'
   # unicode-equivalent-name: NUMBER SIGN
   wl-unicode: "\uF724"
+
 OAcute:
   amslatex: "\\'{o}"
   esc-alias: o'
@@ -5780,6 +5784,7 @@ PartialD:
   unicode-equivalent-name: PARTIAL DIFFERENTIAL
   wl-unicode: "\u2202"
   wl-unicode-name: PARTIAL DIFFERENTIAL
+
 # See also Definition and RawQuestion
 PatternTest:
   ascii: "?"
@@ -5787,8 +5792,6 @@ PatternTest:
   is-letter-like: false
   operator-name: PatternTest
   precedence: 660
-  unicode-equivalent: "?"
-  unicode-equivalent-name: QUESTION MARK
 
 PermutationProduct:
   has-unicode-inverse: true
@@ -5993,19 +5996,15 @@ RHacek:
   wl-unicode-name: LATIN SMALL LETTER R WITH CARON
 # See also Function
 RawAmpersand:
+  ascii: '&'
   has-unicode-inverse: false
   is-letter-like: false
-  unicode-equivalent: "&"
-  unicode-equivalent-name: AMPERSAND
-  wl-unicode: '&'
-  wl-unicode-name: AMPERSAND
+
 RawAt:
+  ascii: '@'
   has-unicode-inverse: false
   is-letter-like: false
-  unicode-equivalent: '@'
-  unicode-equivalent-name: COMMERCIAL AT
-  wl-unicode: '@'
-  wl-unicode-name: COMMERCIAL AT
+
 RawBackquote:
   has-unicode-inverse: false
   is-letter-like: false
@@ -6020,34 +6019,29 @@ RawBackslash:
   unicode-equivalent-name: REVERSE SOLIDUS
   wl-unicode: \
   wl-unicode-name: REVERSE SOLIDUS
+
 RawColon:
+  ascii: ':'
   has-unicode-inverse: false
   is-letter-like: false
-  unicode-equivalent: ':'
-  unicode-equivalent-name: COLON
-  wl-unicode: ':'
-  wl-unicode-name: COLON
+
 RawComma:
+  ascii: ','
   has-unicode-inverse: false
   is-letter-like: false
-  unicode-equivalent: ','
-  unicode-equivalent-name: COMMA
-  wl-unicode: ','
-  wl-unicode-name: COMMA
+
 RawDollar:
+  ascii: '$'
   has-unicode-inverse: false
   is-letter-like: true
-  unicode-equivalent: $
-  unicode-equivalent-name: DOLLAR SIGN
-  wl-unicode: $
-  wl-unicode-name: DOLLAR SIGN
+  # Since we have an is-letter-line, we add wl-unicode for the checker to work.
+  wl-unicode: "$"
+
 RawDoubleQuote:
+  ascii: '"'
   has-unicode-inverse: false
   is-letter-like: false
-  unicode-equivalent: '"'
-  unicode-equivalent-name: QUOTATION MARK
-  wl-unicode: '"'
-  wl-unicode-name: QUOTATION MARK
+
 RawEscape:
   has-unicode-inverse: false
   is-letter-like: false
@@ -6063,51 +6057,38 @@ RawGreater:
   unicode-equivalent-name: GREATER-THAN SIGN
   wl-unicode: "\u003e"
   wl-unicode-name: GREATER-THAN SIGN
+
 RawLeftBrace:
+  ascii: '{'
   has-unicode-inverse: false
   is-letter-like: false
-  unicode-equivalent: '{'
-  unicode-equivalent-name: LEFT CURLY BRACKET
-  wl-unicode: '{'
-  wl-unicode-name: LEFT CURLY BRACKET
+
 RawLeftBracket:
+  ascii: '['
   has-unicode-inverse: false
   is-letter-like: false
-  unicode-equivalent: '['
-  unicode-equivalent-name: LEFT SQUARE BRACKET
-  wl-unicode: '['
-  wl-unicode-name: LEFT SQUARE BRACKET
+
 RawLeftParenthesis:
+  ascii: '('
   has-unicode-inverse: false
   is-letter-like: false
-  unicode-equivalent: (
-  unicode-equivalent-name: LEFT PARENTHESIS
-  wl-unicode: (
-  wl-unicode-name: LEFT PARENTHESIS
+
 RawNumberSign:
+  ascii: "#"
   has-unicode-inverse: false
   is-letter-like: false
-  unicode-equivalent: '#'
-  unicode-equivalent-name: NUMBER SIGN
-  wl-unicode: '#'
-  wl-unicode-name: NUMBER SIGN
+
 RawPercent:
+  ascii: "%"
   has-unicode-inverse: false
   is-letter-like: false
-  unicode-equivalent: '%'
-  unicode-equivalent-name: PERCENT SIGN
-  wl-unicode: '%'
-  wl-unicode-name: PERCENT SIGN
 
 # See also Definition and PatternTest
 RawQuestion:
   ascii: "?"
   has-unicode-inverse: false
   is-letter-like: false
-  unicode-equivalent: "?"
-  unicode-equivalent-name: QUESTION MARK
-  wl-unicode: "?"
-  wl-unicode-name: QUESTION MARK
+
 RawQuote:
   has-unicode-inverse: false
   is-letter-like: false
@@ -7510,17 +7491,20 @@ Thorn:
   unicode-equivalent-name: LATIN SMALL LETTER THORN
   wl-unicode: "\xFE"
   wl-unicode-name: LATIN SMALL LETTER THORN
+
+# See also operator Infix.
+# Tilde has no built-in meaning per the documentation,
+# so it is not the same as Tilde.
+# Yes, it is confusing.
 Tilde:
-  amslatex: "\textasciitilde"
-  esc-alias: '~'
   ascii: "~"
+  esc-alias: '~'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Tilde
-  unicode-equivalent: "\u223C"
-  unicode-equivalent-name: TILDE OPERATOR
-  wl-unicode: "\u223C"
-  wl-unicode-name: TILDE OPERATOR
+  # Since we have an esc-alias, we add wl-unicode for the checker to work.
+  wl-unicode: "~"
+
 TildeEqual:
   amslatex: "$\\simeq$"
   esc-alias: ~=
