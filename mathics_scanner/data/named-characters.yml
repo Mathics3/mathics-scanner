@@ -43,6 +43,7 @@
 #   https://www.compart.com/en/unicode
 #   http://milde.users.sourceforge.net/LUCR/Math/unimathsymbols.pdf
 #   https://reference.wolfram.com/language/ref/character/....html
+#   https://github.com/rsmenon/pygments-mathematica
 
 AAcute:
   amslatex: "\\'{a}"
