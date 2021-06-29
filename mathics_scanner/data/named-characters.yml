@@ -4448,6 +4448,8 @@ Infix:
   has-unicode-inverse: false
   is-letter-like: false
 # operator-name: Infix
+  unicode-equivalent: "~"
+  wl-unicode-name: TILDE
 
 Information:
   ascii: "??"
@@ -4839,11 +4841,11 @@ LeoSign:
 
 Less:
   ascii: "<"
-  has-unicode-inverse: true
+  has-unicode-inverse: false
   is-letter-like: false
   operator-name: Less
-LessEqual:
 
+LessEqual:
   amslatex: "$\\le$"
   ascii: "<="
   esc-alias: "<="
@@ -6000,11 +6002,13 @@ RawAmpersand:
   ascii: '&'
   has-unicode-inverse: false
   is-letter-like: false
+  unicode-equivalent: "&"
 
 RawAt:
   ascii: '@'
   has-unicode-inverse: false
   is-letter-like: false
+  unicode-equivalent: "@"
 
 RawBackquote:
   has-unicode-inverse: false
@@ -6025,23 +6029,28 @@ RawColon:
   ascii: ':'
   has-unicode-inverse: false
   is-letter-like: false
+  unicode-equivalent: ":"
 
 RawComma:
   ascii: ','
   has-unicode-inverse: false
   is-letter-like: false
+  unicode-equivalent: ","
 
 RawDollar:
   ascii: '$'
   has-unicode-inverse: false
   is-letter-like: true
-  # Since we have an is-letter-line, we add wl-unicode for the checker to work.
+  # Since we have an is-letter-like, we add wl-unicode for the checker to work.
+  unicode-equivalent: "$"
   wl-unicode: "$"
+  wl-unicode-name: DOLLAR SIGN
 
 RawDoubleQuote:
   ascii: '"'
   has-unicode-inverse: false
   is-letter-like: false
+  unicode-equivalent: '"'
 
 RawEscape:
   has-unicode-inverse: false
@@ -6063,32 +6072,38 @@ RawLeftBrace:
   ascii: '{'
   has-unicode-inverse: false
   is-letter-like: false
+  unicode-equivalent: '{'
 
 RawLeftBracket:
   ascii: '['
   has-unicode-inverse: false
   is-letter-like: false
+  unicode-equivalent: '['
 
 RawLeftParenthesis:
   ascii: '('
   has-unicode-inverse: false
   is-letter-like: false
+  unicode-equivalent: '('
 
 RawNumberSign:
   ascii: "#"
   has-unicode-inverse: false
   is-letter-like: false
+  unicode-equivalent: '#'
 
 RawPercent:
   ascii: "%"
   has-unicode-inverse: false
   is-letter-like: false
+  unicode-equivalent: '%'
 
 # See also Definition and PatternTest
 RawQuestion:
   ascii: "?"
   has-unicode-inverse: false
   is-letter-like: false
+  unicode-equivalent: '?'
 
 RawQuote:
   has-unicode-inverse: false
@@ -6159,13 +6174,13 @@ RawTab:
   is-letter-like: false
   unicode-equivalent: "\t"
   wl-unicode: "\t"
+
 RawTilde:
+  ascii: '~'
   has-unicode-inverse: false
   is-letter-like: false
   unicode-equivalent: '~'
-  unicode-equivalent-name: TILDE
-  wl-unicode: '~'
-  wl-unicode-name: TILDE
+
 RawUnderscore:
   has-unicode-inverse: false
   is-letter-like: false
@@ -7505,6 +7520,7 @@ Tilde:
   operator-name: Tilde
   # Since we have an esc-alias, we add wl-unicode for the checker to work.
   wl-unicode: "~"
+  wl-unicode-name: TILDE
 
 TildeEqual:
   amslatex: "$\\simeq$"

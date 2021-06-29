@@ -18,6 +18,9 @@ def test_roundtrip():
 
     for k, v in yaml_data.items():
         if v["has-unicode-inverse"]:
+            assert (
+                "unicode-equivalent" in v
+            ), f"{k} has unicode-inverse but no unicode equivalent"
             uni = v["unicode-equivalent"]
             wl = v["wl-unicode"]
             assert (

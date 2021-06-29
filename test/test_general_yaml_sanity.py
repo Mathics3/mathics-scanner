@@ -198,7 +198,7 @@ def test_wl_unicode_name():
         real_name = v.get("wl-unicode-name")
 
         if real_name is None:
-            raise ValueError("Section {k}'s wl-unicode has a name but it isn't listed")
+            raise ValueError(f"Section {k}'s wl-unicode has a name but it isn't listed")
 
         assert (
             real_name == expected_name
