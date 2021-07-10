@@ -63,13 +63,15 @@ INSTALL_REQUIRES = [
 ]
 
 
-extra_requires = []
-for line in open("requirements-full.txt").read().split("\n"):
-    if line and not line.startswith("#"):
-        requires = re.sub(r"([^#]+)(\s*#.*$)?", r"\1", line)
-        extra_requires.append(requires)
-
-EXTRA_REQUIRES = {"full": extra_requires}
+EXTRAS_REQUIRE = {}
+for kind in ("dev", "full"):
+    extras_require = []
+    requirements_file = f"requirements-{kind}.txt"
+    for line in open(requirements_file).read().split("\n"):
+        if line and not line.startswith("#"):
+            requires = re.sub(r"([^#]+)(\s*#.*$)?", r"\1", line)
+            extras_require.append(requires)
+    EXTRAS_REQUIRE[kind] = extras_require
 
 
 def subdirs(root, file="*.*", depth=10):
@@ -82,14 +84,19 @@ setup(
     version=__version__,
     packages=["mathics_scanner", "mathics_scanner.generate"],
     install_requires=INSTALL_REQUIRES,
-    extras_require=EXTRA_REQUIRES,
+    extras_require=EXTRAS_REQUIRE,
     entry_points={
         "console_scripts": [
             "mathics-generate-json-table=mathics_scanner.generate.build_tables:main"
         ]
     },
     package_data={
-        "mathics_scanner": ["data/*.csv", "data/*.json", "data/ExampleData/*"]
+        "mathics_scanner": [
+            "data/named-characters.yml",
+            "data/*.csv",
+            "data/*.json",
+            "data/ExampleData/*",
+        ]
     },
     long_description=long_description,
     long_description_content_type="text/x-rst",
