@@ -1,6 +1,16 @@
 CHANGES
 =======
 
+1.2.4
+-----
+
+* Start adding AMSLateX names.
+* Add ``ApplyTo``, and ``Factorial2``.
+* Adjust ``Tilde``, and ``Factorial``.
+* Regularize unicode equivalents.
+* Add named-characters.yml to distribution packages; Issue #32.
+* Use SPDX identifier in license; PR #31.
+
 1.2.2-1.2.3
 -----
 
