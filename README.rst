@@ -14,7 +14,8 @@ With respect to the first item, there is a commented YAML that contains a
 full set of translation between:
 
 * Wolfram Language named characters,
-* their Unicode/ASCII equivalents and Unicode and WL code-points,
+* Unicode/ASCII equivalents and Unicode and WL code-points,
+* AMLaTeX equivalent names,
 * Operator name (if symbol is an operator),
 * Operator precedence (if an operator)
 * Keyboard escape sequences for the symbol
