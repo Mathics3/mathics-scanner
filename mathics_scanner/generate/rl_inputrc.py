@@ -1,4 +1,4 @@
-#!/bin python3
+#!/usr/bin/env python3
 """
 Creates GNU Readline inputrc tables for converting Wolfram Language escape
 sequences to either unicode symbols or Wolfram Language fully qualified named

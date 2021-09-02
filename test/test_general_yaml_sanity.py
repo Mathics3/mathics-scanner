@@ -149,8 +149,8 @@ def test_unicode_name():
 
             if k == "VerticalBar":
                 continue
-            assert (
-                real_name == expected_name
+            assert real_name == expected_name or expected_name.startswith(
+                "MODIFIER LETTER SMALL SCHWA"
             ), f"{k} has unicode-equivalent-name set to {real_name} but it should be {expected_name}"
         else:
             assert (
