@@ -6778,7 +6778,7 @@ ScriptCapitalM:
   esc-alias: scM
   has-unicode-inverse: false
   is-letter-like: false
-  unicode-equivalent: "\u1D4A9"
+  unicode-equivalent: "\u2133"
   unicode-equivalent-name: SCRIPT CAPITAL M
   wl-unicode: "\u2133"
   wl-unicode-name: SCRIPT CAPITAL M
@@ -6786,7 +6786,7 @@ ScriptCapitalN:
   esc-alias: scN
   has-unicode-inverse: true
   is-letter-like: false
-  unicode-equivalent: "\U0001D4A9"
+  unicode-equivalent: "\u1D4A9"
   unicode-equivalent-name: MATHEMATICAL SCRIPT CAPITAL N
   wl-unicode: "\uF77D"
 ScriptCapitalO:
