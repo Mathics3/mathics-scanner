@@ -49,7 +49,7 @@ AAcute:
   amslatex: "\\'{a}"
   esc-alias: a'
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xE1"
   unicode-equivalent-name: LATIN SMALL LETTER A WITH ACUTE
   wl-unicode: "\xE1"
@@ -58,7 +58,7 @@ ABar:
   amslatex: "\\={a}"
   esc-alias: a-
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u0101"
   unicode-equivalent-name: LATIN SMALL LETTER A WITH MACRON
   wl-unicode: "\u0101"
@@ -67,7 +67,7 @@ ACup:
   amslatex: "\\u{a}"
   esc-alias: au
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u0103"
   unicode-equivalent-name: LATIN SMALL LETTER A WITH BREVE
   wl-unicode: "\u0103"
@@ -82,7 +82,7 @@ AddTo:
 ADoubleDot:
   esc-alias: a"
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xE4"
   unicode-equivalent-name: LATIN SMALL LETTER A WITH DIAERESIS
   wl-unicode: "\xE4"
@@ -90,7 +90,7 @@ ADoubleDot:
 AE:
   esc-alias: ae
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xE6"
   unicode-equivalent-name: LATIN SMALL LETTER AE
   wl-unicode: "\xE6"
@@ -99,7 +99,7 @@ AGrave:
   amslatex: "\\`{a}"
   esc-alias: a`
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xE0"
   unicode-equivalent-name: LATIN SMALL LETTER A WITH GRAVE
   wl-unicode: "\xE0"
@@ -107,7 +107,7 @@ AGrave:
 AHat:
   esc-alias: a^
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xE2"
   unicode-equivalent-name: LATIN SMALL LETTER A WITH CIRCUMFLEX
   wl-unicode: "\xE2"
@@ -149,7 +149,7 @@ ApplyTo:
 ARing:
   esc-alias: ao
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xE5"
   unicode-equivalent-name: LATIN SMALL LETTER A WITH RING ABOVE
   wl-unicode: "\xE5"
@@ -157,7 +157,7 @@ ARing:
 ATilde:
   esc-alias: a~
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xE3"
   unicode-equivalent-name: LATIN SMALL LETTER A WITH TILDE
   wl-unicode: "\xE3"
@@ -166,7 +166,7 @@ Aleph:
   amslatex: "\\aleph"
   esc-alias: al
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u2135"
   unicode-equivalent-name: ALEF SYMBOL
   wl-unicode: "\u2135"
@@ -195,7 +195,7 @@ Alpha:
   amslatex: "\\alpha"
   esc-alias: a
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u03B1"
   unicode-equivalent-name: GREEK SMALL LETTER ALPHA
   wl-unicode: "\u03B1"
@@ -220,7 +220,7 @@ And:
 Angle:
   amslatex: "\\angle"
   has-unicode-inverse: false
-  is-letter-like: true
+  is-letter-like: false
   unicode-equivalent: "\u2220"
   unicode-equivalent-name: ANGLE
   wl-unicode: "\u2220"
@@ -309,7 +309,7 @@ Bet:
   amslatex: "\\beth"
   esc-alias: be
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u2136"
   unicode-equivalent-name: BET SYMBOL
   wl-unicode: "\u2136"
@@ -318,7 +318,7 @@ Beta:
   amslatex: "\\beta"
   esc-alias: b
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u03B2"
   unicode-equivalent-name: GREEK SMALL LETTER BETA
   wl-unicode: "\u03B2"
@@ -383,7 +383,7 @@ BlankSequence:
 Breve:
   esc-alias: bv
   has-unicode-inverse: false
-  is-letter-like: true
+  is-letter-like: false
   unicode-equivalent: "\u02D8"
   unicode-equivalent-name: BREVE
   wl-unicode: "\u02D8"
@@ -392,7 +392,7 @@ Bullet:
   amslatex: "\\bullet"
   esc-alias: bu
   has-unicode-inverse: false
-  is-letter-like: true
+  is-letter-like: false
   unicode-equivalent: "\u2022"
   unicode-equivalent-name: BULLET
   wl-unicode: "\u2022"
@@ -400,8 +400,8 @@ Bullet:
 CAcute:
   amslatex: "\\'{c}"
   esc-alias: c'
-  has-unicode-inverse: false
-  is-letter-like: false
+  has-unicode-inverse: true
+  is-letter-like: true
   unicode-equivalent: "\u0107"
   unicode-equivalent-name: LATIN SMALL LETTER C WITH ACUTE
   wl-unicode: "\u0107"
@@ -410,7 +410,7 @@ CCedilla:
   amslatex: "\\c{c}"
   esc-alias: c
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xE7"
   unicode-equivalent-name: LATIN SMALL LETTER C WITH CEDILLA
   wl-unicode: "\xE7"
@@ -419,7 +419,7 @@ CHacek:
   amslatex: "\\v{c}"
   esc-alias: cv
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u010D"
   unicode-equivalent-name: LATIN SMALL LETTER C WITH CARON
   wl-unicode: "\u010D"
@@ -443,7 +443,7 @@ CapitalAAcute:
   amslatex: "\\'{A}"
   esc-alias: A'
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xC1"
   unicode-equivalent-name: LATIN CAPITAL LETTER A WITH ACUTE
   wl-unicode: "\xC1"
@@ -452,7 +452,7 @@ CapitalABar:
   amslatex: "\\={A}"
   esc-alias: A-
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u0100"
   unicode-equivalent-name: LATIN CAPITAL LETTER A WITH MACRON
   wl-unicode: "\u0100"
@@ -460,24 +460,24 @@ CapitalABar:
 CapitalACup:
   amslatex: "\\u{A}"
   esc-alias: Au
-  has-unicode-inverse: false
-  is-letter-like: false
+  has-unicode-inverse: true
+  is-letter-like: true
   unicode-equivalent: "\u0102"
   unicode-equivalent-name: LATIN CAPITAL LETTER A WITH BREVE
   wl-unicode: "\u0102"
   wl-unicode-name: LATIN CAPITAL LETTER A WITH BREVE
 CapitalADoubleDot:
   esc-alias: A"
-  has-unicode-inverse: false
-  is-letter-like: false
+  has-unicode-inverse: true
+  is-letter-like: true
   unicode-equivalent: "\xC4"
   unicode-equivalent-name: LATIN CAPITAL LETTER A WITH DIAERESIS
   wl-unicode: "\xC4"
   wl-unicode-name: LATIN CAPITAL LETTER A WITH DIAERESIS
 CapitalAE:
   esc-alias: AE
-  has-unicode-inverse: false
-  is-letter-like: false
+  has-unicode-inverse: true
+  is-letter-like: true
   unicode-equivalent: "\xC6"
   unicode-equivalent-name: LATIN CAPITAL LETTER AE
   wl-unicode: "\xC6"
@@ -485,8 +485,8 @@ CapitalAE:
 CapitalAGrave:
   amslatex: "\\`{A}"
   esc-alias: A`
-  has-unicode-inverse: false
-  is-letter-like: false
+  has-unicode-inverse: true
+  is-letter-like: true
   unicode-equivalent: "\xC0"
   unicode-equivalent-name: LATIN CAPITAL LETTER A WITH GRAVE
   wl-unicode: "\xC0"
@@ -494,39 +494,39 @@ CapitalAGrave:
 CapitalAHat:
   esc-alias: A^
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xC2"
   unicode-equivalent-name: LATIN CAPITAL LETTER A WITH CIRCUMFLEX
   wl-unicode: "\xC2"
   wl-unicode-name: LATIN CAPITAL LETTER A WITH CIRCUMFLEX
 CapitalARing:
   esc-alias: Ao
-  has-unicode-inverse: false
-  is-letter-like: false
+  has-unicode-inverse: true
+  is-letter-like: true
   unicode-equivalent: "\xC5"
   unicode-equivalent-name: LATIN CAPITAL LETTER A WITH RING ABOVE
   wl-unicode: "\xC5"
   wl-unicode-name: LATIN CAPITAL LETTER A WITH RING ABOVE
 CapitalATilde:
   esc-alias: A~
-  has-unicode-inverse: false
-  is-letter-like: false
+  has-unicode-inverse: true
+  is-letter-like: true
   unicode-equivalent: "\xC3"
   unicode-equivalent-name: LATIN CAPITAL LETTER A WITH TILDE
   wl-unicode: "\xC3"
   wl-unicode-name: LATIN CAPITAL LETTER A WITH TILDE
 CapitalAlpha:
   esc-alias: A
-  has-unicode-inverse: false
-  is-letter-like: false
+  has-unicode-inverse: true
+  is-letter-like: true
   unicode-equivalent: "\u0391"
   unicode-equivalent-name: GREEK CAPITAL LETTER ALPHA
   wl-unicode: "\u0391"
   wl-unicode-name: GREEK CAPITAL LETTER ALPHA
 CapitalBeta:
   esc-alias: B
-  has-unicode-inverse: false
-  is-letter-like: false
+  has-unicode-inverse: true
+  is-letter-like: true
   unicode-equivalent: "\u0392"
   unicode-equivalent-name: GREEK CAPITAL LETTER BETA
   wl-unicode: "\u0392"
@@ -534,8 +534,8 @@ CapitalBeta:
 CapitalCAcute:
   amslatex: "\\'{C}"
   esc-alias: C'
-  has-unicode-inverse: false
-  is-letter-like: false
+  has-unicode-inverse: true
+  is-letter-like: true
   unicode-equivalent: "\u0106"
   unicode-equivalent-name: LATIN CAPITAL LETTER C WITH ACUTE
   wl-unicode: "\u0106"
@@ -543,7 +543,7 @@ CapitalCAcute:
 CapitalCCedilla:
   esc-alias: C
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xC7"
   unicode-equivalent-name: LATIN CAPITAL LETTER C WITH CEDILLA
   wl-unicode: "\xC7"
@@ -551,7 +551,7 @@ CapitalCCedilla:
 CapitalCHacek:
   amslatex: "\\v{C}"
   esc-alias: Cv
-  has-unicode-inverse: false
+  has-unicode-inverse: true
   is-letter-like: false
   unicode-equivalent: "\u010C"
   unicode-equivalent-name: LATIN CAPITAL LETTER C WITH CARON
@@ -560,7 +560,7 @@ CapitalCHacek:
 CapitalChi:
   esc-alias: Ch
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u03A7"
   unicode-equivalent-name: GREEK CAPITAL LETTER CHI
   wl-unicode: "\u03A7"
@@ -569,7 +569,7 @@ CapitalDHacek:
   amslatex: "\\v{D}"
   esc-alias: Dv
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u010E"
   unicode-equivalent-name: LATIN CAPITAL LETTER D WITH CARON
   wl-unicode: "\u010E"
@@ -577,8 +577,8 @@ CapitalDHacek:
 CapitalDelta:
   amslatex: "\\Delta"
   esc-alias: D
-  has-unicode-inverse: false
-  is-letter-like: false
+  has-unicode-inverse: true
+  is-letter-like: true
   unicode-equivalent: "\u0394"
   unicode-equivalent-name: GREEK CAPITAL LETTER DELTA
   wl-unicode: "\u0394"
@@ -587,14 +587,14 @@ CapitalDifferentialD:
   amslatex: "\\CapitalDifferentialD"
   esc-alias: DD
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u2145"
   unicode-equivalent-name: DOUBLE-STRUCK ITALIC CAPITAL D
   wl-unicode: "\uF74B"
 CapitalDigamma:
   esc-alias: Di
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u03DC"
   unicode-equivalent-name: GREEK LETTER DIGAMMA
   wl-unicode: "\u03DC"
@@ -603,7 +603,7 @@ CapitalEAcute:
   amslatex: "\\'{E}"
   esc-alias: E'
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xC9"
   unicode-equivalent-name: LATIN CAPITAL LETTER E WITH ACUTE
   wl-unicode: "\xC9"
@@ -612,7 +612,7 @@ CapitalEBar:
   amslatex: "\\={E}"
   esc-alias: E-
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u0112"
   unicode-equivalent-name: LATIN CAPITAL LETTER E WITH MACRON
   wl-unicode: "\u0112"
@@ -621,7 +621,7 @@ CapitalECup:
   amslatex: "\\u{E}"
   esc-alias: Eu
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u0114"
   unicode-equivalent-name: LATIN CAPITAL LETTER E WITH BREVE
   wl-unicode: "\u0114"
@@ -629,7 +629,7 @@ CapitalECup:
 CapitalEDoubleDot:
   esc-alias: E"
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xCB"
   unicode-equivalent-name: LATIN CAPITAL LETTER E WITH DIAERESIS
   wl-unicode: "\xCB"
@@ -638,7 +638,7 @@ CapitalEGrave:
   amslatex: "\\`{E}"
   esc-alias: E`
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xC8"
   unicode-equivalent-name: LATIN CAPITAL LETTER E WITH GRAVE
   wl-unicode: "\xC8"
@@ -647,7 +647,7 @@ CapitalEHacek:
   amslatex: "\\v{E}"
   esc-alias: Ev
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u011A"
   unicode-equivalent-name: LATIN CAPITAL LETTER E WITH CARON
   wl-unicode: "\u011A"
@@ -655,7 +655,7 @@ CapitalEHacek:
 CapitalEHat:
   esc-alias: E^
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xCA"
   unicode-equivalent-name: LATIN CAPITAL LETTER E WITH CIRCUMFLEX
   wl-unicode: "\xCA"
@@ -663,7 +663,7 @@ CapitalEHat:
 CapitalEpsilon:
   esc-alias: E
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u0395"
   unicode-equivalent-name: GREEK CAPITAL LETTER EPSILON
   wl-unicode: "\u0395"
@@ -671,7 +671,7 @@ CapitalEpsilon:
 CapitalEta:
   esc-alias: Et
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u0397"
   unicode-equivalent-name: GREEK CAPITAL LETTER ETA
   wl-unicode: "\u0397"
@@ -679,7 +679,7 @@ CapitalEta:
 CapitalEth:
   esc-alias: D-
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xD0"
   unicode-equivalent-name: LATIN CAPITAL LETTER ETH
   wl-unicode: "\xD0"
@@ -688,7 +688,7 @@ CapitalGamma:
   amslatex: "\\Gamma"
   esc-alias: G
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u0393"
   unicode-equivalent-name: GREEK CAPITAL LETTER GAMMA
   wl-unicode: "\u0393"
@@ -697,7 +697,7 @@ CapitalIAcute:
   amslatex: "\\'{I}"
   esc-alias: I'
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xCD"
   unicode-equivalent-name: LATIN CAPITAL LETTER I WITH ACUTE
   wl-unicode: "\xCD"
@@ -706,7 +706,7 @@ CapitalICup:
   amslatex: "\\u{I}"
   esc-alias: Iu
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u012C"
   unicode-equivalent-name: LATIN CAPITAL LETTER I WITH BREVE
   wl-unicode: "\u012C"
@@ -714,7 +714,7 @@ CapitalICup:
 CapitalIDoubleDot:
   esc-alias: I"
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xCF"
   unicode-equivalent-name: LATIN CAPITAL LETTER I WITH DIAERESIS
   wl-unicode: "\xCF"
@@ -723,7 +723,7 @@ CapitalIGrave:
   amslatex: "\\`{I}"
   esc-alias: I`
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xCC"
   unicode-equivalent-name: LATIN CAPITAL LETTER I WITH GRAVE
   wl-unicode: "\xCC"
@@ -731,7 +731,7 @@ CapitalIGrave:
 CapitalIHat:
   esc-alias: I^
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xCE"
   unicode-equivalent-name: LATIN CAPITAL LETTER I WITH CIRCUMFLEX
   wl-unicode: "\xCE"
@@ -739,7 +739,7 @@ CapitalIHat:
 CapitalIota:
   esc-alias: I
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u0399"
   unicode-equivalent-name: GREEK CAPITAL LETTER IOTA
   wl-unicode: "\u0399"
@@ -747,7 +747,7 @@ CapitalIota:
 CapitalKappa:
   esc-alias: K
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u039A"
   unicode-equivalent-name: GREEK CAPITAL LETTER KAPPA
   wl-unicode: "\u039A"
@@ -755,7 +755,7 @@ CapitalKappa:
 CapitalKoppa:
   esc-alias: Ko
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u03DE"
   unicode-equivalent-name: GREEK LETTER KOPPA
   wl-unicode: "\u03DE"
@@ -764,7 +764,7 @@ CapitalLSlash:
   amslatex: "\\L{}"
   esc-alias: L/
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u0141"
   unicode-equivalent-name: LATIN CAPITAL LETTER L WITH STROKE
   wl-unicode: "\u0141"
@@ -773,7 +773,7 @@ CapitalLambda:
   amslatex: "\\Lambda"
   esc-alias: L
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u039B"
   unicode-equivalent-name: GREEK CAPITAL LETTER LAMDA
   wl-unicode: "\u039B"
@@ -781,7 +781,7 @@ CapitalLambda:
 CapitalMu:
   esc-alias: M
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u039C"
   unicode-equivalent-name: GREEK CAPITAL LETTER MU
   wl-unicode: "\u039C"
@@ -790,7 +790,7 @@ CapitalNHacek:
   amslatex: "\\v{N}"
   esc-alias: Nv
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u0147"
   unicode-equivalent-name: LATIN CAPITAL LETTER N WITH CARON
   wl-unicode: "\u0147"
@@ -798,7 +798,7 @@ CapitalNHacek:
 CapitalNTilde:
   esc-alias: N~
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xD1"
   unicode-equivalent-name: LATIN CAPITAL LETTER N WITH TILDE
   wl-unicode: "\xD1"
@@ -806,7 +806,7 @@ CapitalNTilde:
 CapitalNu:
   esc-alias: N
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u039D"
   unicode-equivalent-name: GREEK CAPITAL LETTER NU
   wl-unicode: "\u039D"
@@ -815,7 +815,7 @@ CapitalOAcute:
   amslatex: "\\'{O}"
   esc-alias: O'
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xD3"
   unicode-equivalent-name: LATIN CAPITAL LETTER O WITH ACUTE
   wl-unicode: "\xD3"
@@ -823,7 +823,7 @@ CapitalOAcute:
 CapitalODoubleAcute:
   esc-alias: O''
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u0150"
   unicode-equivalent-name: LATIN CAPITAL LETTER O WITH DOUBLE ACUTE
   wl-unicode: "\u0150"
@@ -831,7 +831,7 @@ CapitalODoubleAcute:
 CapitalODoubleDot:
   esc-alias: O"
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xD6"
   unicode-equivalent-name: LATIN CAPITAL LETTER O WITH DIAERESIS
   wl-unicode: "\xD6"
@@ -839,7 +839,7 @@ CapitalODoubleDot:
 CapitalOE:
   esc-alias: OE
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u0152"
   unicode-equivalent-name: LATIN CAPITAL LIGATURE OE
   wl-unicode: "\u0152"
@@ -848,7 +848,7 @@ CapitalOGrave:
   amslatex: "\\`{O}"
   esc-alias: O`
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xD2"
   unicode-equivalent-name: LATIN CAPITAL LETTER O WITH GRAVE
   wl-unicode: "\xD2"
@@ -857,7 +857,7 @@ CapitalOHat:
   amslatex: "\\^{O}"
   esc-alias: O^
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xD4"
   unicode-equivalent-name: LATIN CAPITAL LETTER O WITH CIRCUMFLEX
   wl-unicode: "\xD4"
@@ -865,8 +865,8 @@ CapitalOHat:
 CapitalOSlash:
   amslatex: "\\O{}"
   esc-alias: O/
-  has-unicode-inverse: false
-  is-letter-like: false
+  has-unicode-inverse: true
+  is-letter-like: true
   unicode-equivalent: "\xD8"
   unicode-equivalent-name: LATIN CAPITAL LETTER O WITH STROKE
   wl-unicode: "\xD8"
@@ -874,7 +874,7 @@ CapitalOSlash:
 CapitalOTilde:
   esc-alias: O~
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xD5"
   unicode-equivalent-name: LATIN CAPITAL LETTER O WITH TILDE
   wl-unicode: "\xD5"
@@ -883,7 +883,7 @@ CapitalOmega:
   amslatex: "\\Omega"
   esc-alias: O
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u03A9"
   unicode-equivalent-name: GREEK CAPITAL LETTER OMEGA
   wl-unicode: "\u03A9"
@@ -891,7 +891,7 @@ CapitalOmega:
 CapitalOmicron:
   esc-alias: Om
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u039F"
   unicode-equivalent-name: GREEK CAPITAL LETTER OMICRON
   wl-unicode: "\u039F"
@@ -900,7 +900,7 @@ CapitalPhi:
   amslatex: "\\Phi"
   esc-alias: Ph
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u03A6"
   unicode-equivalent-name: GREEK CAPITAL LETTER PHI
   wl-unicode: "\u03A6"
@@ -909,7 +909,7 @@ CapitalPi:
   amslatex: "\\Pi"
   esc-alias: P
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u03A0"
   unicode-equivalent-name: GREEK CAPITAL LETTER PI
   wl-unicode: "\u03A0"
@@ -918,7 +918,7 @@ CapitalPsi:
   amslatex: "\\Psi"
   esc-alias: Ps
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u03A8"
   unicode-equivalent-name: GREEK CAPITAL LETTER PSI
   wl-unicode: "\u03A8"
@@ -927,7 +927,7 @@ CapitalRHacek:
   amslatex: "\\v{R}"
   esc-alias: Rv
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u0158"
   unicode-equivalent-name: LATIN CAPITAL LETTER R WITH CARON
   wl-unicode: "\u0158"
@@ -935,7 +935,7 @@ CapitalRHacek:
 CapitalRho:
   esc-alias: R
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u03A1"
   unicode-equivalent-name: GREEK CAPITAL LETTER RHO
   wl-unicode: "\u03A1"
@@ -944,7 +944,7 @@ CapitalSHacek:
   amslatex: "\\v{S}"
   esc-alias: Sv
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u0160"
   unicode-equivalent-name: LATIN CAPITAL LETTER S WITH CARON
   wl-unicode: "\u0160"
@@ -952,7 +952,7 @@ CapitalSHacek:
 CapitalSampi:
   esc-alias: Sa
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u03E0"
   unicode-equivalent-name: GREEK LETTER SAMPI
   wl-unicode: "\u03E0"
@@ -961,7 +961,7 @@ CapitalSigma:
   amslatex: "\\Sigma"
   esc-alias: S
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u03A3"
   unicode-equivalent-name: GREEK CAPITAL LETTER SIGMA
   wl-unicode: "\u03A3"
@@ -969,7 +969,7 @@ CapitalSigma:
 CapitalStigma:
   esc-alias: Sti
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u03DA"
   unicode-equivalent-name: GREEK LETTER STIGMA
   wl-unicode: "\u03DA"
@@ -978,7 +978,7 @@ CapitalTHacek:
   amslatex: "\\v{T}"
   esc-alias: Tv
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u0164"
   unicode-equivalent-name: LATIN CAPITAL LETTER T WITH CARON
   wl-unicode: "\u0164"
@@ -986,7 +986,7 @@ CapitalTHacek:
 CapitalTau:
   esc-alias: T
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u03A4"
   unicode-equivalent-name: GREEK CAPITAL LETTER TAU
   wl-unicode: "\u03A4"
@@ -995,7 +995,7 @@ CapitalTheta:
   amslatex: "\\Theta"
   esc-alias: Th
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u0398"
   unicode-equivalent-name: GREEK CAPITAL LETTER THETA
   wl-unicode: "\u0398"
@@ -1003,7 +1003,7 @@ CapitalTheta:
 CapitalThorn:
   esc-alias: Thn
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xDE"
   unicode-equivalent-name: LATIN CAPITAL LETTER THORN
   wl-unicode: "\xDE"
@@ -1012,7 +1012,7 @@ CapitalUAcute:
   amslatex: "\\'{U}"
   esc-alias: U'
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xDA"
   unicode-equivalent-name: LATIN CAPITAL LETTER U WITH ACUTE
   wl-unicode: "\xDA"
@@ -1020,7 +1020,7 @@ CapitalUAcute:
 CapitalUDoubleAcute:
   esc-alias: U''
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u0170"
   unicode-equivalent-name: LATIN CAPITAL LETTER U WITH DOUBLE ACUTE
   wl-unicode: "\u0170"
@@ -1028,7 +1028,7 @@ CapitalUDoubleAcute:
 CapitalUDoubleDot:
   esc-alias: U"
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xDC"
   unicode-equivalent-name: LATIN CAPITAL LETTER U WITH DIAERESIS
   wl-unicode: "\xDC"
@@ -1037,7 +1037,7 @@ CapitalUGrave:
   amslatex: "\\`{U}"
   esc-alias: U`
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xD9"
   unicode-equivalent-name: LATIN CAPITAL LETTER U WITH GRAVE
   wl-unicode: "\xD9"
@@ -1045,7 +1045,7 @@ CapitalUGrave:
 CapitalUHat:
   esc-alias: U^
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xDB"
   unicode-equivalent-name: LATIN CAPITAL LETTER U WITH CIRCUMFLEX
   wl-unicode: "\xDB"
@@ -1053,7 +1053,7 @@ CapitalUHat:
 CapitalURing:
   esc-alias: Uo
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u016E"
   unicode-equivalent-name: LATIN CAPITAL LETTER U WITH RING ABOVE
   wl-unicode: "\u016E"
@@ -1062,7 +1062,7 @@ CapitalUpsilon:
   amslatex: "\\Upsilon"
   esc-alias: U
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u03A5"
   unicode-equivalent-name: GREEK CAPITAL LETTER UPSILON
   wl-unicode: "\u03A5"
@@ -1071,7 +1071,7 @@ CapitalXi:
   amslatex: "\\Xi"
   esc-alias: X
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u039E"
   unicode-equivalent-name: GREEK CAPITAL LETTER XI
   wl-unicode: "\u039E"
@@ -1080,7 +1080,7 @@ CapitalYAcute:
   amslatex: "\\'{Y}"
   esc-alias: Y'
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xDD"
   unicode-equivalent-name: LATIN CAPITAL LETTER Y WITH ACUTE
   wl-unicode: "\xDD"
@@ -1089,7 +1089,7 @@ CapitalZHacek:
   amslatex: "\\v{Z}"
   esc-alias: Zv
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u017D"
   unicode-equivalent-name: LATIN CAPITAL LETTER Z WITH CARON
   wl-unicode: "\u017D"
@@ -1097,7 +1097,7 @@ CapitalZHacek:
 CapitalZeta:
   esc-alias: Z
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u0396"
   unicode-equivalent-name: GREEK CAPITAL LETTER ZETA
   wl-unicode: "\u0396"
@@ -1112,7 +1112,7 @@ CapricornSign:
 Cedilla:
   esc-alias: cd
   has-unicode-inverse: false
-  is-letter-like: true
+  is-letter-like: false
   unicode-equivalent: "\xB8"
   unicode-equivalent-name: CEDILLA
   wl-unicode: "\xB8"
@@ -1120,7 +1120,7 @@ Cedilla:
 Cent:
   esc-alias: cent
   has-unicode-inverse: false
-  is-letter-like: true
+  is-letter-like: false
   unicode-equivalent: "\xA2"
   unicode-equivalent-name: CENT SIGN
   wl-unicode: "\xA2"
@@ -1159,7 +1159,7 @@ Chi:
   amslatex: "\\chi"
   esc-alias: ch
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u03C7"
   unicode-equivalent-name: GREEK SMALL LETTER CHI
   wl-unicode: "\u03C7"
@@ -1239,7 +1239,7 @@ CloverLeaf:
   wl-unicode-name: PLACE OF INTEREST SIGN
 ClubSuit:
   has-unicode-inverse: false
-  is-letter-like: true
+  is-letter-like: false
   unicode-equivalent: "\u2663"
   unicode-equivalent-name: BLACK CLUB SUIT
   wl-unicode: "\u2663"
@@ -1256,7 +1256,7 @@ Colon:
 CommandKey:
   esc-alias: cmd
   has-unicode-inverse: true
-  is-letter-like: true
+  is-letter-like: false
   unicode-equivalent: "\u2318"
   unicode-equivalent-name: PLACE OF INTEREST SIGN
   wl-unicode: "\uF76A"
@@ -1305,7 +1305,7 @@ ConjugateTranspose:
 ConstantC:
   esc-alias: cc
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D554"
   unicode-equivalent-name: MATHEMATICAL DOUBLE-STRUCK SMALL C
   wl-unicode: "\uF7DA"
@@ -1343,7 +1343,7 @@ Coproduct:
   wl-unicode-name: N-ARY COPRODUCT
 Copyright:
   has-unicode-inverse: false
-  is-letter-like: true
+  is-letter-like: false
   unicode-equivalent: "\xA9"
   unicode-equivalent-name: COPYRIGHT SIGN
   wl-unicode: "\xA9"
@@ -1400,7 +1400,7 @@ CurlyEpsilon:
 CurlyKappa:
   esc-alias: ck
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u03F0"
   unicode-equivalent-name: GREEK KAPPA SYMBOL
   wl-unicode: "\u03F0"
@@ -1408,7 +1408,7 @@ CurlyKappa:
 CurlyPhi:
   esc-alias: j
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u03C6"
   unicode-equivalent-name: GREEK SMALL LETTER PHI
   wl-unicode: "\u03C6"
@@ -1416,7 +1416,7 @@ CurlyPhi:
 CurlyPi:
   esc-alias: cp
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u03D6"
   unicode-equivalent-name: GREEK PI SYMBOL
   wl-unicode: "\u03D6"
@@ -1424,7 +1424,7 @@ CurlyPi:
 CurlyRho:
   esc-alias: cr
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u03F1"
   unicode-equivalent-name: GREEK RHO SYMBOL
   wl-unicode: "\u03F1"
@@ -1432,7 +1432,7 @@ CurlyRho:
 CurlyTheta:
   esc-alias: cq
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u03D1"
   unicode-equivalent-name: GREEK THETA SYMBOL
   wl-unicode: "\u03D1"
@@ -1448,7 +1448,7 @@ DHacek:
   amslatex: "\\v{d}"
   esc-alias: dv
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u010F"
   unicode-equivalent-name: LATIN SMALL LETTER D WITH CARON
   wl-unicode: "\u010F"
@@ -1457,7 +1457,7 @@ Dagger:
   amslatex: "\\dagger"
   esc-alias: dg
   has-unicode-inverse: false
-  is-letter-like: true
+  is-letter-like: false
   unicode-equivalent: "\u2020"
   unicode-equivalent-name: DAGGER
   wl-unicode: "\u2020"
@@ -1474,7 +1474,7 @@ Dalet:
 Dash:
   esc-alias: '-'
   has-unicode-inverse: false
-  is-letter-like: true
+  is-letter-like: false
   unicode-equivalent: "\u2013"
   unicode-equivalent-name: EN DASH
   wl-unicode: "\u2013"
@@ -1575,7 +1575,7 @@ Diamond:
   wl-unicode-name: DIAMOND OPERATOR
 DiamondSuit:
   has-unicode-inverse: false
-  is-letter-like: true
+  is-letter-like: false
   unicode-equivalent: "\u2662"
   unicode-equivalent-name: WHITE DIAMOND SUIT
   wl-unicode: "\u2662"
@@ -1604,7 +1604,7 @@ DifferentialD:
 Digamma:
   esc-alias: di
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u03DD"
   unicode-equivalent-name: GREEK SMALL LETTER DIGAMMA
   wl-unicode: "\u03DD"
@@ -1620,7 +1620,7 @@ DirectedEdge:
 DiscreteRatio:
   esc-alias: dratio
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u03F4"
   unicode-equivalent-name: GREEK CAPITAL THETA SYMBOL
   wl-unicode: "\uF4A4"
@@ -1711,7 +1711,7 @@ DotEqual:
 DotlessI:
   amslatex: "{\\i}"
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u0131"
   unicode-equivalent-name: LATIN SMALL LETTER DOTLESS I
   wl-unicode: "\u0131"
@@ -1719,14 +1719,14 @@ DotlessI:
 
 DotlessJ:
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u0237"
   unicode-equivalent-name: LATIN SMALL LETTER DOTLESS J
   wl-unicode: "\uF700"
 
 DottedSquare:
   has-unicode-inverse: true
-  is-letter-like: true
+  is-letter-like: false
   unicode-equivalent: "\u26F6"
   unicode-equivalent-name: SQUARE FOUR CORNERS
   wl-unicode: "\uF751"
@@ -1745,7 +1745,7 @@ DoubleDagger:
   amslatex: "\\ddagger"
   esc-alias: ddg
   has-unicode-inverse: false
-  is-letter-like: true
+  is-letter-like: false
   unicode-equivalent: "\u2021"
   unicode-equivalent-name: DOUBLE DAGGER
   wl-unicode: "\u2021"
@@ -1828,7 +1828,7 @@ DoubleLongRightArrow:
 DoublePrime:
   esc-alias: ''''''
   has-unicode-inverse: false
-  is-letter-like: true
+  is-letter-like: false
   unicode-equivalent: "\u2033"
   unicode-equivalent-name: DOUBLE PRIME
   wl-unicode: "\u2033"
@@ -1855,7 +1855,7 @@ DoubleRightTee:
 DoubleStruckA:
   esc-alias: dsa
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D552"
   unicode-equivalent-name: MATHEMATICAL DOUBLE-STRUCK SMALL A
   wl-unicode: "\uF6E6"
@@ -1869,217 +1869,217 @@ DoubleStruckB:
 DoubleStruckC:
   esc-alias: dsc
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D554"
   unicode-equivalent-name: MATHEMATICAL DOUBLE-STRUCK SMALL C
   wl-unicode: "\uF6E8"
 DoubleStruckCapitalA:
   esc-alias: dsA
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D538"
   unicode-equivalent-name: MATHEMATICAL DOUBLE-STRUCK CAPITAL A
   wl-unicode: "\uF7A4"
 DoubleStruckCapitalB:
   esc-alias: dsB
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D539"
   unicode-equivalent-name: MATHEMATICAL DOUBLE-STRUCK CAPITAL B
   wl-unicode: "\uF7A5"
 DoubleStruckCapitalC:
   esc-alias: dsC
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u2102"
   unicode-equivalent-name: DOUBLE-STRUCK CAPITAL C
   wl-unicode: "\uF7A6"
 DoubleStruckCapitalD:
   esc-alias: dsD
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D53B"
   unicode-equivalent-name: MATHEMATICAL DOUBLE-STRUCK CAPITAL D
   wl-unicode: "\uF7A7"
 DoubleStruckCapitalE:
   esc-alias: dsE
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D53C"
   unicode-equivalent-name: MATHEMATICAL DOUBLE-STRUCK CAPITAL E
   wl-unicode: "\uF7A8"
 DoubleStruckCapitalF:
   esc-alias: dsF
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D53D"
   unicode-equivalent-name: MATHEMATICAL DOUBLE-STRUCK CAPITAL F
   wl-unicode: "\uF7A9"
 DoubleStruckCapitalG:
   esc-alias: dsG
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D53E"
   unicode-equivalent-name: MATHEMATICAL DOUBLE-STRUCK CAPITAL G
   wl-unicode: "\uF7AA"
 DoubleStruckCapitalH:
   esc-alias: dsH
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u210D"
   unicode-equivalent-name: DOUBLE-STRUCK CAPITAL H
   wl-unicode: "\uF7AB"
 DoubleStruckCapitalI:
   esc-alias: dsI
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D540"
   unicode-equivalent-name: MATHEMATICAL DOUBLE-STRUCK CAPITAL I
   wl-unicode: "\uF7AC"
 DoubleStruckCapitalJ:
   esc-alias: dsJ
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D541"
   unicode-equivalent-name: MATHEMATICAL DOUBLE-STRUCK CAPITAL J
   wl-unicode: "\uF7AD"
 DoubleStruckCapitalK:
   esc-alias: dsK
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D542"
   unicode-equivalent-name: MATHEMATICAL DOUBLE-STRUCK CAPITAL K
   wl-unicode: "\uF7AE"
 DoubleStruckCapitalL:
   esc-alias: dsL
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D543"
   unicode-equivalent-name: MATHEMATICAL DOUBLE-STRUCK CAPITAL L
   wl-unicode: "\uF7AF"
 DoubleStruckCapitalM:
   esc-alias: dsM
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D544"
   unicode-equivalent-name: MATHEMATICAL DOUBLE-STRUCK CAPITAL M
   wl-unicode: "\uF7B0"
 DoubleStruckCapitalN:
   esc-alias: dsN
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u2115"
   unicode-equivalent-name: DOUBLE-STRUCK CAPITAL N
   wl-unicode: "\uF7B1"
 DoubleStruckCapitalO:
   esc-alias: dsO
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D546"
   unicode-equivalent-name: MATHEMATICAL DOUBLE-STRUCK CAPITAL O
   wl-unicode: "\uF7B2"
 DoubleStruckCapitalP:
   esc-alias: dsP
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u2119"
   unicode-equivalent-name: DOUBLE-STRUCK CAPITAL P
   wl-unicode: "\uF7B3"
 DoubleStruckCapitalQ:
   esc-alias: dsQ
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u211A"
   unicode-equivalent-name: DOUBLE-STRUCK CAPITAL Q
   wl-unicode: "\uF7B4"
 DoubleStruckCapitalR:
   esc-alias: dsR
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u211D"
   unicode-equivalent-name: DOUBLE-STRUCK CAPITAL R
   wl-unicode: "\uF7B5"
 DoubleStruckCapitalS:
   esc-alias: dsS
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D54A"
   unicode-equivalent-name: MATHEMATICAL DOUBLE-STRUCK CAPITAL S
   wl-unicode: "\uF7B6"
 DoubleStruckCapitalT:
   esc-alias: dsT
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D54B"
   unicode-equivalent-name: MATHEMATICAL DOUBLE-STRUCK CAPITAL T
   wl-unicode: "\uF7B7"
 DoubleStruckCapitalU:
   esc-alias: dsU
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D54C"
   unicode-equivalent-name: MATHEMATICAL DOUBLE-STRUCK CAPITAL U
   wl-unicode: "\uF7B8"
 DoubleStruckCapitalV:
   esc-alias: dsV
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D54D"
   unicode-equivalent-name: MATHEMATICAL DOUBLE-STRUCK CAPITAL V
   wl-unicode: "\uF7B9"
 DoubleStruckCapitalW:
   esc-alias: dsW
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D54E"
   unicode-equivalent-name: MATHEMATICAL DOUBLE-STRUCK CAPITAL W
   wl-unicode: "\uF7BA"
 DoubleStruckCapitalX:
   esc-alias: dsX
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D54F"
   unicode-equivalent-name: MATHEMATICAL DOUBLE-STRUCK CAPITAL X
   wl-unicode: "\uF7BB"
 DoubleStruckCapitalY:
   esc-alias: dsY
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D550"
   unicode-equivalent-name: MATHEMATICAL DOUBLE-STRUCK CAPITAL Y
   wl-unicode: "\uF7BC"
 DoubleStruckCapitalZ:
   esc-alias: dsZ
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u2124"
   unicode-equivalent-name: DOUBLE-STRUCK CAPITAL Z
   wl-unicode: "\uF7BD"
 DoubleStruckD:
   esc-alias: dsd
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D555"
   unicode-equivalent-name: MATHEMATICAL DOUBLE-STRUCK SMALL D
   wl-unicode: "\uF6E9"
 DoubleStruckE:
   esc-alias: dse
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D556"
   unicode-equivalent-name: MATHEMATICAL DOUBLE-STRUCK SMALL E
   wl-unicode: "\uF6EA"
 DoubleStruckEight:
   esc-alias: ds8
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D7E0"
   unicode-equivalent-name: MATHEMATICAL DOUBLE-STRUCK DIGIT EIGHT
   wl-unicode: "\uF7E3"
 DoubleStruckF:
   esc-alias: dsf
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D557"
   unicode-equivalent-name: MATHEMATICAL DOUBLE-STRUCK SMALL F
   wl-unicode: "\uF6EB"
@@ -2100,56 +2100,56 @@ DoubleStruckFour:
 DoubleStruckG:
   esc-alias: dsg
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D558"
   unicode-equivalent-name: MATHEMATICAL DOUBLE-STRUCK SMALL G
   wl-unicode: "\uF6EC"
 DoubleStruckH:
   esc-alias: dsh
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D559"
   unicode-equivalent-name: MATHEMATICAL DOUBLE-STRUCK SMALL H
   wl-unicode: "\uF6ED"
 DoubleStruckI:
   esc-alias: dsi
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D55A"
   unicode-equivalent-name: MATHEMATICAL DOUBLE-STRUCK SMALL I
   wl-unicode: "\uF6EE"
 DoubleStruckJ:
   esc-alias: dsj
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D55B"
   unicode-equivalent-name: MATHEMATICAL DOUBLE-STRUCK SMALL J
   wl-unicode: "\uF6EF"
 DoubleStruckK:
   esc-alias: dsk
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D55C"
   unicode-equivalent-name: MATHEMATICAL DOUBLE-STRUCK SMALL K
   wl-unicode: "\uF6F0"
 DoubleStruckL:
   esc-alias: dsl
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D55D"
   unicode-equivalent-name: MATHEMATICAL DOUBLE-STRUCK SMALL L
   wl-unicode: "\uF6F1"
 DoubleStruckM:
   esc-alias: dsm
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D55E"
   unicode-equivalent-name: MATHEMATICAL DOUBLE-STRUCK SMALL M
   wl-unicode: "\uF6F2"
 DoubleStruckN:
   esc-alias: dsn
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D55F"
   unicode-equivalent-name: MATHEMATICAL DOUBLE-STRUCK SMALL N
   wl-unicode: "\uF6F3"
@@ -2163,42 +2163,42 @@ DoubleStruckNine:
 DoubleStruckO:
   esc-alias: dso
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D560"
   unicode-equivalent-name: MATHEMATICAL DOUBLE-STRUCK SMALL O
   wl-unicode: "\uF6F4"
 DoubleStruckOne:
   esc-alias: ds1
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D7D9"
   unicode-equivalent-name: MATHEMATICAL DOUBLE-STRUCK DIGIT ONE
   wl-unicode: "\uF7DC"
 DoubleStruckP:
   esc-alias: dsp
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D561"
   unicode-equivalent-name: MATHEMATICAL DOUBLE-STRUCK SMALL P
   wl-unicode: "\uF6F5"
 DoubleStruckQ:
   esc-alias: dsq
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D562"
   unicode-equivalent-name: MATHEMATICAL DOUBLE-STRUCK SMALL Q
   wl-unicode: "\uF6F6"
 DoubleStruckR:
   esc-alias: dsr
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D563"
   unicode-equivalent-name: MATHEMATICAL DOUBLE-STRUCK SMALL R
   wl-unicode: "\uF6F7"
 DoubleStruckS:
   esc-alias: dss
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D564"
   unicode-equivalent-name: MATHEMATICAL DOUBLE-STRUCK SMALL S
   wl-unicode: "\uF6F8"
@@ -2219,7 +2219,7 @@ DoubleStruckSix:
 DoubleStruckT:
   esc-alias: dst
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D565"
   unicode-equivalent-name: MATHEMATICAL DOUBLE-STRUCK SMALL T
   wl-unicode: "\uF6F9"
@@ -2358,7 +2358,7 @@ DownArrowUpArrow:
 DownBreve:
   esc-alias: dbv
   has-unicode-inverse: true
-  is-letter-like: true
+  is-letter-like: false
   unicode-equivalent: " \u0311"
   unicode-equivalent-name: SPACE + COMBINING INVERTED BREVE
   wl-unicode: "\uF755"
@@ -2414,7 +2414,7 @@ DownPointer:
 DownQuestion:
   esc-alias: d?
   has-unicode-inverse: false
-  is-letter-like: true
+  is-letter-like: false
   unicode-equivalent: "\xBF"
   unicode-equivalent-name: INVERTED QUESTION MARK
   wl-unicode: "\xBF"
@@ -2558,28 +2558,28 @@ Ellipsis:
 EmptyCircle:
   esc-alias: eci
   has-unicode-inverse: false
-  is-letter-like: true
+  is-letter-like: false
   unicode-equivalent: "\u25CB"
   unicode-equivalent-name: WHITE CIRCLE
   wl-unicode: "\u25CB"
   wl-unicode-name: WHITE CIRCLE
 EmptyDiamond:
   has-unicode-inverse: false
-  is-letter-like: true
+  is-letter-like: false
   unicode-equivalent: "\u25C7"
   unicode-equivalent-name: WHITE DIAMOND
   wl-unicode: "\u25C7"
   wl-unicode-name: WHITE DIAMOND
 EmptyDownTriangle:
   has-unicode-inverse: false
-  is-letter-like: true
+  is-letter-like: false
   unicode-equivalent: "\u25BD"
   unicode-equivalent-name: WHITE DOWN-POINTING TRIANGLE
   wl-unicode: "\u25BD"
   wl-unicode-name: WHITE DOWN-POINTING TRIANGLE
 EmptyRectangle:
   has-unicode-inverse: false
-  is-letter-like: true
+  is-letter-like: false
   unicode-equivalent: "\u25AF"
   unicode-equivalent-name: WHITE VERTICAL RECTANGLE
   wl-unicode: "\u25AF"
@@ -2588,7 +2588,7 @@ EmptySet:
   amslatex: "\\varnothing"
   esc-alias: es
   has-unicode-inverse: false
-  is-letter-like: true
+  is-letter-like: false
   unicode-equivalent: "\u2205"
   unicode-equivalent-name: EMPTY SET
   wl-unicode: "\u2205"
@@ -2596,7 +2596,7 @@ EmptySet:
 EmptySmallCircle:
   esc-alias: esci
   has-unicode-inverse: false
-  is-letter-like: true
+  is-letter-like: false
   unicode-equivalent: "\u25E6"
   unicode-equivalent-name: WHITE BULLET
   wl-unicode: "\u25E6"
@@ -2604,7 +2604,7 @@ EmptySmallCircle:
 EmptySmallSquare:
   esc-alias: essq
   has-unicode-inverse: false
-  is-letter-like: true
+  is-letter-like: false
   unicode-equivalent: "\u25FB"
   unicode-equivalent-name: WHITE MEDIUM SQUARE
   wl-unicode: "\u25FB"
@@ -2612,14 +2612,14 @@ EmptySmallSquare:
 EmptySquare:
   esc-alias: esq
   has-unicode-inverse: false
-  is-letter-like: true
+  is-letter-like: false
   unicode-equivalent: "\u25A1"
   unicode-equivalent-name: WHITE SQUARE
   wl-unicode: "\u25A1"
   wl-unicode-name: WHITE SQUARE
 EmptyUpTriangle:
   has-unicode-inverse: false
-  is-letter-like: true
+  is-letter-like: false
   unicode-equivalent: "\u25B3"
   unicode-equivalent-name: WHITE UP-POINTING TRIANGLE
   wl-unicode: "\u25B3"
@@ -2718,7 +2718,7 @@ Eth:
   wl-unicode-name: LATIN SMALL LETTER ETH
 Euro:
   has-unicode-inverse: false
-  is-letter-like: true
+  is-letter-like: false
   unicode-equivalent: "\u20AC"
   unicode-equivalent-name: EURO SIGN
   wl-unicode: "\u20AC"
@@ -2770,14 +2770,14 @@ FiLigature:
 FilledCircle:
   esc-alias: fci
   has-unicode-inverse: false
-  is-letter-like: true
+  is-letter-like: false
   unicode-equivalent: "\u25CF"
   unicode-equivalent-name: BLACK CIRCLE
   wl-unicode: "\u25CF"
   wl-unicode-name: BLACK CIRCLE
 FilledDiamond:
   has-unicode-inverse: false
-  is-letter-like: true
+  is-letter-like: false
   unicode-equivalent: "\u25C6"
   unicode-equivalent-name: BLACK DIAMOND
   wl-unicode: "\u25C6"
@@ -2870,7 +2870,7 @@ FivePointedStar:
   wl-unicode-name: BLACK STAR
 FlLigature:
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\uFB02"
   unicode-equivalent-name: LATIN SMALL LIGATURE FL
   wl-unicode: "\uFB02"
@@ -6785,7 +6785,7 @@ ScriptCapitalM:
 ScriptCapitalN:
   esc-alias: scN
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u1D4A9"
   unicode-equivalent-name: MATHEMATICAL SCRIPT CAPITAL N
   wl-unicode: "\uF77D"

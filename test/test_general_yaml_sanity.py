@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import re
 import unicodedata
 
 from mathics_scanner.load import load_mathics_character_yaml
@@ -213,3 +214,14 @@ def test_general_yaml_sanity():
     # Check if attributes that should be invertible are in fact invertible
     check_attr_is_invertible("wl-unicode")
     check_attr_is_invertible("esc-alias")
+
+
+def test_is_letter_like():
+    letter_pat = re.compile(r"(?u)^[^\W_0-9]$")
+    for k, v in yaml_data.items():
+        if "unicode-equivalent" in v:
+            is_letter_like = bool(letter_pat.match(v["unicode-equivalent"]))
+            if "is-letter-like" not in v:
+                print(f"{k} needs is-letter-like: {bool(is_letter_like)}")
+            elif v["is-letter-like"] != is_letter_like:
+                print(f"{k} is-letter-like should be: {bool(is_letter_like)}")
