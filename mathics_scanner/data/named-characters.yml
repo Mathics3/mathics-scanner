@@ -2968,7 +2968,7 @@ FormalCapitalBeta:
   wl-unicode: "\uF835"
 FormalCapitalC:
   esc-alias: .C
-  has-unicode-inverse: true
+  has-unicode-inverse: false
   is-letter-like: true
   unicode-equivalent: "C\u0323"
   unicode-equivalent-name: LATIN CAPITAL LETTER C + COMBINING DOT BELOW
@@ -2976,7 +2976,7 @@ FormalCapitalC:
 FormalCapitalChi:
   esc-alias: .CapitalChi
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u03A7\u0323"
   unicode-equivalent-name: GREEK CAPITAL LETTER CHI + COMBINING DOT BELOW
   wl-unicode: "\uF84A"
@@ -2990,14 +2990,14 @@ FormalCapitalD:
 FormalCapitalDelta:
   esc-alias: .CapitalDelta
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u0394\u0323"
   unicode-equivalent-name: GREEK CAPITAL LETTER DELTA + COMBINING DOT BELOW
   wl-unicode: "\uF837"
 FormalCapitalDigamma:
   esc-alias: .CapitalDigamma
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u03DC\u0323"
   unicode-equivalent-name: GREEK LETTER DIGAMMA + COMBINING DOT BELOW
   wl-unicode: "\uF87F"
@@ -3011,14 +3011,14 @@ FormalCapitalE:
 FormalCapitalEpsilon:
   esc-alias: .CapitalEpsilon
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u0395\u0323"
   unicode-equivalent-name: GREEK CAPITAL LETTER EPSILON + COMBINING DOT BELOW
   wl-unicode: "\uF838"
 FormalCapitalEta:
   esc-alias: .CapitalEta
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u0397\u0323"
   unicode-equivalent-name: GREEK CAPITAL LETTER ETA + COMBINING DOT BELOW
   wl-unicode: "\uF83A"
@@ -3039,7 +3039,7 @@ FormalCapitalG:
 FormalCapitalGamma:
   esc-alias: .CapitalGamma
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u0393"
   unicode-equivalent-name: GREEK CAPITAL LETTER GAMMA
   wl-unicode: "\uF836"
@@ -3060,7 +3060,7 @@ FormalCapitalI:
 FormalCapitalIota:
   esc-alias: .CapitalIota
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u0399\u0323"
   unicode-equivalent-name: GREEK CAPITAL LETTER IOTA + COMBINING DOT BELOW
   wl-unicode: "\uF83C"
@@ -3081,14 +3081,14 @@ FormalCapitalK:
 FormalCapitalKappa:
   esc-alias: .CapitalKappa
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u039A\u0323"
   unicode-equivalent-name: GREEK CAPITAL LETTER KAPPA + COMBINING DOT BELOW
   wl-unicode: "\uF83D"
 FormalCapitalKoppa:
   esc-alias: .CapitalKoppa
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u03DE\u0323"
   unicode-equivalent-name: GREEK LETTER KOPPA + COMBINING DOT BELOW
   wl-unicode: "\uF881"
@@ -3102,7 +3102,7 @@ FormalCapitalL:
 FormalCapitalLambda:
   esc-alias: .CapitalLambda
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u039B\u0323"
   unicode-equivalent-name: GREEK CAPITAL LETTER LAMDA + COMBINING DOT BELOW
   wl-unicode: "\uF83E"
@@ -3116,7 +3116,7 @@ FormalCapitalM:
 FormalCapitalMu:
   esc-alias: .CapitalMu
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u039C\u0323"
   unicode-equivalent-name: GREEK CAPITAL LETTER MU + COMBINING DOT BELOW
   wl-unicode: "\uF83F"
@@ -3130,7 +3130,7 @@ FormalCapitalN:
 FormalCapitalNu:
   esc-alias: .CapitalNu
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u039D\u0323"
   unicode-equivalent-name: GREEK CAPITAL LETTER NU + COMBINING DOT BELOW
   wl-unicode: "\uF840"
@@ -3144,14 +3144,14 @@ FormalCapitalO:
 FormalCapitalOmega:
   esc-alias: .CapitalOmega
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u03A9\u0323"
   unicode-equivalent-name: GREEK CAPITAL LETTER OMEGA + COMBINING DOT BELOW
   wl-unicode: "\uF84C"
 FormalCapitalOmicron:
   esc-alias: .CapitalOmicron
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u039F\u0323"
   unicode-equivalent-name: GREEK CAPITAL LETTER OMICRON + COMBINING DOT BELOW
   wl-unicode: "\uF842"
@@ -3291,7 +3291,7 @@ FormalCapitalX:
 FormalCapitalXi:
   esc-alias: .CapitalXi
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u039E\u0323"
   unicode-equivalent-name: GREEK CAPITAL LETTER XI + COMBINING DOT BELOW
   wl-unicode: "\uF841"
@@ -3312,7 +3312,7 @@ FormalCapitalZ:
 FormalCapitalZeta:
   esc-alias: .CapitalZeta
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u0396\u0323"
   unicode-equivalent-name: GREEK CAPITAL LETTER ZETA + COMBINING DOT BELOW
   wl-unicode: "\uF839"
@@ -3326,7 +3326,7 @@ FormalChi:
 FormalCurlyCapitalUpsilon:
   esc-alias: .CurlyCapitalUpsilon
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u03D2\u0323"
   unicode-equivalent-name: GREEK UPSILON WITH HOOK SYMBOL + COMBINING DOT BELOW
   wl-unicode: "\uF875"

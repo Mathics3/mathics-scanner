@@ -121,12 +121,18 @@ def compile_tables(data: dict) -> dict:
     unicode_to_wl_dict = {k: v for k, v in unicode_to_wl_dict.items() if k != v}
     unicode_to_wl_re = re_from_keys(unicode_to_wl_dict)
 
-    # Unicode string containing all letterlikes values dictionarhy entry
-    letterlikes = "".join(v["wl-unicode"] for v in data.values() if v["is-letter-like"])
+    # Unicode string containing all letterlikes values dictionary entry
+    letterlikes = "".join(
+        v.get("unicode-equivalent", v.get("wl-unicode"))
+        for v in data.values()
+        if v["is-letter-like"]
+    )
 
     # All supported named characters dictionary entry
     named_characters = {
-        k: v["wl-unicode"] for k, v in data.items() if "wl-unicode" in v
+        k: v.get("unicode-equivalent", v.get("wl-unicode"))
+        for k, v in data.items()
+        if "wl-unicode" in v
     }
 
     # Operators with ASCII sequences list entry
