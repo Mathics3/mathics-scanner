@@ -6786,7 +6786,7 @@ ScriptCapitalN:
   esc-alias: scN
   has-unicode-inverse: false
   is-letter-like: true
-  unicode-equivalent: "\u1D4A9"
+  unicode-equivalent: "\U0001D4A9"
   unicode-equivalent-name: MATHEMATICAL SCRIPT CAPITAL N
   wl-unicode: "\uF77D"
 ScriptCapitalO:
