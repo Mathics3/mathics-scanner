@@ -91,8 +91,12 @@ def compile_tables(data: dict) -> dict:
             assert "wl-unicode" in v, f"is-letter-like {k} needs wl-unicode"
 
     # ESC sequence aliases dictionary entry
+    # FIXME: Is using unicode-equivalent correct? And if that doesn't appear but
+    # wl-unicode does, should we use that instead?
     aliased_characters = {
-        v["esc-alias"]: v["wl-unicode"] for v in data.values() if "esc-alias" in v
+        v["esc-alias"]: v.get("unicode-equivalent", v.get("wl-equivalent"))
+        for v in data.values()
+        if "esc-alias" in v
     }
 
     # operator-to-unicode dictionary entry

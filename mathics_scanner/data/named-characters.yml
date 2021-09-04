@@ -220,7 +220,7 @@ And:
 Angle:
   amslatex: "\\angle"
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u2220"
   unicode-equivalent-name: ANGLE
   wl-unicode: "\u2220"
@@ -6784,7 +6784,7 @@ ScriptCapitalM:
   wl-unicode-name: SCRIPT CAPITAL M
 ScriptCapitalN:
   esc-alias: scN
-  has-unicode-inverse: true
+  has-unicode-inverse: false
   is-letter-like: true
   unicode-equivalent: "\u1D4A9"
   unicode-equivalent-name: MATHEMATICAL SCRIPT CAPITAL N
