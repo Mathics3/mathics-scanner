@@ -146,7 +146,7 @@ tokens = [
     ("ConjugateTranspose", r" \uf3c9 "),
     ("HermitianConjugate", r" \uf3ce "),
     ("Integral", r" \u222b "),
-    ("DifferentialD", r" \uf74c "),
+    ("DifferentialD", r" \U0001D451 "),
     ("Del", r" \u2207 "),
     ("Square", r" \uf520 "),
     ("SmallCircle", r" \u2218 "),

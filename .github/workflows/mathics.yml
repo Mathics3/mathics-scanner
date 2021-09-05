@@ -28,6 +28,6 @@ jobs:
     - name: Test Mathics
       run: |
         # Until next Mathic3 release is out...
-        python -m pip install -e git://github.com/mathics/Mathics#egg=Mathics3[full]
+        python -m pip install -e git://github.com/mathics/Mathics@DifferentialD-adjust#egg=Mathics3
         # pip install Mathics3[extra]
         make check-mathics
