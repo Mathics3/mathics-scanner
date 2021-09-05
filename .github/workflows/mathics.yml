@@ -1,4 +1,4 @@
-name: Mathics_Script (ubuntu)
+name: Mathics_Script (Mathics doctest)
 
 on:
   push:
@@ -28,6 +28,6 @@ jobs:
     - name: Test Mathics
       run: |
         # Until next Mathic3 release is out...
-        python -m pip install -e git://github.com/mathics/Mathics@DifferentialD-adjust#egg=Mathics3
-        # pip install Mathics3[extra]
+        python -m pip install -e git://github.com/mathics/Mathics@DifferentialD-adjust#egg=Mathics3[full]
+        # pip install Mathics3[full]
         make check-mathics
