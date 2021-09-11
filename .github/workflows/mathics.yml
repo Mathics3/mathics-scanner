@@ -27,7 +27,7 @@ jobs:
         make
     - name: Test Mathics
       run: |
-        # Until next Mathic3 release is out...
-        python -m pip install -e git://github.com/mathics/Mathics@DifferentialD-adjust#egg=Mathics3[full]
+        # Until next Mathics3/mathics-core release is out...
+        python -m pip install -e git://github.com/Mathics3/mathics-core#egg=Mathics3[full]
         # pip install Mathics3[full]
         make check-mathics
