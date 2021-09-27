@@ -286,7 +286,7 @@ def find_indices(literals) -> dict:
                     break
         assert len(indices) == len(
             tags
-        ), f"problem mathching tokens for symbol {key} having tags {tags}"
+        ), f"problem matching tokens for symbol {key} having tags {tags}"
         literal_indices[key] = tuple(indices)
     return literal_indices
 
