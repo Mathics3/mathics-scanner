@@ -78,6 +78,7 @@ AddTo:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: AddTo
+  right-binary-precedence: 100
 
 ADoubleDot:
   esc-alias: a"
@@ -114,19 +115,19 @@ AHat:
   wl-unicode-name: LATIN SMALL LETTER A WITH CIRCUMFLEX
 
 # See also RawVerticalBar.
-Alternative:
+Alternatives:
   ascii: "|"
   has-unicode-inverse: false
   is-letter-like: false
-  operator-name: Alternative
-  precedence: 160
+  operator-name: Alternatives
+  flat-binary-precedence: 160
 
 Apply:
   ascii: "@@"
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Apply
-  precedence: 620
+  right-binary-precedence: 620
 
 
 # @@@ replaces heads at level 1 of expr by f.
@@ -212,7 +213,7 @@ And:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: And
-  precedence: 215
+  flat-binary-precedence: 215
   unicode-equivalent: "\u2227"
   unicode-equivalent-name: LOGICAL AND
   wl-unicode: "\u2227"
@@ -283,6 +284,7 @@ Backslash:
   unicode-equivalent-name: SET MINUS
   wl-unicode: "\u2216"
   wl-unicode-name: SET MINUS
+  flat-binary-precedence: 460
 BeamedEighthNote:
   has-unicode-inverse: false
   is-letter-like: false
@@ -305,6 +307,7 @@ Because:
   unicode-equivalent-name: BECAUSE
   wl-unicode: "\u2235"
   wl-unicode-name: BECAUSE
+  left-binary-precedence: 50
 Bet:
   amslatex: "\\beth"
   esc-alias: be
@@ -439,6 +442,7 @@ Cap:
   unicode-equivalent-name: FROWN
   wl-unicode: "\u2322"
   wl-unicode-name: FROWN
+  flat-binary-precedence: 350
 CapitalAAcute:
   amslatex: "\\'{A}"
   esc-alias: A'
@@ -1134,6 +1138,7 @@ CenterDot:
   unicode-equivalent-name: MIDDLE DOT
   wl-unicode: "\xB7"
   wl-unicode-name: MIDDLE DOT
+  flat-binary-precedence: 410
 CenterEllipsis:
   has-unicode-inverse: false
   is-letter-like: false
@@ -1174,6 +1179,7 @@ CircleDot:
   unicode-equivalent-name: CIRCLED DOT OPERATOR
   wl-unicode: "\u2299"
   wl-unicode-name: CIRCLED DOT OPERATOR
+  flat-binary-precedence: 520
 CircleMinus:
   amslatex: "\\ominus"
   esc-alias: c-
@@ -1184,6 +1190,7 @@ CircleMinus:
   unicode-equivalent-name: CIRCLED MINUS
   wl-unicode: "\u2296"
   wl-unicode-name: CIRCLED MINUS
+  flat-binary-precedence: 330
 CirclePlus:
   amslatex: "\\oplus"
   esc-alias: c+
@@ -1194,6 +1201,7 @@ CirclePlus:
   unicode-equivalent-name: CIRCLED PLUS
   wl-unicode: "\u2295"
   wl-unicode-name: CIRCLED PLUS
+  flat-binary-precedence: 330
 CircleTimes:
   amslatex: "\\otimes"
   esc-alias: c*
@@ -1204,6 +1212,7 @@ CircleTimes:
   unicode-equivalent-name: CIRCLED TIMES
   wl-unicode: "\u2297"
   wl-unicode-name: CIRCLED TIMES
+  flat-binary-precedence: 420
 ClockwiseContourIntegral:
   esc-alias: ccint
   has-unicode-inverse: false
@@ -1253,6 +1262,7 @@ Colon:
   unicode-equivalent-name: RATIO
   wl-unicode: "\u2236"
   wl-unicode-name: RATIO
+  flat-binary-precedence: 80
 CommandKey:
   esc-alias: cmd
   has-unicode-inverse: true
@@ -1265,18 +1275,19 @@ Composition:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Composition
+  flat-binary-precedence: 625
 CompoundExpression:
   ascii: ";"
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: CompoundExpression
-  precedence: 10
+  flat-binary-precedence: 10
 Condition:
   ascii: "/;"
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Condition
-  precedence: 130
+  left-binary-precedence: 130
 
 Conditioned:
   has-unicode-inverse: false
@@ -1297,11 +1308,13 @@ Conjugate:
   has-unicode-inverse: false
   is-letter-like: false
   wl-unicode: "\uF3C8"
+  postfix-precendence: 670
 ConjugateTranspose:
   esc-alias: ct
   has-unicode-inverse: false
   is-letter-like: false
   wl-unicode: "\uF3C9"
+  postfix-precendence: 670
 ConstantC:
   esc-alias: cc
   has-unicode-inverse: false
@@ -1341,6 +1354,7 @@ Coproduct:
   unicode-equivalent-name: N-ARY COPRODUCT
   wl-unicode: "\u2210"
   wl-unicode-name: N-ARY COPRODUCT
+  flat-binary-precedence: 360
 Copyright:
   has-unicode-inverse: false
   is-letter-like: false
@@ -1364,6 +1378,7 @@ Cross:
   unicode-equivalent: "\u2A2F"
   unicode-equivalent-name: VECTOR OR CROSS PRODUCT
   wl-unicode: "\uF4A0"
+  flat-binary-precedence: 500
 Cup:
   amslatex: "\\cup"
   has-unicode-inverse: false
@@ -1373,6 +1388,7 @@ Cup:
   unicode-equivalent-name: SMILE
   wl-unicode: "\u2323"
   wl-unicode-name: SMILE
+  flat-binary-precedence: 340
 CupCap:
   has-unicode-inverse: false
   is-letter-like: false
@@ -1484,7 +1500,8 @@ Decrement:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Decrement
-  precedence: 660
+  prefix-precedence: 660
+  postfix-precedence: 660
 
 # See also PatternTest and RawQuestion
 Definition:
@@ -1492,7 +1509,7 @@ Definition:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Definition
-  precedence: 670
+  prefix-precedence: 670
 
 # \[Degree] is letter-like, not an operator, which is
 # mutually exclusive.
@@ -1530,6 +1547,7 @@ Del:
   unicode-equivalent-name: NABLA
   wl-unicode: "\u2207"
   wl-unicode-name: NABLA
+  prefix-precedence: 550
 DeleteKey:
   esc-alias: ' del'
   has-unicode-inverse: false
@@ -1549,7 +1567,7 @@ Derivative:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Derivative
-  precedence: 670
+  postfix-precedence: 670
 DescendingEllipsis:
   has-unicode-inverse: false
   is-letter-like: false
@@ -1573,6 +1591,7 @@ Diamond:
   unicode-equivalent-name: DIAMOND OPERATOR
   wl-unicode: "\u22C4"
   wl-unicode-name: DIAMOND OPERATOR
+  flat-binary-precedence: 450
 DiamondSuit:
   has-unicode-inverse: false
   is-letter-like: false
@@ -1617,6 +1636,7 @@ DirectedEdge:
   unicode-equivalent: "\u2192"
   unicode-equivalent-name: RIGHTWARDS ARROW
   wl-unicode: "\uF3D5"
+  nonassoc-binary-precedence: 128
 DiscreteRatio:
   esc-alias: dratio
   has-unicode-inverse: true
@@ -1669,7 +1689,7 @@ Divide:
   has-unicode-inverse: true
   is-letter-like: false
   operator-name: Divide
-  precedence: 470
+  left-binary-precedence: 470
   unicode-equivalent: "\xF7"
   unicode-equivalent-name: DIVISION SIGN
   wl-unicode: "\xF7"
@@ -1680,6 +1700,7 @@ DivideBy:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: DivideBy
+  right-binary-precedence: 100
 
 Divides:
   amslatex: "\\mid"
@@ -1696,7 +1717,7 @@ Dot:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Dot
-  precedence: 490
+  flat-binary-precedence: 490
 
 DotEqual:
   esc-alias: .=
@@ -1798,6 +1819,7 @@ DoubleLeftTee:
   unicode-equivalent-name: VERTICAL BAR DOUBLE LEFT TURNSTILE
   wl-unicode: "\u2AE4"
   wl-unicode-name: VERTICAL BAR DOUBLE LEFT TURNSTILE
+  left-binary-precedence: 190
 DoubleLongLeftArrow:
   esc-alias: <==
   has-unicode-inverse: false
@@ -1852,6 +1874,7 @@ DoubleRightTee:
   operator-name: DoubleRightTee
   wl-unicode: "\u22A8"
   wl-unicode-name: 'TRUE'
+  right-binary-precedence: 190
 DoubleStruckA:
   esc-alias: dsa
   has-unicode-inverse: true
@@ -2314,6 +2337,7 @@ DoubleVerticalBar:
   unicode-equivalent-name: PARALLEL TO
   wl-unicode: "\u2225"
   wl-unicode-name: PARALLEL TO
+  flat-binary-precedence: 280
 DoubledGamma:
   amslatex: "\\mathbb{\\gamma}"
   esc-alias: gg
@@ -2386,6 +2410,7 @@ DownLeftTeeVector:
   unicode-equivalent-name: LEFTWARDS HARPOON WITH BARB DOWN FROM BAR
   wl-unicode: "\u295E"
   wl-unicode-name: LEFTWARDS HARPOON WITH BARB DOWN FROM BAR
+  left-binary-precedence: 190
 DownLeftVector:
   amslatex: "\\leftharpoondown"
   has-unicode-inverse: false
@@ -2546,6 +2571,7 @@ Element:
   unicode-equivalent-name: ELEMENT OF
   wl-unicode: "\u2208"
   wl-unicode-name: ELEMENT OF
+  flat-binary-precedence: 250
 Ellipsis:
   amslatex: "$\\dots$"
   esc-alias: '...'
@@ -2662,6 +2688,7 @@ Equal:
   unicode-equivalent: "\u2A75"
   unicode-equivalent-name: TWO CONSECUTIVE EQUALS SIGNS
   wl-unicode: "\uF431"
+  flat-operator-precedence: 290
 EqualTilde:
   esc-alias: =~
   has-unicode-inverse: false
@@ -2685,7 +2712,7 @@ Equivalent:
   has-unicode-inverse: true
   is-letter-like: false
   operator-name: Equivalent
-  precedence: 205
+  flat-binary-precedence: 205
   unicode-equivalent: "\u29E6"
   unicode-equivalent-name: GLEICH STARK
   wl-unicode: "\u29E6"
@@ -2733,6 +2760,7 @@ Exists:
   unicode-equivalent-name: THERE EXISTS
   wl-unicode: "\u2203"
   wl-unicode-name: THERE EXISTS
+  prefix-precedence: 240
 ExponentialE:
   amslatex: "\\ExponentialE"
   esc-alias: ee
@@ -2749,7 +2777,7 @@ Factorial:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Factorial
-  precedence: 610
+  postfix-precedence: 610
 
 # Double Factorial
 # https://en.wikipedia.org/wiki/Double_factorial
@@ -2759,7 +2787,7 @@ Factorial2:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Factorial2
-  precedence: 610
+  postfix-precedence: 620
 FiLigature:
   has-unicode-inverse: false
   is-letter-like: false
@@ -2898,6 +2926,7 @@ ForAll:
   unicode-equivalent-name: FOR ALL
   wl-unicode: "\u2200"
   wl-unicode-name: FOR ALL
+  prefix-precedence: 240
 FormalA:
   esc-alias: .a
   has-unicode-inverse: true
@@ -3753,7 +3782,7 @@ FunctionAmpersand:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Function
-  precedence: 90
+  postfix-precedence: 90
 Gamma:
   esc-alias: g
   has-unicode-inverse: false
@@ -3774,7 +3803,7 @@ Get:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Get
-  precedence: 720
+  prefix-precedence: 720
 Gimel:
   amslatex: "\\gimel"
   esc-alias: gi
@@ -4229,6 +4258,7 @@ GreaterEqual:
   unicode-equivalent-name: GREATER-THAN OR EQUAL TO
   wl-unicode: "\u2265"
   wl-unicode-name: GREATER-THAN OR EQUAL TO
+  flat-binary-precedence: 290
 GreaterEqualLess:
   has-unicode-inverse: false
   is-letter-like: false
@@ -4427,13 +4457,15 @@ Implies:
   unicode-equivalent: "\u21D2"
   unicode-equivalent-name: RIGHTWARDS DOUBLE ARROW
   wl-unicode: "\uF523"
+  left-binary-precedence: 200
 
 Increment:
   ascii: "++"
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Increment
-  precedence: 660
+  prefix-precedence: 660
+  postfix-precedence: 660
 
 IndentingNewLine:
   esc-alias: nl
@@ -4459,16 +4491,17 @@ Infix:
   amslatex: "\\textasciitilde"
   has-unicode-inverse: false
   is-letter-like: false
-# operator-name: Infix
+  operator-name: Infix
   unicode-equivalent: "~"
   wl-unicode-name: TILDE
+  ternary-precedence: 630
 
 Information:
   ascii: "??"
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Information
-  precedence: 0
+  prefix-precedence: 680
 
 Integral:
   amslatex: "\\int"
@@ -4486,7 +4519,7 @@ InterpretedBox:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: InterpretedBox
-  precedence: 670
+  prefix-precedence: 670
 
 Intersection:
   esc-alias: inter
@@ -4860,6 +4893,7 @@ Less:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Less
+  flat-binary-precedence: 290
 
 LessEqual:
   amslatex: "$\\le$"
@@ -4872,6 +4906,7 @@ LessEqual:
   unicode-equivalent-name: LESS-THAN OR EQUAL TO
   wl-unicode: "\u2264"
   wl-unicode-name: LESS-THAN OR EQUAL TO
+  flat-binary-precedence: 290
 LessEqualGreater:
   has-unicode-inverse: false
   is-letter-like: false
@@ -5009,13 +5044,14 @@ Map:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Map
-  precedence: 620
+  right-binary-precedence: 620
 
 MapAll:
   ascii: "//@"
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: MapAll
+  right-binary-precedence: 620
 Mars:
   has-unicode-inverse: false
   is-letter-like: false
@@ -5076,7 +5112,10 @@ Minus:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Minus
-  precedence: 480
+  # -n
+  prefix-precedence: 480
+  # a - b
+  left-binary-precedence: 310
 
 MinusPlus:
   amslatex: "\\mp"
@@ -5087,6 +5126,7 @@ MinusPlus:
   unicode-equivalent-name: MINUS-OR-PLUS SIGN
   wl-unicode: "\u2213"
   wl-unicode-name: MINUS-OR-PLUS SIGN
+  left-binary-precedence: 310
 Mu:
   amslatex: "$\\mu$"
   esc-alias: m
@@ -5122,6 +5162,7 @@ Nand:
   unicode-equivalent-name: NAND
   wl-unicode: "\u22BC"
   wl-unicode-name: NAND
+  flat-binary-precedence: 225
 Natural:
   has-unicode-inverse: false
   is-letter-like: true
@@ -5199,6 +5240,7 @@ NonCommutativeMultiply:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: NonCommutativeMultiply
+  flat-binary-precedence: 510
 
 Nor:
   amslatex: "$\\veebar$"
@@ -5206,7 +5248,7 @@ Nor:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Nor
-  # No precedences since this gets transformed to Not[Or[expr]]
+  flat-binary-precedence: 215
   unicode-equivalent: "\u22BD"
   unicode-equivalent-name: NOR
   wl-unicode: "\u22BD"
@@ -5220,7 +5262,7 @@ Not:
   is-letter-like: false
   unicode-equivalent: "\u00AC"
   operator-name: Not
-  precedence: 230
+  prefix-precedence: 230
   wl-unicode: "\00AC"
   wl-unicode-name: NOT SIGN
 NotCongruent:
@@ -5250,6 +5292,7 @@ NotDoubleVerticalBar:
   unicode-equivalent-name: NOT PARALLEL TO
   wl-unicode: "\u2226"
   wl-unicode-name: NOT PARALLEL TO
+  flat-binary-precedence: 280
 NotElement:
   amslatex: "\\notin"
   esc-alias: '!el'
@@ -5260,17 +5303,7 @@ NotElement:
   unicode-equivalent-name: NOT AN ELEMENT OF
   wl-unicode: "\u2209"
   wl-unicode-name: NOT AN ELEMENT OF
-NotEqual:
-  amslatex: "$\ne$"
-  ascii: "!="
-  esc-alias: '!='
-  has-unicode-inverse: false
-  is-letter-like: false
-  operator-name: NotEqual
-  unicode-equivalent: "\u2260"
-  unicode-equivalent-name: NOT EQUAL TO
-  wl-unicode: "\u2260"
-  wl-unicode-name: NOT EQUAL TO
+  flat-binary-precedence: 250
 NotEqualTilde:
   esc-alias: '!=~'
   has-unicode-inverse: false
@@ -5286,6 +5319,7 @@ NotExists:
   unicode-equivalent-name: THERE DOES NOT EXIST
   wl-unicode: "\u2204"
   wl-unicode-name: THERE DOES NOT EXIST
+  prefix-precedence: 240
 NotGreater:
   esc-alias: '!>'
   has-unicode-inverse: false
@@ -5615,6 +5649,7 @@ NotVerticalBar:
   has-unicode-inverse: false
   is-letter-like: false
   wl-unicode: "\uF3D1"
+  flat-binary-precedence: 280
 Nu:
   amslatex: "\\nu"
   esc-alias: n
@@ -5762,6 +5797,7 @@ Or:
   unicode-equivalent-name: LOGICAL OR
   wl-unicode: "\u2228"
   wl-unicode-name: LOGICAL OR
+  flat-binary-precedence: 215
 
 OverBrace:
   esc-alias: o{
@@ -5814,7 +5850,7 @@ PatternTest:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: PatternTest
-  precedence: 660
+  nonassoc-binary-precedence: 680
 
 PermutationProduct:
   has-unicode-inverse: true
@@ -5871,7 +5907,7 @@ Plus:
   has-unicode-inverse: true
   is-letter-like: false
   operator-name: Plus
-  precedence: 310
+  flat-binary-precedence: 310
   unicode-equivalent: "+"
   unicode-equivalent-name: PLUS SIGN
   wl-unicode: "+"
@@ -5885,6 +5921,7 @@ PlusMinus:
   unicode-equivalent-name: PLUS-MINUS SIGN
   wl-unicode: "\xB1"
   wl-unicode-name: PLUS-MINUS SIGN
+  left-binary-precedence: 310
 Pluto:
   has-unicode-inverse: false
   is-letter-like: false
@@ -5897,12 +5934,13 @@ Postfix:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Postfix
+  left-binary-precendence: 70
 Power:
   ascii: "^"
   has-unicode-inverse: true
   is-letter-like: false
   operator-name: Power
-  precedence: 590
+  right-binary-precedence: 590
   unicode-equivalent: "^"
   unicode-equivalent-name: CIRCUMFLEX ACCENT
   wl-unicode: "^"
@@ -5997,13 +6035,13 @@ Put:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Put
-  precedence: 30
+  left-binary-precedence: 30
 PutAppend:
   ascii: ">>>"
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: PutAppend
-  precedence: 30
+  left-binary-precedence: 30
 QuarterNote:
   has-unicode-inverse: false
   is-letter-like: false
@@ -6090,6 +6128,7 @@ RawGreater:
   unicode-equivalent-name: GREATER-THAN SIGN
   wl-unicode: "\u003e"
   wl-unicode-name: GREATER-THAN SIGN
+  flat-binary-precedence: 290
 
 RawLeftBrace:
   ascii: '{'
@@ -6235,27 +6274,27 @@ Repeated:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Repeated
-  precedence: 170
+  postfix-precedence: 170
 
 RepeatedNull:
   ascii: "..."
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: RepeatedNull
-  precedence: 170
+  postfix-precedence: 170
 
 ReplaceAll:
   ascii: "/."
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: ReplaceAll
-  precedence: 110
+  left-binary-precedence: 110
 ReplaceRepeated:
   ascii: "//."
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: ReplaceRepeated
-  precedence: 110
+  left-binary-precedence: 110
 ReturnIndicator:
   esc-alias: ret
   has-unicode-inverse: false
@@ -6477,6 +6516,7 @@ RightTee:
   unicode-equivalent-name: RIGHT TACK
   wl-unicode: "\u22A2"
   wl-unicode-name: RIGHT TACK
+  right-binary-precedence: 190
 RightTeeArrow:
   has-unicode-inverse: false
   is-letter-like: false
@@ -6585,7 +6625,7 @@ Rule:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Rule
-  precedence: 120
+  right-binary-precedence: 120
   unicode-equivalent: "\u2192"
   unicode-equivalent-name: RIGHTWARDS ARROW
   wl-unicode: "\uF522"
@@ -6594,7 +6634,7 @@ RuleDelayed:
   esc-alias: ":>"
   has-unicode-inverse: true
   operator-name: RuleDelayed
-  precedence: 120
+  right-binary-precedence: 120
   is-letter-like: false
   unicode-equivalent: "\u29F4"
   unicode-equivalent-name: RULE-DELAYED
@@ -6636,7 +6676,7 @@ SameQ:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: SameQ
-  precedence: 290
+  flat-binary-precedence: 290
 Sampi:
   esc-alias: sa
   has-unicode-inverse: true
@@ -7120,7 +7160,7 @@ Set:
   has-unicode-inverse: true
   is-letter-like: false
   operator-name: Set
-  precedence: 40
+  right-binary-precedence: 40
   unicode-equivalent: "="
   unicode-equivalent-name: EQUALS SIGN
   wl-unicode: "="
@@ -7130,6 +7170,7 @@ SetDelayed:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: SetDelayed
+  right-binary-precedence: 40
 Sharp:
   has-unicode-inverse: false
   is-letter-like: true
@@ -7194,6 +7235,7 @@ SmallCircle:
   unicode-equivalent-name: RING OPERATOR
   wl-unicode: "\u2218"
   wl-unicode-name: RING OPERATOR
+  flat-binary-precedence: 530
 SpaceIndicator:
   esc-alias: space
   has-unicode-inverse: false
@@ -7219,7 +7261,7 @@ Span:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Span
-  precedence: 305
+  ternary-precedence: 305
 SpanFromAbove:
   esc-alias: sfa
   has-unicode-inverse: false
@@ -7266,6 +7308,7 @@ Square:
   unicode-equivalent: "\u25AB"
   unicode-equivalent-name: WHITE SMALL SQUARE
   wl-unicode: "\uF520"
+  prefix-precedence: 540
 SquareIntersection:
   has-unicode-inverse: false
   is-letter-like: false
@@ -7274,6 +7317,7 @@ SquareIntersection:
   unicode-equivalent-name: SQUARE CAP
   wl-unicode: "\u2293"
   wl-unicode-name: SQUARE CAP
+  flat-binary-precedence: 305
 SquareSubset:
   amslatex: "\\sqsubset"
   has-unicode-inverse: false
@@ -7327,6 +7371,7 @@ Star:
   unicode-equivalent-name: STAR OPERATOR
   wl-unicode: "\u22C6"
   wl-unicode-name: STAR OPERATOR
+  flat-binary-precedence: 390
 Sterling:
   has-unicode-inverse: false
   is-letter-like: true
@@ -7348,14 +7393,14 @@ StringExpression:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: StringExpression
-  precedence: 135
+  flat-binary-precedence: 135
 
 StringJoin:
   ascii: "<>"
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: StringJoin
-  precedence: 600
+  flat-binary-precedence: 600
 
 Subset:
   amslatex: "\\subset"
@@ -7367,6 +7412,7 @@ Subset:
   unicode-equivalent-name: SUBSET OF
   wl-unicode: "\u2282"
   wl-unicode-name: SUBSET OF
+  flat-binary-precedence: 250
 SubsetEqual:
   amslatex: "\\subseteq"
   esc-alias: sub=
@@ -7382,6 +7428,7 @@ SubtractFrom:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: SubtractFrom
+  right-binary-precedence: 100
 Succeeds:
   has-unicode-inverse: false
   is-letter-like: false
@@ -7423,6 +7470,7 @@ SuchThat:
   unicode-equivalent-name: SMALL CONTAINS AS MEMBER
   wl-unicode: "\u220D"
   wl-unicode-name: SMALL CONTAINS AS MEMBER
+  right-binary-precedence: 180
 Sum:
   amslatex: "\\sum"
   esc-alias: sum
@@ -7433,6 +7481,7 @@ Sum:
   unicode-equivalent-name: N-ARY SUMMATION
   wl-unicode: "\u2211"
   wl-unicode-name: N-ARY SUMMATION
+  precedence: 320
 Superset:
   esc-alias: sup
   has-unicode-inverse: false
@@ -7442,6 +7491,7 @@ Superset:
   unicode-equivalent-name: SUPERSET OF
   wl-unicode: "\u2283"
   wl-unicode-name: SUPERSET OF
+  flat-binary-precedence: 250
 SupersetEqual:
   esc-alias: sup=
   has-unicode-inverse: false
@@ -7513,6 +7563,7 @@ Therefore:
   unicode-equivalent-name: THEREFORE
   wl-unicode: "\u2234"
   wl-unicode-name: THEREFORE
+  right-binary-precedence: 50
 Theta:
   amslatex: "\\theta"
   esc-alias: th
@@ -7592,7 +7643,7 @@ Times:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Times
-  precedence: 400
+  flat-binary-precedence: 400
   unicode-equivalent: "\xD7"
   unicode-equivalent-name: MULTIPLICATION SIGN
   wl-unicode: "\xD7"
@@ -7602,6 +7653,7 @@ TimesBy:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: TimesBy
+  right-binary-precedence: 100
 Trademark:
   esc-alias: tm
   has-unicode-inverse: false
@@ -7617,6 +7669,7 @@ Transpose:
   unicode-equivalent: "\u1D40"
   unicode-equivalent-name: MODIFIER LETTER CAPITAL T
   wl-unicode: "\uF3C7"
+  postfix-precendence: 670
 TripleDot:
   has-unicode-inverse: false
   is-letter-like: false
@@ -7706,11 +7759,25 @@ UndirectedEdge:
   unicode-equivalent: "\u2194"
   unicode-equivalent-name: LEFT RIGHT ARROW
   wl-unicode: "\uF3D4"
-UnSameQ:
+  nonassoc-binary-precedence: 120
+NotEqual:
+  amslatex: "$\ne$"
+  ascii: "!="
+  esc-alias: '!='
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: NotEqual
+  unicode-equivalent: "\u2260"
+  unicode-equivalent-name: NOT EQUAL TO
+  wl-unicode: "\u2260"
+  wl-unicode-name: NOT EQUAL TO
+  flat-binary-precedence: 290
+UnsameQ:
   ascii: "=!="
   has-unicode-inverse: false
   is-letter-like: false
-  operator-name: UnSameQ
+  operator-name: UnsameQ
+  flat-operator-precedence: 290
 Union:
   esc-alias: un
   has-unicode-inverse: false
@@ -7720,6 +7787,7 @@ Union:
   unicode-equivalent-name: N-ARY UNION
   wl-unicode: "\u22C3"
   wl-unicode-name: N-ARY UNION
+  flat-binary-precedence: 300
 UnionPlus:
   has-unicode-inverse: false
   is-letter-like: false
@@ -7733,7 +7801,7 @@ Unset:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Unset
-  precedence: 670
+  postfix-precedence: 670
 UpArrow:
   amslatex: "\\uparrow"
   has-unicode-inverse: false
@@ -7836,12 +7904,13 @@ UpSet:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: UpSet
-  precedence: 40
+  right-binary-precedence: 40
 UpSetDelayed:
   ascii: "^:="
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: UpSetDelayed
+  right-binary-precedence: 40
 
 # The rendering of Uranus at https://reference.wolfram.com/language/ref/character/Uranus.html
 # looks more like U+26E2 (Astronomical Symbol for Uranus) than the Standard Unicode equavalent
@@ -7865,6 +7934,7 @@ Vee:
   unicode-equivalent-name: N-ARY LOGICAL OR
   wl-unicode: "\u22C1"
   wl-unicode-name: N-ARY LOGICAL OR
+  flat-binary-precedence: 430
 Venus:
   has-unicode-inverse: false
   is-letter-like: false
@@ -7880,6 +7950,7 @@ VerticalBar:
   unicode-equivalent-name: VERTICAL BAR
   wl-unicode: "\uF3D0"
   wl-unicode-name: LIGHT VERTICAL BAR
+  flat-binary-precedence: 280
 VerticalEllipsis:
   has-unicode-inverse: false
   is-letter-like: false
@@ -7900,6 +7971,7 @@ VerticalSeparator:
   has-unicode-inverse: false
   is-letter-like: false
   wl-unicode: "\uF432"
+  flat-binary-precedence: 60
 VerticalTilde:
   has-unicode-inverse: false
   is-letter-like: false
@@ -7908,6 +7980,7 @@ VerticalTilde:
   unicode-equivalent-name: WREATH PRODUCT
   wl-unicode: "\u2240"
   wl-unicode-name: WREATH PRODUCT
+  flat-binary-precedence: 370
 VeryThinSpace:
   has-unicode-inverse: false
   is-letter-like: false
@@ -7943,6 +8016,7 @@ Wedge:
   unicode-equivalent-name: N-ARY LOGICAL AND
   wl-unicode: "\u22C0"
   wl-unicode-name: N-ARY LOGICAL AND
+  flat-binary-precedence: 440
 
 # https://en.wikipedia.org/wiki/Weierstrass%27s_elliptic_functions
 # also confirms this choice as being the right one in both
@@ -8024,13 +8098,14 @@ Xnor:
   has-unicode-inverse: false
   is-letter-like: false
   wl-unicode: "\uF4A2"
+  flat-binary-precedence: 220
 Xor:
   amslatex: "$\\oplus$" # The WL veebar-looking symbol isn't in AMSLaTeX
   esc-alias: xor
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Xor
-  precedence: 215
+  flat-binary-precedence: 215
   unicode-equivalent: "\u22BB"
   unicode-equivalent-name: XOR
   wl-unicode: "\u22BB"
