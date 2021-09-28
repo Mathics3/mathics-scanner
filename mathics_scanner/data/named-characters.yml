@@ -3744,6 +3744,7 @@ Function:
   unicode-equivalent-name: RIGHTWARDS ARROW FROM BAR
   wl-unicode: "\uF4A1"
   wl-unicode-name: RIGHTWARDS ARROW FROM BAR
+  precedence: 800
 
 # Alternative form of Function. We use FunctionAmpersand
 # since Function is already taken. See note above.

@@ -259,7 +259,6 @@ literal_tokens = {
     "^": ["UpSetDelayed", "UpSet", "Power"],
     "_": ["Pattern"],
     "`": ["Pattern", "Symbol"],
-    # FIXME: the -> part of |-> in function isn't handled
     "|": ["RawRightAssociation", "Or", "Alternatives", "Function"],
     "{": ["RawLeftBrace"],
     "}": ["RawRightBrace"],
