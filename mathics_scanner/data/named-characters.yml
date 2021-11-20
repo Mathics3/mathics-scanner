@@ -552,7 +552,7 @@ CapitalCHacek:
   amslatex: "\\v{C}"
   esc-alias: Cv
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u010C"
   unicode-equivalent-name: LATIN CAPITAL LETTER C WITH CARON
   wl-unicode: "\u010C"
@@ -1597,6 +1597,7 @@ DifferentialD:
   amslatex: "\\DifferentialD"
   esc-alias: dd
   has-unicode-inverse: true
+  # This can't be letter-like because it is used in derivatives as a function
   is-letter-like: false
   unicode-equivalent: "\U0001D451"
   unicode-equivalent-name: MATHEMATICAL ITALIC SMALL D
@@ -1862,7 +1863,7 @@ DoubleStruckA:
 DoubleStruckB:
   esc-alias: dsb
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D553"
   unicode-equivalent-name: MATHEMATICAL DOUBLE-STRUCK SMALL B
   wl-unicode: "\uF6E7"
@@ -2240,42 +2241,42 @@ DoubleStruckTwo:
 DoubleStruckU:
   esc-alias: dsu
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D566"
   unicode-equivalent-name: MATHEMATICAL DOUBLE-STRUCK SMALL U
   wl-unicode: "\uF6FA"
 DoubleStruckV:
   esc-alias: dsv
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D567"
   unicode-equivalent-name: MATHEMATICAL DOUBLE-STRUCK SMALL V
   wl-unicode: "\uF6FB"
 DoubleStruckW:
   esc-alias: dsw
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D568"
   unicode-equivalent-name: MATHEMATICAL DOUBLE-STRUCK SMALL W
   wl-unicode: "\uF6FC"
 DoubleStruckX:
   esc-alias: dsx
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D569"
   unicode-equivalent-name: MATHEMATICAL DOUBLE-STRUCK SMALL X
   wl-unicode: "\uF6FD"
 DoubleStruckY:
   esc-alias: dsy
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D56A"
   unicode-equivalent-name: MATHEMATICAL DOUBLE-STRUCK SMALL Y
   wl-unicode: "\uF6FE"
 DoubleStruckZ:
   esc-alias: dsz
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D56B"
   unicode-equivalent-name: MATHEMATICAL DOUBLE-STRUCK SMALL Z
   wl-unicode: "\uF6FF"
@@ -2465,7 +2466,7 @@ EAcute:
   amslatex: "\\'{e}"
   esc-alias: e'
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xE9"
   unicode-equivalent-name: LATIN SMALL LETTER E WITH ACUTE
   wl-unicode: "\xE9"
@@ -2474,7 +2475,7 @@ EBar:
   amslatex: "\\={e}"
   esc-alias: e-
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u0113"
   unicode-equivalent-name: LATIN SMALL LETTER E WITH MACRON
   wl-unicode: "\u0113"
@@ -2483,7 +2484,7 @@ ECup:
   amslatex: "\\u{e}"
   esc-alias: eu
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u0115"
   unicode-equivalent-name: LATIN SMALL LETTER E WITH BREVE
   wl-unicode: "\u0115"
@@ -2491,7 +2492,7 @@ ECup:
 EDoubleDot:
   esc-alias: e"
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xEB"
   unicode-equivalent-name: LATIN SMALL LETTER E WITH DIAERESIS
   wl-unicode: "\xEB"
@@ -2500,7 +2501,7 @@ EGrave:
   amslatex: "\\`{e}"
   esc-alias: e`
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xE8"
   unicode-equivalent-name: LATIN SMALL LETTER E WITH GRAVE
   wl-unicode: "\xE8"
@@ -2509,7 +2510,7 @@ EHacek:
   amslatex: "\\v{e}"
   esc-alias: ev
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u011B"
   unicode-equivalent-name: LATIN SMALL LETTER E WITH CARON
   wl-unicode: "\u011B"
@@ -2517,7 +2518,7 @@ EHacek:
 EHat:
   esc-alias: e^
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xEA"
   unicode-equivalent-name: LATIN SMALL LETTER E WITH CIRCUMFLEX
   wl-unicode: "\xEA"
@@ -2531,7 +2532,7 @@ Earth:
   wl-unicode-name: EARTH
 EighthNote:
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u266A"
   unicode-equivalent-name: EIGHTH NOTE
   wl-unicode: "\u266A"
@@ -3787,35 +3788,35 @@ Gimel:
 GothicA:
   esc-alias: goa
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D51E"
   unicode-equivalent-name: MATHEMATICAL FRAKTUR SMALL A
   wl-unicode: "\uF6CC"
 GothicB:
   esc-alias: gob
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D51F"
   unicode-equivalent-name: MATHEMATICAL FRAKTUR SMALL B
   wl-unicode: "\uF6CD"
 GothicC:
   esc-alias: goc
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D520"
   unicode-equivalent-name: MATHEMATICAL FRAKTUR SMALL C
   wl-unicode: "\uF6CE"
 GothicCapitalA:
   esc-alias: goA
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D504"
   unicode-equivalent-name: MATHEMATICAL FRAKTUR CAPITAL A
   wl-unicode: "\uF78A"
 GothicCapitalB:
   esc-alias: goB
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D505"
   unicode-equivalent-name: MATHEMATICAL FRAKTUR CAPITAL B
   wl-unicode: "\uF78B"
@@ -3823,7 +3824,7 @@ GothicCapitalC:
   amslatex: "\\mathfrak{C}"
   esc-alias: goC
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u212D"
   unicode-equivalent-name: BLACK-LETTER CAPITAL C
   wl-unicode: "\u212D"
@@ -3831,35 +3832,35 @@ GothicCapitalC:
 GothicCapitalD:
   esc-alias: goD
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D507"
   unicode-equivalent-name: MATHEMATICAL FRAKTUR CAPITAL D
   wl-unicode: "\uF78D"
 GothicCapitalE:
   esc-alias: goE
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D508"
   unicode-equivalent-name: MATHEMATICAL FRAKTUR CAPITAL E
   wl-unicode: "\uF78E"
 GothicCapitalF:
   esc-alias: goF
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D509"
   unicode-equivalent-name: MATHEMATICAL FRAKTUR CAPITAL F
   wl-unicode: "\uF78F"
 GothicCapitalG:
   esc-alias: goG
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D50A"
   unicode-equivalent-name: MATHEMATICAL FRAKTUR CAPITAL G
   wl-unicode: "\uF790"
 GothicCapitalH:
   esc-alias: goH
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u210C"
   unicode-equivalent-name: BLACK-LETTER CAPITAL H
   wl-unicode: "\u210C"
@@ -3867,7 +3868,7 @@ GothicCapitalH:
 GothicCapitalI:
   esc-alias: goI
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u2111"
   unicode-equivalent-name: BLACK-LETTER CAPITAL I
   wl-unicode: "\u2111"
@@ -3875,63 +3876,63 @@ GothicCapitalI:
 GothicCapitalJ:
   esc-alias: goJ
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D50D"
   unicode-equivalent-name: MATHEMATICAL FRAKTUR CAPITAL J
   wl-unicode: "\uF793"
 GothicCapitalK:
   esc-alias: goK
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D50E"
   unicode-equivalent-name: MATHEMATICAL FRAKTUR CAPITAL K
   wl-unicode: "\uF794"
 GothicCapitalL:
   esc-alias: goL
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D50F"
   unicode-equivalent-name: MATHEMATICAL FRAKTUR CAPITAL L
   wl-unicode: "\uF795"
 GothicCapitalM:
   esc-alias: goM
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D510"
   unicode-equivalent-name: MATHEMATICAL FRAKTUR CAPITAL M
   wl-unicode: "\uF796"
 GothicCapitalN:
   esc-alias: goN
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D511"
   unicode-equivalent-name: MATHEMATICAL FRAKTUR CAPITAL N
   wl-unicode: "\uF797"
 GothicCapitalO:
   esc-alias: goO
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D512"
   unicode-equivalent-name: MATHEMATICAL FRAKTUR CAPITAL O
   wl-unicode: "\uF798"
 GothicCapitalP:
   esc-alias: goP
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D513"
   unicode-equivalent-name: MATHEMATICAL FRAKTUR CAPITAL P
   wl-unicode: "\uF799"
 GothicCapitalQ:
   esc-alias: goQ
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D514"
   unicode-equivalent-name: MATHEMATICAL FRAKTUR CAPITAL Q
   wl-unicode: "\uF79A"
 GothicCapitalR:
   esc-alias: goR
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u211C"
   unicode-equivalent-name: BLACK-LETTER CAPITAL R
   wl-unicode: "\u211C"
@@ -3939,56 +3940,56 @@ GothicCapitalR:
 GothicCapitalS:
   esc-alias: goS
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D516"
   unicode-equivalent-name: MATHEMATICAL FRAKTUR CAPITAL S
   wl-unicode: "\uF79C"
 GothicCapitalT:
   esc-alias: goT
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D517"
   unicode-equivalent-name: MATHEMATICAL FRAKTUR CAPITAL T
   wl-unicode: "\uF79D"
 GothicCapitalU:
   esc-alias: goU
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D518"
   unicode-equivalent-name: MATHEMATICAL FRAKTUR CAPITAL U
   wl-unicode: "\uF79E"
 GothicCapitalV:
   esc-alias: goV
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D519"
   unicode-equivalent-name: MATHEMATICAL FRAKTUR CAPITAL V
   wl-unicode: "\uF79F"
 GothicCapitalW:
   esc-alias: goW
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D51A"
   unicode-equivalent-name: MATHEMATICAL FRAKTUR CAPITAL W
   wl-unicode: "\uF7A0"
 GothicCapitalX:
   esc-alias: goX
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D51B"
   unicode-equivalent-name: MATHEMATICAL FRAKTUR CAPITAL X
   wl-unicode: "\uF7A1"
 GothicCapitalY:
   esc-alias: goY
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D51C"
   unicode-equivalent-name: MATHEMATICAL FRAKTUR CAPITAL Y
   wl-unicode: "\uF7A2"
 GothicCapitalZ:
   esc-alias: goZ
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u2128"
   unicode-equivalent-name: BLACK-LETTER CAPITAL Z
   wl-unicode: "\u2128"
@@ -3996,14 +3997,14 @@ GothicCapitalZ:
 GothicD:
   esc-alias: god
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D521"
   unicode-equivalent-name: MATHEMATICAL FRAKTUR SMALL D
   wl-unicode: "\uF6CF"
 GothicE:
   esc-alias: goe
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D522"
   unicode-equivalent-name: MATHEMATICAL FRAKTUR SMALL E
   wl-unicode: "\uF6D0"
@@ -4015,7 +4016,7 @@ GothicEight:
 GothicF:
   esc-alias: gof
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D523"
   unicode-equivalent-name: MATHEMATICAL FRAKTUR SMALL F
   wl-unicode: "\uF6D1"
@@ -4032,56 +4033,56 @@ GothicFour:
 GothicG:
   esc-alias: gog
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D524"
   unicode-equivalent-name: MATHEMATICAL FRAKTUR SMALL G
   wl-unicode: "\uF6D2"
 GothicH:
   esc-alias: goh
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D525"
   unicode-equivalent-name: MATHEMATICAL FRAKTUR SMALL H
   wl-unicode: "\uF6D3"
 GothicI:
   esc-alias: goi
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D526"
   unicode-equivalent-name: MATHEMATICAL FRAKTUR SMALL I
   wl-unicode: "\uF6D4"
 GothicJ:
   esc-alias: goj
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D527"
   unicode-equivalent-name: MATHEMATICAL FRAKTUR SMALL J
   wl-unicode: "\uF6D5"
 GothicK:
   esc-alias: gok
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D528"
   unicode-equivalent-name: MATHEMATICAL FRAKTUR SMALL K
   wl-unicode: "\uF6D6"
 GothicL:
   esc-alias: gol
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D529"
   unicode-equivalent-name: MATHEMATICAL FRAKTUR SMALL L
   wl-unicode: "\uF6D7"
 GothicM:
   esc-alias: gom
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D52A"
   unicode-equivalent-name: MATHEMATICAL FRAKTUR SMALL M
   wl-unicode: "\uF6D8"
 GothicN:
   esc-alias: gon
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D52B"
   unicode-equivalent-name: MATHEMATICAL FRAKTUR SMALL N
   wl-unicode: "\uF6D9"
@@ -4093,7 +4094,7 @@ GothicNine:
 GothicO:
   esc-alias: goo
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D52C"
   unicode-equivalent-name: MATHEMATICAL FRAKTUR SMALL O
   wl-unicode: "\uF6DA"
@@ -4105,28 +4106,28 @@ GothicOne:
 GothicP:
   esc-alias: gop
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D52D"
   unicode-equivalent-name: MATHEMATICAL FRAKTUR SMALL P
   wl-unicode: "\uF6DB"
 GothicQ:
   esc-alias: goq
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D52E"
   unicode-equivalent-name: MATHEMATICAL FRAKTUR SMALL Q
   wl-unicode: "\uF6DC"
 GothicR:
   esc-alias: gor
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D52F"
   unicode-equivalent-name: MATHEMATICAL FRAKTUR SMALL R
   wl-unicode: "\uF6DD"
 GothicS:
   esc-alias: gos
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D530"
   unicode-equivalent-name: MATHEMATICAL FRAKTUR SMALL S
   wl-unicode: "\uF6DE"
@@ -4143,7 +4144,7 @@ GothicSix:
 GothicT:
   esc-alias: got
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D531"
   unicode-equivalent-name: MATHEMATICAL FRAKTUR SMALL T
   wl-unicode: "\uF6DF"
@@ -4160,42 +4161,42 @@ GothicTwo:
 GothicU:
   esc-alias: gou
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D532"
   unicode-equivalent-name: MATHEMATICAL FRAKTUR SMALL U
   wl-unicode: "\uF6E0"
 GothicV:
   esc-alias: gov
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D533"
   unicode-equivalent-name: MATHEMATICAL FRAKTUR SMALL V
   wl-unicode: "\uF6E1"
 GothicW:
   esc-alias: gow
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D534"
   unicode-equivalent-name: MATHEMATICAL FRAKTUR SMALL W
   wl-unicode: "\uF6E2"
 GothicX:
   esc-alias: gox
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D535"
   unicode-equivalent-name: MATHEMATICAL FRAKTUR SMALL X
   wl-unicode: "\uF6E3"
 GothicY:
   esc-alias: goy
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D536"
   unicode-equivalent-name: MATHEMATICAL FRAKTUR SMALL Y
   wl-unicode: "\uF6E4"
 GothicZ:
   esc-alias: goz
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D537"
   unicode-equivalent-name: MATHEMATICAL FRAKTUR SMALL Z
   wl-unicode: "\uF6E5"
@@ -4355,7 +4356,7 @@ IAcute:
   amslatex: "\\'{i}"
   esc-alias: i'
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xED"
   unicode-equivalent-name: LATIN SMALL LETTER I WITH ACUTE
   wl-unicode: "\xED"
@@ -4364,7 +4365,7 @@ ICup:
   amslatex: "\\u{i}"
   esc-alias: iu
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u012D"
   unicode-equivalent-name: LATIN SMALL LETTER I WITH BREVE
   wl-unicode: "\u012D"
@@ -4372,7 +4373,7 @@ ICup:
 IDoubleDot:
   esc-alias: i"
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xEF"
   unicode-equivalent-name: LATIN SMALL LETTER I WITH DIAERESIS
   wl-unicode: "\xEF"
@@ -4381,7 +4382,7 @@ IGrave:
   amslatex: "\\`{i}"
   esc-alias: i`
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xEC"
   unicode-equivalent-name: LATIN SMALL LETTER I WITH GRAVE
   wl-unicode: "\xEC"
@@ -4389,7 +4390,7 @@ IGrave:
 IHat:
   esc-alias: i^
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xEE"
   unicode-equivalent-name: LATIN SMALL LETTER I WITH CIRCUMFLEX
   wl-unicode: "\xEE"
@@ -4580,7 +4581,7 @@ LSlash:
   amslatex: "\\l{}"
   esc-alias: l/
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u0142"
   unicode-equivalent-name: LATIN SMALL LETTER L WITH STROKE
   wl-unicode: "\u0142"
@@ -5100,7 +5101,7 @@ NHacek:
   amslatex: "\\v{n}"
   esc-alias: nv
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u0148"
   unicode-equivalent-name: LATIN SMALL LETTER N WITH CARON
   wl-unicode: "\u0148"
@@ -5108,7 +5109,7 @@ NHacek:
 NTilde:
   esc-alias: n~
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xF1"
   unicode-equivalent-name: LATIN SMALL LETTER N WITH TILDE
   wl-unicode: "\xF1"
@@ -5643,7 +5644,7 @@ OAcute:
   amslatex: "\\'{o}"
   esc-alias: o'
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xF3"
   unicode-equivalent-name: LATIN SMALL LETTER O WITH ACUTE
   wl-unicode: "\xF3"
@@ -5651,7 +5652,7 @@ OAcute:
 ODoubleAcute:
   esc-alias: o''
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u0151"
   unicode-equivalent-name: LATIN SMALL LETTER O WITH DOUBLE ACUTE
   wl-unicode: "\u0151"
@@ -5676,7 +5677,7 @@ OGrave:
   amslatex: "\\`{o}"
   esc-alias: o`
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xF2"
   unicode-equivalent-name: LATIN SMALL LETTER O WITH GRAVE
   wl-unicode: "\xF2"
@@ -5685,7 +5686,7 @@ OHat:
   amslatex: "\\^{o}"
   esc-alias: o^
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xF4"
   unicode-equivalent-name: LATIN SMALL LETTER O WITH CIRCUMFLEX
   wl-unicode: "\xF4"
@@ -5694,7 +5695,7 @@ OSlash:
   amslatex: "\\o{}"
   esc-alias: o/
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xF8"
   unicode-equivalent-name: LATIN SMALL LETTER O WITH STROKE
   wl-unicode: "\xF8"
@@ -6015,7 +6016,7 @@ RHacek:
   amslatex: "\\v{r}"
   esc-alias: rv
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u0159"
   unicode-equivalent-name: LATIN SMALL LETTER R WITH CARON
   wl-unicode: "\u0159"
@@ -6603,7 +6604,7 @@ SHacek:
   amslatex: "\v{s}"
   esc-alias: sv
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u0161"
   unicode-equivalent-name: LATIN SMALL LETTER S WITH CARON
   wl-unicode: "\u0161"
@@ -6662,28 +6663,28 @@ ScorpioSign:
 ScriptA:
   esc-alias: sca
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D4B6"
   unicode-equivalent-name: MATHEMATICAL SCRIPT SMALL A
   wl-unicode: "\uF6B2"
 ScriptB:
   esc-alias: scb
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D4B7"
   unicode-equivalent-name: MATHEMATICAL SCRIPT SMALL B
   wl-unicode: "\uF6B3"
 ScriptC:
   esc-alias: scc
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D4B8"
   unicode-equivalent-name: MATHEMATICAL SCRIPT SMALL C
   wl-unicode: "\uF6B4"
 ScriptCapitalA:
   esc-alias: scA
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D49C"
   unicode-equivalent-name: MATHEMATICAL SCRIPT CAPITAL A
   wl-unicode: "\uF770"
@@ -6691,7 +6692,7 @@ ScriptCapitalB:
   amslatex: "\\mathcal{B}"
   esc-alias: scB
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u212C"
   unicode-equivalent-name: SCRIPT CAPITAL B
   wl-unicode: "\u212C"
@@ -6699,14 +6700,14 @@ ScriptCapitalB:
 ScriptCapitalC:
   esc-alias: scC
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D49E"
   unicode-equivalent-name: MATHEMATICAL SCRIPT CAPITAL C
   wl-unicode: "\uF772"
 ScriptCapitalD:
   esc-alias: scD
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D49F"
   unicode-equivalent-name: MATHEMATICAL SCRIPT CAPITAL D
   wl-unicode: "\uF773"
@@ -6714,7 +6715,7 @@ ScriptCapitalE:
   amslatex: "\\mathcal{E}"
   esc-alias: scE
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u2130"
   unicode-equivalent-name: SCRIPT CAPITAL E
   wl-unicode: "\u2130"
@@ -6723,7 +6724,7 @@ ScriptCapitalF:
   amslatex: "\\mathcal{F}"
   esc-alias: scF
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u2131"
   unicode-equivalent-name: SCRIPT CAPITAL F
   wl-unicode: "\u2131"
@@ -6731,14 +6732,14 @@ ScriptCapitalF:
 ScriptCapitalG:
   esc-alias: scG
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D4A2"
   unicode-equivalent-name: MATHEMATICAL SCRIPT CAPITAL G
   wl-unicode: "\uF776"
 ScriptCapitalH:
   esc-alias: scH
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u210B"
   unicode-equivalent-name: SCRIPT CAPITAL H
   wl-unicode: "\u210B"
@@ -6746,7 +6747,7 @@ ScriptCapitalH:
 ScriptCapitalI:
   esc-alias: scI
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u2110"
   unicode-equivalent-name: SCRIPT CAPITAL I
   wl-unicode: "\u2110"
@@ -6754,21 +6755,21 @@ ScriptCapitalI:
 ScriptCapitalJ:
   esc-alias: scJ
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D4A5"
   unicode-equivalent-name: MATHEMATICAL SCRIPT CAPITAL J
   wl-unicode: "\uF779"
 ScriptCapitalK:
   esc-alias: scK
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D4A6"
   unicode-equivalent-name: MATHEMATICAL SCRIPT CAPITAL K
   wl-unicode: "\uF77A"
 ScriptCapitalL:
   esc-alias: scL
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u2112"
   unicode-equivalent-name: SCRIPT CAPITAL L
   wl-unicode: "\u2112"
@@ -6777,7 +6778,7 @@ ScriptCapitalM:
   amslatex: "\\mathcal{M}"
   esc-alias: scM
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u2133"
   unicode-equivalent-name: SCRIPT CAPITAL M
   wl-unicode: "\u2133"
@@ -6792,28 +6793,28 @@ ScriptCapitalN:
 ScriptCapitalO:
   esc-alias: scO
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D4AA"
   unicode-equivalent-name: MATHEMATICAL SCRIPT CAPITAL O
   wl-unicode: "\uF77E"
 ScriptCapitalP:
   esc-alias: scP
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D4AB"
   unicode-equivalent-name: MATHEMATICAL SCRIPT CAPITAL P
   wl-unicode: "\uF77F"
 ScriptCapitalQ:
   esc-alias: scQ
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D4AC"
   unicode-equivalent-name: MATHEMATICAL SCRIPT CAPITAL Q
   wl-unicode: "\uF780"
 ScriptCapitalR:
   esc-alias: scR
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u211B"
   unicode-equivalent-name: SCRIPT CAPITAL R
   wl-unicode: "\u211B"
@@ -6821,75 +6822,75 @@ ScriptCapitalR:
 ScriptCapitalS:
   esc-alias: scS
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D4AE"
   unicode-equivalent-name: MATHEMATICAL SCRIPT CAPITAL S
   wl-unicode: "\uF782"
 ScriptCapitalT:
   esc-alias: scT
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D4AF"
   unicode-equivalent-name: MATHEMATICAL SCRIPT CAPITAL T
   wl-unicode: "\uF783"
 ScriptCapitalU:
   esc-alias: scU
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D4B0"
   unicode-equivalent-name: MATHEMATICAL SCRIPT CAPITAL U
   wl-unicode: "\uF784"
 ScriptCapitalV:
   esc-alias: scV
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D4B1"
   unicode-equivalent-name: MATHEMATICAL SCRIPT CAPITAL V
   wl-unicode: "\uF785"
 ScriptCapitalW:
   esc-alias: scW
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D4B2"
   unicode-equivalent-name: MATHEMATICAL SCRIPT CAPITAL W
   wl-unicode: "\uF786"
 ScriptCapitalX:
   esc-alias: scX
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D4B3"
   unicode-equivalent-name: MATHEMATICAL SCRIPT CAPITAL X
   wl-unicode: "\uF787"
 ScriptCapitalY:
   esc-alias: scY
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D4B4"
   unicode-equivalent-name: MATHEMATICAL SCRIPT CAPITAL Y
   wl-unicode: "\uF788"
 ScriptCapitalZ:
   esc-alias: scZ
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D4B5"
   unicode-equivalent-name: MATHEMATICAL SCRIPT CAPITAL Z
   wl-unicode: "\uF789"
 ScriptD:
   esc-alias: scd
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D4B9"
   unicode-equivalent-name: MATHEMATICAL SCRIPT SMALL D
   wl-unicode: "\uF6B5"
 ScriptDotlessI:
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D4BE"
   unicode-equivalent-name: MATHEMATICAL SCRIPT SMALL I
   wl-unicode: "\uF730"
 ScriptDotlessJ:
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D4BF"
   unicode-equivalent-name: MATHEMATICAL SCRIPT SMALL J
   wl-unicode: "\uF731"
@@ -6897,7 +6898,7 @@ ScriptE:
   amslatex: "\\mathcal{e}"
   esc-alias: sce
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u212F"
   unicode-equivalent-name: SCRIPT SMALL E
   wl-unicode: "\u212F"
@@ -6910,7 +6911,7 @@ ScriptEight:
 ScriptF:
   esc-alias: scf
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D4BB"
   unicode-equivalent-name: MATHEMATICAL SCRIPT SMALL F
   wl-unicode: "\uF6B7"
@@ -6927,7 +6928,7 @@ ScriptFour:
 ScriptG:
   esc-alias: scg
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u210A"
   unicode-equivalent-name: SCRIPT SMALL G
   wl-unicode: "\u210A"
@@ -6935,35 +6936,35 @@ ScriptG:
 ScriptH:
   esc-alias: sch
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D4BD"
   unicode-equivalent-name: MATHEMATICAL SCRIPT SMALL H
   wl-unicode: "\uF6B9"
 ScriptI:
   esc-alias: sci
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D4BE"
   unicode-equivalent-name: MATHEMATICAL SCRIPT SMALL I
   wl-unicode: "\uF6BA"
 ScriptJ:
   esc-alias: scj
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D4BF"
   unicode-equivalent-name: MATHEMATICAL SCRIPT SMALL J
   wl-unicode: "\uF6BB"
 ScriptK:
   esc-alias: sck
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D4C0"
   unicode-equivalent-name: MATHEMATICAL SCRIPT SMALL K
   wl-unicode: "\uF6BC"
 ScriptL:
   esc-alias: scl
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u2113"
   unicode-equivalent-name: SCRIPT SMALL L
   wl-unicode: "\u2113"
@@ -6971,14 +6972,14 @@ ScriptL:
 ScriptM:
   esc-alias: scm
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D4C2"
   unicode-equivalent-name: MATHEMATICAL SCRIPT SMALL M
   wl-unicode: "\uF6BE"
 ScriptN:
   esc-alias: scn
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D4C3"
   unicode-equivalent-name: MATHEMATICAL SCRIPT SMALL N
   wl-unicode: "\uF6BF"
@@ -6991,7 +6992,7 @@ ScriptO:
   amslatex: "\\mathcal{o}"
   esc-alias: sco
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u2134"
   unicode-equivalent-name: SCRIPT SMALL O
   wl-unicode: "\u2134"
@@ -7004,28 +7005,28 @@ ScriptOne:
 ScriptP:
   esc-alias: scp
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D4C5"
   unicode-equivalent-name: MATHEMATICAL SCRIPT SMALL P
   wl-unicode: "\uF6C1"
 ScriptQ:
   esc-alias: scq
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D4C6"
   unicode-equivalent-name: MATHEMATICAL SCRIPT SMALL Q
   wl-unicode: "\uF6C2"
 ScriptR:
   esc-alias: scr
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D4C7"
   unicode-equivalent-name: MATHEMATICAL SCRIPT SMALL R
   wl-unicode: "\uF6C3"
 ScriptS:
   esc-alias: scs
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D4C8"
   unicode-equivalent-name: MATHEMATICAL SCRIPT SMALL S
   wl-unicode: "\uF6C4"
@@ -7042,7 +7043,7 @@ ScriptSix:
 ScriptT:
   esc-alias: sct
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D4C9"
   unicode-equivalent-name: MATHEMATICAL SCRIPT SMALL T
   wl-unicode: "\uF6C5"
@@ -7059,42 +7060,42 @@ ScriptTwo:
 ScriptU:
   esc-alias: scu
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D4CA"
   unicode-equivalent-name: MATHEMATICAL SCRIPT SMALL U
   wl-unicode: "\uF6C6"
 ScriptV:
   esc-alias: scv
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D4CB"
   unicode-equivalent-name: MATHEMATICAL SCRIPT SMALL V
   wl-unicode: "\uF6C7"
 ScriptW:
   esc-alias: scw
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D4CC"
   unicode-equivalent-name: MATHEMATICAL SCRIPT SMALL W
   wl-unicode: "\uF6C8"
 ScriptX:
   esc-alias: scx
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D4CD"
   unicode-equivalent-name: MATHEMATICAL SCRIPT SMALL X
   wl-unicode: "\uF6C9"
 ScriptY:
   esc-alias: scy
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D4CE"
   unicode-equivalent-name: MATHEMATICAL SCRIPT SMALL Y
   wl-unicode: "\uF6CA"
 ScriptZ:
   esc-alias: scz
   has-unicode-inverse: true
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\U0001D4CF"
   unicode-equivalent-name: MATHEMATICAL SCRIPT SMALL Z
   wl-unicode: "\uF6CB"
@@ -7463,7 +7464,7 @@ THacek:
   amslatex: "\\v{t}"
   esc-alias: tv
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u0165"
   unicode-equivalent-name: LATIN SMALL LETTER T WITH CARON
   wl-unicode: "\u0165"
@@ -7627,7 +7628,7 @@ UAcute:
   amslatex: "\\'{u}"
   esc-alias: u'
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xFA"
   unicode-equivalent-name: LATIN SMALL LETTER U WITH ACUTE
   wl-unicode: "\xFA"
@@ -7635,7 +7636,7 @@ UAcute:
 UDoubleAcute:
   esc-alias: u''
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u0171"
   unicode-equivalent-name: LATIN SMALL LETTER U WITH DOUBLE ACUTE
   wl-unicode: "\u0171"
@@ -7643,7 +7644,7 @@ UDoubleAcute:
 UDoubleDot:
   esc-alias: u"
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xFC"
   unicode-equivalent-name: LATIN SMALL LETTER U WITH DIAERESIS
   wl-unicode: "\xFC"
@@ -7652,7 +7653,7 @@ UGrave:
   amslatex: "\\`{u}"
   esc-alias: u`
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xF9"
   unicode-equivalent-name: LATIN SMALL LETTER U WITH GRAVE
   wl-unicode: "\xF9"
@@ -7660,7 +7661,7 @@ UGrave:
 UHat:
   esc-alias: u^
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xFB"
   unicode-equivalent-name: LATIN SMALL LETTER U WITH CIRCUMFLEX
   wl-unicode: "\xFB"
@@ -7668,7 +7669,7 @@ UHat:
 URing:
   esc-alias: uo
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u016F"
   unicode-equivalent-name: LATIN SMALL LETTER U WITH RING ABOVE
   wl-unicode: "\u016F"
@@ -7950,7 +7951,7 @@ Wedge:
 WeierstrassP:
   esc-alias: wp
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u2118"
   unicode-equivalent-name: SCRIPT CAPITAL P
   wl-unicode: "\u2118"
@@ -8039,7 +8040,7 @@ YAcute:
   amslatex: "\\'{y}"
   esc-alias: y'
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xFD"
   unicode-equivalent-name: LATIN SMALL LETTER Y WITH ACUTE
   wl-unicode: "\xFD"
@@ -8047,7 +8048,7 @@ YAcute:
 YDoubleDot:
   esc-alias: y"
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\xFF"
   unicode-equivalent-name: LATIN SMALL LETTER Y WITH DIAERESIS
   wl-unicode: "\xFF"
@@ -8063,7 +8064,7 @@ ZHacek:
   amslatex: "\v{z}"
   esc-alias: zv
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u017E"
   unicode-equivalent-name: LATIN SMALL LETTER Z WITH CARON
   wl-unicode: "\u017E"
