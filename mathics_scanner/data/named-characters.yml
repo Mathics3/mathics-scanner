@@ -3749,10 +3749,9 @@ Function:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Function
-  # precedence 720 may be a bit high and it might turn out to need lowering.
-  # However we need something greater than Alternative "|" which is
+  # This needs to be greater than Alternative "|" which is
   # 160 so that we don't treat |-> as | ->.
-  precedence: 720
+  precedence: 161
   unicode-equivalent: "\u21A6"
   unicode-equivalent-name: RIGHTWARDS ARROW FROM BAR
   wl-unicode: "\uF4A1"
