@@ -22,7 +22,15 @@
 #                  whose class name is the given name. For example Divide.
 #
 #   precedence: If present, this symbol is a Mathics operator with the
-#               specific numeric precidence value.
+#               specific numeric precedence value. A higher value means that
+#               the operator binds before an operator with a lower value.
+#               For example the Times precedence 400 is higher than the
+#               Plus precedence 310 because a + b * c is a + (b * c),
+#               not (a + b) * c.
+#               Precedence is also used to force multi-character ASCII
+#               symbols like |-> to get treated as one unit and not
+#               split into two operators like | and ->. So the precedence
+#               of |-> has to be higher than |.
 #
 #   unicode-equivalent: A unicode equivalent for the named-character, if it
 #                       exists. If it is the same as "ascii", please omit.
@@ -1249,6 +1257,7 @@ Colon:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Colon
+  precedence: 80
   unicode-equivalent: "\u2236"
   unicode-equivalent-name: RATIO
   wl-unicode: "\u2236"
@@ -3741,6 +3750,9 @@ Function:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Function
+  # This needs to be greater than Alternative "|" which is
+  # 160 so that we don't treat |-> as | ->.
+  precedence: 161
   unicode-equivalent: "\u21A6"
   unicode-equivalent-name: RIGHTWARDS ARROW FROM BAR
   wl-unicode: "\uF4A1"
