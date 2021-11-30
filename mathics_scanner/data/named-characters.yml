@@ -1308,13 +1308,13 @@ Conjugate:
   has-unicode-inverse: false
   is-letter-like: false
   wl-unicode: "\uF3C8"
-  postfix-precendence: 670
+  postfix-precedence: 670
 ConjugateTranspose:
   esc-alias: ct
   has-unicode-inverse: false
   is-letter-like: false
   wl-unicode: "\uF3C9"
-  postfix-precendence: 670
+  postfix-precedence: 670
 ConstantC:
   esc-alias: cc
   has-unicode-inverse: false
@@ -2688,7 +2688,7 @@ Equal:
   unicode-equivalent: "\u2A75"
   unicode-equivalent-name: TWO CONSECUTIVE EQUALS SIGNS
   wl-unicode: "\uF431"
-  flat-operator-precedence: 290
+  flat-binary-precedence: 290
 EqualTilde:
   esc-alias: =~
   has-unicode-inverse: false
@@ -5934,7 +5934,7 @@ Postfix:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Postfix
-  left-binary-precendence: 70
+  left-binary-precedence: 70
 Power:
   ascii: "^"
   has-unicode-inverse: true
@@ -7669,7 +7669,7 @@ Transpose:
   unicode-equivalent: "\u1D40"
   unicode-equivalent-name: MODIFIER LETTER CAPITAL T
   wl-unicode: "\uF3C7"
-  postfix-precendence: 670
+  postfix-precedence: 670
 TripleDot:
   has-unicode-inverse: false
   is-letter-like: false
@@ -7777,7 +7777,7 @@ UnsameQ:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: UnsameQ
-  flat-operator-precedence: 290
+  flat-binary-precedence: 290
 Union:
   esc-alias: un
   has-unicode-inverse: false
