@@ -141,7 +141,8 @@ tokens = [
     # ('PartialD', r' \u2202 '),
     ("Cross", r" \uf4a0 "),
     ("Colon", r" \u2236 "),
-    ("Transpose", r" \uf3c7 "),
+    # uf3c7 is Wolfram custom, 1d40 is unicode
+    ("Transpose", r" \uf3c7 | \u1d40"),
     ("Conjugate", r" \uf3c8 "),
     ("ConjugateTranspose", r" \uf3c9 "),
     ("HermitianConjugate", r" \uf3ce "),

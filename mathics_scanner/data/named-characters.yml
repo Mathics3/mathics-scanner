@@ -1305,11 +1305,13 @@ Conjugate:
   esc-alias: co
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: Conjugate
   wl-unicode: "\uF3C8"
 ConjugateTranspose:
   esc-alias: ct
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: ConjugateTranspose
   wl-unicode: "\uF3C9"
 ConstantC:
   esc-alias: cc
@@ -7627,6 +7629,7 @@ Transpose:
   esc-alias: tr
   has-unicode-inverse: true
   is-letter-like: false
+  operator-name: Transpose
   unicode-equivalent: "\u1D40"
   unicode-equivalent-name: MODIFIER LETTER CAPITAL T
   wl-unicode: "\uF3C7"
