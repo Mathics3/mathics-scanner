@@ -139,9 +139,10 @@ tokens = [
     # ('DiscreteRatio', r' \uf4a4 '),
     # ('DifferenceDelta', r' \u2206 '),
     # ('PartialD', r' \u2202 '),
-    ("Cross", r" \uf4a0 "),
+    # uf4a0 is Wolfram custom, u2a2f is standard unicode
+    ("Cross", r" \uf4a0 | \u2a2f"),
     ("Colon", r" \u2236 "),
-    # uf3c7 is Wolfram custom, 1d40 is unicode
+    # uf3c7 is Wolfram custom, 1d40 is standard unicode
     ("Transpose", r" \uf3c7 | \u1d40"),
     ("Conjugate", r" \uf3c8 "),
     ("ConjugateTranspose", r" \uf3c9 "),
@@ -149,7 +150,8 @@ tokens = [
     ("Integral", r" \u222b "),
     ("DifferentialD", r" \U0001D451 "),
     ("Del", r" \u2207 "),
-    ("Square", r" \uf520 "),
+    # uf520 is Wolfram custom, 25ab is standard unicode
+    ("Square", r" \uf520 | \u25ab"),
     ("SmallCircle", r" \u2218 "),
     ("CircleDot", r" \u2299 "),
     # ('Sum', r' \u2211 '),
