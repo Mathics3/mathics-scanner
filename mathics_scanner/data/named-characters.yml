@@ -2674,6 +2674,7 @@ Equal:
   unicode-equivalent: "\u2A75"
   unicode-equivalent-name: TWO CONSECUTIVE EQUALS SIGNS
   wl-unicode: "\uF431"
+  precedence: 290
 EqualTilde:
   esc-alias: =~
   has-unicode-inverse: false
@@ -5286,6 +5287,7 @@ NotEqual:
   unicode-equivalent-name: NOT EQUAL TO
   wl-unicode: "\u2260"
   wl-unicode-name: NOT EQUAL TO
+  precedence: 290
 NotEqualTilde:
   esc-alias: '!=~'
   has-unicode-inverse: false
@@ -5912,6 +5914,7 @@ Postfix:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Postfix
+  precedence: 70
 Power:
   ascii: "^"
   has-unicode-inverse: true
