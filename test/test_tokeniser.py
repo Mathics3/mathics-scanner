@@ -123,12 +123,11 @@ def test_int_repeated():
     assert tokens("1..") == [Token("Number", "1", 0), Token("Repeated", "..", 1)]
     assert tokens("1. .") == [Token("Number", "1.", 0), Token("Dot", ".", 3)]
 
-
 def test_integeral():
-    assert tokens("\u222B x \U0001D451 y") == [
+    assert tokens("\u222B x \uf74c y") == [
         Token("Integral", "\u222B", 0),
         Token("Symbol", "x", 2),
-        Token("DifferentialD", "\U0001D451", 4),
+        Token("DifferentialD", "\uf74c", 4),
         Token("Symbol", "y", 6),
     ]
 

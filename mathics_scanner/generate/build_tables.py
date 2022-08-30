@@ -97,6 +97,13 @@ def compile_tables(data: dict) -> dict:
         if "esc-alias" in v
     }
 
+    # AMSTEX operators
+    amstex_characters = {
+        v["wl-unicode"]: v.get("amslatex", v.get("wl-unicode"))
+        for v in data.values()
+        if "amslatex" in v and "wl-unicode" in v
+    }
+
     # operator-to-unicode dictionary entry
     operator_to_precedence = {
         v["operator-name"]: v["precedence"]
@@ -130,9 +137,7 @@ def compile_tables(data: dict) -> dict:
 
     # All supported named characters dictionary entry
     named_characters = {
-        k: v.get("unicode-equivalent", v.get("wl-unicode"))
-        for k, v in data.items()
-        if "wl-unicode" in v
+        k: v["wl-unicode"] for k, v in data.items() if "wl-unicode" in v
     }
 
     # Operators with ASCII sequences list entry
@@ -176,6 +181,7 @@ def compile_tables(data: dict) -> dict:
 
     return {
         "aliased-characters": aliased_characters,
+        "amstex_characters" : amstex_characters,
         "ascii-operators": ascii_operators,
         "letterlikes": letterlikes,
         "named-characters": named_characters,
@@ -196,6 +202,7 @@ def compile_tables(data: dict) -> dict:
 DEFAULT_DATA_DIR = Path(osp.normpath(osp.dirname(__file__)), "..", "data")
 
 ALL_FIELDS = [
+    "amstex_characters",
     "aliased-characters",
     "ascii-operators",
     "letterlikes",
