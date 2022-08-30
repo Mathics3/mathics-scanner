@@ -181,7 +181,7 @@ def compile_tables(data: dict) -> dict:
 
     return {
         "aliased-characters": aliased_characters,
-        "amstex_characters" : amstex_characters,
+        "amstex_characters": amstex_characters,
         "ascii-operators": ascii_operators,
         "letterlikes": letterlikes,
         "named-characters": named_characters,

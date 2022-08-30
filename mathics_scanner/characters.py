@@ -61,6 +61,7 @@ aliased_characters = _data.get("aliased-characters", {})
 # AMSTeX replacements
 amstex_characters = _data.get("amstex_characters", None)
 
+
 def replace_wl_with_plain_text(wl_input: str, use_unicode=True) -> str:
     """
     The Wolfram Language uses specific Unicode characters to represent Wolfram
