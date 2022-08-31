@@ -4469,7 +4469,7 @@ Infinity:
   wl-unicode-name: INFINITY
 
 # Infix isn't really an operator
-# See also Tilde
+# See also RawTilde
 Infix:
   ascii: "~"
   amslatex: "\\textasciitilde"
@@ -4477,7 +4477,6 @@ Infix:
   is-letter-like: false
 # operator-name: Infix
   unicode-equivalent: "~"
-  wl-unicode-name: TILDE
 
 Information:
   ascii: "??"
@@ -6221,6 +6220,8 @@ RawTilde:
   has-unicode-inverse: false
   is-letter-like: false
   unicode-equivalent: '~'
+  wl-unicode: '~'
+  wl-unicode-name: TILDE
 
 RawUnderscore:
   has-unicode-inverse: false
@@ -7563,17 +7564,18 @@ Thorn:
 
 # See also operator Infix.
 # Tilde has no built-in meaning per the documentation,
-# so it is not the same as Tilde.
+# so it is not the same as RawTilde.
 # Yes, it is confusing.
 Tilde:
-  ascii: "~"
   esc-alias: '~'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Tilde
+  precedence: 290
   # Since we have an esc-alias, we add wl-unicode for the checker to work.
-  wl-unicode: "~"
-  wl-unicode-name: TILDE
+  unicode-equivalent: "\u223c"
+  wl-unicode: "\u223c"
+  wl-unicode-name: TILDE OPERATOR
 
 TildeEqual:
   amslatex: "$\\simeq$"
