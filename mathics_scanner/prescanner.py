@@ -10,6 +10,7 @@ class Prescanner(object):
         character codes to characters:
             \.7A -> z
             \:004a -> J
+            \|01D451  -> \U0001D451
             \041 -> !
         unicode longnames to characters:
             \[Theta] -> \u03B8
@@ -45,6 +46,8 @@ class Prescanner(object):
                 if self.pos + 1 == len(self.code):
                     self.incomplete()
                 c = self.code[self.pos + 1]
+                if c == "|":
+                    self.try_parse_base(2, 8, 16)
                 if c == ".":
                     self.try_parse_base(2, 4, 16)
                 elif c == ":":
