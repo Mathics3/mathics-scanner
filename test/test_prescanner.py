@@ -30,7 +30,6 @@ class PrescannerTest(unittest.TestCase):
         self.equal("z \\\\[Integral]", "z \\\\[Integral]")
         self.equal("z \\\\\\[Integral]", "z \\\\\u222b")
         self.equal("abc\\\\", "abc\\\\")
-        
 
     def test_oct(self):
         self.equal(r"\051", ")")
