@@ -58,10 +58,13 @@ class Prescanner(object):
                         self.incomplete()
                     self.stubs.append(self.code[self.start : self.pos])
                     self.newstub(self.pos + 2)
-                elif c == "\\":
-                    self.pos += 2
                 else:
-                    self.pos += 1
+                    # If c == "\\", we have to avoid consider it as an escape
+                    # character in a way that, for instance r"...\\[Integral]..."
+                    # do not be parsed as r"...\\u222b...".
+                    # Any another character is not to be processed, so
+                    # we can safely skip it.
+                    self.pos += 2
             else:
                 self.pos += 1
         self.stubs.append(self.code[self.start :])  # final stub
