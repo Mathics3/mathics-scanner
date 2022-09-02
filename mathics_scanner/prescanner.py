@@ -58,6 +58,8 @@ class Prescanner(object):
                         self.incomplete()
                     self.stubs.append(self.code[self.start : self.pos])
                     self.newstub(self.pos + 2)
+                elif c == "\\":
+                    self.pos += 2
                 else:
                     self.pos += 1
             else:

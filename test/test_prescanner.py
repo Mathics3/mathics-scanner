@@ -26,6 +26,11 @@ class PrescannerTest(unittest.TestCase):
         self.equal(r"\[CapitalPi]", "\u03A0")
         self.equal(r"\[Fake]", r"\[Fake]")
         self.equal("z \\[Conjugate]", "z \uF3C8")
+        self.equal("z \\[Integral]", "z \u222b")
+        self.equal("z \\\\[Integral]", "z \\\\[Integral]")
+        self.equal("z \\\\\\[Integral]", "z \\\\\u222b")
+        self.equal("abc\\\\", "abc\\\\")
+        
 
     def test_oct(self):
         self.equal(r"\051", ")")
