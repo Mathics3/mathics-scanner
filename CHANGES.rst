@@ -1,6 +1,19 @@
 CHANGES
 =======
 
+1.2.5.dev0
+----------
+
+* Add escape-code sequence for 32-bit unicode. Issue #48.
+* Correct ``Infix`` and ``Tilde`` character symbols
+* Support double backslash (``\\``) as a single backslash character (``\``).
+* Correct Unicode for ScriptN and ScriptCaptialN
+* Correct a number of is-letter-like entries.
+* Accept \u21A6 as symbol for Function.
+* Change the precedence of ``|->``(``Function`` symbol) to 800 so it isn't iterpreted as a ``|``
+  followed by ``->``
+
+
 1.2.4
 -----
 
