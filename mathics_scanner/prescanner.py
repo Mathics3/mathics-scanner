@@ -59,11 +59,11 @@ class Prescanner(object):
                     self.stubs.append(self.code[self.start : self.pos])
                     self.newstub(self.pos + 2)
                 else:
-                    # If c == "\\", we have to avoid consider it as an escape
-                    # character in a way that, for instance r"...\\[Integral]..."
-                    # do not be parsed as r"...\\u222b...".
-                    # Any another character is not to be processed, so
-                    # we can safely skip it.
+                    # Two backslashes in succession indicates a single backslash character,
+                    # rather than an escape sequence which also starts with a backslash. 
+                    #  Advance the scanning cursor (self.pos) over both backslashes.
+                    # Also, Python's backslash escape mechanism turns the two backslashes
+                    # into one in length calculations.
                     self.pos += 2
             else:
                 self.pos += 1
