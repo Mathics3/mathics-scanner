@@ -367,7 +367,7 @@ class Tokeniser(object):
         self.mode = mode
         self.tokens, self.token_indices = self.modes[mode]
 
-    # TODO: Rename this to something that remotetly makes sense?
+    # TODO: Rename this to something that remotely makes sense?
     def incomplete(self):
         "Get more code from the prescanner and continue."
         self.prescanner.incomplete()
