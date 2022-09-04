@@ -357,7 +357,7 @@ class Tokeniser(object):
         self.pos = 0
         self.feeder = feeder
         self.prescanner = Prescanner(feeder)
-        self.code = self.prescanner.scan()
+        self.code = self.prescanner.replace_escape_sequences()
         self._change_mode("expr")
 
     def _change_mode(self, mode):
@@ -371,7 +371,7 @@ class Tokeniser(object):
     def incomplete(self):
         "Get more code from the prescanner and continue."
         self.prescanner.incomplete()
-        self.code += self.prescanner.scan()
+        self.code += self.prescanner.replace_escape_sequences()
 
     def sntx_message(self, pos=None):
         """Send a message to the feeder."""

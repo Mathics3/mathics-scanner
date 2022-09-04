@@ -46,7 +46,7 @@ class Prescanner(object):
             raise IncompleteSyntaxError()
         self.code += line
 
-    def scan(self) -> str:
+    def replace_escape_sequences(self) -> str:
         """
         Replace escape sequences in self.code. The replacement string is returned.
         Note: self.code is not modified.
