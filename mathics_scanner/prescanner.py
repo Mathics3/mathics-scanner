@@ -52,12 +52,11 @@ class Prescanner(object):
         Note: self.code is not modified.
         """
 
-        line_fragments = (
-            []
-        )  # line fragments to be joined before returning from this method.
-        self.fragment_start = (
-            self.pos
-        )  # start position of line fragment under consideration
+        # Line fragments to be joined before returning from this method.
+        line_fragments = []
+
+        # Fragment start position of line fragment under consideration.
+        self.fragment_start = self.pos
 
         def start_new_fragment(pos: int) -> None:
             """
@@ -71,14 +70,14 @@ class Prescanner(object):
             See if characters self.pos+start_shift .. self.pos+end shift
             can be converted to an integer in base  ``base``.
 
-            If so, we append, the characters before the escape sequence without the
+            If so, we append the characters before the escape sequence without the
             escaping characters like ``\.`` or ``\:``.
 
-            We also append the converted integer to ``line_fragments``, and updated
+            We also append the converted integer to ``line_fragments``, and update
             position cursors for a new line fragment.
 
-            However, if the conversion fails, error messages are issued and nothing
-            is updated
+            However, if the conversion fails, then error messages are
+            issued and nothing is updated
             """
             start, end = self.pos + start_shift, self.pos + end_shift
             result = None
@@ -102,6 +101,10 @@ class Prescanner(object):
                     "Syntax", "sntxb", self.code[self.pos :].rstrip("\n")
                 )
                 raise ScanError()
+
+            # Add text from prior line fragment as well
+            # as the escape sequence, a character, from the escape sequence
+            # that was just matched.
             line_fragments.append(self.code[start : self.pos])
             line_fragments.append(chr(result))
 
@@ -131,6 +134,9 @@ class Prescanner(object):
                     self.feeder.message("Syntax", "sntufn", named_character)
                     # stay in same line fragment
                 else:
+                    # Add text from prior line fragment as well
+                    # as the escape sequence, a character, from the escape sequence
+                    # just matched.
                     line_fragments.append(self.code[self.fragment_start : self.pos])
                     line_fragments.append(char)
                     start_new_fragment(i + 1)
@@ -180,7 +186,7 @@ class Prescanner(object):
             else:
                 self.pos += 1
 
-        # Close out final line fragment
+        # Add the final line fragment.
         line_fragments.append(self.code[self.fragment_start :])
 
         # produce and return the replacement string.
