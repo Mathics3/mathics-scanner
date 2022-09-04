@@ -60,7 +60,7 @@ class Prescanner(object):
                     self.newstub(self.pos + 2)
                 else:
                     # Two backslashes in succession indicates a single backslash character,
-                    # rather than an escape sequence which also starts with a backslash. 
+                    # rather than an escape sequence which also starts with a backslash.
                     #  Advance the scanning cursor (self.pos) over both backslashes.
                     # Also, Python's backslash escape mechanism turns the two backslashes
                     # into one in length calculations.

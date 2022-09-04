@@ -21,6 +21,9 @@ class PrescannerTest(unittest.TestCase):
     def equal(self, code, result):
         assert self.prescan(code) == result
 
+    def equal_length(self, code, length):
+        assert len(self.prescan(code)) == length
+
     def test_longnames(self):
         self.equal(r"\[Theta]", "\u03B8")
         self.equal(r"\[CapitalPi]", "\u03A0")
@@ -30,6 +33,13 @@ class PrescannerTest(unittest.TestCase):
         self.equal("z \\\\[Integral]", "z \\\\[Integral]")
         self.equal("z \\\\\\[Integral]", "z \\\\\u222b")
         self.equal("abc\\\\", "abc\\\\")
+
+    def test_lengths(self):
+        self.equal_length(r'"\[Integral]"', 3)
+        # Prescanner keep both slashes and quotes.
+        # The tokenizer brings \\ into \ if it appears
+        # inside a string.
+        self.equal_length(r'"\\[Integral]"', 14)
 
     def test_oct(self):
         self.equal(r"\051", ")")
