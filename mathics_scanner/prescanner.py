@@ -4,10 +4,11 @@ Module for "prescanning". Right now this just means replacing
 character escape sequences.
 """
 
-from typing import Callable
+from typing import List
 
 from mathics_scanner.characters import named_characters
 from mathics_scanner.errors import ScanError, IncompleteSyntaxError
+from mathics_scanner.feed import LineFeeder
 
 
 class Prescanner(object):
@@ -27,11 +28,15 @@ class Prescanner(object):
     Trailing backslash characters (\) are reported incomplete.
     """
 
-    def __init__(self, feeder: Callable):
-        # feeder is a function that returns the next line of the Mathics input
+    def __init__(self, feeder: LineFeeder):
+        # self.feeder is a function that returns the next line of the Mathics input
         self.feeder = feeder
-        self.code = feeder.feed()  # input code
-        self.pos = 0  # current position within code
+
+        # self.input_line is the result of reading the next Mathics input line
+        self.input_line: str = feeder.feed()
+
+        # self.pos is current position within self.input_line.
+        self.pos = 0
 
     def feed(self) -> str:
         """
@@ -40,20 +45,20 @@ class Prescanner(object):
         return self.feeder.feed()
 
     def incomplete(self):
-        line = self.feed()
+        line: str = self.feed()
         if not line:
-            self.feeder.message("Syntax", "sntxi", self.code[self.pos :].rstrip())
+            self.feeder.message("Syntax", "sntxi", self.input_line[self.pos :].rstrip())
             raise IncompleteSyntaxError()
-        self.code += line
+        self.input_line += line
 
     def replace_escape_sequences(self) -> str:
         """
-        Replace escape sequences in self.code. The replacement string is returned.
-        Note: self.code is not modified.
+        Replace escape sequences in ``self.input_line``. The replacement string is returned.
+        Note: ``self.input_line`` is not modified.
         """
 
         # Line fragments to be joined before returning from this method.
-        line_fragments = []
+        line_fragments: List[str] = []
 
         # Fragment start position of line fragment under consideration.
         self.fragment_start = self.pos
@@ -66,7 +71,7 @@ class Prescanner(object):
             self.fragment_start = pos
 
         def try_parse_base(start_shift: int, end_shift: int, base: int) -> None:
-            """
+            r"""
             See if characters self.pos+start_shift .. self.pos+end shift
             can be converted to an integer in base  ``base``.
 
@@ -81,8 +86,8 @@ class Prescanner(object):
             """
             start, end = self.pos + start_shift, self.pos + end_shift
             result = None
-            if end <= len(self.code):
-                text = self.code[start:end]
+            if end <= len(self.input_line):
+                text = self.input_line[start:end]
                 try:
                     result = int(text, base)
                 except ValueError:
@@ -98,21 +103,21 @@ class Prescanner(object):
                 else:
                     raise ValueError()
                 self.feeder.message(
-                    "Syntax", "sntxb", self.code[self.pos :].rstrip("\n")
+                    "Syntax", "sntxb", self.input_line[self.pos :].rstrip("\n")
                 )
                 raise ScanError()
 
             # Add text from prior line fragment as well
             # as the escape sequence, a character, from the escape sequence
             # that was just matched.
-            line_fragments.append(self.code[start : self.pos])
+            line_fragments.append(self.input_line[start : self.pos])
             line_fragments.append(chr(result))
 
             # Set up a new line fragment for the next time we are called.
             start_new_fragment(end)
 
         def try_parse_named_character(start_shift: int):
-            """Before calling we have matched "\[".  Scan to the remaining "]" and
+            r"""Before calling we have matched "\[".  Scan to the remaining "]" and
             try to match what is found in-between with a known named
             character, e.g. "Theta".  If we can match this, we store
             the unicode character equivalent in ``line_fragments``.
@@ -121,13 +126,13 @@ class Prescanner(object):
             """
             i = self.pos + start_shift
             while True:
-                if i == len(self.code):
+                if i == len(self.input_line):
                     self.incomplete()
-                if self.code[i] == "]":
+                if self.input_line[i] == "]":
                     break
                 i += 1
 
-            named_character = self.code[self.pos + start_shift : i]
+            named_character = self.input_line[self.pos + start_shift : i]
             if named_character.isalpha():
                 char = named_characters.get(named_character)
                 if char is None:
@@ -137,7 +142,9 @@ class Prescanner(object):
                     # Add text from prior line fragment as well
                     # as the escape sequence, a character, from the escape sequence
                     # just matched.
-                    line_fragments.append(self.code[self.fragment_start : self.pos])
+                    line_fragments.append(
+                        self.input_line[self.fragment_start : self.pos]
+                    )
                     line_fragments.append(char)
                     start_new_fragment(i + 1)
 
@@ -151,12 +158,12 @@ class Prescanner(object):
         # stored in ``line_fragments``. The start-position marker for the
         # next line_fragment is started and self.pos is updated.
 
-        while self.pos < len(self.code):
-            if self.code[self.pos] == "\\":
+        while self.pos < len(self.input_line):
+            if self.input_line[self.pos] == "\\":
                 # Look for and handle an escape sequence.
-                if self.pos + 1 == len(self.code):
+                if self.pos + 1 == len(self.input_line):
                     self.incomplete()
-                c = self.code[self.pos + 1]
+                c = self.input_line[self.pos + 1]
                 if c == "|":
                     try_parse_base(2, 8, 16)
                 if c == ".":
@@ -171,10 +178,10 @@ class Prescanner(object):
                     # See if we have an octal number.
                     try_parse_base(1, 4, 8)
                 elif c == "\n":
-                    if self.pos + 2 == len(self.code):
+                    if self.pos + 2 == len(self.input_line):
                         self.incomplete()
-                    self.line_fragments.append(
-                        self.code[self.fragment_start : self.pos]
+                    line_fragments.append(
+                        self.input_line[self.fragment_start : self.pos]
                     )
                     start_new_fragment(self.pos + 2)
                 else:
@@ -187,7 +194,7 @@ class Prescanner(object):
                 self.pos += 1
 
         # Add the final line fragment.
-        line_fragments.append(self.code[self.fragment_start :])
+        line_fragments.append(self.input_line[self.fragment_start :])
 
-        # produce and return the replacement string.
+        # Produce and return the input line with escape-sequences replaced
         return "".join(line_fragments)
