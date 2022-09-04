@@ -24,7 +24,7 @@ class PrescannerTest(unittest.TestCase):
     def equal_length(self, code, length):
         assert len(self.prescan(code)) == length
 
-    def test_longnames(self):
+    def test_named_characters(self):
         self.equal(r"\[Theta]", "\u03B8")
         self.equal(r"\[CapitalPi]", "\u03A0")
         self.equal(r"\[Fake]", r"\[Fake]")
