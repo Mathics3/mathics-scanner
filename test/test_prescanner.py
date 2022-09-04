@@ -52,6 +52,9 @@ class PrescannerTest(unittest.TestCase):
         self.equal(r"\:03B8", "\u03B8")
         self.equal(r"\:03b8", "\u03B8")
 
+    def test_hex_vbar(self):
+        self.equal(r"\|01D451", "\U0001D451")
+
     def test_incomplete(self):
         self.incomplete(r"\[")
         self.incomplete(r"\[Theta")
