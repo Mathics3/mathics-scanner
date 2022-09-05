@@ -5,7 +5,7 @@
 # remake --tasks to shows the targets and the comments
 
 GIT2CL ?= admin-tools/git2cl
-PYTHON ?= python3
+PYTHON ?= python
 PIP ?= pip3
 RM  ?= rm
 
