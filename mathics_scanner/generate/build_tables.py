@@ -49,7 +49,7 @@ def get_plain_text(char_name: str, char_data: dict, use_unicode: bool) -> str:
 
     Failing above, return \\[char_name]]
     """
-    uni = char_data.get("unicode-equivalent")
+    uni = char_data.get("unicode-equivalent", char_data.get("ascii"))
 
     if uni is not None:
         if use_unicode:
@@ -118,12 +118,12 @@ def compile_tables(data: dict) -> dict:
         if "operator-name" in v and "unicode-equivalent" in v
     }
 
-    # Conversion from unicode to wl dictionary entry.
+    # Conversion from unicode or ascii to wl dictionary entry.
     # We filter the dictionary after it's first created to redundant entries
     unicode_to_wl_dict = {
-        v["unicode-equivalent"]: v["wl-unicode"]
+        v.get("unicode-equivalent", v.get("ascii")): v["wl-unicode"]
         for v in data.values()
-        if "unicode-equivalent" in v and v["has-unicode-inverse"]
+        if ("unicode-equivalent" in v or "ascii" in v) and v["has-unicode-inverse"]
     }
     unicode_to_wl_dict = {k: v for k, v in unicode_to_wl_dict.items() if k != v}
     unicode_to_wl_re = re_from_keys(unicode_to_wl_dict)

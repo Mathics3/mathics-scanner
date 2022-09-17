@@ -47,7 +47,7 @@ _wl_to_ascii_re = re.compile(_data.get("wl-to-ascii-re", ""))
 _wl_to_amstex = _data.get("wl-to-amstex", None)
 
 # Conversion from WL to unicode
-_wl_to_unicode = _data.get("wl-to-unicode-dict", {})
+_wl_to_unicode = _data.get("wl-to-unicode-dict", _data.get("wl_to_ascii"))
 _wl_to_unicode_re = re.compile(_data.get("wl-to-unicode-re", ""))
 
 # Conversion from unicode to WL
@@ -61,6 +61,7 @@ named_characters = _data.get("named-characters", {})
 aliased_characters = _data.get("aliased-characters", {})
 
 
+# Deprecated
 def replace_wl_with_plain_text(wl_input: str, use_unicode=True) -> str:
     """
     The Wolfram Language uses specific Unicode characters to represent Wolfram
@@ -81,9 +82,12 @@ def replace_wl_with_plain_text(wl_input: str, use_unicode=True) -> str:
     r = _wl_to_unicode_re if use_unicode else _wl_to_ascii_re
     d = _wl_to_unicode if use_unicode else _wl_to_ascii
 
-    return r.sub(lambda m: d[m.group(0)], wl_input)
+    # The below on when use_unicode is False will sometime test on "ascii" twice.
+    # But this routine should be deprecated.
+    return r.sub(lambda m: d.get(m.group(0), _wl_to_ascii.get(m.group(0))), wl_input)
 
 
+# Deprecated
 def replace_unicode_with_wl(unicode_input: str) -> str:
     """
     The Wolfram Language uses specific Unicode characters to represent Wolfram
