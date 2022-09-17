@@ -97,6 +97,13 @@ def compile_tables(data: dict) -> dict:
         if "esc-alias" in v
     }
 
+    # WL to AMS LaTeX characters
+    wl_to_amslatex = {
+        v["wl-unicode"]: v.get("amslatex")
+        for v in data.values()
+        if "amslatex" in v and "wl-unicode" in v
+    }
+
     # operator-to-unicode dictionary entry
     operator_to_precedence = {
         v["operator-name"]: v["precedence"]
@@ -188,6 +195,7 @@ def compile_tables(data: dict) -> dict:
         "unicode-to-wl-re": unicode_to_wl_re,
         "wl-to-ascii-dict": wl_to_ascii_dict,
         "wl-to-ascii-re": wl_to_ascii_re,
+        "wl-to-amslatex": wl_to_amslatex,
         "wl-to-unicode-dict": wl_to_unicode_dict,
         "wl-to-unicode-re": wl_to_unicode_re,
     }
@@ -207,6 +215,7 @@ ALL_FIELDS = [
     "unicode-to-operator",
     "unicode-to-wl-dict",
     "unicode-to-wl-re",
+    "wl-to-amslatex",
     "wl-to-ascii-dict",
     "wl-to-ascii-re",
     "wl-to-unicode-dict",

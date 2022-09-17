@@ -43,6 +43,9 @@ _letterlikes = _data.get("letterlikes", {})
 _wl_to_ascii = _data.get("wl-to-ascii-dict", {})
 _wl_to_ascii_re = re.compile(_data.get("wl-to-ascii-re", ""))
 
+# AMS LaTeX replacements
+_wl_to_amstex = _data.get("wl-to-amstex", None)
+
 # Conversion from WL to unicode
 _wl_to_unicode = _data.get("wl-to-unicode-dict", {})
 _wl_to_unicode_re = re.compile(_data.get("wl-to-unicode-re", ""))
