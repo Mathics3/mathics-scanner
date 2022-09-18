@@ -2,6 +2,8 @@
 # This scripts reads the data from named-characters and converts it to the
 # format used by the library internally
 
+from collections import OrderedDict
+
 import click
 
 import json
@@ -49,7 +51,7 @@ def get_plain_text(char_name: str, char_data: dict, use_unicode: bool) -> str:
 
     Failing above, return \\[char_name]]
     """
-    uni = char_data.get("unicode-equivalent")
+    uni = char_data.get("unicode-equivalent", char_data.get("ascii"))
 
     if uni is not None:
         if use_unicode:
@@ -97,6 +99,13 @@ def compile_tables(data: dict) -> dict:
         if "esc-alias" in v
     }
 
+    # WL to AMS LaTeX characters
+    wl_to_amslatex = {
+        v["wl-unicode"]: v.get("amslatex")
+        for v in data.values()
+        if "amslatex" in v and "wl-unicode" in v
+    }
+
     # operator-to-unicode dictionary entry
     operator_to_precedence = {
         v["operator-name"]: v["precedence"]
@@ -106,17 +115,17 @@ def compile_tables(data: dict) -> dict:
 
     # operator-to-unicode dictionary entry
     operator_to_unicode = {
-        v["operator-name"]: v["unicode-equivalent"]
+        v["operator-name"]: v.get("unicode-equivalent", v.get("ascii"))
         for k, v in data.items()
-        if "operator-name" in v and "unicode-equivalent" in v
+        if "operator-name" in v and ("unicode-equivalent" in v or "ascii" in v)
     }
 
-    # Conversion from unicode to wl dictionary entry.
+    # Conversion from unicode or ascii to wl dictionary entry.
     # We filter the dictionary after it's first created to redundant entries
     unicode_to_wl_dict = {
-        v["unicode-equivalent"]: v["wl-unicode"]
+        v.get("unicode-equivalent", v.get("ascii")): v["wl-unicode"]
         for v in data.values()
-        if "unicode-equivalent" in v and v["has-unicode-inverse"]
+        if ("unicode-equivalent" in v or "ascii" in v) and v["has-unicode-inverse"]
     }
     unicode_to_wl_dict = {k: v for k, v in unicode_to_wl_dict.items() if k != v}
     unicode_to_wl_re = re_from_keys(unicode_to_wl_dict)
@@ -140,20 +149,21 @@ def compile_tables(data: dict) -> dict:
         [v["ascii"] for v in data.values() if "operator-name" in v and "ascii" in v]
     )
 
-    # unicode-equivalent list entry
-    unicode_operators = sorted(
-        [
-            v["unicode-equivalent"]
+    # Mathics core stores the ascii operator value, Use that to get an operator name
+    # Operators with ASCII sequences list entry
+    ascii_operator_to_name = OrderedDict(
+        {
+            v["ascii"]: rf'\[{v["operator-name"]}]'
             for v in data.values()
-            if "operator-name" in v and "unicode-equivalent" in v
-        ]
+            if "operator-name" in v and "ascii" in v
+        }.items()
     )
 
     # unicode-to-operator dictionary entry
     unicode_to_operator = {
-        v["unicode-equivalent"]: v["operator-name"]
+        v.get("unicode-equivalent", v.get("ascii")): v["operator-name"]
         for k, v in data.items()
-        if "operator-name" in v and "unicode-equivalent" in v
+        if "operator-name" in v
     }
     # Conversion from WL to the fully qualified names dictionary entry
     wl_to_ascii_dict = {
@@ -177,17 +187,19 @@ def compile_tables(data: dict) -> dict:
     return {
         "aliased-characters": aliased_characters,
         "ascii-operators": ascii_operators,
+        "ascii-operator-to-name": ascii_operator_to_name,
         "letterlikes": letterlikes,
         "named-characters": named_characters,
         "operator-to-precedence": operator_to_precedence,
         "operator-to-unicode": operator_to_unicode,
-        "unicode-equivalent": unicode_operators,
+        # unicode-operators is irregular, but this is what
+        # mathics-pygments uses
         "unicode-operators": unicode_to_operator,
-        "unicode-to-operator": unicode_to_operator,
         "unicode-to-wl-dict": unicode_to_wl_dict,
         "unicode-to-wl-re": unicode_to_wl_re,
         "wl-to-ascii-dict": wl_to_ascii_dict,
         "wl-to-ascii-re": wl_to_ascii_re,
+        "wl-to-amslatex": wl_to_amslatex,
         "wl-to-unicode-dict": wl_to_unicode_dict,
         "wl-to-unicode-re": wl_to_unicode_re,
     }
@@ -207,6 +219,7 @@ ALL_FIELDS = [
     "unicode-to-operator",
     "unicode-to-wl-dict",
     "unicode-to-wl-re",
+    "wl-to-amslatex",
     "wl-to-ascii-dict",
     "wl-to-ascii-re",
     "wl-to-unicode-dict",

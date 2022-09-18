@@ -148,7 +148,7 @@ tokens = [
     ("ConjugateTranspose", r" \uf3c9 "),
     ("HermitianConjugate", r" \uf3ce "),
     ("Integral", r" \u222b "),
-    ("DifferentialD", r" \U0001D451 "),
+    ("DifferentialD", r" \U0001D451 | \uf74c"),
     ("Del", r" \u2207 "),
     # uf520 is Wolfram custom, 25ab is standard unicode
     ("Square", r" \uf520 | \u25ab"),

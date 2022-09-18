@@ -15,10 +15,10 @@ def test_has_unicode_inverse_sanity():
     for k, v in yaml_data.items():
         if v["has-unicode-inverse"]:
             assert (
-                "unicode-equivalent" in v
-            ), f"key {k} has a unicode inverse but has no unicode equivalent"
+                "unicode-equivalent" in v or "ascii" in v
+            ), f"key {k} has a unicode inverse but has no unicode equivalent or ascii"
 
-            uni = v["unicode-equivalent"]
+            uni = v.get("unicode-equivalent", v.get("ascii"))
 
             assert uni not in inverses, f"unicode character {uni} has multiple inverses"
 

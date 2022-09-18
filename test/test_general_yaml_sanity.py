@@ -155,8 +155,8 @@ def test_unicode_name():
             ), f"{k} has unicode-equivalent-name set to {real_name} but it should be {expected_name}"
         else:
             assert (
-                "unicode-equivalent-name" not in v
-            ), f"{k} has unicode-equivalent-name set to {v['unicode-equivalent-name']} but it doesn't have a unicode equivalent"
+                "ascii" in v
+            ), f"{k} has unicode-equivalent-name set to {v['unicode-equivalent-name']} but it doesn't have a unicode or ascii equivalent"
 
 
 def test_wl_unicode():
@@ -168,8 +168,8 @@ def test_wl_unicode():
                 # unique equivalent
                 continue
         assert (
-            "wl-unicode" in v or "unicode-equivalent" in v
-        ), f"{k} has neither wl-unicode nor unicode-equivalent attribute"
+            "wl-unicode" in v or "unicode-equivalent" in v or "ascii" in v
+        ), f"{k} has neither wl-unicode, unicode-equivalent, nor ascii attribute"
 
 
 def test_unicode_operators():

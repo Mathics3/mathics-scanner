@@ -11,7 +11,7 @@ def check_translation_regression(c: str, expected_translation: str):
 
 
 def test_translation_regressions():
-    check_translation_regression("DifferentialD", "𝑑")
+    check_translation_regression("DifferentialD", "\U0001D451")
     check_translation_regression("PartialD", "\u2202")
     check_translation_regression("Uranus", "\u2645")
     check_translation_regression("WeierstrassP", "\u2118")
