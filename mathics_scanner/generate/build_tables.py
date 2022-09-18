@@ -2,6 +2,8 @@
 # This scripts reads the data from named-characters and converts it to the
 # format used by the library internally
 
+from collections import OrderedDict
+
 import click
 
 import json
@@ -113,9 +115,9 @@ def compile_tables(data: dict) -> dict:
 
     # operator-to-unicode dictionary entry
     operator_to_unicode = {
-        v["operator-name"]: v["unicode-equivalent"]
+        v["operator-name"]: v.get("unicode-equivalent", v.get("ascii"))
         for k, v in data.items()
-        if "operator-name" in v and "unicode-equivalent" in v
+        if "operator-name" in v and ("unicode-equivalent" in v or "ascii" in v)
     }
 
     # Conversion from unicode or ascii to wl dictionary entry.
@@ -147,20 +149,21 @@ def compile_tables(data: dict) -> dict:
         [v["ascii"] for v in data.values() if "operator-name" in v and "ascii" in v]
     )
 
-    # unicode-equivalent list entry
-    unicode_operators = sorted(
-        [
-            v["unicode-equivalent"]
+    # Mathics core stores the ascii operator value, Use that to get an operator name
+    # Operators with ASCII sequences list entry
+    ascii_operator_to_name = OrderedDict(
+        {
+            v["ascii"]: rf'\[{v["operator-name"]}]'
             for v in data.values()
-            if "operator-name" in v and "unicode-equivalent" in v
-        ]
+            if "operator-name" in v and "ascii" in v
+        }.items()
     )
 
     # unicode-to-operator dictionary entry
     unicode_to_operator = {
-        v["unicode-equivalent"]: v["operator-name"]
+        v.get("unicode-equivalent", v.get("ascii")): v["operator-name"]
         for k, v in data.items()
-        if "operator-name" in v and "unicode-equivalent" in v
+        if "operator-name" in v
     }
     # Conversion from WL to the fully qualified names dictionary entry
     wl_to_ascii_dict = {
@@ -184,13 +187,14 @@ def compile_tables(data: dict) -> dict:
     return {
         "aliased-characters": aliased_characters,
         "ascii-operators": ascii_operators,
+        "ascii-operator-to-name": ascii_operator_to_name,
         "letterlikes": letterlikes,
         "named-characters": named_characters,
         "operator-to-precedence": operator_to_precedence,
         "operator-to-unicode": operator_to_unicode,
-        "unicode-equivalent": unicode_operators,
+        # unicode-operators is irregular, but this is what
+        # mathics-pygments uses
         "unicode-operators": unicode_to_operator,
-        "unicode-to-operator": unicode_to_operator,
         "unicode-to-wl-dict": unicode_to_wl_dict,
         "unicode-to-wl-re": unicode_to_wl_re,
         "wl-to-ascii-dict": wl_to_ascii_dict,
