@@ -1,8 +1,6 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # This scripts reads the data from named-characters and converts it to the
 # format used by the library internally
-
-from collections import OrderedDict
 
 import click
 
@@ -144,20 +142,28 @@ def compile_tables(data: dict) -> dict:
         if "wl-unicode" in v
     }
 
-    # Operators with ASCII sequences list entry
-    ascii_operators = sorted(
-        [v["ascii"] for v in data.values() if "operator-name" in v and "ascii" in v]
-    )
+    operator_names = sorted([k for k, v in data.items() if "operator-name" in v])
 
-    # Mathics core stores the ascii operator value, Use that to get an operator name
-    # Operators with ASCII sequences list entry
-    ascii_operator_to_name = OrderedDict(
-        {
-            v["ascii"]: rf'\[{v["operator-name"]}]'
-            for v in data.values()
-            if "operator-name" in v and "ascii" in v
-        }.items()
-    )
+    ascii_operators = []
+    ascii_operator_to_name = {}
+    ascii_operator_to_unicode = {}
+    ascii_operator_to_wl_unicode = {}
+
+    for operator_name in operator_names:
+        # Operators with ASCII sequences list entry
+        v = data[operator_name]
+        ascii_name = v.get("ascii", None)
+        if ascii_name is not None:
+            ascii_operators.append(v["ascii"])
+            ascii_operator_to_name[ascii_name] = rf'\[{v["operator-name"]}]'
+            # Mathics core stores the ascii operator value, Use that to get standard unicode
+            # symbol, and failing use the ASCII sequence.
+            ascii_operator_to_unicode[ascii_name] = v.get(
+                "unicode-equivalent", v.get("ascii")
+            )
+            ascii_operator_to_wl_unicode[ascii_name] = v.get(
+                "wl-unicode", v.get("ascii")
+            )
 
     # unicode-to-operator dictionary entry
     unicode_to_operator = {
@@ -188,8 +194,11 @@ def compile_tables(data: dict) -> dict:
         "aliased-characters": aliased_characters,
         "ascii-operators": ascii_operators,
         "ascii-operator-to-name": ascii_operator_to_name,
+        "ascii-operator-to-unicode": ascii_operator_to_unicode,
+        "ascii-operator-to-wl-unicode": ascii_operator_to_wl_unicode,
         "letterlikes": letterlikes,
         "named-characters": named_characters,
+        "operator-names": operator_names,
         "operator-to-precedence": operator_to_precedence,
         "operator-to-unicode": operator_to_unicode,
         # unicode-operators is irregular, but this is what
@@ -210,13 +219,15 @@ DEFAULT_DATA_DIR = Path(osp.normpath(osp.dirname(__file__)), "..", "data")
 ALL_FIELDS = [
     "aliased-characters",
     "ascii-operators",
+    "ascii-operator-to-name",
+    "ascii-operator-to-unicode",
+    "ascii-operator-to-wl-unicode",
     "letterlikes",
     "named-characters",
+    "operator-names",
     "operator-to-precedence",
     "operator-to-unicode",
-    "unicode-equivalent",
     "unicode-operators",
-    "unicode-to-operator",
     "unicode-to-wl-dict",
     "unicode-to-wl-re",
     "wl-to-amslatex",
