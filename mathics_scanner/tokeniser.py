@@ -424,7 +424,13 @@ class Tokeniser(object):
         while True:
             if self.pos >= len(self.code):
                 if comment:
-                    self.incomplete()
+                    try:
+                        self.incomplete()
+                    except ValueError:
+                        # Funny symbols like | in comments can cause a ValueError.
+                        # Until we have a better fix -- like noting we are inside a comment and
+                        # should not try to substitute symbols -- ignore.
+                        pass
                 else:
                     break
             if comment:
