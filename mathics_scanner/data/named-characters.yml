@@ -653,6 +653,7 @@ CapitalDelta:
 
 CapitalDifferentialD:
   amslatex: "\\CapitalDifferentialD"
+  ascii: "d"
   esc-alias: DD
   has-unicode-inverse: true
   is-letter-like: true
@@ -1787,6 +1788,8 @@ DifferentialD:
   has-unicode-inverse: true
   # This can't be letter-like because it is used in derivatives as a function
   is-letter-like: false
+  # TODO: This should be a prefix operator
+  operator-name: DifferentialD
   unicode-equivalent: "\U0001D451"
   unicode-equivalent-name: MATHEMATICAL ITALIC SMALL D
   wl-unicode: "\uF74C"
@@ -5026,6 +5029,7 @@ Integral:
   esc-alias: int
   has-unicode-inverse: false
   is-letter-like: false
+  # TODO: This should be a prefix operator
   operator-name: Integral
   unicode-equivalent: "\u222B"
   unicode-equivalent-name: INTEGRAL
