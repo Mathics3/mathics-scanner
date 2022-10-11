@@ -1,8 +1,6 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # This scripts reads the data from named-characters and converts it to the
 # format used by the library internally
-
-from collections import OrderedDict
 
 import click
 
@@ -120,6 +118,13 @@ def compile_tables(data: dict) -> dict:
         if "operator-name" in v and ("unicode-equivalent" in v or "ascii" in v)
     }
 
+    # operator-to-ascii or character symbol name
+    operator_to_ascii = {
+        v["operator-name"]: v.get("ascii", rf'\[{v["operator-name"]}]')
+        for k, v in data.items()
+        if "operator-name" in v and ("unicode-equivalent" in v or "ascii" in v)
+    }
+
     # Conversion from unicode or ascii to wl dictionary entry.
     # We filter the dictionary after it's first created to redundant entries
     unicode_to_wl_dict = {
@@ -144,20 +149,30 @@ def compile_tables(data: dict) -> dict:
         if "wl-unicode" in v
     }
 
-    # Operators with ASCII sequences list entry
-    ascii_operators = sorted(
-        [v["ascii"] for v in data.values() if "operator-name" in v and "ascii" in v]
-    )
+    operator_names = sorted([k for k, v in data.items() if "operator-name" in v])
 
-    # Mathics core stores the ascii operator value, Use that to get an operator name
-    # Operators with ASCII sequences list entry
-    ascii_operator_to_name = OrderedDict(
-        {
-            v["ascii"]: rf'\[{v["operator-name"]}]'
-            for v in data.values()
-            if "operator-name" in v and "ascii" in v
-        }.items()
-    )
+    ascii_operators = []
+    ascii_operator_to_character_symbol = {}
+    ascii_operator_to_symbol = {}
+    ascii_operator_to_unicode = {}
+    ascii_operator_to_wl_unicode = {}
+
+    for operator_name in operator_names:
+        # Operators with ASCII sequences list entry
+        v = data[operator_name]
+        ascii_name = v.get("ascii", None)
+        if ascii_name is not None:
+            ascii_operators.append(v["ascii"])
+            ascii_operator_to_character_symbol[ascii_name] = rf'\[{v["operator-name"]}]'
+            ascii_operator_to_symbol[ascii_name] = v["operator-name"]
+            # Mathics core stores the ascii operator value, Use that to get standard unicode
+            # symbol, and failing use the ASCII sequence.
+            ascii_operator_to_unicode[ascii_name] = v.get(
+                "unicode-equivalent", v.get("ascii")
+            )
+            ascii_operator_to_wl_unicode[ascii_name] = v.get(
+                "wl-unicode", v.get("ascii")
+            )
 
     # unicode-to-operator dictionary entry
     unicode_to_operator = {
@@ -187,13 +202,16 @@ def compile_tables(data: dict) -> dict:
     return {
         "aliased-characters": aliased_characters,
         "ascii-operators": ascii_operators,
-        "ascii-operator-to-name": ascii_operator_to_name,
+        "ascii-operator-to-symbol": ascii_operator_to_symbol,
+        "ascii-operator-to-character-symbol": ascii_operator_to_character_symbol,
+        "ascii-operator-to-unicode": ascii_operator_to_unicode,
+        "ascii-operator-to-wl-unicode": ascii_operator_to_wl_unicode,
         "letterlikes": letterlikes,
         "named-characters": named_characters,
+        "operator-names": operator_names,
         "operator-to-precedence": operator_to_precedence,
+        "operator-to-ascii": operator_to_ascii,
         "operator-to-unicode": operator_to_unicode,
-        # unicode-operators is irregular, but this is what
-        # mathics-pygments uses
         "unicode-operators": unicode_to_operator,
         "unicode-to-wl-dict": unicode_to_wl_dict,
         "unicode-to-wl-re": unicode_to_wl_re,
@@ -210,13 +228,17 @@ DEFAULT_DATA_DIR = Path(osp.normpath(osp.dirname(__file__)), "..", "data")
 ALL_FIELDS = [
     "aliased-characters",
     "ascii-operators",
+    "ascii-operator-to-character-symbol",
+    "ascii-operator-to-symbol",
+    "ascii-operator-to-unicode",
+    "ascii-operator-to-wl-unicode",
     "letterlikes",
     "named-characters",
+    "operator-names",
+    "operator-to-ascii",
     "operator-to-precedence",
     "operator-to-unicode",
-    "unicode-equivalent",
-    "unicode-operators",
-    "unicode-to-operator",
+    #   "unicode-operators",  # not used yet
     "unicode-to-wl-dict",
     "unicode-to-wl-re",
     "wl-to-amslatex",

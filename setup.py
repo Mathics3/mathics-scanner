@@ -25,7 +25,10 @@ Or, if all else fails, feel free to write to the mathics users list at
 mathics-users@googlegroups.com and ask for help.
 """
 
+import atexit
+import pkg_resources
 import re
+import subprocess
 import sys
 import os.path as osp
 import platform
@@ -127,3 +130,15 @@ setup(
     ],
     # TODO: could also include long_description, download_url,
 )
+
+
+def build_json_table() -> int:
+    """Run program to create JSON tables"""
+    ROOT_DIR = pkg_resources.resource_filename("mathics_scanner", "")
+    build_tables_program = osp.join(ROOT_DIR, "generate", "build_tables.py")
+    print(f"Building JSON tables via f{build_tables_program}")
+    result = subprocess.run([sys.executable, build_tables_program])
+    return result.returncode
+
+
+atexit.register(build_json_table)
