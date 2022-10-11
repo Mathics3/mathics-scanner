@@ -212,8 +212,6 @@ def compile_tables(data: dict) -> dict:
         "operator-to-precedence": operator_to_precedence,
         "operator-to-ascii": operator_to_ascii,
         "operator-to-unicode": operator_to_unicode,
-        # unicode-operators is irregular, but this is what
-        # mathics-pygments uses
         "unicode-operators": unicode_to_operator,
         "unicode-to-wl-dict": unicode_to_wl_dict,
         "unicode-to-wl-re": unicode_to_wl_re,
@@ -240,7 +238,7 @@ ALL_FIELDS = [
     "operator-to-ascii",
     "operator-to-precedence",
     "operator-to-unicode",
-    "unicode-operators",
+    #   "unicode-operators",  # not used yet
     "unicode-to-wl-dict",
     "unicode-to-wl-re",
     "wl-to-amslatex",
