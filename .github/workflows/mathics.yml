@@ -29,5 +29,6 @@ jobs:
       run: |
         # Until next Mathics3/mathics-core release is out...
         python -m pip install -e git+https://github.com/Mathics3/mathics-core#egg=Mathics3[full]
+        (cd src/mathics3 && ./admin-tools/make-op-tables.sh )
         # pip install Mathics3[full]
-        make check-mathics
+        MATHICS_CHARACTER_ENCODING="ASCII" make check-mathics
