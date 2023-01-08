@@ -54,8 +54,10 @@ from mathics_scanner.version import __version__
 # Get/set __version__ and long_description from files
 long_description = read("README.rst") + "\n"
 
+is_PyPy = platform.python_implementation() == "PyPy" or hasattr(
+    sys, "pypy_version_info"
+)
 
-is_PyPy = platform.python_implementation() == "PyPy"
 
 # General Requirements
 INSTALL_REQUIRES = [
@@ -97,6 +99,7 @@ setup(
         "mathics_scanner": [
             "data/named-characters.yml",
             "data/*.csv",
+            "data/characters.json",  # List this explicitly since it is needed
             "data/*.json",
             "data/ExampleData/*",
         ]
