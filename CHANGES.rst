@@ -1,17 +1,25 @@
 CHANGES
 =======
 
-1.2.5.dev0
-----------
+Note: after the 1.3.0 release support for running on Python 3.6 will be dropped. Python
+3.7 support will be dropped soon as well.
 
-* Add escape-code sequence for 32-bit unicode. Issue #48.
+
+1.3.0
+------
+
+* Add escape-code sequence for 32-bit Unicode. Issue #48.
 * Correct ``Infix`` and ``Tilde`` character symbols
 * Support double backslash (``\\``) as a single backslash character (``\``).
 * Correct Unicode for ScriptN and ScriptCaptialN
 * Correct a number of is-letter-like entries.
 * Accept \u21A6 as symbol for Function.
-* Change the precedence of ``|->``(``Function`` symbol) to 800 so it isn't iterpreted as a ``|``
+* Change the precedence of ``|->``(``Function`` symbol) to 800 so it isn't interpreted as a ``|``
   followed by ``->``
+* ASCII operator tables can now be generated
+* Add DifferentialD and Integrate even though we don't have a full set of prefix operators.
+* more precedence values added to operators
+* Python 3.11 operation verified
 
 
 1.2.4
