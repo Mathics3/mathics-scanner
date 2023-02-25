@@ -61,7 +61,7 @@ clean:
 
 #: Run py.test tests. Use environment variable "o" for pytest options
 pytest: mathics_scanner/data/characters.json
-	py.test test $o
+	$(PYTHON) -m pytest test $o
 
 #: Print to stdout a GNU Readline inputrc without Unicode
 inputrc-no-unicode:
