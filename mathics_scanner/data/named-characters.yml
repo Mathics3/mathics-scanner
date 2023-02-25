@@ -2970,6 +2970,7 @@ Epsilon:
   wl-unicode-name: GREEK LUNATE EPSILON SYMBOL
 
 Equal:
+  amslatex: "\\eqeq"
   ascii: "=="
   esc-alias: "=="
   has-unicode-inverse: true
@@ -6326,7 +6327,7 @@ NumberSign:
   esc-alias: '#'
   has-unicode-inverse: false
   is-letter-like: false
-  # Leave out equvalent here so scanner will match this as a Slot
+  # Leave out equivalent here so scanner will match this as a Slot
   # unicode-equivalent: '#'
   # unicode-equivalent-name: NUMBER SIGN
   wl-unicode: "\uF724"
@@ -7359,6 +7360,7 @@ Rule:
   wl-unicode: "\uF522"
 
 RuleDelayed:
+  amslatex: "\\ruledelayed"
   ascii: ":>"
   esc-alias: ":>"
   has-unicode-inverse: true

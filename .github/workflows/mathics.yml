@@ -18,6 +18,9 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }}
+    - name: Install OS dependencies
+      run: |
+        sudo apt-get update -qq && sudo apt-get install -qq liblapack-dev llvm-dev tesseract-ocr
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -25,7 +28,7 @@ jobs:
     - name: Install Mathics_Scanner
       run: |
         make
-    - name: Test Mathics
+    - name: Test Mathics3
       run: |
         # Until next Mathics3/mathics-core release is out...
         python -m pip install -e git+https://github.com/Mathics3/mathics-core#egg=Mathics3[full]

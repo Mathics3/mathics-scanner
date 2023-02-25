@@ -13,7 +13,7 @@ from mathics_scanner.characters import aliased_characters
 
 
 def _escape(s: str) -> str:
-    """Escapes special chracters in inputrc strings"""
+    """Escapes special characters in inputrc strings"""
     return s.replace("\\", "\\\\").replace('"', '\\"')
 
 
