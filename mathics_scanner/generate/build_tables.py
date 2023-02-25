@@ -70,7 +70,7 @@ def compile_tables(data: dict) -> dict:
     information.
     """
 
-    # Multiple entries in the YAML table are redundant in the following sence:
+    # Multiple entries in the YAML table are redundant in the following sense:
     # when a character has a plain-text equivalent but the plain-text
     # equivalent is equal to it's WL unicode representation (i.e. the
     # "wl-unicode" field is the same as the "unicode-equivalent" field) then it
@@ -284,7 +284,7 @@ def main(field, output, data_dir):
             if f not in field:
                 del data[f]
 
-        # Dump the proprocessed dictionaries to disk as JSON.
+        # Dump the preprocessed dictionaries to disk as JSON.
         json.dump(data, o)
 
 

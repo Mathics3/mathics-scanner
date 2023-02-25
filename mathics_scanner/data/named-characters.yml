@@ -6327,7 +6327,7 @@ NumberSign:
   esc-alias: '#'
   has-unicode-inverse: false
   is-letter-like: false
-  # Leave out equvalent here so scanner will match this as a Slot
+  # Leave out equivalent here so scanner will match this as a Slot
   # unicode-equivalent: '#'
   # unicode-equivalent-name: NUMBER SIGN
   wl-unicode: "\uF724"

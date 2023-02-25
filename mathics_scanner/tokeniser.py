@@ -121,7 +121,7 @@ tokens = [
     ("SetDelayed", r" \:\= "),
     ("UpSet", r" \^\= "),
     ("TagSet", r" \/\: "),
-    ("Unset", r" \=\s*\.(?!\d|\.) "),  # allow whitspace but avoid e.g. x=.01
+    ("Unset", r" \=\s*\.(?!\d|\.) "),  # allow whitespace but avoid e.g. x=.01
     ("Set", r" \= "),
     ("Condition", r" \/\; "),
     ("Semicolon", r" \; "),

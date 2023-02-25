@@ -10,7 +10,7 @@ from abc import abstractmethod, ABCMeta
 class LineFeeder(metaclass=ABCMeta):
     """An abstract representation for reading lines of characters, a
     "feeder". The purpose of a feeder is to mediate the consumption of
-    characters between the tokeniser and the actual file being scaned,
+    characters between the tokeniser and the actual file being scanned,
     as well to store messages regarding tokenization errors.
     """
 
