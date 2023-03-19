@@ -62,7 +62,7 @@ tokens = [
     #
     ("LeftRowBox", r" \\\( "),
     ("RightRowBox", r" \\\) "),
-    # Box operators which are valid only inside Box delimiters
+    # Box Operators which are valid only inside Box delimiters
     ("InterpretedBox", r" \\\! "),
     ("SuperscriptBox", r" \\\^ "),
     ("SubscriptBox", r" \\\_ "),
@@ -74,7 +74,7 @@ tokens = [
     ("RadicalBox", r" \\\@ "),
     ("FormBox", r" \\\` "),
     #
-    # end bloxes
+    # End Box Operators
     #
     ("Information", r"\?\?"),
     ("PatternTest", r" \? "),
