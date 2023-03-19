@@ -26,16 +26,17 @@ mathics-users@googlegroups.com and ask for help.
 """
 
 import atexit
-import pkg_resources
+import os.path as osp
+import platform
 import re
 import subprocess
 import sys
-import os.path as osp
-import platform
+
+import pkg_resources
 from setuptools import setup
 
 # Ensure user has the correct Python version
-if sys.version_info < (3, 6):
+if sys.version_info < (3, 7):
     print("mathics-scanner does not support Python %d.%d" % sys.version_info[:2])
     sys.exit(-1)
 
@@ -119,7 +120,6 @@ setup(
         "Intended Audience :: Science/Research",
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
         "Programming Language :: Python",
-        "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
