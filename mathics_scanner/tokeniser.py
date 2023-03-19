@@ -4,10 +4,9 @@
 import re
 import string
 
+from mathics_scanner.characters import _letterlikes, _letters
 from mathics_scanner.errors import ScanError
 from mathics_scanner.prescanner import Prescanner
-from mathics_scanner.characters import _letters, _letterlikes
-
 
 # special patterns
 number_pattern = r"""
@@ -57,9 +56,12 @@ tokens = [
     ("RawComma", r" \, "),
     ("Span", r" \;\; "),
     ("MessageName", r" \:\: "),
-    # boxes
+    #
+    # Enclosing Box delimiters
+    #
     ("LeftRowBox", r" \\\( "),
     ("RightRowBox", r" \\\) "),
+    # Box operators which are valid only inside Box delimiters
     ("InterpretedBox", r" \\\! "),
     ("SuperscriptBox", r" \\\^ "),
     ("SubscriptBox", r" \\\_ "),
@@ -70,6 +72,9 @@ tokens = [
     ("SqrtBox", r" \\\@ "),
     ("RadicalBox", r" \\\@ "),
     ("FormBox", r" \\\` "),
+    #
+    # end bloxes
+    #
     ("Information", r"\?\?"),
     ("PatternTest", r" \? "),
     ("Increment", r" \+\+ "),
@@ -384,7 +389,7 @@ class Tokeniser(object):
             self.feeder.message("Syntax", "sntxf", pre, post)
 
     # TODO: Convert this to __next__ in the future?
-    def next(self):
+    def next(self) -> "Token":
         "Returns the next token."
         self._skip_blank()
         if self.pos >= len(self.code):
@@ -392,6 +397,8 @@ class Tokeniser(object):
 
         # look for a matching pattern
         indices = self.token_indices.get(self.code[self.pos], ())
+        match = None
+        tag = "??invalid"
         if indices:
             for index in indices:
                 tag, pattern = self.tokens[index]
@@ -428,8 +435,8 @@ class Tokeniser(object):
                         self.incomplete()
                     except ValueError:
                         # Funny symbols like | in comments can cause a ValueError.
-                        # Until we have a better fix -- like noting we are inside a comment and
-                        # should not try to substitute symbols -- ignore.
+                        # Until we have a better fix -- like noting we are inside a
+                        # comment and should not try to substitute symbols -- ignore.
                         pass
                 else:
                     break
@@ -450,7 +457,7 @@ class Tokeniser(object):
             else:
                 break
 
-    def t_String(self, match):
+    def t_String(self, match) -> "Token":
         "String rule"
         start, end = self.pos, None
         self.pos += 1  # skip opening '"'
@@ -478,7 +485,7 @@ class Tokeniser(object):
         )
         return Token("String", result, start)
 
-    def t_Number(self, match):
+    def t_Number(self, match) -> "Token":
         "Number rule"
         text = match.group(0)
         pos = match.end(0)
@@ -491,25 +498,25 @@ class Tokeniser(object):
         return Token("Number", text, match.start(0))
 
     # This isn't outside of here so it's considered internal
-    def _token_mode(self, match, tag, mode):
+    def _token_mode(self, match, tag, mode) -> "Token":
         "consume a token and switch mode"
         text = match.group(0)
         self.pos = match.end(0)
         self._change_mode(mode)
         return Token(tag, text, match.start(0))
 
-    def t_Get(self, match):
+    def t_Get(self, match) -> "Token":
         "Get rule"
         return self._token_mode(match, "Get", "filename")
 
-    def t_Put(self, match):
+    def t_Put(self, match) -> "Token":
         "Put rule"
         return self._token_mode(match, "Put", "filename")
 
-    def t_PutAppend(self, match):
+    def t_PutAppend(self, match) -> "Token":
         "PutAppend rule"
         return self._token_mode(match, "PutAppend", "filename")
 
-    def t_Filename(self, match):
+    def t_Filename(self, match) -> "Token":
         "Filename rule"
         return self._token_mode(match, "Filename", "expr")
