@@ -1687,7 +1687,7 @@ Definition:
 # is valid, and this would not be the case if this symbol were
 # not letterlike.
 
-# On some keyboards 186 can sometimes appear as the keyboad symbol,
+# On some keyboards 186 can sometimes appear as the keyboard symbol,
 # but according to
 # https://reference.wolfram.com/language/ref/character/Degree.html the
 # right value is 176 which is the same as the Unicode value. These

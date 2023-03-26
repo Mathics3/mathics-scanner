@@ -3,11 +3,11 @@
 
 import re
 import string
+from typing import Optional
 
+from mathics_scanner.characters import _letterlikes, _letters
 from mathics_scanner.errors import ScanError
 from mathics_scanner.prescanner import Prescanner
-from mathics_scanner.characters import _letters, _letterlikes
-
 
 # special patterns
 number_pattern = r"""
@@ -57,9 +57,12 @@ tokens = [
     ("RawComma", r" \, "),
     ("Span", r" \;\; "),
     ("MessageName", r" \:\: "),
-    # boxes
+    #
+    # Enclosing Box delimiters
+    #
     ("LeftRowBox", r" \\\( "),
     ("RightRowBox", r" \\\) "),
+    # Box Operators which are valid only inside Box delimiters
     ("InterpretedBox", r" \\\! "),
     ("SuperscriptBox", r" \\\^ "),
     ("SubscriptBox", r" \\\_ "),
@@ -70,6 +73,9 @@ tokens = [
     ("SqrtBox", r" \\\@ "),
     ("RadicalBox", r" \\\@ "),
     ("FormBox", r" \\\` "),
+    #
+    # End Box Operators
+    #
     ("Information", r"\?\?"),
     ("PatternTest", r" \? "),
     ("Increment", r" \+\+ "),
@@ -275,7 +281,7 @@ for c in string.digits:
     literal_tokens[c] = ["Number"]
 
 
-def find_indices(literals) -> dict:
+def find_indices(literals: dict) -> dict:
     "find indices of literal tokens"
 
     literal_indices = {}
@@ -309,7 +315,7 @@ filename_tokens = compile_tokens(filename_tokens)
 full_symbol_pattern = compile_pattern(full_symbol_pattern)
 
 
-def is_symbol_name(text):
+def is_symbol_name(text: str) -> bool:
     """
     Returns ``True`` if ``text`` is a valid identifier. Otherwise returns
     ``False``.
@@ -319,11 +325,11 @@ def is_symbol_name(text):
 
 
 class Token(object):
-    "A representation of a Wolfram Language token."
+    "A representation of a token for parsing the Wolfram Language."
 
-    def __init__(self, tag, text, pos):
+    def __init__(self, tag: str, text: str, pos: int):
         """
-        :param tag: A string that indicates which type of token this is.
+        :param tag: which type of token this is.
         :param text: The actual contents of the token.
         :param pos: The position of the token in the input feed.
         """
@@ -339,30 +345,33 @@ class Token(object):
         )
 
     def __repr__(self):
-        return "Token(%s, %s, %i)" % (self.tag, self.text, self.pos)
+        return f"Token({self.tag}, {self.text}, {self.pos})"
 
 
-class Tokeniser(object):
+class Tokeniser:
     """
-    A tokeniser for the Wolfram Language.
+    This converts input strings from a feeder and
+    produces tokens of the Wolfram Language which can then be used in parsing.
     """
 
     modes = {"expr": (tokens, token_indices), "filename": (filename_tokens, {})}
 
     def __init__(self, feeder):
         """
-        :param feeder: An instance of ``LineFeeder`` which will feed characters
-                       to the tokeniser.
+        feeder: An instance of ``LineFeeder`` from which we receive
+                input srings that are to be split up and put into tokens.
         """
         self.pos = 0
         self.feeder = feeder
         self.prescanner = Prescanner(feeder)
         self.code = self.prescanner.replace_escape_sequences()
-        self._change_mode("expr")
+        self._change_token_scanning_mode("expr")
 
-    def _change_mode(self, mode):
+    def _change_token_scanning_mode(self, mode: str):
         """
-        Set the mode of the tokeniser.
+        Set the kinds of tokens that be will expected on the next token scan.
+        See class variable "modes" above for the dictionary
+        of token-scanning modes.
         """
         self.mode = mode
         self.tokens, self.token_indices = self.modes[mode]
@@ -373,8 +382,10 @@ class Tokeniser(object):
         self.prescanner.incomplete()
         self.code += self.prescanner.replace_escape_sequences()
 
-    def sntx_message(self, pos=None):
-        """Send a message to the feeder."""
+    def sntx_message(self, pos: Optional[int] = None):
+        """
+        Send a "syntx{b,f} error message to the input-reading feeder.
+        """
         if pos is None:
             pos = self.pos
         pre, post = self.code[:pos], self.code[pos:].rstrip("\n")
@@ -383,8 +394,8 @@ class Tokeniser(object):
         else:
             self.feeder.message("Syntax", "sntxf", pre, post)
 
-    # TODO: Convert this to __next__ in the future?
-    def next(self):
+    # TODO: Convert this to __next__ in the future.
+    def next(self) -> "Token":
         "Returns the next token."
         self._skip_blank()
         if self.pos >= len(self.code):
@@ -392,6 +403,8 @@ class Tokeniser(object):
 
         # look for a matching pattern
         indices = self.token_indices.get(self.code[self.pos], ())
+        match = None
+        tag = "??invalid"
         if indices:
             for index in indices:
                 tag, pattern = self.tokens[index]
@@ -428,8 +441,8 @@ class Tokeniser(object):
                         self.incomplete()
                     except ValueError:
                         # Funny symbols like | in comments can cause a ValueError.
-                        # Until we have a better fix -- like noting we are inside a comment and
-                        # should not try to substitute symbols -- ignore.
+                        # Until we have a better fix -- like noting we are inside a
+                        # comment and should not try to substitute symbols -- ignore.
                         pass
                 else:
                     break
@@ -450,8 +463,48 @@ class Tokeniser(object):
             else:
                 break
 
-    def t_String(self, match):
-        "String rule"
+    def _token_mode(self, match: re.Match, tag: str, mode: str) -> "Token":
+        """
+        Pick out the text in ``match``, convert that into a ``Token``, and
+        return that.
+
+        Also switch token-scanning mode.
+        """
+        text = match.group(0)
+        self.pos = match.end(0)
+        self._change_token_scanning_mode(mode)
+        return Token(tag, text, match.start(0))
+
+    def t_Filename(self, match: re.Match) -> "Token":
+        "Scan for ``Filename`` token and return that"
+        return self._token_mode(match, "Filename", "expr")
+
+    def t_Get(self, match: re.Match) -> "Token":
+        "Scan for a ``Get`` token from ``match`` and return that token"
+        return self._token_mode(match, "Get", "filename")
+
+    def t_Put(self, match: re.Match) -> "Token":
+        "Scan for a ``Put`` token and return that"
+        return self._token_mode(match, "Put", "filename")
+
+    def t_PutAppend(self, match: re.Match) -> "Token":
+        "Scan for a ``PutAppend`` token and return that"
+        return self._token_mode(match, "PutAppend", "filename")
+
+    def t_Number(self, match: re.Match) -> "Token":
+        "Break out from ``match`` the next token which is expected to be a Number"
+        text = match.group(0)
+        pos = match.end(0)
+        if self.code[pos - 1 : pos + 1] == "..":
+            # Trailing .. should be ignored. That is, `1..` is `Repeated[1]`.
+            text = text[:-1]
+            self.pos = pos - 1
+        else:
+            self.pos = pos
+        return Token("Number", text, match.start(0))
+
+    def t_String(self, match: re.Match) -> "Token":
+        "Break out from self.code the next token which is expected to be a String"
         start, end = self.pos, None
         self.pos += 1  # skip opening '"'
         newlines = []
@@ -477,39 +530,3 @@ class Tokeniser(object):
             self.code[indices[i] : indices[i + 1]] for i in range(len(indices) - 1)
         )
         return Token("String", result, start)
-
-    def t_Number(self, match):
-        "Number rule"
-        text = match.group(0)
-        pos = match.end(0)
-        if self.code[pos - 1 : pos + 1] == "..":
-            # Trailing .. should be ignored. That is, `1..` is `Repeated[1]`.
-            text = text[:-1]
-            self.pos = pos - 1
-        else:
-            self.pos = pos
-        return Token("Number", text, match.start(0))
-
-    # This isn't outside of here so it's considered internal
-    def _token_mode(self, match, tag, mode):
-        "consume a token and switch mode"
-        text = match.group(0)
-        self.pos = match.end(0)
-        self._change_mode(mode)
-        return Token(tag, text, match.start(0))
-
-    def t_Get(self, match):
-        "Get rule"
-        return self._token_mode(match, "Get", "filename")
-
-    def t_Put(self, match):
-        "Put rule"
-        return self._token_mode(match, "Put", "filename")
-
-    def t_PutAppend(self, match):
-        "PutAppend rule"
-        return self._token_mode(match, "PutAppend", "filename")
-
-    def t_Filename(self, match):
-        "Filename rule"
-        return self._token_mode(match, "Filename", "expr")

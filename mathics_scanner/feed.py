@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-Rather than trying to parse all the lines of code at once, this module implements methods
-for returning one line code at a time.
+Rather than trying to parse all the lines of code at once, this module implements
+methods for returning one line code at a time.
 """
 
-from abc import abstractmethod, ABCMeta
+from abc import ABCMeta, abstractmethod
 
 
 class LineFeeder(metaclass=ABCMeta):
