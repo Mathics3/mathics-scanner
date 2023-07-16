@@ -7,7 +7,7 @@ character escape sequences.
 from typing import List
 
 from mathics_scanner.characters import named_characters
-from mathics_scanner.errors import ScanError, IncompleteSyntaxError
+from mathics_scanner.errors import IncompleteSyntaxError, ScanError
 from mathics_scanner.feed import LineFeeder
 
 
@@ -185,10 +185,11 @@ class Prescanner(object):
                     )
                     start_new_fragment(self.pos + 2)
                 else:
-                    # Two backslashes in succession indicates a single backslash character.
-                    # Advance the scanning cursor (self.pos) over both backslashes.
-                    # Also, Python's backslash escape mechanism turns the two backslashes
-                    # into one in length calculations.
+                    # Two backslashes in succession indicates a single
+                    # backslash character.  Advance the scanning
+                    # cursor (self.pos) over both backslashes.  Also,
+                    # Python's backslash escape mechanism turns the
+                    # two backslashes into one in length calculations.
                     self.pos += 2
             else:
                 self.pos += 1

@@ -10,7 +10,7 @@ from mathics_scanner.errors import ScanError
 from mathics_scanner.prescanner import Prescanner
 
 # special patterns
-number_pattern = r"""
+NUMBER_PATTERN = r"""
 ( (?# Two possible forms depending on whether base is specified)
     (\d+\^\^([a-zA-Z0-9]+\.?[a-zA-Z0-9]*|[a-zA-Z0-9]*\.?[a-zA-Z0-9]+))
     | (\d+\.?\d*|\d*\.?\d+)
@@ -22,21 +22,21 @@ base_symbol_pattern = r"((?![0-9])([0-9${0}{1}])+)".format(_letters, _letterlike
 full_symbol_pattern = r"(`?{0}(`{0})*)".format(base_symbol_pattern)
 pattern_pattern = r"{0}?_(\.|(__?)?{0}?)?".format(full_symbol_pattern)
 slot_pattern = r"\#(\d+|{0})?".format(base_symbol_pattern)
-filename_pattern = r"""
+FILENAME_PATTERN = r"""
 (?P<quote>\"?)                              (?# Opening quotation mark)
     [a-zA-Z0-9\`/\.\\\!\-\:\_\$\*\~\?]+     (?# Literal characters)
 (?P=quote)                                  (?# Closing quotation mark)
 """
-names_wildcards = "@*"
+NAMES_WILDCARDS = "@*"
 base_names_pattern = r"((?![0-9])([0-9${0}{1}{2}])+)".format(
-    _letters, _letterlikes, names_wildcards
+    _letters, _letterlikes, NAMES_WILDCARDS
 )
 full_names_pattern = r"(`?{0}(`{0})*)".format(base_names_pattern)
 
 tokens = [
     ("Definition", r"\? "),
     ("Information", r"\?\? "),
-    ("Number", number_pattern),
+    ("Number", NUMBER_PATTERN),
     ("String", r'"'),
     ("Pattern", pattern_pattern),
     ("Symbol", full_symbol_pattern),
@@ -288,7 +288,7 @@ def find_indices(literals: dict) -> dict:
     for key, tags in literals.items():
         indices = []
         for tag in tags:
-            for i, (tag2, pattern) in enumerate(tokens):
+            for i, (tag2, _) in enumerate(tokens):
                 if tag == tag2:
                     indices.append(i)
                     break
@@ -307,7 +307,7 @@ def compile_tokens(token_list):
     return [(tag, compile_pattern(pattern)) for tag, pattern in token_list]
 
 
-filename_tokens = [("Filename", filename_pattern)]
+filename_tokens = [("Filename", FILENAME_PATTERN)]
 
 token_indices = find_indices(literal_tokens)
 tokens = compile_tokens(tokens)
@@ -324,8 +324,8 @@ def is_symbol_name(text: str) -> bool:
     return full_symbol_pattern.sub("", text) == ""
 
 
-class Token(object):
-    "A representation of a token for parsing the Wolfram Language."
+class Token:
+    "A representation of a Wolfram Language token."
 
     def __init__(self, tag: str, text: str, pos: int):
         """
@@ -361,10 +361,11 @@ class Tokeniser:
         feeder: An instance of ``LineFeeder`` from which we receive
                 input srings that are to be split up and put into tokens.
         """
-        self.pos = 0
+        self.pos: int = 0
         self.feeder = feeder
         self.prescanner = Prescanner(feeder)
         self.code = self.prescanner.replace_escape_sequences()
+        self.mode: str = "invalid"
         self._change_token_scanning_mode("expr")
 
     def _change_token_scanning_mode(self, mode: str):
@@ -426,10 +427,10 @@ class Tokeniser:
         override = getattr(self, "t_" + tag, None)
         if override is not None:
             return override(match)
-        else:
-            text = match.group(0)
-            self.pos = match.end(0)
-            return Token(tag, text, match.start(0))
+
+        text = match.group(0)
+        self.pos = match.end(0)
+        return Token(tag, text, match.start(0))
 
     def _skip_blank(self):
         "Skip whitespace and comments"
@@ -483,14 +484,6 @@ class Tokeniser:
         "Scan for a ``Get`` token from ``match`` and return that token"
         return self._token_mode(match, "Get", "filename")
 
-    def t_Put(self, match: re.Match) -> "Token":
-        "Scan for a ``Put`` token and return that"
-        return self._token_mode(match, "Put", "filename")
-
-    def t_PutAppend(self, match: re.Match) -> "Token":
-        "Scan for a ``PutAppend`` token and return that"
-        return self._token_mode(match, "PutAppend", "filename")
-
     def t_Number(self, match: re.Match) -> "Token":
         "Break out from ``match`` the next token which is expected to be a Number"
         text = match.group(0)
@@ -502,6 +495,14 @@ class Tokeniser:
         else:
             self.pos = pos
         return Token("Number", text, match.start(0))
+
+    def t_Put(self, match: re.Match) -> "Token":
+        "Scan for a ``Put`` token and return that"
+        return self._token_mode(match, "Put", "filename")
+
+    def t_PutAppend(self, match: re.Match) -> "Token":
+        "Scan for a ``PutAppend`` token and return that"
+        return self._token_mode(match, "PutAppend", "filename")
 
     def t_String(self, match: re.Match) -> "Token":
         "Break out from self.code the next token which is expected to be a String"
@@ -516,15 +517,17 @@ class Tokeniser:
                     newlines.append(self.pos)
                 else:
                     break
-            c = self.code[self.pos]
-            if c == '"':
+            char = self.code[self.pos]
+            if char == '"':
                 self.pos += 1
                 end = self.pos
                 break
-            elif c == "\\":
+
+            if char == "\\":
                 self.pos += 2
             else:
                 self.pos += 1
+
         indices = [start] + newlines + [end]
         result = "".join(
             self.code[indices[i] : indices[i + 1]] for i in range(len(indices) - 1)
