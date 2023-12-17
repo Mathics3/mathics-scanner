@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Tests translation from trings to sequences of tokens.
+Tests translation from strings to sequences of tokens.
 """
 
 import pytest

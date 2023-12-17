@@ -1779,7 +1779,7 @@ DifferenceDelta:
   wl-unicode-name: INCREMENT
 
 # There was been some discussion as to what to use
-# here. The concensus was this.
+# here. The consensus was this.
 # That it does not follow the AMS unicode convention
 # \u2146
 DifferentialD:
@@ -8778,7 +8778,7 @@ UpSetDelayed:
   operator-name: UpSetDelayed
 
 # The rendering of Uranus at https://reference.wolfram.com/language/ref/character/Uranus.html
-# looks more like U+26E2 (Astronomical Symbol for Uranus) than the Standard Unicode equavalent
+# looks more like U+26E2 (Astronomical Symbol for Uranus) than the Standard Unicode equivalent
 # seen at https://www.compart.com/en/unicode/U+2645.
 # As with the Earth, we are going off of the name and the code point rather than the
 # visual representation of the symbol.
