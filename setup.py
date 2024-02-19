@@ -50,11 +50,6 @@ def read(*rnames):
     return open(osp.join(get_srcdir(), *rnames)).read()
 
 
-from mathics_scanner.version import __version__
-
-# Get/set __version__ and long_description from files
-long_description = read("README.rst") + "\n"
-
 is_PyPy = platform.python_implementation() == "PyPy" or hasattr(
     sys, "pypy_version_info"
 )
@@ -86,16 +81,9 @@ def subdirs(root, file="*.*", depth=10):
 
 
 setup(
-    name="Mathics_Scanner",
-    version=__version__,
     packages=["mathics_scanner", "mathics_scanner.generate"],
     install_requires=INSTALL_REQUIRES,
     extras_require=EXTRAS_REQUIRE,
-    entry_points={
-        "console_scripts": [
-            "mathics-generate-json-table=mathics_scanner.generate.build_tables:main"
-        ]
-    },
     package_data={
         "mathics_scanner": [
             "data/named-characters.yml",
@@ -105,34 +93,8 @@ setup(
             "data/ExampleData/*",
         ]
     },
-    long_description=long_description,
-    long_description_content_type="text/x-rst",
     # don't pack Mathics in egg because of media files, etc.
     zip_safe=False,
-    # metadata for upload to PyPI
-    maintainer="Mathics Group",
-    description="Character Tables and Tokenizer for Mathics and the Wolfram Language.",
-    license="GPL-3.0-only",
-    url="https://mathics.org/",
-    keywords=["Mathematica", "Wolfram", "Interpreter", "Shell", "Math", "CAS"],
-    classifiers=[
-        "Intended Audience :: Developers",
-        "Intended Audience :: Science/Research",
-        "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
-        "Programming Language :: Python",
-        "Programming Language :: Python :: 3.7",
-        "Programming Language :: Python :: 3.8",
-        "Programming Language :: Python :: 3.9",
-        "Programming Language :: Python :: 3.10",
-        "Programming Language :: Python :: 3.11",
-        "Programming Language :: Python :: Implementation :: CPython",
-        "Programming Language :: Python :: Implementation :: PyPy",
-        "Topic :: Scientific/Engineering",
-        "Topic :: Scientific/Engineering :: Mathematics",
-        "Topic :: Scientific/Engineering :: Physics",
-        "Topic :: Software Development :: Interpreters",
-    ],
-    # TODO: could also include long_description, download_url,
 )
 
 
@@ -145,4 +107,4 @@ def build_json_table() -> int:
     return result.returncode
 
 
-atexit.register(build_json_table)
+# atexit.register(build_json_table)  ## does not work with build isolation

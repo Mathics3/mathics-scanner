@@ -1,0 +1,55 @@
+[build-system]
+requires = [
+    "setuptools>=61.2",
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "Mathics_Scanner"
+version = "1.3.0"
+description = "Character Tables and Tokenizer for Mathics and the Wolfram Language."
+dependencies = [
+    "PyYAML",
+    "chardet",
+    "click",
+]
+requires-python = ">=3.8"
+readme = "README.rst"
+license = {text = "GPL-3.0-only"}
+keywords = ["Mathematica", "Wolfram", "Interpreter", "Shell", "Math", "CAS"]
+maintainers = [
+    {name = "Mathics Group"},
+]
+classifiers = [
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: Implementation :: PyPy",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Scientific/Engineering :: Mathematics",
+    "Topic :: Scientific/Engineering :: Physics",
+    "Topic :: Software Development :: Interpreters",
+]
+
+[project.urls]
+Homepage = "https://mathics.org/"
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+]
+full = [
+    "ujson",
+]
+
+[project.scripts]
+mathics-generate-json-table = "mathics_scanner.generate.build_tables:main"
+
+[tool.setuptools.dynamic]
+version = {attr = "mathics_scanner.version.__version__"}
