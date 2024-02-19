@@ -6,7 +6,6 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "Mathics_Scanner"
-version = "1.3.0"
 description = "Character Tables and Tokenizer for Mathics and the Wolfram Language."
 dependencies = [
     "PyYAML",
@@ -36,6 +35,7 @@ classifiers = [
     "Topic :: Scientific/Engineering :: Physics",
     "Topic :: Software Development :: Interpreters",
 ]
+dynamic = ["version"]
 
 [project.urls]
 Homepage = "https://mathics.org/"
