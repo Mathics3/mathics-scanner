@@ -17,7 +17,7 @@ In addition, there are some other commands:
 
     python setup.py clean -> will clean all trash (*.pyc and stuff)
 
-To get a full list of avaiable commands, read the output of:
+To get a full list of available commands, read the output of:
 
     python setup.py --help-commands
 
@@ -25,7 +25,6 @@ Or, if all else fails, feel free to write to the mathics users list at
 mathics-users@googlegroups.com and ask for help.
 """
 
-import atexit
 import os.path as osp
 import platform
 import re
@@ -61,7 +60,7 @@ INSTALL_REQUIRES = [
     "chardet",  # Used in mathics_scanner.feed
     "PyYAML",  # Used in mathics-generate-json-table
     # "ujson",  # Optional Used in mathics_scanner.characters
-    "click",  # Usin in CLI: mathics-generate-json-table
+    "click",  # Using in CLI: mathics-generate-json-table
 ]
 
 
@@ -76,7 +75,7 @@ for kind in ("dev", "full"):
     EXTRAS_REQUIRE[kind] = extras_require
 
 
-def subdirs(root, file="*.*", depth=10):
+def subdirs(root:str, file="*.*", depth=10):
     for k in range(depth):
         yield root + "*/" * k + file
 
