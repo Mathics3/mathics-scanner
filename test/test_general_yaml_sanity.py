@@ -30,7 +30,6 @@ def check_has_attr(attr: str):
 
 def test_yaml_field_names():
     for k, v in yaml_data.items():
-
         diff = set(v.keys()) - {
             "amslatex",
             "ascii",
@@ -125,7 +124,6 @@ def test_precedence():
 
 def test_unicode_name():
     for k, v in yaml_data.items():
-
         # Hack to skip characters that are correct but that doesn't show up in
         # unicodedata.name
         if "unicode-equivalent-name" not in v:

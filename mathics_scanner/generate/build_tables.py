@@ -11,7 +11,11 @@ import sys
 import os.path as osp
 from pathlib import Path
 
-from mathics_scanner.version import __version__
+try:
+    from mathics_scanner.version import __version__
+except ImportError:
+    # When using build isolation
+    __version__ = "unknown"
 
 
 def get_srcdir():
