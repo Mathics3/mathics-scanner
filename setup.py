@@ -86,11 +86,15 @@ class table_building_egg_info(egg_info):
 
     def finalize_options(self):
         """Run program to create JSON tables"""
-        build_tables_program = osp.join(get_srcdir(), "mathics_scanner", "generate", "build_tables.py")
+        build_tables_program = osp.join(
+            get_srcdir(), "mathics_scanner", "generate", "build_tables.py"
+        )
         print(f"Building JSON tables via {build_tables_program}")
         result = subprocess.run([sys.executable, build_tables_program])
         if result.returncode:
-            raise RuntimeError(f"Running {build_tables_program} exited with code {result.returncode}")
+            raise RuntimeError(
+                f"Running {build_tables_program} exited with code {result.returncode}"
+            )
         super().finalize_options()
 
 

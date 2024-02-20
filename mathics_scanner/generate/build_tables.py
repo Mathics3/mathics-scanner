@@ -15,7 +15,7 @@ try:
     from mathics_scanner.version import __version__
 except ImportError:
     # When using build isolation
-    __version__ = 'unknown'
+    __version__ = "unknown"
 
 
 def get_srcdir():
