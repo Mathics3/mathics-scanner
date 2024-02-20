@@ -32,8 +32,9 @@ import re
 import subprocess
 import sys
 
-import pkg_resources
 from setuptools import setup
+from setuptools.command.egg_info import egg_info
+
 
 # Ensure user has the correct Python version
 if sys.version_info < (3, 7):
@@ -80,7 +81,21 @@ def subdirs(root, file="*.*", depth=10):
         yield root + "*/" * k + file
 
 
+class table_building_egg_info(egg_info):
+    # This runs as part of building an sdist
+
+    def finalize_options(self):
+        """Run program to create JSON tables"""
+        build_tables_program = osp.join(get_srcdir(), "mathics_scanner", "generate", "build_tables.py")
+        print(f"Building JSON tables via {build_tables_program}")
+        result = subprocess.run([sys.executable, build_tables_program])
+        if result.returncode:
+            raise RuntimeError(f"Running {build_tables_program} exited with code {result.returncode}")
+        super().finalize_options()
+
+
 setup(
+    cmdclass={"egg_info": table_building_egg_info},
     packages=["mathics_scanner", "mathics_scanner.generate"],
     install_requires=INSTALL_REQUIRES,
     extras_require=EXTRAS_REQUIRE,
@@ -96,15 +111,3 @@ setup(
     # don't pack Mathics in egg because of media files, etc.
     zip_safe=False,
 )
-
-
-def build_json_table() -> int:
-    """Run program to create JSON tables"""
-    ROOT_DIR = pkg_resources.resource_filename("mathics_scanner", "")
-    build_tables_program = osp.join(ROOT_DIR, "generate", "build_tables.py")
-    print(f"Building JSON tables via f{build_tables_program}")
-    result = subprocess.run([sys.executable, build_tables_program])
-    return result.returncode
-
-
-# atexit.register(build_json_table)  ## does not work with build isolation
