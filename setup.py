@@ -75,7 +75,7 @@ for kind in ("dev", "full"):
     EXTRAS_REQUIRE[kind] = extras_require
 
 
-def subdirs(root:str, file="*.*", depth=10):
+def subdirs(root: str, file="*.*", depth=10):
     for k in range(depth):
         yield root + "*/" * k + file
 
