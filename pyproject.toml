@@ -54,5 +54,20 @@ full = [
 [project.scripts]
 mathics-generate-json-table = "mathics_scanner.generate.build_tables:main"
 
+[tool.setuptools]
+packages = [
+    "mathics_scanner",
+    "mathics_scanner.generate",
+]
+
+[tool.setuptools.package-data]
+"mathics_scanner" = [
+    "data/named-characters.yml",
+    "data/*.csv",
+    "data/characters.json",  # List this explicitly since it is needed
+    "data/*.json",
+    "data/ExampleData/*",
+]
+
 [tool.setuptools.dynamic]
 version = {attr = "mathics_scanner.version.__version__"}

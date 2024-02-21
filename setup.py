@@ -99,18 +99,8 @@ class table_building_egg_info(egg_info):
 
 setup(
     cmdclass={"egg_info": table_building_egg_info},
-    packages=["mathics_scanner", "mathics_scanner.generate"],
     install_requires=INSTALL_REQUIRES,
     extras_require=EXTRAS_REQUIRE,
-    package_data={
-        "mathics_scanner": [
-            "data/named-characters.yml",
-            "data/*.csv",
-            "data/characters.json",  # List this explicitly since it is needed
-            "data/*.json",
-            "data/ExampleData/*",
-        ]
-    },
     # don't pack Mathics in egg because of media files, etc.
     zip_safe=False,
 )
