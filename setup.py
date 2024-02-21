@@ -46,15 +46,6 @@ def get_srcdir():
     return osp.realpath(filename)
 
 
-# General Requirements
-INSTALL_REQUIRES = [
-    "chardet",  # Used in mathics_scanner.feed
-    "PyYAML",  # Used in mathics-generate-json-table
-    # "ujson",  # Optional Used in mathics_scanner.characters
-    "click",  # Using in CLI: mathics-generate-json-table
-]
-
-
 EXTRAS_REQUIRE = {}
 for kind in ("dev", "full"):
     extras_require = []
@@ -85,7 +76,6 @@ class table_building_egg_info(egg_info):
 
 setup(
     cmdclass={"egg_info": table_building_egg_info},
-    install_requires=INSTALL_REQUIRES,
     extras_require=EXTRAS_REQUIRE,
     # don't pack Mathics in egg because of media files, etc.
     zip_safe=False,
