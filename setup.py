@@ -46,15 +46,6 @@ def get_srcdir():
     return osp.realpath(filename)
 
 
-def read(*rnames):
-    return open(osp.join(get_srcdir(), *rnames)).read()
-
-
-is_PyPy = platform.python_implementation() == "PyPy" or hasattr(
-    sys, "pypy_version_info"
-)
-
-
 # General Requirements
 INSTALL_REQUIRES = [
     "chardet",  # Used in mathics_scanner.feed
@@ -73,11 +64,6 @@ for kind in ("dev", "full"):
             requires = re.sub(r"([^#]+)(\s*#.*$)?", r"\1", line)
             extras_require.append(requires)
     EXTRAS_REQUIRE[kind] = extras_require
-
-
-def subdirs(root: str, file="*.*", depth=10):
-    for k in range(depth):
-        yield root + "*/" * k + file
 
 
 class table_building_egg_info(egg_info):
