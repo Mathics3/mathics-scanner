@@ -18,6 +18,7 @@ repos:
     hooks:
       - id: isort
         stages: [commit]
+        args: ["--profile", "black"]
 -   repo: https://github.com/psf/black
     rev: 23.12.1
     hooks:
