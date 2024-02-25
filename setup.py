@@ -46,24 +46,6 @@ def get_srcdir():
     return osp.realpath(filename)
 
 
-def read(*rnames):
-    return open(osp.join(get_srcdir(), *rnames)).read()
-
-
-is_PyPy = platform.python_implementation() == "PyPy" or hasattr(
-    sys, "pypy_version_info"
-)
-
-
-# General Requirements
-INSTALL_REQUIRES = [
-    "chardet",  # Used in mathics_scanner.feed
-    "PyYAML",  # Used in mathics-generate-json-table
-    # "ujson",  # Optional Used in mathics_scanner.characters
-    "click",  # Using in CLI: mathics-generate-json-table
-]
-
-
 EXTRAS_REQUIRE = {}
 for kind in ("dev", "full"):
     extras_require = []
@@ -73,11 +55,6 @@ for kind in ("dev", "full"):
             requires = re.sub(r"([^#]+)(\s*#.*$)?", r"\1", line)
             extras_require.append(requires)
     EXTRAS_REQUIRE[kind] = extras_require
-
-
-def subdirs(root: str, file="*.*", depth=10):
-    for k in range(depth):
-        yield root + "*/" * k + file
 
 
 class table_building_egg_info(egg_info):
@@ -99,18 +76,7 @@ class table_building_egg_info(egg_info):
 
 setup(
     cmdclass={"egg_info": table_building_egg_info},
-    packages=["mathics_scanner", "mathics_scanner.generate"],
-    install_requires=INSTALL_REQUIRES,
     extras_require=EXTRAS_REQUIRE,
-    package_data={
-        "mathics_scanner": [
-            "data/named-characters.yml",
-            "data/*.csv",
-            "data/characters.json",  # List this explicitly since it is needed
-            "data/*.json",
-            "data/ExampleData/*",
-        ]
-    },
     # don't pack Mathics in egg because of media files, etc.
     zip_safe=False,
 )
