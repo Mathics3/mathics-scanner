@@ -6,19 +6,25 @@ between Wolfram's internal representation of `named characters
 and Unicode/ASCII.
 """
 
-import re
 import os
-import pkg_resources
+import os.path as osp
+import re
 
 try:
     import ujson
 except ImportError:
     import json as ujson
 
-ROOT_DIR = pkg_resources.resource_filename("mathics_scanner", "")
+
+def get_srcdir() -> str:
+    filename = osp.normcase(osp.dirname(osp.abspath(__file__)))
+    return osp.realpath(filename)
+
+
+ROOT_DIR = get_srcdir()
 
 # Load the conversion tables from disk
-characters_path = os.path.join(ROOT_DIR, "data", "characters.json")
+characters_path = osp.join(ROOT_DIR, "data", "characters.json")
 if os.path.exists(characters_path):
     with open(characters_path, "r") as f:
         _data = ujson.load(f)
