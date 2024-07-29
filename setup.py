@@ -26,19 +26,12 @@ mathics-users@googlegroups.com and ask for help.
 """
 
 import os.path as osp
-import platform
 import re
 import subprocess
 import sys
 
 from setuptools import setup
 from setuptools.command.egg_info import egg_info
-
-
-# Ensure user has the correct Python version
-if sys.version_info < (3, 7):
-    print("mathics-scanner does not support Python %d.%d" % sys.version_info[:2])
-    sys.exit(-1)
 
 
 def get_srcdir():

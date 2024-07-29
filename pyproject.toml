@@ -1,6 +1,6 @@
 [build-system]
 requires = [
-    "setuptools>=61.2",
+    "setuptools>=70.0.0", # CVE-2024-38335 recommends this
     # needed for building tables for the sdist:
     "PyYAML",
     "click",
