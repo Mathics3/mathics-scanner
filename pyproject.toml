@@ -1,6 +1,6 @@
 [build-system]
 requires = [
-    "setuptools>=61.2",
+    "setuptools~>70.0.0",
     # needed for building tables for the sdist:
     "PyYAML",
     "click",
