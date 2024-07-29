@@ -359,7 +359,7 @@ class Tokeniser:
     def __init__(self, feeder):
         """
         feeder: An instance of ``LineFeeder`` from which we receive
-                input srings that are to be split up and put into tokens.
+                input strings that are to be split up and put into tokens.
         """
         self.pos: int = 0
         self.feeder = feeder
