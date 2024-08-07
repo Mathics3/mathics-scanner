@@ -20,7 +20,7 @@ readme = "README.rst"
 license = {text = "GPL-3.0-only"}
 keywords = ["Mathematica", "Wolfram", "Interpreter", "Shell", "Math", "CAS"]
 maintainers = [
-    {name = "Mathics Group"},
+    {name = "Mathics3 Group"},
 ]
 classifiers = [
     "Intended Audience :: Developers",
