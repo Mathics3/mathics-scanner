@@ -1,8 +1,13 @@
 CHANGES
 =======
 
-Note: after the 1.3.0 release support for running on Python 3.6 will be dropped. Python
-3.7 support will be dropped soon as well.
+1.3.1
+------
+
+Python 3.8 is now the minimum Python supported. Various dependecies elsehwere force this.
+
+
+Packaging was redone to be able to support Python 3.12.
 
 
 1.3.0
