@@ -17,8 +17,8 @@
 # -- Project information -----------------------------------------------------
 
 project = "mathics-scanner"
-copyright = "2021, The Mathics Team"
-author = "The Mathics Team"
+copyright = "2021, 2024 The Mathics Team"
+author = "The Mathics3 Team"
 
 # The full version, including alpha/beta/rc tags
 release = "1.0.1"
