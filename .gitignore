@@ -18,6 +18,8 @@
 /.python-version
 /Mathics_Scanner.egg-info
 ChangeLog
+ChangeLog.orig
+ChangeLog.rej
 Documents/
 Homepage/
 Test/
