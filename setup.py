@@ -35,6 +35,7 @@ from setuptools.command.egg_info import egg_info
 
 
 def get_srcdir():
+    """Return the directory of the location if this code"""
     filename = osp.normcase(osp.dirname(osp.abspath(__file__)))
     return osp.realpath(filename)
 
@@ -43,7 +44,7 @@ EXTRAS_REQUIRE = {}
 for kind in ("dev", "full"):
     extras_require = []
     requirements_file = f"requirements-{kind}.txt"
-    for line in open(requirements_file).read().split("\n"):
+    for line in open(requirements_file, encoding="utf-8").read().split("\n"):
         if line and not line.startswith("#"):
             requires = re.sub(r"([^#]+)(\s*#.*$)?", r"\1", line)
             extras_require.append(requires)
@@ -51,7 +52,7 @@ for kind in ("dev", "full"):
 
 
 class table_building_egg_info(egg_info):
-    # This runs as part of building an sdist
+    """This runs as part of building an sdist"""
 
     def finalize_options(self):
         """Run program to create JSON tables"""
@@ -59,7 +60,7 @@ class table_building_egg_info(egg_info):
             get_srcdir(), "mathics_scanner", "generate", "build_tables.py"
         )
         print(f"Building JSON tables via {build_tables_program}")
-        result = subprocess.run([sys.executable, build_tables_program])
+        result = subprocess.run([sys.executable, build_tables_program], check=False)
         if result.returncode:
             raise RuntimeError(
                 f"Running {build_tables_program} exited with code {result.returncode}"

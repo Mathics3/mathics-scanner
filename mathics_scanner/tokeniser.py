@@ -19,8 +19,8 @@ NUMBER_PATTERN = r"""
 (\*\^(\+|-)?\d+)?                           (?# Exponent)
 """
 base_symbol_pattern = r"((?![0-9])([0-9${0}{1}])+)".format(_letters, _letterlikes)
-full_symbol_pattern = r"(`?{0}(`{0})*)".format(base_symbol_pattern)
-pattern_pattern = r"{0}?_(\.|(__?)?{0}?)?".format(full_symbol_pattern)
+full_symbol_pattern_str = r"(`?{0}(`{0})*)".format(base_symbol_pattern)
+pattern_pattern = r"{0}?_(\.|(__?)?{0}?)?".format(full_symbol_pattern_str)
 slot_pattern = r"\#(\d+|{0})?".format(base_symbol_pattern)
 FILENAME_PATTERN = r"""
 (?P<quote>\"?)                              (?# Opening quotation mark)
@@ -39,7 +39,7 @@ tokens = [
     ("Number", NUMBER_PATTERN),
     ("String", r'"'),
     ("Pattern", pattern_pattern),
-    ("Symbol", full_symbol_pattern),
+    ("Symbol", full_symbol_pattern_str),
     ("SlotSequence", r"\#\#\d*"),
     ("Slot", slot_pattern),
     ("Out", r"\%(\%+|\d+)?"),
@@ -312,7 +312,7 @@ filename_tokens = [("Filename", FILENAME_PATTERN)]
 token_indices = find_indices(literal_tokens)
 tokens = compile_tokens(tokens)
 filename_tokens = compile_tokens(filename_tokens)
-full_symbol_pattern = compile_pattern(full_symbol_pattern)
+full_symbol_pattern_re: re.Pattern = compile_pattern(full_symbol_pattern_str)
 
 
 def is_symbol_name(text: str) -> bool:
@@ -321,7 +321,7 @@ def is_symbol_name(text: str) -> bool:
     ``False``.
     """
     # Can't we just call match here?
-    return full_symbol_pattern.sub("", text) == ""
+    return full_symbol_pattern_re.sub("", text) == ""
 
 
 class Token:

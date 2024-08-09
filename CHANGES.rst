@@ -1,9 +1,16 @@
 CHANGES
 =======
 
-Note: after the 1.3.0 release support for running on Python 3.6 will be dropped. Python
-3.7 support will be dropped soon as well.
+1.3.1
+------
 
+Python 3.8 is now the minimum Python supported. Python 3.12 supported.
+Various dependencies elsewhere force 3.8 or newer.
+
+
+* Packaging was redone to be able to support Python 3.12.
+* Files now follow current Python black formatting and isort import ordering
+* Some Python code linting
 
 1.3.0
 ------

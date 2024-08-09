@@ -10,6 +10,7 @@ repos:
       stages: [commit]
     - id: end-of-file-fixer
       stages: [commit]
+      exclude: ChangeLog-spell-corrected.diff
     - id: trailing-whitespace
     - id: check-json
       exclude: mathics_scanner/data/characters.json
