@@ -27,5 +27,6 @@ _Copies_/
 _Database_/
 build/
 /mathics_scanner/data/characters.json
+/mathics_scanner/data/operators.json
 dist/
 tmp

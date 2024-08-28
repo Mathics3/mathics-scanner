@@ -53,7 +53,8 @@ full = [
 ]
 
 [project.scripts]
-mathics-generate-json-table = "mathics_scanner.generate.build_tables:main"
+mathics3-generate-json-table = "mathics_scanner.generate.build_tables:main"
+mathics3-generate-operator-json-table = "mathics_scanner.generate.build_operator_tables:main"
 
 [tool.setuptools]
 packages = [
