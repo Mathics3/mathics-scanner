@@ -85,6 +85,7 @@ for name in sorted(operators.keys()):
         value = info[i]
         if field == "meaningfull":
             value = value.lower()
+            field = "meaningful"  # spelling correction
         elif field in (
             "L-tokens",
             "N-tokens",

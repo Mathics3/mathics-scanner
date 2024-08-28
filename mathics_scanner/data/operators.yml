@@ -16,7 +16,7 @@
 # Field definitions
 # =================
 
-#   name: this is the WL name. When it exits it will also be the anme of the key
+#   name: this is the WL name. When it exits it will also be the name of the key
 #   actual-precedence: a precedence value that programs can use.
 #   Precedence: the value returned for this operator using the WL function Precedence[]
 #   WolframLangageData: a value returned using WolframLangageData[???]
@@ -24,13 +24,13 @@
 #   parse: when "usage" exists, a parse of the example
 #   parse: when "usage" exists, the FullForm translation of the example
 #   arity: the number of arguments the operator takes. One of:
-#       - Binary (2 argumetns)
+#       - Binary (2 arguments)
 #       - NullAry (0 arguments),
 #       - Ternary (3 arguments)
 #       - Unary (1 argument),
 #       - n-ary (n arguments)
 
-#   asociativity: when two or more of the same operator is used, which group to
+#   associativity: when two or more of the same operator is used, which group to
 #                 evaluate first. One of:
 #       - None
 #       - Non
@@ -58,7 +58,7 @@ AddTo:
   arity: Binary
   affix: Infix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments:
 
 Alternatives:
@@ -79,7 +79,7 @@ Alternatives:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: true
+  meaningful: true
   # comments:
 
 And:
@@ -100,7 +100,7 @@ And:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: true
+  meaningful: true
   # comments:
 
 AngleBracket:
@@ -121,7 +121,7 @@ AngleBracket:
   arity: n-ary
   affix: Matchfix
   associativity: Non
-  meaningfull: false
+  meaningful: false
   # comments:
 
 Apply:
@@ -142,7 +142,7 @@ Apply:
   arity: Binary
   affix: Infix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments:
 
 ApplyFirstLevel:
@@ -163,7 +163,7 @@ ApplyFirstLevel:
   arity: Binary
   affix: Infix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments:
 
 Association:
@@ -184,7 +184,7 @@ Association:
   arity: n-ary
   affix: Matchfix
   associativity: Non
-  meaningfull: true
+  meaningful: true
   # comments:
 
 AutoMatch:
@@ -205,7 +205,7 @@ AutoMatch:
   arity: Unary
   affix: Matchfix
   associativity: Non
-  meaningfull: true
+  meaningful: true
   # comments:
 
 Backslash:
@@ -226,7 +226,7 @@ Backslash:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 Because:
@@ -247,7 +247,7 @@ Because:
   arity: Binary
   affix: Infix
   associativity: Left
-  meaningfull: false
+  meaningful: false
   # comments: Precedence of Therefore and Because are swapped in notebook versus ToExpression.
 
 BlackLenticularBracket:
@@ -268,7 +268,7 @@ BlackLenticularBracket:
   arity: Unary
   affix: Matchfix
   associativity: Non
-  meaningfull: true
+  meaningful: true
   # comments:
 
 Blank:
@@ -289,7 +289,7 @@ Blank:
   arity: Nullary
   affix: None
   associativity: Non
-  meaningfull: true
+  meaningful: true
   # comments: A Blank (_) with no accompanying decoration.
 
 BlankHead:
@@ -310,7 +310,7 @@ BlankHead:
   arity: Unary
   affix: Prefix
   associativity: Non
-  meaningfull: true
+  meaningful: true
   # comments:
 
 BlankNullSequence:
@@ -331,7 +331,7 @@ BlankNullSequence:
   arity: Nullary
   affix: None
   associativity: Non
-  meaningfull: true
+  meaningful: true
   # comments: A BlankNullSequence (___) with no accompanying decoration.
 
 BlankNullSequenceHead:
@@ -352,7 +352,7 @@ BlankNullSequenceHead:
   arity: Unary
   affix: Prefix
   associativity: Non
-  meaningfull: true
+  meaningful: true
   # comments:
 
 BlankOptional:
@@ -373,7 +373,7 @@ BlankOptional:
   arity: Nullary
   affix: None
   associativity: Non
-  meaningfull: true
+  meaningful: true
   # comments: No name or head.
 
 BlankSequence:
@@ -394,7 +394,7 @@ BlankSequence:
   arity: Nullary
   affix: None
   associativity: Non
-  meaningfull: true
+  meaningful: true
   # comments: A BlankNullSequence (__) with no accompanying decoration.
 
 BlankSequenceHead:
@@ -415,7 +415,7 @@ BlankSequenceHead:
   arity: Unary
   affix: Prefix
   associativity: Non
-  meaningfull: true
+  meaningful: true
   # comments:
 
 BoxGroup:
@@ -436,7 +436,7 @@ BoxGroup:
   arity: Unary
   affix: Matchfix
   associativity: Non
-  meaningfull: true
+  meaningful: true
   # comments: The interpretation of this operator depends on context. It must contain box sublanguage.
 
 BracketingBar:
@@ -457,7 +457,7 @@ BracketingBar:
   arity: n-ary
   affix: Matchfix
   associativity: Non
-  meaningfull: false
+  meaningful: false
   # comments:
 
 Cap:
@@ -478,7 +478,7 @@ Cap:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 CapitalDifferentialD:
@@ -499,7 +499,7 @@ CapitalDifferentialD:
   arity: Unary
   affix: Prefix
   associativity: Right
-  meaningfull: false
+  meaningful: false
   # comments:
 
 Ceiling:
@@ -520,7 +520,7 @@ Ceiling:
   arity: Unary
   affix: Matchfix
   associativity: Non
-  meaningfull: true
+  meaningful: true
   # comments:
 
 CenterDot:
@@ -541,7 +541,7 @@ CenterDot:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 CircleDot:
@@ -562,7 +562,7 @@ CircleDot:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 CircleMinus:
@@ -583,7 +583,7 @@ CircleMinus:
   arity: Binary
   affix: Infix
   associativity: Left
-  meaningfull: false
+  meaningful: false
   # comments:
 
 CirclePlus:
@@ -604,7 +604,7 @@ CirclePlus:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 CircleTimes:
@@ -625,7 +625,7 @@ CircleTimes:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 ClockwiseContourIntegral:
@@ -646,7 +646,7 @@ ClockwiseContourIntegral:
   arity: Unary
   affix: Prefix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments: Usage and Parse may not be correct.
 
 Colon:
@@ -667,7 +667,7 @@ Colon:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 Composition:
@@ -688,7 +688,7 @@ Composition:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: true
+  meaningful: true
   # comments:
 
 CompoundExpression:
@@ -709,7 +709,7 @@ CompoundExpression:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: true
+  meaningful: true
   # comments:
 
 CompoundExpressionNull:
@@ -730,7 +730,7 @@ CompoundExpressionNull:
   arity: Unary
   affix: Postfix
   associativity: Left
-  meaningfull: true
+  meaningful: true
   # comments:
 
 Condition:
@@ -751,7 +751,7 @@ Condition:
   arity: Binary
   affix: Infix
   associativity: Left
-  meaningfull: true
+  meaningful: true
   # comments:
 
 Conditioned:
@@ -772,7 +772,7 @@ Conditioned:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: true
+  meaningful: true
   # comments:
 
 Congruent:
@@ -793,7 +793,7 @@ Congruent:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 Conjugate:
@@ -814,7 +814,7 @@ Conjugate:
   arity: Unary
   affix: Postfix
   associativity: Left
-  meaningfull: true
+  meaningful: true
   # comments:
 
 ConjugateTranspose:
@@ -835,7 +835,7 @@ ConjugateTranspose:
   arity: Unary
   affix: Postfix
   associativity: Left
-  meaningfull: true
+  meaningful: true
   # comments:
 
 ContextPathSeparator:
@@ -856,7 +856,7 @@ ContextPathSeparator:
   arity:
   affix:
   associativity: Non
-  meaningfull: true
+  meaningful: true
   # comments: Functions as a decimal point: either contextpath1 or contextpath2 may be empty, but not both at the same time.
 
 ContinuedFractionK:
@@ -877,7 +877,7 @@ ContinuedFractionK:
   arity: Unary
   affix: Prefix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments: Usage and Parse may not be correct.
 
 ContourIntegral:
@@ -898,7 +898,7 @@ ContourIntegral:
   arity: Unary
   affix: Prefix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments: Usage and Parse may not be correct.
 
 Coproduct:
@@ -919,7 +919,7 @@ Coproduct:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 CornerBracket:
@@ -940,7 +940,7 @@ CornerBracket:
   arity: Unary
   affix: Matchfix
   associativity: Non
-  meaningfull: true
+  meaningful: true
   # comments:
 
 CounterClockwiseContourIntegral:
@@ -961,7 +961,7 @@ CounterClockwiseContourIntegral:
   arity: Unary
   affix: Prefix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments: Usage and Parse may not be correct.
 
 Cross:
@@ -982,7 +982,7 @@ Cross:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: true
+  meaningful: true
   # comments:
 
 Cup:
@@ -1003,7 +1003,7 @@ Cup:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 CupCap:
@@ -1024,7 +1024,7 @@ CupCap:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 Curl:
@@ -1045,7 +1045,7 @@ Curl:
   arity: Unary
   affix: Prefix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments: Usage and Parse may not be correct.
 
 CurlyDoubleQuote:
@@ -1066,7 +1066,7 @@ CurlyDoubleQuote:
   arity: Unary
   affix: Matchfix
   associativity: Non
-  meaningfull: false
+  meaningful: false
   # comments:
 
 CurlyQuote:
@@ -1087,7 +1087,7 @@ CurlyQuote:
   arity: Unary
   affix: Matchfix
   associativity: Non
-  meaningfull: false
+  meaningful: false
   # comments:
 
 Decrement:
@@ -1108,7 +1108,7 @@ Decrement:
   arity: Unary
   affix: Postfix
   associativity: Left
-  meaningfull: true
+  meaningful: true
   # comments:
 
 Del:
@@ -1129,7 +1129,7 @@ Del:
   arity: Unary
   affix: Prefix
   associativity: Right
-  meaningfull: false
+  meaningful: false
   # comments:
 
 Derivative:
@@ -1150,7 +1150,7 @@ Derivative:
   arity: Unary
   affix: Postfix
   associativity: Left
-  meaningfull: true
+  meaningful: true
   # comments:
 
 Diamond:
@@ -1171,7 +1171,7 @@ Diamond:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 DifferenceDelta:
@@ -1192,7 +1192,7 @@ DifferenceDelta:
   arity: Unary
   affix: Prefix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments: Usage and Parse may not be correct.
 
 DifferentialD:
@@ -1213,7 +1213,7 @@ DifferentialD:
   arity: Unary
   affix: Prefix
   associativity: Right
-  meaningfull: false
+  meaningful: false
   # comments:
 
 DirectedEdge:
@@ -1234,7 +1234,7 @@ DirectedEdge:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: true
+  meaningful: true
   # comments:
 
 DiscreteRatio:
@@ -1255,7 +1255,7 @@ DiscreteRatio:
   arity: Unary
   affix: Prefix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments: Usage and Parse may not be correct.
 
 DiscreteShift:
@@ -1276,7 +1276,7 @@ DiscreteShift:
   arity: Unary
   affix: Prefix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments: Usage and Parse may not be correct.
 
 Distributed:
@@ -1297,7 +1297,7 @@ Distributed:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: true
+  meaningful: true
   # comments:
 
 Divergence:
@@ -1318,7 +1318,7 @@ Divergence:
   arity: Unary
   affix: Prefix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments: Usage and Parse may not be correct.
 
 Divide:
@@ -1339,7 +1339,7 @@ Divide:
   arity: Binary
   affix: Infix
   associativity: Left
-  meaningfull: true
+  meaningful: true
   # comments:
 
 DivideBy:
@@ -1360,7 +1360,7 @@ DivideBy:
   arity: Binary
   affix: Infix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments:
 
 Divides:
@@ -1381,7 +1381,7 @@ Divides:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: true
+  meaningful: true
   # comments:
 
 Dot:
@@ -1402,7 +1402,7 @@ Dot:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: true
+  meaningful: true
   # comments:
 
 DotEqual:
@@ -1423,7 +1423,7 @@ DotEqual:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 DoubleAngleBracket:
@@ -1444,7 +1444,7 @@ DoubleAngleBracket:
   arity: Unary
   affix: Matchfix
   associativity: Non
-  meaningfull: true
+  meaningful: true
   # comments:
 
 DoubleBracketingBar:
@@ -1465,7 +1465,7 @@ DoubleBracketingBar:
   arity: n-ary
   affix: Matchfix
   associativity: Non
-  meaningfull: false
+  meaningful: false
   # comments:
 
 DoubleContourIntegral:
@@ -1486,7 +1486,7 @@ DoubleContourIntegral:
   arity: Unary
   affix: Prefix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments: Usage and Parse may not be correct.
 
 DoubleDownArrow:
@@ -1507,7 +1507,7 @@ DoubleDownArrow:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 DoubleLeftArrow:
@@ -1528,7 +1528,7 @@ DoubleLeftArrow:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 DoubleLeftRightArrow:
@@ -1549,7 +1549,7 @@ DoubleLeftRightArrow:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 DoubleLeftTee:
@@ -1570,7 +1570,7 @@ DoubleLeftTee:
   arity: Binary
   affix: Infix
   associativity: Left
-  meaningfull: false
+  meaningful: false
   # comments:
 
 DoubleLongLeftArrow:
@@ -1591,7 +1591,7 @@ DoubleLongLeftArrow:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 DoubleLongLeftRightArrow:
@@ -1612,7 +1612,7 @@ DoubleLongLeftRightArrow:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 DoubleLongRightArrow:
@@ -1633,7 +1633,7 @@ DoubleLongRightArrow:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 DoubleRightArrow:
@@ -1654,7 +1654,7 @@ DoubleRightArrow:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 DoubleRightTee:
@@ -1675,7 +1675,7 @@ DoubleRightTee:
   arity: Binary
   affix: Infix
   associativity: Right
-  meaningfull: false
+  meaningful: false
   # comments:
 
 DoubleUpArrow:
@@ -1696,7 +1696,7 @@ DoubleUpArrow:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 DoubleUpDownArrow:
@@ -1717,7 +1717,7 @@ DoubleUpDownArrow:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 DoubleVerticalBar:
@@ -1738,7 +1738,7 @@ DoubleVerticalBar:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 DownArrow:
@@ -1759,7 +1759,7 @@ DownArrow:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 DownArrowBar:
@@ -1780,7 +1780,7 @@ DownArrowBar:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 DownArrowUpArrow:
@@ -1801,7 +1801,7 @@ DownArrowUpArrow:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 DownLeftRightVector:
@@ -1822,7 +1822,7 @@ DownLeftRightVector:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 DownLeftTeeVector:
@@ -1843,7 +1843,7 @@ DownLeftTeeVector:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 DownLeftVector:
@@ -1864,7 +1864,7 @@ DownLeftVector:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 DownLeftVectorBar:
@@ -1885,7 +1885,7 @@ DownLeftVectorBar:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 DownRightTeeVector:
@@ -1906,7 +1906,7 @@ DownRightTeeVector:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 DownRightVector:
@@ -1927,7 +1927,7 @@ DownRightVector:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 DownRightVectorBar:
@@ -1948,7 +1948,7 @@ DownRightVectorBar:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 DownTee:
@@ -1969,7 +1969,7 @@ DownTee:
   arity: Binary
   affix: Infix
   associativity: Left
-  meaningfull: false
+  meaningful: false
   # comments:
 
 DownTeeArrow:
@@ -1990,7 +1990,7 @@ DownTeeArrow:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 Element:
@@ -2011,7 +2011,7 @@ Element:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: true
+  meaningful: true
   # comments:
 
 Equal:
@@ -2032,7 +2032,7 @@ Equal:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: true
+  meaningful: true
   # comments:
 
 EqualTilde:
@@ -2053,7 +2053,7 @@ EqualTilde:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 Equilibrium:
@@ -2074,7 +2074,7 @@ Equilibrium:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 Equivalent:
@@ -2095,7 +2095,7 @@ Equivalent:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: true
+  meaningful: true
   # comments:
 
 Exists:
@@ -2116,7 +2116,7 @@ Exists:
   arity: Unary
   affix: Prefix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments: Usage and Parse may not be correct.
 
 ExpectationE:
@@ -2137,7 +2137,7 @@ ExpectationE:
   arity: Unary
   affix: Prefix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments: Usage and Parse may not be correct.
 
 Factorial:
@@ -2158,7 +2158,7 @@ Factorial:
   arity: Unary
   affix: Postfix
   associativity: Left
-  meaningfull: true
+  meaningful: true
   # comments:
 
 Factorial2:
@@ -2179,7 +2179,7 @@ Factorial2:
   arity: Unary
   affix: Postfix
   associativity: Left
-  meaningfull: true
+  meaningful: true
   # comments:
 
 Floor:
@@ -2200,7 +2200,7 @@ Floor:
   arity: Unary
   affix: Matchfix
   associativity: Non
-  meaningfull: true
+  meaningful: true
   # comments:
 
 ForAll:
@@ -2221,7 +2221,7 @@ ForAll:
   arity: Unary
   affix: Prefix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments: Usage and Parse may not be correct.
 
 FormBox:
@@ -2242,7 +2242,7 @@ FormBox:
   arity: Binary
   affix: Infix
   associativity: Missing["Unknown"]
-  meaningfull: true
+  meaningful: true
   # comments:
 
 FractionBox:
@@ -2263,7 +2263,7 @@ FractionBox:
   arity: Binary
   affix: Infix
   associativity: Left
-  meaningfull: true
+  meaningful: true
   # comments:
 
 FullwidthAngleBracket:
@@ -2284,7 +2284,7 @@ FullwidthAngleBracket:
   arity: Unary
   affix: Matchfix
   associativity: Non
-  meaningfull: true
+  meaningful: true
   # comments:
 
 FullwidthCurlyBracket:
@@ -2305,7 +2305,7 @@ FullwidthCurlyBracket:
   arity: Unary
   affix: Matchfix
   associativity: Non
-  meaningfull: true
+  meaningful: true
   # comments:
 
 FullwidthParenthesis:
@@ -2326,7 +2326,7 @@ FullwidthParenthesis:
   arity: Unary
   affix: Matchfix
   associativity: Non
-  meaningfull: true
+  meaningful: true
   # comments:
 
 FullwidthSquareBracket:
@@ -2347,7 +2347,7 @@ FullwidthSquareBracket:
   arity: Unary
   affix: Matchfix
   associativity: Non
-  meaningfull: true
+  meaningful: true
   # comments:
 
 Function:
@@ -2368,7 +2368,7 @@ Function:
   arity: Unary
   affix: Postfix
   associativity: Left
-  meaningfull: true
+  meaningful: true
   # comments:
 
 FunctionApply:
@@ -2389,7 +2389,7 @@ FunctionApply:
   arity: n-ary
   affix: Postfix
   associativity: Left
-  meaningfull: true
+  meaningful: true
   # comments:
 
 FunctionApplyInfix:
@@ -2410,7 +2410,7 @@ FunctionApplyInfix:
   arity: Ternary
   affix: Infix
   associativity: Left
-  meaningfull: true
+  meaningful: true
   # comments: Infix[f[x,y]] will display as x~f~y. Precedence identifies Infix with this operator, and Precedence[Infix]==30 which is almost correct.
 
 FunctionApplyPostfix:
@@ -2431,7 +2431,7 @@ FunctionApplyPostfix:
   arity: Binary
   affix: Infix
   associativity: Left
-  meaningfull: true
+  meaningful: true
   # comments: Postfix[f[x]] will display as x//f. Precedence identifies Postfix with this operator.
 
 FunctionApplyPrefix:
@@ -2452,7 +2452,7 @@ FunctionApplyPrefix:
   arity: Binary
   affix: Infix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments: Operator Notations includes usages with invisible unicode characters.
 
 Get:
@@ -2473,7 +2473,7 @@ Get:
   arity: Unary
   affix: Prefix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments:
 
 Gradient:
@@ -2494,7 +2494,7 @@ Gradient:
   arity: Unary
   affix: Prefix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments: Usage and Parse may not be correct.
 
 Greater:
@@ -2515,7 +2515,7 @@ Greater:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: true
+  meaningful: true
   # comments:
 
 GreaterEqual:
@@ -2536,7 +2536,7 @@ GreaterEqual:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: true
+  meaningful: true
   # comments:
 
 GreaterEqualLess:
@@ -2557,7 +2557,7 @@ GreaterEqualLess:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 GreaterFullEqual:
@@ -2578,7 +2578,7 @@ GreaterFullEqual:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 GreaterGreater:
@@ -2599,7 +2599,7 @@ GreaterGreater:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 GreaterLess:
@@ -2620,7 +2620,7 @@ GreaterLess:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 GreaterSlantEqual:
@@ -2641,7 +2641,7 @@ GreaterSlantEqual:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 GreaterTilde:
@@ -2662,7 +2662,7 @@ GreaterTilde:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 HumpDownHump:
@@ -2683,7 +2683,7 @@ HumpDownHump:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 HumpEqual:
@@ -2704,7 +2704,7 @@ HumpEqual:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 ImplicitSequence:
@@ -2725,7 +2725,7 @@ ImplicitSequence:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: true
+  meaningful: true
   # comments: Operator Notations includes usages with invisible unicode characters.
 
 Implies:
@@ -2746,7 +2746,7 @@ Implies:
   arity: Binary
   affix: Infix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments:
 
 Increment:
@@ -2767,7 +2767,7 @@ Increment:
   arity: Unary
   affix: Postfix
   associativity: Left
-  meaningfull: true
+  meaningful: true
   # comments:
 
 InlinePart:
@@ -2788,7 +2788,7 @@ InlinePart:
   arity: Binary
   affix: Infix
   associativity: Right
-  meaningfull: false
+  meaningful: false
   # comments: "InlinePart or @> was an operator that was introduced in one of the pre-release/betas for version 10 and subsequently removed before public release. It was briefly available publicly in the Raspberry Pi version of Wolfram Language that co-existed with the pre-releases at the time. The operator allowed you to access elements of a list with an infix operator." https://mathematica.stackexchange.com/questions/134506/inlinepart-what-is-it-and-what-happened-to-it
 
 Integrate:
@@ -2809,7 +2809,7 @@ Integrate:
   arity: Binary
   affix: Prefix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments:
 
 InterpretBoxes:
@@ -2830,7 +2830,7 @@ InterpretBoxes:
   arity: Unary
   affix: Prefix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments:
 
 Intersection:
@@ -2851,7 +2851,7 @@ Intersection:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: true
+  meaningful: true
   # comments:
 
 InvisiblePostfixScriptBase:
@@ -2872,7 +2872,7 @@ InvisiblePostfixScriptBase:
   arity: Unary
   affix: Postfix
   associativity: Left
-  meaningfull: false
+  meaningful: false
   # comments: This operator is an invisible Unicode character and is used in the layout of displayed expressions.
 
 InvisiblePrefixScriptBase:
@@ -2893,7 +2893,7 @@ InvisiblePrefixScriptBase:
   arity: Unary
   affix: Prefix
   associativity: Right
-  meaningfull: false
+  meaningful: false
   # comments: Usage and Parse may not be correct.
 
 Laplacian:
@@ -2914,7 +2914,7 @@ Laplacian:
   arity: Unary
   affix: Prefix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments: Usage and Parse may not be correct.
 
 LeftArrow:
@@ -2935,7 +2935,7 @@ LeftArrow:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 LeftArrowBar:
@@ -2956,7 +2956,7 @@ LeftArrowBar:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 LeftArrowRightArrow:
@@ -2977,7 +2977,7 @@ LeftArrowRightArrow:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 LeftDownTeeVector:
@@ -2998,7 +2998,7 @@ LeftDownTeeVector:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 LeftDownVector:
@@ -3019,7 +3019,7 @@ LeftDownVector:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 LeftDownVectorBar:
@@ -3040,7 +3040,7 @@ LeftDownVectorBar:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 LeftRightArrow:
@@ -3061,7 +3061,7 @@ LeftRightArrow:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 LeftRightVector:
@@ -3082,7 +3082,7 @@ LeftRightVector:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 LeftTee:
@@ -3103,7 +3103,7 @@ LeftTee:
   arity: Binary
   affix: Infix
   associativity: Left
-  meaningfull: false
+  meaningful: false
   # comments:
 
 LeftTeeArrow:
@@ -3124,7 +3124,7 @@ LeftTeeArrow:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 LeftTeeVector:
@@ -3145,7 +3145,7 @@ LeftTeeVector:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 LeftTriangle:
@@ -3166,7 +3166,7 @@ LeftTriangle:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 LeftTriangleBar:
@@ -3187,7 +3187,7 @@ LeftTriangleBar:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 LeftTriangleEqual:
@@ -3208,7 +3208,7 @@ LeftTriangleEqual:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 LeftUpDownVector:
@@ -3229,7 +3229,7 @@ LeftUpDownVector:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 LeftUpTeeVector:
@@ -3250,7 +3250,7 @@ LeftUpTeeVector:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 LeftUpVector:
@@ -3271,7 +3271,7 @@ LeftUpVector:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 LeftUpVectorBar:
@@ -3292,7 +3292,7 @@ LeftUpVectorBar:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 LeftVector:
@@ -3313,7 +3313,7 @@ LeftVector:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 LeftVectorBar:
@@ -3334,7 +3334,7 @@ LeftVectorBar:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 Less:
@@ -3355,7 +3355,7 @@ Less:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: true
+  meaningful: true
   # comments:
 
 LessEqual:
@@ -3376,7 +3376,7 @@ LessEqual:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: true
+  meaningful: true
   # comments:
 
 LessEqualGreater:
@@ -3397,7 +3397,7 @@ LessEqualGreater:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 LessFullEqual:
@@ -3418,7 +3418,7 @@ LessFullEqual:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 LessGreater:
@@ -3439,7 +3439,7 @@ LessGreater:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 LessLess:
@@ -3460,7 +3460,7 @@ LessLess:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 LessSlantEqual:
@@ -3481,7 +3481,7 @@ LessSlantEqual:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 LessTilde:
@@ -3502,7 +3502,7 @@ LessTilde:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 Limit:
@@ -3523,7 +3523,7 @@ Limit:
   arity: Unary
   affix: Prefix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments: Usage and Parse may not be correct.
 
 List:
@@ -3544,7 +3544,7 @@ List:
   arity: n-ary
   affix: Matchfix
   associativity: Non
-  meaningfull: true
+  meaningful: true
   # comments:
 
 LongLeftArrow:
@@ -3565,7 +3565,7 @@ LongLeftArrow:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 LongLeftRightArrow:
@@ -3586,7 +3586,7 @@ LongLeftRightArrow:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 LongRightArrow:
@@ -3607,7 +3607,7 @@ LongRightArrow:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 LowerLeftArrow:
@@ -3628,7 +3628,7 @@ LowerLeftArrow:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 LowerRightArrow:
@@ -3649,7 +3649,7 @@ LowerRightArrow:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 Map:
@@ -3670,7 +3670,7 @@ Map:
   arity: Binary
   affix: Infix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments:
 
 MapAll:
@@ -3691,7 +3691,7 @@ MapAll:
   arity: Binary
   affix: Infix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments:
 
 MaxLimit:
@@ -3712,7 +3712,7 @@ MaxLimit:
   arity: Unary
   affix: Prefix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments: Usage and Parse may not be correct.
 
 MessageName:
@@ -3733,7 +3733,7 @@ MessageName:
   arity: Binary
   affix: Infix
   associativity: Non
-  meaningfull: true
+  meaningful: true
   # comments:
 
 MinLimit:
@@ -3754,7 +3754,7 @@ MinLimit:
   arity: Unary
   affix: Prefix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments: Usage and Parse may not be correct.
 
 Minus:
@@ -3775,7 +3775,7 @@ Minus:
   arity: Unary
   affix: Prefix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments: Operator Notations includes usages with invisible unicode characters.
 
 MinusPlus:
@@ -3796,7 +3796,7 @@ MinusPlus:
   arity: Binary
   affix: Infix
   associativity: Left
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NamedBlank:
@@ -3817,7 +3817,7 @@ NamedBlank:
   arity: Unary
   affix: Postfix
   associativity: Non
-  meaningfull: true
+  meaningful: true
   # comments:
 
 NamedBlankHead:
@@ -3838,7 +3838,7 @@ NamedBlankHead:
   arity: Binary
   affix: Infix
   associativity: Non
-  meaningfull: true
+  meaningful: true
   # comments:
 
 NamedBlankNullSequence:
@@ -3859,7 +3859,7 @@ NamedBlankNullSequence:
   arity: Unary
   affix: Postfix
   associativity: Non
-  meaningfull: true
+  meaningful: true
   # comments:
 
 NamedBlankNullSequenceHead:
@@ -3880,7 +3880,7 @@ NamedBlankNullSequenceHead:
   arity: Binary
   affix: Infix
   associativity: Non
-  meaningfull: true
+  meaningful: true
   # comments:
 
 NamedBlankOptional:
@@ -3901,7 +3901,7 @@ NamedBlankOptional:
   arity: Unary
   affix: Postfix
   associativity: Non
-  meaningfull: true
+  meaningful: true
   # comments:
 
 NamedBlankSequence:
@@ -3922,7 +3922,7 @@ NamedBlankSequence:
   arity: Unary
   affix: Postfix
   associativity: Non
-  meaningfull: true
+  meaningful: true
   # comments:
 
 NamedBlankSequenceHead:
@@ -3943,7 +3943,7 @@ NamedBlankSequenceHead:
   arity: Binary
   affix: Infix
   associativity: Non
-  meaningfull: true
+  meaningful: true
   # comments:
 
 Nand:
@@ -3964,7 +3964,7 @@ Nand:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: true
+  meaningful: true
   # comments:
 
 NestedGreaterGreater:
@@ -3985,7 +3985,7 @@ NestedGreaterGreater:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NestedLessLess:
@@ -4006,7 +4006,7 @@ NestedLessLess:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NonCommutativeMultiply:
@@ -4027,7 +4027,7 @@ NonCommutativeMultiply:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: true
+  meaningful: true
   # comments:
 
 Nor:
@@ -4048,7 +4048,7 @@ Nor:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: true
+  meaningful: true
   # comments:
 
 Not:
@@ -4069,7 +4069,7 @@ Not:
   arity: Unary
   affix: Prefix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments:
 
 NotCongruent:
@@ -4090,7 +4090,7 @@ NotCongruent:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NotCupCap:
@@ -4111,7 +4111,7 @@ NotCupCap:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NotDoubleVerticalBar:
@@ -4132,7 +4132,7 @@ NotDoubleVerticalBar:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NotElement:
@@ -4153,7 +4153,7 @@ NotElement:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: true
+  meaningful: true
   # comments:
 
 NotEqualTilde:
@@ -4174,7 +4174,7 @@ NotEqualTilde:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NotExists:
@@ -4195,7 +4195,7 @@ NotExists:
   arity: Unary
   affix: Prefix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments: Usage and Parse may not be correct.
 
 NotGreater:
@@ -4216,7 +4216,7 @@ NotGreater:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NotGreaterEqual:
@@ -4237,7 +4237,7 @@ NotGreaterEqual:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NotGreaterFullEqual:
@@ -4258,7 +4258,7 @@ NotGreaterFullEqual:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NotGreaterGreater:
@@ -4279,7 +4279,7 @@ NotGreaterGreater:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NotGreaterLess:
@@ -4300,7 +4300,7 @@ NotGreaterLess:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NotGreaterSlantEqual:
@@ -4321,7 +4321,7 @@ NotGreaterSlantEqual:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NotGreaterTilde:
@@ -4342,7 +4342,7 @@ NotGreaterTilde:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NotHumpDownHump:
@@ -4363,7 +4363,7 @@ NotHumpDownHump:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NotHumpEqual:
@@ -4384,7 +4384,7 @@ NotHumpEqual:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NotLeftTriangle:
@@ -4405,7 +4405,7 @@ NotLeftTriangle:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NotLeftTriangleBar:
@@ -4426,7 +4426,7 @@ NotLeftTriangleBar:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NotLeftTriangleEqual:
@@ -4447,7 +4447,7 @@ NotLeftTriangleEqual:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NotLess:
@@ -4468,7 +4468,7 @@ NotLess:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NotLessEqual:
@@ -4489,7 +4489,7 @@ NotLessEqual:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NotLessFullEqual:
@@ -4510,7 +4510,7 @@ NotLessFullEqual:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NotLessGreater:
@@ -4531,7 +4531,7 @@ NotLessGreater:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NotLessLess:
@@ -4552,7 +4552,7 @@ NotLessLess:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NotLessSlantEqual:
@@ -4573,7 +4573,7 @@ NotLessSlantEqual:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NotLessTilde:
@@ -4594,7 +4594,7 @@ NotLessTilde:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NotNestedGreaterGreater:
@@ -4615,7 +4615,7 @@ NotNestedGreaterGreater:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NotNestedLessLess:
@@ -4636,7 +4636,7 @@ NotNestedLessLess:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NotPrecedes:
@@ -4657,7 +4657,7 @@ NotPrecedes:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NotPrecedesEqual:
@@ -4678,7 +4678,7 @@ NotPrecedesEqual:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NotPrecedesSlantEqual:
@@ -4699,7 +4699,7 @@ NotPrecedesSlantEqual:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NotPrecedesTilde:
@@ -4720,7 +4720,7 @@ NotPrecedesTilde:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NotReverseElement:
@@ -4741,7 +4741,7 @@ NotReverseElement:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NotRightTriangle:
@@ -4762,7 +4762,7 @@ NotRightTriangle:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NotRightTriangleBar:
@@ -4783,7 +4783,7 @@ NotRightTriangleBar:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NotRightTriangleEqual:
@@ -4804,7 +4804,7 @@ NotRightTriangleEqual:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NotSquareSubset:
@@ -4825,7 +4825,7 @@ NotSquareSubset:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NotSquareSubsetEqual:
@@ -4846,7 +4846,7 @@ NotSquareSubsetEqual:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NotSquareSuperset:
@@ -4867,7 +4867,7 @@ NotSquareSuperset:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NotSquareSupersetEqual:
@@ -4888,7 +4888,7 @@ NotSquareSupersetEqual:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NotSubset:
@@ -4909,7 +4909,7 @@ NotSubset:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NotSubsetEqual:
@@ -4930,7 +4930,7 @@ NotSubsetEqual:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NotSucceeds:
@@ -4951,7 +4951,7 @@ NotSucceeds:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NotSucceedsEqual:
@@ -4972,7 +4972,7 @@ NotSucceedsEqual:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NotSucceedsSlantEqual:
@@ -4993,7 +4993,7 @@ NotSucceedsSlantEqual:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NotSucceedsTilde:
@@ -5014,7 +5014,7 @@ NotSucceedsTilde:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NotSuperset:
@@ -5035,7 +5035,7 @@ NotSuperset:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NotSupersetEqual:
@@ -5056,7 +5056,7 @@ NotSupersetEqual:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NotTilde:
@@ -5077,7 +5077,7 @@ NotTilde:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NotTildeEqual:
@@ -5098,7 +5098,7 @@ NotTildeEqual:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NotTildeFullEqual:
@@ -5119,7 +5119,7 @@ NotTildeFullEqual:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NotTildeTilde:
@@ -5140,7 +5140,7 @@ NotTildeTilde:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NotVerticalBar:
@@ -5161,7 +5161,7 @@ NotVerticalBar:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 NumberAccuracy:
@@ -5182,7 +5182,7 @@ NumberAccuracy:
   arity: Binary
   affix: Infix
   associativity: Non
-  meaningfull: true
+  meaningful: true
   # comments: Specifies the accuracy (in number of digits to the right of decimal) of number, where s is a positive decimal expressed without using ^^ or `. A magnitude must come after ``.
 
 NumberBase:
@@ -5203,7 +5203,7 @@ NumberBase:
   arity: Binary
   affix: Infix
   associativity: Non
-  meaningfull: true
+  meaningful: true
   # comments: Interprets digits as a number literal in base n. The base n must be a positive integer no greater than 36.
 
 NumberMagnitude:
@@ -5224,7 +5224,7 @@ NumberMagnitude:
   arity: Binary
   affix: Infix
   associativity: Non
-  meaningfull: true
+  meaningful: true
   # comments: Gives mantissa*base^magnitude, where base^^mantissa=number and magnitude is a decimal number expressed without ^^, `, or ``. Only allowed in a number literal, and only after any ` or ``.
 
 NumberPrecision:
@@ -5245,7 +5245,7 @@ NumberPrecision:
   arity: Binary
   affix: Infix
   associativity: Non
-  meaningfull: true
+  meaningful: true
   # comments: Specifies the precision of number, where s is a positive decimal expressed without using ^^ or `. Any magnitude must come after `."
 
 NumberPrecisionPostfix:
@@ -5266,7 +5266,7 @@ NumberPrecisionPostfix:
   arity: Unary
   affix: Postfix
   associativity: Left
-  meaningfull: true
+  meaningful: true
   # comments: Specifies the precision of number to be $MachinePrecision. Any magnitude must come after `."
 
 Optional:
@@ -5287,7 +5287,7 @@ Optional:
   arity: Binary
   affix: Infix
   associativity: Non
-  meaningfull: true
+  meaningful: true
   # comments:
 
 Or:
@@ -5308,7 +5308,7 @@ Or:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: true
+  meaningful: true
   # comments:
 
 Out:
@@ -5329,7 +5329,7 @@ Out:
   arity: Nullary
   affix: None
   associativity: Non
-  meaningfull: true
+  meaningful: true
   # comments:
 
 OutNumber:
@@ -5350,7 +5350,7 @@ OutNumber:
   arity: Unary
   affix: Prefix
   associativity: Non
-  meaningfull: true
+  meaningful: true
   # comments:
 
 OverscriptBox:
@@ -5371,7 +5371,7 @@ OverscriptBox:
   arity: Binary
   affix: Infix
   associativity: Missing["Unknown"]
-  meaningfull: true
+  meaningful: true
   # comments:
 
 OverunderscriptBox:
@@ -5392,7 +5392,7 @@ OverunderscriptBox:
   arity: Ternary
   affix: Infix
   associativity: Missing["Unknown"]
-  meaningfull: true
+  meaningful: true
   # comments:
 
 ParameterizedFunction:
@@ -5413,7 +5413,7 @@ ParameterizedFunction:
   arity: Binary
   affix: Infix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments: The arrow form of Function.
 
 Parentheses:
@@ -5434,7 +5434,7 @@ Parentheses:
   arity: Unary
   affix: Matchfix
   associativity: Non
-  meaningfull: true
+  meaningful: true
   # comments:
 
 Part:
@@ -5455,7 +5455,7 @@ Part:
   arity: n-ary
   affix: Postfix
   associativity: Left
-  meaningfull: true
+  meaningful: true
   # comments:
 
 PartialD:
@@ -5476,7 +5476,7 @@ PartialD:
   arity: Unary
   affix: Prefix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments: Usage and Parse may not be correct.
 
 PartialFractionBox:
@@ -5497,7 +5497,7 @@ PartialFractionBox:
   arity: Unary
   affix: Postfix
   associativity: Left
-  meaningfull: false
+  meaningful: false
   # comments: This operator is an invisible Unicode character and is used in the layout of displayed expressions.
 
 PartialOverscriptBox:
@@ -5518,7 +5518,7 @@ PartialOverscriptBox:
   arity: Unary
   affix: Postfix
   associativity: Left
-  meaningfull: false
+  meaningful: false
   # comments: This operator is an invisible Unicode character and is used in the layout of displayed expressions.
 
 PartialSubscriptBox:
@@ -5539,7 +5539,7 @@ PartialSubscriptBox:
   arity: Unary
   affix: Postfix
   associativity: Left
-  meaningfull: false
+  meaningful: false
   # comments: This operator is an invisible Unicode character and is used in the layout of displayed expressions.
 
 PartialSuperscriptBox:
@@ -5560,7 +5560,7 @@ PartialSuperscriptBox:
   arity: Unary
   affix: Postfix
   associativity: Left
-  meaningfull: false
+  meaningful: false
   # comments: This operator is an invisible Unicode character and is used in the layout of displayed expressions.
 
 PartialUnderscriptBox:
@@ -5581,7 +5581,7 @@ PartialUnderscriptBox:
   arity: Unary
   affix: Postfix
   associativity: Left
-  meaningfull: false
+  meaningful: false
   # comments: This operator is an invisible Unicode character and is used in the layout of displayed expressions.
 
 Pattern:
@@ -5602,7 +5602,7 @@ Pattern:
   arity: Binary
   affix: Infix
   associativity: Non
-  meaningfull: true
+  meaningful: true
   # comments:
 
 PatternTest:
@@ -5623,7 +5623,7 @@ PatternTest:
   arity: Binary
   affix: Infix
   associativity: Missing["Unknown"]
-  meaningfull: true
+  meaningful: true
   # comments:
 
 PermutationProduct:
@@ -5644,7 +5644,7 @@ PermutationProduct:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: true
+  meaningful: true
   # comments:
 
 Perpendicular:
@@ -5665,7 +5665,7 @@ Perpendicular:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 Piecewise:
@@ -5686,7 +5686,7 @@ Piecewise:
   arity: Unary
   affix: Prefix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments: Usage and Parse may not be correct.
 
 Plus:
@@ -5707,7 +5707,7 @@ Plus:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: true
+  meaningful: true
   # comments: Operator Notations includes usages with invisible unicode characters.
 
 PlusMinus:
@@ -5728,7 +5728,7 @@ PlusMinus:
   arity: Binary
   affix: Infix
   associativity: Left
-  meaningfull: false
+  meaningful: false
   # comments:
 
 Power:
@@ -5749,7 +5749,7 @@ Power:
   arity: Binary
   affix: Infix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments:
 
 PreDecrement:
@@ -5770,7 +5770,7 @@ PreDecrement:
   arity: Unary
   affix: Prefix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments:
 
 PreIncrement:
@@ -5791,7 +5791,7 @@ PreIncrement:
   arity: Unary
   affix: Prefix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments:
 
 Precedes:
@@ -5812,7 +5812,7 @@ Precedes:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 PrecedesEqual:
@@ -5833,7 +5833,7 @@ PrecedesEqual:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 PrecedesSlantEqual:
@@ -5854,7 +5854,7 @@ PrecedesSlantEqual:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 PrecedesTilde:
@@ -5875,7 +5875,7 @@ PrecedesTilde:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 ProbabilityPr:
@@ -5896,7 +5896,7 @@ ProbabilityPr:
   arity: Unary
   affix: Prefix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments: Usage and Parse may not be correct.
 
 Product:
@@ -5917,7 +5917,7 @@ Product:
   arity: Unary
   affix: Prefix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments: Usage and Parse may not be correct.
 
 Proportion:
@@ -5938,7 +5938,7 @@ Proportion:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 Proportional:
@@ -5959,7 +5959,7 @@ Proportional:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 Put:
@@ -5980,7 +5980,7 @@ Put:
   arity: Binary
   affix: Infix
   associativity: Left
-  meaningfull: true
+  meaningful: true
   # comments:
 
 PutAppend:
@@ -6001,7 +6001,7 @@ PutAppend:
   arity: Binary
   affix: Infix
   associativity: Left
-  meaningfull: true
+  meaningful: true
   # comments:
 
 RadicalBox:
@@ -6022,7 +6022,7 @@ RadicalBox:
   arity: Binary
   affix: Prefix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments:
 
 Repeated:
@@ -6043,7 +6043,7 @@ Repeated:
   arity: Unary
   affix: Postfix
   associativity: Left
-  meaningfull: true
+  meaningful: true
   # comments:
 
 RepeatedNull:
@@ -6064,7 +6064,7 @@ RepeatedNull:
   arity: Unary
   affix: Postfix
   associativity: Left
-  meaningfull: true
+  meaningful: true
   # comments:
 
 ReplaceAll:
@@ -6085,7 +6085,7 @@ ReplaceAll:
   arity: Binary
   affix: Infix
   associativity: Left
-  meaningfull: true
+  meaningful: true
   # comments:
 
 ReplaceRepeated:
@@ -6106,7 +6106,7 @@ ReplaceRepeated:
   arity: Binary
   affix: Infix
   associativity: Left
-  meaningfull: true
+  meaningful: true
   # comments:
 
 ReverseElement:
@@ -6127,7 +6127,7 @@ ReverseElement:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 ReverseEquilibrium:
@@ -6148,7 +6148,7 @@ ReverseEquilibrium:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 ReverseUpEquilibrium:
@@ -6169,7 +6169,7 @@ ReverseUpEquilibrium:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 RightArrow:
@@ -6190,7 +6190,7 @@ RightArrow:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 RightArrowBar:
@@ -6211,7 +6211,7 @@ RightArrowBar:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 RightArrowLeftArrow:
@@ -6232,7 +6232,7 @@ RightArrowLeftArrow:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 RightComposition:
@@ -6253,7 +6253,7 @@ RightComposition:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: true
+  meaningful: true
   # comments:
 
 RightDownTeeVector:
@@ -6274,7 +6274,7 @@ RightDownTeeVector:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 RightDownVector:
@@ -6295,7 +6295,7 @@ RightDownVector:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 RightDownVectorBar:
@@ -6316,7 +6316,7 @@ RightDownVectorBar:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 RightTee:
@@ -6337,7 +6337,7 @@ RightTee:
   arity: Binary
   affix: Infix
   associativity: Right
-  meaningfull: false
+  meaningful: false
   # comments:
 
 RightTeeArrow:
@@ -6358,7 +6358,7 @@ RightTeeArrow:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 RightTeeVector:
@@ -6379,7 +6379,7 @@ RightTeeVector:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 RightTriangle:
@@ -6400,7 +6400,7 @@ RightTriangle:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 RightTriangleBar:
@@ -6421,7 +6421,7 @@ RightTriangleBar:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 RightTriangleEqual:
@@ -6442,7 +6442,7 @@ RightTriangleEqual:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 RightUpDownVector:
@@ -6463,7 +6463,7 @@ RightUpDownVector:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 RightUpTeeVector:
@@ -6484,7 +6484,7 @@ RightUpTeeVector:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 RightUpVector:
@@ -6505,7 +6505,7 @@ RightUpVector:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 RightUpVectorBar:
@@ -6526,7 +6526,7 @@ RightUpVectorBar:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 RightVector:
@@ -6547,7 +6547,7 @@ RightVector:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 RightVectorBar:
@@ -6568,7 +6568,7 @@ RightVectorBar:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 RoundImplies:
@@ -6589,7 +6589,7 @@ RoundImplies:
   arity: Binary
   affix: Infix
   associativity: Right
-  meaningfull: false
+  meaningful: false
   # comments:
 
 Rule:
@@ -6610,7 +6610,7 @@ Rule:
   arity: Binary
   affix: Infix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments:
 
 RuleDelayed:
@@ -6631,7 +6631,7 @@ RuleDelayed:
   arity: Binary
   affix: Infix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments:
 
 SameQ:
@@ -6652,7 +6652,7 @@ SameQ:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: true
+  meaningful: true
   # comments:
 
 Set:
@@ -6673,7 +6673,7 @@ Set:
   arity: Binary
   affix: Infix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments:
 
 SetDelayed:
@@ -6694,7 +6694,7 @@ SetDelayed:
   arity: Binary
   affix: Infix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments:
 
 ShortDownArrow:
@@ -6715,7 +6715,7 @@ ShortDownArrow:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 ShortLeftArrow:
@@ -6736,7 +6736,7 @@ ShortLeftArrow:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 ShortRightArrow:
@@ -6757,7 +6757,7 @@ ShortRightArrow:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 ShortUpArrow:
@@ -6778,7 +6778,7 @@ ShortUpArrow:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 Skeleton:
@@ -6799,7 +6799,7 @@ Skeleton:
   arity: Unary
   affix: Matchfix
   associativity: Non
-  meaningfull: true
+  meaningful: true
   # comments:
 
 Slot:
@@ -6820,7 +6820,7 @@ Slot:
   arity: Nullary
   affix: None
   associativity: Non
-  meaningfull: true
+  meaningful: true
   # comments:
 
 SlotNumber:
@@ -6841,7 +6841,7 @@ SlotNumber:
   arity: Unary
   affix: Prefix
   associativity: Non
-  meaningfull: true
+  meaningful: true
   # comments:
 
 SlotSequence:
@@ -6862,7 +6862,7 @@ SlotSequence:
   arity: Nullary
   affix: None
   associativity: Non
-  meaningfull: true
+  meaningful: true
   # comments:
 
 SlotSequenceNumber:
@@ -6883,7 +6883,7 @@ SlotSequenceNumber:
   arity: Unary
   affix: Prefix
   associativity: Non
-  meaningfull: true
+  meaningful: true
   # comments:
 
 SmallCircle:
@@ -6904,7 +6904,7 @@ SmallCircle:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 Span:
@@ -6925,7 +6925,7 @@ Span:
   arity: Ternary
   affix: Infix
   associativity: Non
-  meaningfull: true
+  meaningful: true
   # comments:
 
 Sqrt:
@@ -6946,7 +6946,7 @@ Sqrt:
   arity: Unary
   affix: Prefix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments:
 
 SqrtBox:
@@ -6967,7 +6967,7 @@ SqrtBox:
   arity: Unary
   affix: Prefix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments:
 
 Square:
@@ -6988,7 +6988,7 @@ Square:
   arity: Unary
   affix: Prefix
   associativity: Right
-  meaningfull: false
+  meaningful: false
   # comments:
 
 SquareIntersection:
@@ -7009,7 +7009,7 @@ SquareIntersection:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 SquareSubset:
@@ -7030,7 +7030,7 @@ SquareSubset:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 SquareSubsetEqual:
@@ -7051,7 +7051,7 @@ SquareSubsetEqual:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 SquareSuperset:
@@ -7072,7 +7072,7 @@ SquareSuperset:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 SquareSupersetEqual:
@@ -7093,7 +7093,7 @@ SquareSupersetEqual:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 SquareUnion:
@@ -7114,7 +7114,7 @@ SquareUnion:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 Star:
@@ -7135,7 +7135,7 @@ Star:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 StringExpression:
@@ -7156,7 +7156,7 @@ StringExpression:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: true
+  meaningful: true
   # comments:
 
 StringJoin:
@@ -7177,7 +7177,7 @@ StringJoin:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: true
+  meaningful: true
   # comments:
 
 SubscriptBox:
@@ -7198,7 +7198,7 @@ SubscriptBox:
   arity: Binary
   affix: Infix
   associativity: Missing["Unknown"]
-  meaningfull: true
+  meaningful: true
   # comments:
 
 Subset:
@@ -7219,7 +7219,7 @@ Subset:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 SubsetEqual:
@@ -7240,7 +7240,7 @@ SubsetEqual:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 SubsuperscriptBox:
@@ -7261,7 +7261,7 @@ SubsuperscriptBox:
   arity: Ternary
   affix: Infix
   associativity: Missing["Unknown"]
-  meaningfull: true
+  meaningful: true
   # comments:
 
 Subtract:
@@ -7282,7 +7282,7 @@ Subtract:
   arity: Binary
   affix: Infix
   associativity: Left
-  meaningfull: true
+  meaningful: true
   # comments: Operator Notations includes usages with invisible unicode characters.
 
 SubtractFrom:
@@ -7303,7 +7303,7 @@ SubtractFrom:
   arity: Binary
   affix: Infix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments:
 
 Succeeds:
@@ -7324,7 +7324,7 @@ Succeeds:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 SucceedsEqual:
@@ -7345,7 +7345,7 @@ SucceedsEqual:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 SucceedsSlantEqual:
@@ -7366,7 +7366,7 @@ SucceedsSlantEqual:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 SucceedsTilde:
@@ -7387,7 +7387,7 @@ SucceedsTilde:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 SuchThat:
@@ -7408,7 +7408,7 @@ SuchThat:
   arity: Binary
   affix: Infix
   associativity: Right
-  meaningfull: false
+  meaningful: false
   # comments:
 
 Sum:
@@ -7429,7 +7429,7 @@ Sum:
   arity: Unary
   affix: Prefix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments: Usage and Parse may not be correct.
 
 SuperDagger:
@@ -7450,7 +7450,7 @@ SuperDagger:
   arity: Unary
   affix: Postfix
   associativity: Left
-  meaningfull: true
+  meaningful: true
   # comments:
 
 SuperscriptBox:
@@ -7471,7 +7471,7 @@ SuperscriptBox:
   arity: Binary
   affix: Infix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments:
 
 Superset:
@@ -7492,7 +7492,7 @@ Superset:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 SupersetEqual:
@@ -7513,7 +7513,7 @@ SupersetEqual:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 SupersubscriptBox:
@@ -7534,7 +7534,7 @@ SupersubscriptBox:
   arity: Ternary
   affix: Infix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments:
 
 TagSet:
@@ -7555,7 +7555,7 @@ TagSet:
   arity: Ternary
   affix: Infix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments:
 
 TagSetDelayed:
@@ -7576,7 +7576,7 @@ TagSetDelayed:
   arity: Ternary
   affix: Infix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments:
 
 TagUnset:
@@ -7597,7 +7597,7 @@ TagUnset:
   arity: Binary
   affix: Infix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments:
 
 TensorProduct:
@@ -7618,7 +7618,7 @@ TensorProduct:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: true
+  meaningful: true
   # comments:
 
 TensorWedge:
@@ -7639,7 +7639,7 @@ TensorWedge:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: true
+  meaningful: true
   # comments:
 
 Therefore:
@@ -7660,7 +7660,7 @@ Therefore:
   arity: Binary
   affix: Infix
   associativity: Right
-  meaningfull: false
+  meaningful: false
   # comments: Precedence of Therefore and Because are swapped in notebook versus ToExpression.
 
 Tilde:
@@ -7681,7 +7681,7 @@ Tilde:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 TildeEqual:
@@ -7702,7 +7702,7 @@ TildeEqual:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 TildeFullEqual:
@@ -7723,7 +7723,7 @@ TildeFullEqual:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 TildeTilde:
@@ -7744,7 +7744,7 @@ TildeTilde:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 Times:
@@ -7765,7 +7765,7 @@ Times:
   arity: Nullary
   affix: None
   associativity: None
-  meaningfull: true
+  meaningful: true
   # comments: Operator Notations includes usages with invisible unicode characters.
 
 TimesBy:
@@ -7786,7 +7786,7 @@ TimesBy:
   arity: Binary
   affix: Infix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments:
 
 TortoiseShellBracket:
@@ -7807,7 +7807,7 @@ TortoiseShellBracket:
   arity: Unary
   affix: Matchfix
   associativity: Non
-  meaningfull: true
+  meaningful: true
   # comments:
 
 Transpose:
@@ -7828,7 +7828,7 @@ Transpose:
   arity: Unary
   affix: Postfix
   associativity: Left
-  meaningfull: true
+  meaningful: true
   # comments:
 
 TwoWayRule:
@@ -7849,7 +7849,7 @@ TwoWayRule:
   arity: Binary
   affix: Infix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments:
 
 UnaryMinusPlus:
@@ -7870,7 +7870,7 @@ UnaryMinusPlus:
   arity: Unary
   affix: Prefix
   associativity: Right
-  meaningfull: false
+  meaningful: false
   # comments:
 
 UnaryPlus:
@@ -7891,7 +7891,7 @@ UnaryPlus:
   arity: Unary
   affix: Prefix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments: Converts to expr on input.
 
 UnaryPlusMinus:
@@ -7912,7 +7912,7 @@ UnaryPlusMinus:
   arity: Unary
   affix: Prefix
   associativity: Right
-  meaningfull: false
+  meaningful: false
   # comments:
 
 UnderoverscriptBox:
@@ -7933,7 +7933,7 @@ UnderoverscriptBox:
   arity: Ternary
   affix: Infix
   associativity: Missing["Unknown"]
-  meaningfull: true
+  meaningful: true
   # comments:
 
 UnderscriptBox:
@@ -7954,7 +7954,7 @@ UnderscriptBox:
   arity: Binary
   affix: Infix
   associativity: Missing["Unknown"]
-  meaningfull: true
+  meaningful: true
   # comments:
 
 UndirectedEdge:
@@ -7975,7 +7975,7 @@ UndirectedEdge:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: true
+  meaningful: true
   # comments:
 
 Unequal:
@@ -7996,7 +7996,7 @@ Unequal:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: true
+  meaningful: true
   # comments:
 
 Union:
@@ -8017,7 +8017,7 @@ Union:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: true
+  meaningful: true
   # comments:
 
 UnionPlus:
@@ -8038,7 +8038,7 @@ UnionPlus:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 UnsameQ:
@@ -8059,7 +8059,7 @@ UnsameQ:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: true
+  meaningful: true
   # comments:
 
 Unset:
@@ -8080,7 +8080,7 @@ Unset:
   arity: Unary
   affix: Postfix
   associativity: Left
-  meaningfull: true
+  meaningful: true
   # comments:
 
 UpArrow:
@@ -8101,7 +8101,7 @@ UpArrow:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 UpArrowBar:
@@ -8122,7 +8122,7 @@ UpArrowBar:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 UpArrowDownArrow:
@@ -8143,7 +8143,7 @@ UpArrowDownArrow:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 UpDownArrow:
@@ -8164,7 +8164,7 @@ UpDownArrow:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 UpEquilibrium:
@@ -8185,7 +8185,7 @@ UpEquilibrium:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 UpSet:
@@ -8206,7 +8206,7 @@ UpSet:
   arity: Binary
   affix: Infix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments:
 
 UpSetDelayed:
@@ -8227,7 +8227,7 @@ UpSetDelayed:
   arity: Binary
   affix: Infix
   associativity: Right
-  meaningfull: true
+  meaningful: true
   # comments:
 
 UpTee:
@@ -8248,7 +8248,7 @@ UpTee:
   arity: Binary
   affix: Infix
   associativity: Left
-  meaningfull: false
+  meaningful: false
   # comments:
 
 UpTeeArrow:
@@ -8269,7 +8269,7 @@ UpTeeArrow:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 UpperLeftArrow:
@@ -8290,7 +8290,7 @@ UpperLeftArrow:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 UpperRightArrow:
@@ -8311,7 +8311,7 @@ UpperRightArrow:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 Vee:
@@ -8332,7 +8332,7 @@ Vee:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 VerticalBar:
@@ -8353,7 +8353,7 @@ VerticalBar:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 VerticalSeparator:
@@ -8374,7 +8374,7 @@ VerticalSeparator:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 VerticalTilde:
@@ -8395,7 +8395,7 @@ VerticalTilde:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 Wedge:
@@ -8416,7 +8416,7 @@ Wedge:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: false
+  meaningful: false
   # comments:
 
 WhiteCornerBracket:
@@ -8437,7 +8437,7 @@ WhiteCornerBracket:
   arity: Unary
   affix: Matchfix
   associativity: Non
-  meaningfull: true
+  meaningful: true
   # comments:
 
 Xnor:
@@ -8458,7 +8458,7 @@ Xnor:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: true
+  meaningful: true
   # comments:
 
 Xor:
@@ -8479,5 +8479,5 @@ Xor:
   arity: Binary
   affix: Infix
   associativity: None
-  meaningfull: true
+  meaningful: true
   # comments:
