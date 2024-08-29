@@ -6,10 +6,11 @@ https://github/WLTools/LanguageSpec/docs/Specification/Syntax/OperatorTableHTML.
 
 import csv
 import os.path as osp
+from pathlib import Path
 from typing import Dict
 
-my_dir = osp.dirname(__file__)
-csv_file = osp.join(my_dir, "..", "data", "OperatorTable.csv")
+DATA_DIR = Path(osp.normpath(osp.dirname(__file__)), "..", "data")
+csv_file = DATA_DIR / "OperatorTable.csv"
 
 yaml_fields = (
     "name",
@@ -34,6 +35,8 @@ yaml_fields = (
 )
 
 operators: Dict[str, list] = {}
+precedence_index = 2
+precedence_corrected_index = 3
 
 with open(csv_file, newline="") as csvfile:
     # FIXME: to handle "\" in fields
@@ -77,12 +80,25 @@ with open(csv_file, newline="") as csvfile:
         # if count > 5:
         #     break
 
+# Commented code for checking character_data versus
+# Operator data
+
+# import yaml
+
+# with open(DATA_DIR / "named-characters.yml", "r") as i:
+#     # Load the YAML data.
+#     character_data = yaml.load(i, Loader=yaml.FullLoader)
 
 for name in sorted(operators.keys()):
     print(f"\n{name}:")
     info = operators[name]
     for i, field in enumerate(yaml_fields):
         value = info[i]
+        if field == "associativity":
+            if value in ("None", "Non"):
+                value = "null"
+            else:
+                value = value.lower()
         if field == "meaningfull":
             value = value.lower()
             field = "meaningful"  # spelling correction
@@ -95,5 +111,22 @@ for name in sorted(operators.keys()):
             "usage",
         ):
             field = f"# {field}"
+        elif field == "Precedence":
+            if operators[name][precedence_corrected_index] == value:
+                continue
+            # else:
+            #     print(f"# mismatch: {name}")
+            field = "Precedence-Function"
+        elif field == "Precedence-corrected":
+            field = "precedence"
+            # Commented code checking character data versus operator data
+            # character_dict = character_data.get(name)
+            # if character_dict is None:
+            #     print(f"Woah! do not see {name} in character YAML")
+            # else:
+            #     character_precedence = character_dict.get("precedence")
+            #     if character_precedence is not None:
+            #         if character_precedence != value:
+            #             print(f"Woah! mismatched character {name} {character_precedence}, {value}")
 
         print(f"  {field}: {value}")

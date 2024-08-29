@@ -13,12 +13,27 @@
 # The primary here used here is an "unofficial" operator name. This is the name used by
 # WL when there is one. When there is not a name, then we make one up.
 
+
+# Many fields below mention precedence. This is an integer used in
+# specifying the order operations occur when one operator is
+# juxtaposed against another operator.  A higher value means that the
+# operator binds before an operator with a lower value.
+
+# For example, the Times precedence 400 is higher than the Plus
+# precedence 310 because a + b * c is a + (b * c), not (a + b) * c.
+# Precedence is also used to force multi-character ASCII symbols like
+# |-> to get treated as one unit and not split into two operators like
+# | and ->. So the precedence of |-> has to be higher than |.
+#
+
+
 # Field definitions
 # =================
 
 #   name: this is the WL name. When it exits it will also be the name of the key
 #   actual-precedence: a precedence value that programs can use.
 #   Precedence: the value returned for this operator using the WL function Precedence[]
+#   Precedence-corrected: the value used in Mathics3.
 #   WolframLangageData: a value returned using WolframLangageData[???]
 #   usage: when it exists, an example of the use of this operator
 #   parse: when "usage" exists, a parse of the example
@@ -43,8 +58,7 @@
 AddTo:
   name: AddTo
   actual-precedence: 120
-  Precedence: 100
-  Precedence-corrected: 100
+  precedence: 100
   WolframLanguageData: 69
   WolframLanguageData-corrected: 69
   UnicodeCharacters.tr:
@@ -57,15 +71,14 @@ AddTo:
   FullForm: AddTo[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
 Alternatives:
   name: Alternatives
   actual-precedence: 190
-  Precedence: 160
-  Precedence-corrected: 160
+  precedence: 160
   WolframLanguageData: 63
   WolframLanguageData-corrected: 64
   UnicodeCharacters.tr:
@@ -78,15 +91,15 @@ Alternatives:
   FullForm: Alternatives[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
 And:
   name: And
   actual-precedence: 290
-  Precedence: 215
-  Precedence-corrected: 220
+  Precedence-Function: 215
+  precedence: 220
   WolframLanguageData: 55
   WolframLanguageData-corrected: 55
   UnicodeCharacters.tr: 330
@@ -99,15 +112,15 @@ And:
   FullForm: And[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
 AngleBracket:
   name: AngleBracket
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr: -10
@@ -120,15 +133,15 @@ AngleBracket:
   FullForm: AngleBracket[expr, \[Ellipsis]]
   arity: n-ary
   affix: Matchfix
-  associativity: Non
+  associativity: null
   meaningful: false
   # comments:
 
 Apply:
   name: Apply
   actual-precedence: 820
-  Precedence: 620
-  Precedence-corrected: 626
+  Precedence-Function: 620
+  precedence: 626
   WolframLanguageData: 16
   WolframLanguageData-corrected: 16
   UnicodeCharacters.tr:
@@ -141,36 +154,15 @@ Apply:
   FullForm: Apply[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Right
-  meaningful: true
-  # comments:
-
-ApplyFirstLevel:
-  name: Apply
-  actual-precedence: 810
-  Precedence: 620
-  Precedence-corrected: 625
-  WolframLanguageData: 16
-  WolframLanguageData-corrected: 16
-  UnicodeCharacters.tr:
-  UnicodeCharacters-corrected.tr: 710
-  # N-tokens: {}
-  # L-tokens: {"@@@"}
-  # O-tokens: {}
-  # usage: {{"expr1", "@@@", "expr2"}}
-  # parse: {"Apply", "[", "expr1", ",", "expr2", "{", "1", "}", "]"}
-  FullForm: Apply[expr1, expr2, List[1]]
-  arity: Binary
-  affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
 Association:
   name: Association
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr: -10
@@ -183,15 +175,15 @@ Association:
   FullForm: Association[expr, \[Ellipsis]]
   arity: n-ary
   affix: Matchfix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
 AutoMatch:
   name: AutoMatch
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr: -10
@@ -204,15 +196,14 @@ AutoMatch:
   FullForm: AutoMatch[expr]
   arity: Unary
   affix: Matchfix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
 Backslash:
   name: Backslash
   actual-precedence: 560
-  Precedence: 460
-  Precedence-corrected: 460
+  precedence: 460
   WolframLanguageData: 32
   WolframLanguageData-corrected: 32
   UnicodeCharacters.tr: 580
@@ -225,15 +216,14 @@ Backslash:
   FullForm: Backslash[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 Because:
   name: Because
   actual-precedence: 60
-  Precedence: 50
-  Precedence-corrected: 50
+  precedence: 50
   WolframLanguageData: 74
   WolframLanguageData-corrected: 74
   UnicodeCharacters.tr: 201
@@ -246,15 +236,15 @@ Because:
   FullForm: Because[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Left
+  associativity: left
   meaningful: false
   # comments: Precedence of Therefore and Because are swapped in notebook versus ToExpression.
 
 BlackLenticularBracket:
   name: BlackLenticularBracket
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr: -10
@@ -267,15 +257,14 @@ BlackLenticularBracket:
   FullForm:
   arity: Unary
   affix: Matchfix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
 Blank:
   name: Blank
   actual-precedence: 980
-  Precedence: 730
-  Precedence-corrected: 730
+  precedence: 730
   WolframLanguageData: 5
   WolframLanguageData-corrected: 5
   UnicodeCharacters.tr:
@@ -288,15 +277,14 @@ Blank:
   FullForm: Blank[]
   arity: Nullary
   affix: None
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments: A Blank (_) with no accompanying decoration.
 
 BlankHead:
   name: Blank
   actual-precedence: 1010
-  Precedence: 730
-  Precedence-corrected: 730
+  precedence: 730
   WolframLanguageData: 5
   WolframLanguageData-corrected: 5
   UnicodeCharacters.tr:
@@ -309,15 +297,14 @@ BlankHead:
   FullForm: Blank[expr]
   arity: Unary
   affix: Prefix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
 BlankNullSequence:
   name: BlankNullSequence
   actual-precedence: 980
-  Precedence: 730
-  Precedence-corrected: 730
+  precedence: 730
   WolframLanguageData: 5
   WolframLanguageData-corrected: 5
   UnicodeCharacters.tr:
@@ -330,15 +317,14 @@ BlankNullSequence:
   FullForm: BlankNullSequence[]
   arity: Nullary
   affix: None
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments: A BlankNullSequence (___) with no accompanying decoration.
 
 BlankNullSequenceHead:
   name: BlankNullSequence
   actual-precedence: 1010
-  Precedence: 730
-  Precedence-corrected: 730
+  precedence: 730
   WolframLanguageData: 5
   WolframLanguageData-corrected: 5
   UnicodeCharacters.tr:
@@ -351,15 +337,14 @@ BlankNullSequenceHead:
   FullForm: BlankNullSequence[expr]
   arity: Unary
   affix: Prefix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
 BlankOptional:
   name: Blank
   actual-precedence: 980
-  Precedence: 730
-  Precedence-corrected: 730
+  precedence: 730
   WolframLanguageData: 5
   WolframLanguageData-corrected: 5
   UnicodeCharacters.tr:
@@ -372,15 +357,14 @@ BlankOptional:
   FullForm: Optional[Blank[]]
   arity: Nullary
   affix: None
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments: No name or head.
 
 BlankSequence:
   name: BlankSequence
   actual-precedence: 980
-  Precedence: 730
-  Precedence-corrected: 730
+  precedence: 730
   WolframLanguageData: 5
   WolframLanguageData-corrected: 5
   UnicodeCharacters.tr:
@@ -393,15 +377,14 @@ BlankSequence:
   FullForm: BlankSequence[]
   arity: Nullary
   affix: None
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments: A BlankNullSequence (__) with no accompanying decoration.
 
 BlankSequenceHead:
   name: BlankSequence
   actual-precedence: 1010
-  Precedence: 730
-  Precedence-corrected: 730
+  precedence: 730
   WolframLanguageData: 5
   WolframLanguageData-corrected: 5
   UnicodeCharacters.tr:
@@ -414,15 +397,15 @@ BlankSequenceHead:
   FullForm: BlankSequence[expr]
   arity: Unary
   affix: Prefix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
 BoxGroup:
   name: None
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr:
@@ -435,15 +418,15 @@ BoxGroup:
   FullForm: \(expr\)
   arity: Unary
   affix: Matchfix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments: The interpretation of this operator depends on context. It must contain box sublanguage.
 
 BracketingBar:
   name: BracketingBar
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr: -10
@@ -456,15 +439,14 @@ BracketingBar:
   FullForm: BracketingBar[expr, \[Ellipsis]]
   arity: n-ary
   affix: Matchfix
-  associativity: Non
+  associativity: null
   meaningful: false
   # comments:
 
 Cap:
   name: Cap
   actual-precedence: 450
-  Precedence: 350
-  Precedence-corrected: 350
+  precedence: 350
   WolframLanguageData: 43
   WolframLanguageData-corrected: 42.5
   UnicodeCharacters.tr: 470
@@ -477,15 +459,15 @@ Cap:
   FullForm: Cap[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 CapitalDifferentialD:
   name: CapitalDifferentialD
   actual-precedence: 720
-  Precedence: 550
-  Precedence-corrected: 560
+  Precedence-Function: 550
+  precedence: 560
   WolframLanguageData:
   WolframLanguageData-corrected: 23
   UnicodeCharacters.tr: 630
@@ -498,15 +480,15 @@ CapitalDifferentialD:
   FullForm: CapitalDifferentialD[x]
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: false
   # comments:
 
 Ceiling:
   name: Ceiling
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr: -10
@@ -519,15 +501,14 @@ Ceiling:
   FullForm: Ceiling[expr]
   arity: Unary
   affix: Matchfix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
 CenterDot:
   name: CenterDot
   actual-precedence: 510
-  Precedence: 410
-  Precedence-corrected: 410
+  precedence: 410
   WolframLanguageData:
   WolframLanguageData-corrected: 37
   UnicodeCharacters.tr: 530
@@ -540,15 +521,14 @@ CenterDot:
   FullForm: CenterDot[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 CircleDot:
   name: CircleDot
   actual-precedence: 660
-  Precedence: 520
-  Precedence-corrected: 520
+  precedence: 520
   WolframLanguageData: 26, 35, 37
   WolframLanguageData-corrected: 26
   UnicodeCharacters.tr: 605
@@ -561,15 +541,14 @@ CircleDot:
   FullForm: CircleDot[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 CircleMinus:
   name: CircleMinus
   actual-precedence: 430
-  Precedence: 330
-  Precedence-corrected: 330
+  precedence: 330
   WolframLanguageData: 44
   WolframLanguageData-corrected: 44
   UnicodeCharacters.tr: 450
@@ -582,15 +561,14 @@ CircleMinus:
   FullForm: CircleMinus[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Left
+  associativity: left
   meaningful: false
   # comments:
 
 CirclePlus:
   name: CirclePlus
   actual-precedence: 430
-  Precedence: 330
-  Precedence-corrected: 330
+  precedence: 330
   WolframLanguageData: 44
   WolframLanguageData-corrected: 44
   UnicodeCharacters.tr: 450
@@ -603,15 +581,14 @@ CirclePlus:
   FullForm: CirclePlus[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 CircleTimes:
   name: CircleTimes
   actual-precedence: 520
-  Precedence: 420
-  Precedence-corrected: 420
+  precedence: 420
   WolframLanguageData:
   WolframLanguageData-corrected: 36
   UnicodeCharacters.tr: 540
@@ -624,15 +601,15 @@ CircleTimes:
   FullForm: CircleTimes[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 ClockwiseContourIntegral:
   name: ClockwiseContourIntegral
   actual-precedence: 420
-  Precedence: 670
-  Precedence-corrected: 325
+  Precedence-Function: 670
+  precedence: 325
   WolframLanguageData:
   WolframLanguageData-corrected: 45
   UnicodeCharacters.tr: 455
@@ -645,15 +622,14 @@ ClockwiseContourIntegral:
   FullForm: Integrate[expr1, expr2]
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Usage and Parse may not be correct.
 
 Colon:
   name: Colon
   actual-precedence: 100
-  Precedence: 80
-  Precedence-corrected: 80
+  precedence: 80
   WolframLanguageData: 71
   WolframLanguageData-corrected: 71
   UnicodeCharacters.tr: 205
@@ -666,15 +642,15 @@ Colon:
   FullForm: Colon[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 Composition:
   name: Composition
   actual-precedence: 860
-  Precedence: 625
-  Precedence-corrected: 655
+  Precedence-Function: 625
+  precedence: 655
   WolframLanguageData: 13
   WolframLanguageData-corrected: 13
   UnicodeCharacters.tr:
@@ -687,15 +663,14 @@ Composition:
   FullForm: Composition[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
 CompoundExpression:
   name: CompoundExpression
   actual-precedence: 30
-  Precedence: 10
-  Precedence-corrected: 10
+  precedence: 10
   WolframLanguageData: 77
   WolframLanguageData-corrected: 77
   UnicodeCharacters.tr:
@@ -708,15 +683,14 @@ CompoundExpression:
   FullForm: CompoundExpression[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
 CompoundExpressionNull:
   name: CompoundExpression
   actual-precedence: 30
-  Precedence: 10
-  Precedence-corrected: 10
+  precedence: 10
   WolframLanguageData: 77
   WolframLanguageData-corrected: 77
   UnicodeCharacters.tr:
@@ -729,15 +703,14 @@ CompoundExpressionNull:
   FullForm: CompoundExpression[expr1, expr2, Null]
   arity: Unary
   affix: Postfix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments:
 
 Condition:
   name: Condition
   actual-precedence: 170
-  Precedence: 130
-  Precedence-corrected: 130
+  precedence: 130
   WolframLanguageData: 66
   WolframLanguageData-corrected: 66
   UnicodeCharacters.tr:
@@ -750,15 +723,14 @@ Condition:
   FullForm: Condition[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments:
 
 Conditioned:
   name: Conditioned
   actual-precedence: 240
-  Precedence: 195
-  Precedence-corrected: 195
+  precedence: 195
   WolframLanguageData:
   WolframLanguageData-corrected: 59.5
   UnicodeCharacters.tr: 305
@@ -771,15 +743,14 @@ Conditioned:
   FullForm: Conditioned[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
 Congruent:
   name: Congruent
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -792,15 +763,15 @@ Congruent:
   FullForm: Congruent[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 Conjugate:
   name: Conjugate
   actual-precedence: 780
-  Precedence: 670
-  Precedence-corrected: 605
+  Precedence-Function: 670
+  precedence: 605
   WolframLanguageData: 18
   WolframLanguageData-corrected: 18
   UnicodeCharacters.tr: 695
@@ -813,15 +784,15 @@ Conjugate:
   FullForm: Conjugate[expr]
   arity: Unary
   affix: Postfix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments:
 
 ConjugateTranspose:
   name: ConjugateTranspose
   actual-precedence: 780
-  Precedence: 670
-  Precedence-corrected: 605
+  Precedence-Function: 670
+  precedence: 605
   WolframLanguageData: 18
   WolframLanguageData-corrected: 18
   UnicodeCharacters.tr: 695
@@ -834,15 +805,15 @@ ConjugateTranspose:
   FullForm: ConjugateTranspose[expr]
   arity: Unary
   affix: Postfix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments:
 
 ContextPathSeparator:
   name: None
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr:
@@ -855,15 +826,14 @@ ContextPathSeparator:
   FullForm: symb1`symb2
   arity:
   affix:
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments: Functions as a decimal point: either contextpath1 or contextpath2 may be empty, but not both at the same time.
 
 ContinuedFractionK:
   name: ContinuedFractionK
   actual-precedence: 480
-  Precedence: 380
-  Precedence-corrected: 380
+  precedence: 380
   WolframLanguageData:
   WolframLanguageData-corrected: 40
   UnicodeCharacters.tr: 500
@@ -876,15 +846,15 @@ ContinuedFractionK:
   FullForm:
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Usage and Parse may not be correct.
 
 ContourIntegral:
   name: ContourIntegral
   actual-precedence: 420
-  Precedence: 670
-  Precedence-corrected: 325
+  Precedence-Function: 670
+  precedence: 325
   WolframLanguageData:
   WolframLanguageData-corrected: 45
   UnicodeCharacters.tr: 455
@@ -897,15 +867,14 @@ ContourIntegral:
   FullForm: Integrate[expr1, expr2]
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Usage and Parse may not be correct.
 
 Coproduct:
   name: Coproduct
   actual-precedence: 460
-  Precedence: 360
-  Precedence-corrected: 360
+  precedence: 360
   WolframLanguageData: 42
   WolframLanguageData-corrected: 42
   UnicodeCharacters.tr: 500
@@ -918,15 +887,15 @@ Coproduct:
   FullForm: Coproduct[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 CornerBracket:
   name: CornerBracket
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr: -10
@@ -939,15 +908,15 @@ CornerBracket:
   FullForm:
   arity: Unary
   affix: Matchfix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
 CounterClockwiseContourIntegral:
   name: CounterClockwiseContourIntegral
   actual-precedence: 420
-  Precedence: 670
-  Precedence-corrected: 325
+  Precedence-Function: 670
+  precedence: 325
   WolframLanguageData:
   WolframLanguageData-corrected: 45
   UnicodeCharacters.tr: 455
@@ -960,15 +929,14 @@ CounterClockwiseContourIntegral:
   FullForm: Integrate[expr1, expr2]
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Usage and Parse may not be correct.
 
 Cross:
   name: Cross
   actual-precedence: 640
-  Precedence: 500
-  Precedence-corrected: 500
+  precedence: 500
   WolframLanguageData: 28
   WolframLanguageData-corrected: 28
   UnicodeCharacters.tr: 603
@@ -981,15 +949,14 @@ Cross:
   FullForm: Cross[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
 Cup:
   name: Cup
   actual-precedence: 440
-  Precedence: 340
-  Precedence-corrected: 340
+  precedence: 340
   WolframLanguageData: 43
   WolframLanguageData-corrected: 43
   UnicodeCharacters.tr: 460
@@ -1002,15 +969,14 @@ Cup:
   FullForm: Cup[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 CupCap:
   name: CupCap
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -1023,15 +989,15 @@ CupCap:
   FullForm: CupCap[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 Curl:
   name: Curl
   actual-precedence: 590
-  Precedence: 670
-  Precedence-corrected: 485
+  Precedence-Function: 670
+  precedence: 485
   WolframLanguageData:
   WolframLanguageData-corrected: 29.8
   UnicodeCharacters.tr: 601
@@ -1044,15 +1010,15 @@ Curl:
   FullForm:
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Usage and Parse may not be correct.
 
 CurlyDoubleQuote:
   name: CurlyDoubleQuote
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr: -10
@@ -1065,15 +1031,15 @@ CurlyDoubleQuote:
   FullForm: CurlyDoubleQuote[expr]
   arity: Unary
   affix: Matchfix
-  associativity: Non
+  associativity: null
   meaningful: false
   # comments:
 
 CurlyQuote:
   name: CurlyQuote
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr: -10
@@ -1086,15 +1052,15 @@ CurlyQuote:
   FullForm: CurlyQuote[expr]
   arity: Unary
   affix: Matchfix
-  associativity: Non
+  associativity: null
   meaningful: false
   # comments:
 
 Decrement:
   name: Decrement
   actual-precedence: 880
-  Precedence: 660
-  Precedence-corrected: 665
+  Precedence-Function: 660
+  precedence: 665
   WolframLanguageData: 11
   WolframLanguageData-corrected: 11
   UnicodeCharacters.tr:
@@ -1107,15 +1073,14 @@ Decrement:
   FullForm: Decrement[expr]
   arity: Unary
   affix: Postfix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments:
 
 Del:
   name: Del
   actual-precedence: 710
-  Precedence: 550
-  Precedence-corrected: 550
+  precedence: 550
   WolframLanguageData: 24
   WolframLanguageData-corrected: 24
   UnicodeCharacters.tr: 620
@@ -1128,15 +1093,15 @@ Del:
   FullForm: Del[expr]
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: false
   # comments:
 
 Derivative:
   name: Derivative
   actual-precedence: 770
-  Precedence: 670
-  Precedence-corrected: 604
+  Precedence-Function: 670
+  precedence: 604
   WolframLanguageData: 19
   WolframLanguageData-corrected: 19
   UnicodeCharacters.tr:
@@ -1149,15 +1114,14 @@ Derivative:
   FullForm: Derivative[n][expr]
   arity: Unary
   affix: Postfix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments:
 
 Diamond:
   name: Diamond
   actual-precedence: 550
-  Precedence: 450
-  Precedence-corrected: 450
+  precedence: 450
   WolframLanguageData: 33
   WolframLanguageData-corrected: 33
   UnicodeCharacters.tr: 570
@@ -1170,15 +1134,14 @@ Diamond:
   FullForm: Diamond[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 DifferenceDelta:
   name: DifferenceDelta
   actual-precedence: 710
-  Precedence: 550
-  Precedence-corrected: 550
+  precedence: 550
   WolframLanguageData: 24
   WolframLanguageData-corrected: 24
   UnicodeCharacters.tr: 620
@@ -1191,15 +1154,15 @@ DifferenceDelta:
   FullForm:
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Usage and Parse may not be correct.
 
 DifferentialD:
   name: DifferentialD
   actual-precedence: 720
-  Precedence: 550
-  Precedence-corrected: 560
+  Precedence-Function: 550
+  precedence: 560
   WolframLanguageData:
   WolframLanguageData-corrected: 23
   UnicodeCharacters.tr: 630
@@ -1212,15 +1175,14 @@ DifferentialD:
   FullForm: DifferentialD[x]
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: false
   # comments:
 
 DirectedEdge:
   name: DirectedEdge
   actual-precedence: 370
-  Precedence: 295
-  Precedence-corrected: 295
+  precedence: 295
   WolframLanguageData:
   WolframLanguageData-corrected: 49.0
   UnicodeCharacters.tr: 395
@@ -1233,15 +1195,14 @@ DirectedEdge:
   FullForm: DirectedEdge[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
 DiscreteRatio:
   name: DiscreteRatio
   actual-precedence: 710
-  Precedence: 550
-  Precedence-corrected: 550
+  precedence: 550
   WolframLanguageData: 24
   WolframLanguageData-corrected: 24
   UnicodeCharacters.tr: 620
@@ -1254,15 +1215,14 @@ DiscreteRatio:
   FullForm:
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Usage and Parse may not be correct.
 
 DiscreteShift:
   name: DiscreteShift
   actual-precedence: 710
-  Precedence: 550
-  Precedence-corrected: 550
+  precedence: 550
   WolframLanguageData: 24
   WolframLanguageData-corrected: 24
   UnicodeCharacters.tr: 620
@@ -1275,15 +1235,14 @@ DiscreteShift:
   FullForm:
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Usage and Parse may not be correct.
 
 Distributed:
   name: Distributed
   actual-precedence: 320
-  Precedence: 250
-  Precedence-corrected: 250
+  precedence: 250
   WolframLanguageData:
   WolframLanguageData-corrected: 52
   UnicodeCharacters.tr: 360
@@ -1296,15 +1255,15 @@ Distributed:
   FullForm: Distributed[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
 Divergence:
   name: Divergence
   actual-precedence: 590
-  Precedence: 550
-  Precedence-corrected: 485
+  Precedence-Function: 550
+  precedence: 485
   WolframLanguageData:
   WolframLanguageData-corrected: 29.8
   UnicodeCharacters.tr: 601
@@ -1317,15 +1276,14 @@ Divergence:
   FullForm:
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Usage and Parse may not be correct.
 
 Divide:
   name: Divide
   actual-precedence: 570
-  Precedence: 470
-  Precedence-corrected: 470
+  precedence: 470
   WolframLanguageData: 31
   WolframLanguageData-corrected: 31
   UnicodeCharacters.tr: 590
@@ -1338,15 +1296,14 @@ Divide:
   FullForm: Times[expr1, Power[expr2, -1]]
   arity: Binary
   affix: Infix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments:
 
 DivideBy:
   name: DivideBy
   actual-precedence: 120
-  Precedence: 100
-  Precedence-corrected: 100
+  precedence: 100
   WolframLanguageData: 69
   WolframLanguageData-corrected: 69
   UnicodeCharacters.tr:
@@ -1359,15 +1316,15 @@ DivideBy:
   FullForm: DivideBy[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
 Divides:
   name: Divides
   actual-precedence: 570
-  Precedence: 670
-  Precedence-corrected: 470
+  Precedence-Function: 670
+  precedence: 470
   WolframLanguageData:
   WolframLanguageData-corrected: 31
   UnicodeCharacters.tr: 590
@@ -1380,15 +1337,14 @@ Divides:
   FullForm: Divisible[expr2, expr1]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
 Dot:
   name: Dot
   actual-precedence: 630
-  Precedence: 490
-  Precedence-corrected: 490
+  precedence: 490
   WolframLanguageData: 29
   WolframLanguageData-corrected: 29
   UnicodeCharacters.tr:
@@ -1401,15 +1357,14 @@ Dot:
   FullForm: Dot[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
 DotEqual:
   name: DotEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -1422,15 +1377,15 @@ DotEqual:
   FullForm: DotEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 DoubleAngleBracket:
   name: DoubleAngleBracket
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr: -10
@@ -1443,15 +1398,15 @@ DoubleAngleBracket:
   FullForm:
   arity: Unary
   affix: Matchfix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
 DoubleBracketingBar:
   name: DoubleBracketingBar
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr: -10
@@ -1464,15 +1419,15 @@ DoubleBracketingBar:
   FullForm: DoubleBracketingBar[expr, \[Ellipsis]]
   arity: n-ary
   affix: Matchfix
-  associativity: Non
+  associativity: null
   meaningful: false
   # comments:
 
 DoubleContourIntegral:
   name: DoubleContourIntegral
   actual-precedence: 420
-  Precedence: 670
-  Precedence-corrected: 325
+  Precedence-Function: 670
+  precedence: 325
   WolframLanguageData:
   WolframLanguageData-corrected: 45
   UnicodeCharacters.tr: 455
@@ -1485,15 +1440,14 @@ DoubleContourIntegral:
   FullForm: Integrate[expr1, expr2]
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Usage and Parse may not be correct.
 
 DoubleDownArrow:
   name: DoubleDownArrow
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -1506,15 +1460,14 @@ DoubleDownArrow:
   FullForm: DoubleDownArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 DoubleLeftArrow:
   name: DoubleLeftArrow
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -1527,15 +1480,14 @@ DoubleLeftArrow:
   FullForm: DoubleLeftArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 DoubleLeftRightArrow:
   name: DoubleLeftRightArrow
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -1548,15 +1500,14 @@ DoubleLeftRightArrow:
   FullForm: DoubleLeftRightArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 DoubleLeftTee:
   name: DoubleLeftTee
   actual-precedence: 220
-  Precedence: 190
-  Precedence-corrected: 190
+  precedence: 190
   WolframLanguageData: 60
   WolframLanguageData-corrected: 60
   UnicodeCharacters.tr: 300
@@ -1569,15 +1520,14 @@ DoubleLeftTee:
   FullForm: DoubleLeftTee[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Left
+  associativity: left
   meaningful: false
   # comments:
 
 DoubleLongLeftArrow:
   name: DoubleLongLeftArrow
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -1590,15 +1540,14 @@ DoubleLongLeftArrow:
   FullForm: DoubleLongLeftArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 DoubleLongLeftRightArrow:
   name: DoubleLongLeftRightArrow
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -1611,15 +1560,14 @@ DoubleLongLeftRightArrow:
   FullForm: DoubleLongLeftRightArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 DoubleLongRightArrow:
   name: DoubleLongRightArrow
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -1632,15 +1580,14 @@ DoubleLongRightArrow:
   FullForm: DoubleLongRightArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 DoubleRightArrow:
   name: DoubleRightArrow
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -1653,15 +1600,14 @@ DoubleRightArrow:
   FullForm: DoubleRightArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 DoubleRightTee:
   name: DoubleRightTee
   actual-precedence: 230
-  Precedence: 190
-  Precedence-corrected: 190
+  precedence: 190
   WolframLanguageData:
   WolframLanguageData-corrected: 59.6
   UnicodeCharacters.tr: 300
@@ -1674,15 +1620,14 @@ DoubleRightTee:
   FullForm: DoubleRightTee[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: false
   # comments:
 
 DoubleUpArrow:
   name: DoubleUpArrow
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -1695,15 +1640,14 @@ DoubleUpArrow:
   FullForm: DoubleUpArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 DoubleUpDownArrow:
   name: DoubleUpDownArrow
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -1716,15 +1660,14 @@ DoubleUpDownArrow:
   FullForm: DoubleUpDownArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 DoubleVerticalBar:
   name: DoubleVerticalBar
   actual-precedence: 350
-  Precedence: 280
-  Precedence-corrected: 280
+  precedence: 280
   WolframLanguageData: 50
   WolframLanguageData-corrected: 50.5
   UnicodeCharacters.tr: 390
@@ -1737,15 +1680,14 @@ DoubleVerticalBar:
   FullForm: DoubleVerticalBar[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 DownArrow:
   name: DownArrow
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -1758,15 +1700,14 @@ DownArrow:
   FullForm: DownArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 DownArrowBar:
   name: DownArrowBar
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -1779,15 +1720,14 @@ DownArrowBar:
   FullForm: DownArrowBar[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 DownArrowUpArrow:
   name: DownArrowUpArrow
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -1800,15 +1740,14 @@ DownArrowUpArrow:
   FullForm: DownArrowUpArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 DownLeftRightVector:
   name: DownLeftRightVector
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -1821,15 +1760,14 @@ DownLeftRightVector:
   FullForm: DownLeftRightVector[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 DownLeftTeeVector:
   name: DownLeftTeeVector
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -1842,15 +1780,14 @@ DownLeftTeeVector:
   FullForm: DownLeftTeeVector[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 DownLeftVector:
   name: DownLeftVector
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -1863,15 +1800,14 @@ DownLeftVector:
   FullForm: DownLeftVector[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 DownLeftVectorBar:
   name: DownLeftVectorBar
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -1884,15 +1820,14 @@ DownLeftVectorBar:
   FullForm: DownLeftVectorBar[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 DownRightTeeVector:
   name: DownRightTeeVector
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -1905,15 +1840,14 @@ DownRightTeeVector:
   FullForm: DownRightTeeVector[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 DownRightVector:
   name: DownRightVector
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -1926,15 +1860,14 @@ DownRightVector:
   FullForm: DownRightVector[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 DownRightVectorBar:
   name: DownRightVectorBar
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -1947,15 +1880,14 @@ DownRightVectorBar:
   FullForm: DownRightVectorBar[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 DownTee:
   name: DownTee
   actual-precedence: 220
-  Precedence: 190
-  Precedence-corrected: 190
+  precedence: 190
   WolframLanguageData: 60
   WolframLanguageData-corrected: 60
   UnicodeCharacters.tr: 300
@@ -1968,15 +1900,14 @@ DownTee:
   FullForm: DownTee[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Left
+  associativity: left
   meaningful: false
   # comments:
 
 DownTeeArrow:
   name: DownTeeArrow
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -1989,15 +1920,14 @@ DownTeeArrow:
   FullForm: DownTeeArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 Element:
   name: Element
   actual-precedence: 320
-  Precedence: 250
-  Precedence-corrected: 250
+  precedence: 250
   WolframLanguageData: 52
   WolframLanguageData-corrected: 52
   UnicodeCharacters.tr: 360
@@ -2010,15 +1940,14 @@ Element:
   FullForm: Element[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
 Equal:
   name: Equal
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData: 50
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -2031,15 +1960,14 @@ Equal:
   FullForm: Equal[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
 EqualTilde:
   name: EqualTilde
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -2052,15 +1980,14 @@ EqualTilde:
   FullForm: EqualTilde[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 Equilibrium:
   name: Equilibrium
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -2073,15 +2000,14 @@ Equilibrium:
   FullForm: Equilibrium[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 Equivalent:
   name: Equivalent
   actual-precedence: 260
-  Precedence: 205
-  Precedence-corrected: 205
+  precedence: 205
   WolframLanguageData: 58
   WolframLanguageData-corrected: 58
   UnicodeCharacters.tr: 315
@@ -2094,15 +2020,14 @@ Equivalent:
   FullForm: Equivalent[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
 Exists:
   name: Exists
   actual-precedence: 310
-  Precedence: 240
-  Precedence-corrected: 240
+  precedence: 240
   WolframLanguageData: 53
   WolframLanguageData-corrected: 53
   UnicodeCharacters.tr: 350
@@ -2115,15 +2040,14 @@ Exists:
   FullForm:
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Usage and Parse may not be correct.
 
 ExpectationE:
   name: ExpectationE
   actual-precedence: 420
-  Precedence: 325
-  Precedence-corrected: 325
+  precedence: 325
   WolframLanguageData:
   WolframLanguageData-corrected: 45
   UnicodeCharacters.tr: 455
@@ -2136,15 +2060,14 @@ ExpectationE:
   FullForm:
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Usage and Parse may not be correct.
 
 Factorial:
   name: Factorial
   actual-precedence: 790
-  Precedence: 610
-  Precedence-corrected: 610
+  precedence: 610
   WolframLanguageData: 17
   WolframLanguageData-corrected: 17
   UnicodeCharacters.tr:
@@ -2157,15 +2080,14 @@ Factorial:
   FullForm: Factorial[expr]
   arity: Unary
   affix: Postfix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments:
 
 Factorial2:
   name: Factorial2
   actual-precedence: 790
-  Precedence: 610
-  Precedence-corrected: 610
+  precedence: 610
   WolframLanguageData: 17
   WolframLanguageData-corrected: 17
   UnicodeCharacters.tr:
@@ -2178,15 +2100,15 @@ Factorial2:
   FullForm: Factorial2[expr]
   arity: Unary
   affix: Postfix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments:
 
 Floor:
   name: Floor
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr: -10
@@ -2199,15 +2121,14 @@ Floor:
   FullForm: Floor[expr]
   arity: Unary
   affix: Matchfix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
 ForAll:
   name: ForAll
   actual-precedence: 310
-  Precedence: 240
-  Precedence-corrected: 240
+  precedence: 240
   WolframLanguageData: 53
   WolframLanguageData-corrected: 53
   UnicodeCharacters.tr: 350
@@ -2220,15 +2141,15 @@ ForAll:
   FullForm:
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Usage and Parse may not be correct.
 
 FormBox:
   name: FormBox
   actual-precedence: 20
-  Precedence: 670
-  Precedence-corrected: 5
+  Precedence-Function: 670
+  precedence: 5
   WolframLanguageData: 78
   WolframLanguageData-corrected: 78
   UnicodeCharacters.tr:
@@ -2241,15 +2162,15 @@ FormBox:
   FullForm:
   arity: Binary
   affix: Infix
-  associativity: Missing["Unknown"]
+  associativity: missing["unknown"]
   meaningful: true
   # comments:
 
 FractionBox:
   name: FractionBox
   actual-precedence: 570
-  Precedence: 670
-  Precedence-corrected: 470
+  Precedence-Function: 670
+  precedence: 470
   WolframLanguageData:
   WolframLanguageData-corrected: 31
   UnicodeCharacters.tr:
@@ -2262,15 +2183,15 @@ FractionBox:
   FullForm:
   arity: Binary
   affix: Infix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments:
 
 FullwidthAngleBracket:
   name: FullwidthAngleBracket
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr: -10
@@ -2283,15 +2204,15 @@ FullwidthAngleBracket:
   FullForm:
   arity: Unary
   affix: Matchfix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
 FullwidthCurlyBracket:
   name: FullwidthCurlyBracket
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr: -10
@@ -2304,15 +2225,15 @@ FullwidthCurlyBracket:
   FullForm:
   arity: Unary
   affix: Matchfix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
 FullwidthParenthesis:
   name: FullwidthParenthesis
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr: -10
@@ -2325,15 +2246,15 @@ FullwidthParenthesis:
   FullForm:
   arity: Unary
   affix: Matchfix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
 FullwidthSquareBracket:
   name: FullwidthSquareBracket
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr: -10
@@ -2346,15 +2267,14 @@ FullwidthSquareBracket:
   FullForm:
   arity: Unary
   affix: Matchfix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
 Function:
   name: Function
   actual-precedence: 110
-  Precedence: 90
-  Precedence-corrected: 90
+  precedence: 90
   WolframLanguageData: 70
   WolframLanguageData-corrected: 70
   UnicodeCharacters.tr:
@@ -2367,15 +2287,14 @@ Function:
   FullForm: Function[expr]
   arity: Unary
   affix: Postfix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments:
 
 FunctionApply:
   name: None
   actual-precedence: 890
-  Precedence: 670
-  Precedence-corrected: 670
+  precedence: 670
   WolframLanguageData:
   WolframLanguageData-corrected: 10
   UnicodeCharacters.tr:
@@ -2388,15 +2307,14 @@ FunctionApply:
   FullForm: expr1[expr2, \[Ellipsis]]
   arity: n-ary
   affix: Postfix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments:
 
 FunctionApplyInfix:
   name: Infix
   actual-precedence: 830
-  Precedence: 630
-  Precedence-corrected: 630
+  precedence: 630
   WolframLanguageData:
   WolframLanguageData-corrected: 15
   UnicodeCharacters.tr:
@@ -2409,15 +2327,14 @@ FunctionApplyInfix:
   FullForm: expr2[expr1, expr3]
   arity: Ternary
   affix: Infix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments: Infix[f[x,y]] will display as x~f~y. Precedence identifies Infix with this operator, and Precedence[Infix]==30 which is almost correct.
 
 FunctionApplyPostfix:
   name: Postfix
   actual-precedence: 90
-  Precedence: 70
-  Precedence-corrected: 70
+  precedence: 70
   WolframLanguageData:
   WolframLanguageData-corrected: 72
   UnicodeCharacters.tr:
@@ -2430,15 +2347,14 @@ FunctionApplyPostfix:
   FullForm: expr2[expr1]
   arity: Binary
   affix: Infix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments: Postfix[f[x]] will display as x//f. Precedence identifies Postfix with this operator.
 
 FunctionApplyPrefix:
   name: Prefix
   actual-precedence: 840
-  Precedence: 640
-  Precedence-corrected: 640
+  precedence: 640
   WolframLanguageData:
   WolframLanguageData-corrected: 14
   UnicodeCharacters.tr: 730
@@ -2451,15 +2367,14 @@ FunctionApplyPrefix:
   FullForm: expr1[expr2]
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Operator Notations includes usages with invisible unicode characters.
 
 Get:
   name: Get
   actual-precedence: 970
-  Precedence: 720
-  Precedence-corrected: 720
+  precedence: 720
   WolframLanguageData: 6
   WolframLanguageData-corrected: 6
   UnicodeCharacters.tr:
@@ -2472,15 +2387,15 @@ Get:
   FullForm: Get["filename"]
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
 Gradient:
   name: Gradient
   actual-precedence: 700
-  Precedence: 550
-  Precedence-corrected: 545
+  Precedence-Function: 550
+  precedence: 545
   WolframLanguageData:
   WolframLanguageData-corrected: 24
   UnicodeCharacters.tr: 615
@@ -2493,15 +2408,14 @@ Gradient:
   FullForm:
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Usage and Parse may not be correct.
 
 Greater:
   name: Greater
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData: 50
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr:
@@ -2514,15 +2428,14 @@ Greater:
   FullForm: Greater[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
 GreaterEqual:
   name: GreaterEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData: 50
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -2535,15 +2448,14 @@ GreaterEqual:
   FullForm: GreaterEqual[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
 GreaterEqualLess:
   name: GreaterEqualLess
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -2556,15 +2468,14 @@ GreaterEqualLess:
   FullForm: GreaterEqualLess[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 GreaterFullEqual:
   name: GreaterFullEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -2577,15 +2488,14 @@ GreaterFullEqual:
   FullForm: GreaterFullEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 GreaterGreater:
   name: GreaterGreater
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -2598,15 +2508,14 @@ GreaterGreater:
   FullForm: GreaterGreater[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 GreaterLess:
   name: GreaterLess
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -2619,15 +2528,15 @@ GreaterLess:
   FullForm: GreaterLess[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 GreaterSlantEqual:
   name: GreaterSlantEqual
   actual-precedence: 360
-  Precedence: 670
-  Precedence-corrected: 290
+  Precedence-Function: 670
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -2640,15 +2549,14 @@ GreaterSlantEqual:
   FullForm: GreaterEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 GreaterTilde:
   name: GreaterTilde
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -2661,15 +2569,14 @@ GreaterTilde:
   FullForm: GreaterTilde[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 HumpDownHump:
   name: HumpDownHump
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -2682,15 +2589,14 @@ HumpDownHump:
   FullForm: HumpDownHump[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 HumpEqual:
   name: HumpEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -2703,15 +2609,15 @@ HumpEqual:
   FullForm: HumpEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 ImplicitSequence:
   name: Comma
   actual-precedence: 10
-  Precedence: 670
-  Precedence-corrected: 755
+  Precedence-Function: 670
+  precedence: 755
   WolframLanguageData:
   WolframLanguageData-corrected: 79
   UnicodeCharacters.tr: 1
@@ -2724,15 +2630,14 @@ ImplicitSequence:
   FullForm: expr1, expr2
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments: Operator Notations includes usages with invisible unicode characters.
 
 Implies:
   name: Implies
   actual-precedence: 250
-  Precedence: 200
-  Precedence-corrected: 200
+  precedence: 200
   WolframLanguageData: 59
   WolframLanguageData-corrected: 59
   UnicodeCharacters.tr: 310
@@ -2745,15 +2650,15 @@ Implies:
   FullForm: Implies[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
 Increment:
   name: Increment
   actual-precedence: 880
-  Precedence: 660
-  Precedence-corrected: 665
+  Precedence-Function: 660
+  precedence: 665
   WolframLanguageData: 11
   WolframLanguageData-corrected: 11
   UnicodeCharacters.tr:
@@ -2766,15 +2671,15 @@ Increment:
   FullForm: Increment[expr]
   arity: Unary
   affix: Postfix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments:
 
 InlinePart:
   name: InlinePart
   actual-precedence: 900
-  Precedence: 670
-  Precedence-corrected: 675
+  Precedence-Function: 670
+  precedence: 675
   WolframLanguageData:
   WolframLanguageData-corrected: 9.5
   UnicodeCharacters.tr: 763
@@ -2787,15 +2692,14 @@ InlinePart:
   FullForm: RowBox[List[expr1, InlinePart, expr2]]
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: false
   # comments: "InlinePart or @> was an operator that was introduced in one of the pre-release/betas for version 10 and subsequently removed before public release. It was briefly available publicly in the Raspberry Pi version of Wolfram Language that co-existed with the pre-releases at the time. The operator allowed you to access elements of a list with an infix operator." https://mathematica.stackexchange.com/questions/134506/inlinepart-what-is-it-and-what-happened-to-it
 
 Integrate:
   name: Integral
   actual-precedence: 420
-  Precedence: 325
-  Precedence-corrected: 325
+  precedence: 325
   WolframLanguageData: 23
   WolframLanguageData-corrected: 45
   UnicodeCharacters.tr: 455
@@ -2808,15 +2712,15 @@ Integrate:
   FullForm: Integrate[expr1, expr2]
   arity: Binary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
 InterpretBoxes:
   name: None
   actual-precedence: 930
-  Precedence: 670
-  Precedence-corrected: 695
+  Precedence-Function: 670
+  precedence: 695
   WolframLanguageData:
   WolframLanguageData-corrected: 7.6
   UnicodeCharacters.tr:
@@ -2829,15 +2733,14 @@ InterpretBoxes:
   FullForm:
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
 Intersection:
   name: Intersection
   actual-precedence: 390
-  Precedence: 305
-  Precedence-corrected: 305
+  precedence: 305
   WolframLanguageData: 47
   WolframLanguageData-corrected: 47
   UnicodeCharacters.tr: 420
@@ -2850,15 +2753,15 @@ Intersection:
   FullForm: Intersection[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
 InvisiblePostfixScriptBase:
   name: InvisiblePostfixScriptBase
   actual-precedence: 960
-  Precedence: 670
-  Precedence-corrected: 715
+  Precedence-Function: 670
+  precedence: 715
   WolframLanguageData:
   WolframLanguageData-corrected: 6.5
   UnicodeCharacters.tr: 800
@@ -2871,15 +2774,15 @@ InvisiblePostfixScriptBase:
   FullForm:
   arity: Unary
   affix: Postfix
-  associativity: Left
+  associativity: left
   meaningful: false
   # comments: This operator is an invisible Unicode character and is used in the layout of displayed expressions.
 
 InvisiblePrefixScriptBase:
   name: InvisiblePrefixScriptBase
   actual-precedence: 960
-  Precedence: 670
-  Precedence-corrected: 715
+  Precedence-Function: 670
+  precedence: 715
   WolframLanguageData:
   WolframLanguageData-corrected: 6.5
   UnicodeCharacters.tr: 800
@@ -2892,15 +2795,15 @@ InvisiblePrefixScriptBase:
   FullForm:
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: false
   # comments: Usage and Parse may not be correct.
 
 Laplacian:
   name: Laplacian
   actual-precedence: 710
-  Precedence: 670
-  Precedence-corrected: 550
+  Precedence-Function: 670
+  precedence: 550
   WolframLanguageData:
   WolframLanguageData-corrected: 24
   UnicodeCharacters.tr: 620
@@ -2913,15 +2816,14 @@ Laplacian:
   FullForm:
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Usage and Parse may not be correct.
 
 LeftArrow:
   name: LeftArrow
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -2934,15 +2836,14 @@ LeftArrow:
   FullForm: LeftArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 LeftArrowBar:
   name: LeftArrowBar
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -2955,15 +2856,14 @@ LeftArrowBar:
   FullForm: LeftArrowBar[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 LeftArrowRightArrow:
   name: LeftArrowRightArrow
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -2976,15 +2876,14 @@ LeftArrowRightArrow:
   FullForm: LeftArrowRightArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 LeftDownTeeVector:
   name: LeftDownTeeVector
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -2997,15 +2896,14 @@ LeftDownTeeVector:
   FullForm: LeftDownTeeVector[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 LeftDownVector:
   name: LeftDownVector
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -3018,15 +2916,14 @@ LeftDownVector:
   FullForm: LeftDownVector[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 LeftDownVectorBar:
   name: LeftDownVectorBar
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -3039,15 +2936,14 @@ LeftDownVectorBar:
   FullForm: LeftDownVectorBar[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 LeftRightArrow:
   name: LeftRightArrow
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -3060,15 +2956,14 @@ LeftRightArrow:
   FullForm: LeftRightArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 LeftRightVector:
   name: LeftRightVector
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -3081,15 +2976,14 @@ LeftRightVector:
   FullForm: LeftRightVector[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 LeftTee:
   name: LeftTee
   actual-precedence: 220
-  Precedence: 190
-  Precedence-corrected: 190
+  precedence: 190
   WolframLanguageData: 60
   WolframLanguageData-corrected: 60
   UnicodeCharacters.tr: 300
@@ -3102,15 +2996,14 @@ LeftTee:
   FullForm: LeftTee[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Left
+  associativity: left
   meaningful: false
   # comments:
 
 LeftTeeArrow:
   name: LeftTeeArrow
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -3123,15 +3016,14 @@ LeftTeeArrow:
   FullForm: LeftTeeArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 LeftTeeVector:
   name: LeftTeeVector
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -3144,15 +3036,14 @@ LeftTeeVector:
   FullForm: LeftTeeVector[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 LeftTriangle:
   name: LeftTriangle
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -3165,15 +3056,14 @@ LeftTriangle:
   FullForm: LeftTriangle[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 LeftTriangleBar:
   name: LeftTriangleBar
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -3186,15 +3076,14 @@ LeftTriangleBar:
   FullForm: LeftTriangleBar[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 LeftTriangleEqual:
   name: LeftTriangleEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -3207,15 +3096,14 @@ LeftTriangleEqual:
   FullForm: LeftTriangleEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 LeftUpDownVector:
   name: LeftUpDownVector
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -3228,15 +3116,14 @@ LeftUpDownVector:
   FullForm: LeftUpDownVector[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 LeftUpTeeVector:
   name: LeftUpTeeVector
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -3249,15 +3136,14 @@ LeftUpTeeVector:
   FullForm: LeftUpTeeVector[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 LeftUpVector:
   name: LeftUpVector
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -3270,15 +3156,14 @@ LeftUpVector:
   FullForm: LeftUpVector[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 LeftUpVectorBar:
   name: LeftUpVectorBar
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -3291,15 +3176,14 @@ LeftUpVectorBar:
   FullForm: LeftUpVectorBar[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 LeftVector:
   name: LeftVector
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -3312,15 +3196,14 @@ LeftVector:
   FullForm: LeftVector[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 LeftVectorBar:
   name: LeftVectorBar
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -3333,15 +3216,14 @@ LeftVectorBar:
   FullForm: LeftVectorBar[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 Less:
   name: Less
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData: 50
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr:
@@ -3354,15 +3236,14 @@ Less:
   FullForm: Less[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
 LessEqual:
   name: LessEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData: 50
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -3375,15 +3256,14 @@ LessEqual:
   FullForm: LessEqual[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
 LessEqualGreater:
   name: LessEqualGreater
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -3396,15 +3276,14 @@ LessEqualGreater:
   FullForm: LessEqualGreater[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 LessFullEqual:
   name: LessFullEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -3417,15 +3296,14 @@ LessFullEqual:
   FullForm: LessFullEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 LessGreater:
   name: LessGreater
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -3438,15 +3316,14 @@ LessGreater:
   FullForm: LessGreater[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 LessLess:
   name: LessLess
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -3459,15 +3336,15 @@ LessLess:
   FullForm: LessLess[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 LessSlantEqual:
   name: LessSlantEqual
   actual-precedence: 360
-  Precedence: 670
-  Precedence-corrected: 290
+  Precedence-Function: 670
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -3480,15 +3357,14 @@ LessSlantEqual:
   FullForm: LessEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 LessTilde:
   name: LessTilde
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -3501,15 +3377,14 @@ LessTilde:
   FullForm: LessTilde[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 Limit:
   name: Limit
   actual-precedence: 410
-  Precedence: 320
-  Precedence-corrected: 320
+  precedence: 320
   WolframLanguageData:
   WolframLanguageData-corrected: 45.5
   UnicodeCharacters.tr: 440
@@ -3522,15 +3397,15 @@ Limit:
   FullForm:
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Usage and Parse may not be correct.
 
 List:
   name: List
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData: 1
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr:
@@ -3543,15 +3418,14 @@ List:
   FullForm: List[expr, \[Ellipsis]]
   arity: n-ary
   affix: Matchfix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
 LongLeftArrow:
   name: LongLeftArrow
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -3564,15 +3438,14 @@ LongLeftArrow:
   FullForm: LongLeftArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 LongLeftRightArrow:
   name: LongLeftRightArrow
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -3585,15 +3458,14 @@ LongLeftRightArrow:
   FullForm: LongLeftRightArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 LongRightArrow:
   name: LongRightArrow
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -3606,15 +3478,14 @@ LongRightArrow:
   FullForm: LongRightArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 LowerLeftArrow:
   name: LowerLeftArrow
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -3627,15 +3498,14 @@ LowerLeftArrow:
   FullForm: LowerLeftArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 LowerRightArrow:
   name: LowerRightArrow
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -3648,15 +3518,14 @@ LowerRightArrow:
   FullForm: LowerRightArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 Map:
   name: Map
   actual-precedence: 800
-  Precedence: 620
-  Precedence-corrected: 620
+  precedence: 620
   WolframLanguageData: 16
   WolframLanguageData-corrected: 16
   UnicodeCharacters.tr:
@@ -3669,15 +3538,14 @@ Map:
   FullForm: Map[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
 MapAll:
   name: MapAll
   actual-precedence: 800
-  Precedence: 620
-  Precedence-corrected: 620
+  precedence: 620
   WolframLanguageData: 16
   WolframLanguageData-corrected: 16
   UnicodeCharacters.tr:
@@ -3690,15 +3558,35 @@ MapAll:
   FullForm: MapAll[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
+  meaningful: true
+  # comments:
+
+MapApply:
+  name: MapApply
+  actual-precedence: 810
+  Precedence-Function: 620
+  precedence: 625
+  WolframLanguageData: 16
+  WolframLanguageData-corrected: 16
+  UnicodeCharacters.tr:
+  UnicodeCharacters-corrected.tr: 710
+  # N-tokens: {}
+  # L-tokens: {"@@@"}
+  # O-tokens: {}
+  # usage: {{"expr1", "@@@", "expr2"}}
+  # parse: {"Apply", "[", "expr1", ",", "expr2", "{", "1", "}", "]"}
+  FullForm: MapApply[expr1, expr2, List[1]]
+  arity: Binary
+  affix: Infix
+  associativity: right
   meaningful: true
   # comments:
 
 MaxLimit:
   name: MaxLimit
   actual-precedence: 410
-  Precedence: 320
-  Precedence-corrected: 320
+  precedence: 320
   WolframLanguageData:
   WolframLanguageData-corrected: 45.5
   UnicodeCharacters.tr: 440
@@ -3711,15 +3599,14 @@ MaxLimit:
   FullForm:
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Usage and Parse may not be correct.
 
 MessageName:
   name: MessageName
   actual-precedence: 1060
-  Precedence: 750
-  Precedence-corrected: 750
+  precedence: 750
   WolframLanguageData: 2
   WolframLanguageData-corrected: 2
   UnicodeCharacters.tr:
@@ -3732,15 +3619,14 @@ MessageName:
   FullForm: MessageName[expr, "string"]
   arity: Binary
   affix: Infix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
 MinLimit:
   name: MinLimit
   actual-precedence: 410
-  Precedence: 320
-  Precedence-corrected: 320
+  precedence: 320
   WolframLanguageData:
   WolframLanguageData-corrected: 45.5
   UnicodeCharacters.tr: 440
@@ -3753,15 +3639,14 @@ MinLimit:
   FullForm:
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Usage and Parse may not be correct.
 
 Minus:
   name: Minus
   actual-precedence: 580
-  Precedence: 480
-  Precedence-corrected: 480
+  precedence: 480
   WolframLanguageData: 30
   WolframLanguageData-corrected: 30
   UnicodeCharacters.tr: 430
@@ -3774,15 +3659,14 @@ Minus:
   FullForm: Times[-1, expr]
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Operator Notations includes usages with invisible unicode characters.
 
 MinusPlus:
   name: MinusPlus
   actual-precedence: 400
-  Precedence: 310
-  Precedence-corrected: 310
+  precedence: 310
   WolframLanguageData: 46
   WolframLanguageData-corrected: 46
   UnicodeCharacters.tr: 430
@@ -3795,15 +3679,14 @@ MinusPlus:
   FullForm: MinusPlus[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Left
+  associativity: left
   meaningful: false
   # comments:
 
 NamedBlank:
   name: Blank
   actual-precedence: 990
-  Precedence: 730
-  Precedence-corrected: 730
+  precedence: 730
   WolframLanguageData: 5
   WolframLanguageData-corrected: 5
   UnicodeCharacters.tr:
@@ -3816,15 +3699,14 @@ NamedBlank:
   FullForm: Pattern[symb, Blank[]]
   arity: Unary
   affix: Postfix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
 NamedBlankHead:
   name: Blank
   actual-precedence: 1000
-  Precedence: 730
-  Precedence-corrected: 730
+  precedence: 730
   WolframLanguageData: 5
   WolframLanguageData-corrected: 5
   UnicodeCharacters.tr:
@@ -3837,15 +3719,14 @@ NamedBlankHead:
   FullForm: Pattern[symb, Blank[expr]]
   arity: Binary
   affix: Infix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
 NamedBlankNullSequence:
   name: BlankNullSequence
   actual-precedence: 990
-  Precedence: 730
-  Precedence-corrected: 730
+  precedence: 730
   WolframLanguageData: 5
   WolframLanguageData-corrected: 5
   UnicodeCharacters.tr:
@@ -3858,15 +3739,14 @@ NamedBlankNullSequence:
   FullForm: Pattern[symb, BlankNullSequence[]]
   arity: Unary
   affix: Postfix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
 NamedBlankNullSequenceHead:
   name: BlankNullSequence
   actual-precedence: 1000
-  Precedence: 730
-  Precedence-corrected: 730
+  precedence: 730
   WolframLanguageData: 5
   WolframLanguageData-corrected: 5
   UnicodeCharacters.tr:
@@ -3879,15 +3759,14 @@ NamedBlankNullSequenceHead:
   FullForm: Pattern[symb, BlankNullSequence[expr]]
   arity: Binary
   affix: Infix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
 NamedBlankOptional:
   name: Blank
   actual-precedence: 990
-  Precedence: 730
-  Precedence-corrected: 730
+  precedence: 730
   WolframLanguageData: 5
   WolframLanguageData-corrected: 5
   UnicodeCharacters.tr:
@@ -3900,15 +3779,14 @@ NamedBlankOptional:
   FullForm: Optional[Pattern[symb, Blank[]]]
   arity: Unary
   affix: Postfix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
 NamedBlankSequence:
   name: BlankSequence
   actual-precedence: 990
-  Precedence: 730
-  Precedence-corrected: 730
+  precedence: 730
   WolframLanguageData: 5
   WolframLanguageData-corrected: 5
   UnicodeCharacters.tr:
@@ -3921,15 +3799,14 @@ NamedBlankSequence:
   FullForm: Pattern[symb, BlankSequence[]]
   arity: Unary
   affix: Postfix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
 NamedBlankSequenceHead:
   name: BlankSequence
   actual-precedence: 1000
-  Precedence: 730
-  Precedence-corrected: 730
+  precedence: 730
   WolframLanguageData: 5
   WolframLanguageData-corrected: 5
   UnicodeCharacters.tr:
@@ -3942,15 +3819,15 @@ NamedBlankSequenceHead:
   FullForm: Pattern[symb, BlankSequence[expr]]
   arity: Binary
   affix: Infix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
 Nand:
   name: Nand
   actual-precedence: 290
-  Precedence: 215
-  Precedence-corrected: 220
+  Precedence-Function: 215
+  precedence: 220
   WolframLanguageData: 55
   WolframLanguageData-corrected: 55
   UnicodeCharacters.tr: 330
@@ -3963,15 +3840,14 @@ Nand:
   FullForm: Nand[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
 NestedGreaterGreater:
   name: NestedGreaterGreater
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -3984,15 +3860,14 @@ NestedGreaterGreater:
   FullForm: NestedGreaterGreater[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NestedLessLess:
   name: NestedLessLess
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4005,15 +3880,14 @@ NestedLessLess:
   FullForm: NestedLessLess[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NonCommutativeMultiply:
   name: NonCommutativeMultiply
   actual-precedence: 650
-  Precedence: 510
-  Precedence-corrected: 510
+  precedence: 510
   WolframLanguageData: 27
   WolframLanguageData-corrected: 27
   UnicodeCharacters.tr:
@@ -4026,15 +3900,15 @@ NonCommutativeMultiply:
   FullForm: NonCommutativeMultiply[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
 Nor:
   name: Nor
   actual-precedence: 270
-  Precedence: 215
-  Precedence-corrected: 210
+  Precedence-Function: 215
+  precedence: 210
   WolframLanguageData: 57
   WolframLanguageData-corrected: 57
   UnicodeCharacters.tr: 320
@@ -4047,15 +3921,14 @@ Nor:
   FullForm: Nor[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
 Not:
   name: Not
   actual-precedence: 300
-  Precedence: 230
-  Precedence-corrected: 230
+  precedence: 230
   WolframLanguageData: 54
   WolframLanguageData-corrected: 54
   UnicodeCharacters.tr: 340
@@ -4068,15 +3941,14 @@ Not:
   FullForm: Not[expr]
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
 NotCongruent:
   name: NotCongruent
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4089,15 +3961,14 @@ NotCongruent:
   FullForm: NotCongruent[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NotCupCap:
   name: NotCupCap
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4110,15 +3981,14 @@ NotCupCap:
   FullForm: NotCupCap[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NotDoubleVerticalBar:
   name: NotDoubleVerticalBar
   actual-precedence: 350
-  Precedence: 280
-  Precedence-corrected: 280
+  precedence: 280
   WolframLanguageData: 50
   WolframLanguageData-corrected: 50.5
   UnicodeCharacters.tr: 390
@@ -4131,15 +4001,14 @@ NotDoubleVerticalBar:
   FullForm: NotDoubleVerticalBar[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NotElement:
   name: NotElement
   actual-precedence: 320
-  Precedence: 250
-  Precedence-corrected: 250
+  precedence: 250
   WolframLanguageData: 52
   WolframLanguageData-corrected: 52
   UnicodeCharacters.tr: 360
@@ -4152,15 +4021,14 @@ NotElement:
   FullForm: NotElement[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
 NotEqualTilde:
   name: NotEqualTilde
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4173,15 +4041,14 @@ NotEqualTilde:
   FullForm: NotEqualTilde[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NotExists:
   name: NotExists
   actual-precedence: 310
-  Precedence: 240
-  Precedence-corrected: 240
+  precedence: 240
   WolframLanguageData: 53
   WolframLanguageData-corrected: 53
   UnicodeCharacters.tr: 350
@@ -4194,15 +4061,14 @@ NotExists:
   FullForm:
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Usage and Parse may not be correct.
 
 NotGreater:
   name: NotGreater
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4215,15 +4081,14 @@ NotGreater:
   FullForm: NotGreater[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NotGreaterEqual:
   name: NotGreaterEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4236,15 +4101,14 @@ NotGreaterEqual:
   FullForm: NotGreaterEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NotGreaterFullEqual:
   name: NotGreaterFullEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4257,15 +4121,14 @@ NotGreaterFullEqual:
   FullForm: NotGreaterFullEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NotGreaterGreater:
   name: NotGreaterGreater
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4278,15 +4141,14 @@ NotGreaterGreater:
   FullForm: NotGreaterGreater[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NotGreaterLess:
   name: NotGreaterLess
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4299,15 +4161,14 @@ NotGreaterLess:
   FullForm: NotGreaterLess[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NotGreaterSlantEqual:
   name: NotGreaterSlantEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4320,15 +4181,14 @@ NotGreaterSlantEqual:
   FullForm: NotGreaterSlantEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NotGreaterTilde:
   name: NotGreaterTilde
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4341,15 +4201,14 @@ NotGreaterTilde:
   FullForm: NotGreaterTilde[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NotHumpDownHump:
   name: NotHumpDownHump
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4362,15 +4221,14 @@ NotHumpDownHump:
   FullForm: NotHumpDownHump[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NotHumpEqual:
   name: NotHumpEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4383,15 +4241,14 @@ NotHumpEqual:
   FullForm: NotHumpEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NotLeftTriangle:
   name: NotLeftTriangle
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4404,15 +4261,14 @@ NotLeftTriangle:
   FullForm: NotLeftTriangle[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NotLeftTriangleBar:
   name: NotLeftTriangleBar
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4425,15 +4281,14 @@ NotLeftTriangleBar:
   FullForm: NotLeftTriangleBar[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NotLeftTriangleEqual:
   name: NotLeftTriangleEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4446,15 +4301,14 @@ NotLeftTriangleEqual:
   FullForm: NotLeftTriangleEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NotLess:
   name: NotLess
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4467,15 +4321,14 @@ NotLess:
   FullForm: NotLess[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NotLessEqual:
   name: NotLessEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4488,15 +4341,14 @@ NotLessEqual:
   FullForm: NotLessEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NotLessFullEqual:
   name: NotLessFullEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4509,15 +4361,14 @@ NotLessFullEqual:
   FullForm: NotLessFullEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NotLessGreater:
   name: NotLessGreater
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4530,15 +4381,14 @@ NotLessGreater:
   FullForm: NotLessGreater[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NotLessLess:
   name: NotLessLess
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4551,15 +4401,14 @@ NotLessLess:
   FullForm: NotLessLess[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NotLessSlantEqual:
   name: NotLessSlantEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4572,15 +4421,14 @@ NotLessSlantEqual:
   FullForm: NotLessSlantEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NotLessTilde:
   name: NotLessTilde
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4593,15 +4441,14 @@ NotLessTilde:
   FullForm: NotLessTilde[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NotNestedGreaterGreater:
   name: NotNestedGreaterGreater
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4614,15 +4461,14 @@ NotNestedGreaterGreater:
   FullForm: NotNestedGreaterGreater[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NotNestedLessLess:
   name: NotNestedLessLess
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4635,15 +4481,14 @@ NotNestedLessLess:
   FullForm: NotNestedLessLess[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NotPrecedes:
   name: NotPrecedes
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4656,15 +4501,14 @@ NotPrecedes:
   FullForm: NotPrecedes[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NotPrecedesEqual:
   name: NotPrecedesEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4677,15 +4521,14 @@ NotPrecedesEqual:
   FullForm: NotPrecedesEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NotPrecedesSlantEqual:
   name: NotPrecedesSlantEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4698,15 +4541,14 @@ NotPrecedesSlantEqual:
   FullForm: NotPrecedesSlantEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NotPrecedesTilde:
   name: NotPrecedesTilde
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4719,15 +4561,14 @@ NotPrecedesTilde:
   FullForm: NotPrecedesTilde[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NotReverseElement:
   name: NotReverseElement
   actual-precedence: 320
-  Precedence: 250
-  Precedence-corrected: 250
+  precedence: 250
   WolframLanguageData:
   WolframLanguageData-corrected: 52
   UnicodeCharacters.tr: 360
@@ -4740,15 +4581,14 @@ NotReverseElement:
   FullForm: NotReverseElement[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NotRightTriangle:
   name: NotRightTriangle
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4761,15 +4601,14 @@ NotRightTriangle:
   FullForm: NotRightTriangle[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NotRightTriangleBar:
   name: NotRightTriangleBar
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4782,15 +4621,14 @@ NotRightTriangleBar:
   FullForm: NotRightTriangleBar[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NotRightTriangleEqual:
   name: NotRightTriangleEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4803,15 +4641,14 @@ NotRightTriangleEqual:
   FullForm: NotRightTriangleEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NotSquareSubset:
   name: NotSquareSubset
   actual-precedence: 320
-  Precedence: 250
-  Precedence-corrected: 250
+  precedence: 250
   WolframLanguageData:
   WolframLanguageData-corrected: 52
   UnicodeCharacters.tr: 360
@@ -4824,15 +4661,14 @@ NotSquareSubset:
   FullForm: NotSquareSubset[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NotSquareSubsetEqual:
   name: NotSquareSubsetEqual
   actual-precedence: 320
-  Precedence: 250
-  Precedence-corrected: 250
+  precedence: 250
   WolframLanguageData:
   WolframLanguageData-corrected: 52
   UnicodeCharacters.tr: 360
@@ -4845,15 +4681,14 @@ NotSquareSubsetEqual:
   FullForm: NotSquareSubsetEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NotSquareSuperset:
   name: NotSquareSuperset
   actual-precedence: 320
-  Precedence: 250
-  Precedence-corrected: 250
+  precedence: 250
   WolframLanguageData:
   WolframLanguageData-corrected: 52
   UnicodeCharacters.tr: 360
@@ -4866,15 +4701,14 @@ NotSquareSuperset:
   FullForm: NotSquareSuperset[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NotSquareSupersetEqual:
   name: NotSquareSupersetEqual
   actual-precedence: 320
-  Precedence: 250
-  Precedence-corrected: 250
+  precedence: 250
   WolframLanguageData:
   WolframLanguageData-corrected: 52
   UnicodeCharacters.tr: 360
@@ -4887,15 +4721,14 @@ NotSquareSupersetEqual:
   FullForm: NotSquareSupersetEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NotSubset:
   name: NotSubset
   actual-precedence: 320
-  Precedence: 250
-  Precedence-corrected: 250
+  precedence: 250
   WolframLanguageData:
   WolframLanguageData-corrected: 52
   UnicodeCharacters.tr: 360
@@ -4908,15 +4741,14 @@ NotSubset:
   FullForm: NotSubset[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NotSubsetEqual:
   name: NotSubsetEqual
   actual-precedence: 320
-  Precedence: 250
-  Precedence-corrected: 250
+  precedence: 250
   WolframLanguageData:
   WolframLanguageData-corrected: 52
   UnicodeCharacters.tr: 360
@@ -4929,15 +4761,14 @@ NotSubsetEqual:
   FullForm: NotSubsetEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NotSucceeds:
   name: NotSucceeds
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4950,15 +4781,14 @@ NotSucceeds:
   FullForm: NotSucceeds[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NotSucceedsEqual:
   name: NotSucceedsEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4971,15 +4801,14 @@ NotSucceedsEqual:
   FullForm: NotSucceedsEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NotSucceedsSlantEqual:
   name: NotSucceedsSlantEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4992,15 +4821,14 @@ NotSucceedsSlantEqual:
   FullForm: NotSucceedsSlantEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NotSucceedsTilde:
   name: NotSucceedsTilde
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -5013,15 +4841,14 @@ NotSucceedsTilde:
   FullForm: NotSucceedsTilde[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NotSuperset:
   name: NotSuperset
   actual-precedence: 320
-  Precedence: 250
-  Precedence-corrected: 250
+  precedence: 250
   WolframLanguageData:
   WolframLanguageData-corrected: 52
   UnicodeCharacters.tr: 360
@@ -5034,15 +4861,14 @@ NotSuperset:
   FullForm: NotSuperset[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NotSupersetEqual:
   name: NotSupersetEqual
   actual-precedence: 320
-  Precedence: 250
-  Precedence-corrected: 250
+  precedence: 250
   WolframLanguageData:
   WolframLanguageData-corrected: 52
   UnicodeCharacters.tr: 360
@@ -5055,15 +4881,14 @@ NotSupersetEqual:
   FullForm: NotSupersetEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NotTilde:
   name: NotTilde
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -5076,15 +4901,14 @@ NotTilde:
   FullForm: NotTilde[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NotTildeEqual:
   name: NotTildeEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -5097,15 +4921,14 @@ NotTildeEqual:
   FullForm: NotTildeEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NotTildeFullEqual:
   name: NotTildeFullEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -5118,15 +4941,14 @@ NotTildeFullEqual:
   FullForm: NotTildeFullEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NotTildeTilde:
   name: NotTildeTilde
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -5139,15 +4961,14 @@ NotTildeTilde:
   FullForm: NotTildeTilde[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 NotVerticalBar:
   name: NotVerticalBar
   actual-precedence: 350
-  Precedence: 280
-  Precedence-corrected: 280
+  precedence: 280
   WolframLanguageData: 50
   WolframLanguageData-corrected: 50.5
   UnicodeCharacters.tr: 390
@@ -5160,36 +4981,15 @@ NotVerticalBar:
   FullForm: NotVerticalBar[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
-
-NumberAccuracy:
-  name: None
-  actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
-  WolframLanguageData:
-  WolframLanguageData-corrected: 1
-  UnicodeCharacters.tr:
-  UnicodeCharacters-corrected.tr: -10
-  # N-tokens: {}
-  # L-tokens: {"``"}
-  # O-tokens: {}
-  # usage: {{"number", "``", "s"}}
-  # parse: {"number", "``", "s"}
-  FullForm: number``s
-  arity: Binary
-  affix: Infix
-  associativity: Non
-  meaningful: true
-  # comments: Specifies the accuracy (in number of digits to the right of decimal) of number, where s is a positive decimal expressed without using ^^ or `. A magnitude must come after ``.
 
 NumberBase:
   name: None
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr:
@@ -5202,15 +5002,15 @@ NumberBase:
   FullForm: n^^digits
   arity: Binary
   affix: Infix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments: Interprets digits as a number literal in base n. The base n must be a positive integer no greater than 36.
 
 NumberMagnitude:
   name: None
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr:
@@ -5223,15 +5023,15 @@ NumberMagnitude:
   FullForm: number*^magnitude
   arity: Binary
   affix: Infix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments: Gives mantissa*base^magnitude, where base^^mantissa=number and magnitude is a decimal number expressed without ^^, `, or ``. Only allowed in a number literal, and only after any ` or ``.
 
 NumberPrecision:
   name: None
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr:
@@ -5244,15 +5044,15 @@ NumberPrecision:
   FullForm: number`s
   arity: Binary
   affix: Infix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments: Specifies the precision of number, where s is a positive decimal expressed without using ^^ or `. Any magnitude must come after `."
 
 NumberPrecisionPostfix:
   name: None
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr:
@@ -5265,15 +5065,14 @@ NumberPrecisionPostfix:
   FullForm: number`
   arity: Unary
   affix: Postfix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments: Specifies the precision of number to be $MachinePrecision. Any magnitude must come after `."
 
 Optional:
   name: Optional
   actual-precedence: 190
-  Precedence: 140
-  Precedence-corrected: 140
+  precedence: 140
   WolframLanguageData: 64
   WolframLanguageData-corrected: 64
   UnicodeCharacters.tr:
@@ -5286,15 +5085,15 @@ Optional:
   FullForm: Optional[patt, expr]
   arity: Binary
   affix: Infix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
 Or:
   name: Or
   actual-precedence: 270
-  Precedence: 215
-  Precedence-corrected: 210
+  Precedence-Function: 215
+  precedence: 210
   WolframLanguageData: 57
   WolframLanguageData-corrected: 57
   UnicodeCharacters.tr: 320
@@ -5307,15 +5106,15 @@ Or:
   FullForm: Or[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
 Out:
   name: Out
   actual-precedence: 1030
-  Precedence: 670
-  Precedence-corrected: 735
+  Precedence-Function: 670
+  precedence: 735
   WolframLanguageData: 4
   WolframLanguageData-corrected: 4
   UnicodeCharacters.tr:
@@ -5328,15 +5127,15 @@ Out:
   FullForm: Out[-n]
   arity: Nullary
   affix: None
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
 OutNumber:
   name: Out
   actual-precedence: 1020
-  Precedence: 670
-  Precedence-corrected: 735
+  Precedence-Function: 670
+  precedence: 735
   WolframLanguageData: 4
   WolframLanguageData-corrected: 4
   UnicodeCharacters.tr:
@@ -5349,15 +5148,15 @@ OutNumber:
   FullForm: Out[n]
   arity: Unary
   affix: Prefix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
 OverscriptBox:
   name: Overscript
   actual-precedence: 950
-  Precedence: 670
-  Precedence-corrected: 710
+  Precedence-Function: 670
+  precedence: 710
   WolframLanguageData: 7
   WolframLanguageData-corrected: 7
   UnicodeCharacters.tr:
@@ -5370,15 +5169,15 @@ OverscriptBox:
   FullForm:
   arity: Binary
   affix: Infix
-  associativity: Missing["Unknown"]
+  associativity: missing["unknown"]
   meaningful: true
   # comments:
 
 OverunderscriptBox:
   name: Underoverscript
   actual-precedence: 940
-  Precedence: 670
-  Precedence-corrected: 700
+  Precedence-Function: 670
+  precedence: 700
   WolframLanguageData: 7
   WolframLanguageData-corrected: 7.5
   UnicodeCharacters.tr:
@@ -5391,15 +5190,15 @@ OverunderscriptBox:
   FullForm:
   arity: Ternary
   affix: Infix
-  associativity: Missing["Unknown"]
+  associativity: missing["unknown"]
   meaningful: true
   # comments:
 
 ParameterizedFunction:
   name: Function
   actual-precedence: 50
-  Precedence: 90
-  Precedence-corrected: 40
+  Precedence-Function: 90
+  precedence: 40
   WolframLanguageData: 75
   WolframLanguageData-corrected: 75
   UnicodeCharacters.tr: 190
@@ -5412,15 +5211,15 @@ ParameterizedFunction:
   FullForm: Function[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: The arrow form of Function.
 
 Parentheses:
   name: None
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr:
@@ -5433,15 +5232,14 @@ Parentheses:
   FullForm:
   arity: Unary
   affix: Matchfix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
 Part:
   name: Part
   actual-precedence: 890
-  Precedence: 670
-  Precedence-corrected: 670
+  precedence: 670
   WolframLanguageData: 10
   WolframLanguageData-corrected: 10
   UnicodeCharacters.tr:
@@ -5454,15 +5252,15 @@ Part:
   FullForm: Part[expr1, expr2, \[Ellipsis]]
   arity: n-ary
   affix: Postfix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments:
 
 PartialD:
   name: PartialD
   actual-precedence: 710
-  Precedence: 670
-  Precedence-corrected: 550
+  Precedence-Function: 670
+  precedence: 550
   WolframLanguageData: 24
   WolframLanguageData-corrected: 24
   UnicodeCharacters.tr: 620
@@ -5475,15 +5273,15 @@ PartialD:
   FullForm:
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Usage and Parse may not be correct.
 
 PartialFractionBox:
   name: PartialFractionBox
   actual-precedence: 570
-  Precedence: 670
-  Precedence-corrected: 470
+  Precedence-Function: 670
+  precedence: 470
   WolframLanguageData:
   WolframLanguageData-corrected: 31
   UnicodeCharacters.tr:
@@ -5496,15 +5294,15 @@ PartialFractionBox:
   FullForm:
   arity: Unary
   affix: Postfix
-  associativity: Left
+  associativity: left
   meaningful: false
   # comments: This operator is an invisible Unicode character and is used in the layout of displayed expressions.
 
 PartialOverscriptBox:
   name: PartialOverscriptBox
   actual-precedence: 950
-  Precedence: 670
-  Precedence-corrected: 710
+  Precedence-Function: 670
+  precedence: 710
   WolframLanguageData:
   WolframLanguageData-corrected: 7
   UnicodeCharacters.tr:
@@ -5517,15 +5315,15 @@ PartialOverscriptBox:
   FullForm:
   arity: Unary
   affix: Postfix
-  associativity: Left
+  associativity: left
   meaningful: false
   # comments: This operator is an invisible Unicode character and is used in the layout of displayed expressions.
 
 PartialSubscriptBox:
   name: PartialSubscriptBox
   actual-precedence: 920
-  Precedence: 670
-  Precedence-corrected: 690
+  Precedence-Function: 670
+  precedence: 690
   WolframLanguageData:
   WolframLanguageData-corrected: 8
   UnicodeCharacters.tr:
@@ -5538,15 +5336,15 @@ PartialSubscriptBox:
   FullForm:
   arity: Unary
   affix: Postfix
-  associativity: Left
+  associativity: left
   meaningful: false
   # comments: This operator is an invisible Unicode character and is used in the layout of displayed expressions.
 
 PartialSuperscriptBox:
   name: PartialSuperscriptBox
   actual-precedence: 750
-  Precedence: 670
-  Precedence-corrected: 590
+  Precedence-Function: 670
+  precedence: 590
   WolframLanguageData:
   WolframLanguageData-corrected: 21
   UnicodeCharacters.tr:
@@ -5559,15 +5357,15 @@ PartialSuperscriptBox:
   FullForm:
   arity: Unary
   affix: Postfix
-  associativity: Left
+  associativity: left
   meaningful: false
   # comments: This operator is an invisible Unicode character and is used in the layout of displayed expressions.
 
 PartialUnderscriptBox:
   name: PartialUnderscriptBox
   actual-precedence: 950
-  Precedence: 670
-  Precedence-corrected: 710
+  Precedence-Function: 670
+  precedence: 710
   WolframLanguageData:
   WolframLanguageData-corrected: 7
   UnicodeCharacters.tr:
@@ -5580,15 +5378,14 @@ PartialUnderscriptBox:
   FullForm:
   arity: Unary
   affix: Postfix
-  associativity: Left
+  associativity: left
   meaningful: false
   # comments: This operator is an invisible Unicode character and is used in the layout of displayed expressions.
 
 Pattern:
   name: Pattern
   actual-precedence: 190
-  Precedence: 150
-  Precedence-corrected: 150
+  precedence: 150
   WolframLanguageData: 64
   WolframLanguageData-corrected: 64
   UnicodeCharacters.tr:
@@ -5601,15 +5398,14 @@ Pattern:
   FullForm: Pattern[symb, expr]
   arity: Binary
   affix: Infix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
 PatternTest:
   name: PatternTest
   actual-precedence: 910
-  Precedence: 680
-  Precedence-corrected: 680
+  precedence: 680
   WolframLanguageData: 9
   WolframLanguageData-corrected: 9
   UnicodeCharacters.tr:
@@ -5622,15 +5418,15 @@ PatternTest:
   FullForm: PatternTest[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Missing["Unknown"]
+  associativity: missing["unknown"]
   meaningful: true
   # comments:
 
 PermutationProduct:
   name: PermutationProduct
   actual-precedence: 600
-  Precedence: 520
-  Precedence-corrected: 486
+  Precedence-Function: 520
+  precedence: 486
   WolframLanguageData:
   WolframLanguageData-corrected: 29.7
   UnicodeCharacters.tr: 605
@@ -5643,15 +5439,14 @@ PermutationProduct:
   FullForm: PermutationProduct[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
 Perpendicular:
   name: Perpendicular
   actual-precedence: 220
-  Precedence: 190
-  Precedence-corrected: 190
+  precedence: 190
   WolframLanguageData:
   WolframLanguageData-corrected: 60
   UnicodeCharacters.tr: 390
@@ -5664,15 +5459,15 @@ Perpendicular:
   FullForm: Perpendicular[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 Piecewise:
   name: Piecewise
   actual-precedence: 680
-  Precedence: 480
-  Precedence-corrected: 535
+  Precedence-Function: 480
+  precedence: 535
   WolframLanguageData: 1
   WolframLanguageData-corrected: 25.5
   UnicodeCharacters.tr: 600
@@ -5685,15 +5480,14 @@ Piecewise:
   FullForm:
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Usage and Parse may not be correct.
 
 Plus:
   name: Plus
   actual-precedence: 400
-  Precedence: 310
-  Precedence-corrected: 310
+  precedence: 310
   WolframLanguageData: 46
   WolframLanguageData-corrected: 46
   UnicodeCharacters.tr:
@@ -5706,15 +5500,14 @@ Plus:
   FullForm: Plus[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments: Operator Notations includes usages with invisible unicode characters.
 
 PlusMinus:
   name: PlusMinus
   actual-precedence: 400
-  Precedence: 310
-  Precedence-corrected: 310
+  precedence: 310
   WolframLanguageData: 46
   WolframLanguageData-corrected: 46
   UnicodeCharacters.tr: 430
@@ -5727,15 +5520,14 @@ PlusMinus:
   FullForm: PlusMinus[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Left
+  associativity: left
   meaningful: false
   # comments:
 
 Power:
   name: Power
   actual-precedence: 750
-  Precedence: 590
-  Precedence-corrected: 590
+  precedence: 590
   WolframLanguageData: 21
   WolframLanguageData-corrected: 21
   UnicodeCharacters.tr:
@@ -5748,15 +5540,14 @@ Power:
   FullForm: Power[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
 PreDecrement:
   name: PreDecrement
   actual-precedence: 870
-  Precedence: 660
-  Precedence-corrected: 660
+  precedence: 660
   WolframLanguageData: 12
   WolframLanguageData-corrected: 12
   UnicodeCharacters.tr:
@@ -5769,15 +5560,14 @@ PreDecrement:
   FullForm: PreDecrement[expr]
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
 PreIncrement:
   name: PreIncrement
   actual-precedence: 870
-  Precedence: 660
-  Precedence-corrected: 660
+  precedence: 660
   WolframLanguageData: 12
   WolframLanguageData-corrected: 12
   UnicodeCharacters.tr:
@@ -5790,15 +5580,14 @@ PreIncrement:
   FullForm: PreIncrement[expr]
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
 Precedes:
   name: Precedes
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -5811,15 +5600,14 @@ Precedes:
   FullForm: Precedes[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 PrecedesEqual:
   name: PrecedesEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -5832,15 +5620,14 @@ PrecedesEqual:
   FullForm: PrecedesEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 PrecedesSlantEqual:
   name: PrecedesSlantEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -5853,15 +5640,14 @@ PrecedesSlantEqual:
   FullForm: PrecedesSlantEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 PrecedesTilde:
   name: PrecedesTilde
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -5874,15 +5660,14 @@ PrecedesTilde:
   FullForm: PrecedesTilde[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 ProbabilityPr:
   name: ProbabilityPr
   actual-precedence: 420
-  Precedence: 325
-  Precedence-corrected: 325
+  precedence: 325
   WolframLanguageData:
   WolframLanguageData-corrected: 45
   UnicodeCharacters.tr: 455
@@ -5895,15 +5680,14 @@ ProbabilityPr:
   FullForm:
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Usage and Parse may not be correct.
 
 Product:
   name: Product
   actual-precedence: 480
-  Precedence: 380
-  Precedence-corrected: 380
+  precedence: 380
   WolframLanguageData: 40
   WolframLanguageData-corrected: 40
   UnicodeCharacters.tr: 500
@@ -5916,15 +5700,14 @@ Product:
   FullForm:
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Usage and Parse may not be correct.
 
 Proportion:
   name: Proportion
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -5937,15 +5720,14 @@ Proportion:
   FullForm: Proportion[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 Proportional:
   name: Proportional
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -5958,15 +5740,14 @@ Proportional:
   FullForm: Proportional[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 Put:
   name: Put
   actual-precedence: 40
-  Precedence: 30
-  Precedence-corrected: 30
+  precedence: 30
   WolframLanguageData: 76
   WolframLanguageData-corrected: 76
   UnicodeCharacters.tr:
@@ -5979,15 +5760,14 @@ Put:
   FullForm: Put[expr, "filename"]
   arity: Binary
   affix: Infix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments:
 
 PutAppend:
   name: PutAppend
   actual-precedence: 40
-  Precedence: 30
-  Precedence-corrected: 30
+  precedence: 30
   WolframLanguageData: 76
   WolframLanguageData-corrected: 76
   UnicodeCharacters.tr:
@@ -6000,15 +5780,15 @@ PutAppend:
   FullForm: PutAppend[expr, "filename"]
   arity: Binary
   affix: Infix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments:
 
 RadicalBox:
   name: RadicalBox
   actual-precedence: 730
-  Precedence: 670
-  Precedence-corrected: 570
+  Precedence-Function: 670
+  precedence: 570
   WolframLanguageData: 22
   WolframLanguageData-corrected: 22
   UnicodeCharacters.tr:
@@ -6021,15 +5801,35 @@ RadicalBox:
   FullForm:
   arity: Binary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
+
+RawBackquote:
+  name: None
+  actual-precedence: -10
+  Precedence-Function: 670
+  precedence: 760
+  WolframLanguageData:
+  WolframLanguageData-corrected: 1
+  UnicodeCharacters.tr:
+  UnicodeCharacters-corrected.tr: -10
+  # N-tokens: {}
+  # L-tokens: {"``"}
+  # O-tokens: {}
+  # usage: {{"number", "``", "s"}}
+  # parse: {"number", "``", "s"}
+  FullForm: number``s
+  arity: Binary
+  affix: Infix
+  associativity: null
+  meaningful: true
+  # comments: Specifies the accuracy (in number of digits to the right of decimal) of number, where s is a positive decimal expressed without using ^^ or `. A magnitude must come after ``.
 
 Repeated:
   name: Repeated
   actual-precedence: 200
-  Precedence: 170
-  Precedence-corrected: 170
+  precedence: 170
   WolframLanguageData: 62
   WolframLanguageData-corrected: 62
   UnicodeCharacters.tr:
@@ -6042,15 +5842,14 @@ Repeated:
   FullForm: Repeated[expr]
   arity: Unary
   affix: Postfix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments:
 
 RepeatedNull:
   name: RepeatedNull
   actual-precedence: 200
-  Precedence: 170
-  Precedence-corrected: 170
+  precedence: 170
   WolframLanguageData: 62
   WolframLanguageData-corrected: 62
   UnicodeCharacters.tr:
@@ -6063,15 +5862,14 @@ RepeatedNull:
   FullForm: RepeatedNull[expr]
   arity: Unary
   affix: Postfix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments:
 
 ReplaceAll:
   name: ReplaceAll
   actual-precedence: 130
-  Precedence: 110
-  Precedence-corrected: 110
+  precedence: 110
   WolframLanguageData: 68
   WolframLanguageData-corrected: 68
   UnicodeCharacters.tr:
@@ -6084,15 +5882,14 @@ ReplaceAll:
   FullForm: ReplaceAll[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments:
 
 ReplaceRepeated:
   name: ReplaceRepeated
   actual-precedence: 130
-  Precedence: 110
-  Precedence-corrected: 110
+  precedence: 110
   WolframLanguageData: 68
   WolframLanguageData-corrected: 68
   UnicodeCharacters.tr:
@@ -6105,15 +5902,14 @@ ReplaceRepeated:
   FullForm: ReplaceRepeated[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments:
 
 ReverseElement:
   name: ReverseElement
   actual-precedence: 320
-  Precedence: 250
-  Precedence-corrected: 250
+  precedence: 250
   WolframLanguageData:
   WolframLanguageData-corrected: 52
   UnicodeCharacters.tr: 360
@@ -6126,15 +5922,14 @@ ReverseElement:
   FullForm: ReverseElement[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 ReverseEquilibrium:
   name: ReverseEquilibrium
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -6147,15 +5942,14 @@ ReverseEquilibrium:
   FullForm: ReverseEquilibrium[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 ReverseUpEquilibrium:
   name: ReverseUpEquilibrium
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -6168,15 +5962,14 @@ ReverseUpEquilibrium:
   FullForm: ReverseUpEquilibrium[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 RightArrow:
   name: RightArrow
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -6189,15 +5982,14 @@ RightArrow:
   FullForm: RightArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 RightArrowBar:
   name: RightArrowBar
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -6210,15 +6002,14 @@ RightArrowBar:
   FullForm: RightArrowBar[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 RightArrowLeftArrow:
   name: RightArrowLeftArrow
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -6231,15 +6022,15 @@ RightArrowLeftArrow:
   FullForm: RightArrowLeftArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 RightComposition:
   name: RightComposition
   actual-precedence: 850
-  Precedence: 624
-  Precedence-corrected: 650
+  Precedence-Function: 624
+  precedence: 650
   WolframLanguageData: 13
   WolframLanguageData-corrected: 13
   UnicodeCharacters.tr:
@@ -6252,15 +6043,14 @@ RightComposition:
   FullForm: RightComposition[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
 RightDownTeeVector:
   name: RightDownTeeVector
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -6273,15 +6063,14 @@ RightDownTeeVector:
   FullForm: RightDownTeeVector[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 RightDownVector:
   name: RightDownVector
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -6294,15 +6083,14 @@ RightDownVector:
   FullForm: RightDownVector[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 RightDownVectorBar:
   name: RightDownVectorBar
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -6315,15 +6103,14 @@ RightDownVectorBar:
   FullForm: RightDownVectorBar[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 RightTee:
   name: RightTee
   actual-precedence: 230
-  Precedence: 190
-  Precedence-corrected: 190
+  precedence: 190
   WolframLanguageData:
   WolframLanguageData-corrected: 59.6
   UnicodeCharacters.tr: 300
@@ -6336,15 +6123,14 @@ RightTee:
   FullForm: RightTee[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: false
   # comments:
 
 RightTeeArrow:
   name: RightTeeArrow
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -6357,15 +6143,14 @@ RightTeeArrow:
   FullForm: RightTeeArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 RightTeeVector:
   name: RightTeeVector
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -6378,15 +6163,14 @@ RightTeeVector:
   FullForm: RightTeeVector[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 RightTriangle:
   name: RightTriangle
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -6399,15 +6183,14 @@ RightTriangle:
   FullForm: RightTriangle[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 RightTriangleBar:
   name: RightTriangleBar
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -6420,15 +6203,14 @@ RightTriangleBar:
   FullForm: RightTriangleBar[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 RightTriangleEqual:
   name: RightTriangleEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -6441,15 +6223,14 @@ RightTriangleEqual:
   FullForm: RightTriangleEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 RightUpDownVector:
   name: RightUpDownVector
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -6462,15 +6243,14 @@ RightUpDownVector:
   FullForm: RightUpDownVector[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 RightUpTeeVector:
   name: RightUpTeeVector
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -6483,15 +6263,14 @@ RightUpTeeVector:
   FullForm: RightUpTeeVector[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 RightUpVector:
   name: RightUpVector
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -6504,15 +6283,14 @@ RightUpVector:
   FullForm: RightUpVector[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 RightUpVectorBar:
   name: RightUpVectorBar
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -6525,15 +6303,14 @@ RightUpVectorBar:
   FullForm: RightUpVectorBar[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 RightVector:
   name: RightVector
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -6546,15 +6323,14 @@ RightVector:
   FullForm: RightVector[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 RightVectorBar:
   name: RightVectorBar
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -6567,15 +6343,15 @@ RightVectorBar:
   FullForm: RightVectorBar[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 RoundImplies:
   name: RoundImplies
   actual-precedence: 250
-  Precedence: 240
-  Precedence-corrected: 200
+  Precedence-Function: 240
+  precedence: 200
   WolframLanguageData:
   WolframLanguageData-corrected: 59
   UnicodeCharacters.tr: 310
@@ -6588,15 +6364,14 @@ RoundImplies:
   FullForm: RoundImplies[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: false
   # comments:
 
 Rule:
   name: Rule
   actual-precedence: 140
-  Precedence: 120
-  Precedence-corrected: 120
+  precedence: 120
   WolframLanguageData: 67
   WolframLanguageData-corrected: 67.5
   UnicodeCharacters.tr: 250
@@ -6609,15 +6384,14 @@ Rule:
   FullForm: Rule[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
 RuleDelayed:
   name: RuleDelayed
   actual-precedence: 150
-  Precedence: 120
-  Precedence-corrected: 120
+  precedence: 120
   WolframLanguageData: 67
   WolframLanguageData-corrected: 67
   UnicodeCharacters.tr: 250
@@ -6630,15 +6404,15 @@ RuleDelayed:
   FullForm: RuleDelayed[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
 SameQ:
   name: SameQ
   actual-precedence: 330
-  Precedence: 290
-  Precedence-corrected: 260
+  Precedence-Function: 290
+  precedence: 260
   WolframLanguageData: 51
   WolframLanguageData-corrected: 51
   UnicodeCharacters.tr:
@@ -6651,15 +6425,14 @@ SameQ:
   FullForm: SameQ[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
 Set:
   name: Set
   actual-precedence: 50
-  Precedence: 40
-  Precedence-corrected: 40
+  precedence: 40
   WolframLanguageData: 75
   WolframLanguageData-corrected: 75
   UnicodeCharacters.tr:
@@ -6672,15 +6445,14 @@ Set:
   FullForm: Set[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
 SetDelayed:
   name: SetDelayed
   actual-precedence: 50
-  Precedence: 40
-  Precedence-corrected: 40
+  precedence: 40
   WolframLanguageData: 75
   WolframLanguageData-corrected: 75
   UnicodeCharacters.tr:
@@ -6693,15 +6465,14 @@ SetDelayed:
   FullForm: SetDelayed[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
 ShortDownArrow:
   name: ShortDownArrow
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -6714,15 +6485,14 @@ ShortDownArrow:
   FullForm: ShortDownArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 ShortLeftArrow:
   name: ShortLeftArrow
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -6735,15 +6505,14 @@ ShortLeftArrow:
   FullForm: ShortLeftArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 ShortRightArrow:
   name: ShortRightArrow
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -6756,15 +6525,14 @@ ShortRightArrow:
   FullForm: ShortRightArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 ShortUpArrow:
   name: ShortUpArrow
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -6777,15 +6545,15 @@ ShortUpArrow:
   FullForm: ShortUpArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 Skeleton:
   name: Skeleton
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr: -10
@@ -6798,15 +6566,14 @@ Skeleton:
   FullForm: Skeleton[n]
   arity: Unary
   affix: Matchfix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
 Slot:
   name: Slot
   actual-precedence: 1040
-  Precedence: 740
-  Precedence-corrected: 740
+  precedence: 740
   WolframLanguageData: 3
   WolframLanguageData-corrected: 3
   UnicodeCharacters.tr:
@@ -6819,15 +6586,14 @@ Slot:
   FullForm: Slot[1]
   arity: Nullary
   affix: None
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
 SlotNumber:
   name: Slot
   actual-precedence: 1050
-  Precedence: 740
-  Precedence-corrected: 740
+  precedence: 740
   WolframLanguageData: 3
   WolframLanguageData-corrected: 3
   UnicodeCharacters.tr:
@@ -6840,15 +6606,14 @@ SlotNumber:
   FullForm: Slot[n]
   arity: Unary
   affix: Prefix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
 SlotSequence:
   name: SlotSequence
   actual-precedence: 1040
-  Precedence: 740
-  Precedence-corrected: 740
+  precedence: 740
   WolframLanguageData: 3
   WolframLanguageData-corrected: 3
   UnicodeCharacters.tr:
@@ -6861,15 +6626,14 @@ SlotSequence:
   FullForm: SlotSequence[1]
   arity: Nullary
   affix: None
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
 SlotSequenceNumber:
   name: SlotSequence
   actual-precedence: 1050
-  Precedence: 740
-  Precedence-corrected: 740
+  precedence: 740
   WolframLanguageData: 3
   WolframLanguageData-corrected: 3
   UnicodeCharacters.tr:
@@ -6882,15 +6646,14 @@ SlotSequenceNumber:
   FullForm: SlotSequence[n]
   arity: Unary
   affix: Prefix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
 SmallCircle:
   name: SmallCircle
   actual-precedence: 670
-  Precedence: 530
-  Precedence-corrected: 530
+  precedence: 530
   WolframLanguageData: 25
   WolframLanguageData-corrected: 25.6
   UnicodeCharacters.tr: 607
@@ -6903,15 +6666,14 @@ SmallCircle:
   FullForm: SmallCircle[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 Span:
   name: Span
   actual-precedence: 390
-  Precedence: 305
-  Precedence-corrected: 305
+  precedence: 305
   WolframLanguageData: 49
   WolframLanguageData-corrected: 47
   UnicodeCharacters.tr:
@@ -6924,15 +6686,15 @@ Span:
   FullForm: Span[i, j, k]
   arity: Ternary
   affix: Infix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
 Sqrt:
   name: Sqrt
   actual-precedence: 730
-  Precedence: 670
-  Precedence-corrected: 570
+  Precedence-Function: 670
+  precedence: 570
   WolframLanguageData: 22
   WolframLanguageData-corrected: 22
   UnicodeCharacters.tr: 650
@@ -6945,15 +6707,15 @@ Sqrt:
   FullForm: Sqrt[expr]
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
 SqrtBox:
   name: Sqrt
   actual-precedence: 730
-  Precedence: 670
-  Precedence-corrected: 570
+  Precedence-Function: 670
+  precedence: 570
   WolframLanguageData: 22
   WolframLanguageData-corrected: 22
   UnicodeCharacters.tr: 650
@@ -6966,15 +6728,14 @@ SqrtBox:
   FullForm:
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
 Square:
   name: Square
   actual-precedence: 690
-  Precedence: 540
-  Precedence-corrected: 540
+  precedence: 540
   WolframLanguageData: 25
   WolframLanguageData-corrected: 25.0
   UnicodeCharacters.tr: 610
@@ -6987,15 +6748,14 @@ Square:
   FullForm: Square[expr]
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: false
   # comments:
 
 SquareIntersection:
   name: SquareIntersection
   actual-precedence: 390
-  Precedence: 305
-  Precedence-corrected: 305
+  precedence: 305
   WolframLanguageData:
   WolframLanguageData-corrected: 47
   UnicodeCharacters.tr: 420
@@ -7008,15 +6768,14 @@ SquareIntersection:
   FullForm: SquareIntersection[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 SquareSubset:
   name: SquareSubset
   actual-precedence: 320
-  Precedence: 250
-  Precedence-corrected: 250
+  precedence: 250
   WolframLanguageData:
   WolframLanguageData-corrected: 52
   UnicodeCharacters.tr: 360
@@ -7029,15 +6788,14 @@ SquareSubset:
   FullForm: SquareSubset[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 SquareSubsetEqual:
   name: SquareSubsetEqual
   actual-precedence: 320
-  Precedence: 250
-  Precedence-corrected: 250
+  precedence: 250
   WolframLanguageData:
   WolframLanguageData-corrected: 52
   UnicodeCharacters.tr: 360
@@ -7050,15 +6808,14 @@ SquareSubsetEqual:
   FullForm: SquareSubsetEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 SquareSuperset:
   name: SquareSuperset
   actual-precedence: 320
-  Precedence: 250
-  Precedence-corrected: 250
+  precedence: 250
   WolframLanguageData:
   WolframLanguageData-corrected: 52
   UnicodeCharacters.tr: 360
@@ -7071,15 +6828,14 @@ SquareSuperset:
   FullForm: SquareSuperset[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 SquareSupersetEqual:
   name: SquareSupersetEqual
   actual-precedence: 320
-  Precedence: 250
-  Precedence-corrected: 250
+  precedence: 250
   WolframLanguageData:
   WolframLanguageData-corrected: 52
   UnicodeCharacters.tr: 360
@@ -7092,15 +6848,14 @@ SquareSupersetEqual:
   FullForm: SquareSupersetEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 SquareUnion:
   name: SquareUnion
   actual-precedence: 380
-  Precedence: 300
-  Precedence-corrected: 300
+  precedence: 300
   WolframLanguageData:
   WolframLanguageData-corrected: 48
   UnicodeCharacters.tr: 410
@@ -7113,15 +6868,14 @@ SquareUnion:
   FullForm: SquareUnion[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 Star:
   name: Star
   actual-precedence: 490
-  Precedence: 390
-  Precedence-corrected: 390
+  precedence: 390
   WolframLanguageData: 39
   WolframLanguageData-corrected: 39
   UnicodeCharacters.tr: 510
@@ -7134,15 +6888,14 @@ Star:
   FullForm: Star[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 StringExpression:
   name: StringExpression
   actual-precedence: 180
-  Precedence: 135
-  Precedence-corrected: 135
+  precedence: 135
   WolframLanguageData: 65
   WolframLanguageData-corrected: 65
   UnicodeCharacters.tr:
@@ -7155,15 +6908,14 @@ StringExpression:
   FullForm: StringExpression[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
 StringJoin:
   name: StringJoin
   actual-precedence: 760
-  Precedence: 600
-  Precedence-corrected: 600
+  precedence: 600
   WolframLanguageData: 20
   WolframLanguageData-corrected: 20
   UnicodeCharacters.tr:
@@ -7176,15 +6928,15 @@ StringJoin:
   FullForm: StringJoin[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
 SubscriptBox:
   name: Subscript
   actual-precedence: 920
-  Precedence: 670
-  Precedence-corrected: 690
+  Precedence-Function: 670
+  precedence: 690
   WolframLanguageData: 8
   WolframLanguageData-corrected: 8
   UnicodeCharacters.tr:
@@ -7197,15 +6949,14 @@ SubscriptBox:
   FullForm:
   arity: Binary
   affix: Infix
-  associativity: Missing["Unknown"]
+  associativity: missing["unknown"]
   meaningful: true
   # comments:
 
 Subset:
   name: Subset
   actual-precedence: 320
-  Precedence: 250
-  Precedence-corrected: 250
+  precedence: 250
   WolframLanguageData: 52
   WolframLanguageData-corrected: 52
   UnicodeCharacters.tr: 360
@@ -7218,15 +6969,14 @@ Subset:
   FullForm: Subset[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 SubsetEqual:
   name: SubsetEqual
   actual-precedence: 320
-  Precedence: 250
-  Precedence-corrected: 250
+  precedence: 250
   WolframLanguageData:
   WolframLanguageData-corrected: 52
   UnicodeCharacters.tr: 360
@@ -7239,15 +6989,15 @@ SubsetEqual:
   FullForm: SubsetEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 SubsuperscriptBox:
   name: Subsuperscript
   actual-precedence: 920
-  Precedence: 670
-  Precedence-corrected: 690
+  Precedence-Function: 670
+  precedence: 690
   WolframLanguageData: 8
   WolframLanguageData-corrected: 8
   UnicodeCharacters.tr:
@@ -7260,15 +7010,14 @@ SubsuperscriptBox:
   FullForm:
   arity: Ternary
   affix: Infix
-  associativity: Missing["Unknown"]
+  associativity: missing["unknown"]
   meaningful: true
   # comments:
 
 Subtract:
   name: Subtract
   actual-precedence: 400
-  Precedence: 310
-  Precedence-corrected: 310
+  precedence: 310
   WolframLanguageData: 46
   WolframLanguageData-corrected: 46
   UnicodeCharacters.tr: 430
@@ -7281,15 +7030,14 @@ Subtract:
   FullForm: Plus[expr1, Times[-1, expr2]]
   arity: Binary
   affix: Infix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments: Operator Notations includes usages with invisible unicode characters.
 
 SubtractFrom:
   name: SubtractFrom
   actual-precedence: 120
-  Precedence: 100
-  Precedence-corrected: 100
+  precedence: 100
   WolframLanguageData: 69
   WolframLanguageData-corrected: 69
   UnicodeCharacters.tr:
@@ -7302,15 +7050,14 @@ SubtractFrom:
   FullForm: SubtractFrom[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
 Succeeds:
   name: Succeeds
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -7323,15 +7070,14 @@ Succeeds:
   FullForm: Succeeds[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 SucceedsEqual:
   name: SucceedsEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -7344,15 +7090,14 @@ SucceedsEqual:
   FullForm: SucceedsEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 SucceedsSlantEqual:
   name: SucceedsSlantEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -7365,15 +7110,14 @@ SucceedsSlantEqual:
   FullForm: SucceedsSlantEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 SucceedsTilde:
   name: SucceedsTilde
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -7386,15 +7130,14 @@ SucceedsTilde:
   FullForm: SucceedsTilde[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 SuchThat:
   name: SuchThat
   actual-precedence: 210
-  Precedence: 180
-  Precedence-corrected: 180
+  precedence: 180
   WolframLanguageData: 61
   WolframLanguageData-corrected: 61
   UnicodeCharacters.tr: 290
@@ -7407,15 +7150,15 @@ SuchThat:
   FullForm: SuchThat[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: false
   # comments:
 
 Sum:
   name: Sum
   actual-precedence: 420
-  Precedence: 320
-  Precedence-corrected: 325
+  Precedence-Function: 320
+  precedence: 325
   WolframLanguageData: 45
   WolframLanguageData-corrected: 45
   UnicodeCharacters.tr: 440
@@ -7428,15 +7171,15 @@ Sum:
   FullForm: Sum[expr]
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Usage and Parse may not be correct.
 
 SuperDagger:
   name: SuperDagger
   actual-precedence: 780
-  Precedence: 0
-  Precedence-corrected: 605
+  Precedence-Function: 0
+  precedence: 605
   WolframLanguageData:
   WolframLanguageData-corrected: 18
   UnicodeCharacters.tr:
@@ -7449,15 +7192,14 @@ SuperDagger:
   FullForm: Power[expr, \[Dagger]]
   arity: Unary
   affix: Postfix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments:
 
 SuperscriptBox:
   name: SuperscriptBox
   actual-precedence: 750
-  Precedence: 590
-  Precedence-corrected: 590
+  precedence: 590
   WolframLanguageData: 21
   WolframLanguageData-corrected: 21
   UnicodeCharacters.tr:
@@ -7470,15 +7212,14 @@ SuperscriptBox:
   FullForm:
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
 Superset:
   name: Superset
   actual-precedence: 320
-  Precedence: 250
-  Precedence-corrected: 250
+  precedence: 250
   WolframLanguageData: 52
   WolframLanguageData-corrected: 52
   UnicodeCharacters.tr: 360
@@ -7491,15 +7232,14 @@ Superset:
   FullForm: Superset[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 SupersetEqual:
   name: SupersetEqual
   actual-precedence: 320
-  Precedence: 250
-  Precedence-corrected: 250
+  precedence: 250
   WolframLanguageData:
   WolframLanguageData-corrected: 52
   UnicodeCharacters.tr: 360
@@ -7512,15 +7252,15 @@ SupersetEqual:
   FullForm: SupersetEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 SupersubscriptBox:
   name: SubsuperscriptBox
   actual-precedence: 750
-  Precedence: 690
-  Precedence-corrected: 590
+  Precedence-Function: 690
+  precedence: 590
   WolframLanguageData: 21
   WolframLanguageData-corrected: 21
   UnicodeCharacters.tr:
@@ -7533,15 +7273,15 @@ SupersubscriptBox:
   FullForm:
   arity: Ternary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
 TagSet:
   name: TagSet
   actual-precedence: 50
-  Precedence: 670
-  Precedence-corrected: 40
+  Precedence-Function: 670
+  precedence: 40
   WolframLanguageData: 75
   WolframLanguageData-corrected: 75
   UnicodeCharacters.tr:
@@ -7554,15 +7294,15 @@ TagSet:
   FullForm: TagSet[symb, expr1, expr2]
   arity: Ternary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
 TagSetDelayed:
   name: TagSetDelayed
   actual-precedence: 50
-  Precedence: 670
-  Precedence-corrected: 40
+  Precedence-Function: 670
+  precedence: 40
   WolframLanguageData: 75
   WolframLanguageData-corrected: 75
   UnicodeCharacters.tr:
@@ -7575,15 +7315,15 @@ TagSetDelayed:
   FullForm: TagSetDelayed[symb, expr1, expr2]
   arity: Ternary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
 TagUnset:
   name: TagUnset
   actual-precedence: 50
-  Precedence: 670
-  Precedence-corrected: 40
+  Precedence-Function: 670
+  precedence: 40
   WolframLanguageData: 75
   WolframLanguageData-corrected: 75
   UnicodeCharacters.tr:
@@ -7596,15 +7336,15 @@ TagUnset:
   FullForm: Unset[Condition[symb, expr]]
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
 TensorProduct:
   name: TensorProduct
   actual-precedence: 610
-  Precedence: 495
-  Precedence-corrected: 487
+  Precedence-Function: 495
+  precedence: 487
   WolframLanguageData:
   WolframLanguageData-corrected: 29.6
   UnicodeCharacters.tr: 602
@@ -7617,15 +7357,15 @@ TensorProduct:
   FullForm: TensorProduct[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
 TensorWedge:
   name: TensorWedge
   actual-precedence: 620
-  Precedence: 500
-  Precedence-corrected: 488
+  Precedence-Function: 500
+  precedence: 488
   WolframLanguageData:
   WolframLanguageData-corrected: 29.5
   UnicodeCharacters.tr: 603
@@ -7638,15 +7378,14 @@ TensorWedge:
   FullForm: TensorWedge[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
 Therefore:
   name: Therefore
   actual-precedence: 70
-  Precedence: 50
-  Precedence-corrected: 50
+  precedence: 50
   WolframLanguageData: 74
   WolframLanguageData-corrected: 73.5
   UnicodeCharacters.tr: 201
@@ -7659,15 +7398,14 @@ Therefore:
   FullForm: Therefore[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: false
   # comments: Precedence of Therefore and Because are swapped in notebook versus ToExpression.
 
 Tilde:
   name: Tilde
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -7680,15 +7418,14 @@ Tilde:
   FullForm: Tilde[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 TildeEqual:
   name: TildeEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -7701,15 +7438,14 @@ TildeEqual:
   FullForm: TildeEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 TildeFullEqual:
   name: TildeFullEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -7722,15 +7458,14 @@ TildeFullEqual:
   FullForm: TildeFullEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 TildeTilde:
   name: TildeTilde
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -7743,15 +7478,14 @@ TildeTilde:
   FullForm: TildeTilde[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 Times:
   name: Times
   actual-precedence: 500
-  Precedence: 400
-  Precedence-corrected: 400
+  precedence: 400
   WolframLanguageData: 38
   WolframLanguageData-corrected: 38
   UnicodeCharacters.tr: 520
@@ -7764,15 +7498,14 @@ Times:
   FullForm: Times[expr1, expr2]
   arity: Nullary
   affix: None
-  associativity: None
+  associativity: null
   meaningful: true
   # comments: Operator Notations includes usages with invisible unicode characters.
 
 TimesBy:
   name: TimesBy
   actual-precedence: 120
-  Precedence: 100
-  Precedence-corrected: 100
+  precedence: 100
   WolframLanguageData: 69
   WolframLanguageData-corrected: 69
   UnicodeCharacters.tr:
@@ -7785,15 +7518,15 @@ TimesBy:
   FullForm: TimesBy[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
 TortoiseShellBracket:
   name: TortoiseShellBracket
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr: -10
@@ -7806,15 +7539,15 @@ TortoiseShellBracket:
   FullForm:
   arity: Unary
   affix: Matchfix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
 Transpose:
   name: Transpose
   actual-precedence: 780
-  Precedence: 670
-  Precedence-corrected: 605
+  Precedence-Function: 670
+  precedence: 605
   WolframLanguageData: 18
   WolframLanguageData-corrected: 18
   UnicodeCharacters.tr: 695
@@ -7827,15 +7560,14 @@ Transpose:
   FullForm: Transpose[expr]
   arity: Unary
   affix: Postfix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments:
 
 TwoWayRule:
   name: TwoWayRule
   actual-precedence: 160
-  Precedence: 125
-  Precedence-corrected: 125
+  precedence: 125
   WolframLanguageData:
   WolframLanguageData-corrected: 66.5
   UnicodeCharacters.tr: 255
@@ -7848,15 +7580,15 @@ TwoWayRule:
   FullForm: TwoWayRule[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
 UnaryMinusPlus:
   name: MinusPlus
   actual-precedence: 580
-  Precedence: 310
-  Precedence-corrected: 480
+  Precedence-Function: 310
+  precedence: 480
   WolframLanguageData: 30
   WolframLanguageData-corrected: 30
   UnicodeCharacters.tr: 430
@@ -7869,15 +7601,15 @@ UnaryMinusPlus:
   FullForm: MinusPlus[expr]
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: false
   # comments:
 
 UnaryPlus:
   name: Plus
   actual-precedence: 580
-  Precedence: 310
-  Precedence-corrected: 480
+  Precedence-Function: 310
+  precedence: 480
   WolframLanguageData:
   WolframLanguageData-corrected: 30
   UnicodeCharacters.tr:
@@ -7890,15 +7622,15 @@ UnaryPlus:
   FullForm: Plus[expr]
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Converts to expr on input.
 
 UnaryPlusMinus:
   name: PlusMinus
   actual-precedence: 580
-  Precedence: 310
-  Precedence-corrected: 480
+  Precedence-Function: 310
+  precedence: 480
   WolframLanguageData: 30
   WolframLanguageData-corrected: 30
   UnicodeCharacters.tr: 430
@@ -7911,15 +7643,15 @@ UnaryPlusMinus:
   FullForm: PlusMinus[expr]
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: false
   # comments:
 
 UnderoverscriptBox:
   name: Underoverscript
   actual-precedence: 940
-  Precedence: 670
-  Precedence-corrected: 700
+  Precedence-Function: 670
+  precedence: 700
   WolframLanguageData: 7
   WolframLanguageData-corrected: 7.5
   UnicodeCharacters.tr:
@@ -7932,15 +7664,15 @@ UnderoverscriptBox:
   FullForm:
   arity: Ternary
   affix: Infix
-  associativity: Missing["Unknown"]
+  associativity: missing["unknown"]
   meaningful: true
   # comments:
 
 UnderscriptBox:
   name: Underscript
   actual-precedence: 950
-  Precedence: 670
-  Precedence-corrected: 710
+  Precedence-Function: 670
+  precedence: 710
   WolframLanguageData: 7
   WolframLanguageData-corrected: 7
   UnicodeCharacters.tr:
@@ -7953,15 +7685,14 @@ UnderscriptBox:
   FullForm:
   arity: Binary
   affix: Infix
-  associativity: Missing["Unknown"]
+  associativity: missing["unknown"]
   meaningful: true
   # comments:
 
 UndirectedEdge:
   name: UndirectedEdge
   actual-precedence: 370
-  Precedence: 295
-  Precedence-corrected: 295
+  precedence: 295
   WolframLanguageData:
   WolframLanguageData-corrected: 49.0
   UnicodeCharacters.tr: 395
@@ -7974,15 +7705,14 @@ UndirectedEdge:
   FullForm: UndirectedEdge[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
 Unequal:
   name: Unequal
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData: 50
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -7995,15 +7725,14 @@ Unequal:
   FullForm: Unequal[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
 Union:
   name: Union
   actual-precedence: 380
-  Precedence: 300
-  Precedence-corrected: 300
+  precedence: 300
   WolframLanguageData: 48
   WolframLanguageData-corrected: 48
   UnicodeCharacters.tr: 410
@@ -8016,15 +7745,14 @@ Union:
   FullForm: Union[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
 UnionPlus:
   name: UnionPlus
   actual-precedence: 380
-  Precedence: 300
-  Precedence-corrected: 300
+  precedence: 300
   WolframLanguageData:
   WolframLanguageData-corrected: 48
   UnicodeCharacters.tr: 410
@@ -8037,15 +7765,15 @@ UnionPlus:
   FullForm: UnionPlus[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 UnsameQ:
   name: UnsameQ
   actual-precedence: 330
-  Precedence: 290
-  Precedence-corrected: 260
+  Precedence-Function: 290
+  precedence: 260
   WolframLanguageData: 51
   WolframLanguageData-corrected: 51
   UnicodeCharacters.tr:
@@ -8058,15 +7786,15 @@ UnsameQ:
   FullForm: UnsameQ[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
 Unset:
   name: Unset
   actual-precedence: 50
-  Precedence: 670
-  Precedence-corrected: 40
+  Precedence-Function: 670
+  precedence: 40
   WolframLanguageData: 75
   WolframLanguageData-corrected: 75
   UnicodeCharacters.tr:
@@ -8079,15 +7807,14 @@ Unset:
   FullForm: Unset[expr]
   arity: Unary
   affix: Postfix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments:
 
 UpArrow:
   name: UpArrow
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -8100,15 +7827,14 @@ UpArrow:
   FullForm: UpArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 UpArrowBar:
   name: UpArrowBar
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -8121,15 +7847,14 @@ UpArrowBar:
   FullForm: UpArrowBar[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 UpArrowDownArrow:
   name: UpArrowDownArrow
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -8142,15 +7867,14 @@ UpArrowDownArrow:
   FullForm: UpArrowDownArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 UpDownArrow:
   name: UpDownArrow
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -8163,15 +7887,14 @@ UpDownArrow:
   FullForm: UpDownArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 UpEquilibrium:
   name: UpEquilibrium
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -8184,15 +7907,14 @@ UpEquilibrium:
   FullForm: UpEquilibrium[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 UpSet:
   name: UpSet
   actual-precedence: 50
-  Precedence: 40
-  Precedence-corrected: 40
+  precedence: 40
   WolframLanguageData: 75
   WolframLanguageData-corrected: 75
   UnicodeCharacters.tr:
@@ -8205,15 +7927,14 @@ UpSet:
   FullForm: UpSet[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
 UpSetDelayed:
   name: UpSetDelayed
   actual-precedence: 50
-  Precedence: 40
-  Precedence-corrected: 40
+  precedence: 40
   WolframLanguageData: 75
   WolframLanguageData-corrected: 75
   UnicodeCharacters.tr:
@@ -8226,15 +7947,14 @@ UpSetDelayed:
   FullForm: UpSetDelayed[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
 UpTee:
   name: UpTee
   actual-precedence: 220
-  Precedence: 190
-  Precedence-corrected: 190
+  precedence: 190
   WolframLanguageData: 60
   WolframLanguageData-corrected: 60
   UnicodeCharacters.tr: 390
@@ -8247,15 +7967,14 @@ UpTee:
   FullForm: UpTee[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Left
+  associativity: left
   meaningful: false
   # comments:
 
 UpTeeArrow:
   name: UpTeeArrow
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -8268,15 +7987,14 @@ UpTeeArrow:
   FullForm: UpTeeArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 UpperLeftArrow:
   name: UpperLeftArrow
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -8289,15 +8007,14 @@ UpperLeftArrow:
   FullForm: UpperLeftArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 UpperRightArrow:
   name: UpperRightArrow
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -8310,15 +8027,14 @@ UpperRightArrow:
   FullForm: UpperRightArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 Vee:
   name: Vee
   actual-precedence: 530
-  Precedence: 430
-  Precedence-corrected: 430
+  precedence: 430
   WolframLanguageData:
   WolframLanguageData-corrected: 35
   UnicodeCharacters.tr: 550
@@ -8331,15 +8047,14 @@ Vee:
   FullForm: Vee[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 VerticalBar:
   name: VerticalBar
   actual-precedence: 350
-  Precedence: 280
-  Precedence-corrected: 280
+  precedence: 280
   WolframLanguageData: 50
   WolframLanguageData-corrected: 50.5
   UnicodeCharacters.tr: 390
@@ -8352,15 +8067,14 @@ VerticalBar:
   FullForm: VerticalBar[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 VerticalSeparator:
   name: VerticalSeparator
   actual-precedence: 80
-  Precedence: 60
-  Precedence-corrected: 60
+  precedence: 60
   WolframLanguageData: 73
   WolframLanguageData-corrected: 73
   UnicodeCharacters.tr: 202
@@ -8373,15 +8087,14 @@ VerticalSeparator:
   FullForm: VerticalSeparator[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 VerticalTilde:
   name: VerticalTilde
   actual-precedence: 470
-  Precedence: 370
-  Precedence-corrected: 370
+  precedence: 370
   WolframLanguageData: 41
   WolframLanguageData-corrected: 41
   UnicodeCharacters.tr: 490
@@ -8394,15 +8107,14 @@ VerticalTilde:
   FullForm: VerticalTilde[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 Wedge:
   name: Wedge
   actual-precedence: 540
-  Precedence: 440
-  Precedence-corrected: 440
+  precedence: 440
   WolframLanguageData: 34
   WolframLanguageData-corrected: 34
   UnicodeCharacters.tr: 560
@@ -8415,15 +8127,15 @@ Wedge:
   FullForm: Wedge[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
 WhiteCornerBracket:
   name: WhiteCornerBracket
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr: -10
@@ -8436,15 +8148,14 @@ WhiteCornerBracket:
   FullForm:
   arity: Unary
   affix: Matchfix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
 Xnor:
   name: Xnor
   actual-precedence: 280
-  Precedence: 215
-  Precedence-corrected: 215
+  precedence: 215
   WolframLanguageData: 56
   WolframLanguageData-corrected: 56
   UnicodeCharacters.tr: 325
@@ -8457,15 +8168,14 @@ Xnor:
   FullForm: Xnor[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
 Xor:
   name: Xor
   actual-precedence: 280
-  Precedence: 215
-  Precedence-corrected: 215
+  precedence: 215
   WolframLanguageData: 56
   WolframLanguageData-corrected: 56
   UnicodeCharacters.tr: 325
@@ -8478,6 +8188,6 @@ Xor:
   FullForm: Xor[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:

@@ -2,14 +2,14 @@
 # This scripts reads the data from named-characters and converts it to the
 # format used by the library internally
 
-import click
-
 import json
-import yaml
+import os.path as osp
 import re
 import sys
-import os.path as osp
 from pathlib import Path
+
+import click
+import yaml
 
 try:
     from mathics_scanner.version import __version__
@@ -18,12 +18,12 @@ except ImportError:
     __version__ = "unknown"
 
 
-def get_srcdir():
+def get_srcdir() -> str:
     filename = osp.normcase(osp.dirname(osp.abspath(__file__)))
     return osp.realpath(filename)
 
 
-def read(*rnames):
+def read(*rnames) -> str:
     return open(osp.join(get_srcdir(), *rnames)).read()
 
 

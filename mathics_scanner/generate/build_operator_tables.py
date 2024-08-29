@@ -4,9 +4,9 @@
 
 import json
 import os.path as osp
-import re
 import sys
 from pathlib import Path
+from typing import Dict
 
 import click
 import yaml
@@ -33,56 +33,16 @@ except ImportError:
     __version__ = "unknown"
 
 
-def get_srcdir():
+def get_srcdir() -> str:
     filename = osp.normcase(osp.dirname(osp.abspath(__file__)))
     return osp.realpath(filename)
 
 
-def read(*rnames):
+def read(*rnames) -> str:
     return open(osp.join(get_srcdir(), *rnames)).read()
 
 
-def re_from_keys(d: dict) -> str:
-    """
-    Takes dictionary whose keys are all strings and returns a regex that
-    matches any of the keys
-    """
-
-    # The sorting is necessary to prevent the shorter keys from obscuring the
-    # longer ones when pattern-matchig
-    return "|".join(sorted(map(re.escape, d.keys()), key=lambda k: (-len(k), k)))
-
-
-def get_plain_text(char_name: str, char_data: dict, use_unicode: bool) -> str:
-    """:param char_name: named character to look up.
-    :param char_data: translation dictionary.
-
-    :returns: if use_unicode is True, then return the standard unicode equivalent
-    of the name if there is one.
-
-    Note that this may sometimes be different than the WL unicode
-    value. An example of this is DifferentialD.
-
-    If use_unicode is False, return char_name if it consists of only
-    ASCII characters.
-
-    Failing above, return \\[char_name]]
-    """
-    uni = char_data.get("unicode-equivalent", char_data.get("ascii"))
-
-    if uni is not None:
-        if use_unicode:
-            return uni
-
-        # If all of the characters in the unicode representation are valid
-        # ASCII then return the unicode representation
-        elif all(ord(c) < 127 for c in uni):
-            return uni
-
-    return f"\\[{char_name}]"
-
-
-def compile_tables(data: dict) -> dict:
+def compile_tables(data: Dict[str, dict]) -> Dict[str, dict]:
     """
     Compiles the general table into the tables used internally by the library.
     This facilitates fast access of this information by clients needing this
@@ -91,7 +51,7 @@ def compile_tables(data: dict) -> dict:
     operator_precedence = {}
 
     for k, v in data.items():
-        operator_precedence[k] = v["Precedence-corrected"]
+        operator_precedence[k] = v["precedence"]
 
     return {
         "operator-precedence": operator_precedence,
