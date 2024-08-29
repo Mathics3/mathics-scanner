@@ -32,6 +32,6 @@ jobs:
       run: |
         # Until next Mathics3/mathics-core release is out...
         git checkout https://github.com/Mathics3/mathics-core.git
-        (cd src/mathics3 && make install)
+        (cd src/mathics3 && git checkout table-driven-operator-precedence && make install)
         # pip install Mathics3[full]
         MATHICS_CHARACTER_ENCODING="ASCII" make check-mathics
