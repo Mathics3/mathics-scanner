@@ -120,11 +120,11 @@ AHat:
   wl-unicode-name: LATIN SMALL LETTER A WITH CIRCUMFLEX
 
 # See also RawVerticalBar.
-Alternative:
+Alternatives:
   ascii: "|"
   has-unicode-inverse: false
   is-letter-like: false
-  operator-name: Alternative
+  operator-name: Alternatives
 
 Apply:
   ascii: "@@"
@@ -5621,6 +5621,12 @@ MapAll:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: MapAll
+
+MapApply:
+  ascii: "@@@"
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: MapApply
 
 Mars:
   has-unicode-inverse: false

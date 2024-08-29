@@ -158,27 +158,6 @@ Apply:
   meaningful: true
   # comments:
 
-ApplyFirstLevel:
-  name: Apply
-  actual-precedence: 810
-  Precedence-Function: 620
-  precedence: 625
-  WolframLanguageData: 16
-  WolframLanguageData-corrected: 16
-  UnicodeCharacters.tr:
-  UnicodeCharacters-corrected.tr: 710
-  # N-tokens: {}
-  # L-tokens: {"@@@"}
-  # O-tokens: {}
-  # usage: {{"expr1", "@@@", "expr2"}}
-  # parse: {"Apply", "[", "expr1", ",", "expr2", "{", "1", "}", "]"}
-  FullForm: Apply[expr1, expr2, List[1]]
-  arity: Binary
-  affix: Infix
-  associativity: Right
-  meaningful: true
-  # comments:
-
 Association:
   name: Association
   actual-precedence: -10
@@ -3583,6 +3562,27 @@ MapAll:
   meaningful: true
   # comments:
 
+MapApply:
+  name: MapApply
+  actual-precedence: 810
+  Precedence-Function: 620
+  precedence: 625
+  WolframLanguageData: 16
+  WolframLanguageData-corrected: 16
+  UnicodeCharacters.tr:
+  UnicodeCharacters-corrected.tr: 710
+  # N-tokens: {}
+  # L-tokens: {"@@@"}
+  # O-tokens: {}
+  # usage: {{"expr1", "@@@", "expr2"}}
+  # parse: {"Apply", "[", "expr1", ",", "expr2", "{", "1", "}", "]"}
+  FullForm: MapApply[expr1, expr2, List[1]]
+  arity: Binary
+  affix: Infix
+  associativity: Right
+  meaningful: true
+  # comments:
+
 MaxLimit:
   name: MaxLimit
   actual-precedence: 410
@@ -4985,27 +4985,6 @@ NotVerticalBar:
   meaningful: false
   # comments:
 
-NumberAccuracy:
-  name: None
-  actual-precedence: -10
-  Precedence-Function: 670
-  precedence: 760
-  WolframLanguageData:
-  WolframLanguageData-corrected: 1
-  UnicodeCharacters.tr:
-  UnicodeCharacters-corrected.tr: -10
-  # N-tokens: {}
-  # L-tokens: {"``"}
-  # O-tokens: {}
-  # usage: {{"number", "``", "s"}}
-  # parse: {"number", "``", "s"}
-  FullForm: number``s
-  arity: Binary
-  affix: Infix
-  associativity: Non
-  meaningful: true
-  # comments: Specifies the accuracy (in number of digits to the right of decimal) of number, where s is a positive decimal expressed without using ^^ or `. A magnitude must come after ``.
-
 NumberBase:
   name: None
   actual-precedence: -10
@@ -5825,6 +5804,27 @@ RadicalBox:
   associativity: Right
   meaningful: true
   # comments:
+
+RawBackquote:
+  name: None
+  actual-precedence: -10
+  Precedence-Function: 670
+  precedence: 760
+  WolframLanguageData:
+  WolframLanguageData-corrected: 1
+  UnicodeCharacters.tr:
+  UnicodeCharacters-corrected.tr: -10
+  # N-tokens: {}
+  # L-tokens: {"``"}
+  # O-tokens: {}
+  # usage: {{"number", "``", "s"}}
+  # parse: {"number", "``", "s"}
+  FullForm: number``s
+  arity: Binary
+  affix: Infix
+  associativity: Non
+  meaningful: true
+  # comments: Specifies the accuracy (in number of digits to the right of decimal) of number, where s is a positive decimal expressed without using ^^ or `. A magnitude must come after ``.
 
 Repeated:
   name: Repeated
