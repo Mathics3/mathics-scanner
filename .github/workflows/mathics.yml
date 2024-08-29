@@ -11,11 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.9]
+        python-version: ['3.11']
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install OS dependencies
@@ -31,7 +31,7 @@ jobs:
     - name: Test Mathics3
       run: |
         # Until next Mathics3/mathics-core release is out...
-        python -m pip install -e git+https://github.com/Mathics3/mathics-core#egg=Mathics3[full]
-        (cd src/mathics3 && ./admin-tools/make-op-tables.sh )
+        python -m pip install -e git+https://github.com/Mathics3/mathics-core@table-driven-operator-precedence#egg=Mathics3[full]
+        (cd src/mathics3 && make )
         # pip install Mathics3[full]
         MATHICS_CHARACTER_ENCODING="ASCII" make check-mathics
