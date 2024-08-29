@@ -8,6 +8,7 @@ GIT2CL ?= admin-tools/git2cl
 PYTHON ?= python
 PIP ?= pip3
 RM  ?= rm
+PIP_INSTALL_OPTS ?=
 
 .PHONY: all build \
    check check-full check-mathics clean \
@@ -35,7 +36,7 @@ build: mathics_scanner/data/characters.json
 
 #: Set up to run from the source tree
 develop: mathics_scanner/data/characters.json mathics_scanner/data/operators.json
-	$(PIP) install -e .
+	$(PIP) install -e .$(PIP_INSTALL_OPTS)
 
 #: Build distribution
 dist: admin-tools/make-dist.sh
