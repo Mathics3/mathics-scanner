@@ -8,6 +8,7 @@ GIT2CL ?= admin-tools/git2cl
 PYTHON ?= python
 PIP ?= pip3
 RM  ?= rm
+PIP_INSTALL_OPTS ?=
 
 .PHONY: all build \
    check check-full check-mathics clean \
@@ -25,19 +26,23 @@ mathics_scanner/data/characters.json: mathics_scanner/data/named-characters.yml
 	$(PIP) install -r requirements-dev.txt
 	$(PYTHON) mathics_scanner/generate/build_tables.py
 
+mathics_scanner/data/operators.json: mathics_scanner/data/operators.yml
+	$(PIP) install -r requirements-dev.txt
+	$(PYTHON) mathics_scanner/generate/build_operator_tables.py
+
 #: build everything needed to install
 build: mathics_scanner/data/characters.json
 	$(PYTHON) ./setup.py build
 
 #: Set up to run from the source tree
-develop: mathics_scanner/data/characters.json
-	$(PIP) install -e .
+develop: mathics_scanner/data/characters.json mathics_scanner/data/operators.json
+	$(PIP) install -e .$(PIP_INSTALL_OPTS)
 
 #: Build distribution
 dist: admin-tools/make-dist.sh
 	$(SHELL) admin-tools/make-dist.sh
 
-#: Install mathics
+#: Install mathics-scanner
 install: build
 	$(PYTHON) setup.py install
 
@@ -57,7 +62,7 @@ doc:  mathics_scanner/data/characters.json
 #: Remove derived files
 clean:
 	@find . -name *.pyc -type f -delete; \
-	$(RM) -f mathics_scanner/data/characters.json || true
+	$(RM) -f mathics_scanner/data/characters.json mathics_scanner/data/operators.json || true
 
 #: Run py.test tests. Use environment variable "o" for pytest options
 pytest: mathics_scanner/data/characters.json

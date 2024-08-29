@@ -18,6 +18,8 @@
 /.python-version
 /Mathics_Scanner.egg-info
 ChangeLog
+ChangeLog.orig
+ChangeLog.rej
 Documents/
 Homepage/
 Test/
@@ -25,5 +27,6 @@ _Copies_/
 _Database_/
 build/
 /mathics_scanner/data/characters.json
+/mathics_scanner/data/operators.json
 dist/
 tmp

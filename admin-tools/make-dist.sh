@@ -3,11 +3,11 @@ PACKAGE=mathics-scanner
 
 # FIXME put some of the below in a common routine
 function finish {
-  cd $owd
+  cd $mathics_scanner_owd
 }
 
 cd $(dirname ${BASH_SOURCE[0]})
-owd=$(pwd)
+mathics_scanner_owd=$(pwd)
 trap finish EXIT
 
 if ! source ./pyenv-versions ; then
@@ -25,9 +25,9 @@ for pyversion in $PYVERSIONS; do
     # pip bdist_egg create too-general wheels. So
     # we narrow that by moving the generated wheel.
 
-    # Pick out first two number of version, e.g. 3.7.9 -> 37
     rm -fr build
     python setup.py bdist_egg
 done
 python setup.py bdist_wheel
 python ./setup.py sdist
+finish

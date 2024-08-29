@@ -1,4 +1,8 @@
-# Information about named characters, indexed by their fully qualified names.
+# Information about Wolfram Language named characters, indexed by
+# their fully qualified names.
+#
+# Field definitions
+# =================
 #
 #   amslatex: If present, the AMSLaTeX name of the symbol. AMSLaTeX symbols
 #             are a superset of normal LaTeX symbols. If the replacement

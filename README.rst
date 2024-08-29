@@ -48,13 +48,14 @@ To regenerate JSON-format tables run:
 
 ::
 
-   $ mathics-generate-json-table
+   $ mathics3-generate-json-table
+   $ mathics3-operator-json-table
 
-Without options ``mathics-generate-json-table`` produces the maximum set of correspondences.
+Without options ``mathics3-generate-json-table`` produces the maximum set of correspondences.
 
 In most applications though you may need just a few of these. The
 ``--field`` option can be used to narrow the list of entries to output in JSON. Run
-``mathics-generate-json-table --help`` for a full list of fields.
+``mathics3-generate-json-table --help`` for a full list of fields.
 
 
 Implementation

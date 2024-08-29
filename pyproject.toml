@@ -11,9 +11,9 @@ build-backend = "setuptools.build_meta"
 name = "Mathics_Scanner"
 description = "Character Tables and Tokenizer for Mathics and the Wolfram Language."
 dependencies = [
-    "PyYAML",     # Used in mathics-generate-json-table
+    "PyYAML",     # Used in mathics3-generate-json-table
     "chardet",    # Used in mathics_scanner.feed
-    "click",      # Using in CLI: mathics-generate-json-table
+    "click",      # Using in CLI: mathics3-generate-json-table
 ]
 requires-python = ">=3.8"
 readme = "README.rst"
@@ -53,7 +53,8 @@ full = [
 ]
 
 [project.scripts]
-mathics-generate-json-table = "mathics_scanner.generate.build_tables:main"
+mathics3-generate-json-table = "mathics_scanner.generate.build_tables:main"
+mathics3-generate-operator-json-table = "mathics_scanner.generate.build_operator_tables:main"
 
 [tool.setuptools]
 packages = [
