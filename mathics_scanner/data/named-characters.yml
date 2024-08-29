@@ -23,7 +23,15 @@
 #                   is letter-like. Therefore we can write: \[alpha]5 = "testing"
 #
 #   operator-name: If present, this symbol is a Mathics operator with
-#                  whose class name is the given name. For example Divide.
+#                  whose class name is the given name. For example, the
+#                  Divide operator, "/" is here.  But some symbols like
+#                  "`" or "." inside a number could be considered
+#                  either an operator or as part of a lexical symbol.
+#                  "operators.yml" may contain use these symbols, while here we
+#                  might not (or we might). Also, from an operator
+#                  prespective, an operator name like "Association"
+#                  might have *two* (bracketing) symbols associated
+#                  here: "LeftAssociation" and "RightAssociation".
 #
 #   unicode-equivalent: A unicode equivalent for the named-character, if it
 #                       exists. If it is the same as "ascii", please omit.
@@ -131,7 +139,6 @@ Apply:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Apply
-  precedence: 620
 
 
 # @@@ replaces heads at level 1 of expr by f.
@@ -142,14 +149,12 @@ Apply3Ats:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Apply
-  precedence: 620
 
 ApplyTo:
   ascii: "//="
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: ApplyTo
-  precedence: 620
 
 ARing:
   esc-alias: ao
@@ -222,7 +227,6 @@ And:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: And
-  precedence: 215
   unicode-equivalent: "\u2227"
   unicode-equivalent-name: LOGICAL AND
   wl-unicode: "\u2227"
@@ -1388,7 +1392,6 @@ Colon:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Colon
-  precedence: 80
   unicode-equivalent: "\u2236"
   unicode-equivalent-name: RATIO
   wl-unicode: "\u2236"
@@ -1413,14 +1416,12 @@ CompoundExpression:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: CompoundExpression
-  precedence: 10
 
 Condition:
   ascii: "/;"
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Condition
-  precedence: 130
 
 Conditioned:
   has-unicode-inverse: false
@@ -1656,7 +1657,6 @@ Decrement:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Decrement
-  precedence: 660
 
 # See also PatternTest and RawQuestion
 
@@ -1665,7 +1665,6 @@ Definition:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Definition
-  precedence: 670
 
 # \[Degree] is letter-like, not an operator, which is
 # mutually exclusive.
@@ -1725,7 +1724,6 @@ Derivative:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Derivative
-  precedence: 670
 
 DescendingEllipsis:
   has-unicode-inverse: false
@@ -1861,7 +1859,6 @@ Divide:
   has-unicode-inverse: true
   is-letter-like: false
   operator-name: Divide
-  precedence: 470
   unicode-equivalent: "\xF7"
   unicode-equivalent-name: DIVISION SIGN
   wl-unicode: "\xF7"
@@ -1888,7 +1885,6 @@ Dot:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Dot
-  precedence: 490
 
 DotEqual:
   esc-alias: .=
@@ -2037,7 +2033,6 @@ DoubleRightArrow:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: DoubleRightArrow
-  precedence: 200
   unicode-equivalent: "\u21D2"
   unicode-equivalent-name: RIGHTWARDS DOUBLE ARROW
   wl-unicode: "\u21D2"
@@ -2971,7 +2966,6 @@ Equal:
   unicode-equivalent: "\u2A75"
   unicode-equivalent-name: TWO CONSECUTIVE EQUALS SIGNS
   wl-unicode: "\uF431"
-  precedence: 290
 
 EqualTilde:
   esc-alias: =~
@@ -2998,7 +2992,6 @@ Equivalent:
   has-unicode-inverse: true
   is-letter-like: false
   operator-name: Equivalent
-  precedence: 205
   unicode-equivalent: "\u29E6"
   unicode-equivalent-name: GLEICH STARK
   wl-unicode: "\u29E6"
@@ -3069,7 +3062,6 @@ Factorial:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Factorial
-  precedence: 610
 
 # Double Factorial
 # https://en.wikipedia.org/wiki/Double_factorial
@@ -3079,7 +3071,6 @@ Factorial2:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Factorial2
-  precedence: 610
 
 FiLigature:
   has-unicode-inverse: false
@@ -4198,7 +4189,6 @@ Function:
   operator-name: Function
   # This needs to be greater than Alternative "|" which is
   # 160 so that we don't treat |-> as | ->.
-  precedence: 161
   unicode-equivalent: "\u21A6"
   unicode-equivalent-name: RIGHTWARDS ARROW FROM BAR
   wl-unicode: "\uF4A1"
@@ -4212,7 +4202,6 @@ FunctionAmpersand:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Function
-  precedence: 90
 
 Gamma:
   esc-alias: g
@@ -4236,7 +4225,6 @@ Get:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Get
-  precedence: 720
 
 Gimel:
   amslatex: "\\gimel"
@@ -4983,7 +4971,6 @@ Increment:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Increment
-  precedence: 660
 
 IndentingNewLine:
   esc-alias: nl
@@ -5015,7 +5002,6 @@ Information:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Information
-  precedence: 0
 
 Integral:
   amslatex: "\\int"
@@ -5034,7 +5020,6 @@ InterpretedBox:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: InterpretedBox
-  precedence: 670
 
 Intersection:
   esc-alias: inter
@@ -5614,7 +5599,6 @@ Map:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Map
-  precedence: 620
 
 MapAll:
   ascii: "//@"
@@ -5670,7 +5654,6 @@ Message:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Message
-  precedence: 750
 
 Mho:
   esc-alias: mho
@@ -5695,7 +5678,6 @@ Minus:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Minus
-  precedence: 480
 
 MinusPlus:
   amslatex: "\\mp"
@@ -5856,7 +5838,6 @@ Not:
   is-letter-like: false
   unicode-equivalent: "\u00AC"
   operator-name: Not
-  precedence: 230
   wl-unicode: "\00AC"
   wl-unicode-name: NOT SIGN
 
@@ -5912,7 +5893,6 @@ NotEqual:
   unicode-equivalent-name: NOT EQUAL TO
   wl-unicode: "\u2260"
   wl-unicode-name: NOT EQUAL TO
-  precedence: 290
 
 NotEqualTilde:
   esc-alias: '!=~'
@@ -6448,7 +6428,6 @@ Option:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Option
-  precedence: 140
 
 OptionKey:
   esc-alias: opt
@@ -6518,7 +6497,6 @@ PatternTest:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: PatternTest
-  precedence: 660
 
 PermutationProduct:
   has-unicode-inverse: true
@@ -6582,7 +6560,6 @@ Plus:
   has-unicode-inverse: true
   is-letter-like: false
   operator-name: Plus
-  precedence: 310
   unicode-equivalent-name: PLUS SIGN
   wl-unicode: "+"
   wl-unicode-name: PLUS SIGN
@@ -6610,14 +6587,12 @@ Postfix:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Postfix
-  precedence: 70
 
 Power:
   ascii: "^"
   has-unicode-inverse: true
   is-letter-like: false
   operator-name: Power
-  precedence: 590
   unicode-equivalent-name: CIRCUMFLEX ACCENT
   wl-unicode: "^"
   wl-unicode-name: CIRCUMFLEX ACCENT
@@ -6720,14 +6695,12 @@ Put:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Put
-  precedence: 30
 
 PutAppend:
   ascii: ">>>"
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: PutAppend
-  precedence: 30
 
 QuarterNote:
   has-unicode-inverse: false
@@ -6959,28 +6932,24 @@ Repeated:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Repeated
-  precedence: 170
 
 RepeatedNull:
   ascii: "..."
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: RepeatedNull
-  precedence: 170
 
 ReplaceAll:
   ascii: "/."
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: ReplaceAll
-  precedence: 110
 
 ReplaceRepeated:
   ascii: "//."
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: ReplaceRepeated
-  precedence: 110
 
 ReturnIndicator:
   esc-alias: ret
@@ -7148,7 +7117,6 @@ RightDoubleBracketingBar:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: RightDoubleBracketingBar
-  precedence: 215
   unicode-equivalent: "\u2016"
   unicode-equivalent-name: DOUBLE VERTICAL LINE
   wl-unicode: "\uF606"
@@ -7352,7 +7320,6 @@ Rule:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Rule
-  precedence: 120
   unicode-equivalent: "\u2192"
   unicode-equivalent-name: RIGHTWARDS ARROW
   wl-unicode: "\uF522"
@@ -7363,7 +7330,6 @@ RuleDelayed:
   esc-alias: ":>"
   has-unicode-inverse: true
   operator-name: RuleDelayed
-  precedence: 120
   is-letter-like: false
   unicode-equivalent: "\u29F4"
   unicode-equivalent-name: RULE-DELAYED
@@ -7410,7 +7376,6 @@ SameQ:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: SameQ
-  precedence: 290
 
 Sampi:
   esc-alias: sa
@@ -7964,7 +7929,6 @@ Set:
   has-unicode-inverse: true
   is-letter-like: false
   operator-name: Set
-  precedence: 40
   unicode-equivalent-name: EQUALS SIGN
   wl-unicode: "="
   wl-unicode-name: EQUALS SIGN
@@ -8076,7 +8040,6 @@ Span:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Span
-  precedence: 305
 
 SpanFromAbove:
   esc-alias: sfa
@@ -8220,14 +8183,12 @@ StringExpression:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: StringExpression
-  precedence: 135
 
 StringJoin:
   ascii: "<>"
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: StringJoin
-  precedence: 600
 
 Subset:
   amslatex: "\\subset"
@@ -8448,7 +8409,6 @@ Tilde:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Tilde
-  precedence: 290
   # Since we have an esc-alias, we add wl-unicode for the checker to work.
   unicode-equivalent: "\u223c"
   wl-unicode: "\u223c"
@@ -8492,7 +8452,6 @@ Times:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Times
-  precedence: 400
   unicode-equivalent: "\xD7"
   unicode-equivalent-name: MULTIPLICATION SIGN
   wl-unicode: "\xD7"
@@ -8652,7 +8611,6 @@ Unset:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Unset
-  precedence: 670
 
 UpArrow:
   amslatex: "\\uparrow"
@@ -8767,7 +8725,6 @@ UpSet:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: UpSet
-  precedence: 40
 
 UpSetDelayed:
   ascii: "^:="
@@ -8986,7 +8943,6 @@ Xor:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Xor
-  precedence: 215
   unicode-equivalent: "\u22BB"
   unicode-equivalent-name: XOR
   wl-unicode: "\u22BB"
