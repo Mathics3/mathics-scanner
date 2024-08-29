@@ -13,12 +13,27 @@
 # The primary here used here is an "unofficial" operator name. This is the name used by
 # WL when there is one. When there is not a name, then we make one up.
 
+
+# Many fields below mention precedence. This is an integer used in
+# specifying the order operations occur when one operator is
+# juxtaposed against another operator.  A higher value means that the
+# operator binds before an operator with a lower value.
+
+# For example, the Times precedence 400 is higher than the Plus
+# precedence 310 because a + b * c is a + (b * c), not (a + b) * c.
+# Precedence is also used to force multi-character ASCII symbols like
+# |-> to get treated as one unit and not split into two operators like
+# | and ->. So the precedence of |-> has to be higher than |.
+#
+
+
 # Field definitions
 # =================
 
 #   name: this is the WL name. When it exits it will also be the name of the key
 #   actual-precedence: a precedence value that programs can use.
 #   Precedence: the value returned for this operator using the WL function Precedence[]
+#   Precedence-corrected: the value used in Mathics3.
 #   WolframLangageData: a value returned using WolframLangageData[???]
 #   usage: when it exists, an example of the use of this operator
 #   parse: when "usage" exists, a parse of the example
@@ -43,8 +58,7 @@
 AddTo:
   name: AddTo
   actual-precedence: 120
-  Precedence: 100
-  Precedence-corrected: 100
+  precedence: 100
   WolframLanguageData: 69
   WolframLanguageData-corrected: 69
   UnicodeCharacters.tr:
@@ -64,8 +78,7 @@ AddTo:
 Alternatives:
   name: Alternatives
   actual-precedence: 190
-  Precedence: 160
-  Precedence-corrected: 160
+  precedence: 160
   WolframLanguageData: 63
   WolframLanguageData-corrected: 64
   UnicodeCharacters.tr:
@@ -85,8 +98,8 @@ Alternatives:
 And:
   name: And
   actual-precedence: 290
-  Precedence: 215
-  Precedence-corrected: 220
+  Precedence-Function: 215
+  precedence: 220
   WolframLanguageData: 55
   WolframLanguageData-corrected: 55
   UnicodeCharacters.tr: 330
@@ -106,8 +119,8 @@ And:
 AngleBracket:
   name: AngleBracket
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr: -10
@@ -127,8 +140,8 @@ AngleBracket:
 Apply:
   name: Apply
   actual-precedence: 820
-  Precedence: 620
-  Precedence-corrected: 626
+  Precedence-Function: 620
+  precedence: 626
   WolframLanguageData: 16
   WolframLanguageData-corrected: 16
   UnicodeCharacters.tr:
@@ -148,8 +161,8 @@ Apply:
 ApplyFirstLevel:
   name: Apply
   actual-precedence: 810
-  Precedence: 620
-  Precedence-corrected: 625
+  Precedence-Function: 620
+  precedence: 625
   WolframLanguageData: 16
   WolframLanguageData-corrected: 16
   UnicodeCharacters.tr:
@@ -169,8 +182,8 @@ ApplyFirstLevel:
 Association:
   name: Association
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr: -10
@@ -190,8 +203,8 @@ Association:
 AutoMatch:
   name: AutoMatch
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr: -10
@@ -211,8 +224,7 @@ AutoMatch:
 Backslash:
   name: Backslash
   actual-precedence: 560
-  Precedence: 460
-  Precedence-corrected: 460
+  precedence: 460
   WolframLanguageData: 32
   WolframLanguageData-corrected: 32
   UnicodeCharacters.tr: 580
@@ -232,8 +244,7 @@ Backslash:
 Because:
   name: Because
   actual-precedence: 60
-  Precedence: 50
-  Precedence-corrected: 50
+  precedence: 50
   WolframLanguageData: 74
   WolframLanguageData-corrected: 74
   UnicodeCharacters.tr: 201
@@ -253,8 +264,8 @@ Because:
 BlackLenticularBracket:
   name: BlackLenticularBracket
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr: -10
@@ -274,8 +285,7 @@ BlackLenticularBracket:
 Blank:
   name: Blank
   actual-precedence: 980
-  Precedence: 730
-  Precedence-corrected: 730
+  precedence: 730
   WolframLanguageData: 5
   WolframLanguageData-corrected: 5
   UnicodeCharacters.tr:
@@ -295,8 +305,7 @@ Blank:
 BlankHead:
   name: Blank
   actual-precedence: 1010
-  Precedence: 730
-  Precedence-corrected: 730
+  precedence: 730
   WolframLanguageData: 5
   WolframLanguageData-corrected: 5
   UnicodeCharacters.tr:
@@ -316,8 +325,7 @@ BlankHead:
 BlankNullSequence:
   name: BlankNullSequence
   actual-precedence: 980
-  Precedence: 730
-  Precedence-corrected: 730
+  precedence: 730
   WolframLanguageData: 5
   WolframLanguageData-corrected: 5
   UnicodeCharacters.tr:
@@ -337,8 +345,7 @@ BlankNullSequence:
 BlankNullSequenceHead:
   name: BlankNullSequence
   actual-precedence: 1010
-  Precedence: 730
-  Precedence-corrected: 730
+  precedence: 730
   WolframLanguageData: 5
   WolframLanguageData-corrected: 5
   UnicodeCharacters.tr:
@@ -358,8 +365,7 @@ BlankNullSequenceHead:
 BlankOptional:
   name: Blank
   actual-precedence: 980
-  Precedence: 730
-  Precedence-corrected: 730
+  precedence: 730
   WolframLanguageData: 5
   WolframLanguageData-corrected: 5
   UnicodeCharacters.tr:
@@ -379,8 +385,7 @@ BlankOptional:
 BlankSequence:
   name: BlankSequence
   actual-precedence: 980
-  Precedence: 730
-  Precedence-corrected: 730
+  precedence: 730
   WolframLanguageData: 5
   WolframLanguageData-corrected: 5
   UnicodeCharacters.tr:
@@ -400,8 +405,7 @@ BlankSequence:
 BlankSequenceHead:
   name: BlankSequence
   actual-precedence: 1010
-  Precedence: 730
-  Precedence-corrected: 730
+  precedence: 730
   WolframLanguageData: 5
   WolframLanguageData-corrected: 5
   UnicodeCharacters.tr:
@@ -421,8 +425,8 @@ BlankSequenceHead:
 BoxGroup:
   name: None
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr:
@@ -442,8 +446,8 @@ BoxGroup:
 BracketingBar:
   name: BracketingBar
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr: -10
@@ -463,8 +467,7 @@ BracketingBar:
 Cap:
   name: Cap
   actual-precedence: 450
-  Precedence: 350
-  Precedence-corrected: 350
+  precedence: 350
   WolframLanguageData: 43
   WolframLanguageData-corrected: 42.5
   UnicodeCharacters.tr: 470
@@ -484,8 +487,8 @@ Cap:
 CapitalDifferentialD:
   name: CapitalDifferentialD
   actual-precedence: 720
-  Precedence: 550
-  Precedence-corrected: 560
+  Precedence-Function: 550
+  precedence: 560
   WolframLanguageData:
   WolframLanguageData-corrected: 23
   UnicodeCharacters.tr: 630
@@ -505,8 +508,8 @@ CapitalDifferentialD:
 Ceiling:
   name: Ceiling
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr: -10
@@ -526,8 +529,7 @@ Ceiling:
 CenterDot:
   name: CenterDot
   actual-precedence: 510
-  Precedence: 410
-  Precedence-corrected: 410
+  precedence: 410
   WolframLanguageData:
   WolframLanguageData-corrected: 37
   UnicodeCharacters.tr: 530
@@ -547,8 +549,7 @@ CenterDot:
 CircleDot:
   name: CircleDot
   actual-precedence: 660
-  Precedence: 520
-  Precedence-corrected: 520
+  precedence: 520
   WolframLanguageData: 26, 35, 37
   WolframLanguageData-corrected: 26
   UnicodeCharacters.tr: 605
@@ -568,8 +569,7 @@ CircleDot:
 CircleMinus:
   name: CircleMinus
   actual-precedence: 430
-  Precedence: 330
-  Precedence-corrected: 330
+  precedence: 330
   WolframLanguageData: 44
   WolframLanguageData-corrected: 44
   UnicodeCharacters.tr: 450
@@ -589,8 +589,7 @@ CircleMinus:
 CirclePlus:
   name: CirclePlus
   actual-precedence: 430
-  Precedence: 330
-  Precedence-corrected: 330
+  precedence: 330
   WolframLanguageData: 44
   WolframLanguageData-corrected: 44
   UnicodeCharacters.tr: 450
@@ -610,8 +609,7 @@ CirclePlus:
 CircleTimes:
   name: CircleTimes
   actual-precedence: 520
-  Precedence: 420
-  Precedence-corrected: 420
+  precedence: 420
   WolframLanguageData:
   WolframLanguageData-corrected: 36
   UnicodeCharacters.tr: 540
@@ -631,8 +629,8 @@ CircleTimes:
 ClockwiseContourIntegral:
   name: ClockwiseContourIntegral
   actual-precedence: 420
-  Precedence: 670
-  Precedence-corrected: 325
+  Precedence-Function: 670
+  precedence: 325
   WolframLanguageData:
   WolframLanguageData-corrected: 45
   UnicodeCharacters.tr: 455
@@ -652,8 +650,7 @@ ClockwiseContourIntegral:
 Colon:
   name: Colon
   actual-precedence: 100
-  Precedence: 80
-  Precedence-corrected: 80
+  precedence: 80
   WolframLanguageData: 71
   WolframLanguageData-corrected: 71
   UnicodeCharacters.tr: 205
@@ -673,8 +670,8 @@ Colon:
 Composition:
   name: Composition
   actual-precedence: 860
-  Precedence: 625
-  Precedence-corrected: 655
+  Precedence-Function: 625
+  precedence: 655
   WolframLanguageData: 13
   WolframLanguageData-corrected: 13
   UnicodeCharacters.tr:
@@ -694,8 +691,7 @@ Composition:
 CompoundExpression:
   name: CompoundExpression
   actual-precedence: 30
-  Precedence: 10
-  Precedence-corrected: 10
+  precedence: 10
   WolframLanguageData: 77
   WolframLanguageData-corrected: 77
   UnicodeCharacters.tr:
@@ -715,8 +711,7 @@ CompoundExpression:
 CompoundExpressionNull:
   name: CompoundExpression
   actual-precedence: 30
-  Precedence: 10
-  Precedence-corrected: 10
+  precedence: 10
   WolframLanguageData: 77
   WolframLanguageData-corrected: 77
   UnicodeCharacters.tr:
@@ -736,8 +731,7 @@ CompoundExpressionNull:
 Condition:
   name: Condition
   actual-precedence: 170
-  Precedence: 130
-  Precedence-corrected: 130
+  precedence: 130
   WolframLanguageData: 66
   WolframLanguageData-corrected: 66
   UnicodeCharacters.tr:
@@ -757,8 +751,7 @@ Condition:
 Conditioned:
   name: Conditioned
   actual-precedence: 240
-  Precedence: 195
-  Precedence-corrected: 195
+  precedence: 195
   WolframLanguageData:
   WolframLanguageData-corrected: 59.5
   UnicodeCharacters.tr: 305
@@ -778,8 +771,7 @@ Conditioned:
 Congruent:
   name: Congruent
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -799,8 +791,8 @@ Congruent:
 Conjugate:
   name: Conjugate
   actual-precedence: 780
-  Precedence: 670
-  Precedence-corrected: 605
+  Precedence-Function: 670
+  precedence: 605
   WolframLanguageData: 18
   WolframLanguageData-corrected: 18
   UnicodeCharacters.tr: 695
@@ -820,8 +812,8 @@ Conjugate:
 ConjugateTranspose:
   name: ConjugateTranspose
   actual-precedence: 780
-  Precedence: 670
-  Precedence-corrected: 605
+  Precedence-Function: 670
+  precedence: 605
   WolframLanguageData: 18
   WolframLanguageData-corrected: 18
   UnicodeCharacters.tr: 695
@@ -841,8 +833,8 @@ ConjugateTranspose:
 ContextPathSeparator:
   name: None
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr:
@@ -862,8 +854,7 @@ ContextPathSeparator:
 ContinuedFractionK:
   name: ContinuedFractionK
   actual-precedence: 480
-  Precedence: 380
-  Precedence-corrected: 380
+  precedence: 380
   WolframLanguageData:
   WolframLanguageData-corrected: 40
   UnicodeCharacters.tr: 500
@@ -883,8 +874,8 @@ ContinuedFractionK:
 ContourIntegral:
   name: ContourIntegral
   actual-precedence: 420
-  Precedence: 670
-  Precedence-corrected: 325
+  Precedence-Function: 670
+  precedence: 325
   WolframLanguageData:
   WolframLanguageData-corrected: 45
   UnicodeCharacters.tr: 455
@@ -904,8 +895,7 @@ ContourIntegral:
 Coproduct:
   name: Coproduct
   actual-precedence: 460
-  Precedence: 360
-  Precedence-corrected: 360
+  precedence: 360
   WolframLanguageData: 42
   WolframLanguageData-corrected: 42
   UnicodeCharacters.tr: 500
@@ -925,8 +915,8 @@ Coproduct:
 CornerBracket:
   name: CornerBracket
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr: -10
@@ -946,8 +936,8 @@ CornerBracket:
 CounterClockwiseContourIntegral:
   name: CounterClockwiseContourIntegral
   actual-precedence: 420
-  Precedence: 670
-  Precedence-corrected: 325
+  Precedence-Function: 670
+  precedence: 325
   WolframLanguageData:
   WolframLanguageData-corrected: 45
   UnicodeCharacters.tr: 455
@@ -967,8 +957,7 @@ CounterClockwiseContourIntegral:
 Cross:
   name: Cross
   actual-precedence: 640
-  Precedence: 500
-  Precedence-corrected: 500
+  precedence: 500
   WolframLanguageData: 28
   WolframLanguageData-corrected: 28
   UnicodeCharacters.tr: 603
@@ -988,8 +977,7 @@ Cross:
 Cup:
   name: Cup
   actual-precedence: 440
-  Precedence: 340
-  Precedence-corrected: 340
+  precedence: 340
   WolframLanguageData: 43
   WolframLanguageData-corrected: 43
   UnicodeCharacters.tr: 460
@@ -1009,8 +997,7 @@ Cup:
 CupCap:
   name: CupCap
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -1030,8 +1017,8 @@ CupCap:
 Curl:
   name: Curl
   actual-precedence: 590
-  Precedence: 670
-  Precedence-corrected: 485
+  Precedence-Function: 670
+  precedence: 485
   WolframLanguageData:
   WolframLanguageData-corrected: 29.8
   UnicodeCharacters.tr: 601
@@ -1051,8 +1038,8 @@ Curl:
 CurlyDoubleQuote:
   name: CurlyDoubleQuote
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr: -10
@@ -1072,8 +1059,8 @@ CurlyDoubleQuote:
 CurlyQuote:
   name: CurlyQuote
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr: -10
@@ -1093,8 +1080,8 @@ CurlyQuote:
 Decrement:
   name: Decrement
   actual-precedence: 880
-  Precedence: 660
-  Precedence-corrected: 665
+  Precedence-Function: 660
+  precedence: 665
   WolframLanguageData: 11
   WolframLanguageData-corrected: 11
   UnicodeCharacters.tr:
@@ -1114,8 +1101,7 @@ Decrement:
 Del:
   name: Del
   actual-precedence: 710
-  Precedence: 550
-  Precedence-corrected: 550
+  precedence: 550
   WolframLanguageData: 24
   WolframLanguageData-corrected: 24
   UnicodeCharacters.tr: 620
@@ -1135,8 +1121,8 @@ Del:
 Derivative:
   name: Derivative
   actual-precedence: 770
-  Precedence: 670
-  Precedence-corrected: 604
+  Precedence-Function: 670
+  precedence: 604
   WolframLanguageData: 19
   WolframLanguageData-corrected: 19
   UnicodeCharacters.tr:
@@ -1156,8 +1142,7 @@ Derivative:
 Diamond:
   name: Diamond
   actual-precedence: 550
-  Precedence: 450
-  Precedence-corrected: 450
+  precedence: 450
   WolframLanguageData: 33
   WolframLanguageData-corrected: 33
   UnicodeCharacters.tr: 570
@@ -1177,8 +1162,7 @@ Diamond:
 DifferenceDelta:
   name: DifferenceDelta
   actual-precedence: 710
-  Precedence: 550
-  Precedence-corrected: 550
+  precedence: 550
   WolframLanguageData: 24
   WolframLanguageData-corrected: 24
   UnicodeCharacters.tr: 620
@@ -1198,8 +1182,8 @@ DifferenceDelta:
 DifferentialD:
   name: DifferentialD
   actual-precedence: 720
-  Precedence: 550
-  Precedence-corrected: 560
+  Precedence-Function: 550
+  precedence: 560
   WolframLanguageData:
   WolframLanguageData-corrected: 23
   UnicodeCharacters.tr: 630
@@ -1219,8 +1203,7 @@ DifferentialD:
 DirectedEdge:
   name: DirectedEdge
   actual-precedence: 370
-  Precedence: 295
-  Precedence-corrected: 295
+  precedence: 295
   WolframLanguageData:
   WolframLanguageData-corrected: 49.0
   UnicodeCharacters.tr: 395
@@ -1240,8 +1223,7 @@ DirectedEdge:
 DiscreteRatio:
   name: DiscreteRatio
   actual-precedence: 710
-  Precedence: 550
-  Precedence-corrected: 550
+  precedence: 550
   WolframLanguageData: 24
   WolframLanguageData-corrected: 24
   UnicodeCharacters.tr: 620
@@ -1261,8 +1243,7 @@ DiscreteRatio:
 DiscreteShift:
   name: DiscreteShift
   actual-precedence: 710
-  Precedence: 550
-  Precedence-corrected: 550
+  precedence: 550
   WolframLanguageData: 24
   WolframLanguageData-corrected: 24
   UnicodeCharacters.tr: 620
@@ -1282,8 +1263,7 @@ DiscreteShift:
 Distributed:
   name: Distributed
   actual-precedence: 320
-  Precedence: 250
-  Precedence-corrected: 250
+  precedence: 250
   WolframLanguageData:
   WolframLanguageData-corrected: 52
   UnicodeCharacters.tr: 360
@@ -1303,8 +1283,8 @@ Distributed:
 Divergence:
   name: Divergence
   actual-precedence: 590
-  Precedence: 550
-  Precedence-corrected: 485
+  Precedence-Function: 550
+  precedence: 485
   WolframLanguageData:
   WolframLanguageData-corrected: 29.8
   UnicodeCharacters.tr: 601
@@ -1324,8 +1304,7 @@ Divergence:
 Divide:
   name: Divide
   actual-precedence: 570
-  Precedence: 470
-  Precedence-corrected: 470
+  precedence: 470
   WolframLanguageData: 31
   WolframLanguageData-corrected: 31
   UnicodeCharacters.tr: 590
@@ -1345,8 +1324,7 @@ Divide:
 DivideBy:
   name: DivideBy
   actual-precedence: 120
-  Precedence: 100
-  Precedence-corrected: 100
+  precedence: 100
   WolframLanguageData: 69
   WolframLanguageData-corrected: 69
   UnicodeCharacters.tr:
@@ -1366,8 +1344,8 @@ DivideBy:
 Divides:
   name: Divides
   actual-precedence: 570
-  Precedence: 670
-  Precedence-corrected: 470
+  Precedence-Function: 670
+  precedence: 470
   WolframLanguageData:
   WolframLanguageData-corrected: 31
   UnicodeCharacters.tr: 590
@@ -1387,8 +1365,7 @@ Divides:
 Dot:
   name: Dot
   actual-precedence: 630
-  Precedence: 490
-  Precedence-corrected: 490
+  precedence: 490
   WolframLanguageData: 29
   WolframLanguageData-corrected: 29
   UnicodeCharacters.tr:
@@ -1408,8 +1385,7 @@ Dot:
 DotEqual:
   name: DotEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -1429,8 +1405,8 @@ DotEqual:
 DoubleAngleBracket:
   name: DoubleAngleBracket
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr: -10
@@ -1450,8 +1426,8 @@ DoubleAngleBracket:
 DoubleBracketingBar:
   name: DoubleBracketingBar
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr: -10
@@ -1471,8 +1447,8 @@ DoubleBracketingBar:
 DoubleContourIntegral:
   name: DoubleContourIntegral
   actual-precedence: 420
-  Precedence: 670
-  Precedence-corrected: 325
+  Precedence-Function: 670
+  precedence: 325
   WolframLanguageData:
   WolframLanguageData-corrected: 45
   UnicodeCharacters.tr: 455
@@ -1492,8 +1468,7 @@ DoubleContourIntegral:
 DoubleDownArrow:
   name: DoubleDownArrow
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -1513,8 +1488,7 @@ DoubleDownArrow:
 DoubleLeftArrow:
   name: DoubleLeftArrow
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -1534,8 +1508,7 @@ DoubleLeftArrow:
 DoubleLeftRightArrow:
   name: DoubleLeftRightArrow
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -1555,8 +1528,7 @@ DoubleLeftRightArrow:
 DoubleLeftTee:
   name: DoubleLeftTee
   actual-precedence: 220
-  Precedence: 190
-  Precedence-corrected: 190
+  precedence: 190
   WolframLanguageData: 60
   WolframLanguageData-corrected: 60
   UnicodeCharacters.tr: 300
@@ -1576,8 +1548,7 @@ DoubleLeftTee:
 DoubleLongLeftArrow:
   name: DoubleLongLeftArrow
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -1597,8 +1568,7 @@ DoubleLongLeftArrow:
 DoubleLongLeftRightArrow:
   name: DoubleLongLeftRightArrow
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -1618,8 +1588,7 @@ DoubleLongLeftRightArrow:
 DoubleLongRightArrow:
   name: DoubleLongRightArrow
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -1639,8 +1608,7 @@ DoubleLongRightArrow:
 DoubleRightArrow:
   name: DoubleRightArrow
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -1660,8 +1628,7 @@ DoubleRightArrow:
 DoubleRightTee:
   name: DoubleRightTee
   actual-precedence: 230
-  Precedence: 190
-  Precedence-corrected: 190
+  precedence: 190
   WolframLanguageData:
   WolframLanguageData-corrected: 59.6
   UnicodeCharacters.tr: 300
@@ -1681,8 +1648,7 @@ DoubleRightTee:
 DoubleUpArrow:
   name: DoubleUpArrow
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -1702,8 +1668,7 @@ DoubleUpArrow:
 DoubleUpDownArrow:
   name: DoubleUpDownArrow
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -1723,8 +1688,7 @@ DoubleUpDownArrow:
 DoubleVerticalBar:
   name: DoubleVerticalBar
   actual-precedence: 350
-  Precedence: 280
-  Precedence-corrected: 280
+  precedence: 280
   WolframLanguageData: 50
   WolframLanguageData-corrected: 50.5
   UnicodeCharacters.tr: 390
@@ -1744,8 +1708,7 @@ DoubleVerticalBar:
 DownArrow:
   name: DownArrow
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -1765,8 +1728,7 @@ DownArrow:
 DownArrowBar:
   name: DownArrowBar
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -1786,8 +1748,7 @@ DownArrowBar:
 DownArrowUpArrow:
   name: DownArrowUpArrow
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -1807,8 +1768,7 @@ DownArrowUpArrow:
 DownLeftRightVector:
   name: DownLeftRightVector
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -1828,8 +1788,7 @@ DownLeftRightVector:
 DownLeftTeeVector:
   name: DownLeftTeeVector
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -1849,8 +1808,7 @@ DownLeftTeeVector:
 DownLeftVector:
   name: DownLeftVector
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -1870,8 +1828,7 @@ DownLeftVector:
 DownLeftVectorBar:
   name: DownLeftVectorBar
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -1891,8 +1848,7 @@ DownLeftVectorBar:
 DownRightTeeVector:
   name: DownRightTeeVector
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -1912,8 +1868,7 @@ DownRightTeeVector:
 DownRightVector:
   name: DownRightVector
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -1933,8 +1888,7 @@ DownRightVector:
 DownRightVectorBar:
   name: DownRightVectorBar
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -1954,8 +1908,7 @@ DownRightVectorBar:
 DownTee:
   name: DownTee
   actual-precedence: 220
-  Precedence: 190
-  Precedence-corrected: 190
+  precedence: 190
   WolframLanguageData: 60
   WolframLanguageData-corrected: 60
   UnicodeCharacters.tr: 300
@@ -1975,8 +1928,7 @@ DownTee:
 DownTeeArrow:
   name: DownTeeArrow
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -1996,8 +1948,7 @@ DownTeeArrow:
 Element:
   name: Element
   actual-precedence: 320
-  Precedence: 250
-  Precedence-corrected: 250
+  precedence: 250
   WolframLanguageData: 52
   WolframLanguageData-corrected: 52
   UnicodeCharacters.tr: 360
@@ -2017,8 +1968,7 @@ Element:
 Equal:
   name: Equal
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData: 50
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -2038,8 +1988,7 @@ Equal:
 EqualTilde:
   name: EqualTilde
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -2059,8 +2008,7 @@ EqualTilde:
 Equilibrium:
   name: Equilibrium
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -2080,8 +2028,7 @@ Equilibrium:
 Equivalent:
   name: Equivalent
   actual-precedence: 260
-  Precedence: 205
-  Precedence-corrected: 205
+  precedence: 205
   WolframLanguageData: 58
   WolframLanguageData-corrected: 58
   UnicodeCharacters.tr: 315
@@ -2101,8 +2048,7 @@ Equivalent:
 Exists:
   name: Exists
   actual-precedence: 310
-  Precedence: 240
-  Precedence-corrected: 240
+  precedence: 240
   WolframLanguageData: 53
   WolframLanguageData-corrected: 53
   UnicodeCharacters.tr: 350
@@ -2122,8 +2068,7 @@ Exists:
 ExpectationE:
   name: ExpectationE
   actual-precedence: 420
-  Precedence: 325
-  Precedence-corrected: 325
+  precedence: 325
   WolframLanguageData:
   WolframLanguageData-corrected: 45
   UnicodeCharacters.tr: 455
@@ -2143,8 +2088,7 @@ ExpectationE:
 Factorial:
   name: Factorial
   actual-precedence: 790
-  Precedence: 610
-  Precedence-corrected: 610
+  precedence: 610
   WolframLanguageData: 17
   WolframLanguageData-corrected: 17
   UnicodeCharacters.tr:
@@ -2164,8 +2108,7 @@ Factorial:
 Factorial2:
   name: Factorial2
   actual-precedence: 790
-  Precedence: 610
-  Precedence-corrected: 610
+  precedence: 610
   WolframLanguageData: 17
   WolframLanguageData-corrected: 17
   UnicodeCharacters.tr:
@@ -2185,8 +2128,8 @@ Factorial2:
 Floor:
   name: Floor
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr: -10
@@ -2206,8 +2149,7 @@ Floor:
 ForAll:
   name: ForAll
   actual-precedence: 310
-  Precedence: 240
-  Precedence-corrected: 240
+  precedence: 240
   WolframLanguageData: 53
   WolframLanguageData-corrected: 53
   UnicodeCharacters.tr: 350
@@ -2227,8 +2169,8 @@ ForAll:
 FormBox:
   name: FormBox
   actual-precedence: 20
-  Precedence: 670
-  Precedence-corrected: 5
+  Precedence-Function: 670
+  precedence: 5
   WolframLanguageData: 78
   WolframLanguageData-corrected: 78
   UnicodeCharacters.tr:
@@ -2248,8 +2190,8 @@ FormBox:
 FractionBox:
   name: FractionBox
   actual-precedence: 570
-  Precedence: 670
-  Precedence-corrected: 470
+  Precedence-Function: 670
+  precedence: 470
   WolframLanguageData:
   WolframLanguageData-corrected: 31
   UnicodeCharacters.tr:
@@ -2269,8 +2211,8 @@ FractionBox:
 FullwidthAngleBracket:
   name: FullwidthAngleBracket
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr: -10
@@ -2290,8 +2232,8 @@ FullwidthAngleBracket:
 FullwidthCurlyBracket:
   name: FullwidthCurlyBracket
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr: -10
@@ -2311,8 +2253,8 @@ FullwidthCurlyBracket:
 FullwidthParenthesis:
   name: FullwidthParenthesis
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr: -10
@@ -2332,8 +2274,8 @@ FullwidthParenthesis:
 FullwidthSquareBracket:
   name: FullwidthSquareBracket
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr: -10
@@ -2353,8 +2295,7 @@ FullwidthSquareBracket:
 Function:
   name: Function
   actual-precedence: 110
-  Precedence: 90
-  Precedence-corrected: 90
+  precedence: 90
   WolframLanguageData: 70
   WolframLanguageData-corrected: 70
   UnicodeCharacters.tr:
@@ -2374,8 +2315,7 @@ Function:
 FunctionApply:
   name: None
   actual-precedence: 890
-  Precedence: 670
-  Precedence-corrected: 670
+  precedence: 670
   WolframLanguageData:
   WolframLanguageData-corrected: 10
   UnicodeCharacters.tr:
@@ -2395,8 +2335,7 @@ FunctionApply:
 FunctionApplyInfix:
   name: Infix
   actual-precedence: 830
-  Precedence: 630
-  Precedence-corrected: 630
+  precedence: 630
   WolframLanguageData:
   WolframLanguageData-corrected: 15
   UnicodeCharacters.tr:
@@ -2416,8 +2355,7 @@ FunctionApplyInfix:
 FunctionApplyPostfix:
   name: Postfix
   actual-precedence: 90
-  Precedence: 70
-  Precedence-corrected: 70
+  precedence: 70
   WolframLanguageData:
   WolframLanguageData-corrected: 72
   UnicodeCharacters.tr:
@@ -2437,8 +2375,7 @@ FunctionApplyPostfix:
 FunctionApplyPrefix:
   name: Prefix
   actual-precedence: 840
-  Precedence: 640
-  Precedence-corrected: 640
+  precedence: 640
   WolframLanguageData:
   WolframLanguageData-corrected: 14
   UnicodeCharacters.tr: 730
@@ -2458,8 +2395,7 @@ FunctionApplyPrefix:
 Get:
   name: Get
   actual-precedence: 970
-  Precedence: 720
-  Precedence-corrected: 720
+  precedence: 720
   WolframLanguageData: 6
   WolframLanguageData-corrected: 6
   UnicodeCharacters.tr:
@@ -2479,8 +2415,8 @@ Get:
 Gradient:
   name: Gradient
   actual-precedence: 700
-  Precedence: 550
-  Precedence-corrected: 545
+  Precedence-Function: 550
+  precedence: 545
   WolframLanguageData:
   WolframLanguageData-corrected: 24
   UnicodeCharacters.tr: 615
@@ -2500,8 +2436,7 @@ Gradient:
 Greater:
   name: Greater
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData: 50
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr:
@@ -2521,8 +2456,7 @@ Greater:
 GreaterEqual:
   name: GreaterEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData: 50
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -2542,8 +2476,7 @@ GreaterEqual:
 GreaterEqualLess:
   name: GreaterEqualLess
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -2563,8 +2496,7 @@ GreaterEqualLess:
 GreaterFullEqual:
   name: GreaterFullEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -2584,8 +2516,7 @@ GreaterFullEqual:
 GreaterGreater:
   name: GreaterGreater
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -2605,8 +2536,7 @@ GreaterGreater:
 GreaterLess:
   name: GreaterLess
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -2626,8 +2556,8 @@ GreaterLess:
 GreaterSlantEqual:
   name: GreaterSlantEqual
   actual-precedence: 360
-  Precedence: 670
-  Precedence-corrected: 290
+  Precedence-Function: 670
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -2647,8 +2577,7 @@ GreaterSlantEqual:
 GreaterTilde:
   name: GreaterTilde
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -2668,8 +2597,7 @@ GreaterTilde:
 HumpDownHump:
   name: HumpDownHump
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -2689,8 +2617,7 @@ HumpDownHump:
 HumpEqual:
   name: HumpEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -2710,8 +2637,8 @@ HumpEqual:
 ImplicitSequence:
   name: Comma
   actual-precedence: 10
-  Precedence: 670
-  Precedence-corrected: 755
+  Precedence-Function: 670
+  precedence: 755
   WolframLanguageData:
   WolframLanguageData-corrected: 79
   UnicodeCharacters.tr: 1
@@ -2731,8 +2658,7 @@ ImplicitSequence:
 Implies:
   name: Implies
   actual-precedence: 250
-  Precedence: 200
-  Precedence-corrected: 200
+  precedence: 200
   WolframLanguageData: 59
   WolframLanguageData-corrected: 59
   UnicodeCharacters.tr: 310
@@ -2752,8 +2678,8 @@ Implies:
 Increment:
   name: Increment
   actual-precedence: 880
-  Precedence: 660
-  Precedence-corrected: 665
+  Precedence-Function: 660
+  precedence: 665
   WolframLanguageData: 11
   WolframLanguageData-corrected: 11
   UnicodeCharacters.tr:
@@ -2773,8 +2699,8 @@ Increment:
 InlinePart:
   name: InlinePart
   actual-precedence: 900
-  Precedence: 670
-  Precedence-corrected: 675
+  Precedence-Function: 670
+  precedence: 675
   WolframLanguageData:
   WolframLanguageData-corrected: 9.5
   UnicodeCharacters.tr: 763
@@ -2794,8 +2720,7 @@ InlinePart:
 Integrate:
   name: Integral
   actual-precedence: 420
-  Precedence: 325
-  Precedence-corrected: 325
+  precedence: 325
   WolframLanguageData: 23
   WolframLanguageData-corrected: 45
   UnicodeCharacters.tr: 455
@@ -2815,8 +2740,8 @@ Integrate:
 InterpretBoxes:
   name: None
   actual-precedence: 930
-  Precedence: 670
-  Precedence-corrected: 695
+  Precedence-Function: 670
+  precedence: 695
   WolframLanguageData:
   WolframLanguageData-corrected: 7.6
   UnicodeCharacters.tr:
@@ -2836,8 +2761,7 @@ InterpretBoxes:
 Intersection:
   name: Intersection
   actual-precedence: 390
-  Precedence: 305
-  Precedence-corrected: 305
+  precedence: 305
   WolframLanguageData: 47
   WolframLanguageData-corrected: 47
   UnicodeCharacters.tr: 420
@@ -2857,8 +2781,8 @@ Intersection:
 InvisiblePostfixScriptBase:
   name: InvisiblePostfixScriptBase
   actual-precedence: 960
-  Precedence: 670
-  Precedence-corrected: 715
+  Precedence-Function: 670
+  precedence: 715
   WolframLanguageData:
   WolframLanguageData-corrected: 6.5
   UnicodeCharacters.tr: 800
@@ -2878,8 +2802,8 @@ InvisiblePostfixScriptBase:
 InvisiblePrefixScriptBase:
   name: InvisiblePrefixScriptBase
   actual-precedence: 960
-  Precedence: 670
-  Precedence-corrected: 715
+  Precedence-Function: 670
+  precedence: 715
   WolframLanguageData:
   WolframLanguageData-corrected: 6.5
   UnicodeCharacters.tr: 800
@@ -2899,8 +2823,8 @@ InvisiblePrefixScriptBase:
 Laplacian:
   name: Laplacian
   actual-precedence: 710
-  Precedence: 670
-  Precedence-corrected: 550
+  Precedence-Function: 670
+  precedence: 550
   WolframLanguageData:
   WolframLanguageData-corrected: 24
   UnicodeCharacters.tr: 620
@@ -2920,8 +2844,7 @@ Laplacian:
 LeftArrow:
   name: LeftArrow
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -2941,8 +2864,7 @@ LeftArrow:
 LeftArrowBar:
   name: LeftArrowBar
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -2962,8 +2884,7 @@ LeftArrowBar:
 LeftArrowRightArrow:
   name: LeftArrowRightArrow
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -2983,8 +2904,7 @@ LeftArrowRightArrow:
 LeftDownTeeVector:
   name: LeftDownTeeVector
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -3004,8 +2924,7 @@ LeftDownTeeVector:
 LeftDownVector:
   name: LeftDownVector
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -3025,8 +2944,7 @@ LeftDownVector:
 LeftDownVectorBar:
   name: LeftDownVectorBar
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -3046,8 +2964,7 @@ LeftDownVectorBar:
 LeftRightArrow:
   name: LeftRightArrow
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -3067,8 +2984,7 @@ LeftRightArrow:
 LeftRightVector:
   name: LeftRightVector
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -3088,8 +3004,7 @@ LeftRightVector:
 LeftTee:
   name: LeftTee
   actual-precedence: 220
-  Precedence: 190
-  Precedence-corrected: 190
+  precedence: 190
   WolframLanguageData: 60
   WolframLanguageData-corrected: 60
   UnicodeCharacters.tr: 300
@@ -3109,8 +3024,7 @@ LeftTee:
 LeftTeeArrow:
   name: LeftTeeArrow
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -3130,8 +3044,7 @@ LeftTeeArrow:
 LeftTeeVector:
   name: LeftTeeVector
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -3151,8 +3064,7 @@ LeftTeeVector:
 LeftTriangle:
   name: LeftTriangle
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -3172,8 +3084,7 @@ LeftTriangle:
 LeftTriangleBar:
   name: LeftTriangleBar
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -3193,8 +3104,7 @@ LeftTriangleBar:
 LeftTriangleEqual:
   name: LeftTriangleEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -3214,8 +3124,7 @@ LeftTriangleEqual:
 LeftUpDownVector:
   name: LeftUpDownVector
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -3235,8 +3144,7 @@ LeftUpDownVector:
 LeftUpTeeVector:
   name: LeftUpTeeVector
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -3256,8 +3164,7 @@ LeftUpTeeVector:
 LeftUpVector:
   name: LeftUpVector
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -3277,8 +3184,7 @@ LeftUpVector:
 LeftUpVectorBar:
   name: LeftUpVectorBar
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -3298,8 +3204,7 @@ LeftUpVectorBar:
 LeftVector:
   name: LeftVector
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -3319,8 +3224,7 @@ LeftVector:
 LeftVectorBar:
   name: LeftVectorBar
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -3340,8 +3244,7 @@ LeftVectorBar:
 Less:
   name: Less
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData: 50
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr:
@@ -3361,8 +3264,7 @@ Less:
 LessEqual:
   name: LessEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData: 50
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -3382,8 +3284,7 @@ LessEqual:
 LessEqualGreater:
   name: LessEqualGreater
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -3403,8 +3304,7 @@ LessEqualGreater:
 LessFullEqual:
   name: LessFullEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -3424,8 +3324,7 @@ LessFullEqual:
 LessGreater:
   name: LessGreater
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -3445,8 +3344,7 @@ LessGreater:
 LessLess:
   name: LessLess
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -3466,8 +3364,8 @@ LessLess:
 LessSlantEqual:
   name: LessSlantEqual
   actual-precedence: 360
-  Precedence: 670
-  Precedence-corrected: 290
+  Precedence-Function: 670
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -3487,8 +3385,7 @@ LessSlantEqual:
 LessTilde:
   name: LessTilde
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -3508,8 +3405,7 @@ LessTilde:
 Limit:
   name: Limit
   actual-precedence: 410
-  Precedence: 320
-  Precedence-corrected: 320
+  precedence: 320
   WolframLanguageData:
   WolframLanguageData-corrected: 45.5
   UnicodeCharacters.tr: 440
@@ -3529,8 +3425,8 @@ Limit:
 List:
   name: List
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData: 1
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr:
@@ -3550,8 +3446,7 @@ List:
 LongLeftArrow:
   name: LongLeftArrow
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -3571,8 +3466,7 @@ LongLeftArrow:
 LongLeftRightArrow:
   name: LongLeftRightArrow
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -3592,8 +3486,7 @@ LongLeftRightArrow:
 LongRightArrow:
   name: LongRightArrow
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -3613,8 +3506,7 @@ LongRightArrow:
 LowerLeftArrow:
   name: LowerLeftArrow
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -3634,8 +3526,7 @@ LowerLeftArrow:
 LowerRightArrow:
   name: LowerRightArrow
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -3655,8 +3546,7 @@ LowerRightArrow:
 Map:
   name: Map
   actual-precedence: 800
-  Precedence: 620
-  Precedence-corrected: 620
+  precedence: 620
   WolframLanguageData: 16
   WolframLanguageData-corrected: 16
   UnicodeCharacters.tr:
@@ -3676,8 +3566,7 @@ Map:
 MapAll:
   name: MapAll
   actual-precedence: 800
-  Precedence: 620
-  Precedence-corrected: 620
+  precedence: 620
   WolframLanguageData: 16
   WolframLanguageData-corrected: 16
   UnicodeCharacters.tr:
@@ -3697,8 +3586,7 @@ MapAll:
 MaxLimit:
   name: MaxLimit
   actual-precedence: 410
-  Precedence: 320
-  Precedence-corrected: 320
+  precedence: 320
   WolframLanguageData:
   WolframLanguageData-corrected: 45.5
   UnicodeCharacters.tr: 440
@@ -3718,8 +3606,7 @@ MaxLimit:
 MessageName:
   name: MessageName
   actual-precedence: 1060
-  Precedence: 750
-  Precedence-corrected: 750
+  precedence: 750
   WolframLanguageData: 2
   WolframLanguageData-corrected: 2
   UnicodeCharacters.tr:
@@ -3739,8 +3626,7 @@ MessageName:
 MinLimit:
   name: MinLimit
   actual-precedence: 410
-  Precedence: 320
-  Precedence-corrected: 320
+  precedence: 320
   WolframLanguageData:
   WolframLanguageData-corrected: 45.5
   UnicodeCharacters.tr: 440
@@ -3760,8 +3646,7 @@ MinLimit:
 Minus:
   name: Minus
   actual-precedence: 580
-  Precedence: 480
-  Precedence-corrected: 480
+  precedence: 480
   WolframLanguageData: 30
   WolframLanguageData-corrected: 30
   UnicodeCharacters.tr: 430
@@ -3781,8 +3666,7 @@ Minus:
 MinusPlus:
   name: MinusPlus
   actual-precedence: 400
-  Precedence: 310
-  Precedence-corrected: 310
+  precedence: 310
   WolframLanguageData: 46
   WolframLanguageData-corrected: 46
   UnicodeCharacters.tr: 430
@@ -3802,8 +3686,7 @@ MinusPlus:
 NamedBlank:
   name: Blank
   actual-precedence: 990
-  Precedence: 730
-  Precedence-corrected: 730
+  precedence: 730
   WolframLanguageData: 5
   WolframLanguageData-corrected: 5
   UnicodeCharacters.tr:
@@ -3823,8 +3706,7 @@ NamedBlank:
 NamedBlankHead:
   name: Blank
   actual-precedence: 1000
-  Precedence: 730
-  Precedence-corrected: 730
+  precedence: 730
   WolframLanguageData: 5
   WolframLanguageData-corrected: 5
   UnicodeCharacters.tr:
@@ -3844,8 +3726,7 @@ NamedBlankHead:
 NamedBlankNullSequence:
   name: BlankNullSequence
   actual-precedence: 990
-  Precedence: 730
-  Precedence-corrected: 730
+  precedence: 730
   WolframLanguageData: 5
   WolframLanguageData-corrected: 5
   UnicodeCharacters.tr:
@@ -3865,8 +3746,7 @@ NamedBlankNullSequence:
 NamedBlankNullSequenceHead:
   name: BlankNullSequence
   actual-precedence: 1000
-  Precedence: 730
-  Precedence-corrected: 730
+  precedence: 730
   WolframLanguageData: 5
   WolframLanguageData-corrected: 5
   UnicodeCharacters.tr:
@@ -3886,8 +3766,7 @@ NamedBlankNullSequenceHead:
 NamedBlankOptional:
   name: Blank
   actual-precedence: 990
-  Precedence: 730
-  Precedence-corrected: 730
+  precedence: 730
   WolframLanguageData: 5
   WolframLanguageData-corrected: 5
   UnicodeCharacters.tr:
@@ -3907,8 +3786,7 @@ NamedBlankOptional:
 NamedBlankSequence:
   name: BlankSequence
   actual-precedence: 990
-  Precedence: 730
-  Precedence-corrected: 730
+  precedence: 730
   WolframLanguageData: 5
   WolframLanguageData-corrected: 5
   UnicodeCharacters.tr:
@@ -3928,8 +3806,7 @@ NamedBlankSequence:
 NamedBlankSequenceHead:
   name: BlankSequence
   actual-precedence: 1000
-  Precedence: 730
-  Precedence-corrected: 730
+  precedence: 730
   WolframLanguageData: 5
   WolframLanguageData-corrected: 5
   UnicodeCharacters.tr:
@@ -3949,8 +3826,8 @@ NamedBlankSequenceHead:
 Nand:
   name: Nand
   actual-precedence: 290
-  Precedence: 215
-  Precedence-corrected: 220
+  Precedence-Function: 215
+  precedence: 220
   WolframLanguageData: 55
   WolframLanguageData-corrected: 55
   UnicodeCharacters.tr: 330
@@ -3970,8 +3847,7 @@ Nand:
 NestedGreaterGreater:
   name: NestedGreaterGreater
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -3991,8 +3867,7 @@ NestedGreaterGreater:
 NestedLessLess:
   name: NestedLessLess
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4012,8 +3887,7 @@ NestedLessLess:
 NonCommutativeMultiply:
   name: NonCommutativeMultiply
   actual-precedence: 650
-  Precedence: 510
-  Precedence-corrected: 510
+  precedence: 510
   WolframLanguageData: 27
   WolframLanguageData-corrected: 27
   UnicodeCharacters.tr:
@@ -4033,8 +3907,8 @@ NonCommutativeMultiply:
 Nor:
   name: Nor
   actual-precedence: 270
-  Precedence: 215
-  Precedence-corrected: 210
+  Precedence-Function: 215
+  precedence: 210
   WolframLanguageData: 57
   WolframLanguageData-corrected: 57
   UnicodeCharacters.tr: 320
@@ -4054,8 +3928,7 @@ Nor:
 Not:
   name: Not
   actual-precedence: 300
-  Precedence: 230
-  Precedence-corrected: 230
+  precedence: 230
   WolframLanguageData: 54
   WolframLanguageData-corrected: 54
   UnicodeCharacters.tr: 340
@@ -4075,8 +3948,7 @@ Not:
 NotCongruent:
   name: NotCongruent
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4096,8 +3968,7 @@ NotCongruent:
 NotCupCap:
   name: NotCupCap
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4117,8 +3988,7 @@ NotCupCap:
 NotDoubleVerticalBar:
   name: NotDoubleVerticalBar
   actual-precedence: 350
-  Precedence: 280
-  Precedence-corrected: 280
+  precedence: 280
   WolframLanguageData: 50
   WolframLanguageData-corrected: 50.5
   UnicodeCharacters.tr: 390
@@ -4138,8 +4008,7 @@ NotDoubleVerticalBar:
 NotElement:
   name: NotElement
   actual-precedence: 320
-  Precedence: 250
-  Precedence-corrected: 250
+  precedence: 250
   WolframLanguageData: 52
   WolframLanguageData-corrected: 52
   UnicodeCharacters.tr: 360
@@ -4159,8 +4028,7 @@ NotElement:
 NotEqualTilde:
   name: NotEqualTilde
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4180,8 +4048,7 @@ NotEqualTilde:
 NotExists:
   name: NotExists
   actual-precedence: 310
-  Precedence: 240
-  Precedence-corrected: 240
+  precedence: 240
   WolframLanguageData: 53
   WolframLanguageData-corrected: 53
   UnicodeCharacters.tr: 350
@@ -4201,8 +4068,7 @@ NotExists:
 NotGreater:
   name: NotGreater
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4222,8 +4088,7 @@ NotGreater:
 NotGreaterEqual:
   name: NotGreaterEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4243,8 +4108,7 @@ NotGreaterEqual:
 NotGreaterFullEqual:
   name: NotGreaterFullEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4264,8 +4128,7 @@ NotGreaterFullEqual:
 NotGreaterGreater:
   name: NotGreaterGreater
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4285,8 +4148,7 @@ NotGreaterGreater:
 NotGreaterLess:
   name: NotGreaterLess
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4306,8 +4168,7 @@ NotGreaterLess:
 NotGreaterSlantEqual:
   name: NotGreaterSlantEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4327,8 +4188,7 @@ NotGreaterSlantEqual:
 NotGreaterTilde:
   name: NotGreaterTilde
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4348,8 +4208,7 @@ NotGreaterTilde:
 NotHumpDownHump:
   name: NotHumpDownHump
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4369,8 +4228,7 @@ NotHumpDownHump:
 NotHumpEqual:
   name: NotHumpEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4390,8 +4248,7 @@ NotHumpEqual:
 NotLeftTriangle:
   name: NotLeftTriangle
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4411,8 +4268,7 @@ NotLeftTriangle:
 NotLeftTriangleBar:
   name: NotLeftTriangleBar
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4432,8 +4288,7 @@ NotLeftTriangleBar:
 NotLeftTriangleEqual:
   name: NotLeftTriangleEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4453,8 +4308,7 @@ NotLeftTriangleEqual:
 NotLess:
   name: NotLess
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4474,8 +4328,7 @@ NotLess:
 NotLessEqual:
   name: NotLessEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4495,8 +4348,7 @@ NotLessEqual:
 NotLessFullEqual:
   name: NotLessFullEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4516,8 +4368,7 @@ NotLessFullEqual:
 NotLessGreater:
   name: NotLessGreater
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4537,8 +4388,7 @@ NotLessGreater:
 NotLessLess:
   name: NotLessLess
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4558,8 +4408,7 @@ NotLessLess:
 NotLessSlantEqual:
   name: NotLessSlantEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4579,8 +4428,7 @@ NotLessSlantEqual:
 NotLessTilde:
   name: NotLessTilde
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4600,8 +4448,7 @@ NotLessTilde:
 NotNestedGreaterGreater:
   name: NotNestedGreaterGreater
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4621,8 +4468,7 @@ NotNestedGreaterGreater:
 NotNestedLessLess:
   name: NotNestedLessLess
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4642,8 +4488,7 @@ NotNestedLessLess:
 NotPrecedes:
   name: NotPrecedes
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4663,8 +4508,7 @@ NotPrecedes:
 NotPrecedesEqual:
   name: NotPrecedesEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4684,8 +4528,7 @@ NotPrecedesEqual:
 NotPrecedesSlantEqual:
   name: NotPrecedesSlantEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4705,8 +4548,7 @@ NotPrecedesSlantEqual:
 NotPrecedesTilde:
   name: NotPrecedesTilde
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4726,8 +4568,7 @@ NotPrecedesTilde:
 NotReverseElement:
   name: NotReverseElement
   actual-precedence: 320
-  Precedence: 250
-  Precedence-corrected: 250
+  precedence: 250
   WolframLanguageData:
   WolframLanguageData-corrected: 52
   UnicodeCharacters.tr: 360
@@ -4747,8 +4588,7 @@ NotReverseElement:
 NotRightTriangle:
   name: NotRightTriangle
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4768,8 +4608,7 @@ NotRightTriangle:
 NotRightTriangleBar:
   name: NotRightTriangleBar
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4789,8 +4628,7 @@ NotRightTriangleBar:
 NotRightTriangleEqual:
   name: NotRightTriangleEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4810,8 +4648,7 @@ NotRightTriangleEqual:
 NotSquareSubset:
   name: NotSquareSubset
   actual-precedence: 320
-  Precedence: 250
-  Precedence-corrected: 250
+  precedence: 250
   WolframLanguageData:
   WolframLanguageData-corrected: 52
   UnicodeCharacters.tr: 360
@@ -4831,8 +4668,7 @@ NotSquareSubset:
 NotSquareSubsetEqual:
   name: NotSquareSubsetEqual
   actual-precedence: 320
-  Precedence: 250
-  Precedence-corrected: 250
+  precedence: 250
   WolframLanguageData:
   WolframLanguageData-corrected: 52
   UnicodeCharacters.tr: 360
@@ -4852,8 +4688,7 @@ NotSquareSubsetEqual:
 NotSquareSuperset:
   name: NotSquareSuperset
   actual-precedence: 320
-  Precedence: 250
-  Precedence-corrected: 250
+  precedence: 250
   WolframLanguageData:
   WolframLanguageData-corrected: 52
   UnicodeCharacters.tr: 360
@@ -4873,8 +4708,7 @@ NotSquareSuperset:
 NotSquareSupersetEqual:
   name: NotSquareSupersetEqual
   actual-precedence: 320
-  Precedence: 250
-  Precedence-corrected: 250
+  precedence: 250
   WolframLanguageData:
   WolframLanguageData-corrected: 52
   UnicodeCharacters.tr: 360
@@ -4894,8 +4728,7 @@ NotSquareSupersetEqual:
 NotSubset:
   name: NotSubset
   actual-precedence: 320
-  Precedence: 250
-  Precedence-corrected: 250
+  precedence: 250
   WolframLanguageData:
   WolframLanguageData-corrected: 52
   UnicodeCharacters.tr: 360
@@ -4915,8 +4748,7 @@ NotSubset:
 NotSubsetEqual:
   name: NotSubsetEqual
   actual-precedence: 320
-  Precedence: 250
-  Precedence-corrected: 250
+  precedence: 250
   WolframLanguageData:
   WolframLanguageData-corrected: 52
   UnicodeCharacters.tr: 360
@@ -4936,8 +4768,7 @@ NotSubsetEqual:
 NotSucceeds:
   name: NotSucceeds
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4957,8 +4788,7 @@ NotSucceeds:
 NotSucceedsEqual:
   name: NotSucceedsEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4978,8 +4808,7 @@ NotSucceedsEqual:
 NotSucceedsSlantEqual:
   name: NotSucceedsSlantEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -4999,8 +4828,7 @@ NotSucceedsSlantEqual:
 NotSucceedsTilde:
   name: NotSucceedsTilde
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -5020,8 +4848,7 @@ NotSucceedsTilde:
 NotSuperset:
   name: NotSuperset
   actual-precedence: 320
-  Precedence: 250
-  Precedence-corrected: 250
+  precedence: 250
   WolframLanguageData:
   WolframLanguageData-corrected: 52
   UnicodeCharacters.tr: 360
@@ -5041,8 +4868,7 @@ NotSuperset:
 NotSupersetEqual:
   name: NotSupersetEqual
   actual-precedence: 320
-  Precedence: 250
-  Precedence-corrected: 250
+  precedence: 250
   WolframLanguageData:
   WolframLanguageData-corrected: 52
   UnicodeCharacters.tr: 360
@@ -5062,8 +4888,7 @@ NotSupersetEqual:
 NotTilde:
   name: NotTilde
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -5083,8 +4908,7 @@ NotTilde:
 NotTildeEqual:
   name: NotTildeEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -5104,8 +4928,7 @@ NotTildeEqual:
 NotTildeFullEqual:
   name: NotTildeFullEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -5125,8 +4948,7 @@ NotTildeFullEqual:
 NotTildeTilde:
   name: NotTildeTilde
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -5146,8 +4968,7 @@ NotTildeTilde:
 NotVerticalBar:
   name: NotVerticalBar
   actual-precedence: 350
-  Precedence: 280
-  Precedence-corrected: 280
+  precedence: 280
   WolframLanguageData: 50
   WolframLanguageData-corrected: 50.5
   UnicodeCharacters.tr: 390
@@ -5167,8 +4988,8 @@ NotVerticalBar:
 NumberAccuracy:
   name: None
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr:
@@ -5188,8 +5009,8 @@ NumberAccuracy:
 NumberBase:
   name: None
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr:
@@ -5209,8 +5030,8 @@ NumberBase:
 NumberMagnitude:
   name: None
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr:
@@ -5230,8 +5051,8 @@ NumberMagnitude:
 NumberPrecision:
   name: None
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr:
@@ -5251,8 +5072,8 @@ NumberPrecision:
 NumberPrecisionPostfix:
   name: None
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr:
@@ -5272,8 +5093,7 @@ NumberPrecisionPostfix:
 Optional:
   name: Optional
   actual-precedence: 190
-  Precedence: 140
-  Precedence-corrected: 140
+  precedence: 140
   WolframLanguageData: 64
   WolframLanguageData-corrected: 64
   UnicodeCharacters.tr:
@@ -5293,8 +5113,8 @@ Optional:
 Or:
   name: Or
   actual-precedence: 270
-  Precedence: 215
-  Precedence-corrected: 210
+  Precedence-Function: 215
+  precedence: 210
   WolframLanguageData: 57
   WolframLanguageData-corrected: 57
   UnicodeCharacters.tr: 320
@@ -5314,8 +5134,8 @@ Or:
 Out:
   name: Out
   actual-precedence: 1030
-  Precedence: 670
-  Precedence-corrected: 735
+  Precedence-Function: 670
+  precedence: 735
   WolframLanguageData: 4
   WolframLanguageData-corrected: 4
   UnicodeCharacters.tr:
@@ -5335,8 +5155,8 @@ Out:
 OutNumber:
   name: Out
   actual-precedence: 1020
-  Precedence: 670
-  Precedence-corrected: 735
+  Precedence-Function: 670
+  precedence: 735
   WolframLanguageData: 4
   WolframLanguageData-corrected: 4
   UnicodeCharacters.tr:
@@ -5356,8 +5176,8 @@ OutNumber:
 OverscriptBox:
   name: Overscript
   actual-precedence: 950
-  Precedence: 670
-  Precedence-corrected: 710
+  Precedence-Function: 670
+  precedence: 710
   WolframLanguageData: 7
   WolframLanguageData-corrected: 7
   UnicodeCharacters.tr:
@@ -5377,8 +5197,8 @@ OverscriptBox:
 OverunderscriptBox:
   name: Underoverscript
   actual-precedence: 940
-  Precedence: 670
-  Precedence-corrected: 700
+  Precedence-Function: 670
+  precedence: 700
   WolframLanguageData: 7
   WolframLanguageData-corrected: 7.5
   UnicodeCharacters.tr:
@@ -5398,8 +5218,8 @@ OverunderscriptBox:
 ParameterizedFunction:
   name: Function
   actual-precedence: 50
-  Precedence: 90
-  Precedence-corrected: 40
+  Precedence-Function: 90
+  precedence: 40
   WolframLanguageData: 75
   WolframLanguageData-corrected: 75
   UnicodeCharacters.tr: 190
@@ -5419,8 +5239,8 @@ ParameterizedFunction:
 Parentheses:
   name: None
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr:
@@ -5440,8 +5260,7 @@ Parentheses:
 Part:
   name: Part
   actual-precedence: 890
-  Precedence: 670
-  Precedence-corrected: 670
+  precedence: 670
   WolframLanguageData: 10
   WolframLanguageData-corrected: 10
   UnicodeCharacters.tr:
@@ -5461,8 +5280,8 @@ Part:
 PartialD:
   name: PartialD
   actual-precedence: 710
-  Precedence: 670
-  Precedence-corrected: 550
+  Precedence-Function: 670
+  precedence: 550
   WolframLanguageData: 24
   WolframLanguageData-corrected: 24
   UnicodeCharacters.tr: 620
@@ -5482,8 +5301,8 @@ PartialD:
 PartialFractionBox:
   name: PartialFractionBox
   actual-precedence: 570
-  Precedence: 670
-  Precedence-corrected: 470
+  Precedence-Function: 670
+  precedence: 470
   WolframLanguageData:
   WolframLanguageData-corrected: 31
   UnicodeCharacters.tr:
@@ -5503,8 +5322,8 @@ PartialFractionBox:
 PartialOverscriptBox:
   name: PartialOverscriptBox
   actual-precedence: 950
-  Precedence: 670
-  Precedence-corrected: 710
+  Precedence-Function: 670
+  precedence: 710
   WolframLanguageData:
   WolframLanguageData-corrected: 7
   UnicodeCharacters.tr:
@@ -5524,8 +5343,8 @@ PartialOverscriptBox:
 PartialSubscriptBox:
   name: PartialSubscriptBox
   actual-precedence: 920
-  Precedence: 670
-  Precedence-corrected: 690
+  Precedence-Function: 670
+  precedence: 690
   WolframLanguageData:
   WolframLanguageData-corrected: 8
   UnicodeCharacters.tr:
@@ -5545,8 +5364,8 @@ PartialSubscriptBox:
 PartialSuperscriptBox:
   name: PartialSuperscriptBox
   actual-precedence: 750
-  Precedence: 670
-  Precedence-corrected: 590
+  Precedence-Function: 670
+  precedence: 590
   WolframLanguageData:
   WolframLanguageData-corrected: 21
   UnicodeCharacters.tr:
@@ -5566,8 +5385,8 @@ PartialSuperscriptBox:
 PartialUnderscriptBox:
   name: PartialUnderscriptBox
   actual-precedence: 950
-  Precedence: 670
-  Precedence-corrected: 710
+  Precedence-Function: 670
+  precedence: 710
   WolframLanguageData:
   WolframLanguageData-corrected: 7
   UnicodeCharacters.tr:
@@ -5587,8 +5406,7 @@ PartialUnderscriptBox:
 Pattern:
   name: Pattern
   actual-precedence: 190
-  Precedence: 150
-  Precedence-corrected: 150
+  precedence: 150
   WolframLanguageData: 64
   WolframLanguageData-corrected: 64
   UnicodeCharacters.tr:
@@ -5608,8 +5426,7 @@ Pattern:
 PatternTest:
   name: PatternTest
   actual-precedence: 910
-  Precedence: 680
-  Precedence-corrected: 680
+  precedence: 680
   WolframLanguageData: 9
   WolframLanguageData-corrected: 9
   UnicodeCharacters.tr:
@@ -5629,8 +5446,8 @@ PatternTest:
 PermutationProduct:
   name: PermutationProduct
   actual-precedence: 600
-  Precedence: 520
-  Precedence-corrected: 486
+  Precedence-Function: 520
+  precedence: 486
   WolframLanguageData:
   WolframLanguageData-corrected: 29.7
   UnicodeCharacters.tr: 605
@@ -5650,8 +5467,7 @@ PermutationProduct:
 Perpendicular:
   name: Perpendicular
   actual-precedence: 220
-  Precedence: 190
-  Precedence-corrected: 190
+  precedence: 190
   WolframLanguageData:
   WolframLanguageData-corrected: 60
   UnicodeCharacters.tr: 390
@@ -5671,8 +5487,8 @@ Perpendicular:
 Piecewise:
   name: Piecewise
   actual-precedence: 680
-  Precedence: 480
-  Precedence-corrected: 535
+  Precedence-Function: 480
+  precedence: 535
   WolframLanguageData: 1
   WolframLanguageData-corrected: 25.5
   UnicodeCharacters.tr: 600
@@ -5692,8 +5508,7 @@ Piecewise:
 Plus:
   name: Plus
   actual-precedence: 400
-  Precedence: 310
-  Precedence-corrected: 310
+  precedence: 310
   WolframLanguageData: 46
   WolframLanguageData-corrected: 46
   UnicodeCharacters.tr:
@@ -5713,8 +5528,7 @@ Plus:
 PlusMinus:
   name: PlusMinus
   actual-precedence: 400
-  Precedence: 310
-  Precedence-corrected: 310
+  precedence: 310
   WolframLanguageData: 46
   WolframLanguageData-corrected: 46
   UnicodeCharacters.tr: 430
@@ -5734,8 +5548,7 @@ PlusMinus:
 Power:
   name: Power
   actual-precedence: 750
-  Precedence: 590
-  Precedence-corrected: 590
+  precedence: 590
   WolframLanguageData: 21
   WolframLanguageData-corrected: 21
   UnicodeCharacters.tr:
@@ -5755,8 +5568,7 @@ Power:
 PreDecrement:
   name: PreDecrement
   actual-precedence: 870
-  Precedence: 660
-  Precedence-corrected: 660
+  precedence: 660
   WolframLanguageData: 12
   WolframLanguageData-corrected: 12
   UnicodeCharacters.tr:
@@ -5776,8 +5588,7 @@ PreDecrement:
 PreIncrement:
   name: PreIncrement
   actual-precedence: 870
-  Precedence: 660
-  Precedence-corrected: 660
+  precedence: 660
   WolframLanguageData: 12
   WolframLanguageData-corrected: 12
   UnicodeCharacters.tr:
@@ -5797,8 +5608,7 @@ PreIncrement:
 Precedes:
   name: Precedes
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -5818,8 +5628,7 @@ Precedes:
 PrecedesEqual:
   name: PrecedesEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -5839,8 +5648,7 @@ PrecedesEqual:
 PrecedesSlantEqual:
   name: PrecedesSlantEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -5860,8 +5668,7 @@ PrecedesSlantEqual:
 PrecedesTilde:
   name: PrecedesTilde
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -5881,8 +5688,7 @@ PrecedesTilde:
 ProbabilityPr:
   name: ProbabilityPr
   actual-precedence: 420
-  Precedence: 325
-  Precedence-corrected: 325
+  precedence: 325
   WolframLanguageData:
   WolframLanguageData-corrected: 45
   UnicodeCharacters.tr: 455
@@ -5902,8 +5708,7 @@ ProbabilityPr:
 Product:
   name: Product
   actual-precedence: 480
-  Precedence: 380
-  Precedence-corrected: 380
+  precedence: 380
   WolframLanguageData: 40
   WolframLanguageData-corrected: 40
   UnicodeCharacters.tr: 500
@@ -5923,8 +5728,7 @@ Product:
 Proportion:
   name: Proportion
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -5944,8 +5748,7 @@ Proportion:
 Proportional:
   name: Proportional
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -5965,8 +5768,7 @@ Proportional:
 Put:
   name: Put
   actual-precedence: 40
-  Precedence: 30
-  Precedence-corrected: 30
+  precedence: 30
   WolframLanguageData: 76
   WolframLanguageData-corrected: 76
   UnicodeCharacters.tr:
@@ -5986,8 +5788,7 @@ Put:
 PutAppend:
   name: PutAppend
   actual-precedence: 40
-  Precedence: 30
-  Precedence-corrected: 30
+  precedence: 30
   WolframLanguageData: 76
   WolframLanguageData-corrected: 76
   UnicodeCharacters.tr:
@@ -6007,8 +5808,8 @@ PutAppend:
 RadicalBox:
   name: RadicalBox
   actual-precedence: 730
-  Precedence: 670
-  Precedence-corrected: 570
+  Precedence-Function: 670
+  precedence: 570
   WolframLanguageData: 22
   WolframLanguageData-corrected: 22
   UnicodeCharacters.tr:
@@ -6028,8 +5829,7 @@ RadicalBox:
 Repeated:
   name: Repeated
   actual-precedence: 200
-  Precedence: 170
-  Precedence-corrected: 170
+  precedence: 170
   WolframLanguageData: 62
   WolframLanguageData-corrected: 62
   UnicodeCharacters.tr:
@@ -6049,8 +5849,7 @@ Repeated:
 RepeatedNull:
   name: RepeatedNull
   actual-precedence: 200
-  Precedence: 170
-  Precedence-corrected: 170
+  precedence: 170
   WolframLanguageData: 62
   WolframLanguageData-corrected: 62
   UnicodeCharacters.tr:
@@ -6070,8 +5869,7 @@ RepeatedNull:
 ReplaceAll:
   name: ReplaceAll
   actual-precedence: 130
-  Precedence: 110
-  Precedence-corrected: 110
+  precedence: 110
   WolframLanguageData: 68
   WolframLanguageData-corrected: 68
   UnicodeCharacters.tr:
@@ -6091,8 +5889,7 @@ ReplaceAll:
 ReplaceRepeated:
   name: ReplaceRepeated
   actual-precedence: 130
-  Precedence: 110
-  Precedence-corrected: 110
+  precedence: 110
   WolframLanguageData: 68
   WolframLanguageData-corrected: 68
   UnicodeCharacters.tr:
@@ -6112,8 +5909,7 @@ ReplaceRepeated:
 ReverseElement:
   name: ReverseElement
   actual-precedence: 320
-  Precedence: 250
-  Precedence-corrected: 250
+  precedence: 250
   WolframLanguageData:
   WolframLanguageData-corrected: 52
   UnicodeCharacters.tr: 360
@@ -6133,8 +5929,7 @@ ReverseElement:
 ReverseEquilibrium:
   name: ReverseEquilibrium
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -6154,8 +5949,7 @@ ReverseEquilibrium:
 ReverseUpEquilibrium:
   name: ReverseUpEquilibrium
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -6175,8 +5969,7 @@ ReverseUpEquilibrium:
 RightArrow:
   name: RightArrow
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -6196,8 +5989,7 @@ RightArrow:
 RightArrowBar:
   name: RightArrowBar
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -6217,8 +6009,7 @@ RightArrowBar:
 RightArrowLeftArrow:
   name: RightArrowLeftArrow
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -6238,8 +6029,8 @@ RightArrowLeftArrow:
 RightComposition:
   name: RightComposition
   actual-precedence: 850
-  Precedence: 624
-  Precedence-corrected: 650
+  Precedence-Function: 624
+  precedence: 650
   WolframLanguageData: 13
   WolframLanguageData-corrected: 13
   UnicodeCharacters.tr:
@@ -6259,8 +6050,7 @@ RightComposition:
 RightDownTeeVector:
   name: RightDownTeeVector
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -6280,8 +6070,7 @@ RightDownTeeVector:
 RightDownVector:
   name: RightDownVector
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -6301,8 +6090,7 @@ RightDownVector:
 RightDownVectorBar:
   name: RightDownVectorBar
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -6322,8 +6110,7 @@ RightDownVectorBar:
 RightTee:
   name: RightTee
   actual-precedence: 230
-  Precedence: 190
-  Precedence-corrected: 190
+  precedence: 190
   WolframLanguageData:
   WolframLanguageData-corrected: 59.6
   UnicodeCharacters.tr: 300
@@ -6343,8 +6130,7 @@ RightTee:
 RightTeeArrow:
   name: RightTeeArrow
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -6364,8 +6150,7 @@ RightTeeArrow:
 RightTeeVector:
   name: RightTeeVector
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -6385,8 +6170,7 @@ RightTeeVector:
 RightTriangle:
   name: RightTriangle
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -6406,8 +6190,7 @@ RightTriangle:
 RightTriangleBar:
   name: RightTriangleBar
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -6427,8 +6210,7 @@ RightTriangleBar:
 RightTriangleEqual:
   name: RightTriangleEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -6448,8 +6230,7 @@ RightTriangleEqual:
 RightUpDownVector:
   name: RightUpDownVector
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -6469,8 +6250,7 @@ RightUpDownVector:
 RightUpTeeVector:
   name: RightUpTeeVector
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -6490,8 +6270,7 @@ RightUpTeeVector:
 RightUpVector:
   name: RightUpVector
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -6511,8 +6290,7 @@ RightUpVector:
 RightUpVectorBar:
   name: RightUpVectorBar
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -6532,8 +6310,7 @@ RightUpVectorBar:
 RightVector:
   name: RightVector
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -6553,8 +6330,7 @@ RightVector:
 RightVectorBar:
   name: RightVectorBar
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -6574,8 +6350,8 @@ RightVectorBar:
 RoundImplies:
   name: RoundImplies
   actual-precedence: 250
-  Precedence: 240
-  Precedence-corrected: 200
+  Precedence-Function: 240
+  precedence: 200
   WolframLanguageData:
   WolframLanguageData-corrected: 59
   UnicodeCharacters.tr: 310
@@ -6595,8 +6371,7 @@ RoundImplies:
 Rule:
   name: Rule
   actual-precedence: 140
-  Precedence: 120
-  Precedence-corrected: 120
+  precedence: 120
   WolframLanguageData: 67
   WolframLanguageData-corrected: 67.5
   UnicodeCharacters.tr: 250
@@ -6616,8 +6391,7 @@ Rule:
 RuleDelayed:
   name: RuleDelayed
   actual-precedence: 150
-  Precedence: 120
-  Precedence-corrected: 120
+  precedence: 120
   WolframLanguageData: 67
   WolframLanguageData-corrected: 67
   UnicodeCharacters.tr: 250
@@ -6637,8 +6411,8 @@ RuleDelayed:
 SameQ:
   name: SameQ
   actual-precedence: 330
-  Precedence: 290
-  Precedence-corrected: 260
+  Precedence-Function: 290
+  precedence: 260
   WolframLanguageData: 51
   WolframLanguageData-corrected: 51
   UnicodeCharacters.tr:
@@ -6658,8 +6432,7 @@ SameQ:
 Set:
   name: Set
   actual-precedence: 50
-  Precedence: 40
-  Precedence-corrected: 40
+  precedence: 40
   WolframLanguageData: 75
   WolframLanguageData-corrected: 75
   UnicodeCharacters.tr:
@@ -6679,8 +6452,7 @@ Set:
 SetDelayed:
   name: SetDelayed
   actual-precedence: 50
-  Precedence: 40
-  Precedence-corrected: 40
+  precedence: 40
   WolframLanguageData: 75
   WolframLanguageData-corrected: 75
   UnicodeCharacters.tr:
@@ -6700,8 +6472,7 @@ SetDelayed:
 ShortDownArrow:
   name: ShortDownArrow
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -6721,8 +6492,7 @@ ShortDownArrow:
 ShortLeftArrow:
   name: ShortLeftArrow
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -6742,8 +6512,7 @@ ShortLeftArrow:
 ShortRightArrow:
   name: ShortRightArrow
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -6763,8 +6532,7 @@ ShortRightArrow:
 ShortUpArrow:
   name: ShortUpArrow
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -6784,8 +6552,8 @@ ShortUpArrow:
 Skeleton:
   name: Skeleton
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr: -10
@@ -6805,8 +6573,7 @@ Skeleton:
 Slot:
   name: Slot
   actual-precedence: 1040
-  Precedence: 740
-  Precedence-corrected: 740
+  precedence: 740
   WolframLanguageData: 3
   WolframLanguageData-corrected: 3
   UnicodeCharacters.tr:
@@ -6826,8 +6593,7 @@ Slot:
 SlotNumber:
   name: Slot
   actual-precedence: 1050
-  Precedence: 740
-  Precedence-corrected: 740
+  precedence: 740
   WolframLanguageData: 3
   WolframLanguageData-corrected: 3
   UnicodeCharacters.tr:
@@ -6847,8 +6613,7 @@ SlotNumber:
 SlotSequence:
   name: SlotSequence
   actual-precedence: 1040
-  Precedence: 740
-  Precedence-corrected: 740
+  precedence: 740
   WolframLanguageData: 3
   WolframLanguageData-corrected: 3
   UnicodeCharacters.tr:
@@ -6868,8 +6633,7 @@ SlotSequence:
 SlotSequenceNumber:
   name: SlotSequence
   actual-precedence: 1050
-  Precedence: 740
-  Precedence-corrected: 740
+  precedence: 740
   WolframLanguageData: 3
   WolframLanguageData-corrected: 3
   UnicodeCharacters.tr:
@@ -6889,8 +6653,7 @@ SlotSequenceNumber:
 SmallCircle:
   name: SmallCircle
   actual-precedence: 670
-  Precedence: 530
-  Precedence-corrected: 530
+  precedence: 530
   WolframLanguageData: 25
   WolframLanguageData-corrected: 25.6
   UnicodeCharacters.tr: 607
@@ -6910,8 +6673,7 @@ SmallCircle:
 Span:
   name: Span
   actual-precedence: 390
-  Precedence: 305
-  Precedence-corrected: 305
+  precedence: 305
   WolframLanguageData: 49
   WolframLanguageData-corrected: 47
   UnicodeCharacters.tr:
@@ -6931,8 +6693,8 @@ Span:
 Sqrt:
   name: Sqrt
   actual-precedence: 730
-  Precedence: 670
-  Precedence-corrected: 570
+  Precedence-Function: 670
+  precedence: 570
   WolframLanguageData: 22
   WolframLanguageData-corrected: 22
   UnicodeCharacters.tr: 650
@@ -6952,8 +6714,8 @@ Sqrt:
 SqrtBox:
   name: Sqrt
   actual-precedence: 730
-  Precedence: 670
-  Precedence-corrected: 570
+  Precedence-Function: 670
+  precedence: 570
   WolframLanguageData: 22
   WolframLanguageData-corrected: 22
   UnicodeCharacters.tr: 650
@@ -6973,8 +6735,7 @@ SqrtBox:
 Square:
   name: Square
   actual-precedence: 690
-  Precedence: 540
-  Precedence-corrected: 540
+  precedence: 540
   WolframLanguageData: 25
   WolframLanguageData-corrected: 25.0
   UnicodeCharacters.tr: 610
@@ -6994,8 +6755,7 @@ Square:
 SquareIntersection:
   name: SquareIntersection
   actual-precedence: 390
-  Precedence: 305
-  Precedence-corrected: 305
+  precedence: 305
   WolframLanguageData:
   WolframLanguageData-corrected: 47
   UnicodeCharacters.tr: 420
@@ -7015,8 +6775,7 @@ SquareIntersection:
 SquareSubset:
   name: SquareSubset
   actual-precedence: 320
-  Precedence: 250
-  Precedence-corrected: 250
+  precedence: 250
   WolframLanguageData:
   WolframLanguageData-corrected: 52
   UnicodeCharacters.tr: 360
@@ -7036,8 +6795,7 @@ SquareSubset:
 SquareSubsetEqual:
   name: SquareSubsetEqual
   actual-precedence: 320
-  Precedence: 250
-  Precedence-corrected: 250
+  precedence: 250
   WolframLanguageData:
   WolframLanguageData-corrected: 52
   UnicodeCharacters.tr: 360
@@ -7057,8 +6815,7 @@ SquareSubsetEqual:
 SquareSuperset:
   name: SquareSuperset
   actual-precedence: 320
-  Precedence: 250
-  Precedence-corrected: 250
+  precedence: 250
   WolframLanguageData:
   WolframLanguageData-corrected: 52
   UnicodeCharacters.tr: 360
@@ -7078,8 +6835,7 @@ SquareSuperset:
 SquareSupersetEqual:
   name: SquareSupersetEqual
   actual-precedence: 320
-  Precedence: 250
-  Precedence-corrected: 250
+  precedence: 250
   WolframLanguageData:
   WolframLanguageData-corrected: 52
   UnicodeCharacters.tr: 360
@@ -7099,8 +6855,7 @@ SquareSupersetEqual:
 SquareUnion:
   name: SquareUnion
   actual-precedence: 380
-  Precedence: 300
-  Precedence-corrected: 300
+  precedence: 300
   WolframLanguageData:
   WolframLanguageData-corrected: 48
   UnicodeCharacters.tr: 410
@@ -7120,8 +6875,7 @@ SquareUnion:
 Star:
   name: Star
   actual-precedence: 490
-  Precedence: 390
-  Precedence-corrected: 390
+  precedence: 390
   WolframLanguageData: 39
   WolframLanguageData-corrected: 39
   UnicodeCharacters.tr: 510
@@ -7141,8 +6895,7 @@ Star:
 StringExpression:
   name: StringExpression
   actual-precedence: 180
-  Precedence: 135
-  Precedence-corrected: 135
+  precedence: 135
   WolframLanguageData: 65
   WolframLanguageData-corrected: 65
   UnicodeCharacters.tr:
@@ -7162,8 +6915,7 @@ StringExpression:
 StringJoin:
   name: StringJoin
   actual-precedence: 760
-  Precedence: 600
-  Precedence-corrected: 600
+  precedence: 600
   WolframLanguageData: 20
   WolframLanguageData-corrected: 20
   UnicodeCharacters.tr:
@@ -7183,8 +6935,8 @@ StringJoin:
 SubscriptBox:
   name: Subscript
   actual-precedence: 920
-  Precedence: 670
-  Precedence-corrected: 690
+  Precedence-Function: 670
+  precedence: 690
   WolframLanguageData: 8
   WolframLanguageData-corrected: 8
   UnicodeCharacters.tr:
@@ -7204,8 +6956,7 @@ SubscriptBox:
 Subset:
   name: Subset
   actual-precedence: 320
-  Precedence: 250
-  Precedence-corrected: 250
+  precedence: 250
   WolframLanguageData: 52
   WolframLanguageData-corrected: 52
   UnicodeCharacters.tr: 360
@@ -7225,8 +6976,7 @@ Subset:
 SubsetEqual:
   name: SubsetEqual
   actual-precedence: 320
-  Precedence: 250
-  Precedence-corrected: 250
+  precedence: 250
   WolframLanguageData:
   WolframLanguageData-corrected: 52
   UnicodeCharacters.tr: 360
@@ -7246,8 +6996,8 @@ SubsetEqual:
 SubsuperscriptBox:
   name: Subsuperscript
   actual-precedence: 920
-  Precedence: 670
-  Precedence-corrected: 690
+  Precedence-Function: 670
+  precedence: 690
   WolframLanguageData: 8
   WolframLanguageData-corrected: 8
   UnicodeCharacters.tr:
@@ -7267,8 +7017,7 @@ SubsuperscriptBox:
 Subtract:
   name: Subtract
   actual-precedence: 400
-  Precedence: 310
-  Precedence-corrected: 310
+  precedence: 310
   WolframLanguageData: 46
   WolframLanguageData-corrected: 46
   UnicodeCharacters.tr: 430
@@ -7288,8 +7037,7 @@ Subtract:
 SubtractFrom:
   name: SubtractFrom
   actual-precedence: 120
-  Precedence: 100
-  Precedence-corrected: 100
+  precedence: 100
   WolframLanguageData: 69
   WolframLanguageData-corrected: 69
   UnicodeCharacters.tr:
@@ -7309,8 +7057,7 @@ SubtractFrom:
 Succeeds:
   name: Succeeds
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -7330,8 +7077,7 @@ Succeeds:
 SucceedsEqual:
   name: SucceedsEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -7351,8 +7097,7 @@ SucceedsEqual:
 SucceedsSlantEqual:
   name: SucceedsSlantEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -7372,8 +7117,7 @@ SucceedsSlantEqual:
 SucceedsTilde:
   name: SucceedsTilde
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -7393,8 +7137,7 @@ SucceedsTilde:
 SuchThat:
   name: SuchThat
   actual-precedence: 210
-  Precedence: 180
-  Precedence-corrected: 180
+  precedence: 180
   WolframLanguageData: 61
   WolframLanguageData-corrected: 61
   UnicodeCharacters.tr: 290
@@ -7414,8 +7157,8 @@ SuchThat:
 Sum:
   name: Sum
   actual-precedence: 420
-  Precedence: 320
-  Precedence-corrected: 325
+  Precedence-Function: 320
+  precedence: 325
   WolframLanguageData: 45
   WolframLanguageData-corrected: 45
   UnicodeCharacters.tr: 440
@@ -7435,8 +7178,8 @@ Sum:
 SuperDagger:
   name: SuperDagger
   actual-precedence: 780
-  Precedence: 0
-  Precedence-corrected: 605
+  Precedence-Function: 0
+  precedence: 605
   WolframLanguageData:
   WolframLanguageData-corrected: 18
   UnicodeCharacters.tr:
@@ -7456,8 +7199,7 @@ SuperDagger:
 SuperscriptBox:
   name: SuperscriptBox
   actual-precedence: 750
-  Precedence: 590
-  Precedence-corrected: 590
+  precedence: 590
   WolframLanguageData: 21
   WolframLanguageData-corrected: 21
   UnicodeCharacters.tr:
@@ -7477,8 +7219,7 @@ SuperscriptBox:
 Superset:
   name: Superset
   actual-precedence: 320
-  Precedence: 250
-  Precedence-corrected: 250
+  precedence: 250
   WolframLanguageData: 52
   WolframLanguageData-corrected: 52
   UnicodeCharacters.tr: 360
@@ -7498,8 +7239,7 @@ Superset:
 SupersetEqual:
   name: SupersetEqual
   actual-precedence: 320
-  Precedence: 250
-  Precedence-corrected: 250
+  precedence: 250
   WolframLanguageData:
   WolframLanguageData-corrected: 52
   UnicodeCharacters.tr: 360
@@ -7519,8 +7259,8 @@ SupersetEqual:
 SupersubscriptBox:
   name: SubsuperscriptBox
   actual-precedence: 750
-  Precedence: 690
-  Precedence-corrected: 590
+  Precedence-Function: 690
+  precedence: 590
   WolframLanguageData: 21
   WolframLanguageData-corrected: 21
   UnicodeCharacters.tr:
@@ -7540,8 +7280,8 @@ SupersubscriptBox:
 TagSet:
   name: TagSet
   actual-precedence: 50
-  Precedence: 670
-  Precedence-corrected: 40
+  Precedence-Function: 670
+  precedence: 40
   WolframLanguageData: 75
   WolframLanguageData-corrected: 75
   UnicodeCharacters.tr:
@@ -7561,8 +7301,8 @@ TagSet:
 TagSetDelayed:
   name: TagSetDelayed
   actual-precedence: 50
-  Precedence: 670
-  Precedence-corrected: 40
+  Precedence-Function: 670
+  precedence: 40
   WolframLanguageData: 75
   WolframLanguageData-corrected: 75
   UnicodeCharacters.tr:
@@ -7582,8 +7322,8 @@ TagSetDelayed:
 TagUnset:
   name: TagUnset
   actual-precedence: 50
-  Precedence: 670
-  Precedence-corrected: 40
+  Precedence-Function: 670
+  precedence: 40
   WolframLanguageData: 75
   WolframLanguageData-corrected: 75
   UnicodeCharacters.tr:
@@ -7603,8 +7343,8 @@ TagUnset:
 TensorProduct:
   name: TensorProduct
   actual-precedence: 610
-  Precedence: 495
-  Precedence-corrected: 487
+  Precedence-Function: 495
+  precedence: 487
   WolframLanguageData:
   WolframLanguageData-corrected: 29.6
   UnicodeCharacters.tr: 602
@@ -7624,8 +7364,8 @@ TensorProduct:
 TensorWedge:
   name: TensorWedge
   actual-precedence: 620
-  Precedence: 500
-  Precedence-corrected: 488
+  Precedence-Function: 500
+  precedence: 488
   WolframLanguageData:
   WolframLanguageData-corrected: 29.5
   UnicodeCharacters.tr: 603
@@ -7645,8 +7385,7 @@ TensorWedge:
 Therefore:
   name: Therefore
   actual-precedence: 70
-  Precedence: 50
-  Precedence-corrected: 50
+  precedence: 50
   WolframLanguageData: 74
   WolframLanguageData-corrected: 73.5
   UnicodeCharacters.tr: 201
@@ -7666,8 +7405,7 @@ Therefore:
 Tilde:
   name: Tilde
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -7687,8 +7425,7 @@ Tilde:
 TildeEqual:
   name: TildeEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -7708,8 +7445,7 @@ TildeEqual:
 TildeFullEqual:
   name: TildeFullEqual
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -7729,8 +7465,7 @@ TildeFullEqual:
 TildeTilde:
   name: TildeTilde
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData:
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -7750,8 +7485,7 @@ TildeTilde:
 Times:
   name: Times
   actual-precedence: 500
-  Precedence: 400
-  Precedence-corrected: 400
+  precedence: 400
   WolframLanguageData: 38
   WolframLanguageData-corrected: 38
   UnicodeCharacters.tr: 520
@@ -7771,8 +7505,7 @@ Times:
 TimesBy:
   name: TimesBy
   actual-precedence: 120
-  Precedence: 100
-  Precedence-corrected: 100
+  precedence: 100
   WolframLanguageData: 69
   WolframLanguageData-corrected: 69
   UnicodeCharacters.tr:
@@ -7792,8 +7525,8 @@ TimesBy:
 TortoiseShellBracket:
   name: TortoiseShellBracket
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr: -10
@@ -7813,8 +7546,8 @@ TortoiseShellBracket:
 Transpose:
   name: Transpose
   actual-precedence: 780
-  Precedence: 670
-  Precedence-corrected: 605
+  Precedence-Function: 670
+  precedence: 605
   WolframLanguageData: 18
   WolframLanguageData-corrected: 18
   UnicodeCharacters.tr: 695
@@ -7834,8 +7567,7 @@ Transpose:
 TwoWayRule:
   name: TwoWayRule
   actual-precedence: 160
-  Precedence: 125
-  Precedence-corrected: 125
+  precedence: 125
   WolframLanguageData:
   WolframLanguageData-corrected: 66.5
   UnicodeCharacters.tr: 255
@@ -7855,8 +7587,8 @@ TwoWayRule:
 UnaryMinusPlus:
   name: MinusPlus
   actual-precedence: 580
-  Precedence: 310
-  Precedence-corrected: 480
+  Precedence-Function: 310
+  precedence: 480
   WolframLanguageData: 30
   WolframLanguageData-corrected: 30
   UnicodeCharacters.tr: 430
@@ -7876,8 +7608,8 @@ UnaryMinusPlus:
 UnaryPlus:
   name: Plus
   actual-precedence: 580
-  Precedence: 310
-  Precedence-corrected: 480
+  Precedence-Function: 310
+  precedence: 480
   WolframLanguageData:
   WolframLanguageData-corrected: 30
   UnicodeCharacters.tr:
@@ -7897,8 +7629,8 @@ UnaryPlus:
 UnaryPlusMinus:
   name: PlusMinus
   actual-precedence: 580
-  Precedence: 310
-  Precedence-corrected: 480
+  Precedence-Function: 310
+  precedence: 480
   WolframLanguageData: 30
   WolframLanguageData-corrected: 30
   UnicodeCharacters.tr: 430
@@ -7918,8 +7650,8 @@ UnaryPlusMinus:
 UnderoverscriptBox:
   name: Underoverscript
   actual-precedence: 940
-  Precedence: 670
-  Precedence-corrected: 700
+  Precedence-Function: 670
+  precedence: 700
   WolframLanguageData: 7
   WolframLanguageData-corrected: 7.5
   UnicodeCharacters.tr:
@@ -7939,8 +7671,8 @@ UnderoverscriptBox:
 UnderscriptBox:
   name: Underscript
   actual-precedence: 950
-  Precedence: 670
-  Precedence-corrected: 710
+  Precedence-Function: 670
+  precedence: 710
   WolframLanguageData: 7
   WolframLanguageData-corrected: 7
   UnicodeCharacters.tr:
@@ -7960,8 +7692,7 @@ UnderscriptBox:
 UndirectedEdge:
   name: UndirectedEdge
   actual-precedence: 370
-  Precedence: 295
-  Precedence-corrected: 295
+  precedence: 295
   WolframLanguageData:
   WolframLanguageData-corrected: 49.0
   UnicodeCharacters.tr: 395
@@ -7981,8 +7712,7 @@ UndirectedEdge:
 Unequal:
   name: Unequal
   actual-precedence: 360
-  Precedence: 290
-  Precedence-corrected: 290
+  precedence: 290
   WolframLanguageData: 50
   WolframLanguageData-corrected: 50.0
   UnicodeCharacters.tr: 390
@@ -8002,8 +7732,7 @@ Unequal:
 Union:
   name: Union
   actual-precedence: 380
-  Precedence: 300
-  Precedence-corrected: 300
+  precedence: 300
   WolframLanguageData: 48
   WolframLanguageData-corrected: 48
   UnicodeCharacters.tr: 410
@@ -8023,8 +7752,7 @@ Union:
 UnionPlus:
   name: UnionPlus
   actual-precedence: 380
-  Precedence: 300
-  Precedence-corrected: 300
+  precedence: 300
   WolframLanguageData:
   WolframLanguageData-corrected: 48
   UnicodeCharacters.tr: 410
@@ -8044,8 +7772,8 @@ UnionPlus:
 UnsameQ:
   name: UnsameQ
   actual-precedence: 330
-  Precedence: 290
-  Precedence-corrected: 260
+  Precedence-Function: 290
+  precedence: 260
   WolframLanguageData: 51
   WolframLanguageData-corrected: 51
   UnicodeCharacters.tr:
@@ -8065,8 +7793,8 @@ UnsameQ:
 Unset:
   name: Unset
   actual-precedence: 50
-  Precedence: 670
-  Precedence-corrected: 40
+  Precedence-Function: 670
+  precedence: 40
   WolframLanguageData: 75
   WolframLanguageData-corrected: 75
   UnicodeCharacters.tr:
@@ -8086,8 +7814,7 @@ Unset:
 UpArrow:
   name: UpArrow
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -8107,8 +7834,7 @@ UpArrow:
 UpArrowBar:
   name: UpArrowBar
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -8128,8 +7854,7 @@ UpArrowBar:
 UpArrowDownArrow:
   name: UpArrowDownArrow
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -8149,8 +7874,7 @@ UpArrowDownArrow:
 UpDownArrow:
   name: UpDownArrow
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -8170,8 +7894,7 @@ UpDownArrow:
 UpEquilibrium:
   name: UpEquilibrium
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -8191,8 +7914,7 @@ UpEquilibrium:
 UpSet:
   name: UpSet
   actual-precedence: 50
-  Precedence: 40
-  Precedence-corrected: 40
+  precedence: 40
   WolframLanguageData: 75
   WolframLanguageData-corrected: 75
   UnicodeCharacters.tr:
@@ -8212,8 +7934,7 @@ UpSet:
 UpSetDelayed:
   name: UpSetDelayed
   actual-precedence: 50
-  Precedence: 40
-  Precedence-corrected: 40
+  precedence: 40
   WolframLanguageData: 75
   WolframLanguageData-corrected: 75
   UnicodeCharacters.tr:
@@ -8233,8 +7954,7 @@ UpSetDelayed:
 UpTee:
   name: UpTee
   actual-precedence: 220
-  Precedence: 190
-  Precedence-corrected: 190
+  precedence: 190
   WolframLanguageData: 60
   WolframLanguageData-corrected: 60
   UnicodeCharacters.tr: 390
@@ -8254,8 +7974,7 @@ UpTee:
 UpTeeArrow:
   name: UpTeeArrow
   actual-precedence: 740
-  Precedence: 580
-  Precedence-corrected: 580
+  precedence: 580
   WolframLanguageData:
   WolframLanguageData-corrected: 21.5
   UnicodeCharacters.tr: 650
@@ -8275,8 +7994,7 @@ UpTeeArrow:
 UpperLeftArrow:
   name: UpperLeftArrow
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -8296,8 +8014,7 @@ UpperLeftArrow:
 UpperRightArrow:
   name: UpperRightArrow
   actual-precedence: 340
-  Precedence: 270
-  Precedence-corrected: 270
+  precedence: 270
   WolframLanguageData:
   WolframLanguageData-corrected: 50.6
   UnicodeCharacters.tr: 380
@@ -8317,8 +8034,7 @@ UpperRightArrow:
 Vee:
   name: Vee
   actual-precedence: 530
-  Precedence: 430
-  Precedence-corrected: 430
+  precedence: 430
   WolframLanguageData:
   WolframLanguageData-corrected: 35
   UnicodeCharacters.tr: 550
@@ -8338,8 +8054,7 @@ Vee:
 VerticalBar:
   name: VerticalBar
   actual-precedence: 350
-  Precedence: 280
-  Precedence-corrected: 280
+  precedence: 280
   WolframLanguageData: 50
   WolframLanguageData-corrected: 50.5
   UnicodeCharacters.tr: 390
@@ -8359,8 +8074,7 @@ VerticalBar:
 VerticalSeparator:
   name: VerticalSeparator
   actual-precedence: 80
-  Precedence: 60
-  Precedence-corrected: 60
+  precedence: 60
   WolframLanguageData: 73
   WolframLanguageData-corrected: 73
   UnicodeCharacters.tr: 202
@@ -8380,8 +8094,7 @@ VerticalSeparator:
 VerticalTilde:
   name: VerticalTilde
   actual-precedence: 470
-  Precedence: 370
-  Precedence-corrected: 370
+  precedence: 370
   WolframLanguageData: 41
   WolframLanguageData-corrected: 41
   UnicodeCharacters.tr: 490
@@ -8401,8 +8114,7 @@ VerticalTilde:
 Wedge:
   name: Wedge
   actual-precedence: 540
-  Precedence: 440
-  Precedence-corrected: 440
+  precedence: 440
   WolframLanguageData: 34
   WolframLanguageData-corrected: 34
   UnicodeCharacters.tr: 560
@@ -8422,8 +8134,8 @@ Wedge:
 WhiteCornerBracket:
   name: WhiteCornerBracket
   actual-precedence: -10
-  Precedence: 670
-  Precedence-corrected: 760
+  Precedence-Function: 670
+  precedence: 760
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr: -10
@@ -8443,8 +8155,7 @@ WhiteCornerBracket:
 Xnor:
   name: Xnor
   actual-precedence: 280
-  Precedence: 215
-  Precedence-corrected: 215
+  precedence: 215
   WolframLanguageData: 56
   WolframLanguageData-corrected: 56
   UnicodeCharacters.tr: 325
@@ -8464,8 +8175,7 @@ Xnor:
 Xor:
   name: Xor
   actual-precedence: 280
-  Precedence: 215
-  Precedence-corrected: 215
+  precedence: 215
   WolframLanguageData: 56
   WolframLanguageData-corrected: 56
   UnicodeCharacters.tr: 325

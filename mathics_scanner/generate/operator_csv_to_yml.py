@@ -34,6 +34,8 @@ yaml_fields = (
 )
 
 operators: Dict[str, list] = {}
+precedence_index = 2
+precedence_corrected_index = 3
 
 with open(csv_file, newline="") as csvfile:
     # FIXME: to handle "\" in fields
@@ -95,5 +97,13 @@ for name in sorted(operators.keys()):
             "usage",
         ):
             field = f"# {field}"
+        elif field == "Precedence":
+            if operators[name][precedence_corrected_index] == value:
+                continue
+            # else:
+            #     print(f"# mismatch: {name}")
+            field = "Precedence-Function"
+        elif field == "Precedence-corrected":
+            field = "precedence"
 
         print(f"  {field}: {value}")

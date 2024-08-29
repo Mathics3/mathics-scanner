@@ -25,17 +25,6 @@
 #   operator-name: If present, this symbol is a Mathics operator with
 #                  whose class name is the given name. For example Divide.
 #
-#   precedence: If present, this symbol is a Mathics operator with the
-#               specific numeric precedence value. A higher value means that
-#               the operator binds before an operator with a lower value.
-#               For example the Times precedence 400 is higher than the
-#               Plus precedence 310 because a + b * c is a + (b * c),
-#               not (a + b) * c.
-#               Precedence is also used to force multi-character ASCII
-#               symbols like |-> to get treated as one unit and not
-#               split into two operators like | and ->. So the precedence
-#               of |-> has to be higher than |.
-#
 #   unicode-equivalent: A unicode equivalent for the named-character, if it
 #                       exists. If it is the same as "ascii", please omit.
 #
@@ -136,7 +125,6 @@ Alternative:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Alternative
-  precedence: 160
 
 Apply:
   ascii: "@@"
