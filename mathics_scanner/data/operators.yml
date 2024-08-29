@@ -71,7 +71,7 @@ AddTo:
   FullForm: AddTo[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
@@ -91,7 +91,7 @@ Alternatives:
   FullForm: Alternatives[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
@@ -112,7 +112,7 @@ And:
   FullForm: And[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
@@ -133,7 +133,7 @@ AngleBracket:
   FullForm: AngleBracket[expr, \[Ellipsis]]
   arity: n-ary
   affix: Matchfix
-  associativity: Non
+  associativity: null
   meaningful: false
   # comments:
 
@@ -154,7 +154,7 @@ Apply:
   FullForm: Apply[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
@@ -175,7 +175,7 @@ Association:
   FullForm: Association[expr, \[Ellipsis]]
   arity: n-ary
   affix: Matchfix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
@@ -196,7 +196,7 @@ AutoMatch:
   FullForm: AutoMatch[expr]
   arity: Unary
   affix: Matchfix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
@@ -216,7 +216,7 @@ Backslash:
   FullForm: Backslash[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -236,7 +236,7 @@ Because:
   FullForm: Because[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Left
+  associativity: left
   meaningful: false
   # comments: Precedence of Therefore and Because are swapped in notebook versus ToExpression.
 
@@ -257,7 +257,7 @@ BlackLenticularBracket:
   FullForm:
   arity: Unary
   affix: Matchfix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
@@ -277,7 +277,7 @@ Blank:
   FullForm: Blank[]
   arity: Nullary
   affix: None
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments: A Blank (_) with no accompanying decoration.
 
@@ -297,7 +297,7 @@ BlankHead:
   FullForm: Blank[expr]
   arity: Unary
   affix: Prefix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
@@ -317,7 +317,7 @@ BlankNullSequence:
   FullForm: BlankNullSequence[]
   arity: Nullary
   affix: None
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments: A BlankNullSequence (___) with no accompanying decoration.
 
@@ -337,7 +337,7 @@ BlankNullSequenceHead:
   FullForm: BlankNullSequence[expr]
   arity: Unary
   affix: Prefix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
@@ -357,7 +357,7 @@ BlankOptional:
   FullForm: Optional[Blank[]]
   arity: Nullary
   affix: None
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments: No name or head.
 
@@ -377,7 +377,7 @@ BlankSequence:
   FullForm: BlankSequence[]
   arity: Nullary
   affix: None
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments: A BlankNullSequence (__) with no accompanying decoration.
 
@@ -397,7 +397,7 @@ BlankSequenceHead:
   FullForm: BlankSequence[expr]
   arity: Unary
   affix: Prefix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
@@ -418,7 +418,7 @@ BoxGroup:
   FullForm: \(expr\)
   arity: Unary
   affix: Matchfix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments: The interpretation of this operator depends on context. It must contain box sublanguage.
 
@@ -439,7 +439,7 @@ BracketingBar:
   FullForm: BracketingBar[expr, \[Ellipsis]]
   arity: n-ary
   affix: Matchfix
-  associativity: Non
+  associativity: null
   meaningful: false
   # comments:
 
@@ -459,7 +459,7 @@ Cap:
   FullForm: Cap[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -480,7 +480,7 @@ CapitalDifferentialD:
   FullForm: CapitalDifferentialD[x]
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: false
   # comments:
 
@@ -501,7 +501,7 @@ Ceiling:
   FullForm: Ceiling[expr]
   arity: Unary
   affix: Matchfix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
@@ -521,7 +521,7 @@ CenterDot:
   FullForm: CenterDot[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -541,7 +541,7 @@ CircleDot:
   FullForm: CircleDot[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -561,7 +561,7 @@ CircleMinus:
   FullForm: CircleMinus[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Left
+  associativity: left
   meaningful: false
   # comments:
 
@@ -581,7 +581,7 @@ CirclePlus:
   FullForm: CirclePlus[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -601,7 +601,7 @@ CircleTimes:
   FullForm: CircleTimes[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -622,7 +622,7 @@ ClockwiseContourIntegral:
   FullForm: Integrate[expr1, expr2]
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Usage and Parse may not be correct.
 
@@ -642,7 +642,7 @@ Colon:
   FullForm: Colon[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -663,7 +663,7 @@ Composition:
   FullForm: Composition[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
@@ -683,7 +683,7 @@ CompoundExpression:
   FullForm: CompoundExpression[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
@@ -703,7 +703,7 @@ CompoundExpressionNull:
   FullForm: CompoundExpression[expr1, expr2, Null]
   arity: Unary
   affix: Postfix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments:
 
@@ -723,7 +723,7 @@ Condition:
   FullForm: Condition[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments:
 
@@ -743,7 +743,7 @@ Conditioned:
   FullForm: Conditioned[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
@@ -763,7 +763,7 @@ Congruent:
   FullForm: Congruent[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -784,7 +784,7 @@ Conjugate:
   FullForm: Conjugate[expr]
   arity: Unary
   affix: Postfix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments:
 
@@ -805,7 +805,7 @@ ConjugateTranspose:
   FullForm: ConjugateTranspose[expr]
   arity: Unary
   affix: Postfix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments:
 
@@ -826,7 +826,7 @@ ContextPathSeparator:
   FullForm: symb1`symb2
   arity:
   affix:
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments: Functions as a decimal point: either contextpath1 or contextpath2 may be empty, but not both at the same time.
 
@@ -846,7 +846,7 @@ ContinuedFractionK:
   FullForm:
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Usage and Parse may not be correct.
 
@@ -867,7 +867,7 @@ ContourIntegral:
   FullForm: Integrate[expr1, expr2]
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Usage and Parse may not be correct.
 
@@ -887,7 +887,7 @@ Coproduct:
   FullForm: Coproduct[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -908,7 +908,7 @@ CornerBracket:
   FullForm:
   arity: Unary
   affix: Matchfix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
@@ -929,7 +929,7 @@ CounterClockwiseContourIntegral:
   FullForm: Integrate[expr1, expr2]
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Usage and Parse may not be correct.
 
@@ -949,7 +949,7 @@ Cross:
   FullForm: Cross[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
@@ -969,7 +969,7 @@ Cup:
   FullForm: Cup[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -989,7 +989,7 @@ CupCap:
   FullForm: CupCap[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -1010,7 +1010,7 @@ Curl:
   FullForm:
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Usage and Parse may not be correct.
 
@@ -1031,7 +1031,7 @@ CurlyDoubleQuote:
   FullForm: CurlyDoubleQuote[expr]
   arity: Unary
   affix: Matchfix
-  associativity: Non
+  associativity: null
   meaningful: false
   # comments:
 
@@ -1052,7 +1052,7 @@ CurlyQuote:
   FullForm: CurlyQuote[expr]
   arity: Unary
   affix: Matchfix
-  associativity: Non
+  associativity: null
   meaningful: false
   # comments:
 
@@ -1073,7 +1073,7 @@ Decrement:
   FullForm: Decrement[expr]
   arity: Unary
   affix: Postfix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments:
 
@@ -1093,7 +1093,7 @@ Del:
   FullForm: Del[expr]
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: false
   # comments:
 
@@ -1114,7 +1114,7 @@ Derivative:
   FullForm: Derivative[n][expr]
   arity: Unary
   affix: Postfix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments:
 
@@ -1134,7 +1134,7 @@ Diamond:
   FullForm: Diamond[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -1154,7 +1154,7 @@ DifferenceDelta:
   FullForm:
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Usage and Parse may not be correct.
 
@@ -1175,7 +1175,7 @@ DifferentialD:
   FullForm: DifferentialD[x]
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: false
   # comments:
 
@@ -1195,7 +1195,7 @@ DirectedEdge:
   FullForm: DirectedEdge[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
@@ -1215,7 +1215,7 @@ DiscreteRatio:
   FullForm:
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Usage and Parse may not be correct.
 
@@ -1235,7 +1235,7 @@ DiscreteShift:
   FullForm:
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Usage and Parse may not be correct.
 
@@ -1255,7 +1255,7 @@ Distributed:
   FullForm: Distributed[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
@@ -1276,7 +1276,7 @@ Divergence:
   FullForm:
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Usage and Parse may not be correct.
 
@@ -1296,7 +1296,7 @@ Divide:
   FullForm: Times[expr1, Power[expr2, -1]]
   arity: Binary
   affix: Infix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments:
 
@@ -1316,7 +1316,7 @@ DivideBy:
   FullForm: DivideBy[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
@@ -1337,7 +1337,7 @@ Divides:
   FullForm: Divisible[expr2, expr1]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
@@ -1357,7 +1357,7 @@ Dot:
   FullForm: Dot[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
@@ -1377,7 +1377,7 @@ DotEqual:
   FullForm: DotEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -1398,7 +1398,7 @@ DoubleAngleBracket:
   FullForm:
   arity: Unary
   affix: Matchfix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
@@ -1419,7 +1419,7 @@ DoubleBracketingBar:
   FullForm: DoubleBracketingBar[expr, \[Ellipsis]]
   arity: n-ary
   affix: Matchfix
-  associativity: Non
+  associativity: null
   meaningful: false
   # comments:
 
@@ -1440,7 +1440,7 @@ DoubleContourIntegral:
   FullForm: Integrate[expr1, expr2]
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Usage and Parse may not be correct.
 
@@ -1460,7 +1460,7 @@ DoubleDownArrow:
   FullForm: DoubleDownArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -1480,7 +1480,7 @@ DoubleLeftArrow:
   FullForm: DoubleLeftArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -1500,7 +1500,7 @@ DoubleLeftRightArrow:
   FullForm: DoubleLeftRightArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -1520,7 +1520,7 @@ DoubleLeftTee:
   FullForm: DoubleLeftTee[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Left
+  associativity: left
   meaningful: false
   # comments:
 
@@ -1540,7 +1540,7 @@ DoubleLongLeftArrow:
   FullForm: DoubleLongLeftArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -1560,7 +1560,7 @@ DoubleLongLeftRightArrow:
   FullForm: DoubleLongLeftRightArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -1580,7 +1580,7 @@ DoubleLongRightArrow:
   FullForm: DoubleLongRightArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -1600,7 +1600,7 @@ DoubleRightArrow:
   FullForm: DoubleRightArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -1620,7 +1620,7 @@ DoubleRightTee:
   FullForm: DoubleRightTee[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: false
   # comments:
 
@@ -1640,7 +1640,7 @@ DoubleUpArrow:
   FullForm: DoubleUpArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -1660,7 +1660,7 @@ DoubleUpDownArrow:
   FullForm: DoubleUpDownArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -1680,7 +1680,7 @@ DoubleVerticalBar:
   FullForm: DoubleVerticalBar[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -1700,7 +1700,7 @@ DownArrow:
   FullForm: DownArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -1720,7 +1720,7 @@ DownArrowBar:
   FullForm: DownArrowBar[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -1740,7 +1740,7 @@ DownArrowUpArrow:
   FullForm: DownArrowUpArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -1760,7 +1760,7 @@ DownLeftRightVector:
   FullForm: DownLeftRightVector[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -1780,7 +1780,7 @@ DownLeftTeeVector:
   FullForm: DownLeftTeeVector[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -1800,7 +1800,7 @@ DownLeftVector:
   FullForm: DownLeftVector[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -1820,7 +1820,7 @@ DownLeftVectorBar:
   FullForm: DownLeftVectorBar[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -1840,7 +1840,7 @@ DownRightTeeVector:
   FullForm: DownRightTeeVector[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -1860,7 +1860,7 @@ DownRightVector:
   FullForm: DownRightVector[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -1880,7 +1880,7 @@ DownRightVectorBar:
   FullForm: DownRightVectorBar[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -1900,7 +1900,7 @@ DownTee:
   FullForm: DownTee[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Left
+  associativity: left
   meaningful: false
   # comments:
 
@@ -1920,7 +1920,7 @@ DownTeeArrow:
   FullForm: DownTeeArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -1940,7 +1940,7 @@ Element:
   FullForm: Element[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
@@ -1960,7 +1960,7 @@ Equal:
   FullForm: Equal[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
@@ -1980,7 +1980,7 @@ EqualTilde:
   FullForm: EqualTilde[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -2000,7 +2000,7 @@ Equilibrium:
   FullForm: Equilibrium[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -2020,7 +2020,7 @@ Equivalent:
   FullForm: Equivalent[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
@@ -2040,7 +2040,7 @@ Exists:
   FullForm:
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Usage and Parse may not be correct.
 
@@ -2060,7 +2060,7 @@ ExpectationE:
   FullForm:
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Usage and Parse may not be correct.
 
@@ -2080,7 +2080,7 @@ Factorial:
   FullForm: Factorial[expr]
   arity: Unary
   affix: Postfix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments:
 
@@ -2100,7 +2100,7 @@ Factorial2:
   FullForm: Factorial2[expr]
   arity: Unary
   affix: Postfix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments:
 
@@ -2121,7 +2121,7 @@ Floor:
   FullForm: Floor[expr]
   arity: Unary
   affix: Matchfix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
@@ -2141,7 +2141,7 @@ ForAll:
   FullForm:
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Usage and Parse may not be correct.
 
@@ -2162,7 +2162,7 @@ FormBox:
   FullForm:
   arity: Binary
   affix: Infix
-  associativity: Missing["Unknown"]
+  associativity: missing["unknown"]
   meaningful: true
   # comments:
 
@@ -2183,7 +2183,7 @@ FractionBox:
   FullForm:
   arity: Binary
   affix: Infix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments:
 
@@ -2204,7 +2204,7 @@ FullwidthAngleBracket:
   FullForm:
   arity: Unary
   affix: Matchfix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
@@ -2225,7 +2225,7 @@ FullwidthCurlyBracket:
   FullForm:
   arity: Unary
   affix: Matchfix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
@@ -2246,7 +2246,7 @@ FullwidthParenthesis:
   FullForm:
   arity: Unary
   affix: Matchfix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
@@ -2267,7 +2267,7 @@ FullwidthSquareBracket:
   FullForm:
   arity: Unary
   affix: Matchfix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
@@ -2287,7 +2287,7 @@ Function:
   FullForm: Function[expr]
   arity: Unary
   affix: Postfix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments:
 
@@ -2307,7 +2307,7 @@ FunctionApply:
   FullForm: expr1[expr2, \[Ellipsis]]
   arity: n-ary
   affix: Postfix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments:
 
@@ -2327,7 +2327,7 @@ FunctionApplyInfix:
   FullForm: expr2[expr1, expr3]
   arity: Ternary
   affix: Infix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments: Infix[f[x,y]] will display as x~f~y. Precedence identifies Infix with this operator, and Precedence[Infix]==30 which is almost correct.
 
@@ -2347,7 +2347,7 @@ FunctionApplyPostfix:
   FullForm: expr2[expr1]
   arity: Binary
   affix: Infix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments: Postfix[f[x]] will display as x//f. Precedence identifies Postfix with this operator.
 
@@ -2367,7 +2367,7 @@ FunctionApplyPrefix:
   FullForm: expr1[expr2]
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Operator Notations includes usages with invisible unicode characters.
 
@@ -2387,7 +2387,7 @@ Get:
   FullForm: Get["filename"]
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
@@ -2408,7 +2408,7 @@ Gradient:
   FullForm:
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Usage and Parse may not be correct.
 
@@ -2428,7 +2428,7 @@ Greater:
   FullForm: Greater[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
@@ -2448,7 +2448,7 @@ GreaterEqual:
   FullForm: GreaterEqual[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
@@ -2468,7 +2468,7 @@ GreaterEqualLess:
   FullForm: GreaterEqualLess[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -2488,7 +2488,7 @@ GreaterFullEqual:
   FullForm: GreaterFullEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -2508,7 +2508,7 @@ GreaterGreater:
   FullForm: GreaterGreater[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -2528,7 +2528,7 @@ GreaterLess:
   FullForm: GreaterLess[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -2549,7 +2549,7 @@ GreaterSlantEqual:
   FullForm: GreaterEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -2569,7 +2569,7 @@ GreaterTilde:
   FullForm: GreaterTilde[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -2589,7 +2589,7 @@ HumpDownHump:
   FullForm: HumpDownHump[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -2609,7 +2609,7 @@ HumpEqual:
   FullForm: HumpEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -2630,7 +2630,7 @@ ImplicitSequence:
   FullForm: expr1, expr2
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments: Operator Notations includes usages with invisible unicode characters.
 
@@ -2650,7 +2650,7 @@ Implies:
   FullForm: Implies[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
@@ -2671,7 +2671,7 @@ Increment:
   FullForm: Increment[expr]
   arity: Unary
   affix: Postfix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments:
 
@@ -2692,7 +2692,7 @@ InlinePart:
   FullForm: RowBox[List[expr1, InlinePart, expr2]]
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: false
   # comments: "InlinePart or @> was an operator that was introduced in one of the pre-release/betas for version 10 and subsequently removed before public release. It was briefly available publicly in the Raspberry Pi version of Wolfram Language that co-existed with the pre-releases at the time. The operator allowed you to access elements of a list with an infix operator." https://mathematica.stackexchange.com/questions/134506/inlinepart-what-is-it-and-what-happened-to-it
 
@@ -2712,7 +2712,7 @@ Integrate:
   FullForm: Integrate[expr1, expr2]
   arity: Binary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
@@ -2733,7 +2733,7 @@ InterpretBoxes:
   FullForm:
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
@@ -2753,7 +2753,7 @@ Intersection:
   FullForm: Intersection[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
@@ -2774,7 +2774,7 @@ InvisiblePostfixScriptBase:
   FullForm:
   arity: Unary
   affix: Postfix
-  associativity: Left
+  associativity: left
   meaningful: false
   # comments: This operator is an invisible Unicode character and is used in the layout of displayed expressions.
 
@@ -2795,7 +2795,7 @@ InvisiblePrefixScriptBase:
   FullForm:
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: false
   # comments: Usage and Parse may not be correct.
 
@@ -2816,7 +2816,7 @@ Laplacian:
   FullForm:
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Usage and Parse may not be correct.
 
@@ -2836,7 +2836,7 @@ LeftArrow:
   FullForm: LeftArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -2856,7 +2856,7 @@ LeftArrowBar:
   FullForm: LeftArrowBar[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -2876,7 +2876,7 @@ LeftArrowRightArrow:
   FullForm: LeftArrowRightArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -2896,7 +2896,7 @@ LeftDownTeeVector:
   FullForm: LeftDownTeeVector[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -2916,7 +2916,7 @@ LeftDownVector:
   FullForm: LeftDownVector[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -2936,7 +2936,7 @@ LeftDownVectorBar:
   FullForm: LeftDownVectorBar[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -2956,7 +2956,7 @@ LeftRightArrow:
   FullForm: LeftRightArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -2976,7 +2976,7 @@ LeftRightVector:
   FullForm: LeftRightVector[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -2996,7 +2996,7 @@ LeftTee:
   FullForm: LeftTee[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Left
+  associativity: left
   meaningful: false
   # comments:
 
@@ -3016,7 +3016,7 @@ LeftTeeArrow:
   FullForm: LeftTeeArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -3036,7 +3036,7 @@ LeftTeeVector:
   FullForm: LeftTeeVector[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -3056,7 +3056,7 @@ LeftTriangle:
   FullForm: LeftTriangle[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -3076,7 +3076,7 @@ LeftTriangleBar:
   FullForm: LeftTriangleBar[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -3096,7 +3096,7 @@ LeftTriangleEqual:
   FullForm: LeftTriangleEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -3116,7 +3116,7 @@ LeftUpDownVector:
   FullForm: LeftUpDownVector[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -3136,7 +3136,7 @@ LeftUpTeeVector:
   FullForm: LeftUpTeeVector[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -3156,7 +3156,7 @@ LeftUpVector:
   FullForm: LeftUpVector[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -3176,7 +3176,7 @@ LeftUpVectorBar:
   FullForm: LeftUpVectorBar[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -3196,7 +3196,7 @@ LeftVector:
   FullForm: LeftVector[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -3216,7 +3216,7 @@ LeftVectorBar:
   FullForm: LeftVectorBar[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -3236,7 +3236,7 @@ Less:
   FullForm: Less[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
@@ -3256,7 +3256,7 @@ LessEqual:
   FullForm: LessEqual[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
@@ -3276,7 +3276,7 @@ LessEqualGreater:
   FullForm: LessEqualGreater[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -3296,7 +3296,7 @@ LessFullEqual:
   FullForm: LessFullEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -3316,7 +3316,7 @@ LessGreater:
   FullForm: LessGreater[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -3336,7 +3336,7 @@ LessLess:
   FullForm: LessLess[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -3357,7 +3357,7 @@ LessSlantEqual:
   FullForm: LessEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -3377,7 +3377,7 @@ LessTilde:
   FullForm: LessTilde[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -3397,7 +3397,7 @@ Limit:
   FullForm:
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Usage and Parse may not be correct.
 
@@ -3418,7 +3418,7 @@ List:
   FullForm: List[expr, \[Ellipsis]]
   arity: n-ary
   affix: Matchfix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
@@ -3438,7 +3438,7 @@ LongLeftArrow:
   FullForm: LongLeftArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -3458,7 +3458,7 @@ LongLeftRightArrow:
   FullForm: LongLeftRightArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -3478,7 +3478,7 @@ LongRightArrow:
   FullForm: LongRightArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -3498,7 +3498,7 @@ LowerLeftArrow:
   FullForm: LowerLeftArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -3518,7 +3518,7 @@ LowerRightArrow:
   FullForm: LowerRightArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -3538,7 +3538,7 @@ Map:
   FullForm: Map[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
@@ -3558,7 +3558,7 @@ MapAll:
   FullForm: MapAll[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
@@ -3579,7 +3579,7 @@ MapApply:
   FullForm: MapApply[expr1, expr2, List[1]]
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
@@ -3599,7 +3599,7 @@ MaxLimit:
   FullForm:
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Usage and Parse may not be correct.
 
@@ -3619,7 +3619,7 @@ MessageName:
   FullForm: MessageName[expr, "string"]
   arity: Binary
   affix: Infix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
@@ -3639,7 +3639,7 @@ MinLimit:
   FullForm:
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Usage and Parse may not be correct.
 
@@ -3659,7 +3659,7 @@ Minus:
   FullForm: Times[-1, expr]
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Operator Notations includes usages with invisible unicode characters.
 
@@ -3679,7 +3679,7 @@ MinusPlus:
   FullForm: MinusPlus[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Left
+  associativity: left
   meaningful: false
   # comments:
 
@@ -3699,7 +3699,7 @@ NamedBlank:
   FullForm: Pattern[symb, Blank[]]
   arity: Unary
   affix: Postfix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
@@ -3719,7 +3719,7 @@ NamedBlankHead:
   FullForm: Pattern[symb, Blank[expr]]
   arity: Binary
   affix: Infix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
@@ -3739,7 +3739,7 @@ NamedBlankNullSequence:
   FullForm: Pattern[symb, BlankNullSequence[]]
   arity: Unary
   affix: Postfix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
@@ -3759,7 +3759,7 @@ NamedBlankNullSequenceHead:
   FullForm: Pattern[symb, BlankNullSequence[expr]]
   arity: Binary
   affix: Infix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
@@ -3779,7 +3779,7 @@ NamedBlankOptional:
   FullForm: Optional[Pattern[symb, Blank[]]]
   arity: Unary
   affix: Postfix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
@@ -3799,7 +3799,7 @@ NamedBlankSequence:
   FullForm: Pattern[symb, BlankSequence[]]
   arity: Unary
   affix: Postfix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
@@ -3819,7 +3819,7 @@ NamedBlankSequenceHead:
   FullForm: Pattern[symb, BlankSequence[expr]]
   arity: Binary
   affix: Infix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
@@ -3840,7 +3840,7 @@ Nand:
   FullForm: Nand[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
@@ -3860,7 +3860,7 @@ NestedGreaterGreater:
   FullForm: NestedGreaterGreater[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -3880,7 +3880,7 @@ NestedLessLess:
   FullForm: NestedLessLess[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -3900,7 +3900,7 @@ NonCommutativeMultiply:
   FullForm: NonCommutativeMultiply[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
@@ -3921,7 +3921,7 @@ Nor:
   FullForm: Nor[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
@@ -3941,7 +3941,7 @@ Not:
   FullForm: Not[expr]
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
@@ -3961,7 +3961,7 @@ NotCongruent:
   FullForm: NotCongruent[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -3981,7 +3981,7 @@ NotCupCap:
   FullForm: NotCupCap[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -4001,7 +4001,7 @@ NotDoubleVerticalBar:
   FullForm: NotDoubleVerticalBar[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -4021,7 +4021,7 @@ NotElement:
   FullForm: NotElement[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
@@ -4041,7 +4041,7 @@ NotEqualTilde:
   FullForm: NotEqualTilde[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -4061,7 +4061,7 @@ NotExists:
   FullForm:
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Usage and Parse may not be correct.
 
@@ -4081,7 +4081,7 @@ NotGreater:
   FullForm: NotGreater[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -4101,7 +4101,7 @@ NotGreaterEqual:
   FullForm: NotGreaterEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -4121,7 +4121,7 @@ NotGreaterFullEqual:
   FullForm: NotGreaterFullEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -4141,7 +4141,7 @@ NotGreaterGreater:
   FullForm: NotGreaterGreater[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -4161,7 +4161,7 @@ NotGreaterLess:
   FullForm: NotGreaterLess[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -4181,7 +4181,7 @@ NotGreaterSlantEqual:
   FullForm: NotGreaterSlantEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -4201,7 +4201,7 @@ NotGreaterTilde:
   FullForm: NotGreaterTilde[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -4221,7 +4221,7 @@ NotHumpDownHump:
   FullForm: NotHumpDownHump[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -4241,7 +4241,7 @@ NotHumpEqual:
   FullForm: NotHumpEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -4261,7 +4261,7 @@ NotLeftTriangle:
   FullForm: NotLeftTriangle[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -4281,7 +4281,7 @@ NotLeftTriangleBar:
   FullForm: NotLeftTriangleBar[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -4301,7 +4301,7 @@ NotLeftTriangleEqual:
   FullForm: NotLeftTriangleEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -4321,7 +4321,7 @@ NotLess:
   FullForm: NotLess[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -4341,7 +4341,7 @@ NotLessEqual:
   FullForm: NotLessEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -4361,7 +4361,7 @@ NotLessFullEqual:
   FullForm: NotLessFullEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -4381,7 +4381,7 @@ NotLessGreater:
   FullForm: NotLessGreater[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -4401,7 +4401,7 @@ NotLessLess:
   FullForm: NotLessLess[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -4421,7 +4421,7 @@ NotLessSlantEqual:
   FullForm: NotLessSlantEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -4441,7 +4441,7 @@ NotLessTilde:
   FullForm: NotLessTilde[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -4461,7 +4461,7 @@ NotNestedGreaterGreater:
   FullForm: NotNestedGreaterGreater[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -4481,7 +4481,7 @@ NotNestedLessLess:
   FullForm: NotNestedLessLess[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -4501,7 +4501,7 @@ NotPrecedes:
   FullForm: NotPrecedes[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -4521,7 +4521,7 @@ NotPrecedesEqual:
   FullForm: NotPrecedesEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -4541,7 +4541,7 @@ NotPrecedesSlantEqual:
   FullForm: NotPrecedesSlantEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -4561,7 +4561,7 @@ NotPrecedesTilde:
   FullForm: NotPrecedesTilde[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -4581,7 +4581,7 @@ NotReverseElement:
   FullForm: NotReverseElement[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -4601,7 +4601,7 @@ NotRightTriangle:
   FullForm: NotRightTriangle[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -4621,7 +4621,7 @@ NotRightTriangleBar:
   FullForm: NotRightTriangleBar[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -4641,7 +4641,7 @@ NotRightTriangleEqual:
   FullForm: NotRightTriangleEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -4661,7 +4661,7 @@ NotSquareSubset:
   FullForm: NotSquareSubset[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -4681,7 +4681,7 @@ NotSquareSubsetEqual:
   FullForm: NotSquareSubsetEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -4701,7 +4701,7 @@ NotSquareSuperset:
   FullForm: NotSquareSuperset[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -4721,7 +4721,7 @@ NotSquareSupersetEqual:
   FullForm: NotSquareSupersetEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -4741,7 +4741,7 @@ NotSubset:
   FullForm: NotSubset[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -4761,7 +4761,7 @@ NotSubsetEqual:
   FullForm: NotSubsetEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -4781,7 +4781,7 @@ NotSucceeds:
   FullForm: NotSucceeds[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -4801,7 +4801,7 @@ NotSucceedsEqual:
   FullForm: NotSucceedsEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -4821,7 +4821,7 @@ NotSucceedsSlantEqual:
   FullForm: NotSucceedsSlantEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -4841,7 +4841,7 @@ NotSucceedsTilde:
   FullForm: NotSucceedsTilde[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -4861,7 +4861,7 @@ NotSuperset:
   FullForm: NotSuperset[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -4881,7 +4881,7 @@ NotSupersetEqual:
   FullForm: NotSupersetEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -4901,7 +4901,7 @@ NotTilde:
   FullForm: NotTilde[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -4921,7 +4921,7 @@ NotTildeEqual:
   FullForm: NotTildeEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -4941,7 +4941,7 @@ NotTildeFullEqual:
   FullForm: NotTildeFullEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -4961,7 +4961,7 @@ NotTildeTilde:
   FullForm: NotTildeTilde[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -4981,7 +4981,7 @@ NotVerticalBar:
   FullForm: NotVerticalBar[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -5002,7 +5002,7 @@ NumberBase:
   FullForm: n^^digits
   arity: Binary
   affix: Infix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments: Interprets digits as a number literal in base n. The base n must be a positive integer no greater than 36.
 
@@ -5023,7 +5023,7 @@ NumberMagnitude:
   FullForm: number*^magnitude
   arity: Binary
   affix: Infix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments: Gives mantissa*base^magnitude, where base^^mantissa=number and magnitude is a decimal number expressed without ^^, `, or ``. Only allowed in a number literal, and only after any ` or ``.
 
@@ -5044,7 +5044,7 @@ NumberPrecision:
   FullForm: number`s
   arity: Binary
   affix: Infix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments: Specifies the precision of number, where s is a positive decimal expressed without using ^^ or `. Any magnitude must come after `."
 
@@ -5065,7 +5065,7 @@ NumberPrecisionPostfix:
   FullForm: number`
   arity: Unary
   affix: Postfix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments: Specifies the precision of number to be $MachinePrecision. Any magnitude must come after `."
 
@@ -5085,7 +5085,7 @@ Optional:
   FullForm: Optional[patt, expr]
   arity: Binary
   affix: Infix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
@@ -5106,7 +5106,7 @@ Or:
   FullForm: Or[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
@@ -5127,7 +5127,7 @@ Out:
   FullForm: Out[-n]
   arity: Nullary
   affix: None
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
@@ -5148,7 +5148,7 @@ OutNumber:
   FullForm: Out[n]
   arity: Unary
   affix: Prefix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
@@ -5169,7 +5169,7 @@ OverscriptBox:
   FullForm:
   arity: Binary
   affix: Infix
-  associativity: Missing["Unknown"]
+  associativity: missing["unknown"]
   meaningful: true
   # comments:
 
@@ -5190,7 +5190,7 @@ OverunderscriptBox:
   FullForm:
   arity: Ternary
   affix: Infix
-  associativity: Missing["Unknown"]
+  associativity: missing["unknown"]
   meaningful: true
   # comments:
 
@@ -5211,7 +5211,7 @@ ParameterizedFunction:
   FullForm: Function[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: The arrow form of Function.
 
@@ -5232,7 +5232,7 @@ Parentheses:
   FullForm:
   arity: Unary
   affix: Matchfix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
@@ -5252,7 +5252,7 @@ Part:
   FullForm: Part[expr1, expr2, \[Ellipsis]]
   arity: n-ary
   affix: Postfix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments:
 
@@ -5273,7 +5273,7 @@ PartialD:
   FullForm:
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Usage and Parse may not be correct.
 
@@ -5294,7 +5294,7 @@ PartialFractionBox:
   FullForm:
   arity: Unary
   affix: Postfix
-  associativity: Left
+  associativity: left
   meaningful: false
   # comments: This operator is an invisible Unicode character and is used in the layout of displayed expressions.
 
@@ -5315,7 +5315,7 @@ PartialOverscriptBox:
   FullForm:
   arity: Unary
   affix: Postfix
-  associativity: Left
+  associativity: left
   meaningful: false
   # comments: This operator is an invisible Unicode character and is used in the layout of displayed expressions.
 
@@ -5336,7 +5336,7 @@ PartialSubscriptBox:
   FullForm:
   arity: Unary
   affix: Postfix
-  associativity: Left
+  associativity: left
   meaningful: false
   # comments: This operator is an invisible Unicode character and is used in the layout of displayed expressions.
 
@@ -5357,7 +5357,7 @@ PartialSuperscriptBox:
   FullForm:
   arity: Unary
   affix: Postfix
-  associativity: Left
+  associativity: left
   meaningful: false
   # comments: This operator is an invisible Unicode character and is used in the layout of displayed expressions.
 
@@ -5378,7 +5378,7 @@ PartialUnderscriptBox:
   FullForm:
   arity: Unary
   affix: Postfix
-  associativity: Left
+  associativity: left
   meaningful: false
   # comments: This operator is an invisible Unicode character and is used in the layout of displayed expressions.
 
@@ -5398,7 +5398,7 @@ Pattern:
   FullForm: Pattern[symb, expr]
   arity: Binary
   affix: Infix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
@@ -5418,7 +5418,7 @@ PatternTest:
   FullForm: PatternTest[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Missing["Unknown"]
+  associativity: missing["unknown"]
   meaningful: true
   # comments:
 
@@ -5439,7 +5439,7 @@ PermutationProduct:
   FullForm: PermutationProduct[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
@@ -5459,7 +5459,7 @@ Perpendicular:
   FullForm: Perpendicular[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -5480,7 +5480,7 @@ Piecewise:
   FullForm:
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Usage and Parse may not be correct.
 
@@ -5500,7 +5500,7 @@ Plus:
   FullForm: Plus[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments: Operator Notations includes usages with invisible unicode characters.
 
@@ -5520,7 +5520,7 @@ PlusMinus:
   FullForm: PlusMinus[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Left
+  associativity: left
   meaningful: false
   # comments:
 
@@ -5540,7 +5540,7 @@ Power:
   FullForm: Power[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
@@ -5560,7 +5560,7 @@ PreDecrement:
   FullForm: PreDecrement[expr]
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
@@ -5580,7 +5580,7 @@ PreIncrement:
   FullForm: PreIncrement[expr]
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
@@ -5600,7 +5600,7 @@ Precedes:
   FullForm: Precedes[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -5620,7 +5620,7 @@ PrecedesEqual:
   FullForm: PrecedesEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -5640,7 +5640,7 @@ PrecedesSlantEqual:
   FullForm: PrecedesSlantEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -5660,7 +5660,7 @@ PrecedesTilde:
   FullForm: PrecedesTilde[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -5680,7 +5680,7 @@ ProbabilityPr:
   FullForm:
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Usage and Parse may not be correct.
 
@@ -5700,7 +5700,7 @@ Product:
   FullForm:
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Usage and Parse may not be correct.
 
@@ -5720,7 +5720,7 @@ Proportion:
   FullForm: Proportion[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -5740,7 +5740,7 @@ Proportional:
   FullForm: Proportional[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -5760,7 +5760,7 @@ Put:
   FullForm: Put[expr, "filename"]
   arity: Binary
   affix: Infix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments:
 
@@ -5780,7 +5780,7 @@ PutAppend:
   FullForm: PutAppend[expr, "filename"]
   arity: Binary
   affix: Infix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments:
 
@@ -5801,7 +5801,7 @@ RadicalBox:
   FullForm:
   arity: Binary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
@@ -5822,7 +5822,7 @@ RawBackquote:
   FullForm: number``s
   arity: Binary
   affix: Infix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments: Specifies the accuracy (in number of digits to the right of decimal) of number, where s is a positive decimal expressed without using ^^ or `. A magnitude must come after ``.
 
@@ -5842,7 +5842,7 @@ Repeated:
   FullForm: Repeated[expr]
   arity: Unary
   affix: Postfix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments:
 
@@ -5862,7 +5862,7 @@ RepeatedNull:
   FullForm: RepeatedNull[expr]
   arity: Unary
   affix: Postfix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments:
 
@@ -5882,7 +5882,7 @@ ReplaceAll:
   FullForm: ReplaceAll[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments:
 
@@ -5902,7 +5902,7 @@ ReplaceRepeated:
   FullForm: ReplaceRepeated[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments:
 
@@ -5922,7 +5922,7 @@ ReverseElement:
   FullForm: ReverseElement[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -5942,7 +5942,7 @@ ReverseEquilibrium:
   FullForm: ReverseEquilibrium[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -5962,7 +5962,7 @@ ReverseUpEquilibrium:
   FullForm: ReverseUpEquilibrium[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -5982,7 +5982,7 @@ RightArrow:
   FullForm: RightArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -6002,7 +6002,7 @@ RightArrowBar:
   FullForm: RightArrowBar[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -6022,7 +6022,7 @@ RightArrowLeftArrow:
   FullForm: RightArrowLeftArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -6043,7 +6043,7 @@ RightComposition:
   FullForm: RightComposition[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
@@ -6063,7 +6063,7 @@ RightDownTeeVector:
   FullForm: RightDownTeeVector[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -6083,7 +6083,7 @@ RightDownVector:
   FullForm: RightDownVector[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -6103,7 +6103,7 @@ RightDownVectorBar:
   FullForm: RightDownVectorBar[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -6123,7 +6123,7 @@ RightTee:
   FullForm: RightTee[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: false
   # comments:
 
@@ -6143,7 +6143,7 @@ RightTeeArrow:
   FullForm: RightTeeArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -6163,7 +6163,7 @@ RightTeeVector:
   FullForm: RightTeeVector[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -6183,7 +6183,7 @@ RightTriangle:
   FullForm: RightTriangle[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -6203,7 +6203,7 @@ RightTriangleBar:
   FullForm: RightTriangleBar[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -6223,7 +6223,7 @@ RightTriangleEqual:
   FullForm: RightTriangleEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -6243,7 +6243,7 @@ RightUpDownVector:
   FullForm: RightUpDownVector[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -6263,7 +6263,7 @@ RightUpTeeVector:
   FullForm: RightUpTeeVector[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -6283,7 +6283,7 @@ RightUpVector:
   FullForm: RightUpVector[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -6303,7 +6303,7 @@ RightUpVectorBar:
   FullForm: RightUpVectorBar[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -6323,7 +6323,7 @@ RightVector:
   FullForm: RightVector[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -6343,7 +6343,7 @@ RightVectorBar:
   FullForm: RightVectorBar[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -6364,7 +6364,7 @@ RoundImplies:
   FullForm: RoundImplies[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: false
   # comments:
 
@@ -6384,7 +6384,7 @@ Rule:
   FullForm: Rule[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
@@ -6404,7 +6404,7 @@ RuleDelayed:
   FullForm: RuleDelayed[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
@@ -6425,7 +6425,7 @@ SameQ:
   FullForm: SameQ[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
@@ -6445,7 +6445,7 @@ Set:
   FullForm: Set[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
@@ -6465,7 +6465,7 @@ SetDelayed:
   FullForm: SetDelayed[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
@@ -6485,7 +6485,7 @@ ShortDownArrow:
   FullForm: ShortDownArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -6505,7 +6505,7 @@ ShortLeftArrow:
   FullForm: ShortLeftArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -6525,7 +6525,7 @@ ShortRightArrow:
   FullForm: ShortRightArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -6545,7 +6545,7 @@ ShortUpArrow:
   FullForm: ShortUpArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -6566,7 +6566,7 @@ Skeleton:
   FullForm: Skeleton[n]
   arity: Unary
   affix: Matchfix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
@@ -6586,7 +6586,7 @@ Slot:
   FullForm: Slot[1]
   arity: Nullary
   affix: None
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
@@ -6606,7 +6606,7 @@ SlotNumber:
   FullForm: Slot[n]
   arity: Unary
   affix: Prefix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
@@ -6626,7 +6626,7 @@ SlotSequence:
   FullForm: SlotSequence[1]
   arity: Nullary
   affix: None
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
@@ -6646,7 +6646,7 @@ SlotSequenceNumber:
   FullForm: SlotSequence[n]
   arity: Unary
   affix: Prefix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
@@ -6666,7 +6666,7 @@ SmallCircle:
   FullForm: SmallCircle[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -6686,7 +6686,7 @@ Span:
   FullForm: Span[i, j, k]
   arity: Ternary
   affix: Infix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
@@ -6707,7 +6707,7 @@ Sqrt:
   FullForm: Sqrt[expr]
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
@@ -6728,7 +6728,7 @@ SqrtBox:
   FullForm:
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
@@ -6748,7 +6748,7 @@ Square:
   FullForm: Square[expr]
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: false
   # comments:
 
@@ -6768,7 +6768,7 @@ SquareIntersection:
   FullForm: SquareIntersection[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -6788,7 +6788,7 @@ SquareSubset:
   FullForm: SquareSubset[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -6808,7 +6808,7 @@ SquareSubsetEqual:
   FullForm: SquareSubsetEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -6828,7 +6828,7 @@ SquareSuperset:
   FullForm: SquareSuperset[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -6848,7 +6848,7 @@ SquareSupersetEqual:
   FullForm: SquareSupersetEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -6868,7 +6868,7 @@ SquareUnion:
   FullForm: SquareUnion[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -6888,7 +6888,7 @@ Star:
   FullForm: Star[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -6908,7 +6908,7 @@ StringExpression:
   FullForm: StringExpression[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
@@ -6928,7 +6928,7 @@ StringJoin:
   FullForm: StringJoin[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
@@ -6949,7 +6949,7 @@ SubscriptBox:
   FullForm:
   arity: Binary
   affix: Infix
-  associativity: Missing["Unknown"]
+  associativity: missing["unknown"]
   meaningful: true
   # comments:
 
@@ -6969,7 +6969,7 @@ Subset:
   FullForm: Subset[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -6989,7 +6989,7 @@ SubsetEqual:
   FullForm: SubsetEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -7010,7 +7010,7 @@ SubsuperscriptBox:
   FullForm:
   arity: Ternary
   affix: Infix
-  associativity: Missing["Unknown"]
+  associativity: missing["unknown"]
   meaningful: true
   # comments:
 
@@ -7030,7 +7030,7 @@ Subtract:
   FullForm: Plus[expr1, Times[-1, expr2]]
   arity: Binary
   affix: Infix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments: Operator Notations includes usages with invisible unicode characters.
 
@@ -7050,7 +7050,7 @@ SubtractFrom:
   FullForm: SubtractFrom[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
@@ -7070,7 +7070,7 @@ Succeeds:
   FullForm: Succeeds[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -7090,7 +7090,7 @@ SucceedsEqual:
   FullForm: SucceedsEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -7110,7 +7110,7 @@ SucceedsSlantEqual:
   FullForm: SucceedsSlantEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -7130,7 +7130,7 @@ SucceedsTilde:
   FullForm: SucceedsTilde[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -7150,7 +7150,7 @@ SuchThat:
   FullForm: SuchThat[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: false
   # comments:
 
@@ -7171,7 +7171,7 @@ Sum:
   FullForm: Sum[expr]
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Usage and Parse may not be correct.
 
@@ -7192,7 +7192,7 @@ SuperDagger:
   FullForm: Power[expr, \[Dagger]]
   arity: Unary
   affix: Postfix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments:
 
@@ -7212,7 +7212,7 @@ SuperscriptBox:
   FullForm:
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
@@ -7232,7 +7232,7 @@ Superset:
   FullForm: Superset[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -7252,7 +7252,7 @@ SupersetEqual:
   FullForm: SupersetEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -7273,7 +7273,7 @@ SupersubscriptBox:
   FullForm:
   arity: Ternary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
@@ -7294,7 +7294,7 @@ TagSet:
   FullForm: TagSet[symb, expr1, expr2]
   arity: Ternary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
@@ -7315,7 +7315,7 @@ TagSetDelayed:
   FullForm: TagSetDelayed[symb, expr1, expr2]
   arity: Ternary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
@@ -7336,7 +7336,7 @@ TagUnset:
   FullForm: Unset[Condition[symb, expr]]
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
@@ -7357,7 +7357,7 @@ TensorProduct:
   FullForm: TensorProduct[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
@@ -7378,7 +7378,7 @@ TensorWedge:
   FullForm: TensorWedge[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
@@ -7398,7 +7398,7 @@ Therefore:
   FullForm: Therefore[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: false
   # comments: Precedence of Therefore and Because are swapped in notebook versus ToExpression.
 
@@ -7418,7 +7418,7 @@ Tilde:
   FullForm: Tilde[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -7438,7 +7438,7 @@ TildeEqual:
   FullForm: TildeEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -7458,7 +7458,7 @@ TildeFullEqual:
   FullForm: TildeFullEqual[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -7478,7 +7478,7 @@ TildeTilde:
   FullForm: TildeTilde[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -7498,7 +7498,7 @@ Times:
   FullForm: Times[expr1, expr2]
   arity: Nullary
   affix: None
-  associativity: None
+  associativity: null
   meaningful: true
   # comments: Operator Notations includes usages with invisible unicode characters.
 
@@ -7518,7 +7518,7 @@ TimesBy:
   FullForm: TimesBy[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
@@ -7539,7 +7539,7 @@ TortoiseShellBracket:
   FullForm:
   arity: Unary
   affix: Matchfix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
@@ -7560,7 +7560,7 @@ Transpose:
   FullForm: Transpose[expr]
   arity: Unary
   affix: Postfix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments:
 
@@ -7580,7 +7580,7 @@ TwoWayRule:
   FullForm: TwoWayRule[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
@@ -7601,7 +7601,7 @@ UnaryMinusPlus:
   FullForm: MinusPlus[expr]
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: false
   # comments:
 
@@ -7622,7 +7622,7 @@ UnaryPlus:
   FullForm: Plus[expr]
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments: Converts to expr on input.
 
@@ -7643,7 +7643,7 @@ UnaryPlusMinus:
   FullForm: PlusMinus[expr]
   arity: Unary
   affix: Prefix
-  associativity: Right
+  associativity: right
   meaningful: false
   # comments:
 
@@ -7664,7 +7664,7 @@ UnderoverscriptBox:
   FullForm:
   arity: Ternary
   affix: Infix
-  associativity: Missing["Unknown"]
+  associativity: missing["unknown"]
   meaningful: true
   # comments:
 
@@ -7685,7 +7685,7 @@ UnderscriptBox:
   FullForm:
   arity: Binary
   affix: Infix
-  associativity: Missing["Unknown"]
+  associativity: missing["unknown"]
   meaningful: true
   # comments:
 
@@ -7705,7 +7705,7 @@ UndirectedEdge:
   FullForm: UndirectedEdge[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
@@ -7725,7 +7725,7 @@ Unequal:
   FullForm: Unequal[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
@@ -7745,7 +7745,7 @@ Union:
   FullForm: Union[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
@@ -7765,7 +7765,7 @@ UnionPlus:
   FullForm: UnionPlus[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -7786,7 +7786,7 @@ UnsameQ:
   FullForm: UnsameQ[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
@@ -7807,7 +7807,7 @@ Unset:
   FullForm: Unset[expr]
   arity: Unary
   affix: Postfix
-  associativity: Left
+  associativity: left
   meaningful: true
   # comments:
 
@@ -7827,7 +7827,7 @@ UpArrow:
   FullForm: UpArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -7847,7 +7847,7 @@ UpArrowBar:
   FullForm: UpArrowBar[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -7867,7 +7867,7 @@ UpArrowDownArrow:
   FullForm: UpArrowDownArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -7887,7 +7887,7 @@ UpDownArrow:
   FullForm: UpDownArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -7907,7 +7907,7 @@ UpEquilibrium:
   FullForm: UpEquilibrium[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -7927,7 +7927,7 @@ UpSet:
   FullForm: UpSet[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
@@ -7947,7 +7947,7 @@ UpSetDelayed:
   FullForm: UpSetDelayed[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Right
+  associativity: right
   meaningful: true
   # comments:
 
@@ -7967,7 +7967,7 @@ UpTee:
   FullForm: UpTee[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: Left
+  associativity: left
   meaningful: false
   # comments:
 
@@ -7987,7 +7987,7 @@ UpTeeArrow:
   FullForm: UpTeeArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -8007,7 +8007,7 @@ UpperLeftArrow:
   FullForm: UpperLeftArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -8027,7 +8027,7 @@ UpperRightArrow:
   FullForm: UpperRightArrow[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -8047,7 +8047,7 @@ Vee:
   FullForm: Vee[x, y]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -8067,7 +8067,7 @@ VerticalBar:
   FullForm: VerticalBar[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -8087,7 +8087,7 @@ VerticalSeparator:
   FullForm: VerticalSeparator[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -8107,7 +8107,7 @@ VerticalTilde:
   FullForm: VerticalTilde[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -8127,7 +8127,7 @@ Wedge:
   FullForm: Wedge[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: false
   # comments:
 
@@ -8148,7 +8148,7 @@ WhiteCornerBracket:
   FullForm:
   arity: Unary
   affix: Matchfix
-  associativity: Non
+  associativity: null
   meaningful: true
   # comments:
 
@@ -8168,7 +8168,7 @@ Xnor:
   FullForm: Xnor[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:
 
@@ -8188,6 +8188,6 @@ Xor:
   FullForm: Xor[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: None
+  associativity: null
   meaningful: true
   # comments:

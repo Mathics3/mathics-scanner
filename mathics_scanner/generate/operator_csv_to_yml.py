@@ -94,6 +94,11 @@ for name in sorted(operators.keys()):
     info = operators[name]
     for i, field in enumerate(yaml_fields):
         value = info[i]
+        if field == "associativity":
+            if value in ("None", "Non"):
+                value = "null"
+            else:
+                value = value.lower()
         if field == "meaningfull":
             value = value.lower()
             field = "meaningful"  # spelling correction
