@@ -1,0 +1,46 @@
+#
+# Additional information not in CSV or
+# Note: we keep the misspelling of "meaningfull"
+# and the uncoverted types like None and True
+
+Postfix:
+  name: Postfix
+  actual-precedence: 670
+  Precedence: 670
+  Precedence-corrected: 670
+  WolframLanguageData: null
+  WolframLanguageData-corrected:
+  UnicodeCharacters.tr:
+  UnicodeCharacters-corrected.tr:
+  # N-tokens:
+  # L-tokens:
+  # O-tokens:
+  # usage: {{"expr", "//", "FormName"}}
+  # parse: {"FullForm", "[", "expr1",  "]"}
+  # FullForm: FullForm[expr]
+  arity: Binary
+  affix: Infix
+  associativity: None
+  meaningfull: "true"
+  # comments:
+
+Prefix:
+  name: Prefix
+  actual-precedence: 640
+  Precedence: 640
+  Precedence-corrected: 640
+  WolframLanguageData: null
+  WolframLanguageData-corrected:
+  UnicodeCharacters.tr:
+  UnicodeCharacters-corrected.tr:
+  # N-tokens:
+  # L-tokens:
+  # O-tokens:
+  # usage: {{"expr", "//", "FormName"}}
+  # parse: {"FullForm", "[", "expr1",  "]"}
+  # FullForm: FullForm[expr]
+  arity: Binary
+  affix: Infix
+  associativity: None
+  meaningfull: "true"
+  # comments:

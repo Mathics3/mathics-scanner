@@ -1,0 +1,56 @@
+# Information about Wolfram Language named operators.
+
+# This information comes from Robert L. Jacobson's Table of Wolfram
+# Language Operators found at:
+#    https://github.com/WLTools/LanguageSpec/blob/master/docs/Specification/Syntax/Operator%20Table.csv
+#
+# We have copy of this in the Mathics-Scanner repository.
+# The CSV file has been converted to YAML using mathics_scanner/generate/operator_csv_to_yaml.py
+#
+# However, after this has been done, there may be further edits in this file and comments like this one
+# added.
+
+# The primary here used here is an "unofficial" operator name. This is the name used by
+# WL when there is one. When there is not a name, then we make one up.
+
+
+# Many fields below mention precedence. This is an integer used in
+# specifying the order operations occur when one operator is
+# juxtaposed against another operator.  A higher value means that the
+# operator binds before an operator with a lower value.
+
+# For example, the Times precedence 400 is higher than the Plus
+# precedence 310 because a + b * c is a + (b * c), not (a + b) * c.
+# Precedence is also used to force multi-character ASCII symbols like
+# |-> to get treated as one unit and not split into two operators like
+# | and ->. So the precedence of |-> has to be higher than |.
+#
+
+
+# Field definitions
+# =================
+
+#   name: this is the WL name. When it exits it will also be the name of the key
+#   actual-precedence: a precedence value that programs can use.
+#   Precedence: the value returned for this operator using the WL function Precedence[]
+#   Precedence-corrected: the value used in Mathics3.
+#   WolframLangageData: a value returned using WolframLangageData[???]
+#   usage: when it exists, an example of the use of this operator
+#   parse: when "usage" exists, a parse of the example
+#   parse: when "usage" exists, the FullForm translation of the example
+#   arity: the number of arguments the operator takes. One of:
+#       - Binary (2 arguments)
+#       - NullAry (0 arguments),
+#       - Ternary (3 arguments)
+#       - Unary (1 argument),
+#       - n-ary (n arguments)
+
+#   associativity: when two or more of the same operator is used, which group to
+#                 evaluate first. One of:
+#       - None
+#       - Non
+#       - Right
+#       - Left
+#       - Missing["Unknown"]
+#
+#   meaningful: boolean ??
