@@ -3,8 +3,30 @@
 # Note: we keep the misspelling of "meaningfull"
 # and the uncoverted types like None and True
 
-Postfix:
-  name: Postfix
+Derivative:
+  name: Derivative
+  actual-precedence: 770
+  Precedence: 670  # CSV has 604 which is wrong
+  Precedence-Function: 670
+  WolframLanguageData: 19
+  WolframLanguageData-corrected: 19
+  UnicodeCharacters.tr:
+  UnicodeCharacters-corrected.tr: 680
+  # N-tokens: {}
+  # L-tokens: {"''"}
+  # O-tokens: {}
+  # usage: {{"expr", "''"}}
+  # parse: {"Derivative", "[", "n", "]", "[", "expr", "]"}
+  # FullForm: Derivative[n][expr]
+  arity: Unary
+  affix: Postfix
+  associativity: left
+  meaningfull: "true"
+  # comments:
+
+# This operator is a little sketchy
+Information:
+  name: Information
   actual-precedence: 670
   Precedence: 670
   Precedence-corrected: 670
@@ -15,7 +37,50 @@ Postfix:
   # N-tokens:
   # L-tokens:
   # O-tokens:
-  # usage: {{"expr", "//", "FormName"}}
+  # usage: "?? AddTo"
+  # parse: {"Information", "[", "AddTo",  "]"}
+  # FullForm: Information[AddTo]
+  arity: Binary
+  affix: Infix
+  associativity: None
+  meaningfull: "true"
+  # comments:
+
+# This operator is a little sketchy
+InterpretedBox:
+  name: InterpretedBox
+  actual-precedence: 670
+  Precedence: 670
+  Precedence-corrected: 670
+  WolframLanguageData: null
+  WolframLanguageData-corrected:
+  UnicodeCharacters.tr:
+  UnicodeCharacters-corrected.tr:
+  # N-tokens:
+  # L-tokens:
+  # O-tokens:
+  # usage: "\! \(2+2\)"
+  # parse: {"FullForm", "[", "expr1",  "]"}
+  # FullForm: FullForm[expr]
+  arity: Binary
+  affix: Infix
+  associativity: None
+  meaningfull: "true"
+  # comments:
+
+Postfix:
+  name: Postfix
+  actual-precedence: 640
+  Precedence: 640
+  Precedence-corrected: 640
+  WolframLanguageData: null
+  WolframLanguageData-corrected:
+  UnicodeCharacters.tr:
+  UnicodeCharacters-corrected.tr:
+  # N-tokens:
+  # L-tokens:
+  # O-tokens:
+  usage: "expr // FormName"
   # parse: {"FullForm", "[", "expr1",  "]"}
   # FullForm: FullForm[expr]
   arity: Binary
@@ -36,9 +101,9 @@ Prefix:
   # N-tokens:
   # L-tokens:
   # O-tokens:
-  # usage: {{"expr", "//", "FormName"}}
-  # parse: {"FullForm", "[", "expr1",  "]"}
-  # FullForm: FullForm[expr]
+  usage: "expr1 @ expr2"
+  # parse: {"expr1", "[", "expr2",  "]"}
+  # FullForm: expr1[expr2]
   arity: Binary
   affix: Infix
   associativity: None
