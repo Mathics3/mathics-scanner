@@ -4,7 +4,6 @@
 # and the uncoverted types like None and True
 
 Derivative:
-  name: Derivative
   actual-precedence: 770
   Precedence: 670  # CSV has 604 which is wrong
   Precedence-corrected: 670
@@ -26,7 +25,6 @@ Derivative:
   # comments:
 
 Information:
-  name: Information
   actual-precedence: 670
   Precedence: 670
   Precedence-corrected: 670
@@ -48,7 +46,6 @@ Information:
 
 # This operator is a little sketchy
 InterpretedBox:
-  name: InterpretedBox
   actual-precedence: 670
   Precedence: 670
   Precedence-corrected: 670
@@ -69,7 +66,6 @@ InterpretedBox:
   # comments:
 
 Postfix:
-  name: Postfix
   actual-precedence: 640
   Precedence: 640
   Precedence-corrected: 640
@@ -90,7 +86,6 @@ Postfix:
   # comments:
 
 Prefix:
-  name: Prefix
   actual-precedence: 640
   Precedence: 640
   Precedence-corrected: 640
