@@ -3,17 +3,14 @@
 # This information comes from Robert L. Jacobson's Table of Wolfram
 # Language Operators found at:
 #    https://github.com/WLTools/LanguageSpec/blob/master/docs/Specification/Syntax/Operator%20Table.csv
-#
+
+# See
+# https://www.robertjacobson.dev/posts/2018-09-04-defining-the-wolfram-language-part-2-operator-properties/
+# for a description of some of the fields used here.
+
 # We have copy of this in the Mathics-Scanner repository.
 # The CSV file has been converted to YAML using mathics_scanner/generate/operator_csv_to_yaml.py
 #
-# However, after this has been done, there may be further edits in this file and comments like this one
-# added.
-
-# The primary here used here is an "unofficial" operator name. This is the name used by
-# WL when there is one. When there is not a name, then we make one up.
-
-
 # Many fields below mention precedence. This is an integer used in
 # specifying the order operations occur when one operator is
 # juxtaposed against another operator.  A higher value means that the

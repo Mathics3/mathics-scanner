@@ -25,7 +25,6 @@ Derivative:
   meaningfull: "true"
   # comments:
 
-# This operator is a little sketchy
 Information:
   name: Information
   actual-precedence: 670
