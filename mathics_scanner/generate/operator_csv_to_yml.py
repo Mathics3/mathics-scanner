@@ -124,6 +124,8 @@ with open(output_yaml_path, "w") as output_yaml:
             # This entry comes from additional YAML information. Adjust
             # so it looks like a list.
             new_info = []
+            # Below, we skip the first field, "name" which is the
+            # same as the key name.
             for field in yaml_fields:
                 if field in info:
                     new_info.append(info[field])
@@ -132,8 +134,8 @@ with open(output_yaml_path, "w") as output_yaml:
 
             info = new_info
 
-        for i, field in enumerate(yaml_fields):
-            value = info[i]
+        for i, field in enumerate(yaml_fields[1:]):
+            value = info[i + 1]
             if field == "associativity":
                 if value in ("None", "Non"):
                     value = "null"

@@ -12,7 +12,6 @@ import click
 import yaml
 
 OPERATOR_FIELDS = [
-    "name",
     "actual-precedence",
     "Precedence",
     "Precedence-corrected",
