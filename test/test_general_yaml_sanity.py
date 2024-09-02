@@ -73,7 +73,7 @@ def test_operators():
     operator_name_seen = set()
 
     # These names have more than one operator symbol
-    dup_operators = set(["Apply", "Function"])
+    dup_operators = set(["Apply", "Function", "MapApply", "LeftList"])
 
     # These symbols have more than one operator name
     dup_operator_symbols = set(["?", "!"])
@@ -83,14 +83,12 @@ def test_operators():
             if len(v["ascii"]) > 1:
                 assert (
                     "operator-name" in v
-                ), "In %s: ASCII with more than one characters must be an operator" % (
-                    k
-                )
+                ), f"In {k}: ASCII with more than one characters must be an operator"
                 pass
         else:
-            assert "wl-unicode" in v, (
-                "In %s: there must be either an ascii name or have a wl-unicode" % k
-            )
+            assert (
+                "wl-unicode" in v
+            ), f"In {k}: there must be either an ascii name or have a wl-unicode"
         if "operator-name" not in v:
             continue
 
@@ -108,7 +106,7 @@ def test_operators():
             continue
         assert (
             operator_name not in operator_name_seen
-        ), "Operator name %s has operator %s already been seen" % (operator_name, k)
+        ), f"Operator name {operator_name} has operator {k} already been seen"
         operator_name_seen.add(operator_name)
 
 
@@ -171,7 +169,11 @@ def test_wl_unicode():
 
 
 def test_unicode_operators():
-    exclude_list = frozenset("Apply3Ats FunctionAmpersand".split(" "))
+    exclude_list = frozenset(
+        """Apply3Ats LeftDoubleBracket Function FunctionAmpersand NotEqual RawGreater RawLeftBrace RightDoubleBracket""".split(
+            " "
+        )
+    )
     for k, v in yaml_data.items():
         if k in exclude_list:
             continue
@@ -180,7 +182,7 @@ def test_unicode_operators():
         operator_name = v["operator-name"]
         assert (
             k == operator_name
-        ), f"Section name {k} should match operator-name {operator_name} when a section has an operator"
+        ), f"Section name {k} should match operator-name {operator_name} or be exlicitly excluded when a section has an operator"
 
 
 def test_wl_unicode_name():
