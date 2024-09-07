@@ -56,6 +56,7 @@
 #   http://milde.users.sourceforge.net/LUCR/Math/unimathsymbols.pdf
 #   https://reference.wolfram.com/language/ref/character/....html
 #   https://github.com/rsmenon/pygments-mathematica
+#   https://reference.wolfram.com/language/tutorial/OperatorInputForms.html
 
 AAcute:
   amslatex: "\\'{a}"
@@ -1345,11 +1346,11 @@ CircleTimes:
   wl-unicode: "\u2297"
   wl-unicode-name: CIRCLED TIMES
 
-# See comment under "Integrate".
 ClockwiseContourIntegral:
   esc-alias: ccint
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: ClockwiseContourIntegral
   unicode-equivalent: "\u2232"
   unicode-equivalent-name: CLOCKWISE CONTOUR INTEGRAL
   wl-unicode: "\u2232"
@@ -1477,6 +1478,7 @@ ContourIntegral:
   esc-alias: cint
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: ContourIntegral
   unicode-equivalent: "\u222E"
   unicode-equivalent-name: CONTOUR INTEGRAL
   wl-unicode: "\u222E"
@@ -1507,11 +1509,11 @@ Copyright:
   wl-unicode: "\xA9"
   wl-unicode-name: COPYRIGHT SIGN
 
-# See comment under "Integral".
 CounterClockwiseContourIntegral:
   esc-alias: cccint
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: CounterClockwiseContourIntegral
   unicode-equivalent: "\u2233"
   unicode-equivalent-name: ANTICLOCKWISE CONTOUR INTEGRAL
   wl-unicode: "\u2233"
@@ -1915,11 +1917,11 @@ DottedSquare:
   unicode-equivalent-name: SQUARE FOUR CORNERS
   wl-unicode: "\uF751"
 
-# See comment before "Integral".
 DoubleContourIntegral:
   amslatex: "\\oiint"
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: DoubleContourIntegral
   unicode-equivalent: "\u222F"
   unicode-equivalent-name: SURFACE INTEGRAL
   wl-unicode: "\u222F"
@@ -4992,15 +4994,13 @@ Information:
   is-letter-like: false
   operator-name: Information
 
-# While one might think that Integral is an WL operator, it is not.
-# The builtin function name is "Integrate". I imagine part of the
-# reason is the complexity in specifying it as an operator which takes
-# a min, max, a function, and some sort of derivative partial .
+# https://reference.wolfram.com/language/ref/character/Integral.html
 Integral:
   amslatex: "\\int"
   esc-alias: int
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: Integral
   unicode-equivalent: "\u222B"
   unicode-equivalent-name: INTEGRAL
   wl-unicode: "\u222B"

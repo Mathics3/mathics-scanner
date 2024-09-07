@@ -182,7 +182,7 @@ def test_unicode_operators():
         operator_name = v["operator-name"]
         assert (
             k == operator_name
-        ), f"Section name {k} should match operator-name {operator_name} or be exlicitly excluded when a section has an operator"
+        ), f"Section name {k} should match operator-name {operator_name} or be explicitly excluded when a section has an operator"
 
 
 def test_wl_unicode_name():
