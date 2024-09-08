@@ -132,7 +132,7 @@ def compile_tables(data: dict) -> dict:
     # Conversion from unicode or ascii to wl dictionary entry.
     # We filter the dictionary after it's first created to redundant entries
     unicode_to_wl_dict = {
-        v.get("unicode-equivalent", v.get("ascii")): v["wl-unicode"]
+        v.get("unicode-equivalent", v.get("ascii")): v.get("wl-unicode", v.get("ascii"))
         for v in data.values()
         if ("unicode-equivalent" in v or "ascii" in v) and v["has-unicode-inverse"]
     }
