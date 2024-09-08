@@ -5674,10 +5674,12 @@ Micro:
   wl-unicode-name: MICRO SIGN
 
 Minus:
+  amslatex: "$-$"
   ascii: "-"
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Minus
+  unicode-equivalent: "\u2212"
 
 MinusPlus:
   amslatex: "\\mp"
