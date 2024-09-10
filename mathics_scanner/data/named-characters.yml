@@ -32,6 +32,9 @@
 #                  prespective, an operator name like "Association"
 #                  might have *two* (bracketing) symbols associated
 #                  here: "LeftAssociation" and "RightAssociation".
+#                  More operator information can be found in
+#                  file "operators.yml".
+#
 #
 #   unicode-equivalent: A unicode equivalent for the named-character, if it
 #                       exists. If it is the same as "ascii", please omit.
@@ -53,6 +56,7 @@
 #   http://milde.users.sourceforge.net/LUCR/Math/unimathsymbols.pdf
 #   https://reference.wolfram.com/language/ref/character/....html
 #   https://github.com/rsmenon/pygments-mathematica
+#   https://reference.wolfram.com/language/tutorial/OperatorInputForms.html
 
 AAcute:
   amslatex: "\\'{a}"
@@ -143,12 +147,12 @@ Apply:
 
 # @@@ replaces heads at level 1 of expr by f.
 # We add "3Ats" at the end so keys are unique, but
-# the WL operator is still "Apply".
+# the WL operator is still "MapApply".
 Apply3Ats:
   ascii: "@@@"
   has-unicode-inverse: false
   is-letter-like: false
-  operator-name: Apply
+  operator-name: MapApply
 
 ApplyTo:
   ascii: "//="
@@ -1660,12 +1664,6 @@ Decrement:
 
 # See also PatternTest and RawQuestion
 
-Definition:
-  ascii: "?"
-  has-unicode-inverse: false
-  is-letter-like: false
-  operator-name: Definition
-
 # \[Degree] is letter-like, not an operator, which is
 # mutually exclusive.
 
@@ -2677,7 +2675,6 @@ DownLeftVectorBar:
 DownPointer:
   has-unicode-inverse: false
   is-letter-like: false
-  operator-name: DownPointer
   unicode-equivalent: "\u25BE"
   unicode-equivalent-name: BLACK DOWN-POINTING SMALL TRIANGLE
   wl-unicode: "\u25BE"
@@ -4966,12 +4963,6 @@ Implies:
   unicode-equivalent-name: RIGHTWARDS DOUBLE ARROW
   wl-unicode: "\uF523"
 
-Increment:
-  ascii: "++"
-  has-unicode-inverse: false
-  is-letter-like: false
-  operator-name: Increment
-
 IndentingNewLine:
   esc-alias: nl
   has-unicode-inverse: false
@@ -5003,12 +4994,12 @@ Information:
   is-letter-like: false
   operator-name: Information
 
+# https://reference.wolfram.com/language/ref/character/Integral.html
 Integral:
   amslatex: "\\int"
   esc-alias: int
   has-unicode-inverse: false
   is-letter-like: false
-  # TODO: This should be a prefix operator
   operator-name: Integral
   unicode-equivalent: "\u222B"
   unicode-equivalent-name: INTEGRAL
@@ -5188,6 +5179,7 @@ LeftAssociation:
   esc-alias: <|
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: LeftAssociation
   wl-unicode: "\uF113"
 
 LeftBracketingBar:
@@ -5208,10 +5200,12 @@ LeftCeiling:
   wl-unicode: "\u2308"
   wl-unicode-name: LEFT CEILING
 
+# Left part of "Part[] operator
 LeftDoubleBracket:
   esc-alias: '[['
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: LeftPart
   unicode-equivalent: "\u301A"
   unicode-equivalent-name: LEFT WHITE SQUARE BRACKET
   wl-unicode: "\u301A"
@@ -5221,6 +5215,7 @@ LeftDoubleBracketingBar:
   esc-alias: l||
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: LeftDoubleBracketingBar
   unicode-equivalent: "\u2016"
   unicode-equivalent-name: DOUBLE VERTICAL LINE
   wl-unicode: "\uF605"
@@ -5271,6 +5266,12 @@ LeftGuillemet:
   wl-unicode: "\xAB"
   wl-unicode-name: LEFT-POINTING DOUBLE ANGLE QUOTATION MARK
 
+LeftList:
+  ascii: "{{"
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: LeftList
+
 LeftModified:
   esc-alias: '['
   has-unicode-inverse: false
@@ -5280,7 +5281,6 @@ LeftModified:
 LeftPointer:
   has-unicode-inverse: false
   is-letter-like: false
-  operator-name: LeftPointer
   unicode-equivalent: "\u25C2"
   unicode-equivalent-name: BLACK LEFT-POINTING SMALL TRIANGLE
   wl-unicode: "\u25C2"
@@ -5530,7 +5530,6 @@ LongDash:
   esc-alias: --
   has-unicode-inverse: false
   is-letter-like: false
-  operator-name: LongDash
   unicode-equivalent: "\u2014"
   unicode-equivalent-name: EM DASH
   wl-unicode: "\u2014"
@@ -5612,6 +5611,12 @@ MapApply:
   is-letter-like: false
   operator-name: MapApply
 
+MaxLimit:
+  esc-alias: Mlim
+  has-unicode-inverse: false
+  is-letter-like: false
+  wl-unicode: "\uF439"
+
 Mars:
   has-unicode-inverse: false
   is-letter-like: false
@@ -5649,11 +5654,11 @@ Mercury:
   wl-unicode: "\u263F"
   wl-unicode-name: MERCURY
 
-Message:
+MessageName:
   ascii: "::"
   has-unicode-inverse: false
   is-letter-like: false
-  operator-name: Message
+  operator-name: MessageName
 
 Mho:
   esc-alias: mho
@@ -5680,6 +5685,14 @@ Minus:
   is-letter-like: false
   operator-name: Minus
   unicode-equivalent: "\u2212"
+
+MinLimit:
+  amslatex: "\\lim_"
+  esc-alias: mlim
+  has-unicode-inverse: false
+  is-letter-like: false
+  unicode-equivalent: "lim"
+  wl-unicode: "\uF43A"
 
 MinusPlus:
   amslatex: "\\mp"
@@ -5890,7 +5903,7 @@ NotEqual:
   esc-alias: '!='
   has-unicode-inverse: false
   is-letter-like: false
-  operator-name: NotEqual
+  operator-name: Unequal
   unicode-equivalent: "\u2260"
   unicode-equivalent-name: NOT EQUAL TO
   wl-unicode: "\u2260"
@@ -6201,6 +6214,7 @@ NotSucceeds:
 
 NotSucceedsEqual:
   has-unicode-inverse: false
+  operator-name: NotSucceedsEqual
   is-letter-like: false
   wl-unicode: "\uF42D"
 
@@ -6429,7 +6443,6 @@ Option:
   ascii: ":"
   has-unicode-inverse: false
   is-letter-like: false
-  operator-name: Option
 
 OptionKey:
   esc-alias: opt
@@ -6441,6 +6454,7 @@ Or:
   esc-alias: '||'
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: Or
   unicode-equivalent: "\u2228"
   unicode-equivalent-name: LOGICAL OR
   wl-unicode: "\u2228"
@@ -6493,7 +6507,7 @@ PartialD:
   wl-unicode: "\u2202"
   wl-unicode-name: PARTIAL DIFFERENTIAL
 
-# See also Definition and RawQuestion
+# See also RawQuestion
 PatternTest:
   ascii: "?"
   has-unicode-inverse: false
@@ -6598,6 +6612,12 @@ Power:
   unicode-equivalent-name: CIRCUMFLEX ACCENT
   wl-unicode: "^"
   wl-unicode-name: CIRCUMFLEX ACCENT
+
+PreIncrement:
+  ascii: "++"
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: PreIncrement
 
 Precedes:
   has-unicode-inverse: false
@@ -6777,12 +6797,12 @@ RawEscape:
   is-letter-like: false
   wl-unicode: "\e"
 
-# Note: RawGreater WL's name for Mathics Greater or ASCII ">"
+# Note: the operator name and key name differ.
 RawGreater:
   ascii: ">"
   has-unicode-inverse: true
   is-letter-like: false
-  operator-name: RawGreater
+  operator-name: Greater
   unicode-equivalent-name: GREATER-THAN SIGN
   wl-unicode: "\u003e"
   wl-unicode-name: GREATER-THAN SIGN
@@ -6790,6 +6810,7 @@ RawGreater:
 RawLeftBrace:
   ascii: '{'
   has-unicode-inverse: false
+  operator-name: LeftList
   is-letter-like: false
 
 RawLeftBracket:
@@ -6812,7 +6833,7 @@ RawPercent:
   has-unicode-inverse: false
   is-letter-like: false
 
-# See also Definition and PatternTest
+# See also PatternTest
 RawQuestion:
   ascii: "?"
   has-unicode-inverse: false
@@ -7079,6 +7100,7 @@ RightAssociation:
   esc-alias: '|>'
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: RightAssociation
   wl-unicode: "\uF114"
 
 RightBracketingBar:
@@ -7105,10 +7127,12 @@ RightComposition:
   is-letter-like: false
   operator-name: RightComposition
 
+# Right part of "Part[] operator
 RightDoubleBracket:
   esc-alias: ']]'
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: RightPart
   unicode-equivalent: "\u301B"
   unicode-equivalent-name: RIGHT WHITE SQUARE BRACKET
   wl-unicode: "\u301B"
@@ -7169,6 +7193,12 @@ RightGuillemet:
   wl-unicode: "\xBB"
   wl-unicode-name: RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK
 
+RightList:
+  ascii: "}}"
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: RightList
+
 RightModified:
   esc-alias: ']'
   has-unicode-inverse: false
@@ -7178,7 +7208,6 @@ RightModified:
 RightPointer:
   has-unicode-inverse: false
   is-letter-like: false
-  operator-name: RightPointer
   unicode-equivalent: "\u25B8"
   unicode-equivalent-name: BLACK RIGHT-POINTING SMALL TRIANGLE
   wl-unicode: "\u25B8"
@@ -8583,11 +8612,11 @@ UndirectedEdge:
   unicode-equivalent-name: LEFT RIGHT ARROW
   wl-unicode: "\uF3D4"
 
-UnSameQ:
+UnsameQ:
   ascii: "=!="
   has-unicode-inverse: false
   is-letter-like: false
-  operator-name: UnSameQ
+  operator-name: UnsameQ
 
 Union:
   esc-alias: un

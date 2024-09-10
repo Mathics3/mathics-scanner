@@ -3,6 +3,21 @@
 # Note: we keep the misspelling of "meaningfull"
 # and the uncoverted types like None and True
 
+ApplyTo:
+  actual-precedence: 75
+  Precedence: 75  # CSV has 604 which is wrong
+  Precedence-corrected: 75
+  Precedence-Function: 75
+  WolframLanguageData: 76
+  WolframLanguageData-corrected: 75
+  UnicodeCharacters.tr:
+  UnicodeCharacters-corrected.tr: 75
+  arity: Binary
+  affix: Infix
+  associativity: left
+  meaningfull: "true"
+  # comments:
+
 Derivative:
   actual-precedence: 770
   Precedence: 670  # CSV has 604 which is wrong
