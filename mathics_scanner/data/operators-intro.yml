@@ -3,20 +3,24 @@
 # This information comes largely from Robert L. Jacobson's Table of
 # Wolfram Language Operators found at:
 # https://github.com/WLTools/LanguageSpec/blob/master/docs/Specification/Syntax/Operator%20Table.csv
-
+#
 # We have copy of this in the Mathics-Scanner repository.
 # The CSV file has been converted to YAML using mathics_scanner/generate/operator_csv_to_yaml.py
+#
+# Some operator information attached to individual character names can
+# be found in file named-characters.yml.
+#
 #
 # For a description of many of the fields below, see
 #  https://www.robertjacobson.dev/posts/2018-09-03-generalizing-pemdas-what-is-an-operator/
 # and:
 # https://www.robertjacobson.dev/posts/2018-09-04-defining-the-wolfram-language-part-2-operator-properties/
-
+#
 # However, I will summmarize some of the field descriptions.
-
+#
 # precedence
 # ----------
-
+#
 # Many fields below mention precedence, and the WMA builtin-function
 # Precedence[]. When given an operator, this function gives an integer
 # used in specifying the order operations occur when one operator is
@@ -29,7 +33,7 @@
 # |-> to get treated as one unit and not split into two operators like
 # | and ->. So the precedence of |-> has to be higher than |.
 #
-
+#
 # arity (https://en.wikipedia.org/wiki/Arity)
 # -----
 #
@@ -41,14 +45,34 @@
 #  - Binary (2 arguments)
 #  - Ternary (3 arguments)
 #  - n-ary (n arguments)
-
-
+#
+#
 #   actual-precedence: a precedence value that programs can use.
+#
 #   Precedence-corrected: the value used in Mathics3.
-#   WolframLangageData: a value returned using WolframLangageData[???]
+
+#   WolframLanguageData: a "PrecedenceRanks" value returned using:
+#       WolframLanguageData[*operator_name*, "PrecedenceRanks"]
+#     Example:
+#       In[1] := WolframLanguageData[AddTo, "PrecedenceRanks"]
+#       Out[1]= {{expr1 +=expr2 , AddTo[expr1 ,expr2]} -> 73
+#
+#     Note that 73 uses a diffrent precedence scheme than the one
+#     given by Precedence and used in Mathics3.
+#
+#     Also Note that WolframLanguageData can also be used to give the
+#     ASCII and unicode character representations:
+
+#       In[2] := WolframLanguageData[AddTo, "ShortNotations"]
+#       Out[2]= {+=}
+#       In[2] := WolframLanguageData[GreaterEqual, "ShortNotations"]
+#       Out[7]= {>=, ≥}
+#
 #   usage: when it exists, an example of the use of this operator
+#
 #   parse: when "usage" exists, a parse of the example
-#   parse: when "usage" exists, the FullForm translation of the example
+
+#   FullForm: when "usage" exists, the FullForm translation of the example
 
 #   associativity: when two or more of the same operator is used, which group to
 #                 evaluate first. One of:

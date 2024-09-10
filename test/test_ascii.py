@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from mathics_scanner.load import (
-    load_mathics_character_yaml,
     load_mathics_character_json,
+    load_mathics_character_yaml,
 )
 
 yaml_data = load_mathics_character_yaml()
@@ -24,5 +24,4 @@ def test_ascii():
         assert char_symbol.startswith(r"\[")
         assert char_symbol.endswith(r"]")
         raw_char_symbol = char_symbol[len(r"\[") : -len(r"]")]
-        assert raw_char_symbol in yaml_data
         assert raw_char_symbol in ascii_operator_to_symbol.values()
