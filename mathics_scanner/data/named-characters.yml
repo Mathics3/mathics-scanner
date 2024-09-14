@@ -4,7 +4,7 @@
 # Heuristics to consider in adding a Named Character.
 # ===================================================
 
-# 1. Unicode symbols used by Mathemathica that are not in the Unicode Private Use Area are the same in Mathics3
+# 1. Unicode symbols used by Mathematica that are not in the Unicode Private Use Area are the same in Mathics3
 # 2. Unicode symbols that correspond semantically with existing mathematical symbols are included. Example: − (U+2212, "Minus Sign")
 #    is an alias for ASCII - even though Mathematica does not consider it so.
 # 3. Unicode symbols outside of the Mathematical Operators Block (and the ASCII block) should be excluded unless one of the previous
