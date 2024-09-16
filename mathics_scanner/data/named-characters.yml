@@ -59,7 +59,7 @@
 #                            unicode names that we check against. So if the character
 #                            or unicode symbol is not in that, don't use it here.
 #
-#   wl-reference: HTML link to the Workfram Langauge & System document for character.
+#   wl-reference: HTML link to the Worlfram Langauge & System document for character.
 #
 #   wl-unicode: The unicode code point used by Mathics internally to represent
 #               the named character. If it is the same as unicode-equivalent

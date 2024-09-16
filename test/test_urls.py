@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
-from urllib.error import HTTPError, URLError
+
+# from urllib.error import HTTPError, URLError
 from urllib.request import urlopen
 
 import pytest
@@ -26,5 +27,6 @@ def test_yaml_urls():
                     html = response.read()
                     assert html, f"should have been able to get HTML for {k} ({url})"
                     print(f"got {k}")
-            except* (URLError, HTTPError):
+            # except* (URLError, HTTPError): # for when we have 3.11+
+            except Exception:
                 assert False, f"{k} ({url}) fails"
