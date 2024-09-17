@@ -1,5 +1,20 @@
-# Information about Wolfram Language named characters, indexed by
-# their fully qualified names.
+# Information about Wolfram Language Named Characters.
+# See https://reference.wolfram.com/language/tutorial/InputAndOutputInNotebooks.html#4718
+
+# Heuristics to consider in adding a Named Character.
+# ===================================================
+
+# 1. Unicode symbols used by Mathematica that are not in the Unicode Private Use Area are the same in Mathics3
+# 2. Unicode symbols that correspond semantically with existing mathematical symbols are included. Example: − (U+2212, "Minus Sign")
+#    is an alias for ASCII - even though Mathematica does not consider it so.
+# 3. Unicode symbols outside of the Mathematical Operators Block (and the ASCII block) should be excluded unless one of the previous
+#    heuristics includes it. Example: ✕ (U+2715, "Multiplication X") can be used for Times but is in the Dingbats Block and is thus excluded.
+# 4. All typographical variants of "plain"/"regular" symbols are be excluded unless included by a previous heuristic.
+#    For example, all Full Width variants, bold variants, italic variants, and so forth are excluded.
+# 5. Unicode symbols cannot be overloaded, i.e. should not be used for more than one underlying function.
+#    For example, ≫ (U+226B, "Much Greater-Than") is already used for GreaterGreater and therefore should not be an alias for >> for Put.
+#    Likewise, ≪ (U+226A, "Much Less-Than") for Get, ∷ (U+2237, "Proportion") for MessageName, etc.
+
 #
 # Field definitions
 # =================

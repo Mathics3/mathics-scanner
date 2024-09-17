@@ -55,7 +55,7 @@
 #   WolframLanguageData: a "PrecedenceRanks" value returned using:
 #       WolframLanguageData[*operator_name*, "PrecedenceRanks"]
 #     Example:
-#       In[1] := WolframLanguageData[AddTo, "PrecedenceRanks"]
+#       In[1] := WolframLanguageData["AddTo", "PrecedenceRanks"]
 #       Out[1]= {{expr1 +=expr2 , AddTo[expr1 ,expr2]} -> 73
 #
 #     Note that 73 uses a diffrent precedence scheme than the one
