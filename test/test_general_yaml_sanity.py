@@ -40,6 +40,7 @@ def test_yaml_field_names():
             "precedence",
             "unicode-equivalent",
             "unicode-equivalent-name",
+            "wl-reference",
             "wl-unicode",
             "wl-unicode-name",
         }
