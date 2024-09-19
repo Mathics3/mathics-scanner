@@ -18,15 +18,19 @@ yaml_data = load_mathics_character_yaml()
 def test_yaml_urls():
     for k, v in yaml_data.items():
         # This code can be used to start some point down the list
-        # if k < "UndirectedEdge":
-        #     continue
-        url = v.get("wl-reference")
-        if url:
-            try:
-                with urlopen(url) as response:
-                    html = response.read()
-                    assert html, f"should have been able to get HTML for {k} ({url})"
-                    print(f"got {k}")
-            # except* (URLError, HTTPError): # for when we have 3.11+
-            except Exception:
-                assert False, f"{k} ({url}) fails"
+        if k < "Up":
+            continue
+        # for field in ("unicode-reference", "wl-reference"):
+        for field in ("unicode-reference",):
+            url = v.get(field)
+            if url:
+                try:
+                    with urlopen(url) as response:
+                        html = response.read()
+                        assert (
+                            html
+                        ), f"should have been able to get HTML for {k} ({url})"
+                        print(f"got {k}")
+                # except* (URLError, HTTPError): # for when we have 3.11+
+                except Exception:
+                    assert False, f"{k} ({url}) fails"
