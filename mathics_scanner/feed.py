@@ -5,7 +5,7 @@ methods for returning one line code at a time.
 """
 
 from abc import ABCMeta, abstractmethod
-from typing import List
+from typing import Callable, List, Optional
 
 
 class LineFeeder(metaclass=ABCMeta):
@@ -52,7 +52,7 @@ class LineFeeder(metaclass=ABCMeta):
             message = [sym, tag] + list(args)
         self.messages.append(message)
 
-    def syntax_message(self, sym: str, tag: str, *args):
+    def syntax_message(self, sym: str, tag: str, *args) -> list:
         """
         Append a message concerning syntax errors to the message queue.
         """
@@ -132,7 +132,7 @@ class SingleLineFeeder(LineFeeder):
 class FileLineFeeder(LineFeeder):
     "A feeder that feeds lines from an open ``File`` object"
 
-    def __init__(self, fileobject, trace_fn=None):
+    def __init__(self, fileobject, trace_fn: Optional[Callable] = None):
         """
         :param fileobject: The source of the feeder (a string).
         :param filename: A string that describes the source of the feeder,
@@ -150,7 +150,7 @@ class FileLineFeeder(LineFeeder):
             result = self.fileobject.readline()
             self.lineno += 1
             if self.trace_fn:
-                self.trace_fn("%5d: %s" % (self.lineno, result), end="")
+                self.trace_fn(self.lineno, result)
         if result:
             self.lineno += 1
         else:
