@@ -10,7 +10,6 @@ from mathics_scanner.characters import named_characters
 from mathics_scanner.errors import IncompleteSyntaxError, ScanError
 from mathics_scanner.feed import LineFeeder
 
-
 class Prescanner(object):
     r"""
     A Class for converting escape sequences:

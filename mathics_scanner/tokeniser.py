@@ -3,7 +3,7 @@
 
 import re
 import string
-from typing import Optional
+from typing import List, Optional
 
 from mathics_scanner.characters import _letterlikes, _letters
 from mathics_scanner.errors import ScanError
@@ -33,7 +33,7 @@ base_names_pattern = r"((?![0-9])([0-9${0}{1}{2}])+)".format(
 )
 full_names_pattern = r"(`?{0}(`{0})*)".format(base_names_pattern)
 
-tokens = [
+uncompiled_tokens: List[tuple] = [
     ("Definition", r"\? "),
     ("Information", r"\?\? "),
     ("Number", NUMBER_PATTERN),
@@ -281,14 +281,14 @@ for c in string.digits:
     literal_tokens[c] = ["Number"]
 
 
-def find_indices(literals: dict) -> dict:
+def find_indices(literals: dict, uncompiled_tokens: List[tuple]) -> dict:
     "find indices of literal tokens"
 
     literal_indices = {}
     for key, tags in literals.items():
         indices = []
         for tag in tags:
-            for i, (tag2, _) in enumerate(tokens):
+            for i, (tag2, _) in enumerate(uncompiled_tokens):
                 if tag == tag2:
                     indices.append(i)
                     break
@@ -309,8 +309,9 @@ def compile_tokens(token_list):
 
 filename_tokens = [("Filename", FILENAME_PATTERN)]
 
-token_indices = find_indices(literal_tokens)
-tokens = compile_tokens(tokens)
+token_indices = find_indices(literal_tokens, uncompiled_tokens)
+tokens = compile_tokens(uncompiled_tokens)
+box_tokens = compile_tokens(uncompiled_tokens)
 filename_tokens = compile_tokens(filename_tokens)
 full_symbol_pattern_re: re.Pattern = compile_pattern(full_symbol_pattern_str)
 
@@ -354,7 +355,11 @@ class Tokeniser:
     produces tokens of the Wolfram Language which can then be used in parsing.
     """
 
-    modes = {"expr": (tokens, token_indices), "filename": (filename_tokens, {})}
+    modes = {
+        "box_expr": (tokens + box_tokens, token_indices),
+        "expr": (tokens, token_indices),
+        "filename": (filename_tokens, {}),
+    }
 
     def __init__(self, feeder):
         """
@@ -404,33 +409,34 @@ class Tokeniser:
 
         # look for a matching pattern
         indices = self.token_indices.get(self.code[self.pos], ())
-        match = None
+        re_match = None
         tag = "??invalid"
         if indices:
             for index in indices:
                 tag, pattern = self.tokens[index]
-                match = pattern.match(self.code, self.pos)
-                if match is not None:
+                re_match = pattern.match(self.code, self.pos)
+                if re_match is not None:
                     break
         else:
             for tag, pattern in self.tokens:
-                match = pattern.match(self.code, self.pos)
-                if match is not None:
+                re_match = pattern.match(self.code, self.pos)
+                if re_match is not None:
                     break
 
         # no matching pattern found
-        if match is None:
+        if re_match is None:
             self.sntx_message()
             raise ScanError()
 
-        # custom tokenisation rules defined with t_tag
+        # See if there is a method defined in this class named t_<tag>, e.g. t_String.
+        # If so, that is used to pick out what Token object to return.
         override = getattr(self, "t_" + tag, None)
         if override is not None:
-            return override(match)
+            return override(re_match)
 
-        text = match.group(0)
-        self.pos = match.end(0)
-        return Token(tag, text, match.start(0))
+        text = re_match.group(0)
+        self.pos = re_match.end(0)
+        return Token(tag, text, re_match.start(0))
 
     def _skip_blank(self):
         "Skip whitespace and comments"
@@ -464,47 +470,55 @@ class Tokeniser:
             else:
                 break
 
-    def _token_mode(self, match: re.Match, tag: str, mode: str) -> "Token":
+    def _token_mode(self, re_match: re.Match, tag: str, mode: str) -> "Token":
         """
-        Pick out the text in ``match``, convert that into a ``Token``, and
+        Pick out the text in ``re_match``, convert that into a ``Token``, and
         return that.
 
         Also switch token-scanning mode.
         """
-        text = match.group(0)
-        self.pos = match.end(0)
+        text = re_match.group(0)
+        self.pos = re_match.end(0)
         self._change_token_scanning_mode(mode)
-        return Token(tag, text, match.start(0))
+        return Token(tag, text, re_match.start(0))
 
     def t_Filename(self, match: re.Match) -> "Token":
         "Scan for ``Filename`` token and return that"
         return self._token_mode(match, "Filename", "expr")
 
-    def t_Get(self, match: re.Match) -> "Token":
+    def t_Get(self, re_match: re.Match) -> "Token":
         "Scan for a ``Get`` token from ``match`` and return that token"
-        return self._token_mode(match, "Get", "filename")
+        return self._token_mode(re_match, "Get", "filename")
 
-    def t_Number(self, match: re.Match) -> "Token":
+    def t_LeftRowBox(self, re_match: re.Match) -> "Token":
+        "Note that we are in RowBox parsing mode"
+        return self._token_mode(re_match, "LeftRowBox", "box_expr")
+
+    def t_Number(self, re_match: re.Match) -> "Token":
         "Break out from ``match`` the next token which is expected to be a Number"
-        text = match.group(0)
-        pos = match.end(0)
+        text = re_match.group(0)
+        pos = re_match.end(0)
         if self.code[pos - 1 : pos + 1] == "..":
             # Trailing .. should be ignored. That is, `1..` is `Repeated[1]`.
             text = text[:-1]
             self.pos = pos - 1
         else:
             self.pos = pos
-        return Token("Number", text, match.start(0))
+        return Token("Number", text, re_match.start(0))
 
-    def t_Put(self, match: re.Match) -> "Token":
+    def t_Put(self, re_match: re.Match) -> "Token":
         "Scan for a ``Put`` token and return that"
-        return self._token_mode(match, "Put", "filename")
+        return self._token_mode(re_match, "Put", "filename")
 
-    def t_PutAppend(self, match: re.Match) -> "Token":
+    def t_PutAppend(self, re_match: re.Match) -> "Token":
         "Scan for a ``PutAppend`` token and return that"
-        return self._token_mode(match, "PutAppend", "filename")
+        return self._token_mode(re_match, "PutAppend", "filename")
 
-    def t_String(self, match: re.Match) -> "Token":
+    def t_RighttRowBox(self, re_match: re.Match) -> "Token":
+        "Note that we are leaving RowBox parsing mode and going back into expr mode"
+        return self._token_mode(re_match, "RightRowBox", "expr")
+
+    def t_String(self, re_match: re.Match) -> "Token":
         "Break out from self.code the next token which is expected to be a String"
         start, end = self.pos, None
         self.pos += 1  # skip opening '"'
