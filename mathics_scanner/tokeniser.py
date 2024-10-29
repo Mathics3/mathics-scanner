@@ -401,9 +401,14 @@ class Tokeniser:
         else:
             self.feeder.message("Syntax", "sntxf", pre, post)
 
-    # TODO: Convert this to __next__ in the future.
-    def next(self) -> "Token":
-        "Returns the next token."
+    # TODO: Convert this to __iter__ in the future?
+    def next(self) -> Token:
+        """Returns the next token starting at self.code[self.pos] after skipping
+        over white space. If we have reached the end of self.code, return the "END"
+        token.
+
+        A ScanError exception signalling syntax error can also be raised.
+        """
         self._skip_blank()
         if self.pos >= len(self.code):
             return Token("END", "", len(self.code))
@@ -440,7 +445,7 @@ class Tokeniser:
         return Token(tag, text, re_match.start(0))
 
     def _skip_blank(self):
-        "Skip whitespace and comments"
+        """Skip whitespace and comments starting at self.code[self.pos]."""
         comment = []  # start positions of comments
         while True:
             if self.pos >= len(self.code):
@@ -471,7 +476,7 @@ class Tokeniser:
             else:
                 break
 
-    def _token_mode(self, re_match: re.Match, tag: str, mode: str) -> "Token":
+    def _token_mode(self, re_match: re.Match, tag: str, mode: str) -> Token:
         """
         Pick out the text in ``re_match``, convert that into a ``Token``, and
         return that.
@@ -483,20 +488,20 @@ class Tokeniser:
         self._change_token_scanning_mode(mode)
         return Token(tag, text, re_match.start(0))
 
-    def t_Filename(self, match: re.Match) -> "Token":
+    def t_Filename(self, match: re.Match) -> Token:
         "Scan for ``Filename`` token and return that"
         return self._token_mode(match, "Filename", "expr")
 
-    def t_Get(self, re_match: re.Match) -> "Token":
+    def t_Get(self, re_match: re.Match) -> Token:
         "Scan for a ``Get`` token from ``match`` and return that token"
         return self._token_mode(re_match, "Get", "filename")
 
-    def t_LeftRowBox(self, re_match: re.Match) -> "Token":
+    def t_LeftRowBox(self, re_match: re.Match) -> Token:
         "Note that we are in RowBox parsing mode"
         self.token_box_nesting += 1
         return self._token_mode(re_match, "LeftRowBox", "box_expr")
 
-    def t_Number(self, re_match: re.Match) -> "Token":
+    def t_Number(self, re_match: re.Match) -> Token:
         "Break out from ``match`` the next token which is expected to be a Number"
         text = re_match.group(0)
         pos = re_match.end(0)
@@ -508,15 +513,15 @@ class Tokeniser:
             self.pos = pos
         return Token("Number", text, re_match.start(0))
 
-    def t_Put(self, re_match: re.Match) -> "Token":
+    def t_Put(self, re_match: re.Match) -> Token:
         "Scan for a ``Put`` token and return that"
         return self._token_mode(re_match, "Put", "filename")
 
-    def t_PutAppend(self, re_match: re.Match) -> "Token":
+    def t_PutAppend(self, re_match: re.Match) -> Token:
         "Scan for a ``PutAppend`` token and return that"
         return self._token_mode(re_match, "PutAppend", "filename")
 
-    def t_RightRowBox(self, re_match: re.Match) -> "Token":
+    def t_RightRowBox(self, re_match: re.Match) -> Token:
         "Note that we are leaving RowBox parsing mode and going back into expr mode"
         if self.token_box_nesting > 0:
             self.token_box_nesting -= 1
@@ -525,7 +530,7 @@ class Tokeniser:
         else:
             return self._token_mode(re_match, "RightRowBox", "box_expr")
 
-    def t_String(self, re_match: re.Match) -> "Token":
+    def t_String(self, re_match: re.Match) -> Token:
         "Break out from self.code the next token which is expected to be a String"
         start, end = self.pos, None
         self.pos += 1  # skip opening '"'

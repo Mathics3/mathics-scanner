@@ -5,7 +5,7 @@ methods for returning one line code at a time.
 """
 
 from abc import ABCMeta, abstractmethod
-from typing import Callable, List, Optional
+from typing import Callable, Optional
 
 
 class LineFeeder(metaclass=ABCMeta):
@@ -20,7 +20,7 @@ class LineFeeder(metaclass=ABCMeta):
         :param filename: A string that describes the source of the feeder, i.e.
                          the filename that is being feed.
         """
-        self.messages: List[str] = []
+        self.messages: list = []
         self.lineno = 0
         self.filename = filename
 

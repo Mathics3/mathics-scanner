@@ -13,10 +13,17 @@ from mathics_scanner.errors import IncompleteSyntaxError, InvalidSyntaxError, Sc
 from mathics_scanner.feed import SingleLineFeeder
 from mathics_scanner.tokeniser import Token, Tokeniser, is_symbol_name
 
+# Helper functions
+
 
 def check_number(mathics3_code: str):
     token = single_token(mathics3_code)
     assert token, Token("Number", mathics3_code, 0)
+
+
+def check_string(mathics3_code: str):
+    token = single_token(mathics3_code)
+    assert token, Token("String", mathics3_code, 0)
 
 
 def check_symbol(mathics3_code: str):
@@ -24,9 +31,15 @@ def check_symbol(mathics3_code: str):
     assert token, Token("Symbol", mathics3_code, 0)
 
 
-def check_string(mathics3_code: str):
-    token = single_token(mathics3_code)
-    assert token, Token("String", mathics3_code, 0)
+def get_mathics3_tokens(mathics3_code: str) -> List[Token]:
+    """
+    Returns the sequence of tokesnall of the tokens A generator that returns the next token in string mathics3_code.
+    """
+    tokenizer = Tokeniser(SingleLineFeeder(mathics3_code))
+    mathics3_tokens = list(mathics3_token_generator(tokenizer))
+    assert len(mathics3_tokens) > 0
+    assert mathics3_tokens[-1].tag == "END"
+    return mathics3_tokens[:-1]
 
 
 def incomplete_error(string):
@@ -37,6 +50,19 @@ def incomplete_error(string):
 def invalid_error(string):
     with pytest.raises(InvalidSyntaxError):
         get_mathics3_tokens(string)
+
+
+def mathics3_token_generator(tokenizer):
+    """
+    A generator that returns the next token in string mathics3_code.
+    """
+    while True:
+        token = tokenizer.next()
+        if token.tag == "END":
+            yield token
+            break
+        yield token
+    return
 
 
 def scan_error(string):
@@ -55,28 +81,14 @@ def tags(mathics3_code: str):
     return [token.tag for token in get_mathics3_tokens(mathics3_code)]
 
 
-def mathics3_token_generator(tokenizer):
-    """
-    A generator that returns the next token in string mathics3_code.
-    """
-    while True:
-        token = tokenizer.next()
-        if token.tag == "END":
-            yield token
-            break
-        yield token
-    return
+# Testing starts here...
 
 
-def get_mathics3_tokens(mathics3_code: str) -> List[Token]:
-    """
-    Returns the sequence of tokesnall of the tokens A generator that returns the next token in string mathics3_code.
-    """
-    tokenizer = Tokeniser(SingleLineFeeder(mathics3_code))
-    mathics3_tokens = list(mathics3_token_generator(tokenizer))
-    assert len(mathics3_tokens) > 0
-    assert mathics3_tokens[-1].tag == "END"
-    return mathics3_tokens[:-1]
+def test_accuracy():
+    scan_error("1.5``")
+    check_number("1.0``20")
+    check_number("1.0``0")
+    check_number("1.4``-20")
 
 
 def test_apply():
@@ -123,9 +135,27 @@ def test_boxes():
     assert tokenizer.mode == "expr"
     token_generator = mathics3_token_generator(tokenizer)
     for expect_token, expect_mode in (
-        (Token("LeftRowBox", "\\(", 0), "box_expr"),
+        (Token("LeftRowBox", r"\(", 0), "box_expr"),
         (Token("Number", "1", 2), "box_expr"),
-        (Token("RightRowBox", "\\)", 3), "expr"),
+        (Token("RightRowBox", r"\)", 3), "expr"),
+    ):
+        token = next(token_generator)
+        assert token == expect_token
+        assert tokenizer.mode == expect_mode
+
+    tokenizer = Tokeniser(SingleLineFeeder(r"""\( x \(n \& 2 \) \)"""))
+    assert tokenizer.mode == "expr"
+    token_generator = mathics3_token_generator(tokenizer)
+
+    for expect_token, expect_mode in (
+        (Token("LeftRowBox", r"\(", 0), "box_expr"),
+        (Token("Symbol", "x", 3), "box_expr"),
+        (Token("LeftRowBox", r"\(", 5), "box_expr"),
+        (Token("Symbol", "n", 7), "box_expr"),
+        (Token("OverscriptBox", r"\&", 9), "box_expr"),
+        (Token("Number", "2", 12), "box_expr"),
+        (Token("RightRowBox", r"\)", 14), "box_expr"),
+        (Token("RightRowBox", r"\)", 17), "expr"),
     ):
         token = next(token_generator)
         assert token == expect_token
@@ -170,11 +200,34 @@ def test_is_symbol():
     assert not is_symbol_name("98")  # symbols can't start with numbers
 
 
-def test_accuracy():
-    scan_error("1.5``")
-    check_number("1.0``20")
-    check_number("1.0``0")
-    check_number("1.4``-20")
+def test_file():
+    """
+    Test that we can parse file names, and that we get into and out of
+    "filename" parsing mode.
+    """
+    filename = "test_file.m"
+    for operator, operator_name in (("<<", "Get"), (">>", "Put"), (">>>", "PutAppend")):
+        tokenizer = Tokeniser(SingleLineFeeder(f"{operator} {filename}"))
+        assert tokenizer.mode == "expr"
+        token_generator = mathics3_token_generator(tokenizer)
+        for expect_token, expect_mode in (
+            (Token(operator_name, operator, 0), "filename"),
+            (Token("Filename", filename, len(operator) + 1), "expr"),
+        ):
+            token = next(token_generator)
+            assert token == expect_token
+            assert tokenizer.mode == expect_mode
+
+
+def test_function():
+    assert get_mathics3_tokens("x&") == [
+        Token("Symbol", "x", 0),
+        Token("Function", "&", 1),
+    ]
+    assert get_mathics3_tokens("x\uf4a1") == [
+        Token("Symbol", "x", 0),
+        Token("Function", "\uf4a1", 1),
+    ]
 
 
 def test_number():
@@ -257,15 +310,4 @@ def test_unset():
     assert get_mathics3_tokens("= ..") == [
         Token("Set", "=", 0),
         Token("Repeated", "..", 2),
-    ]
-
-
-def test_function():
-    assert get_mathics3_tokens("x&") == [
-        Token("Symbol", "x", 0),
-        Token("Function", "&", 1),
-    ]
-    assert get_mathics3_tokens("x\uf4a1") == [
-        Token("Symbol", "x", 0),
-        Token("Function", "\uf4a1", 1),
     ]
