@@ -5,7 +5,7 @@ methods for returning one line code at a time.
 """
 
 from abc import ABCMeta, abstractmethod
-from typing import Callable, Optional
+from typing import Callable, List, Optional
 
 
 class LineFeeder(metaclass=ABCMeta):
@@ -20,7 +20,7 @@ class LineFeeder(metaclass=ABCMeta):
         :param filename: A string that describes the source of the feeder, i.e.
                          the filename that is being feed.
         """
-        self.messages: list = []
+        self.messages: List[List[str]] = []
         self.lineno = 0
         self.filename = filename
 
@@ -47,12 +47,12 @@ class LineFeeder(metaclass=ABCMeta):
         """
 
         if sym == "Syntax":
-            message = self.syntax_message(sym, tag, *args)
+            new_message = self.syntax_message(sym, tag, *args)
         else:
-            message = [sym, tag] + list(args)
-        self.messages.append(message)
+            new_message = [sym, tag] + list(args)
+        self.messages.append(new_message)
 
-    def syntax_message(self, sym: str, tag: str, *args) -> list:
+    def syntax_message(self, sym: str, tag: str, *args) -> List[str]:
         """
         Append a message concerning syntax errors to the message queue.
         """
