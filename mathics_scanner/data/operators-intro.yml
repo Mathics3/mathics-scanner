@@ -54,7 +54,7 @@
 #   WolframLanguageData: a "PrecedenceRanks" value returned using:
 #       WolframLanguageData[*operator_name*, "PrecedenceRanks"]
 #     Example:
-#       In[1] := WolframLanguageData[AddTo, "PrecedenceRanks"]
+#       In[1] := WolframLanguageData["AddTo", "PrecedenceRanks"]
 #       Out[1]= {{expr1 +=expr2 , AddTo[expr1 ,expr2]} -> 73
 #
 #     Note that 73 uses a diffrent precedence scheme than the one
@@ -63,9 +63,9 @@
 #     Also Note that WolframLanguageData can also be used to give the
 #     ASCII and unicode character representations:
 
-#       In[2] := WolframLanguageData[AddTo, "ShortNotations"]
+#       In[2] := WolframLanguageData["AddTo", "ShortNotations"]
 #       Out[2]= {+=}
-#       In[2] := WolframLanguageData[GreaterEqual, "ShortNotations"]
+#       In[2] := WolframLanguageData["GreaterEqual", "ShortNotations"]
 #       Out[7]= {>=, ≥}
 #
 #   usage: when it exists, an example of the use of this operator
