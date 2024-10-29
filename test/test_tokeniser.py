@@ -16,17 +16,17 @@ from mathics_scanner.tokeniser import Token, Tokeniser, is_symbol_name
 # Helper functions
 
 
-def check_number(mathics3_code: str):
+def check_Number(mathics3_code: str):
     token = single_token(mathics3_code)
     assert token, Token("Number", mathics3_code, 0)
 
 
-def check_string(mathics3_code: str):
+def check_String(mathics3_code: str):
     token = single_token(mathics3_code)
     assert token, Token("String", mathics3_code, 0)
 
 
-def check_symbol(mathics3_code: str):
+def check_Symbol(mathics3_code: str):
     token = single_token(mathics3_code)
     assert token, Token("Symbol", mathics3_code, 0)
 
@@ -86,9 +86,9 @@ def tags(mathics3_code: str):
 
 def test_accuracy():
     scan_error("1.5``")
-    check_number("1.0``20")
-    check_number("1.0``0")
-    check_number("1.4``-20")
+    check_Number("1.0``20")
+    check_Number("1.0``0")
+    check_Number("1.4``-20")
 
 
 def test_apply():
@@ -200,7 +200,7 @@ def test_is_symbol():
     assert not is_symbol_name("98")  # symbols can't start with numbers
 
 
-def test_file():
+def test_Filename():
     """
     Test that we can parse file names, and that we get into and out of
     "filename" parsing mode.
@@ -230,29 +230,29 @@ def test_function():
     ]
 
 
-def test_number():
+def test_Number():
     assert tags("1.5") == ["Number"]
     assert tags("1.5*^10") == ["Number"]
-    check_number("0")
+    check_Number("0")
 
 
 def test_number_base():
-    check_number("8^^23")
-    check_number("10*^3")
-    check_number("10*^-3")
-    check_number("8^^23*^2")
+    check_Number("8^^23")
+    check_Number("10*^3")
+    check_Number("10*^-3")
+    check_Number("8^^23*^2")
 
 
 def test_number_big():
     for _ in range(10):
-        check_number(str(random.randint(0, sys.maxsize)))
-        check_number(str(random.randint(sys.maxsize, sys.maxsize * sys.maxsize)))
+        check_Number(str(random.randint(0, sys.maxsize)))
+        check_Number(str(random.randint(sys.maxsize, sys.maxsize * sys.maxsize)))
 
 
 def test_number_real():
-    check_number("1.5")
-    check_number("1.5`")
-    check_number("0.0")
+    check_Number("1.5")
+    check_Number("1.5`")
+    check_Number("0.0")
 
 
 def test_pre():
@@ -264,16 +264,16 @@ def test_pre():
 
 
 def test_precision():
-    check_number("1.5`-5")
-    check_number("1.5`0")
-    check_number("1.5`10")
+    check_Number("1.5`-5")
+    check_Number("1.5`0")
+    check_Number("1.5`10")
 
 
-def test_string():
-    check_string(r'"abc"')
+def test_String():
+    check_String(r'"abc"')
     incomplete_error(r'"abc')
-    check_string(r'"abc(*def*)"')
-    check_string(r'"a\"b\\c"')
+    check_String(r'"abc(*def*)"')
+    check_String(r'"a\"b\\c"')
     incomplete_error(r'"\"')
 
 
@@ -293,10 +293,10 @@ def test_set():
 
 
 def test_symbol():
-    check_symbol("xX")
-    check_symbol("context`name")
-    check_symbol("`name")
-    check_symbol("`context`name")
+    check_Symbol("xX")
+    check_Symbol("context`name")
+    check_Symbol("`name")
+    check_Symbol("`context`name")
 
 
 def test_unset():
