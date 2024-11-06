@@ -1,55 +1,54 @@
 Unofficial Name,Name,Actual Precedence,Precedence[ ],Precedence[ ] Corrected,WolframLanguageData[ ],WolframLanguageData[ ] Corrected,UnicodeCharacters.tr,UnicodeCharacters.tr Corrected,N Tokens,L Tokens,O Tokens,Usage,Parse,FullForm,Arity,Affix,Associativity,Meaningful,Comments
 AddTo,AddTo,120,100,100,69,69,,230,{},"{""+=""}",{},expr1 += expr2,"{""AddTo"", ""["", ""expr1"", "","", ""expr2"", ""]""}","AddTo[expr1, expr2]",Binary,Infix,Right,True,
-Alternatives,Alternatives,190,160,160,63,64,,276,{},"{""|""}",{},expr1 | expr2,"{""Alternatives"", ""["", ""expr1"", "","", ""expr2"", ""]""}","Alternatives[expr1, expr2]",Binary,Infix,None,True,
+Alternatives,Alternatives,190,160,160,63,64,,276,{},"{""|""}",{},p1 | p2, expr2,"{""Alternatives"", ""["", ""expr1"", "","", ""expr2"", ""]""}","Alternatives[expr1, expr2]",Binary,Infix,None,True
 And,And,290,215,220,55,55,330,330,{},"{""&&"", ""∧""}",{},expr1 && expr2;  expr1 ∧ expr2,"{""And"", ""["", ""expr1"", "","", ""expr2"", ""]""}","And[expr1, expr2]",Binary,Infix,None,True,
 AngleBracket,AngleBracket,-10,670,760,,1,-10,-10,"{""〈""}",{},"{""〉""}",〈expr〉,"{""AngleBracket"", ""["", ""expr"", "","", ""…"", ""]""}","AngleBracket[expr, \[Ellipsis]]",n-ary,Matchfix,Non,False,
 Apply,Apply,820,620,626,16,16,,710,{},"{""@@""}",{},expr1 @@ expr2,"{""Apply"", ""["", ""expr1"", "","", ""expr2"", ""]""}","Apply[expr1, expr2]",Binary,Infix,Right,True,
-Association,Association,-10,670,760,,1,-10,-10,"{""<|"", """"}",{},"{""|>"", """"}","<|expr|>;   """"expr ","{""Association"", ""["", ""expr"", "","", ""…"", ""]""}","Association[expr, \[Ellipsis]]",n-ary,Matchfix,Non,True,
-AutoMatch,AutoMatch,-10,670,760,,1,-10,-10,"{""""}",{},"{""""}","{{"""", ""expr"", """"}}","{""AutoMatch"",""["",""expr"",""]""}",AutoMatch[expr],Unary,Matchfix,Non,True,
+Association,Association,-10,670,760,,1,-10,-10,"{""<|"", """"}",e,"{""|>"", """"}","<|expr|>;   """"expr ","{""Association"", ""["", ""expr"", "","", ""…"", ""]""}","Association[expr, \[Ellipsis]]",n-ary,Matchfix,Non,True,
+AutoMatch,AutoMatch,-10,670,760,,1,-10,-10,"{""""}",{},"{""""}", expr ,"{""AutoMatch"",""["",""expr"",""]""}",AutoMatch[expr],Unary,Matchfix,Non,True,
 Backslash,Backslash,560,460,460,32,32,580,580,{},"{""∖""}",{},expr1 \ expr2,"{""Backslash"", ""["", ""expr1"", "","", ""expr2"", ""]""}","Backslash[expr1, expr2]",Binary,Infix,None,False,
 Because,Because,60,50,50,74,74,201,201,{},"{""∵""}",{},expr1 ∵ expr2,"{""Because"", ""["", ""expr1"", "","", ""expr2"", ""]""}","Because[expr1, expr2]",Binary,Infix,Left,False,Precedence of Therefore and Because are swapped in notebook versus ToExpression.
-BlackLenticularBracket,BlackLenticularBracket,-10,670,760,,1,-10,-10,"{""【""}",{},"{""】""}","{{""【"", ""expr"", ""】""}}",,,Unary,Matchfix,Non,True,
-Blank,Blank,980,730,730,5,5,,820,"{""_""}",{},{},"{{""_""}}","{""Blank"", ""["", ""]""}",Blank[],Nullary,None,Non,True,A Blank (_) with no accompanying decoration.
-BlankHead,Blank,1010,730,730,5,5,,820,"{""_""}",{},{},"{{""_"", ""expr""}}","{""Blank"", ""["", ""expr"", ""]""}",Blank[expr],Unary,Prefix,Non,True,
-BlankNullSequence,BlankNullSequence,980,730,730,5,5,,820,"{""___""}",{},{},"{{""___""}}","{""BlankNullSequence"", ""["", ""]""}",BlankNullSequence[],Nullary,None,Non,True,A BlankNullSequence (___) with no accompanying decoration.
-BlankNullSequenceHead,BlankNullSequence,1010,730,730,5,5,,820,"{""___""}",{},{},"{{""___"", ""expr""}}","{""BlankNullSequence"", ""["", ""expr"", ""]""}",BlankNullSequence[expr],Unary,Prefix,Non,True,
-BlankOptional,Blank,980,730,730,5,5,,820,"{""_.""}",{},{},"{{""_.""}}","{""Optional"", ""["", ""Blank"", ""]""}",Optional[Blank[]],Nullary,None,Non,True,No name or head.
-BlankSequence,BlankSequence,980,730,730,5,5,,820,"{""__""}",{},{},"{{""__""}}","{""BlankSequence"", ""["", ""]""}",BlankSequence[],Nullary,None,Non,True,A BlankNullSequence (__) with no accompanying decoration.
-BlankSequenceHead,BlankSequence,1010,730,730,5,5,,820,"{""__""}",{},{},"{{""__"", ""expr""}}","{""BlankSequence"", ""["", ""expr"", ""]""}",BlankSequence[expr],Unary,Prefix,Non,True,
-BoxGroup,None,-10,670,760,,1,,-10,"{""\(""}",{},"{""\)""}","{{""\("", ""expr"", ""\)""}}",,\(expr\),Unary,Matchfix,Non,True,The interpretation of this operator depends on context. It must contain box sublanguage.
-BracketingBar,BracketingBar,-10,670,760,,1,-10,-10,"{""""}",{},"{""""}","{{"""", ""expr"", """"}}","{""BracketingBar"", ""["", ""expr"", "","", ""…"", ""]""}","BracketingBar[expr, \[Ellipsis]]",n-ary,Matchfix,Non,False,
-Cap,Cap,450,350,350,43,42.5,470,470,{},"{""⌢""}",{},"{{""expr1"", ""⌢"", ""expr2""}}","{""Cap"", ""["", ""expr1"", "","", ""expr2"", ""]""}","Cap[expr1, expr2]",Binary,Infix,None,False,
-CapitalDifferentialD,CapitalDifferentialD,720,550,560,,23,630,630,"{""""}",{},{},"{{"""", ""x""}}","{""CapitalDifferentialD"", ""["", ""x"", ""]""}",CapitalDifferentialD[x],Unary,Prefix,Right,False,
-Ceiling,Ceiling,-10,670,760,,1,-10,-10,"{""⌈""}",{},"{""⌉""}","{{""⌈"", ""expr"", ""⌉""}}","{""Ceiling"", ""["", ""expr"", ""]""}",Ceiling[expr],Unary,Matchfix,Non,True,
-CenterDot,CenterDot,510,410,410,,37,530,530,{},"{""·""}",{},"{{""x"", ""·"", ""y""}}","{""CenterDot"", ""["", ""x"", "","", ""y"", ""]""}","CenterDot[x, y]",Binary,Infix,None,False,
-CircleDot,CircleDot,660,520,520,"26, 35, 37",26,605,608,{},"{""⊙""}",{},"{{""expr1"", ""⊙"", ""expr2""}}","{""CircleDot"", ""["", ""expr1"", "","", ""expr2"", ""]""}","CircleDot[expr1, expr2]",Binary,Infix,None,False,
-CircleMinus,CircleMinus,430,330,330,44,44,450,450,{},"{""⊖""}",{},"{{""expr1"", ""⊖"", ""expr2""}}","{""CircleMinus"", ""["", ""expr1"", "","", ""expr2"", ""]""}","CircleMinus[expr1, expr2]",Binary,Infix,Left,False,
-CirclePlus,CirclePlus,430,330,330,44,44,450,450,{},"{""⊕""}",{},"{{""expr1"", ""⊕"", ""expr2""}}","{""CirclePlus"", ""["", ""expr1"", "","", ""expr2"", ""]""}","CirclePlus[expr1, expr2]",Binary,Infix,None,False,
-CircleTimes,CircleTimes,520,420,420,,36,540,540,{},"{""⊗""}",{},"{{""expr1"", ""⊗"", ""expr2""}}","{""CircleTimes"", ""["", ""expr1"", "","", ""expr2"", ""]""}","CircleTimes[expr1, expr2]",Binary,Infix,None,False,
-ClockwiseContourIntegral,ClockwiseContourIntegral,420,670,325,,45,455,445,"{""∲""}",{},"{""""}","{{""∲"", ""expr1"", """", ""expr2""}}","{""ClockwiseContourIntegral"", ""["", ""expr1"", "","", ""expr2"", ""]""}","Integrate[expr1, expr2]",Binary,Compound,Right,True,Usage and Parse may not be correct.
-Colon,Colon,100,80,80,71,71,205,205,{},"{""∶""}",{},"{{""expr1"", ""∶"", ""expr2""}}","{""Colon"", ""["", ""expr1"", "","", ""expr2"", ""]""}","Colon[expr1, expr2]",Binary,Infix,None,False,
-Composition,Composition,860,625,655,13,13,,740,{},"{""@*""}",{},"{{""expr1"", ""@*"", ""expr2""}}","{""Composition"", ""["", ""expr1"", "","", ""expr2"", ""]""}","Composition[expr1, expr2]",Binary,Infix,None,True,
-CompoundExpression,CompoundExpression,30,10,10,77,77,,170,{},"{"";""}",{},"{{""expr1"", "";"", ""expr2""}}","{""CompoundExpression"", ""["", ""expr1"", "","", ""expr2"", ""]""}","CompoundExpression[expr1, expr2]",Binary,Infix,None,True,
-CompoundExpressionNull,CompoundExpression,30,10,10,77,77,,170,{},"{"";""}",{},"{{""expr1"", "";"", ""expr2"", "";""}}","{""CompoundExpression"", ""["", ""expr1"", "","", ""expr2"", ""]""}","CompoundExpression[expr1, expr2, Null]",Unary,Postfix,Left,True,
-Condition,Condition,170,130,130,66,66,,260,{},"{""/;""}",{},"{{""expr1"", ""/;"", ""expr2""}}","{""Condition"", ""["", ""expr1"", "","", ""expr2"", ""]""}","Condition[expr1, expr2]",Binary,Infix,Left,True,
-Conditioned,Conditioned,240,195,195,,59.5,305,305,{},"{""""}",{},"{{""expr1"", """", ""expr2""}}","{""Conditioned"", ""["", ""expr1"", "","", ""expr2"", ""]""}","Conditioned[expr1, expr2]",Binary,Infix,None,True,
-Congruent,Congruent,360,290,290,,50,390,390,{},"{""≡""}",{},"{{""x"", ""≡"", ""y""}}","{""Congruent"", ""["", ""x"", "","", ""y"", ""]""}","Congruent[x, y]",Binary,Infix,None,False,
-Conjugate,Conjugate,780,670,605,18,18,695,695,{},"{""""}",{},"{{""expr"", """"}}","{""Conjugate"", ""["", ""expr"", ""]""}",Conjugate[expr],Unary,Postfix,Left,True,
-ConjugateTranspose,ConjugateTranspose,780,670,605,18,18,695,695,{},"{"""", """"}",{},"{{""expr"", """"}, {""expr"", """"}}","{""ConjugateTranspose"", ""["", ""expr"", ""]""}",ConjugateTranspose[expr],Unary,Postfix,Left,True,
-ContextPathSeparator,None,-10,670,760,,1,,-10,{},"{""`""}",{},"{{""symb1"", ""`"", ""symb2""}}","{""symb1"", ""`"", ""symb2""}",symb1`symb2,,,Non,True,"Functions as a decimal point: either contextpath1 or contextpath2 may be empty, but not both at the same time."
-ContinuedFractionK,ContinuedFractionK,480,380,380,,40,500,500,"{""""}",{},{},"{{"""", ""expr""}}","{""ContinuedFractionK"", ""["", ""expr"", ""]""}",,Unary,Prefix,Right,True,Usage and Parse may not be correct.
-ContourIntegral,ContourIntegral,420,670,325,,45,455,445,"{""∮""}",{},"{""""}","{{""∮"", ""expr1"", """", ""expr2""}}","{""ContourIntegral"", ""["", ""expr1"", "","", ""expr2"", ""]""}","Integrate[expr1, expr2]",Binary,Compound,Right,True,Usage and Parse may not be correct.
-Coproduct,Coproduct,460,360,360,42,42,500,500,{},"{""∐""}",{},"{{""expr1"", ""∐"", ""expr2""}}","{""Coproduct"", ""["", ""expr1"", "","", ""expr2"", ""]""}","Coproduct[expr1, expr2]",Binary,Infix,None,False,
-CornerBracket,CornerBracket,-10,670,760,,1,-10,-10,"{""「""}",{},"{""」""}","{{""「"", ""expr"", ""」""}}",,,Unary,Matchfix,Non,True,
-CounterClockwiseContourIntegral,CounterClockwiseContourIntegral,420,670,325,,45,455,445,"{""∳""}",{},"{""""}","{{""∳"", ""expr1"", """", ""expr2""}}","{""CounterClockwiseContourIntegral"", ""["", ""expr1"", "","", ""expr2"", ""]""}","Integrate[expr1, expr2]",Binary,Compound,Right,True,Usage and Parse may not be correct.
-Cross,Cross,640,500,500,28,28,603,606,{},"{""""}",{},"{{""expr1"", """", ""expr2""}}","{""Cross"", ""["", ""expr1"", "","", ""expr2"", ""]""}","Cross[expr1, expr2]",Binary,Infix,None,True,
-Cup,Cup,440,340,340,43,43,460,460,{},"{""⌣""}",{},"{{""expr1"", ""⌣"", ""expr2""}}","{""Cup"", ""["", ""expr1"", "","", ""expr2"", ""]""}","Cup[expr1, expr2]",Binary,Infix,None,False,
-CupCap,CupCap,360,290,290,,50,390,390,{},"{""≍""}",{},"{{""x"", ""≍"", ""y""}}","{""CupCap"", ""["", ""x"", "","", ""y"", ""]""}","CupCap[x, y]",Binary,Infix,None,False,
-Curl,Curl,590,670,485,,29.8,601,601,"{""""}",{},{},"{{"""", ""expr""}}","{""Curl"", ""["", ""expr"", ""]""}",,Unary,Prefix,Right,True,Usage and Parse may not be correct.
-CurlyDoubleQuote,CurlyDoubleQuote,-10,670,760,,1,-10,-10,"{""“""}",{},"{""”""}","{{""“"", ""expr"", ""”""}}","{""CurlyDoubleQuote"",""["",""expr"",""]""}",CurlyDoubleQuote[expr],Unary,Matchfix,Non,False,
-CurlyQuote,CurlyQuote,-10,670,760,,1,-10,-10,"{""‘""}",{},"{""’""}","{{""‘"", ""expr"", ""’""}}","{""CurlyQuote"",""["",""expr"",""]""}",CurlyQuote[expr],Unary,Matchfix,Non,False,
-Decrement,Decrement,880,660,665,11,11,,760,{},"{""--""}",{},"{{""expr"", ""--""}}","{""Decrement"", ""["", ""expr"", ""]""}",Decrement[expr],Unary,Postfix,Left,True,
-Del,Del,710,550,550,24,24,620,620,"{""∇""}",{},{},"{{""∇"", ""expr""}}","{""Del"", ""["", ""expr"", ""]""}",Del[expr],Unary,Prefix,Right,False,
+BlackLenticularBracket,BlackLenticularBracket,-10,670,760,,1,-10,-10,"{""【""}",{},"{""】""}",【expr】,,,Unary,Matchfix,Non,True,
+Blank,Blank,980,730,730,5,5,,820,"{""_""}",{},{},_,"{""Blank"", ""["", ""]""}",Blank[],Nullary,None,Non,True,A Blank (_) with no accompanying decoration.
+BlankHead,Blank,1010,730,730,5,5,,820,"{""_""}",{},{},_expr,"{""Blank"", ""["", ""expr"", ""]""}",Blank[expr],Unary,Prefix,Non,True,
+BlankNullSequence,BlankNullSequence,980,730,730,5,5,,820,"{""___""}",{},{},___,"{""BlankNullSequence"", ""["", ""]""}",BlankNullSequence[],Nullary,None,Non,True,A BlankNullSequence (___) with no accompanying decoration.
+BlankNullSequenceHead,BlankNullSequence,1010,730,730,5,5,,820,"{""___""}",{},{},___expr,"{""BlankNullSequence"", ""["", ""expr"", ""]""}",BlankNullSequence[expr],Unary,Prefix,Non,True,
+BlankOptional,Blank,980,730,730,5,5,,820,"{""_.""}",{},{},_.,"{""Optional"", ""["", ""Blank"", ""]""}",Optional[Blank[]],Nullary,None,Non,True,No name or head.
+BlankSequence,BlankSequence,980,730,730,5,5,,820,"{""__""}",{},{},__,"{""BlankSequence"", ""["", ""]""}",BlankSequence[],Nullary,None,Non,True,A BlankNullSequence (__) with no accompanying decoration.
+BlankSequenceHead,BlankSequence,1010,730,730,5,5,,820,"{""__""}",{},{},__expr,"{""BlankSequence"", ""["", ""expr"", ""]""}",BlankSequence[expr],Unary,Prefix,Non,True,
+BoxGroup,None,-10,670,760,,1,,-10,"{""\(""}",{},"{""\)""}",\(expr\),"{“LeftRowBox”, expr, “RightRowBox”]",\(expr\),Unary,Matchfix,Non,True,The interpretation of this operator depends on context. It must contain box sublanguage.
+BracketingBar,BracketingBar,-10,670,760,,1,-10,-10,"{""""}",{},"{""""}", expr,"{""BracketingBar"", ""["", ""expr"", "","", ""…"", ""]""}","BracketingBar[expr, \[Ellipsis]]",n-ary,Matchfix,Non,False,
+Cap,Cap,450,350,350,43,42.5,470,470,{},"{""⌢""}",{},expr1 ⌢ expr2,"{""Cap"", ""["", ""expr1"", "","", ""expr2"", ""]""}","Cap[expr1, expr2]",Binary,Infix,None,False,
+CapitalDifferentialD,CapitalDifferentialD,720,550,560,,23,630,630,"{""""}",{},{},x,"{""CapitalDifferentialD"", ""["", ""x"", ""]""}",CapitalDifferentialD[x],Unary,Prefix,Right,False,
+Ceiling,Ceiling,-10,670,760,,1,-10,-10,"{""⌈""}",{},"{""⌉""}",⌈expr⌉,"{""Ceiling"", ""["", ""expr"", ""]""}",Ceiling[expr],Unary,Matchfix,Non,True,
+CenterDot,CenterDot,510,410,410,,37,530,530,{},"{""·""}",{},x · y,"{""CenterDot"", ""["", ""x"", "","", ""y"", ""]""}","CenterDot[x, y]",Binary,Infix,None,False,
+CircleDot,CircleDot,660,520,520,"26, 35, 37",26,605,608,{},"{""⊙""}",{},expr1 ⊙ expr2,"{""CircleDot"", ""["", ""expr1"", "","", ""expr2"", ""]""}","CircleDot[expr1, expr2]",Binary,Infix,None,False,
+CircleMinus,CircleMinus,430,330,330,44,44,450,450,{},"{""⊖""}",{},expr1 ⊖ expr2,"{""CircleMinus"", ""["", ""expr1"", "","", ""expr2"", ""]""}","CircleMinus[expr1, expr2]",Binary,Infix,Left,False,
+CirclePlus,CirclePlus,430,330,330,44,44,450,450,{},"{""⊕""}",{},expr1 ⊕ expr1,"{""CirclePlus"", ""["", ""expr1"", "","", ""expr2"", ""]""}","CirclePlus[expr1, expr2]",Binary,Infix,None,False,
+CircleTimes,CircleTimes,520,420,420,,36,540,540,{},"{""⊗""}",{},expr1 ⊗ expr2,"{""CircleTimes"", ""["", ""expr1"", "","", ""expr2"", ""]""}","CircleTimes[expr1, expr2]",Binary,Infix,None,False,
+ClockwiseContourIntegral,ClockwiseContourIntegral,420,670,325,,45,455,445,"{""∲""}",{},"{""""}",∲ f()  x,"{""ClockwiseContourIntegral"", ""["", ""expr1"", "","", ""expr2"", ""]""}","Integrate[expr1, expr2]",Binary,Compound,Right,True,Usage and Parse may not be correct.
+Colon,Colon,100,80,80,71,71,205,205,{},"{""∶""}",{},expr1 ∶ expr2,"{""Colon"", ""["", ""expr1"", "","", ""expr2"", ""]""}","Colon[expr1, expr2]",Binary,Infix,None,False,
+Composition,Composition,860,625,655,13,13,,740,{},"{""@*""}",{},expr1 @* expr2,"{""Composition"", ""["", ""expr1"", "","", ""expr2"", ""]""}","Composition[expr1, expr2]",Binary,Infix,None,True,
+CompoundExpression,CompoundExpression,30,10,10,77,77,,170,{},"{"";""}",{},"expr1,  expr2","{""CompoundExpression"", ""["", ""expr1"", "","", ""expr2"", ""]""}","CompoundExpression[expr1, expr2]",Binary,Infix,None,True,
+CompoundExpressionNull,CompoundExpression,30,10,10,77,77,,170,{},"{"";""}",{},expr1; expr2,"{""CompoundExpression"", ""["", ""expr1"", "","", ""expr2"", ""]""}","CompoundExpression[expr1, expr2, Null]",Unary,Postfix,Left,True,
+Condition,Condition,170,130,130,66,66,,260,{},"{""/;""}",{},expr1 /; expr2,"{""Condition"", ""["", ""expr1"", "","", ""expr2"", ""]""}","Condition[expr1, expr2]",Binary,Infix,Left,True,
+Conditioned,Conditioned,240,195,195,,59.5,305,305,{},"{""""}",{},expr1 expr2,"{""Conditioned"", ""["", ""expr1"", "","", ""expr2"", ""]""}","Conditioned[expr1, expr2]",Binary,Infix,None,True,
+Congruent,Congruent,360,290,290,,50,390,390,{},"{""≡""}",{},x ≡ y,"{""Congruent"", ""["", ""x"", "","", ""y"", ""]""}","Congruent[x, y]",Binary,Infix,None,False,
+Conjugate,Conjugate,780,670,605,18,18,695,695,{},"{""""}",{},expr ,"{""Conjugate"", ""["", ""expr"", ""]""}",Conjugate[expr],Unary,Postfix,Left,True,
+ConjugateTranspose,ConjugateTranspose,780,670,605,18,18,695,695,{},"{"""", """"}",{},expr ; expr ,"{""ConjugateTranspose"", ""["", ""expr"", ""]""}",ConjugateTranspose[expr],Unary,Postfix,Left,True,
+ContextPathSeparator,None,-10,670,760,,1,,-10,{},"{""`""}",{},symb1`symb2,"{""symb1"", ""`"", ""symb2""}",symb1`symb2,,,Non,True,"Functions as a decimal point: either contextpath1 or contextpath2 may be empty, but not both at the same time."
+ContourIntegral,ContourIntegral,420,670,325,,45,455,445,"{""∮""}",{},"{""""}",∮ fn1  x,"{""ContourIntegral"", ""["", ""expr1"", "","", ""expr2"", ""]""}","Integrate[expr1, expr2]",Binary,Compound,Right,True,Usage and Parse may not be correct.
+Coproduct,Coproduct,460,360,360,42,42,500,500,{},"{""∐""}",{},expr1 ∐ expr2,"{""Coproduct"", ""["", ""expr1"", "","", ""expr2"", ""]""}","Coproduct[expr1, expr2]",Binary,Infix,None,False,
+CornerBracket,CornerBracket,-10,670,760,,1,-10,-10,"{""「""}",{},"{""」""}",「expr」,,,Unary,Matchfix,Non,True,
+CounterClockwiseContourIntegral,CounterClockwiseContourIntegral,420,670,325,,45,455,445,"{""∳""}",{},"{""""}",∳ fn   var,"{""CounterClockwiseContourIntegral"", ""["", ""expr1"", "","", ""expr2"", ""]""}","Integrate[expr1, expr2]",Binary,Compound,Right,True,Usage and Parse may not be correct.
+Cross,Cross,640,500,500,28,28,603,606,{},"{""""}",{},expr1  expr2,"{""Cross"", ""["", ""expr1"", "","", ""expr2"", ""]""}","Cross[expr1, expr2]",Binary,Infix,None,True,
+Cup,Cup,440,340,340,43,43,460,460,{},"{""⌣""}",{},expr1 ⌣ expr2,"{""Cup"", ""["", ""expr1"", "","", ""expr2"", ""]""}","Cup[expr1, expr2]",Binary,Infix,None,False,
+CupCap,CupCap,360,290,290,,50,390,390,{},"{""≍""}",{},x ≍ y,"{""CupCap"", ""["", ""x"", "","", ""y"", ""]""}","CupCap[x, y]",Binary,Infix,None,False,
+Curl,Curl,590,670,485,,29.8,601,601,"{""""}",{},{},expr,"{""Curl"", ""["", ""expr"", ""]""}",,Unary,Prefix,Right,True,Usage and Parse may not be correct.
+CurlyDoubleQuote,CurlyDoubleQuote,-10,670,760,,1,-10,-10,"{""“""}",{},"{""”""}","""“expr""”","{""CurlyDoubleQuote"",""["",""expr"",""]""}",CurlyDoubleQuote[expr],Unary,Matchfix,Non,False,
+CurlyQuote,CurlyQuote,-10,670,760,,1,-10,-10,"{""‘""}",{},"{""’""}",‘expr’,"{""CurlyQuote"",""["",""expr"",""]""}",CurlyQuote[expr],Unary,Matchfix,Non,False,
+Decrement,Decrement,880,660,665,11,11,,760,{},"{""--""}",{},expr--,"{""Decrement"", ""["", ""expr"", ""]""}",Decrement[expr],Unary,Postfix,Left,True,
+Del,Del,710,550,550,24,24,620,620,"{""∇""}",{},{},∇x,"{""Del"", ""["", ""expr"", ""]""}",Del[expr],Unary,Prefix,Right,False,
 Derivative,Derivative,770,670,604,19,19,,680,{},"{""''""}",{},"{{""expr"", ""''""}}","{""Derivative"", ""["", ""n"", ""]"", ""["", ""expr"", ""]""}",Derivative[n][expr],Unary,Postfix,Left,True,
 Diamond,Diamond,550,450,450,33,33,570,570,{},"{""⋄""}",{},"{{""expr1"", ""⋄"", ""expr2""}}","{""Diamond"", ""["", ""expr1"", "","", ""expr2"", ""]""}","Diamond[expr1, expr2]",Binary,Infix,None,False,
 DifferenceDelta,DifferenceDelta,710,550,550,24,24,620,620,"{""""}",{},{},"{{"""", ""expr""}}","{""DifferenceDelta"", ""["", ""expr"", ""]""}",,Unary,Prefix,Right,True,Usage and Parse may not be correct.

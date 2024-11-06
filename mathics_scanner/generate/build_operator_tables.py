@@ -67,7 +67,7 @@ DEFAULT_DATA_DIR = Path(osp.normpath(osp.dirname(__file__)), "..", "data")
     "-o",
     show_default=True,
     type=click.Path(writable=True),
-    default=DEFAULT_DATA_DIR / "operators.json",
+    default=DEFAULT_DATA_DIR / "operators-next.json",
 )
 @click.argument(
     "data_dir", type=click.Path(readable=True), default=DEFAULT_DATA_DIR, required=False

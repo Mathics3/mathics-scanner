@@ -26,7 +26,7 @@ mathics_scanner/data/characters.json: mathics_scanner/data/named-characters.yml
 	$(PIP) install -r requirements-dev.txt
 	$(PYTHON) mathics_scanner/generate/build_tables.py
 
-mathics_scanner/data/operators.json: mathics_scanner/data/operators.yml
+mathics_scanner/data/operators.json: mathics_scanner/data/operators-next.yml
 	$(PIP) install -r requirements-dev.txt
 	$(PYTHON) mathics_scanner/generate/build_operator_tables.py
 
