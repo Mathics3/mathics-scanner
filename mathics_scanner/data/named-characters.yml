@@ -3636,6 +3636,17 @@ Exists:
   wl-unicode: "\u2203"
   wl-unicode-name: THERE EXISTS
 
+# ExpectationE:
+# #  amslatex: "\\ExpectationE"
+# #  esc-alias: ee
+# #  has-unicode-inverse: true
+# #  is-letter-like: true
+# #  unicode-equivalent: "\u2147"
+# #  unicode-equivalent-name: DOUBLE-STRUCK ITALIC SMALL E
+# #  unicode-reference: https://www.compart.com/en/unicode/U+2147
+#   wl-reference: https://reference.wolfram.com/language/ref/character/ExpectationE.html
+#   wl-unicode: "\uF2D3"
+
 ExponentialE:
   amslatex: "\\ExponentialE"
   esc-alias: ee

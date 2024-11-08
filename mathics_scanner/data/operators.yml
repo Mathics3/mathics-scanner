@@ -1973,22 +1973,6 @@ Exists:
   meaningful: true
   # comments: Usage and Parse may not be correct.
 
-ExpectationE:
-  actual-precedence: 420
-  precedence: 325
-  WolframLanguageData-corrected: 45
-  UnicodeCharacters.tr: 455
-  UnicodeCharacters-corrected.tr: 445
-  # N-tokens: {""}
-  # L-tokens: {}
-  # O-tokens: {}
-  usage: "{{"", "expr"}}"
-  # parse: {"ExpectationE", "[", "expr", "]"}
-  arity: Unary
-  affix: Prefix
-  associativity: right
-  meaningful: true
-  # comments: Usage and Parse may not be correct.
 
 Factorial:
   actual-precedence: 790
@@ -2000,8 +1984,8 @@ Factorial:
   # N-tokens: {}
   # L-tokens: {"!"}
   # O-tokens: {}
-  usage: "{{"expr", "!"}}"
-  # parse: {"Factorial", "[", "expr", "]"}
+  usage: "n!"
+  # parse: {"Factorial", "[", "n", "]"}
   FullForm: Factorial[expr]
   arity: Unary
   affix: Postfix
@@ -2019,7 +2003,7 @@ Factorial2:
   # N-tokens: {}
   # L-tokens: {"!!"}
   # O-tokens: {}
-  usage: "{{"expr", "!!"}}"
+  usage: "n!!"
   # parse: {"Factorial2", "[", "expr", "]"}
   FullForm: Factorial2[expr]
   arity: Unary
@@ -2039,9 +2023,9 @@ Floor:
   # N-tokens: {"⌊"}
   # L-tokens: {}
   # O-tokens: {"⌋"}
-  usage: "⌊ expr ⌋"
-  # parse: {"Floor", "[", "expr", "]"}
-  FullForm: Floor[expr]
+  usage: "⌊ x ⌋"
+  # parse: {"Floor", "[", "x", "]"}
+  FullForm: Floor[x]
   arity: Unary
   affix: Matchfix
   associativity: null
@@ -2096,7 +2080,7 @@ FractionBox:
   # N-tokens: {}
   # L-tokens: {"\/"}
   # O-tokens: {}
-  usage: "\( expr1 \/  expr2 \)"
+  usage: "\\( expr1 \/  expr2 \\)"
   # parse: {"FractionBox", "[", "expr1", ",", "expr2", "]"}
   arity: Binary
   affix: Infix
@@ -2190,9 +2174,9 @@ Function:
   # N-tokens: {}
   # L-tokens: {"&"}
   # O-tokens: {}
-  usage: "{{"expr", "&"}}"
-  # parse: {"Function", "[", "expr", "]"}
-  FullForm: Function[expr]
+  usage: "body&"
+  # parse: {"Function", "[", "body", "]"}
+  FullForm: Function[body]
   arity: Unary
   affix: Postfix
   associativity: left
@@ -2209,9 +2193,9 @@ FunctionApply:
   # N-tokens: {}
   # L-tokens: {"["}
   # O-tokens: {"]"}
-  usage: "expr1", "[ expr2 ]"
-  # parse: {"expr1", "[", "expr2", ",", "…", "]"}
-  FullForm: expr1[expr2, \[Ellipsis]]
+  usage: "f [ body ]"
+  # parse: {"f", "[", "expr1", ",", "…", "]"}
+  FullForm: f[expr1, \[Ellipsis]]
   arity: n-ary
   affix: Postfix
   associativity: left
