@@ -146,11 +146,11 @@ class FileLineFeeder(LineFeeder):
 
     def feed(self) -> str:
         result = self.fileobject.readline()
+        if self.trace_fn:
+            self.trace_fn(self.lineno + 1, result)
         while result == "\n":
             result = self.fileobject.readline()
             self.lineno += 1
-            if self.trace_fn:
-                self.trace_fn(self.lineno, result)
         if result:
             self.lineno += 1
         else:
