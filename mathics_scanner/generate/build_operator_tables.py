@@ -54,22 +54,32 @@ def compile_tables(
     for k, v in operator_data.items():
         operator_precedence[k] = v["precedence"]
 
-    no_meaning_operators = {}
+    no_meaning_infix_operators = {}
+    no_meaning_prefix_operators = {}
+    no_meaning_postfix_operators = {}
 
-    for operator_name, v in operator_data.items():
-        if (
-            v.get("meaningful", True) is False
-            and (character_info := character_data.get(operator_name))
-            and (
-                character_info
-                and (unicode_char := character_info.get("unicode-equivalent"))
-            )
+    for operator_name, operator_info in operator_data.items():
+        if operator_info.get("meaningful", True) is False and (
+            character_info := character_data.get(operator_name)
         ):
-            no_meaning_operators[operator_name] = unicode_char
+            if (unicode_char := character_info.get("unicode-equivalent")) is None:
+                print(f"FIXME: no unicode-equivalent for {operator_name}")
+                continue
 
+            affix = operator_info["affix"]
+            if affix == "Infix":
+                no_meaning_infix_operators[operator_name] = unicode_char
+            elif affix == "Postfix":
+                no_meaning_postfix_operators[operator_name] = unicode_char
+            elif affix == "Prefix":
+                no_meaning_prefix_operators[operator_name] = unicode_char
+            else:
+                print(f"FIXME: affix {affix} not handled {operator_name}")
     return {
         "operator-precedence": operator_precedence,
-        "no-meaning-operators": no_meaning_operators,
+        "no-meaning-infix-operators": no_meaning_infix_operators,
+        "no-meaning-postfix-operators": no_meaning_postfix_operators,
+        "no-meaning-prefix-operators": no_meaning_prefix_operators,
     }
 
 
