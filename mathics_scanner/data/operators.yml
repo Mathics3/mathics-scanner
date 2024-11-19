@@ -6610,7 +6610,7 @@ Star:
   # N-tokens: {}
   # L-tokens: {"⋆"}
   # O-tokens: {}
-  # usage: "expr1 ⋆ expr2 * expr3"
+  # usage: "expr1 ⋆ expr2 ⋆ expr3"
   # parse: {"Star", "[", "expr1", ",", "expr2", "]"}
   FullForm: Star[expr1, expr2]
   arity: Binary

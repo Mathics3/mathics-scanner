@@ -6,7 +6,7 @@ import json
 import os.path as osp
 import sys
 from pathlib import Path
-from typing import Dict, Union
+from typing import Dict
 
 import click
 import yaml
@@ -41,7 +41,9 @@ def read(*rnames) -> str:
     return open(osp.join(get_srcdir(), *rnames)).read()
 
 
-def compile_tables(data: Dict[str, dict]) -> Dict[str, Union[dict, tuple]]:
+def compile_tables(
+    operator_data: Dict[str, dict], character_data: Dict[str, dict]
+) -> Dict[str, dict]:
     """
     Compiles the general table into the tables used internally by the library.
     This facilitates fast access of this information by clients needing this
@@ -49,18 +51,25 @@ def compile_tables(data: Dict[str, dict]) -> Dict[str, Union[dict, tuple]]:
     """
     operator_precedence = {}
 
-    for k, v in data.items():
+    for k, v in operator_data.items():
         operator_precedence[k] = v["precedence"]
 
-    no_meaning_operators = set()
+    no_meaning_operators = {}
 
-    for k, v in data.items():
-        if v.get("meaningful", True) is False:
-            no_meaning_operators.add(k)
+    for operator_name, v in operator_data.items():
+        if (
+            v.get("meaningful", True) is False
+            and (character_info := character_data.get(operator_name))
+            and (
+                character_info
+                and (unicode_char := character_info.get("unicode-equivalent"))
+            )
+        ):
+            no_meaning_operators[operator_name] = unicode_char
 
     return {
         "operator-precedence": operator_precedence,
-        "no-meaning-operators": tuple(sorted(no_meaning_operators)),
+        "no-meaning-operators": no_meaning_operators,
     }
 
 
@@ -80,14 +89,15 @@ DEFAULT_DATA_DIR = Path(osp.normpath(osp.dirname(__file__)), "..", "data")
     "data_dir", type=click.Path(readable=True), default=DEFAULT_DATA_DIR, required=False
 )
 def main(output, data_dir):
-    with open(data_dir / "operators.yml", "r", encoding="utf8") as i, open(
-        output, "w"
-    ) as o:
+    with open(data_dir / "operators.yml", "r", encoding="utf8") as operator_f, open(
+        data_dir / "named-characters.yml", "r", encoding="utf8"
+    ) as character_f, open(output, "w") as o:
         # Load the YAML data.
-        data = yaml.load(i, Loader=yaml.FullLoader)
+        operator_data = yaml.load(operator_f, Loader=yaml.FullLoader)
+        character_data = yaml.load(character_f, Loader=yaml.FullLoader)
 
         # Precompile the tables.
-        data = compile_tables(data)
+        data = compile_tables(operator_data, character_data)
 
         # Dump the preprocessed dictionaries to disk as JSON.
         json.dump(data, o)
