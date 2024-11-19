@@ -6,7 +6,7 @@ import json
 import os.path as osp
 import sys
 from pathlib import Path
-from typing import Dict
+from typing import Dict, Union
 
 import click
 import yaml
@@ -41,7 +41,7 @@ def read(*rnames) -> str:
     return open(osp.join(get_srcdir(), *rnames)).read()
 
 
-def compile_tables(data: Dict[str, dict]) -> Dict[str, dict]:
+def compile_tables(data: Dict[str, dict]) -> Dict[str, Union[dict, tuple]]:
     """
     Compiles the general table into the tables used internally by the library.
     This facilitates fast access of this information by clients needing this
@@ -52,8 +52,15 @@ def compile_tables(data: Dict[str, dict]) -> Dict[str, dict]:
     for k, v in data.items():
         operator_precedence[k] = v["precedence"]
 
+    no_meaning_operators = set()
+
+    for k, v in data.items():
+        if v.get("meaningful", True) is False:
+            no_meaning_operators.add(k)
+
     return {
         "operator-precedence": operator_precedence,
+        "no-meaning-operators": tuple(sorted(no_meaning_operators)),
     }
 
 
@@ -67,7 +74,7 @@ DEFAULT_DATA_DIR = Path(osp.normpath(osp.dirname(__file__)), "..", "data")
     "-o",
     show_default=True,
     type=click.Path(writable=True),
-    default=DEFAULT_DATA_DIR / "operators-next.json",
+    default=DEFAULT_DATA_DIR / "operators.json",
 )
 @click.argument(
     "data_dir", type=click.Path(readable=True), default=DEFAULT_DATA_DIR, required=False
