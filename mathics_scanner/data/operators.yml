@@ -43,6 +43,7 @@
 #  - NullAry (0 arguments),
 #  - Unary (1 argument),
 #  - Binary (2 arguments)
+#  - Infix (2 or more arguments; Binary is a special case of Infix having exactly 2 argumetns)
 #  - Ternary (3 arguments)
 #  - n-ary (n arguments)
 #
