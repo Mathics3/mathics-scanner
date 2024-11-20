@@ -63,7 +63,8 @@ def compile_tables(
             character_info := character_data.get(operator_name)
         ):
             if (unicode_char := character_info.get("unicode-equivalent")) is None:
-                print(f"FIXME: no unicode-equivalent for {operator_name}")
+                if (unicode_char := character_info.get("wl-unicode")) is None:
+                    print(f"FIXME: no unicode or WMA equivalent for {operator_name}")
                 continue
 
             affix = operator_info["affix"]
@@ -74,7 +75,7 @@ def compile_tables(
             elif affix == "Prefix":
                 no_meaning_prefix_operators[operator_name] = unicode_char
             else:
-                print(f"FIXME: affix {affix} not handled {operator_name}")
+                print(f"FIXME: affix {affix} of {operator_name} not handled")
     return {
         "operator-precedence": operator_precedence,
         "no-meaning-infix-operators": no_meaning_infix_operators,
