@@ -68,12 +68,13 @@ def compile_tables(
                 continue
 
             affix = operator_info["affix"]
+            precedence = operator_info["precedence"]
             if affix == "Infix":
-                no_meaning_infix_operators[operator_name] = unicode_char
+                no_meaning_infix_operators[operator_name] = unicode_char, precedence
             elif affix == "Postfix":
-                no_meaning_postfix_operators[operator_name] = unicode_char
+                no_meaning_postfix_operators[operator_name] = unicode_char, precedence
             elif affix == "Prefix":
-                no_meaning_prefix_operators[operator_name] = unicode_char
+                no_meaning_prefix_operators[operator_name] = unicode_char, precedence
             else:
                 print(f"FIXME: affix {affix} of {operator_name} not handled")
     return {
