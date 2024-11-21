@@ -33,6 +33,7 @@ base_names_pattern = r"((?![0-9])([0-9${0}{1}{2}])+)".format(
 )
 full_names_pattern = r"(`?{0}(`{0})*)".format(base_names_pattern)
 
+# FIXME: Revise to get Character Symbols from data/characters.json
 tokens = [
     ("Definition", r"\? "),
     ("Information", r"\?\? "),
@@ -180,6 +181,7 @@ tokens = [
     ("Cup", r" \u2323 "),
     ("CirclePlus", r" \u2295 "),
     ("CircleMinus", r" \u2296 "),
+    ("Congruent", r" \u2261 "),
     ("Intersection", r" \u22c2 "),
     ("Union", r" \u22c3 "),
     ("VerticalBar", r" \u2223 "),
