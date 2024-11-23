@@ -56,6 +56,7 @@ def compile_tables(
 
     flat_binary_operators = {}
     left_binary_operators = {}
+    misc_operators = {}
     no_meaning_infix_operators = {}
     no_meaning_postfix_operators = {}
     no_meaning_prefix_operators = {}
@@ -66,19 +67,18 @@ def compile_tables(
     ternary_operators = {}
 
     for operator_name, operator_info in operator_data.items():
-        character_info = character_data.get(operator_name)
-
-        if character_info is None:
-            continue
-
         precedence = operator_info["precedence"]
-        unicode_char = character_info.get("unicode-equivalent")
 
         affix = operator_info["affix"]
+        arity = operator_info["arity"]
         operator_dict = None
 
-        if affix in ("Infix", "Binary"):
-            associativity = operator_info["associativity"]
+        associativity = operator_info["associativity"]
+        if arity == "Ternary":
+            operator_dict = ternary_operators
+        elif associativity == "unknown":
+            operator_dict = misc_operators
+        elif affix in ("Infix", "Binary"):
             if associativity is None:
                 operator_dict = flat_binary_operators
             elif associativity == "left":
@@ -96,16 +96,23 @@ def compile_tables(
             operator_dict = prefix_operators
         elif affix == "Postfix":
             operator_dict = postfix_operators
-        elif affix == "Ternaryhh":
-            operator_dict = ternary_operators
+
+        character_info = character_data.get(operator_name)
+        if character_info is None:
+            unicode_char = "no-unicode"
+        else:
+            unicode_char = character_info.get("unicode-equivalent", "no-unicode")
 
         if operator_dict is not None:
             operator_dict[operator_name] = unicode_char, precedence
 
+        if character_info is None:
+            continue
+
         if operator_info.get("meaningful", True) is False and (
             character_data.get(operator_name)
         ):
-            if unicode_char is None:
+            if unicode_char == "no-unicode":
                 if (unicode_char := character_info.get("wl-unicode")) is None:
                     print(f"FIXME: no unicode or WMA equivalent for {operator_name}")
                 continue
@@ -121,15 +128,16 @@ def compile_tables(
                 print(f"FIXME: affix {affix} of {operator_name} not handled")
 
     return {
-        "operator-precedence": operator_precedence,
+        "flat-binary-operators": flat_binary_operators,
+        "left-binary-operators": left_binary_operators,
+        "misc-ops": misc_operators,
         "no-meaning-infix-operators": no_meaning_infix_operators,
         "no-meaning-postfix-operators": no_meaning_postfix_operators,
         "non-associative-binary-operators": nonassoc_binary_operators,
-        "flat-binary-operators": flat_binary_operators,
-        "right-binary-operators": right_binary_operators,
-        "left-binary-operators": left_binary_operators,
+        "operator-precedence": operator_precedence,
+        "postfix-operators": postfix_operators,
         "prefix-operators": prefix_operators,
-        "postfix_operators": postfix_operators,
+        "right-binary-operators": right_binary_operators,
         "ternary-operators": ternary_operators,
     }
 

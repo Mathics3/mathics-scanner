@@ -85,6 +85,7 @@
 #       - left
 #       - non-associative
 #       - right
+#       - unknown
 #
 #
 #
@@ -136,7 +137,7 @@ And:
   # HACK: although the should be 215 for all boolean_ops we adjust slightly
   # to get the subprecedences correct
   Precedence-Function: 225
-  precedence: 220
+  precedence: 225
   WolframLanguageData: 55
   WolframLanguageData-corrected: 55
   UnicodeCharacters.tr: 330
@@ -176,7 +177,7 @@ AngleBracket:
 Apply:
   actual-precedence: 820
   Precedence-Function: 620
-  precedence: 626
+  precedence: 620
   WolframLanguageData: 16
   WolframLanguageData-corrected: 16
   UnicodeCharacters.tr:
@@ -595,7 +596,7 @@ CircleMinus:
   FullForm: CircleMinus[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: left
+  associativity: null
   meaningful: false
   # comments:
 
@@ -679,7 +680,7 @@ Colon:
 Composition:
   actual-precedence: 860
   Precedence-Function: 625
-  precedence: 655
+  precedence: 625
   WolframLanguageData: 13
   WolframLanguageData-corrected: 13
   UnicodeCharacters.tr:
@@ -794,7 +795,7 @@ Congruent:
 Conjugate:
   actual-precedence: 780
   Precedence-Function: 670
-  precedence: 605
+  precedence: 670
   WolframLanguageData: 18
   WolframLanguageData-corrected: 18
   UnicodeCharacters.tr: 695
@@ -814,7 +815,7 @@ Conjugate:
 ConjugateTranspose:
   actual-precedence: 780
   Precedence-Function: 670
-  precedence: 605
+  precedence: 670
   WolframLanguageData: 18
   WolframLanguageData-corrected: 18
   UnicodeCharacters.tr: 695
@@ -1050,7 +1051,7 @@ CurlyQuote:
 Decrement:
   actual-precedence: 880
   Precedence-Function: 660
-  precedence: 665
+  precedence: 660
   WolframLanguageData: 11
   WolframLanguageData-corrected: 11
   UnicodeCharacters.tr:
@@ -1178,7 +1179,7 @@ DirectedEdge:
   FullForm: DirectedEdge[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: non-associative
+  associativity: null
   meaningful: true
   # comments:
 
@@ -2075,7 +2076,7 @@ FormBox:
   # parse: {"FormBox", "[", "expr2", ",", "expr1", "]"}
   arity: Binary
   affix: Infix
-  associativity: missing["unknown"]
+  associativity: "unknown"
   meaningful: true
   # comments:
 
@@ -2540,7 +2541,7 @@ Implies:
 Increment:
   actual-precedence: 880
   Precedence-Function: 660
-  precedence: 665
+  precedence: 660
   WolframLanguageData: 11
   WolframLanguageData-corrected: 11
   UnicodeCharacters.tr:
@@ -2557,9 +2558,27 @@ Increment:
   meaningful: true
   # comments:
 
+Infix:
+  precedence: 630
+  WolframLanguageData: None
+  WolframLanguageData-corrected: None
+  UnicodeCharacters.tr: None
+  UnicodeCharacters-corrected.tr: None
+  # N-tokens: None
+  # L-tokens: None
+  # O-tokens: None
+  usage: x ~ f ~ y
+  # parse: Infix[f[x, y]]
+  FullForm: None
+  arity: Ternary
+  affix: Infix
+  associativity: null
+  meaningful: true
+  # comments: None
+
 Information:
   actual-precedence: 670
-  precedence: 670
+  precedence: 5001  # Seems a bit extreme. This is the old Mathics data
   WolframLanguageData: None
   WolframLanguageData-corrected: None
   UnicodeCharacters.tr: None
@@ -2570,8 +2589,8 @@ Information:
   # usage: "None"
   # parse: None
   FullForm: None
-  arity: Binary
-  affix: Infix
+  arity: Unary
+  affix: Prefix
   associativity: null
   meaningful: true
   # comments: None
@@ -3682,7 +3701,7 @@ NamedBlankSequenceHead:
 Nand:
   actual-precedence: 290
   Precedence-Function: 215
-  precedence: 220
+  precedence: 225
   WolframLanguageData: 55
   WolframLanguageData-corrected: 55
   UnicodeCharacters.tr: 330
@@ -3759,7 +3778,7 @@ NonCommutativeMultiply:
 Nor:
   actual-precedence: 270
   Precedence-Function: 215
-  precedence: 210
+  precedence: 215
   WolframLanguageData: 57
   WolframLanguageData-corrected: 57
   UnicodeCharacters.tr: 320
@@ -4884,7 +4903,7 @@ Optional:
 Or:
   actual-precedence: 270
   Precedence-Function: 215
-  precedence: 210
+  precedence: 215
   WolframLanguageData: 57
   WolframLanguageData-corrected: 57
   UnicodeCharacters.tr: 320
@@ -4956,7 +4975,7 @@ OverscriptBox:
   # parse: {"OverscriptBox", "[", "expr1", ",", "expr2", "]"}
   arity: Binary
   affix: Infix
-  associativity: missing["unknown"]
+  associativity: "unknown"
   meaningful: true
   # comments:
 
@@ -5189,7 +5208,7 @@ PatternTest:
   FullForm: PatternTest[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: non-associative
+  associativity: null
   meaningful: true
   # comments:
 
@@ -5292,7 +5311,7 @@ PlusMinus:
 
 Postfix:
   actual-precedence: 640
-  precedence: 640
+  precedence: 70  # Seems weird but this is what old Mathics code has
   WolframLanguageData: None
   WolframLanguageData-corrected: None
   UnicodeCharacters.tr: None
@@ -5305,7 +5324,7 @@ Postfix:
   FullForm: None
   arity: Binary
   affix: Infix
-  associativity: null
+  associativity: left
   meaningful: true
   # comments: None
 
@@ -6171,7 +6190,7 @@ RuleDelayed:
 SameQ:
   actual-precedence: 330
   Precedence-Function: 290
-  precedence: 260
+  precedence: 290
   WolframLanguageData: 51
   WolframLanguageData-corrected: 51
   UnicodeCharacters.tr:
@@ -6427,7 +6446,7 @@ Span:
   # N-tokens: {";;"}
   # L-tokens: {";;"}
   # O-tokens: {";;"}
-  # usage: "i", ";;", "j ;; k"
+  usage: ;;,  i;;,; ;;j, ;;;;k, i;;j, i;;;;k, ;;j;;k  i;;j;;k
   # parse: {"Span", "[", "i", ",", "j", ",", "k", "]"}
   FullForm: Span[i, j, k]
   arity: Ternary
@@ -6682,7 +6701,7 @@ SubscriptBox:
   FullForm:
   arity: Binary
   affix: Infix
-  associativity: missing["unknown"]
+  associativity: "unknown"
   meaningful: true
   # comments:
 
@@ -7199,11 +7218,11 @@ Times:
   # N-tokens: {}
   # L-tokens: {"*", "×", "
   # O-tokens: {}
-  # usage: "{{"expr1", "*", "expr2"}, {"expr1", "expr2"}, {"expr1", "×", "expr2"}, {"expr1", ""
+  usage: x * y, x × y, x y,
   # parse: {"Times", "[", "expr1", ",", "expr2", "]"}
   FullForm: Times[expr1, expr2]
-  arity: Nullary
-  affix: None
+  arity: Binary
+  affix: Infix
   associativity: null
   meaningful: true
   # comments: Operator Notations includes usages with invisible unicode characters.
@@ -7250,7 +7269,7 @@ TortoiseShellBracket:
 Transpose:
   actual-precedence: 780
   Precedence-Function: 670
-  precedence: 605
+  precedence: 670
   WolframLanguageData: 18
   WolframLanguageData-corrected: 18
   UnicodeCharacters.tr: 695
@@ -7382,7 +7401,7 @@ UnderscriptBox:
   FullForm:
   arity: Binary
   affix: Infix
-  associativity: missing["unknown"]
+  associativity: "unknown"
   meaningful: true
   # comments:
 
@@ -7401,7 +7420,7 @@ UndirectedEdge:
   FullForm: UndirectedEdge[u, v]
   arity: Binary
   affix: Infix
-  associativity: non-associative
+  associativity: null
   meaningful: true
   # comments:
 
@@ -7465,7 +7484,7 @@ UnionPlus:
 UnsameQ:
   actual-precedence: 330
   Precedence-Function: 290
-  precedence: 260
+  precedence: 290
   WolframLanguageData: 51
   WolframLanguageData-corrected: 51
   UnicodeCharacters.tr:
@@ -7485,7 +7504,7 @@ UnsameQ:
 Unset:
   actual-precedence: 50
   Precedence-Function: 670
-  precedence: 40
+  precedence: 670
   WolframLanguageData: 75
   WolframLanguageData-corrected: 75
   UnicodeCharacters.tr:
@@ -7828,7 +7847,7 @@ WhiteCornerBracket:
 
 Xnor:
   actual-precedence: 280
-  precedence: 215
+  precedence: 220
   WolframLanguageData: 56
   WolframLanguageData-corrected: 56
   UnicodeCharacters.tr: 325
@@ -7847,7 +7866,7 @@ Xnor:
 
 Xor:
   actual-precedence: 280
-  precedence: 215
+  precedence: 220
   WolframLanguageData: 56
   WolframLanguageData-corrected: 56
   UnicodeCharacters.tr: 325
