@@ -5311,7 +5311,7 @@ PlusMinus:
 
 Postfix:
   actual-precedence: 640
-  precedence: 70  # Seems weird but this is what old Mathics code has
+  precedence: 70
   WolframLanguageData: None
   WolframLanguageData-corrected: None
   UnicodeCharacters.tr: None
@@ -7407,7 +7407,7 @@ UnderscriptBox:
 
 UndirectedEdge:
   actual-precedence: 370
-  precedence: 120
+  precedence: 120 # FIXME: is probably 295. Check and adjust after code and mathics-core are merge
   WolframLanguageData:
   WolframLanguageData-corrected: 49
   UnicodeCharacters.tr: 395
@@ -7866,7 +7866,7 @@ Xnor:
 
 Xor:
   actual-precedence: 280
-  precedence: 220
+  precedence: 220 # FIXME: is probably 215. Check and adjust after code and mathics-core are merged
   WolframLanguageData: 56
   WolframLanguageData-corrected: 56
   UnicodeCharacters.tr: 325
