@@ -54,33 +54,89 @@ def compile_tables(
     for k, v in operator_data.items():
         operator_precedence[k] = v["precedence"]
 
+    flat_binary_operators = {}
+    left_binary_operators = {}
+    misc_operators = {}
     no_meaning_infix_operators = {}
-    no_meaning_prefix_operators = {}
     no_meaning_postfix_operators = {}
+    no_meaning_prefix_operators = {}
+    nonassoc_binary_operators = {}
+    postfix_operators = {}
+    prefix_operators = {}
+    right_binary_operators = {}
+    ternary_operators = {}
 
     for operator_name, operator_info in operator_data.items():
+        precedence = operator_info["precedence"]
+
+        affix = operator_info["affix"]
+        arity = operator_info["arity"]
+        operator_dict = None
+
+        associativity = operator_info["associativity"]
+        if arity == "Ternary":
+            operator_dict = ternary_operators
+        elif associativity == "unknown":
+            operator_dict = misc_operators
+        elif affix in ("Infix", "Binary"):
+            if associativity is None:
+                operator_dict = flat_binary_operators
+            elif associativity == "left":
+                operator_dict = left_binary_operators
+            elif associativity == "right":
+                operator_dict = right_binary_operators
+            elif associativity == "non-associative":
+                operator_dict = nonassoc_binary_operators
+            else:
+                print(
+                    f"FIXME: associativity {associativity} not handled in  {operator_name}"
+                )
+
+        elif affix == "Prefix":
+            operator_dict = prefix_operators
+        elif affix == "Postfix":
+            operator_dict = postfix_operators
+
+        if operator_dict is not None:
+            operator_dict[operator_name] = precedence
+
+        character_info = character_data.get(operator_name)
+        if character_info is None:
+            continue
+
+        unicode_char = character_info.get("unicode-equivalent", "no-unicode")
+
         if operator_info.get("meaningful", True) is False and (
-            character_info := character_data.get(operator_name)
+            character_data.get(operator_name)
         ):
-            if (unicode_char := character_info.get("unicode-equivalent")) is None:
+            if unicode_char == "no-unicode":
                 if (unicode_char := character_info.get("wl-unicode")) is None:
                     print(f"FIXME: no unicode or WMA equivalent for {operator_name}")
                 continue
 
             affix = operator_info["affix"]
             if affix == "Infix":
-                no_meaning_infix_operators[operator_name] = unicode_char
+                no_meaning_infix_operators[operator_name] = unicode_char, precedence
             elif affix == "Postfix":
-                no_meaning_postfix_operators[operator_name] = unicode_char
+                no_meaning_postfix_operators[operator_name] = unicode_char, precedence
             elif affix == "Prefix":
-                no_meaning_prefix_operators[operator_name] = unicode_char
+                no_meaning_prefix_operators[operator_name] = unicode_char, precedence
             else:
                 print(f"FIXME: affix {affix} of {operator_name} not handled")
+
     return {
-        "operator-precedence": operator_precedence,
+        "flat-binary-operators": flat_binary_operators,
+        "left-binary-operators": left_binary_operators,
+        "miscellaneous-operators": misc_operators,
         "no-meaning-infix-operators": no_meaning_infix_operators,
         "no-meaning-postfix-operators": no_meaning_postfix_operators,
         "no-meaning-prefix-operators": no_meaning_prefix_operators,
+        "non-associative-binary-operators": nonassoc_binary_operators,
+        "operator-precedence": operator_precedence,
+        "postfix-operators": postfix_operators,
+        "prefix-operators": prefix_operators,
+        "right-binary-operators": right_binary_operators,
+        "ternary-operators": ternary_operators,
     }
 
 

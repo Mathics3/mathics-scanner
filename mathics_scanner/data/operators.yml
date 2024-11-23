@@ -33,9 +33,12 @@
 # |-> to get treated as one unit and not split into two operators like
 # | and ->. So the precedence of |-> has to be higher than |.
 #
+# Note: When there was a mismatch between Jacobson's table and the old Mathics code,
+# we've used the old Mathics code.
+#
 #
 # arity (https://en.wikipedia.org/wiki/Arity)
-# -----
+# -------------------------------------------
 #
 # A fancy word for how many operands (arguments) the operator takes;
 # it is some sort of positive integer. Acceptable values found in our table
@@ -76,12 +79,15 @@
 #   FullForm: when "usage" exists, the FullForm translation of the example
 
 #   associativity: when two or more of the same operator is used, which group to
-#                 evaluate first. One of:
+#                 evaluate first. This value is used in the Mathics3 parser. The
+#   value should be one of:
 #       - None
-#       - Non
-#       - Right
-#       - Left
-#       - Missing["Unknown"]
+#       - left
+#       - non-associative
+#       - right
+#       - unknown
+#
+#
 #
 #   meaningful: "true" if WMA defines a meaning for the operator and "false" if not.
 #               See "Operators without Built-in Meanings"
@@ -97,7 +103,7 @@ AddTo:
   # N-tokens: {}
   # L-tokens: {"+="}
   # O-tokens: {}
-  # usage: "expr1 += expr2"
+  usage: "expr1 += expr2"
   # parse: {"AddTo", "[", "expr1", ",", "expr2", "]"}
   FullForm: AddTo[expr1, expr2]
   arity: Binary
@@ -116,19 +122,22 @@ Alternatives:
   # N-tokens: {}
   # L-tokens: {"|"}
   # O-tokens: {}
-  # usage: "p1 | p2"
+  usage: "p1 | p2"
   # parse:  expr2
   FullForm: {"Alternatives", "[", "expr1", ",", "expr2", "]"}
   arity: Alternatives[expr1, expr2]
   affix: Binary
-  associativity: infix
+  associativity: null
   meaningful: none
   # comments: True
 
 And:
   actual-precedence: 290
-  Precedence-Function: 215
-  precedence: 220
+  # Note from Mathics3 code:
+  # HACK: although the should be 215 for all boolean_ops we adjust slightly
+  # to get the subprecedences correct
+  Precedence-Function: 225
+  precedence: 225
   WolframLanguageData: 55
   WolframLanguageData-corrected: 55
   UnicodeCharacters.tr: 330
@@ -136,7 +145,7 @@ And:
   # N-tokens: {}
   # L-tokens: {"&&", "∧"}
   # O-tokens: {}
-  # usage: "expr1 && expr2;  expr1 ∧ expr2"
+  usage: ["expr1 && expr2", "expr1 ∧ expr2"]
   # parse: {"And", "[", "expr1", ",", "expr2", "]"}
   FullForm: And[expr1, expr2]
   arity: Binary
@@ -156,7 +165,7 @@ AngleBracket:
   # N-tokens: {"〈"}
   # L-tokens: {}
   # O-tokens: {"〉"}
-  # usage: "〈expr〉"
+  usage: "〈expr〉"
   # parse: {"AngleBracket", "[", "expr", ",", "…", "]"}
   FullForm: AngleBracket[expr, \[Ellipsis]]
   arity: n-ary
@@ -168,7 +177,7 @@ AngleBracket:
 Apply:
   actual-precedence: 820
   Precedence-Function: 620
-  precedence: 626
+  precedence: 620
   WolframLanguageData: 16
   WolframLanguageData-corrected: 16
   UnicodeCharacters.tr:
@@ -176,7 +185,7 @@ Apply:
   # N-tokens: {}
   # L-tokens: {"@@"}
   # O-tokens: {}
-  # usage: "expr1 @@ expr2"
+  usage: "expr1 @@ expr2"
   # parse: {"Apply", "[", "expr1", ",", "expr2", "]"}
   FullForm: Apply[expr1, expr2]
   arity: Binary
@@ -195,7 +204,7 @@ ApplyTo:
   # N-tokens: None
   # L-tokens: None
   # O-tokens: None
-  # # usage: "None"
+  # usage: "None"
   # parse: None
   FullForm: None
   arity: Binary
@@ -215,7 +224,7 @@ Association:
   # N-tokens: {"<|", ""}
   # L-tokens: e
   # O-tokens: {"|>", ""}
-  # usage: "<|expr|>; expr "
+  usage: ["<|expr|>", "expr "]
   # parse: {"Association", "[", "expr", ",", "…", "]"}
   FullForm: Association[expr, \[Ellipsis]]
   arity: n-ary
@@ -235,7 +244,7 @@ AutoMatch:
   # N-tokens: {""}
   # L-tokens: {}
   # O-tokens: {""}
-  # usage: " expr "
+  usage: " expr "
   # parse: {"AutoMatch","[","expr","]"}
   FullForm: AutoMatch[expr]
   arity: Unary
@@ -254,7 +263,7 @@ Backslash:
   # N-tokens: {}
   # L-tokens: {"∖"}
   # O-tokens: {}
-  # usage: "expr1 \ expr2"
+  usage: "expr1 \ expr2"
   # parse: {"Backslash", "[", "expr1", ",", "expr2", "]"}
   FullForm: Backslash[expr1, expr2]
   arity: Binary
@@ -273,7 +282,7 @@ Because:
   # N-tokens: {}
   # L-tokens: {"∵"}
   # O-tokens: {}
-  # usage: "expr1 ∵ expr2"
+  usage: "expr1 ∵ expr2"
   # parse: {"Because", "[", "expr1", ",", "expr2", "]"}
   FullForm: Because[expr1, expr2]
   arity: Binary
@@ -293,7 +302,7 @@ BlackLenticularBracket:
   # N-tokens: {"【"}
   # L-tokens: {}
   # O-tokens: {"】"}
-  # usage: "【expr】"
+  usage: "【expr】"
   # parse:
   FullForm:
   arity: Unary
@@ -312,7 +321,7 @@ Blank:
   # N-tokens: {"_"}
   # L-tokens: {}
   # O-tokens: {}
-  # usage: "_"
+  usage: "_"
   # parse: {"Blank", "[", "]"}
   FullForm: Blank[]
   arity: Nullary
@@ -331,7 +340,7 @@ BlankHead:
   # N-tokens: {"_"}
   # L-tokens: {}
   # O-tokens: {}
-  # usage: "_expr"
+  usage: "_expr"
   # parse: {"Blank", "[", "expr", "]"}
   FullForm: Blank[expr]
   arity: Unary
@@ -350,7 +359,7 @@ BlankNullSequence:
   # N-tokens: {"___"}
   # L-tokens: {}
   # O-tokens: {}
-  # usage: "___"
+  usage: "___"
   # parse: {"BlankNullSequence", "[", "]"}
   FullForm: BlankNullSequence[]
   arity: Nullary
@@ -369,7 +378,7 @@ BlankNullSequenceHead:
   # N-tokens: {"___"}
   # L-tokens: {}
   # O-tokens: {}
-  # usage: "___expr"
+  usage: "___expr"
   # parse: {"BlankNullSequence", "[", "expr", "]"}
   FullForm: BlankNullSequence[expr]
   arity: Unary
@@ -388,7 +397,7 @@ BlankOptional:
   # N-tokens: {"_."}
   # L-tokens: {}
   # O-tokens: {}
-  # usage: "_."
+  usage: "_."
   # parse: {"Optional", "[", "Blank", "]"}
   FullForm: Optional[Blank[]]
   arity: Nullary
@@ -407,7 +416,7 @@ BlankSequence:
   # N-tokens: {"__"}
   # L-tokens: {}
   # O-tokens: {}
-  # usage: "__"
+  usage: "__"
   # parse: {"BlankSequence", "[", "]"}
   FullForm: BlankSequence[]
   arity: Nullary
@@ -426,7 +435,7 @@ BlankSequenceHead:
   # N-tokens: {"__"}
   # L-tokens: {}
   # O-tokens: {}
-  # usage: "__expr"
+  usage: "__expr"
   # parse: {"BlankSequence", "[", "expr", "]"}
   FullForm: BlankSequence[expr]
   arity: Unary
@@ -446,7 +455,7 @@ BoxGroup:
   # N-tokens: {"\("}
   # L-tokens: {}
   # O-tokens: {"\)"}
-  # usage: "\\(expr\\)"
+  usage: "\\(expr\\)"
   # parse: {“LeftRowBox”, expr, “RightRowBox”]
   FullForm: "\\(expr\\)"
   arity: Unary
@@ -466,7 +475,7 @@ BracketingBar:
   # N-tokens: {""}
   # L-tokens: {}
   # O-tokens: {""}
-  # usage: "expr"
+  usage: "expr"
   # parse: {"BracketingBar", "[", "expr", ",", "…", "]"}
   FullForm: BracketingBar[expr, \[Ellipsis]]
   arity: n-ary
@@ -485,7 +494,7 @@ Cap:
   # N-tokens: {}
   # L-tokens: {"⌢"}
   # O-tokens: {}
-  # usage: "expr1 ⌢ expr2"
+  usage: "expr1 ⌢ expr2"
   # parse: {"Cap", "[", "expr1", ",", "expr2", "]"}
   FullForm: Cap[expr1, expr2]
   arity: Binary
@@ -505,7 +514,7 @@ CapitalDifferentialD:
   # N-tokens: {""}
   # L-tokens: {}
   # O-tokens: {}
-  # usage: "x"
+  usage: "x"
   # parse: {"CapitalDifferentialD", "[", "x", "]"}
   FullForm: CapitalDifferentialD[x]
   arity: Unary
@@ -525,7 +534,7 @@ Ceiling:
   # N-tokens: {"⌈"}
   # L-tokens: {}
   # O-tokens: {"⌉"}
-  # usage: "⌈expr⌉"
+  usage: "⌈expr⌉"
   # parse: {"Ceiling", "[", "expr", "]"}
   FullForm: Ceiling[expr]
   arity: Unary
@@ -544,7 +553,7 @@ CenterDot:
   # N-tokens: {}
   # L-tokens: {"·"}
   # O-tokens: {}
-  # usage: "x · y"
+  usage: "x · y"
   # parse: {"CenterDot", "[", "x", ",", "y", "]"}
   FullForm: CenterDot[x, y]
   arity: Binary
@@ -563,7 +572,7 @@ CircleDot:
   # N-tokens: {}
   # L-tokens: {"⊙"}
   # O-tokens: {}
-  # usage: "expr1 ⊙ expr2"
+  usage: "expr1 ⊙ expr2"
   # parse: {"CircleDot", "[", "expr1", ",", "expr2", "]"}
   FullForm: CircleDot[expr1, expr2]
   arity: Binary
@@ -582,12 +591,12 @@ CircleMinus:
   # N-tokens: {}
   # L-tokens: {"⊖"}
   # O-tokens: {}
-  # usage: "expr1 ⊖ expr2"
+  usage: "expr1 ⊖ expr2"
   # parse: {"CircleMinus", "[", "expr1", ",", "expr2", "]"}
   FullForm: CircleMinus[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: left
+  associativity: null
   meaningful: false
   # comments:
 
@@ -601,7 +610,7 @@ CirclePlus:
   # N-tokens: {}
   # L-tokens: {"⊕"}
   # O-tokens: {}
-  # usage: "expr1 ⊕ expr1"
+  usage: "expr1 ⊕ expr1"
   # parse: {"CirclePlus", "[", "expr1", ",", "expr2", "]"}
   FullForm: CirclePlus[expr1, expr2]
   arity: Binary
@@ -620,7 +629,7 @@ CircleTimes:
   # N-tokens: {}
   # L-tokens: {"⊗"}
   # O-tokens: {}
-  # usage: "expr1 ⊗ expr2"
+  usage: "expr1 ⊗ expr2"
   # parse: {"CircleTimes", "[", "expr1", ",", "expr2", "]"}
   FullForm: CircleTimes[expr1, expr2]
   arity: Binary
@@ -640,7 +649,7 @@ ClockwiseContourIntegral:
   # N-tokens: {"∲"}
   # L-tokens: {}
   # O-tokens: {""}
-  # usage: "∲ f(x) x"
+  usage: "∲ f(x) x"
   # parse: {"ClockwiseContourIntegral", "[", "expr1", ",", "expr2", "]"}
   FullForm: Integrate[expr1, expr2]
   arity: Binary
@@ -659,7 +668,7 @@ Colon:
   # N-tokens: {}
   # L-tokens: {"∶"}
   # O-tokens: {}
-  # usage: "expr1 ∶ expr2"
+  usage: "expr1 ∶ expr2"
   # parse: {"Colon", "[", "expr1", ",", "expr2", "]"}
   FullForm: Colon[expr1, expr2]
   arity: Binary
@@ -671,7 +680,7 @@ Colon:
 Composition:
   actual-precedence: 860
   Precedence-Function: 625
-  precedence: 655
+  precedence: 625
   WolframLanguageData: 13
   WolframLanguageData-corrected: 13
   UnicodeCharacters.tr:
@@ -679,7 +688,7 @@ Composition:
   # N-tokens: {}
   # L-tokens: {"@*"}
   # O-tokens: {}
-  # usage: "expr1 @* expr2"
+  usage: "expr1 @* expr2"
   # parse: {"Composition", "[", "expr1", ",", "expr2", "]"}
   FullForm: Composition[expr1, expr2]
   arity: Binary
@@ -696,9 +705,9 @@ CompoundExpression:
   UnicodeCharacters.tr:
   UnicodeCharacters-corrected.tr: 170
   # N-tokens: {}
-  # L-tokens: {";"}
+  # L-tokens: {","}
   # O-tokens: {}
-  # usage: "expr1, expr2"
+  usage: "expr1, expr2"
   # parse: {"CompoundExpression", "[", "expr1", ",", "expr2", "]"}
   FullForm: CompoundExpression[expr1, expr2]
   arity: Binary
@@ -707,6 +716,7 @@ CompoundExpression:
   meaningful: true
   # comments:
 
+# rocky: What's this for?
 CompoundExpressionNull:
   actual-precedence: 30
   precedence: 10
@@ -736,7 +746,7 @@ Condition:
   # N-tokens: {}
   # L-tokens: {"/;"}
   # O-tokens: {}
-  # usage: "expr1 /; expr2"
+  usage: "expr1 /; expr2"
   # parse: {"Condition", "[", "expr1", ",", "expr2", "]"}
   FullForm: Condition[expr1, expr2]
   arity: Binary
@@ -755,7 +765,7 @@ Conditioned:
   # N-tokens: {}
   # L-tokens: {""}
   # O-tokens: {}
-  # usage: "expr  cond"
+  usage: "expr  cond"
   # parse: {"Conditioned", "[", "expr", ",", "cond", "]"}
   FullForm: Conditioned[expr, cond]
   arity: Binary
@@ -774,7 +784,7 @@ Congruent:
   # N-tokens: {}
   # L-tokens: {"≡"}
   # O-tokens: {}
-  # usage: "x ≡ y"
+  usage: "x ≡ y"
   # parse: {"Congruent", "[", "x", ",", "y", "]"}
   FullForm: Congruent[x, y]
   arity: Binary
@@ -786,7 +796,7 @@ Congruent:
 Conjugate:
   actual-precedence: 780
   Precedence-Function: 670
-  precedence: 605
+  precedence: 670
   WolframLanguageData: 18
   WolframLanguageData-corrected: 18
   UnicodeCharacters.tr: 695
@@ -794,7 +804,7 @@ Conjugate:
   # N-tokens: {}
   # L-tokens: {""}
   # O-tokens: {}
-  # usage: "z"
+  usage: "z"
   # parse: {"Conjugate", "[", "z", "]"}
   FullForm: Conjugate[z]
   arity: Unary
@@ -806,7 +816,7 @@ Conjugate:
 ConjugateTranspose:
   actual-precedence: 780
   Precedence-Function: 670
-  precedence: 605
+  precedence: 670
   WolframLanguageData: 18
   WolframLanguageData-corrected: 18
   UnicodeCharacters.tr: 695
@@ -814,7 +824,7 @@ ConjugateTranspose:
   # N-tokens: {}
   # L-tokens: {"", ""}
   # O-tokens: {}
-  # usage: "m; m"
+  usage: "m; m"
   # parse: {"ConjugateTranspose", "[", "m", "]"}
   FullForm: ConjugateTranspose[m]
   arity: Unary
@@ -834,14 +844,14 @@ ContextPathSeparator:
   # N-tokens: {}
   # L-tokens: {"`"}
   # O-tokens: {}
-  # usage: "symb1`symb2"
+  usage: "symb1`symb2"
   # parse: {"symb1", "`", "symb2"}
   FullForm: symb1`symb2
   arity:
   affix:
   associativity: null
   meaningful: true
-  # comments: Functions as a decimal point: either contextpath1 or contextpath2 may be empty, but not both at the same time.
+  # comments: Functions similiar to decimal point for numbers: either contextpath1 or contextpath2 may be empty, but not both at the same time.
 
 ContourIntegral:
   actual-precedence: 420
@@ -854,7 +864,7 @@ ContourIntegral:
   # N-tokens: {"∮"}
   # L-tokens: {}
   # O-tokens: {""}
-  # usage: "∮ f(x) x"
+  usage: "∮ f(x) x"
   # parse: {"ContourIntegral", "[", "expr1", ",", "expr2", "]"}
   FullForm: Integrate[expr1, expr2]
   arity: Binary
@@ -873,7 +883,7 @@ Coproduct:
   # N-tokens: {}
   # L-tokens: {"∐"}
   # O-tokens: {}
-  # usage: "expr1 ∐ expr2"
+  usage: "expr1 ∐ expr2"
   # parse: {"Coproduct", "[", "expr1", ",", "expr2", "]"}
   FullForm: Coproduct[expr1, expr2]
   arity: Binary
@@ -893,7 +903,7 @@ CornerBracket:
   # N-tokens: {"「"}
   # L-tokens: {}
   # O-tokens: {"」"}
-  # usage: "「expr」"
+  usage: "「expr」"
   # parse:
   FullForm:
   arity: Unary
@@ -913,7 +923,7 @@ CounterClockwiseContourIntegral:
   # N-tokens: {"∳"}
   # L-tokens: {}
   # O-tokens: {""}
-  # usage: "∳ f(x)  x"
+  usage: "∳ f(x)  x"
   # parse: {"CounterClockwiseContourIntegral", "[", "expr1", ",", "expr2", "]"}
   FullForm: Integrate[expr1, expr2]
   arity: Binary
@@ -932,7 +942,7 @@ Cross:
   # N-tokens: {}
   # L-tokens: {""}
   # O-tokens: {}
-  # usage: "expr1  expr2"
+  usage: "expr1  expr2"
   # parse: {"Cross", "[", "expr1", ",", "expr2", "]"}
   FullForm: Cross[expr1, expr2]
   arity: Binary
@@ -951,7 +961,7 @@ Cup:
   # N-tokens: {}
   # L-tokens: {"⌣"}
   # O-tokens: {}
-  # usage: "expr1 ⌣ expr2"
+  usage: "expr1 ⌣ expr2"
   # parse: {"Cup", "[", "expr1", ",", "expr2", "]"}
   FullForm: Cup[expr1, expr2]
   arity: Binary
@@ -970,7 +980,7 @@ CupCap:
   # N-tokens: {}
   # L-tokens: {"≍"}
   # O-tokens: {}
-  # usage: "x ≍ y"
+  usage: "x ≍ y"
   # parse: {"CupCap", "[", "x", ",", "y", "]"}
   FullForm: CupCap[x, y]
   arity: Binary
@@ -990,7 +1000,7 @@ Curl:
   # N-tokens: {""}
   # L-tokens: {}
   # O-tokens: {}
-  # usage: "expr"
+  usage: "expr"
   # parse: {"Curl", "[", "expr", "]"}
   FullForm:
   arity: Unary
@@ -1010,7 +1020,7 @@ CurlyDoubleQuote:
   # N-tokens: {"“"}
   # L-tokens: {}
   # O-tokens: {"”"}
-  # usage: "“expr”"
+  usage: "“expr”"
   # parse: {"CurlyDoubleQuote","[","expr","]"}
   FullForm: CurlyDoubleQuote[expr]
   arity: Unary
@@ -1042,7 +1052,7 @@ CurlyQuote:
 Decrement:
   actual-precedence: 880
   Precedence-Function: 660
-  precedence: 665
+  precedence: 660
   WolframLanguageData: 11
   WolframLanguageData-corrected: 11
   UnicodeCharacters.tr:
@@ -1050,7 +1060,7 @@ Decrement:
   # N-tokens: {}
   # L-tokens: {"--"}
   # O-tokens: {}
-  # usage: "expr--"
+  usage: "expr--"
   # parse: {"Decrement", "[", "expr", "]"}
   FullForm: Decrement[expr]
   arity: Unary
@@ -1069,7 +1079,7 @@ Del:
   # N-tokens: {"∇"}
   # L-tokens: {}
   # O-tokens: {}
-  # usage: "∇x"
+  usage: "∇x"
   # parse: {"Del", "[", "expr", "]"}
   FullForm: Del[expr]
   arity: Unary
@@ -1107,7 +1117,7 @@ Diamond:
   # N-tokens: {}
   # L-tokens: {"⋄"}
   # O-tokens: {}
-  # usage: "expr1 ⋄ expr2"
+  usage: "expr1 ⋄ expr2"
   # parse: {"Diamond", "[", "expr1", ",", "expr2", "]"}
   FullForm: Diamond[expr1, expr2]
   arity: Binary
@@ -1126,7 +1136,7 @@ DifferenceDelta:
   # N-tokens: {""}
   # L-tokens: {}
   # O-tokens: {}
-  # usage: "expr"
+  usage: "expr"
   # parse: {"DifferenceDelta", "[", "expr", "]"}
   FullForm:
   arity: Unary
@@ -1146,7 +1156,7 @@ DifferentialD:
   # N-tokens: {""}
   # L-tokens: {}
   # O-tokens: {}
-  # usage: "x"
+  usage: "x"
   # parse: {"DifferentialD", "[", "x", "]"}
   FullForm: DifferentialD[x]
   arity: Unary
@@ -1157,20 +1167,20 @@ DifferentialD:
 
 DirectedEdge:
   actual-precedence: 370
-  precedence: 295
+  precedence: 128
   WolframLanguageData:
   WolframLanguageData-corrected: 49
   UnicodeCharacters.tr: 395
   UnicodeCharacters-corrected.tr: 395
   # N-tokens: {}
-  # L-tokens: {""}
+  # L-tokens: {"→"}
   # O-tokens: {}
-  # usage: "u  v"
+  usage: "u → v"
   # parse: {"DirectedEdge", "[", "u", ",", "v", "]"}
   FullForm: DirectedEdge[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: null
+  associativity: "non-associative"
   meaningful: true
   # comments:
 
@@ -1184,7 +1194,7 @@ DiscreteRatio:
   # N-tokens: {""}
   # L-tokens: {}
   # O-tokens: {}
-  # usage: "f  i"
+  usage: "f  i"
   # parse: {"DiscreteRatio", "[", "f", "i", "]"}
   FullForm:
   arity: Unary
@@ -2067,7 +2077,7 @@ FormBox:
   # parse: {"FormBox", "[", "expr2", ",", "expr1", "]"}
   arity: Binary
   affix: Infix
-  associativity: missing["unknown"]
+  associativity: "unknown"
   meaningful: true
   # comments:
 
@@ -2086,7 +2096,7 @@ FractionBox:
   # parse: {"FractionBox", "[", "expr1", ",", "expr2", "]"}
   arity: Binary
   affix: Infix
-  associativity: left
+  associativity: "unknown"
   meaningful: true
   # comments:
 
@@ -2532,7 +2542,7 @@ Implies:
 Increment:
   actual-precedence: 880
   Precedence-Function: 660
-  precedence: 665
+  precedence: 660
   WolframLanguageData: 11
   WolframLanguageData-corrected: 11
   UnicodeCharacters.tr:
@@ -2549,9 +2559,27 @@ Increment:
   meaningful: true
   # comments:
 
+Infix:
+  precedence: 630
+  WolframLanguageData: None
+  WolframLanguageData-corrected: None
+  UnicodeCharacters.tr: None
+  UnicodeCharacters-corrected.tr: None
+  # N-tokens: None
+  # L-tokens: None
+  # O-tokens: None
+  usage: x ~ f ~ y
+  # parse: Infix[f[x, y]]
+  FullForm: None
+  arity: Ternary
+  affix: Infix
+  associativity: null
+  meaningful: true
+  # comments: None
+
 Information:
   actual-precedence: 670
-  precedence: 670
+  precedence: 5001  # Seems a bit extreme. This is the old Mathics data
   WolframLanguageData: None
   WolframLanguageData-corrected: None
   UnicodeCharacters.tr: None
@@ -2562,8 +2590,8 @@ Information:
   # usage: "None"
   # parse: None
   FullForm: None
-  arity: Binary
-  affix: Infix
+  arity: Unary
+  affix: Prefix
   associativity: null
   meaningful: true
   # comments: None
@@ -3674,7 +3702,7 @@ NamedBlankSequenceHead:
 Nand:
   actual-precedence: 290
   Precedence-Function: 215
-  precedence: 220
+  precedence: 225
   WolframLanguageData: 55
   WolframLanguageData-corrected: 55
   UnicodeCharacters.tr: 330
@@ -3751,7 +3779,7 @@ NonCommutativeMultiply:
 Nor:
   actual-precedence: 270
   Precedence-Function: 215
-  precedence: 210
+  precedence: 215
   WolframLanguageData: 57
   WolframLanguageData-corrected: 57
   UnicodeCharacters.tr: 320
@@ -4869,14 +4897,14 @@ Optional:
   FullForm: Optional[patt, expr]
   arity: Binary
   affix: Infix
-  associativity: null
+  associativity: "unknown"
   meaningful: true
   # comments:
 
 Or:
   actual-precedence: 270
   Precedence-Function: 215
-  precedence: 210
+  precedence: 215
   WolframLanguageData: 57
   WolframLanguageData-corrected: 57
   UnicodeCharacters.tr: 320
@@ -4884,7 +4912,7 @@ Or:
   # N-tokens: {}
   # L-tokens: {"||", "∨"}
   # O-tokens: {}
-  # usage: "expr1", "||", "expr2"}, {"expr1 ∨ expr2"
+  usage: ["x || y", "x ∨ y"]
   # parse: {"Or", "[", "expr1", ",", "expr2", "]"}
   FullForm: Or[expr1, expr2]
   arity: Binary
@@ -4948,7 +4976,7 @@ OverscriptBox:
   # parse: {"OverscriptBox", "[", "expr1", ",", "expr2", "]"}
   arity: Binary
   affix: Infix
-  associativity: missing["unknown"]
+  associativity: "unknown"
   meaningful: true
   # comments:
 
@@ -4967,7 +4995,7 @@ OverunderscriptBox:
   # parse: {"UnderoverscriptBox", "[", "expr1", ",", "expr3", ",", "expr2", "]"}
   arity: Ternary
   affix: Infix
-  associativity: missing["unknown"]
+  associativity: "unknown"
   meaningful: true
   # comments:
 
@@ -5162,7 +5190,7 @@ Pattern:
   FullForm: Pattern[symb, expr]
   arity: Binary
   affix: Infix
-  associativity: null
+  associativity: "unknown"
   meaningful: true
   # comments:
 
@@ -5176,12 +5204,12 @@ PatternTest:
   # N-tokens: {}
   # L-tokens: {"?"}
   # O-tokens: {}
-  # usage: "expr1 ? expr2"
+  usage: "expr1 ? expr2"
   # parse: {"PatternTest", "[", "expr1", ",", "expr2", "]"}
   FullForm: PatternTest[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: missing["unknown"]
+  associativity: "non-associative"
   meaningful: true
   # comments:
 
@@ -5284,7 +5312,7 @@ PlusMinus:
 
 Postfix:
   actual-precedence: 640
-  precedence: 640
+  precedence: 70
   WolframLanguageData: None
   WolframLanguageData-corrected: None
   UnicodeCharacters.tr: None
@@ -5297,7 +5325,7 @@ Postfix:
   FullForm: None
   arity: Binary
   affix: Infix
-  associativity: null
+  associativity: left
   meaningful: true
   # comments: None
 
@@ -6163,7 +6191,7 @@ RuleDelayed:
 SameQ:
   actual-precedence: 330
   Precedence-Function: 290
-  precedence: 260
+  precedence: 290
   WolframLanguageData: 51
   WolframLanguageData-corrected: 51
   UnicodeCharacters.tr:
@@ -6419,7 +6447,7 @@ Span:
   # N-tokens: {";;"}
   # L-tokens: {";;"}
   # O-tokens: {";;"}
-  # usage: "i", ";;", "j ;; k"
+  usage: [";;",  "i;;", ";;j", ";;;;k", "i;;j", "i;;;;k", ;";j;;k", "i;;j;;k"]
   # parse: {"Span", "[", "i", ",", "j", ",", "k", "]"}
   FullForm: Span[i, j, k]
   arity: Ternary
@@ -6464,7 +6492,7 @@ SqrtBox:
   FullForm:
   arity: Unary
   affix: Prefix
-  associativity: right
+  associativity: "unknown"
   meaningful: true
   # comments:
 
@@ -6674,7 +6702,7 @@ SubscriptBox:
   FullForm:
   arity: Binary
   affix: Infix
-  associativity: missing["unknown"]
+  associativity: "unknown"
   meaningful: true
   # comments:
 
@@ -6732,7 +6760,7 @@ SubsuperscriptBox:
   FullForm:
   arity: Ternary
   affix: Infix
-  associativity: missing["unknown"]
+  associativity: "unknown"
   meaningful: true
   # comments:
 
@@ -6924,7 +6952,7 @@ SuperscriptBox:
   FullForm:
   arity: Binary
   affix: Infix
-  associativity: right
+  associativity: "unknown"
   meaningful: true
   # comments:
 
@@ -7191,11 +7219,11 @@ Times:
   # N-tokens: {}
   # L-tokens: {"*", "×", "
   # O-tokens: {}
-  # usage: "{{"expr1", "*", "expr2"}, {"expr1", "expr2"}, {"expr1", "×", "expr2"}, {"expr1", ""
+  usage: ["x * y", "x × y", "x y"]
   # parse: {"Times", "[", "expr1", ",", "expr2", "]"}
   FullForm: Times[expr1, expr2]
-  arity: Nullary
-  affix: None
+  arity: Binary
+  affix: Infix
   associativity: null
   meaningful: true
   # comments: Operator Notations includes usages with invisible unicode characters.
@@ -7242,7 +7270,7 @@ TortoiseShellBracket:
 Transpose:
   actual-precedence: 780
   Precedence-Function: 670
-  precedence: 605
+  precedence: 670
   WolframLanguageData: 18
   WolframLanguageData-corrected: 18
   UnicodeCharacters.tr: 695
@@ -7354,7 +7382,7 @@ UnderoverscriptBox:
   FullForm:
   arity: Ternary
   affix: Infix
-  associativity: missing["unknown"]
+  associativity: "unknown"
   meaningful: true
   # comments:
 
@@ -7369,31 +7397,31 @@ UnderscriptBox:
   # N-tokens: {}
   # L-tokens: {"\+"}
   # O-tokens: {}
-  # usage: "expr1 \+ expr2"
+  usage: "expr1 \\+ expr2"
   # parse: {"UnderscriptBox", "[", "expr1", ",", "expr2", "]"}
   FullForm:
   arity: Binary
   affix: Infix
-  associativity: missing["unknown"]
+  associativity: "unknown"
   meaningful: true
   # comments:
 
 UndirectedEdge:
   actual-precedence: 370
-  precedence: 295
+  precedence: 120 # FIXME: is probably 295. Check and adjust after code and mathics-core are merge
   WolframLanguageData:
   WolframLanguageData-corrected: 49
   UnicodeCharacters.tr: 395
   UnicodeCharacters-corrected.tr: 395
   # N-tokens: {}
-  # L-tokens: {""}
+  # L-tokens: {"↔"}
   # O-tokens: {}
-  # usage: "expr1  expr2"
-  # parse: {"UndirectedEdge", "[", "expr1", ",", "expr2", "]"}
-  FullForm: UndirectedEdge[expr1, expr2]
+  usage: "u ↔ v"
+  # parse: {"UndirectedEdge", "[", "u", ",", "v", "]"}
+  FullForm: UndirectedEdge[u, v]
   arity: Binary
   affix: Infix
-  associativity: null
+  associativity: "non-associative"
   meaningful: true
   # comments:
 
@@ -7407,7 +7435,7 @@ Unequal:
   # N-tokens: {}
   # L-tokens: {"!=", "≠"}
   # O-tokens: {}
-  # usage: "expr1", "!=", "expr2"}, {"expr1 ≠ expr2"
+  usage: ["x != y", "x ≠ y"]
   # parse: {"Unequal", "[", "expr1", ",", "expr2", "]"}
   FullForm: Unequal[expr1, expr2]
   arity: Binary
@@ -7426,7 +7454,7 @@ Union:
   # N-tokens: {}
   # L-tokens: {"⋃"}
   # O-tokens: {}
-  # usage: "expr1 ⋃ expr2"
+  usage: "expr1 ⋃ expr2"
   # parse: {"Union", "[", "expr1", ",", "expr2", "]"}
   FullForm: Union[expr1, expr2]
   arity: Binary
@@ -7445,7 +7473,7 @@ UnionPlus:
   # N-tokens: {}
   # L-tokens: {"⊎"}
   # O-tokens: {}
-  # usage: "x ⊎ y"
+  usage: "x ⊎ y"
   # parse: {"UnionPlus", "[", "x", ",", "y", "]"}
   FullForm: UnionPlus[x, y]
   arity: Binary
@@ -7457,7 +7485,7 @@ UnionPlus:
 UnsameQ:
   actual-precedence: 330
   Precedence-Function: 290
-  precedence: 260
+  precedence: 290
   WolframLanguageData: 51
   WolframLanguageData-corrected: 51
   UnicodeCharacters.tr:
@@ -7465,7 +7493,7 @@ UnsameQ:
   # N-tokens: {}
   # L-tokens: {"=!="}
   # O-tokens: {}
-  # usage: "expr1 =!= expr2"
+  usage: "expr1 =!= expr2"
   # parse: {"UnsameQ", "[", "expr1", ",", "expr2", "]"}
   FullForm: UnsameQ[expr1, expr2]
   arity: Binary
@@ -7477,7 +7505,7 @@ UnsameQ:
 Unset:
   actual-precedence: 50
   Precedence-Function: 670
-  precedence: 40
+  precedence: 670
   WolframLanguageData: 75
   WolframLanguageData-corrected: 75
   UnicodeCharacters.tr:
@@ -7504,7 +7532,7 @@ UpArrow:
   # N-tokens: {}
   # L-tokens: {"↑"}
   # O-tokens: {}
-  # usage: "x ↑ y"
+  usage: "x ↑ y"
   # parse: {"UpArrow", "[", "x", ",", "y", "]"}
   FullForm: UpArrow[x, y]
   arity: Binary
@@ -7523,7 +7551,7 @@ UpArrowBar:
   # N-tokens: {}
   # L-tokens: {"⤒"}
   # O-tokens: {}
-  # usage: "x ⤒ y"
+  usage: "x ⤒ y"
   # parse: {"UpArrowBar", "[", "x", ",", "y", "]"}
   FullForm: UpArrowBar[x, y]
   arity: Binary
@@ -7542,7 +7570,7 @@ UpArrowDownArrow:
   # N-tokens: {}
   # L-tokens: {"⇅"}
   # O-tokens: {}
-  # usage: "x ⇅ y"
+  usage: "x ⇅ y"
   # parse: {"UpArrowDownArrow", "[", "x", ",", "y", "]"}
   FullForm: UpArrowDownArrow[x, y]
   arity: Binary
@@ -7561,7 +7589,7 @@ UpDownArrow:
   # N-tokens: {}
   # L-tokens: {"↕"}
   # O-tokens: {}
-  # usage: "x ↕ y"
+  usage: "x ↕ y"
   # parse: {"UpDownArrow", "[", "x", ",", "y", "]"}
   FullForm: UpDownArrow[x, y]
   arity: Binary
@@ -7580,7 +7608,7 @@ UpEquilibrium:
   # N-tokens: {}
   # L-tokens: {"⥮"}
   # O-tokens: {}
-  # usage: "x ⥮ y"
+  usage: "x ⥮ y"
   # parse: {"UpEquilibrium", "[", "x", ",", "y", "]"}
   FullForm: UpEquilibrium[x, y]
   arity: Binary
@@ -7599,7 +7627,7 @@ UpSet:
   # N-tokens: {}
   # L-tokens: {"^="}
   # O-tokens: {}
-  # usage: "expr1 ^= expr2"
+  usage: "expr1 ^= expr2"
   # parse: {"UpSet", "[", "expr1", ",", "expr2", "]"}
   FullForm: UpSet[expr1, expr2]
   arity: Binary
@@ -7618,7 +7646,7 @@ UpSetDelayed:
   # N-tokens: {}
   # L-tokens: {"^:="}
   # O-tokens: {}
-  # usage: "expr1 ^:= expr2"
+  usage: "expr1 ^:= expr2"
   # parse: {"UpSetDelayed", "[", "expr1", ",", "expr2", "]"}
   FullForm: UpSetDelayed[expr1, expr2]
   arity: Binary
@@ -7637,7 +7665,7 @@ UpTee:
   # N-tokens: {}
   # L-tokens: {"⊥"}
   # O-tokens: {}
-  # usage: "expr1 ⊥ expr2"
+  usage: "expr1 ⊥ expr2"
   # parse: {"UpTee", "[", "expr1", ",", "expr2", "]"}
   FullForm: UpTee[expr1, expr2]
   arity: Binary
@@ -7656,7 +7684,7 @@ UpTeeArrow:
   # N-tokens: {}
   # L-tokens: {"↥"}
   # O-tokens: {}
-  # usage: "x ↥ y"
+  usage: "x ↥ y"
   # parse: {"UpTeeArrow", "[", "x", ",", "y", "]"}
   FullForm: UpTeeArrow[x, y]
   arity: Binary
@@ -7675,7 +7703,7 @@ UpperLeftArrow:
   # N-tokens: {}
   # L-tokens: {"↖"}
   # O-tokens: {}
-  # usage: "x ↖ y"
+  usage: "x ↖ y"
   # parse: {"UpperLeftArrow", "[", "x", ",", "y", "]"}
   FullForm: UpperLeftArrow[x, y]
   arity: Binary
@@ -7694,7 +7722,7 @@ UpperRightArrow:
   # N-tokens: {}
   # L-tokens: {"↗"}
   # O-tokens: {}
-  # usage: "x ↗ y"
+  usage: "x ↗ y"
   # parse: {"UpperRightArrow", "[", "x", ",", "y", "]"}
   FullForm: UpperRightArrow[x, y]
   arity: Binary
@@ -7713,7 +7741,7 @@ Vee:
   # N-tokens: {}
   # L-tokens: {"⋁"}
   # O-tokens: {}
-  # usage: "x ⋁ y"
+  usage: "x ⋁ y"
   # parse: {"Vee", "[", "x", ",", "y", "]"}
   FullForm: Vee[x, y]
   arity: Binary
@@ -7732,7 +7760,7 @@ VerticalBar:
   # N-tokens: {}
   # L-tokens: {""}
   # O-tokens: {}
-  # usage: "expr1  expr2"
+  usage: "expr1  expr2"
   # parse: {"VerticalBar", "[", "expr1", ",", "expr2", "]"}
   FullForm: VerticalBar[expr1, expr2]
   arity: Binary
@@ -7751,7 +7779,7 @@ VerticalSeparator:
   # N-tokens: {}
   # L-tokens: {""}
   # O-tokens: {}
-  # usage: "expr1  expr2"
+  usage: "expr1  expr2"
   # parse: {"VerticalSeparator", "[", "expr1", ",", "expr2", "]"}
   FullForm: VerticalSeparator[expr1, expr2]
   arity: Binary
@@ -7770,7 +7798,7 @@ VerticalTilde:
   # N-tokens: {}
   # L-tokens: {"≀"}
   # O-tokens: {}
-  # usage: "expr1 ≀ expr2"
+  usage: "expr1 ≀ expr2"
   # parse: {"VerticalTilde", "[", "expr1", ",", "expr2", "]"}
   FullForm: VerticalTilde[expr1, expr2]
   arity: Binary
@@ -7789,7 +7817,7 @@ Wedge:
   # N-tokens: {}
   # L-tokens: {"⋀"}
   # O-tokens: {}
-  # usage: "expr1 ⋀ expr2"
+  usage: "expr1 ⋀ expr2"
   # parse: {"Wedge", "[", "expr1", ",", "expr2", "]"}
   FullForm: Wedge[expr1, expr2]
   arity: Binary
@@ -7809,7 +7837,7 @@ WhiteCornerBracket:
   # N-tokens: {"『"}
   # L-tokens: {}
   # O-tokens: {"』"}
-  # usage: "『 expr 』"
+  usage: "『 expr 』"
   # parse:
   FullForm:
   arity: Unary
@@ -7820,7 +7848,7 @@ WhiteCornerBracket:
 
 Xnor:
   actual-precedence: 280
-  precedence: 215
+  precedence: 220
   WolframLanguageData: 56
   WolframLanguageData-corrected: 56
   UnicodeCharacters.tr: 325
@@ -7828,7 +7856,7 @@ Xnor:
   # N-tokens: {}
   # L-tokens: {""}
   # O-tokens: {}
-  # usage: "expr1  expr2"
+  usage: "x1  y"
   # parse: {"Xnor", "[", "expr1", ",", "expr2", "]"}
   FullForm: Xnor[expr1, expr2]
   arity: Binary
@@ -7839,7 +7867,7 @@ Xnor:
 
 Xor:
   actual-precedence: 280
-  precedence: 215
+  precedence: 220 # FIXME: is probably 215. Check and adjust after code and mathics-core are merged
   WolframLanguageData: 56
   WolframLanguageData-corrected: 56
   UnicodeCharacters.tr: 325
@@ -7847,7 +7875,7 @@ Xor:
   # N-tokens: {}
   # L-tokens: {"⊻"}
   # O-tokens: {}
-  # usage: "expr1 ⊻ expr2"
+  usage: "x ⊻ y"
   # parse: {"Xor", "[", "expr1", ",", "expr2", "]"}
   FullForm: Xor[expr1, expr2]
   arity: Binary
