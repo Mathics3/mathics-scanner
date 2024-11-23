@@ -145,7 +145,7 @@ And:
   # N-tokens: {}
   # L-tokens: {"&&", "∧"}
   # O-tokens: {}
-  usage: "expr1 && expr2;  expr1 ∧ expr2"
+  usage: ["expr1 && expr2", "expr1 ∧ expr2"]
   # parse: {"And", "[", "expr1", ",", "expr2", "]"}
   FullForm: And[expr1, expr2]
   arity: Binary
@@ -4912,7 +4912,7 @@ Or:
   # N-tokens: {}
   # L-tokens: {"||", "∨"}
   # O-tokens: {}
-  # usage: "expr1", "||", "expr2"}, {"expr1 ∨ expr2"
+  usage: ["x || y", "x ∨ y"]
   # parse: {"Or", "[", "expr1", ",", "expr2", "]"}
   FullForm: Or[expr1, expr2]
   arity: Binary
@@ -7397,7 +7397,7 @@ UnderscriptBox:
   # N-tokens: {}
   # L-tokens: {"\+"}
   # O-tokens: {}
-  # usage: "expr1 \+ expr2"
+  usage: "expr1 \\+ expr2"
   # parse: {"UnderscriptBox", "[", "expr1", ",", "expr2", "]"}
   FullForm:
   arity: Binary
@@ -7435,7 +7435,7 @@ Unequal:
   # N-tokens: {}
   # L-tokens: {"!=", "≠"}
   # O-tokens: {}
-  # usage: "expr1", "!=", "expr2"}, {"expr1 ≠ expr2"
+  usage: ["x != y", "x ≠ y"]
   # parse: {"Unequal", "[", "expr1", ",", "expr2", "]"}
   FullForm: Unequal[expr1, expr2]
   arity: Binary
@@ -7454,7 +7454,7 @@ Union:
   # N-tokens: {}
   # L-tokens: {"⋃"}
   # O-tokens: {}
-  # usage: "expr1 ⋃ expr2"
+  usage: "expr1 ⋃ expr2"
   # parse: {"Union", "[", "expr1", ",", "expr2", "]"}
   FullForm: Union[expr1, expr2]
   arity: Binary
@@ -7473,7 +7473,7 @@ UnionPlus:
   # N-tokens: {}
   # L-tokens: {"⊎"}
   # O-tokens: {}
-  # usage: "x ⊎ y"
+  usage: "x ⊎ y"
   # parse: {"UnionPlus", "[", "x", ",", "y", "]"}
   FullForm: UnionPlus[x, y]
   arity: Binary
@@ -7493,7 +7493,7 @@ UnsameQ:
   # N-tokens: {}
   # L-tokens: {"=!="}
   # O-tokens: {}
-  # usage: "expr1 =!= expr2"
+  usage: "expr1 =!= expr2"
   # parse: {"UnsameQ", "[", "expr1", ",", "expr2", "]"}
   FullForm: UnsameQ[expr1, expr2]
   arity: Binary
@@ -7532,7 +7532,7 @@ UpArrow:
   # N-tokens: {}
   # L-tokens: {"↑"}
   # O-tokens: {}
-  # usage: "x ↑ y"
+  usage: "x ↑ y"
   # parse: {"UpArrow", "[", "x", ",", "y", "]"}
   FullForm: UpArrow[x, y]
   arity: Binary
@@ -7551,7 +7551,7 @@ UpArrowBar:
   # N-tokens: {}
   # L-tokens: {"⤒"}
   # O-tokens: {}
-  # usage: "x ⤒ y"
+  usage: "x ⤒ y"
   # parse: {"UpArrowBar", "[", "x", ",", "y", "]"}
   FullForm: UpArrowBar[x, y]
   arity: Binary
@@ -7570,7 +7570,7 @@ UpArrowDownArrow:
   # N-tokens: {}
   # L-tokens: {"⇅"}
   # O-tokens: {}
-  # usage: "x ⇅ y"
+  usage: "x ⇅ y"
   # parse: {"UpArrowDownArrow", "[", "x", ",", "y", "]"}
   FullForm: UpArrowDownArrow[x, y]
   arity: Binary
@@ -7589,7 +7589,7 @@ UpDownArrow:
   # N-tokens: {}
   # L-tokens: {"↕"}
   # O-tokens: {}
-  # usage: "x ↕ y"
+  usage: "x ↕ y"
   # parse: {"UpDownArrow", "[", "x", ",", "y", "]"}
   FullForm: UpDownArrow[x, y]
   arity: Binary
@@ -7608,7 +7608,7 @@ UpEquilibrium:
   # N-tokens: {}
   # L-tokens: {"⥮"}
   # O-tokens: {}
-  # usage: "x ⥮ y"
+  usage: "x ⥮ y"
   # parse: {"UpEquilibrium", "[", "x", ",", "y", "]"}
   FullForm: UpEquilibrium[x, y]
   arity: Binary
@@ -7627,7 +7627,7 @@ UpSet:
   # N-tokens: {}
   # L-tokens: {"^="}
   # O-tokens: {}
-  # usage: "expr1 ^= expr2"
+  usage: "expr1 ^= expr2"
   # parse: {"UpSet", "[", "expr1", ",", "expr2", "]"}
   FullForm: UpSet[expr1, expr2]
   arity: Binary
@@ -7646,7 +7646,7 @@ UpSetDelayed:
   # N-tokens: {}
   # L-tokens: {"^:="}
   # O-tokens: {}
-  # usage: "expr1 ^:= expr2"
+  usage: "expr1 ^:= expr2"
   # parse: {"UpSetDelayed", "[", "expr1", ",", "expr2", "]"}
   FullForm: UpSetDelayed[expr1, expr2]
   arity: Binary
@@ -7665,7 +7665,7 @@ UpTee:
   # N-tokens: {}
   # L-tokens: {"⊥"}
   # O-tokens: {}
-  # usage: "expr1 ⊥ expr2"
+  usage: "expr1 ⊥ expr2"
   # parse: {"UpTee", "[", "expr1", ",", "expr2", "]"}
   FullForm: UpTee[expr1, expr2]
   arity: Binary
@@ -7684,7 +7684,7 @@ UpTeeArrow:
   # N-tokens: {}
   # L-tokens: {"↥"}
   # O-tokens: {}
-  # usage: "x ↥ y"
+  usage: "x ↥ y"
   # parse: {"UpTeeArrow", "[", "x", ",", "y", "]"}
   FullForm: UpTeeArrow[x, y]
   arity: Binary
@@ -7703,7 +7703,7 @@ UpperLeftArrow:
   # N-tokens: {}
   # L-tokens: {"↖"}
   # O-tokens: {}
-  # usage: "x ↖ y"
+  usage: "x ↖ y"
   # parse: {"UpperLeftArrow", "[", "x", ",", "y", "]"}
   FullForm: UpperLeftArrow[x, y]
   arity: Binary
@@ -7722,7 +7722,7 @@ UpperRightArrow:
   # N-tokens: {}
   # L-tokens: {"↗"}
   # O-tokens: {}
-  # usage: "x ↗ y"
+  usage: "x ↗ y"
   # parse: {"UpperRightArrow", "[", "x", ",", "y", "]"}
   FullForm: UpperRightArrow[x, y]
   arity: Binary
@@ -7741,7 +7741,7 @@ Vee:
   # N-tokens: {}
   # L-tokens: {"⋁"}
   # O-tokens: {}
-  # usage: "x ⋁ y"
+  usage: "x ⋁ y"
   # parse: {"Vee", "[", "x", ",", "y", "]"}
   FullForm: Vee[x, y]
   arity: Binary
@@ -7760,7 +7760,7 @@ VerticalBar:
   # N-tokens: {}
   # L-tokens: {""}
   # O-tokens: {}
-  # usage: "expr1  expr2"
+  usage: "expr1  expr2"
   # parse: {"VerticalBar", "[", "expr1", ",", "expr2", "]"}
   FullForm: VerticalBar[expr1, expr2]
   arity: Binary
@@ -7779,7 +7779,7 @@ VerticalSeparator:
   # N-tokens: {}
   # L-tokens: {""}
   # O-tokens: {}
-  # usage: "expr1  expr2"
+  usage: "expr1  expr2"
   # parse: {"VerticalSeparator", "[", "expr1", ",", "expr2", "]"}
   FullForm: VerticalSeparator[expr1, expr2]
   arity: Binary
@@ -7798,7 +7798,7 @@ VerticalTilde:
   # N-tokens: {}
   # L-tokens: {"≀"}
   # O-tokens: {}
-  # usage: "expr1 ≀ expr2"
+  usage: "expr1 ≀ expr2"
   # parse: {"VerticalTilde", "[", "expr1", ",", "expr2", "]"}
   FullForm: VerticalTilde[expr1, expr2]
   arity: Binary
@@ -7817,7 +7817,7 @@ Wedge:
   # N-tokens: {}
   # L-tokens: {"⋀"}
   # O-tokens: {}
-  # usage: "expr1 ⋀ expr2"
+  usage: "expr1 ⋀ expr2"
   # parse: {"Wedge", "[", "expr1", ",", "expr2", "]"}
   FullForm: Wedge[expr1, expr2]
   arity: Binary
@@ -7837,7 +7837,7 @@ WhiteCornerBracket:
   # N-tokens: {"『"}
   # L-tokens: {}
   # O-tokens: {"』"}
-  # usage: "『 expr 』"
+  usage: "『 expr 』"
   # parse:
   FullForm:
   arity: Unary
@@ -7856,7 +7856,7 @@ Xnor:
   # N-tokens: {}
   # L-tokens: {""}
   # O-tokens: {}
-  # usage: "expr1  expr2"
+  usage: "x1  y"
   # parse: {"Xnor", "[", "expr1", ",", "expr2", "]"}
   FullForm: Xnor[expr1, expr2]
   arity: Binary
@@ -7875,7 +7875,7 @@ Xor:
   # N-tokens: {}
   # L-tokens: {"⊻"}
   # O-tokens: {}
-  # usage: "expr1 ⊻ expr2"
+  usage: "x ⊻ y"
   # parse: {"Xor", "[", "expr1", ",", "expr2", "]"}
   FullForm: Xor[expr1, expr2]
   arity: Binary
