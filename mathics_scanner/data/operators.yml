@@ -224,7 +224,7 @@ Association:
   # N-tokens: {"<|", ""}
   # L-tokens: e
   # O-tokens: {"|>", ""}
-  usage: "<|expr|>; expr "
+  usage: ["<|expr|>", "expr "]
   # parse: {"Association", "[", "expr", ",", "…", "]"}
   FullForm: Association[expr, \[Ellipsis]]
   arity: n-ary
@@ -716,6 +716,7 @@ CompoundExpression:
   meaningful: true
   # comments:
 
+# rocky: What's this for?
 CompoundExpressionNull:
   actual-precedence: 30
   precedence: 10
@@ -850,7 +851,7 @@ ContextPathSeparator:
   affix:
   associativity: null
   meaningful: true
-  # comments: Functions as a decimal point: either contextpath1 or contextpath2 may be empty, but not both at the same time.
+  # comments: Functions similiar to decimal point for numbers: either contextpath1 or contextpath2 may be empty, but not both at the same time.
 
 ContourIntegral:
   actual-precedence: 420
@@ -1179,7 +1180,7 @@ DirectedEdge:
   FullForm: DirectedEdge[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: null
+  associativity: "non-associative"
   meaningful: true
   # comments:
 
@@ -2095,7 +2096,7 @@ FractionBox:
   # parse: {"FractionBox", "[", "expr1", ",", "expr2", "]"}
   arity: Binary
   affix: Infix
-  associativity: left
+  associativity: "unknown"
   meaningful: true
   # comments:
 
@@ -4896,7 +4897,7 @@ Optional:
   FullForm: Optional[patt, expr]
   arity: Binary
   affix: Infix
-  associativity: null
+  associativity: "unknown"
   meaningful: true
   # comments:
 
@@ -4994,7 +4995,7 @@ OverunderscriptBox:
   # parse: {"UnderoverscriptBox", "[", "expr1", ",", "expr3", ",", "expr2", "]"}
   arity: Ternary
   affix: Infix
-  associativity: missing["unknown"]
+  associativity: "unknown"
   meaningful: true
   # comments:
 
@@ -5189,7 +5190,7 @@ Pattern:
   FullForm: Pattern[symb, expr]
   arity: Binary
   affix: Infix
-  associativity: null
+  associativity: "unknown"
   meaningful: true
   # comments:
 
@@ -5203,12 +5204,12 @@ PatternTest:
   # N-tokens: {}
   # L-tokens: {"?"}
   # O-tokens: {}
-  # usage: "expr1 ? expr2"
+  usage: "expr1 ? expr2"
   # parse: {"PatternTest", "[", "expr1", ",", "expr2", "]"}
   FullForm: PatternTest[expr1, expr2]
   arity: Binary
   affix: Infix
-  associativity: null
+  associativity: "non-associative"
   meaningful: true
   # comments:
 
@@ -6446,7 +6447,7 @@ Span:
   # N-tokens: {";;"}
   # L-tokens: {";;"}
   # O-tokens: {";;"}
-  usage: ;;,  i;;,; ;;j, ;;;;k, i;;j, i;;;;k, ;;j;;k  i;;j;;k
+  usage: [";;",  "i;;", ";;j", ";;;;k", "i;;j", "i;;;;k", ;";j;;k", "i;;j;;k"]
   # parse: {"Span", "[", "i", ",", "j", ",", "k", "]"}
   FullForm: Span[i, j, k]
   arity: Ternary
@@ -6491,7 +6492,7 @@ SqrtBox:
   FullForm:
   arity: Unary
   affix: Prefix
-  associativity: right
+  associativity: "unknown"
   meaningful: true
   # comments:
 
@@ -6759,7 +6760,7 @@ SubsuperscriptBox:
   FullForm:
   arity: Ternary
   affix: Infix
-  associativity: missing["unknown"]
+  associativity: "unknown"
   meaningful: true
   # comments:
 
@@ -6951,7 +6952,7 @@ SuperscriptBox:
   FullForm:
   arity: Binary
   affix: Infix
-  associativity: right
+  associativity: "unknown"
   meaningful: true
   # comments:
 
@@ -7218,7 +7219,7 @@ Times:
   # N-tokens: {}
   # L-tokens: {"*", "×", "
   # O-tokens: {}
-  usage: x * y, x × y, x y,
+  usage: ["x * y", "x × y", "x y"]
   # parse: {"Times", "[", "expr1", ",", "expr2", "]"}
   FullForm: Times[expr1, expr2]
   arity: Binary
@@ -7381,7 +7382,7 @@ UnderoverscriptBox:
   FullForm:
   arity: Ternary
   affix: Infix
-  associativity: missing["unknown"]
+  associativity: "unknown"
   meaningful: true
   # comments:
 
@@ -7420,7 +7421,7 @@ UndirectedEdge:
   FullForm: UndirectedEdge[u, v]
   arity: Binary
   affix: Infix
-  associativity: null
+  associativity: "non-associative"
   meaningful: true
   # comments:
 

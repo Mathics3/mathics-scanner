@@ -97,17 +97,14 @@ def compile_tables(
         elif affix == "Postfix":
             operator_dict = postfix_operators
 
+        if operator_dict is not None:
+            operator_dict[operator_name] = precedence
+
         character_info = character_data.get(operator_name)
         if character_info is None:
-            unicode_char = "no-unicode"
-        else:
-            unicode_char = character_info.get("unicode-equivalent", "no-unicode")
-
-        if operator_dict is not None:
-            operator_dict[operator_name] = unicode_char, precedence
-
-        if character_info is None:
             continue
+
+        unicode_char = character_info.get("unicode-equivalent", "no-unicode")
 
         if operator_info.get("meaningful", True) is False and (
             character_data.get(operator_name)
@@ -119,20 +116,21 @@ def compile_tables(
 
             affix = operator_info["affix"]
             if affix == "Infix":
-                no_meaning_infix_operators[operator_name] = unicode_char
+                no_meaning_infix_operators[operator_name] = unicode_char, precedence
             elif affix == "Postfix":
-                no_meaning_postfix_operators[operator_name] = unicode_char
+                no_meaning_postfix_operators[operator_name] = unicode_char, precedence
             elif affix == "Prefix":
-                no_meaning_prefix_operators[operator_name] = unicode_char
+                no_meaning_prefix_operators[operator_name] = unicode_char, precedence
             else:
                 print(f"FIXME: affix {affix} of {operator_name} not handled")
 
     return {
         "flat-binary-operators": flat_binary_operators,
         "left-binary-operators": left_binary_operators,
-        "misc-ops": misc_operators,
+        "miscellaneous-operators": misc_operators,
         "no-meaning-infix-operators": no_meaning_infix_operators,
         "no-meaning-postfix-operators": no_meaning_postfix_operators,
+        "no-meaning-prefix-operators": no_meaning_prefix_operators,
         "non-associative-binary-operators": nonassoc_binary_operators,
         "operator-precedence": operator_precedence,
         "postfix-operators": postfix_operators,
