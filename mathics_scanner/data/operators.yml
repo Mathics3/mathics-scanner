@@ -1069,6 +1069,25 @@ Decrement:
   meaningful: true
   # comments:
 
+Definition:
+  actual-precedence: 670
+  precedence: 5000  # Seems a bit extreme. This is the old Mathics data. It needs to be one less than Information
+  WolframLanguageData: None
+  WolframLanguageData-corrected: None
+  UnicodeCharacters.tr: None
+  UnicodeCharacters-corrected.tr: None
+  # N-tokens: None
+  # L-tokens: None
+  # O-tokens: None
+  usage: ?Times
+  # parse: None
+  FullForm: None
+  arity: Unary
+  affix: Prefix
+  associativity: null
+  meaningful: true
+  # comments: None
+
 Del:
   actual-precedence: 710
   precedence: 550
@@ -2587,7 +2606,7 @@ Information:
   # N-tokens: None
   # L-tokens: None
   # O-tokens: None
-  # usage: "None"
+  usage: ??Times
   # parse: None
   FullForm: None
   arity: Unary
