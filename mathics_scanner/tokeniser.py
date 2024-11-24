@@ -34,7 +34,7 @@ base_names_pattern = r"((?![0-9])([0-9${0}{1}{2}])+)".format(
 full_names_pattern = r"(`?{0}(`{0})*)".format(base_names_pattern)
 
 # FIXME: Revise to get Character Symbols from data/characters.json
-tokens = [
+uncompiled_tokens = [
     ("Definition", r"\? "),
     ("Information", r"\?\? "),
     ("Number", NUMBER_PATTERN),
