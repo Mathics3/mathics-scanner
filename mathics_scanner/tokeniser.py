@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-
+import os.path as osp
 import re
 import string
 from typing import Optional
@@ -8,6 +8,22 @@ from typing import Optional
 from mathics_scanner.characters import _letterlikes, _letters
 from mathics_scanner.errors import ScanError
 from mathics_scanner.prescanner import Prescanner
+
+ROOT_DIR = osp.dirname(__file__)
+try:
+    import ujson
+except ImportError:
+    import json as ujson  # type: ignore[no-redef]
+
+# Load Mathics3 character information from JSON. The JSON is built from
+# named-characters.yml
+
+operators_table_path = osp.join(ROOT_DIR, "data", "operators.json")
+assert osp.exists(
+    operators_table_path
+), f"Internal error: Mathics3 Operator information are missing; expected to be in {operators_table_path}"
+with open(osp.join(operators_table_path), "r", encoding="utf8") as operator_f:
+    OPERATOR_DATA = ujson.load(operator_f)
 
 # special patterns
 NUMBER_PATTERN = r"""
@@ -33,7 +49,6 @@ base_names_pattern = r"((?![0-9])([0-9${0}{1}{2}])+)".format(
 )
 full_names_pattern = r"(`?{0}(`{0})*)".format(base_names_pattern)
 
-# FIXME: Revise to get Character Symbols from data/characters.json
 tokens = [
     ("Definition", r"\? "),
     ("Information", r"\?\? "),
@@ -102,9 +117,7 @@ tokens = [
     ("Equal", r" (\=\=) | \uf431 | \uf7d9 "),
     ("Unequal", r" (\!\= ) | \u2260 "),
     ("LessEqual", r" (\<\=) | \u2264 "),
-    ("LessSlantEqual", r" \u2a7d "),
     ("GreaterEqual", r" (\>\=) | \u2265 "),
-    ("GreaterSlantEqual", r" \u2a7e "),
     ("Greater", r" \> "),
     ("Less", r" \< "),
     # https://reference.wolfram.com/language/ref/character/DirectedEdge.html
@@ -148,7 +161,6 @@ tokens = [
     # ('PartialD', r' \u2202 '),
     # uf4a0 is Wolfram custom, u2a2f is standard unicode
     ("Cross", r" \uf4a0 | \u2a2f"),
-    ("Colon", r" \u2236 "),
     # uf3c7 is Wolfram custom, 1d40 is standard unicode
     ("Transpose", r" \uf3c7 | \u1d40"),
     ("Conjugate", r" \uf3c8 "),
@@ -159,55 +171,31 @@ tokens = [
     ("Del", r" \u2207 "),
     # uf520 is Wolfram custom, 25ab is standard unicode
     ("Square", r" \uf520 | \u25ab"),
-    ("SmallCircle", r" \u2218 "),
-    ("CircleDot", r" \u2299 "),
     # ('Sum', r' \u2211 '),
     # ('Product', r' \u220f '),
-    ("PlusMinus", r" \u00b1 "),
-    ("MinusPlus", r" \u2213 "),
     ("Nor", r" \u22BD "),
     ("Nand", r" \u22BC "),
     ("Xor", r" \u22BB "),
     ("Xnor", r" \uF4A2 "),
-    ("Diamond", r" \u22c4 "),
-    ("Wedge", r" \u22c0 "),
-    ("Vee", r" \u22c1 "),
-    ("CircleTimes", r" \u2297 "),
-    ("CenterDot", r" \u00b7 "),
-    ("Star", r" \u22c6"),
-    ("VerticalTilde", r" \u2240 "),
-    ("Coproduct", r" \u2210 "),
-    ("Cap", r" \u2322 "),
-    ("Cup", r" \u2323 "),
-    ("CirclePlus", r" \u2295 "),
-    ("CircleMinus", r" \u2296 "),
-    ("Congruent", r" \u2261 "),
     ("Intersection", r" \u22c2 "),
     ("Union", r" \u22c3 "),
-    ("VerticalBar", r" \u2223 "),
-    ("NotVerticalBar", r" \u2224 "),
-    ("DoubleVerticalBar", r" \u2225 "),
-    ("NotDoubleVerticalBar", r" \u2226 "),
     ("Element", r" \u2208 "),
     ("NotElement", r" \u2209 "),
-    ("Subset", r" \u2282 "),
-    ("Superset", r" \u2283 "),
     ("ForAll", r" \u2200 "),
     ("Exists", r" \u2203 "),
     ("NotExists", r" \u2204 "),
     ("Not", r" \u00AC "),
     ("Equivalent", r" \u29E6 "),
     ("Implies", r" \uF523 "),
-    ("RightTee", r" \u22A2 "),
-    ("DoubleRightTee", r" \u22A8 "),
-    ("LeftTee", r" \u22A3 "),
-    ("DoubleLeftTee", r" \u2AE4 "),
-    ("SuchThat", r" \u220D "),
     ("VerticalSeparator", r" \uF432 "),
-    ("Therefore", r" \u2234 "),
-    ("Because", r" \u2235 "),
-    ("Backslash", r" \u2216 "),
 ]
+
+for table in ("no-meaning-infix-operators",):
+    table_info = OPERATOR_DATA[table]
+    for operator_name, unicode in table_info.items():
+        # if any([tup[0] == operator_name for tup in tokens]):
+        #     print(f"Please remove {operator_name}")
+        tokens.append((operator_name, f" {unicode} "))
 
 
 literal_tokens = {
