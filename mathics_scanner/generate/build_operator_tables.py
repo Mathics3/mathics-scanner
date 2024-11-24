@@ -41,7 +41,9 @@ def read(*rnames) -> str:
     return open(osp.join(get_srcdir(), *rnames)).read()
 
 
-def compile_tables(data: Dict[str, dict]) -> Dict[str, dict]:
+def compile_tables(
+    operator_data: Dict[str, dict], character_data: Dict[str, dict]
+) -> Dict[str, dict]:
     """
     Compiles the general table into the tables used internally by the library.
     This facilitates fast access of this information by clients needing this
@@ -49,11 +51,92 @@ def compile_tables(data: Dict[str, dict]) -> Dict[str, dict]:
     """
     operator_precedence = {}
 
-    for k, v in data.items():
+    for k, v in operator_data.items():
         operator_precedence[k] = v["precedence"]
 
+    flat_binary_operators = {}
+    left_binary_operators = {}
+    misc_operators = {}
+    no_meaning_infix_operators = {}
+    no_meaning_postfix_operators = {}
+    no_meaning_prefix_operators = {}
+    nonassoc_binary_operators = {}
+    postfix_operators = {}
+    prefix_operators = {}
+    right_binary_operators = {}
+    ternary_operators = {}
+
+    for operator_name, operator_info in operator_data.items():
+        precedence = operator_info["precedence"]
+
+        affix = operator_info["affix"]
+        arity = operator_info["arity"]
+        operator_dict = None
+
+        associativity = operator_info["associativity"]
+        if arity == "Ternary":
+            operator_dict = ternary_operators
+        elif associativity == "unknown":
+            operator_dict = misc_operators
+        elif affix in ("Infix", "Binary"):
+            if associativity is None:
+                operator_dict = flat_binary_operators
+            elif associativity == "left":
+                operator_dict = left_binary_operators
+            elif associativity == "right":
+                operator_dict = right_binary_operators
+            elif associativity == "non-associative":
+                operator_dict = nonassoc_binary_operators
+            else:
+                print(
+                    f"FIXME: associativity {associativity} not handled in  {operator_name}"
+                )
+
+        elif affix == "Prefix":
+            operator_dict = prefix_operators
+        elif affix == "Postfix":
+            operator_dict = postfix_operators
+
+        if operator_dict is not None:
+            operator_dict[operator_name] = precedence
+
+        character_info = character_data.get(operator_name)
+        if character_info is None:
+            continue
+
+        unicode_char = character_info.get("unicode-equivalent", "no-unicode")
+
+        if operator_info.get("meaningful", True) is False and (
+            character_data.get(operator_name)
+        ):
+            if unicode_char == "no-unicode":
+                if (unicode_char := character_info.get("wl-unicode")) is None:
+                    print(f"FIXME: no unicode or WMA equivalent for {operator_name}")
+                continue
+
+            affix = operator_info["affix"]
+            if affix == "Infix":
+                no_meaning_infix_operators[operator_name] = unicode_char, precedence
+            elif affix == "Postfix":
+                no_meaning_postfix_operators[operator_name] = unicode_char, precedence
+            elif affix == "Prefix":
+                no_meaning_prefix_operators[operator_name] = unicode_char, precedence
+            else:
+                print(f"FIXME: affix {affix} of {operator_name} not handled")
+
     return {
+        "flat-binary-operators": flat_binary_operators,
+        "left-binary-operators": left_binary_operators,
+        "miscellaneous-operators": misc_operators,
+        "no-meaning-infix-operators": no_meaning_infix_operators,
+        "no-meaning-postfix-operators": no_meaning_postfix_operators,
+        "no-meaning-prefix-operators": no_meaning_prefix_operators,
+        "non-associative-binary-operators": nonassoc_binary_operators,
         "operator-precedence": operator_precedence,
+        "postfix-operators": postfix_operators,
+        "prefix-operators": prefix_operators,
+        "right-binary-operators": right_binary_operators,
+        "ternary-operators": ternary_operators,
     }
 
 
@@ -73,14 +156,15 @@ DEFAULT_DATA_DIR = Path(osp.normpath(osp.dirname(__file__)), "..", "data")
     "data_dir", type=click.Path(readable=True), default=DEFAULT_DATA_DIR, required=False
 )
 def main(output, data_dir):
-    with open(data_dir / "operators.yml", "r", encoding="utf8") as i, open(
-        output, "w"
-    ) as o:
+    with open(data_dir / "operators.yml", "r", encoding="utf8") as operator_f, open(
+        data_dir / "named-characters.yml", "r", encoding="utf8"
+    ) as character_f, open(output, "w") as o:
         # Load the YAML data.
-        data = yaml.load(i, Loader=yaml.FullLoader)
+        operator_data = yaml.load(operator_f, Loader=yaml.FullLoader)
+        character_data = yaml.load(character_f, Loader=yaml.FullLoader)
 
         # Precompile the tables.
-        data = compile_tables(data)
+        data = compile_tables(operator_data, character_data)
 
         # Dump the preprocessed dictionaries to disk as JSON.
         json.dump(data, o)
