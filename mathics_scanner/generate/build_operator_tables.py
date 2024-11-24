@@ -167,6 +167,7 @@ def main(output, data_dir):
         data = compile_tables(operator_data, character_data)
 
         # Dump the preprocessed dictionaries to disk as JSON.
+        print("dump data tables into ", output)
         json.dump(data, o)
 
 
