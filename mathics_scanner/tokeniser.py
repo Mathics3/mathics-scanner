@@ -24,7 +24,7 @@ OPERATORS_TABLE_PATH = osp.join(ROOT_DIR, "data", "operators.json")
 
 FILENAME_TOKENS: List = []
 TOKENS: List[Tuple] = []
-TOKEN_INDICES:Dict = {}
+TOKEN_INDICES: Dict = {}
 
 
 # special patterns
@@ -38,8 +38,7 @@ NUMBER_PATTERN = r"""
 """
 
 # TODO: Check what of this should be a part of the module interface.
-base_symbol_pattern = r"((?![0-9])([0-9${0}{1}])+)".format(
-    _letters, _letterlikes)
+base_symbol_pattern = r"((?![0-9])([0-9${0}{1}])+)".format(_letters, _letterlikes)
 full_symbol_pattern_str = r"(`?{0}(`{0})*)".format(base_symbol_pattern)
 pattern_pattern = r"{0}?_(\.|(__?)?{0}?)?".format(full_symbol_pattern_str)
 slot_pattern = r"\#(\d+|{0})?".format(base_symbol_pattern)
@@ -50,8 +49,8 @@ FILENAME_PATTERN = r"""
 """
 NAMES_WILDCARDS = "@*"
 base_names_pattern = r"((?![0-9])([0-9${0}{1}{2}])+)".format(
-        _letters, _letterlikes, NAMES_WILDCARDS
-    )
+    _letters, _letterlikes, NAMES_WILDCARDS
+)
 full_names_pattern = r"(`?{0}(`{0})*)".format(base_names_pattern)
 
 
@@ -66,14 +65,16 @@ def init_module():
     # named-characters.yml
 
     if not osp.exists(OPERATORS_TABLE_PATH):
-        print("Warning: Mathics3 Operator information are missing; "
-              f"expected to be in {OPERATORS_TABLE_PATH}")
-        print("Please run the "
-              "mathics_scanner/generate/build_operator_tables.py script")
+        print(
+            "Warning: Mathics3 Operator information are missing; "
+            f"expected to be in {OPERATORS_TABLE_PATH}"
+        )
+        print(
+            "Please run the " "mathics_scanner/generate/build_operator_tables.py script"
+        )
         return
 
-    with open(osp.join(OPERATORS_TABLE_PATH), "r",
-              encoding="utf8") as operator_f:
+    with open(osp.join(OPERATORS_TABLE_PATH), "r", encoding="utf8") as operator_f:
         OPERATOR_DATA.update(ujson.load(operator_f))
 
     tokens = [
@@ -328,8 +329,8 @@ def compile_tokens(token_list):
     return [(tag, compile_pattern(pattern)) for tag, pattern in token_list]
 
 
-FULL_SYMBOL_PATTERN_RE: re.Pattern = compile_pattern(
-    full_symbol_pattern_str)
+FULL_SYMBOL_PATTERN_RE: re.Pattern = compile_pattern(full_symbol_pattern_str)
+
 
 def is_symbol_name(text: str) -> bool:
     """
@@ -376,17 +377,18 @@ class Tokeniser:
     produces tokens of the Wolfram Language which can then be used in parsing.
     """
 
-    modes = {"expr": (TOKENS, TOKEN_INDICES),
-             "filename": (FILENAME_TOKENS, {})}
+    modes = {"expr": (TOKENS, TOKEN_INDICES), "filename": (FILENAME_TOKENS, {})}
 
     def __init__(self, feeder):
         """
         feeder: An instance of ``LineFeeder`` from which we receive
                 input strings that are to be split up and put into tokens.
         """
-        assert len(TOKENS) > 0, ("Tokenizer was not initialized. "
-                                 f"Check if {OPERATORS_TABLE_PATH} "
-                                 "is available")
+        assert len(TOKENS) > 0, (
+            "Tokenizer was not initialized. "
+            f"Check if {OPERATORS_TABLE_PATH} "
+            "is available"
+        )
         self.pos: int = 0
         self.feeder = feeder
         self.prescanner = Prescanner(feeder)
@@ -516,7 +518,7 @@ class Tokeniser:
         "Break out from ``match`` the next token which is expected to be a Number"
         text = match.group(0)
         pos = match.end(0)
-        if self.code[pos - 1: pos + 1] == "..":
+        if self.code[pos - 1 : pos + 1] == "..":
             # Trailing .. should be ignored. That is, `1..` is `Repeated[1]`.
             text = text[:-1]
             self.pos = pos - 1
@@ -558,7 +560,7 @@ class Tokeniser:
 
         indices = [start] + newlines + [end]
         result = "".join(
-            self.code[indices[i]: indices[i + 1]] for i in range(len(indices) - 1)
+            self.code[indices[i] : indices[i + 1]] for i in range(len(indices) - 1)
         )
         return Token("String", result, start)
 
