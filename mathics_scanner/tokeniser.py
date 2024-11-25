@@ -49,7 +49,10 @@ FILENAME_PATTERN = r"""
 (?P=quote)                                  (?# Closing quotation mark)
 """
 NAMES_WILDCARDS = "@*"
-
+base_names_pattern = r"((?![0-9])([0-9${0}{1}{2}])+)".format(
+        _letters, _letterlikes, NAMES_WILDCARDS
+    )
+full_names_pattern = r"(`?{0}(`{0})*)".format(base_names_pattern)
 
 
 
@@ -73,11 +76,6 @@ def init_module():
     with open(osp.join(OPERATORS_TABLE_PATH), "r",
               encoding="utf8") as operator_f:
         OPERATOR_DATA.update(ujson.load(operator_f))
-
-    base_names_pattern = r"((?![0-9])([0-9${0}{1}{2}])+)".format(
-        _letters, _letterlikes, NAMES_WILDCARDS
-    )
-    full_names_pattern = r"(`?{0}(`{0})*)".format(base_names_pattern)
 
     tokens = [
         ("Definition", r"\? "),
