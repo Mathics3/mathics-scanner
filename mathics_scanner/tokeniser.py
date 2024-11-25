@@ -389,8 +389,6 @@ class Tokeniser:
         self.code = self.prescanner.replace_escape_sequences()
         self.mode: str = "invalid"
         self._change_token_scanning_mode("expr")
-        if tokens_need_JSON_update:
-            update_tokens_from_JSON()
 
     def _change_token_scanning_mode(self, mode: str):
         """
