@@ -182,7 +182,7 @@ def init_module():
         ("RawBackslash", r" \\ "),
         ("Factorial2", r" \!\! "),
         ("Factorial", r" \! "),
-        ("Function", r" \& | \uF4A1 | \u21A6 | \|-> "),
+        ("Function", r" \& | \uF4A1 | \u27FC | \|-> "),
         ("RawColon", r" \: "),
         # ('DiscreteShift', r' \uf4a3 '),
         # ('DiscreteRatio', r' \uf4a4 '),
