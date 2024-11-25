@@ -55,7 +55,6 @@ base_names_pattern = r"((?![0-9])([0-9${0}{1}{2}])+)".format(
 full_names_pattern = r"(`?{0}(`{0})*)".format(base_names_pattern)
 
 
-
 def compile_pattern(pattern):
     """Compile a pattern from a regular expression"""
     return re.compile(pattern, re.VERBOSE)
@@ -332,7 +331,6 @@ def compile_tokens(token_list):
 FULL_SYMBOL_PATTERN_RE: re.Pattern = compile_pattern(
     full_symbol_pattern_str)
 
-
 def is_symbol_name(text: str) -> bool:
     """
     Returns ``True`` if ``text`` is a valid identifier. Otherwise returns
@@ -366,6 +364,12 @@ class Token:
         return f"Token({self.tag}, {self.text}, {self.pos})"
 
 
+# FIXME: this should be done in Tokeniser so we can import
+# this module from mathics_scanner and not worry about whether
+# the operators.json has been created.
+update_tokens_from_JSON()
+
+
 class Tokeniser:
     """
     This converts input strings from a feeder and
@@ -389,6 +393,8 @@ class Tokeniser:
         self.code = self.prescanner.replace_escape_sequences()
         self.mode: str = "invalid"
         self._change_token_scanning_mode("expr")
+        if tokens_need_JSON_update:
+            update_tokens_from_JSON()
 
     def _change_token_scanning_mode(self, mode: str):
         """

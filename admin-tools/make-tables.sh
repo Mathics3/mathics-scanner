@@ -7,5 +7,4 @@ PYTHON=${PYTHON:-python}
 
 cd $mydir/../mathics_scanner/data
 $PYTHON ../generate/build_tables.py -o characters.json
-$PYTHON ../generate/operator_csv_to_yml.py
 $PYTHON ../generate/build_operator_tables.py -o operators.json
