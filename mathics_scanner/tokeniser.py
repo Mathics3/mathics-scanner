@@ -182,7 +182,7 @@ def init_module():
         ("RawBackslash", r" \\ "),
         ("Factorial2", r" \!\! "),
         ("Factorial", r" \! "),
-        ("Function", r" \& | \uF4A1 | \u21A6 | \|-> "),
+        ("Function", r" \& | \uF4A1 | \u27FC | \|-> "),
         ("RawColon", r" \: "),
         # ('DiscreteShift', r' \uf4a3 '),
         # ('DiscreteRatio', r' \uf4a4 '),
@@ -365,12 +365,6 @@ class Token:
         return f"Token({self.tag}, {self.text}, {self.pos})"
 
 
-# FIXME: this should be done in Tokeniser so we can import
-# this module from mathics_scanner and not worry about whether
-# the operators.json has been created.
-update_tokens_from_JSON()
-
-
 class Tokeniser:
     """
     This converts input strings from a feeder and
@@ -395,8 +389,6 @@ class Tokeniser:
         self.code = self.prescanner.replace_escape_sequences()
         self.mode: str = "invalid"
         self._change_token_scanning_mode("expr")
-        if tokens_need_JSON_update:
-            update_tokens_from_JSON()
 
     def _change_token_scanning_mode(self, mode: str):
         """
