@@ -470,12 +470,29 @@ class Tokeniser:
             if self.pos >= len(self.code):
                 if comment:
                     try:
+                        # Since we are inside a comment,
+                        # we can just do
+                        # ```
+                        # self.prescanner.incomplete()
+                        # self.code = self.prescanner.input_line
+                        # ```
+                        # avoiding the call to the method
+                        # `Prescanner.replace_escape_sequences()`
+                        # which have issues with escape characters...
                         self.incomplete()
                     except ValueError:
-                        # Funny symbols like | in comments can cause a ValueError.
-                        # Until we have a better fix -- like noting we are inside a
-                        # comment and should not try to substitute symbols -- ignore.
-                        pass
+                        # `incomplete` tries to parse substrings like `\|AAAAA`
+                        # that can be interpreted as a character reference.
+                        # To do that, it tries to get the
+                        # new line using the method
+                        # `Prescanner.replace_escape_sequences()`
+                        # Inside a comment, the special meaning of escape sequences
+                        # like `\|` should not be taken into account.
+                        #
+                        # In case of error, just let's pick the code
+                        # from the `input_line` attribute of
+                        # prescanner:
+                        self.code = self.prescanner.input_line
                 else:
                     break
             if comment:
