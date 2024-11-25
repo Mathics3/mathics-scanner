@@ -60,7 +60,10 @@ def compile_pattern(pattern):
 
 
 def init_module():
-    """Initialize the module"""
+    """
+    Initialize the module using the information
+    stored in the JSON tables.
+    """
     # Load Mathics3 character information from JSON. The JSON is built from
     # named-characters.yml
 
@@ -300,6 +303,11 @@ def init_module():
 
     filename_tokens = [("Filename", FILENAME_PATTERN)]
 
+    # Reset the global variables
+    TOKENS.clear()
+    TOKEN_INDICES.clear()
+    FILENAME_TOKENS.clear()
+
     TOKENS.extend(compile_tokens(tokens))
     TOKEN_INDICES.update(find_indices(literal_tokens))
     FILENAME_TOKENS.extend(compile_tokens(filename_tokens))
@@ -371,6 +379,7 @@ class Tokeniser:
     produces tokens of the Wolfram Language which can then be used in parsing.
     """
 
+    # TODO: Check if this dict should be updated using the init_module function
     modes = {"expr": (TOKENS, TOKEN_INDICES), "filename": (FILENAME_TOKENS, {})}
 
     def __init__(self, feeder):
@@ -557,4 +566,7 @@ class Tokeniser:
         return Token("String", result, start)
 
 
+# Call the function that initializes the dictionaries.
+# If the JSON tables were modified during the execution,
+# just call this function again.
 init_module()
