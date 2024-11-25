@@ -26,7 +26,7 @@ from mathics_scanner.feed import (
 )
 
 # TODO: Move is_symbol_name to the characters module
-from mathics_scanner.tokeniser import Token, Tokeniser, is_symbol_name
+# from mathics_scanner.tokeniser import Token, Tokeniser, is_symbol_name
 from mathics_scanner.version import __version__
 
 __all__ = [
@@ -37,12 +37,12 @@ __all__ = [
     "MultiLineFeeder",
     "ScanError",
     "SingleLineFeeder",
-    "Token",
-    "Tokeniser",
+    # "Token",
+    # "Tokeniser",
     "TranslateError",
     "__version__",
     "aliased_characters",
-    "is_symbol_name",
+    # "is_symbol_name",
     "named_characters",
     "replace_unicode_with_wl",
     "replace_wl_with_plain_text",
