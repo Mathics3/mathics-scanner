@@ -470,15 +470,6 @@ class Tokeniser:
             if self.pos >= len(self.code):
                 if comment:
                     try:
-                        # Since we are inside a comment,
-                        # we can just do
-                        # ```
-                        # self.prescanner.incomplete()
-                        # self.code = self.prescanner.input_line
-                        # ```
-                        # avoiding the call to the method
-                        # `Prescanner.replace_escape_sequences()`
-                        # which have issues with escape characters...
                         self.incomplete()
                     except ValueError:
                         # `incomplete` tries to parse substrings like `\|AAAAA`
@@ -493,6 +484,8 @@ class Tokeniser:
                         # from the `input_line` attribute of
                         # prescanner:
                         self.code = self.prescanner.input_line
+                        # TODO: handle the corner case where the rest of the line
+                        # include escaped sequences, out of the comment.
                 else:
                     break
             if comment:
