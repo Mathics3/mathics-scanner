@@ -371,6 +371,7 @@ class Token:
 # the operators.json has been created.
 update_tokens_from_JSON()
 
+
 class Tokeniser:
     """
     This converts input strings from a feeder and
