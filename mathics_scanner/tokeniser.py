@@ -1,29 +1,31 @@
-# -*- coding: utf-8 -*-
+"""
+Tokenizer functions
+"""
 
 import os.path as osp
 import re
 import string
-from typing import List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple
 
 from mathics_scanner.characters import _letterlikes, _letters
 from mathics_scanner.errors import ScanError
 from mathics_scanner.prescanner import Prescanner
 
-ROOT_DIR = osp.dirname(__file__)
 try:
     import ujson
 except ImportError:
     import json as ujson  # type: ignore[no-redef]
 
-# Load Mathics3 character information from JSON. The JSON is built from
-# named-characters.yml
 
-operators_table_path = osp.join(ROOT_DIR, "data", "operators.json")
-assert osp.exists(
-    operators_table_path
-), f"Internal error: Mathics3 Operator information are missing; expected to be in {operators_table_path}"
-with open(osp.join(operators_table_path), "r", encoding="utf8") as operator_f:
-    OPERATOR_DATA = ujson.load(operator_f)
+OPERATOR_DATA = {}
+ROOT_DIR = osp.dirname(__file__)
+OPERATORS_TABLE_PATH = osp.join(ROOT_DIR, "data", "operators.json")
+
+
+FILENAME_TOKENS: List = []
+TOKENS: List[Tuple] = []
+TOKEN_INDICES: Dict = {}
+
 
 # special patterns
 NUMBER_PATTERN = r"""
@@ -34,6 +36,8 @@ NUMBER_PATTERN = r"""
 (``?(\+|-)?(\d+\.?\d*|\d*\.?\d+)|`)?        (?# Precision / Accuracy)
 (\*\^(\+|-)?\d+)?                           (?# Exponent)
 """
+
+# TODO: Check what of this should be a part of the module interface.
 base_symbol_pattern = r"((?![0-9])([0-9${0}{1}])+)".format(_letters, _letterlikes)
 full_symbol_pattern_str = r"(`?{0}(`{0})*)".format(base_symbol_pattern)
 pattern_pattern = r"{0}?_(\.|(__?)?{0}?)?".format(full_symbol_pattern_str)
@@ -49,167 +53,266 @@ base_names_pattern = r"((?![0-9])([0-9${0}{1}{2}])+)".format(
 )
 full_names_pattern = r"(`?{0}(`{0})*)".format(base_names_pattern)
 
-# token_list is temporarily used to build a "tokens", list of
-# repexp for each tuple in the list.
-token_list: List[Tuple[str, str]] = [
-    ("Definition", r"\? "),
-    ("Information", r"\?\? "),
-    ("Number", NUMBER_PATTERN),
-    ("String", r'"'),
-    ("Pattern", pattern_pattern),
-    ("Symbol", full_symbol_pattern_str),
-    ("SlotSequence", r"\#\#\d*"),
-    ("Slot", slot_pattern),
-    ("Out", r"\%(\%+|\d+)?"),
-    ("PutAppend", r"\>\>\>"),
-    ("Put", r"\>\>"),
-    ("Get", r"\<\<"),
-    ("RawLeftBracket", r" \[ "),
-    ("RawRightBracket", r" \] "),
-    ("RawLeftBrace", r" \{ "),
-    ("RawRightBrace", r" \} "),
-    ("RawLeftParenthesis", r" \( "),
-    ("RawRightParenthesis", r" \) "),
-    ("RawLeftAssociation", r" \<\| "),
-    ("RawRightAssociation", r" \|\> "),
-    ("RawComma", r" \, "),
-    ("Span", r" \;\; "),
-    ("MessageName", r" \:\: "),
-    #
-    # Enclosing Box delimiters
-    #
-    ("LeftRowBox", r" \\\( "),
-    ("RightRowBox", r" \\\) "),
-    # Box Operators which are valid only inside Box delimiters
-    ("InterpretedBox", r" \\\! "),
-    ("SuperscriptBox", r" \\\^ "),
-    ("SubscriptBox", r" \\\_ "),
-    ("OverscriptBox", r" \\\& "),
-    ("UnderscriptBox", r" \\\+ "),
-    ("OtherscriptBox", r" \\\% "),
-    ("FractionBox", r" \\\/ "),
-    ("SqrtBox", r" \\\@ "),
-    ("RadicalBox", r" \\\@ "),
-    ("FormBox", r" \\\` "),
-    #
-    # End Box Operators
-    #
-    ("Information", r"\?\?"),
-    ("PatternTest", r" \? "),
-    ("Increment", r" \+\+ "),
-    ("Decrement", r" \-\- "),
-    ("MapAll", r" \/\/\@ "),
-    ("Map", r" \/\@ "),
-    ("ApplyList", r" \@\@\@ "),
-    ("Apply", r" \@\@ "),
-    ("Composition", r" \@\* "),
-    ("Prefix", r" \@ "),
-    ("StringExpression", r" \~\~ "),
-    ("Infix", r" \~ "),
-    ("Derivative", r" \' "),
-    ("StringJoin", r" \<\> "),
-    ("NonCommutativeMultiply", r" \*\* "),
-    ("AddTo", r" \+\= "),
-    ("SubtractFrom", r" \-\=  "),
-    ("TimesBy", r" \*\= "),
-    ("DivideBy", r" \/\=  "),
-    ("Times", r" \*|\u00d7 "),
-    ("SameQ", r" \=\=\= "),
-    ("UnsameQ", r" \=\!\= "),
-    ("Equal", r" (\=\=) | \uf431 | \uf7d9 "),
-    ("Unequal", r" (\!\= ) | \u2260 "),
-    ("LessEqual", r" (\<\=) | \u2264 "),
-    ("GreaterEqual", r" (\>\=) | \u2265 "),
-    ("Greater", r" \> "),
-    ("Less", r" \< "),
-    # https://reference.wolfram.com/language/ref/character/DirectedEdge.html
-    # The official Unicode value is \u2192.
-    ("DirectedEdge", r" -> | \uf3d5|\u2192"),
-    ("Or", r" (\|\|) | \u2228 "),
-    ("And", r" (\&\&) | \u2227 "),
-    ("RepeatedNull", r" \.\.\. "),
-    ("Repeated", r" \.\. "),
-    ("Alternatives", r" \| "),
-    ("Rule", r" (\-\>)|\uF522 "),
-    ("RuleDelayed", r" (\:\>)|\uF51F "),
-    # https://reference.wolfram.com/language/ref/character/UndirectedEdge.html
-    # The official Unicode value is \u2194
-    ("UndirectedEdge", r" (\<\-\>)|\u29DF|\u2194 "),
-    ("ReplaceRepeated", r" \/\/\. "),
-    ("ReplaceAll", r" \/\. "),
-    ("RightComposition", r" \/\* "),
-    ("Postfix", r" \/\/ "),
-    ("UpSetDelayed", r" \^\:\= "),
-    ("SetDelayed", r" \:\= "),
-    ("UpSet", r" \^\= "),
-    ("TagSet", r" \/\: "),
-    ("Unset", r" \=\s*\.(?!\d|\.) "),  # allow whitespace but avoid e.g. x=.01
-    ("Set", r" \= "),
-    ("Condition", r" \/\; "),
-    ("Semicolon", r" \; "),
-    ("Divide", r" \/|\u00f7 "),
-    ("Power", r" \^ "),
-    ("Dot", r" \. "),
-    ("Minus", r" \-|\u2212 "),
-    ("Plus", r" \+ "),
-    ("RawBackslash", r" \\ "),
-    ("Factorial2", r" \!\! "),
-    ("Factorial", r" \! "),
-    ("Function", r" \& | \uF4A1 | \u27FC | \|-> "),
-    ("RawColon", r" \: "),
-    # ('DiscreteShift', r' \uf4a3 '),
-    # ('DiscreteRatio', r' \uf4a4 '),
-    # ('DifferenceDelta', r' \u2206 '),
-    # ('PartialD', r' \u2202 '),
-    # uf4a0 is Wolfram custom, u2a2f is standard unicode
-    ("Cross", r" \uf4a0 | \u2a2f"),
-    # uf3c7 is Wolfram custom, 1d40 is standard unicode
-    ("Transpose", r" \uf3c7 | \u1d40"),
-    ("Conjugate", r" \uf3c8 "),
-    ("ConjugateTranspose", r" \uf3c9 "),
-    ("HermitianConjugate", r" \uf3ce "),
-    ("Integral", r" \u222b "),
-    ("DifferentialD", r" \U0001D451 | \uf74c"),
-    ("Del", r" \u2207 "),
-    # uf520 is Wolfram custom, 25ab is standard unicode
-    ("Square", r" \uf520 | \u25ab"),
-    # ('Sum', r' \u2211 '),
-    # ('Product', r' \u220f '),
-    ("Nor", r" \u22BD "),
-    ("Nand", r" \u22BC "),
-    ("Xor", r" \u22BB "),
-    ("Xnor", r" \uF4A2 "),
-    ("Intersection", r" \u22c2 "),
-    ("Union", r" \u22c3 "),
-    ("Element", r" \u2208 "),
-    ("NotElement", r" \u2209 "),
-    ("ForAll", r" \u2200 "),
-    ("Exists", r" \u2203 "),
-    ("NotExists", r" \u2204 "),
-    ("Not", r" \u00AC "),
-    ("Equivalent", r" \u29E6 "),
-    ("Implies", r" \uF523 "),
-    ("VerticalSeparator", r" \uF432 "),
-]
-
 
 def compile_pattern(pattern):
+    """Compile a pattern from a regular expression"""
     return re.compile(pattern, re.VERBOSE)
 
 
-def compile_tokens(token_list):
-    return [(tag, compile_pattern(pattern)) for tag, pattern in token_list]
+def init_module():
+    """Initialize the module"""
+    # Load Mathics3 character information from JSON. The JSON is built from
+    # named-characters.yml
+
+    if not osp.exists(OPERATORS_TABLE_PATH):
+        print(
+            "Warning: Mathics3 Operator information are missing; "
+            f"expected to be in {OPERATORS_TABLE_PATH}"
+        )
+        print(
+            "Please run the " "mathics_scanner/generate/build_operator_tables.py script"
+        )
+        return
+
+    with open(osp.join(OPERATORS_TABLE_PATH), "r", encoding="utf8") as operator_f:
+        OPERATOR_DATA.update(ujson.load(operator_f))
+
+    tokens = [
+        ("Definition", r"\? "),
+        ("Information", r"\?\? "),
+        ("Number", NUMBER_PATTERN),
+        ("String", r'"'),
+        ("Pattern", pattern_pattern),
+        ("Symbol", full_symbol_pattern_str),
+        ("SlotSequence", r"\#\#\d*"),
+        ("Slot", slot_pattern),
+        ("Out", r"\%(\%+|\d+)?"),
+        ("PutAppend", r"\>\>\>"),
+        ("Put", r"\>\>"),
+        ("Get", r"\<\<"),
+        ("RawLeftBracket", r" \[ "),
+        ("RawRightBracket", r" \] "),
+        ("RawLeftBrace", r" \{ "),
+        ("RawRightBrace", r" \} "),
+        ("RawLeftParenthesis", r" \( "),
+        ("RawRightParenthesis", r" \) "),
+        ("RawLeftAssociation", r" \<\| "),
+        ("RawRightAssociation", r" \|\> "),
+        ("RawComma", r" \, "),
+        ("Span", r" \;\; "),
+        ("MessageName", r" \:\: "),
+        #
+        # Enclosing Box delimiters
+        #
+        ("LeftRowBox", r" \\\( "),
+        ("RightRowBox", r" \\\) "),
+        # Box Operators which are valid only inside Box delimiters
+        ("InterpretedBox", r" \\\! "),
+        ("SuperscriptBox", r" \\\^ "),
+        ("SubscriptBox", r" \\\_ "),
+        ("OverscriptBox", r" \\\& "),
+        ("UnderscriptBox", r" \\\+ "),
+        ("OtherscriptBox", r" \\\% "),
+        ("FractionBox", r" \\\/ "),
+        ("SqrtBox", r" \\\@ "),
+        ("RadicalBox", r" \\\@ "),
+        ("FormBox", r" \\\` "),
+        #
+        # End Box Operators
+        #
+        ("Information", r"\?\?"),
+        ("PatternTest", r" \? "),
+        ("Increment", r" \+\+ "),
+        ("Decrement", r" \-\- "),
+        ("MapAll", r" \/\/\@ "),
+        ("Map", r" \/\@ "),
+        ("ApplyList", r" \@\@\@ "),
+        ("Apply", r" \@\@ "),
+        ("Composition", r" \@\* "),
+        ("Prefix", r" \@ "),
+        ("StringExpression", r" \~\~ "),
+        ("Infix", r" \~ "),
+        ("Derivative", r" \' "),
+        ("StringJoin", r" \<\> "),
+        ("NonCommutativeMultiply", r" \*\* "),
+        ("AddTo", r" \+\= "),
+        ("SubtractFrom", r" \-\=  "),
+        ("TimesBy", r" \*\= "),
+        ("DivideBy", r" \/\=  "),
+        ("Times", r" \*|\u00d7 "),
+        ("SameQ", r" \=\=\= "),
+        ("UnsameQ", r" \=\!\= "),
+        ("Equal", r" (\=\=) | \uf431 | \uf7d9 "),
+        ("Unequal", r" (\!\= ) | \u2260 "),
+        ("LessEqual", r" (\<\=) | \u2264 "),
+        ("GreaterEqual", r" (\>\=) | \u2265 "),
+        ("Greater", r" \> "),
+        ("Less", r" \< "),
+        # https://reference.wolfram.com/language/ref/character/DirectedEdge.html
+        # The official Unicode value is \u2192.
+        ("DirectedEdge", r" -> | \uf3d5|\u2192"),
+        ("Or", r" (\|\|) | \u2228 "),
+        ("And", r" (\&\&) | \u2227 "),
+        ("RepeatedNull", r" \.\.\. "),
+        ("Repeated", r" \.\. "),
+        ("Alternatives", r" \| "),
+        ("Rule", r" (\-\>)|\uF522 "),
+        ("RuleDelayed", r" (\:\>)|\uF51F "),
+        # https://reference.wolfram.com/language/ref/character/UndirectedEdge.html
+        # The official Unicode value is \u2194
+        ("UndirectedEdge", r" (\<\-\>)|\u29DF|\u2194 "),
+        ("ReplaceRepeated", r" \/\/\. "),
+        ("ReplaceAll", r" \/\. "),
+        ("RightComposition", r" \/\* "),
+        ("Postfix", r" \/\/ "),
+        ("UpSetDelayed", r" \^\:\= "),
+        ("SetDelayed", r" \:\= "),
+        ("UpSet", r" \^\= "),
+        ("TagSet", r" \/\: "),
+        # allow whitespace but avoid e.g. x=.01
+        ("Unset", r" \=\s*\.(?!\d|\.) "),
+        ("Set", r" \= "),
+        ("Condition", r" \/\; "),
+        ("Semicolon", r" \; "),
+        ("Divide", r" \/|\u00f7 "),
+        ("Power", r" \^ "),
+        ("Dot", r" \. "),
+        ("Minus", r" \-|\u2212 "),
+        ("Plus", r" \+ "),
+        ("RawBackslash", r" \\ "),
+        ("Factorial2", r" \!\! "),
+        ("Factorial", r" \! "),
+        ("Function", r" \& | \uF4A1 | \u21A6 | \|-> "),
+        ("RawColon", r" \: "),
+        # ('DiscreteShift', r' \uf4a3 '),
+        # ('DiscreteRatio', r' \uf4a4 '),
+        # ('DifferenceDelta', r' \u2206 '),
+        # ('PartialD', r' \u2202 '),
+        # uf4a0 is Wolfram custom, u2a2f is standard unicode
+        ("Cross", r" \uf4a0 | \u2a2f"),
+        # uf3c7 is Wolfram custom, 1d40 is standard unicode
+        ("Transpose", r" \uf3c7 | \u1d40"),
+        ("Conjugate", r" \uf3c8 "),
+        ("ConjugateTranspose", r" \uf3c9 "),
+        ("HermitianConjugate", r" \uf3ce "),
+        ("Integral", r" \u222b "),
+        ("DifferentialD", r" \U0001D451 | \uf74c"),
+        ("Del", r" \u2207 "),
+        # uf520 is Wolfram custom, 25ab is standard unicode
+        ("Square", r" \uf520 | \u25ab"),
+        # ('Sum', r' \u2211 '),
+        # ('Product', r' \u220f '),
+        ("Nor", r" \u22BD "),
+        ("Nand", r" \u22BC "),
+        ("Xor", r" \u22BB "),
+        ("Xnor", r" \uF4A2 "),
+        ("Intersection", r" \u22c2 "),
+        ("Union", r" \u22c3 "),
+        ("Element", r" \u2208 "),
+        ("NotElement", r" \u2209 "),
+        ("ForAll", r" \u2200 "),
+        ("Exists", r" \u2203 "),
+        ("NotExists", r" \u2204 "),
+        ("Not", r" \u00AC "),
+        ("Equivalent", r" \u29E6 "),
+        ("Implies", r" \uF523 "),
+        ("VerticalSeparator", r" \uF432 "),
+    ]
+
+    for table in ("no-meaning-infix-operators",):
+        table_info = OPERATOR_DATA[table]
+        for operator_name, unicode in table_info.items():
+            # if any([tup[0] == operator_name for tup in tokens]):
+            #     print(f"Please remove {operator_name}")
+            tokens.append((operator_name, f" {unicode} "))
+
+    literal_tokens = {
+        "!": ["Unequal", "Factorial2", "Factorial"],
+        '"': ["String"],
+        "#": ["SlotSequence", "Slot"],
+        "%": ["Out"],
+        "&": ["And", "Function"],
+        "'": ["Derivative"],
+        "(": ["RawLeftParenthesis"],
+        ")": ["RawRightParenthesis"],
+        "*": ["NonCommutativeMultiply", "TimesBy", "Times"],
+        "+": ["Increment", "AddTo", "Plus"],
+        ",": ["RawComma"],
+        "-": ["Decrement", "SubtractFrom", "Rule", "Minus"],
+        ".": ["Number", "RepeatedNull", "Repeated", "Dot"],
+        "/": [
+            "MapAll",
+            "Map",
+            "DivideBy",
+            "ReplaceRepeated",
+            "ReplaceAll",
+            "RightComposition",
+            "Postfix",
+            "TagSet",
+            "Condition",
+            "Divide",
+        ],
+        ":": ["MessageName", "RuleDelayed", "SetDelayed", "RawColon"],
+        ";": ["Span", "Semicolon"],
+        "<": [
+            "RawLeftAssociation",
+            "UndirectedEdge",
+            "Get",
+            "StringJoin",
+            "LessEqual",
+            "Less",
+        ],
+        "=": ["SameQ", "UnsameQ", "Equal", "Unset", "Set"],
+        ">": ["PutAppend", "Put", "GreaterEqual", "Greater"],
+        "?": ["Information", "PatternTest"],
+        "@": ["ApplyList", "Apply", "Composition", "Prefix"],
+        "[": ["RawLeftBracket"],
+        "\\": [
+            "LeftRowBox",
+            "RightRowBox",
+            "InterpretedBox",
+            "SuperscriptBox",
+            "SubscriptBox",
+            "OverscriptBox",
+            "UnderscriptBox",
+            "OtherscriptBox",
+            "FractionBox",
+            "SqrtBox",
+            "RadicalBox",
+            "FormBox",
+            "RawBackslash",
+        ],
+        "]": ["RawRightBracket"],
+        "^": ["UpSetDelayed", "UpSet", "Power"],
+        "_": ["Pattern"],
+        "`": ["Pattern", "Symbol"],
+        "|": ["RawRightAssociation", "Or", "Alternatives", "Function"],
+        "{": ["RawLeftBrace"],
+        "}": ["RawRightBrace"],
+        "~": ["StringExpression", "Infix"],
+    }
+
+    for c in string.ascii_letters:
+        literal_tokens[c] = ["Pattern", "Symbol"]
+
+    for c in string.digits:
+        literal_tokens[c] = ["Number"]
+
+    filename_tokens = [("Filename", FILENAME_PATTERN)]
+
+    TOKENS.extend(compile_tokens(tokens))
+    TOKEN_INDICES.update(find_indices(literal_tokens))
+    FILENAME_TOKENS.extend(compile_tokens(filename_tokens))
 
 
-def find_indices(token_list: list, literals: dict) -> dict:
-    """Return a list of indices for literal tokens taking into account
-    the contents of token_list"""
+def find_indices(literals: dict) -> dict:
+    "find indices of literal tokens"
 
     literal_indices = {}
     for key, tags in literals.items():
         indices = []
         for tag in tags:
-            for i, (tag2, _) in enumerate(token_list):
+            for i, (tag2, _) in enumerate(TOKENS):
                 if tag == tag2:
                     indices.append(i)
                     break
@@ -220,115 +323,13 @@ def find_indices(token_list: list, literals: dict) -> dict:
     return literal_indices
 
 
-# Initalized below in update_tokens_from_JSON
-tokens = []
-token_indices: dict = {}
-
-tokens_need_JSON_update = True
-
-
-def update_tokens_from_JSON():
-    """Get and use operator information from a JSON file to add
-    unicode operator characters to `tokens`.
-
-    We do this in a function to be able to control better when this file
-    read is done.
-    """
-    global tokens
-    global token_list
-    global token_indices
-
-    for table in ("no-meaning-infix-operators",):
-        table_info = OPERATOR_DATA[table]
-        for operator_name, unicode in table_info.items():
-            # if any([tup[0] == operator_name for tup in tokens]):
-            #     print(f"Please remove {operator_name}")
-            token_list.append((operator_name, f" {unicode} "))
-
-    tokens = compile_tokens(token_list)
-    token_indices = find_indices(token_list, literal_tokens)
-
-    global tokens_need_JSON_update
-    tokens_need_JSON_update = False
+def compile_tokens(token_list):
+    """Compile a list of tokens into a list
+    of tuples of the form (tag, compiled_pattern)"""
+    return [(tag, compile_pattern(pattern)) for tag, pattern in token_list]
 
 
-literal_tokens = {
-    "!": ["Unequal", "Factorial2", "Factorial"],
-    '"': ["String"],
-    "#": ["SlotSequence", "Slot"],
-    "%": ["Out"],
-    "&": ["And", "Function"],
-    "'": ["Derivative"],
-    "(": ["RawLeftParenthesis"],
-    ")": ["RawRightParenthesis"],
-    "*": ["NonCommutativeMultiply", "TimesBy", "Times"],
-    "+": ["Increment", "AddTo", "Plus"],
-    ",": ["RawComma"],
-    "-": ["Decrement", "SubtractFrom", "Rule", "Minus"],
-    ".": ["Number", "RepeatedNull", "Repeated", "Dot"],
-    "/": [
-        "MapAll",
-        "Map",
-        "DivideBy",
-        "ReplaceRepeated",
-        "ReplaceAll",
-        "RightComposition",
-        "Postfix",
-        "TagSet",
-        "Condition",
-        "Divide",
-    ],
-    ":": ["MessageName", "RuleDelayed", "SetDelayed", "RawColon"],
-    ";": ["Span", "Semicolon"],
-    "<": [
-        "RawLeftAssociation",
-        "UndirectedEdge",
-        "Get",
-        "StringJoin",
-        "LessEqual",
-        "Less",
-    ],
-    "=": ["SameQ", "UnsameQ", "Equal", "Unset", "Set"],
-    ">": ["PutAppend", "Put", "GreaterEqual", "Greater"],
-    "?": ["Information", "PatternTest"],
-    "@": ["ApplyList", "Apply", "Composition", "Prefix"],
-    "[": ["RawLeftBracket"],
-    "\\": [
-        "LeftRowBox",
-        "RightRowBox",
-        "InterpretedBox",
-        "SuperscriptBox",
-        "SubscriptBox",
-        "OverscriptBox",
-        "UnderscriptBox",
-        "OtherscriptBox",
-        "FractionBox",
-        "SqrtBox",
-        "RadicalBox",
-        "FormBox",
-        "RawBackslash",
-    ],
-    "]": ["RawRightBracket"],
-    "^": ["UpSetDelayed", "UpSet", "Power"],
-    "_": ["Pattern"],
-    "`": ["Pattern", "Symbol"],
-    "|": ["RawRightAssociation", "Or", "Alternatives", "Function"],
-    "{": ["RawLeftBrace"],
-    "}": ["RawRightBrace"],
-    "~": ["StringExpression", "Infix"],
-}
-
-for c in string.ascii_letters:
-    literal_tokens[c] = ["Pattern", "Symbol"]
-
-for c in string.digits:
-    literal_tokens[c] = ["Number"]
-
-
-filename_tokens = [("Filename", FILENAME_PATTERN)]
-
-filename_tokens = compile_tokens(filename_tokens)
-full_symbol_pattern_re: re.Pattern = compile_pattern(full_symbol_pattern_str)
+FULL_SYMBOL_PATTERN_RE: re.Pattern = compile_pattern(full_symbol_pattern_str)
 
 
 def is_symbol_name(text: str) -> bool:
@@ -337,7 +338,7 @@ def is_symbol_name(text: str) -> bool:
     ``False``.
     """
     # Can't we just call match here?
-    return full_symbol_pattern_re.sub("", text) == ""
+    return FULL_SYMBOL_PATTERN_RE.sub("", text) == ""
 
 
 class Token:
@@ -376,13 +377,18 @@ class Tokeniser:
     produces tokens of the Wolfram Language which can then be used in parsing.
     """
 
-    modes = {"expr": (tokens, token_indices), "filename": (filename_tokens, {})}
+    modes = {"expr": (TOKENS, TOKEN_INDICES), "filename": (FILENAME_TOKENS, {})}
 
     def __init__(self, feeder):
         """
         feeder: An instance of ``LineFeeder`` from which we receive
                 input strings that are to be split up and put into tokens.
         """
+        assert len(TOKENS) > 0, (
+            "Tokenizer was not initialized. "
+            f"Check if {OPERATORS_TABLE_PATH} "
+            "is available"
+        )
         self.pos: int = 0
         self.feeder = feeder
         self.prescanner = Prescanner(feeder)
@@ -557,3 +563,6 @@ class Tokeniser:
             self.code[indices[i] : indices[i + 1]] for i in range(len(indices) - 1)
         )
         return Token("String", result, start)
+
+
+init_module()
