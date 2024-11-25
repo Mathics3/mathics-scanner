@@ -3,7 +3,7 @@
 import os.path as osp
 import re
 import string
-from typing import Optional
+from typing import List, Optional, Tuple
 
 from mathics_scanner.characters import _letterlikes, _letters
 from mathics_scanner.errors import ScanError
@@ -49,7 +49,9 @@ base_names_pattern = r"((?![0-9])([0-9${0}{1}{2}])+)".format(
 )
 full_names_pattern = r"(`?{0}(`{0})*)".format(base_names_pattern)
 
-tokens = [
+# token_list is temporarily used to build a "tokens", list of
+# repexp for each tuple in the list.
+token_list: List[Tuple[str, str]] = [
     ("Definition", r"\? "),
     ("Information", r"\?\? "),
     ("Number", NUMBER_PATTERN),
@@ -153,7 +155,7 @@ tokens = [
     ("RawBackslash", r" \\ "),
     ("Factorial2", r" \!\! "),
     ("Factorial", r" \! "),
-    ("Function", r" \& | \uF4A1 | \u21A6 | \|-> "),
+    ("Function", r" \& | \uF4A1 | \u27FC | \|-> "),
     ("RawColon", r" \: "),
     # ('DiscreteShift', r' \uf4a3 '),
     # ('DiscreteRatio', r' \uf4a4 '),
@@ -190,12 +192,64 @@ tokens = [
     ("VerticalSeparator", r" \uF432 "),
 ]
 
-for table in ("no-meaning-infix-operators",):
-    table_info = OPERATOR_DATA[table]
-    for operator_name, unicode in table_info.items():
-        # if any([tup[0] == operator_name for tup in tokens]):
-        #     print(f"Please remove {operator_name}")
-        tokens.append((operator_name, f" {unicode} "))
+
+def compile_pattern(pattern):
+    return re.compile(pattern, re.VERBOSE)
+
+
+def compile_tokens(token_list):
+    return [(tag, compile_pattern(pattern)) for tag, pattern in token_list]
+
+
+def find_indices(token_list: list, literals: dict) -> dict:
+    """Return a list of indices for literal tokens taking into account
+    the contents of token_list"""
+
+    literal_indices = {}
+    for key, tags in literals.items():
+        indices = []
+        for tag in tags:
+            for i, (tag2, _) in enumerate(token_list):
+                if tag == tag2:
+                    indices.append(i)
+                    break
+        assert len(indices) == len(
+            tags
+        ), f"problem matching tokens for symbol {key} having tags {tags}"
+        literal_indices[key] = tuple(indices)
+    return literal_indices
+
+
+# Initalized below in update_tokens_from_JSON
+tokens = []
+token_indices: dict = {}
+
+tokens_need_JSON_update = True
+
+
+def update_tokens_from_JSON():
+    """Get and use operator information from a JSON file to add
+    unicode operator characters to `tokens`.
+
+    We do this in a function to be able to control better when this file
+    read is done.
+    """
+    global tokens
+    global token_list
+    global token_indices
+
+    for table in ("no-meaning-infix-operators",):
+        table_info = OPERATOR_DATA[table]
+        for operator_name, unicode in table_info.items():
+            # if any([tup[0] == operator_name for tup in tokens]):
+            #     print(f"Please remove {operator_name}")
+            token_list.append((operator_name, f" {unicode} "))
+
+    tokens = compile_tokens(token_list)
+    token_indices = find_indices(token_list, literal_tokens)
+
+    global tokens_need_JSON_update
+    tokens_need_JSON_update = False
 
 
 literal_tokens = {
@@ -271,36 +325,8 @@ for c in string.digits:
     literal_tokens[c] = ["Number"]
 
 
-def find_indices(literals: dict) -> dict:
-    "find indices of literal tokens"
-
-    literal_indices = {}
-    for key, tags in literals.items():
-        indices = []
-        for tag in tags:
-            for i, (tag2, _) in enumerate(tokens):
-                if tag == tag2:
-                    indices.append(i)
-                    break
-        assert len(indices) == len(
-            tags
-        ), f"problem matching tokens for symbol {key} having tags {tags}"
-        literal_indices[key] = tuple(indices)
-    return literal_indices
-
-
-def compile_pattern(pattern):
-    return re.compile(pattern, re.VERBOSE)
-
-
-def compile_tokens(token_list):
-    return [(tag, compile_pattern(pattern)) for tag, pattern in token_list]
-
-
 filename_tokens = [("Filename", FILENAME_PATTERN)]
 
-token_indices = find_indices(literal_tokens)
-tokens = compile_tokens(tokens)
 filename_tokens = compile_tokens(filename_tokens)
 full_symbol_pattern_re: re.Pattern = compile_pattern(full_symbol_pattern_str)
 
@@ -338,6 +364,12 @@ class Token:
         return f"Token({self.tag}, {self.text}, {self.pos})"
 
 
+# FIXME: this should be done in Tokeniser so we can import
+# this module from mathics_scanner and not worry about whether
+# the operators.json has been created.
+update_tokens_from_JSON()
+
+
 class Tokeniser:
     """
     This converts input strings from a feeder and
@@ -357,6 +389,8 @@ class Tokeniser:
         self.code = self.prescanner.replace_escape_sequences()
         self.mode: str = "invalid"
         self._change_token_scanning_mode("expr")
+        if tokens_need_JSON_update:
+            update_tokens_from_JSON()
 
     def _change_token_scanning_mode(self, mode: str):
         """

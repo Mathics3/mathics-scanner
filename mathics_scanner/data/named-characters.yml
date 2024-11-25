@@ -4933,21 +4933,20 @@ FreakedSmiley:
 # the YAML name doesn't have to match since there is just ASCII for that.
 # Since we use the name Function as the key here, the YAML name for "&" has
 # to be different, since YAML keys need to be unique.
-
+# Note \[Function] is not the same as \[RightTeeArrow] the
+# unicode for each has to be different. Here we add
+# "LONG".
 Function:
   amslatex: "\\mathsto"
   ascii: "|->"
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Function
-  # This needs to be greater than Alternative "|" which is
-  # 160 so that we don't treat |-> as | ->.
-  unicode-equivalent: "\u21A6"
-  unicode-equivalent-name: RIGHTWARDS ARROW FROM BAR
+  unicode-equivalent: "\u27FC"
+  unicode-equivalent-name: LONG RIGHTWARDS ARROW FROM BAR
   unicode-reference: https://www.compart.com/en/unicode/U+21A6
   wl-reference: https://reference.wolfram.com/language/ref/character/Function.html
   wl-unicode: "\uF4A1"
-  wl-unicode-name: RIGHTWARDS ARROW FROM BAR
 
 # Alternative form of Function. We use FunctionAmpersand
 # since Function is already taken. See note above.
