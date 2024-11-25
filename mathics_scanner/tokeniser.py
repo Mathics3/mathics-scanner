@@ -365,12 +365,6 @@ class Token:
         return f"Token({self.tag}, {self.text}, {self.pos})"
 
 
-# FIXME: this should be done in Tokeniser so we can import
-# this module from mathics_scanner and not worry about whether
-# the operators.json has been created.
-update_tokens_from_JSON()
-
-
 class Tokeniser:
     """
     This converts input strings from a feeder and
