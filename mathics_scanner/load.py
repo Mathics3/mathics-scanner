@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from mathics_scanner.generate.build_tables import DEFAULT_DATA_DIR
-import yaml
 import json
+
+import yaml
+
+from mathics_scanner.generate.build_tables import DEFAULT_DATA_DIR
 
 
 def load_mathics_character_yaml():
@@ -12,6 +14,6 @@ def load_mathics_character_yaml():
 
 
 def load_mathics_character_json():
-    with open(DEFAULT_DATA_DIR / "characters.json", "r") as json_file:
+    with open(DEFAULT_DATA_DIR / "character-tables.json", "r") as json_file:
         json_data = json.load(json_file)
     return json_data

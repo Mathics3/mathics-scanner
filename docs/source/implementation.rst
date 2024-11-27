@@ -19,10 +19,10 @@ class) whose names are preceded by ``t_``, such as in the following example: ::
        # Some logic goes here...
        pass
 
-A tokenization rule is supposed to take a regular expression match (the 
-``match`` parameter of type ``re.Match``) and convert it to an appropriate 
-token, which is then returned by the method. The rule is also responsible for 
-updating the internal state of the tokeniser, such as incrementing the ``pos`` 
+A tokenization rule is supposed to take a regular expression match (the
+``match`` parameter of type ``re.Match``) and convert it to an appropriate
+token, which is then returned by the method. The rule is also responsible for
+updating the internal state of the tokeniser, such as incrementing the ``pos``
 counter.
 
 A rule is always expected to receive sane input. In other words, deciding which
@@ -67,7 +67,7 @@ field in the YAML table is set to ``true``.
 The conversion routines ``replace_wl_with_plain_text`` and
 ``replace_unicode_with_wl`` use this information to convert between Wolfram's
 internal format and standard Unicode, but it should be noted that the
-conversion scheme is more complex than a simple lookup in the YAML table. 
+conversion scheme is more complex than a simple lookup in the YAML table.
 
 The Conversion Scheme
 ---------------------
@@ -97,7 +97,7 @@ ASCII is the following:
   replaced by it's Unicode equivalent.
 - If a character doesn't have a Unicode equivalent or any of the characters of
   it's Unicode equivalent isn't a valid character then the character is
-  replaced by it's fully qualified name. 
+  replaced by it's fully qualified name.
 
 The ``replace_unicode_with_wl`` function converts text from standard Unicode to
 Wolfram's internal representation.  The algorithm for converting from standard
@@ -123,9 +123,9 @@ tests showed that storing the tables as JSON and using `ujson
 way to access them. However, this is merely an implementation detail and
 consumers of this library should not rely on this assumption.
 
-The conversion tables are stored in the ``data/characters.json`` file, along
+The conversion tables are stored in the ``data/character-tables.json`` file, along
 side other complementary information used internally by the library.
-``data/characters.json`` holds three conversion tables:
+``data/character-tables.json`` holds three conversion tables:
 
 - The ``wl-to-unicode`` table, which stores the precompiled results of the
   Wolfram-to-Unicode conversion algorithm. ``wl-to-unicode`` is used for lookup
@@ -140,7 +140,7 @@ side other complementary information used internally by the library.
   when ``replace_unicode_with_wl`` is called.
 
 The precompiled translation tables, as well as the rest of data stored in
-``data/characters.json``, is generated from the YAML table with the
+``data/character-tables.json``, is generated from the YAML table with the
 ``mathics_scanner.generate.build_tables.compile_tables`` function.
 
 Note that multiple entries in the YAML table are redundant in the following
@@ -155,4 +155,3 @@ precompiled conversion tables. Such optimization makes the tables smaller and
 easier to load. This implies that not all named characters that have a Unicode
 equivalent are included in the precompiled translation tables (the ones that
 are not included are the ones where no conversion is needed).
-

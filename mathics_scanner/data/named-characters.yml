@@ -59,7 +59,7 @@
 #                            unicode names that we check against. So if the character
 #                            or unicode symbol is not in that, don't use it here.
 #
-#   wl-reference: HTML link to the Worlfram Langauge & System document for character.
+#   wl-reference: HTML link to the Wolfram Langauge & System document for character.
 #
 #   wl-unicode: The unicode code point used by Mathics internally to represent
 #               the named character. If it is the same as unicode-equivalent
@@ -2115,6 +2115,10 @@ Digamma:
   wl-unicode: "\u03DD"
   wl-unicode-name: GREEK SMALL LETTER DIGAMMA
 
+# The WL symbol displays with a round dot at the left endpoint.
+# The unicode equivalent shows omits this
+# When there is a tag over the edge, WL uses a bold variant
+# of the symbol.
 DirectedEdge:
   amslatex: "\\rightarrow"
   esc-alias: de
@@ -10172,6 +10176,10 @@ UnderParenthesis:
   wl-unicode: "\uFE36"
   wl-unicode-name: PRESENTATION FORM FOR VERTICAL RIGHT PARENTHESIS
 
+# The WL symbol displays with a round dot at each endpoint.
+# The unicode equivalent shows arrows at each endpoint.
+# When there is a tag over the edge, WL uses a bold variant
+# of the symbol.
 UndirectedEdge:
   ascii: "<->"
   esc-alias: ue

@@ -6,5 +6,5 @@ mydir=$(dirname $bs)
 PYTHON=${PYTHON:-python}
 
 cd $mydir/../mathics_scanner/data
-$PYTHON ../generate/build_tables.py -o characters.json
+$PYTHON ../generate/build_tables.py -o character-tables.json
 $PYTHON ../generate/build_operator_tables.py -o operators.json
