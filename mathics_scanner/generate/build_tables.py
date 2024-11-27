@@ -270,7 +270,7 @@ ALL_FIELDS = [
     "-o",
     show_default=True,
     type=click.Path(writable=True),
-    default=DEFAULT_DATA_DIR / "characters.json",
+    default=DEFAULT_DATA_DIR / "character-tables.json",
 )
 @click.argument(
     "data_dir", type=click.Path(readable=True), default=DEFAULT_DATA_DIR, required=False
