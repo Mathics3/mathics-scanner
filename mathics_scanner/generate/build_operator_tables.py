@@ -14,7 +14,6 @@ import yaml
 OPERATOR_FIELDS = [
     "actual-precedence",
     "Precedence",
-    "Precedence-corrected",
     "WolframLanguageData",
     "WolframLanguageData-corrected",
     "FullForm",
@@ -56,7 +55,7 @@ def compile_tables(
 
     flat_binary_operators = {}
     left_binary_operators = {}
-    misc_operators = {}
+    miscellaneous_operators = {}
     no_meaning_infix_operators = {}
     no_meaning_postfix_operators = {}
     no_meaning_prefix_operators = {}
@@ -77,7 +76,7 @@ def compile_tables(
         if arity == "Ternary":
             operator_dict = ternary_operators
         elif associativity == "unknown":
-            operator_dict = misc_operators
+            operator_dict = miscellaneous_operators
         elif affix in ("Infix", "Binary"):
             if associativity is None:
                 operator_dict = flat_binary_operators
@@ -97,6 +96,10 @@ def compile_tables(
         elif affix == "Postfix":
             operator_dict = postfix_operators
 
+        # operator_dict tables are tied into the Mathics3
+        # parser. Extend this table, for example to
+        # include the operator unicode, requires
+        # the coordination of the parser.
         if operator_dict is not None:
             operator_dict[operator_name] = precedence
 
@@ -127,7 +130,7 @@ def compile_tables(
     return {
         "flat-binary-operators": flat_binary_operators,
         "left-binary-operators": left_binary_operators,
-        "miscellaneous-operators": misc_operators,
+        "miscellaneous-operators": miscellaneous_operators,
         "no-meaning-infix-operators": no_meaning_infix_operators,
         "no-meaning-postfix-operators": no_meaning_postfix_operators,
         "no-meaning-prefix-operators": no_meaning_prefix_operators,

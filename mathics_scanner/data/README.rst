@@ -11,4 +11,4 @@ Python programs (via ujson).
 Json output is not formatted in any way to facilitate loaded. To see
 json output formated use a JSON formatter like ``jq``:
 
-   cat characters.json | jq
+   cat character-tables.json | jq
