@@ -466,7 +466,7 @@ SORTED_SYMBOLS_BY_PRECEDENCE = [
     "PlusMinus",
     "Plus",
     "Subtract",  #  310
-    #    "Integrete", # In Mathics, this has the default precedence. In WMA, 325
+    #    "Integrate", # In Mathics, this has the default precedence. In WMA, 325
     "CircleMinus",  # 330
     "CirclePlus",
     "Cup",
