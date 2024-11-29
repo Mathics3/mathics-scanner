@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-
+"""
+Test contents of mathics_scanner/data/operators.yml file
+"""
 import os.path as osp
 from pathlib import Path
 
@@ -12,6 +14,18 @@ with open(data_dir / "operators.yml", "r", encoding="utf8") as operator_f, open(
     # Load the YAML data.
     operator_data = yaml.load(operator_f, Loader=yaml.FullLoader)
     character_data = yaml.load(character_f, Loader=yaml.FullLoader)
+
+
+def test_associativity_field():
+    """
+    Check "associativity" field is one of the accepted values,
+      None, "left", "non-associative", "right", or "unknown"
+    """
+    associativity_set = {None, "left", "non-associative", "right", "unknown"}
+    for operator_name, operator_info in operator_data.items():
+        assert operator_info["associativity"] in associativity_set, (
+            f"operator {operator_name} associativity is {operator_info['associativity']}; "
+        ) + f"should be one of: {associativity_set}; "
 
 
 def test_operators():
@@ -82,7 +96,7 @@ def test_operators():
     ), f"Should not have extra operators in JSON character table {extra_character_operators}"
 
 
-def test_meaningful_affix():
+def test_meaningful_field():
     """
     Check that all operators where the "meaningful" field is "false" have an valid affix value.
     """

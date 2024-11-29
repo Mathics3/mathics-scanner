@@ -24,7 +24,7 @@ def get_srcdir() -> str:
 ROOT_DIR = get_srcdir()
 
 # Load the conversion tables from disk
-characters_path = osp.join(ROOT_DIR, "data", "characters.json")
+characters_path = osp.join(ROOT_DIR, "data", "character-tables.json")
 if os.path.exists(characters_path):
     with open(characters_path, "r") as f:
         _data = ujson.load(f)

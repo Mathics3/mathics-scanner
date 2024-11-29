@@ -66,7 +66,7 @@ packages = [
 "mathics_scanner" = [
     "data/named-characters.yml",
     "data/*.csv",
-    "data/characters.json",  # List this explicitly since it is needed
+    "data/character-tables.json",  # List this explicitly since it is needed
     "data/*.json",
     "data/ExampleData/*",
 ]
