@@ -1,10 +1,12 @@
 """
 Test precedences
 """
+
 try:
     from test.mathics_helper import check_evaluation, evaluate, session
+
     MATHICS_NOT_INSTALLED = False
-except ValueError:
+except ModuleNotFoundError:
     MATHICS_NOT_INSTALLED = True
 
 import pytest
@@ -544,9 +546,8 @@ SORTED_SYMBOLS_BY_PRECEDENCE = [
     "Information",
 ]
 
-@pytest.mark.skipif(
-    MATHICS_NOT_INSTALLED, reason="Requires Mathics-core installed"
-)
+
+@pytest.mark.skipif(MATHICS_NOT_INSTALLED, reason="Requires Mathics-core installed")
 @pytest.mark.parametrize(
     (
         "symbol",
@@ -580,9 +581,8 @@ def test_precedence_values(symbol, prec):
         expected_messages=None,
     )
 
-@pytest.mark.skipif(
-    MATHICS_NOT_INSTALLED, reason="Requires Mathics-core installed"
-)
+
+@pytest.mark.skipif(MATHICS_NOT_INSTALLED, reason="Requires Mathics-core installed")
 def test_precedence_order():
     """
     Test the precedence order.
