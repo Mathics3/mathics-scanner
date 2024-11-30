@@ -7294,6 +7294,7 @@ UpSetDelayed:
 
 UpTee:
   precedence: 197
+  Precedence-Function: 190
   WolframLanguageData: 60
   WolframLanguageData-corrected: 60
   UnicodeCharacters.tr: 390
