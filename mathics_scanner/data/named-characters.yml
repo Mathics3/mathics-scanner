@@ -6920,7 +6920,6 @@ Nor:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Nor
-  # No precedences since this gets transformed to Not[Or[expr]]
   unicode-equivalent: "\u22BD"
   unicode-equivalent-name: NOR
   unicode-reference: https://www.compart.com/en/unicode/U+22BD

@@ -79,6 +79,7 @@ inputrc-unicode:
 #: Run Mathics core checks
 check-mathics::
 	MATHICS_CHARACTER_ENCODING="ASCII" $(PYTHON) -m mathics.docpipeline $o
+	pytest test/test_mathics_precedence.py
 
 #: Remove ChangeLog
 rmChangeLog:
