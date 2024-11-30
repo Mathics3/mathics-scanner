@@ -59,7 +59,7 @@
 #       In[1] := WolframLanguageData["AddTo", "PrecedenceRanks"]
 #       Out[1]= {{expr1 +=expr2 , AddTo[expr1 ,expr2]} -> 73
 #
-#     Note that 73 uses a diffrent precedence scheme than the one
+#     Note that 73 uses a different precedence scheme than the one
 #     given by Precedence and used in Mathics3.
 #
 #     Also Note that WolframLanguageData can also be used to give the
@@ -5848,7 +5848,7 @@ RightVectorBar:
 
 RoundImplies:
   Precedence-Function: 240
-  precedence: 200
+  precedence: 193
   WolframLanguageData:
   WolframLanguageData-corrected: 59
   UnicodeCharacters.tr: 310
@@ -7293,7 +7293,7 @@ UpSetDelayed:
   # comments:
 
 UpTee:
-  precedence: 190
+  precedence: 197
   WolframLanguageData: 60
   WolframLanguageData-corrected: 60
   UnicodeCharacters.tr: 390
