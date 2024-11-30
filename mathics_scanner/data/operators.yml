@@ -1137,7 +1137,7 @@ DifferentialD:
   # comments:
 
 DirectedEdge:
-  precedence: 128
+  precedence: 295
   WolframLanguageData:
   WolframLanguageData-corrected: 49
   UnicodeCharacters.tr: 395
@@ -7057,7 +7057,7 @@ UnderscriptBox:
   # comments:
 
 UndirectedEdge:
-  precedence: 120 # FIXME: is probably 295. Check and adjust after code and mathics-core are merge
+  precedence: 295
   WolframLanguageData:
   WolframLanguageData-corrected: 49
   UnicodeCharacters.tr: 395
