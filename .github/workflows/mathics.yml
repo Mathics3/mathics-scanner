@@ -31,9 +31,7 @@ jobs:
     - name: Test Mathics3
       run: |
         # Until next Mathics3/mathics-core release is out...
-        # git clone https://github.com/Mathics3/mathics-core.git
-        # Until next operator-info-from-JSON is merges
-        git clone -b operator-info-from-JSON https://github.com/Mathics3/mathics-core.git
+        git clone https://github.com/Mathics3/mathics-core.git
         cd mathics-core/
         make PIP_INSTALL_OPTS='[full]'
         # pip install Mathics3[full]
