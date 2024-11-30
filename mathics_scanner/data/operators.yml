@@ -490,7 +490,7 @@ Cap:
 
 CapitalDifferentialD:
   Precedence-Function: 550
-  precedence: 560
+  precedence: 550
   WolframLanguageData:
   WolframLanguageData-corrected: 23
   UnicodeCharacters.tr: 630
@@ -1119,7 +1119,7 @@ DifferenceDelta:
 
 DifferentialD:
   Precedence-Function: 550
-  precedence: 560
+  precedence: 550
   WolframLanguageData:
   WolframLanguageData-corrected: 23
   UnicodeCharacters.tr: 630
