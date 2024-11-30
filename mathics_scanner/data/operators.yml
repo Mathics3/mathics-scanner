@@ -47,7 +47,8 @@
 #  - n-ary (n arguments)
 #
 #
-#   Precedence: the value used in Mathics3.
+#   Precedence: the value used in Mathics3 for parsing and for build the
+#   formatted version of the expression.
 #
 #   Precedence-Function: when there is a discrepency between what WMA
 #      reports when using the function Precedence[] and what Mathics3
@@ -59,8 +60,8 @@
 #       In[1] := WolframLanguageData["AddTo", "PrecedenceRanks"]
 #       Out[1]= {{expr1 +=expr2 , AddTo[expr1 ,expr2]} -> 73
 #
-#     Note that 73 uses a different precedence scheme than the one
-#     given by Precedence and used in Mathics3.
+#     Note that 73 is a number that belongs to a different precedence
+#     scheme than the one given by Precedence and used in Mathics3.
 #
 #     Also Note that WolframLanguageData can also be used to give the
 #     ASCII and unicode character representations:
@@ -91,7 +92,7 @@
 #       "left-binary-operators", "right" will appar in JSON table under the key
 #       "right-binary-operators", "non-associative" under the key
 #       "non-associative-operators", "unknown" under the key "miscellaneous-operators",
-#        and None as "flat_binary_operators.
+#        and None as "flat_binary_operators".
 #
 #   meaningful: "true" if WMA defines a meaning for the operator and "false" if not.
 #               See "Operators without Built-in Meanings"
