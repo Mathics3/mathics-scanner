@@ -8,6 +8,9 @@ CheckPrecedenceOutput::usage="`CheckPrecedenceOutput[op]`\ checks if the Precede
 consistent with the way in which expressions involving `op` are formatted when are inside an `Infix` expression."
 
 
+BeginPackage["testprecedences`"];
+
+
 (*Check the order of the precedence for two operators
 by looking how are they parsed.
 *)
@@ -47,3 +50,5 @@ CheckPrecedenceOutput[op_String] :=
   If[StringPart[test, 1] != "(", Return[False]];
   True
   ]
+
+EndPackage[]
