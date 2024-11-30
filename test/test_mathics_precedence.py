@@ -455,9 +455,8 @@ SORTED_SYMBOLS_BY_PRECEDENCE = [
     "TildeEqual",
     "TildeFullEqual",
     "TildeTilde",
-    # In Mathics, the precedence of these operators is quite low.
-    "DirectedEdge",  # Mathics 128 , WMA 295
-    "UndirectedEdge", # Mathics 120, WMA 295
+    "DirectedEdge",
+    "UndirectedEdge",
     "SquareUnion",
     "UnionPlus",
     "Span",
