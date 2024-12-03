@@ -21,7 +21,7 @@ Precedence[Not]>Precedence[And]==Precedence[Nand]>Precedence[Xor]>Precedence[Or]
 ```
 
 In other cases, precedence values of some operators are reported to be the default value (670)
-while its behaviour is different (Ej: `GreaterSlantEqual` and `LessSlantEqual` behaves as
+while its behavior is different (Ej: `GreaterSlantEqual` and `LessSlantEqual` behaves as
 their precedence were the same that the one for `LessEqual` and `GreaterEqual`).
 
 In any case, the relevant information is the order relation that `Precedence` induce over the
@@ -35,6 +35,10 @@ with the way in which expressions involving these symbols / operators are parsed
 by `OutputForm`. This consistency was tested in WMA using the functions defined in
 the `testprecedence.m` module.
 
+Notice also that the tests of this module does not tries to check the behavior
+of the parser or the formatters in Mathics-core, but just that the information
+that MathicsScanner reports to be consistent with the behavior of WMA. 
+
 """
 
 try:
@@ -47,7 +51,7 @@ except ModuleNotFoundError:
 import pytest
 
 
-SORTED_SYMBOLS_BY_PRECEDENCE = [
+SYMBOLS_SORTED_BY_PRECEDENCE = [
     "CompoundExpression",
     "Put",
     "PutAppend",
@@ -328,20 +332,22 @@ SORTED_SYMBOLS_BY_PRECEDENCE = [
 def test_precedence_order():
     """
     Test the precedence order.
-    This is a slighly flexible test, which does not
-    requires the numerical coincidence of the Precedence values
-    with WMA, but just to preserve the order.
+
+    This test checks that the precedence values of the symbols associted
+    to WL operators follows the order required to make the
+    that the parser and the OutputForm formatter produce
+    outputs consistent with the WMA behavior.
     """
     precedence_values = [
         session.evaluate(f"Precedence[{symbol}]").value
-        for symbol in SORTED_SYMBOLS_BY_PRECEDENCE
+        for symbol in SYMBOLS_SORTED_BY_PRECEDENCE
     ]
     fails = []
     for i in range(len(precedence_values) - 1):
         if precedence_values[i] > precedence_values[i + 1]:
             fails.append(
-                f"Precedence[{SORTED_SYMBOLS_BY_PRECEDENCE[i]}]={precedence_values[i]}>"
-                f"{precedence_values[i+1]}=Precedence[{SORTED_SYMBOLS_BY_PRECEDENCE[i+1]}]"
+                f"Precedence[{SYMBOLS_SORTED_BY_PRECEDENCE[i]}]={precedence_values[i]}>"
+                f"{precedence_values[i+1]}=Precedence[{SYMBOLS_SORTED_BY_PRECEDENCE[i+1]}]"
             )
     for fail in fails:
         print(fail)
