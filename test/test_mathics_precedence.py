@@ -26,18 +26,18 @@ their precedence were the same that the one for `LessEqual` and `GreaterEqual`).
 
 In any case, the relevant information is the order relation that `Precedence` induce over the
 operator and their associated symbols, and this is the information that we want to curate in
-the MathicsScanner tables.
+the MathicsScanner tables. 
 
-This module test that the *order* induced by the precedence values assigned to each operator/symbol
+This module test that the *order* induced by the precedence values assigned to each operator/symbol 
 to be consistent with the one of a list built from WMA. This list was build by sorting the elements
 according to their WMA `Precedence` values, and then modified in a way the ordering be consistent
-with the way in which expressions involving these symbols / operators are parsed and formatter
+with the way in which expressions involving these symbols / operators are parsed and formatter 
 by `OutputForm`. This consistency was tested in WMA using the functions defined in
 the `testprecedence.m` module.
 
 Notice also that the tests of this module does not tries to check the behavior
 of the parser or the formatters in Mathics-core, but just that the information
-that MathicsScanner reports to be consistent with the behavior of WMA.
+that MathicsScanner reports to be consistent with the behavior of WMA. 
 
 """
 
@@ -351,6 +351,7 @@ def test_precedence_order():
     for fail in fails:
         print(fail)
     assert len(fails) == 0
+
 
 
 # Here are "operational" tests. In my opinion, these tests belongs to mathics-core.
