@@ -353,7 +353,6 @@ def test_precedence_order():
     assert len(fails) == 0
 
 
-
 # Here are "operational" tests. In my opinion, these tests belongs to mathics-core.
 # Some of them fails, not because the data in the tables are wrong,
 # but because our parser gives a different result when two operators has the same precedence:
@@ -381,7 +380,7 @@ def test_precedence_order():
         ),
         (
             r"a\[DirectedEdge]b\[UndirectedEdge]c//FullForm",
-            "UndirectedEdge[DirectedEdge[a, b], c]"
+            "UndirectedEdge[DirectedEdge[a, b], c]",
             # In WMA, this is parsed as:
             #'DirectedEdge[UndirectedEdge[a, b], c]'
         ),
