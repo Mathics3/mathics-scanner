@@ -75,7 +75,6 @@
 #   https://github.com/rsmenon/pygments-mathematica
 #   https://reference.wolfram.com/language/tutorial/OperatorInputForms.html
 
-# unicode-reference: https://www.compart.com/en/unicode/U+00E1
 AAcute:
   amslatex: "\\'{a}"
   esc-alias: a'
@@ -6138,6 +6137,7 @@ LeftArrowRightArrow:
   wl-unicode: "\u21C6"
   wl-unicode-name: LEFTWARDS ARROW OVER RIGHTWARDS ARROW
 
+# Left part of "Association[]" operator
 LeftAssociation:
   esc-alias: <|
   has-unicode-inverse: false
@@ -6155,6 +6155,7 @@ LeftBracketingBar:
   wl-reference: https://reference.wolfram.com/language/ref/character/LeftBracketingBar.html
   wl-unicode: "\uF603"
 
+# Left part of "Ceiling[]" operator
 LeftCeiling:
   esc-alias: lc
   has-unicode-inverse: false
@@ -8340,6 +8341,7 @@ RightAngleBracket:
   wl-unicode: "\u232A"
   wl-unicode-name: RIGHT-POINTING ANGLE BRACKET
 
+# Note: not the same as \[Rule]
 RightArrow:
   amslatex: "\\rightarrow"
   esc-alias: ' ->'
@@ -8376,6 +8378,7 @@ RightArrowLeftArrow:
   wl-unicode: "\u21C4"
   wl-unicode-name: RIGHTWARDS ARROW OVER LEFTWARDS ARROW
 
+# Right part of "Association[]" operator
 RightAssociation:
   esc-alias: '|>'
   has-unicode-inverse: false
@@ -8384,6 +8387,8 @@ RightAssociation:
   wl-reference: https://reference.wolfram.com/language/ref/character/RightAssociation.html
   wl-unicode: "\uF114"
 
+# Note: not the same as \[VerticalBar]
+# Used in BracketingBar
 RightBracketingBar:
   esc-alias: r|
   has-unicode-inverse: false
@@ -8393,6 +8398,7 @@ RightBracketingBar:
   wl-reference: https://reference.wolfram.com/language/ref/character/RightBracketingBar.html
   wl-unicode: "\uF604"
 
+# Right part of "Ceiling[]" operator
 RightCeiling:
   esc-alias: rc
   has-unicode-inverse: false
@@ -8655,6 +8661,7 @@ RightVectorBar:
   wl-unicode: "\u2953"
   wl-unicode-name: RIGHTWARDS HARPOON WITH BARB UP TO BAR
 
+# Note: not the same as \[Superset]
 RoundImplies:
   has-unicode-inverse: false
   is-letter-like: false
@@ -8672,6 +8679,7 @@ RoundSpaceIndicator:
   wl-reference: https://reference.wolfram.com/language/ref/character/RoundSpaceIndicator.html
   wl-unicode: "\uF3B2"
 
+# Note: not the same as \[RightArrow]
 Rule:
   ascii: "->"
   esc-alias: "->"
