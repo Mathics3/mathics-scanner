@@ -603,3 +603,44 @@ def test_precedence_order():
     for fail in fails:
         print(fail)
     assert len(fails) == 0
+
+
+# Just because @rocky's ask:
+
+
+@pytest.mark.skipif(MATHICS_NOT_INSTALLED, reason="Requires Mathics-core installed")
+@pytest.mark.parametrize(
+    ("expr", "expected"),
+    [
+        (
+            "a\[TildeTilde]b\[DirectedEdge]c//FullForm",
+            "TildeTilde[a, DirectedEdge[b, c]]",
+        ),
+        (
+            "a\[DirectedEdge]b\[TildeTilde]c//FullForm",
+            "TildeTilde[DirectedEdge[a, b], c]",
+        ),
+        (
+            "a\[UndirectedEdge]b\[DirectedEdge]c//FullForm",
+            "UndirectedEdge[a, DirectedEdge[b, c]]",
+        ),
+        (
+            "a\[UndirectedEdge]b\[TildeTilde]c//FullForm",
+            "UndirectedEdge[DirectedEdge[a, b], c]",
+        ),
+        (
+            "a\[SquareUnion]b\[UndirectedEdge]c//FullForm",
+            "UndirectedEdge[a, SquareUnion[b, c]]",
+        ),
+        (
+            "a\[UndirectedEdge]b\[SquareUnion]c//FullForm",
+            "UndirectedEdge[SquareUnion[a, b], c]",
+        ),
+        ('OutputForm[Infix[{DirectedEdge[a, b],c},"#", 294,None]]', "a → b#c"),
+        ('OutputForm[Infix[{DirectedEdge[a, b],c},"#", 295,None]]', "(a → b)#c"),
+        ('OutputForm[Infix[{UndirectedEdge[a, b],c},"#", 294,None]]', "a → b#c"),
+        ('OutputForm[Infix[{UndirectedEdge[a, b],c},"#", 295,None]]', "(a → b)#c"),
+    ],
+)
+def test_parsing_and_formatting(expr, expected):
+    check_evaluation(str_expr, str_expected)
