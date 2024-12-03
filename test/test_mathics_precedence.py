@@ -326,7 +326,6 @@ SYMBOLS_SORTED_BY_PRECEDENCE = [
 ]
 
 
-
 # TODO: rewrite this test by reading the table directly.
 @pytest.mark.skipif(MATHICS_NOT_INSTALLED, reason="Requires Mathics-core installed")
 def test_precedence_order():
