@@ -1,6 +1,6 @@
 """
-Test precedences
-================
+Test operator precedences
+=========================
 
 Precedence values reported in the Mathics Scanner tables do not always match
 with the values reported by `Precedence[...]` in WMA. As it was
@@ -332,7 +332,7 @@ def test_precedence_order():
     """
     Test the precedence order.
 
-    This test checks that the precedence values of the symbols associted
+    This test checks that the precedence values of the symbols associated
     to WL operators follows the order required to make the
     that the parser and the OutputForm formatter produce
     outputs consistent with the WMA behavior.
