@@ -6062,14 +6062,13 @@ SubscriptBox:
   WolframLanguageData-corrected: 8
   UnicodeCharacters.tr:
   UnicodeCharacters-corrected.tr: 775
-  # N-tokens: {}
-  # L-tokens: {"\_"}
-  # O-tokens: {}
-  # usage: "expr1 \_ expr2"
+  operator: "\\_"
+  usage: "\\(x\\\_y\\)"
   FullForm:
   arity: Binary
   affix: Infix
   associativity: "unknown"
+  box-operator: true
   meaningful: true
   # comments:
 
@@ -6313,6 +6312,22 @@ Superset:
   meaningful: false
   # comments:
 
+SuperscriptBox:
+  precedence: 590
+  WolframLanguageData: 21
+  WolframLanguageData-corrected: 21
+  UnicodeCharacters.tr:
+  UnicodeCharacters-corrected.tr: 660
+  operator: "\\^"
+  usage: "\\(x\\^_y\\)"
+  FullForm:
+  arity: Binary
+  affix: Infix
+  associativity: "unknown"
+  box-operator: true
+  meaningful: true
+  # comments:
+
 SupersetEqual:
   precedence: 250
   WolframLanguageData:
@@ -6328,23 +6343,6 @@ SupersetEqual:
   affix: Infix
   associativity: null
   meaningful: false
-  # comments:
-
-SupercriptBox:
-  Precedence-Function: 690
-  precedence: 590
-  WolframLanguageData: 21
-  WolframLanguageData-corrected: 21
-  UnicodeCharacters.tr:
-  UnicodeCharacters-corrected.tr: 660
-  operator: "\\^"
-  usage: "\\(x\\^y\\)"
-  FullForm:
-  arity: Binary
-  affix: Infix
-  associativity: right
-  box-operator: true
-  meaningful: true
   # comments:
 
 TagSet:

@@ -109,18 +109,6 @@ def init_module():
         #
         ("LeftRowBox", r" \\\( "),
         ("RightRowBox", r" \\\) "),
-        # Box Operators which are valid only inside Box delimiters
-        ("InterpretedBox", r" \\\! "),
-        ("SuperscriptBox", r" \\\^ "),
-        ("SubscriptBox", r" \\\_ "),
-        ("OverscriptBox", r" \\\& "),
-        ("UnderscriptBox", r" \\\+ "),
-        ("OtherscriptBox", r" \\\% "),
-        ("FractionBox", r" \\\/ "),
-        ("SqrtBox", r" \\\@ "),
-        ("RadicalBox", r" \\\@ "),
-        ("FormBox", r" \\\` "),
-        #
         # End Box Operators
         #
         ("Information", r"\?\?"),
@@ -222,11 +210,11 @@ def init_module():
         ("VerticalSeparator", r" \uF432 "),
     ]
 
-    for table in ("no-meaning-infix-operators",):
+    for table in ("box-operators", "no-meaning-infix-operators"):
         table_info = OPERATOR_DATA[table]
         for operator_name, unicode in table_info.items():
-            # if any([tup[0] == operator_name for tup in tokens]):
-            #     print(f"Please remove {operator_name}")
+            if any([tup[0] == operator_name for tup in tokens]):
+                print(f"Please remove {operator_name}")
             tokens.append((operator_name, f" {unicode} "))
 
     literal_tokens = {
@@ -273,17 +261,17 @@ def init_module():
         "\\": [
             "LeftRowBox",
             "RightRowBox",
-            "InterpretedBox",
-            "SuperscriptBox",
-            "SubscriptBox",
-            "OverscriptBox",
-            "UnderscriptBox",
-            "OtherscriptBox",
-            "FractionBox",
-            "SqrtBox",
-            "RadicalBox",
             "FormBox",
+            "FractionBox",
+            "InterpretedBox",
+            "OverunderscriptBox",
+            "OverscriptBox",
+            "RadicalBox",
             "RawBackslash",
+            "SqrtBox",
+            "SubscriptBox",
+            "SuperscriptBox",
+            "UnderscriptBox",
         ],
         "]": ["RawRightBracket"],
         "^": ["UpSetDelayed", "UpSet", "Power"],
