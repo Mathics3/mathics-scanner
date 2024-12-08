@@ -14,7 +14,6 @@
 # 5. Unicode symbols cannot be overloaded, i.e. should not be used for more than one underlying function.
 #    For example, ≫ (U+226B, "Much Greater-Than") is already used for GreaterGreater and therefore should not be an alias for >> for Put.
 #    Likewise, ≪ (U+226A, "Much Less-Than") for Get, ∷ (U+2237, "Proportion") for MessageName, etc.
-
 #
 # Field definitions
 # =================
