@@ -574,6 +574,13 @@ class Tokeniser:
                     # We have a \ at the end of a line.
                     self.incomplete()
                     skipped_chars.append(self.pos)
+
+                # Code below is in pre-scanner. We might decide
+                # later to move that code here.
+                # elif self.code[self.pos + 1] in "01234567":
+                #     # See if we have an octal number.
+                #     try_parse_base(1, 4, 8)
+
                 else:
                     # newlines (\n), tabs (\t) and double backslash
                     # "\\" have the backslash preserved. But for other
@@ -591,7 +598,7 @@ class Tokeniser:
                         self.feeder.message(
                             "Syntax", "stresc", self.code[self.pos : self.pos + 2]
                         )
-                        return Token("String", "", start)
+                        raise ScanError()
 
                     self.pos += 2
             else:

@@ -5,7 +5,7 @@ Tests translation from text characters to the token: String
 
 import pytest
 
-from mathics_scanner.errors import IncompleteSyntaxError
+from mathics_scanner.errors import IncompleteSyntaxError, ScanError
 from mathics_scanner.feed import SingleLineFeeder
 from mathics_scanner.tokeniser import Token, Tokeniser
 
@@ -17,9 +17,18 @@ def check_string(source_text, expected_text: str):
     assert token.text == expected_text
 
 
-def incomplete_error(s: str):
-    with pytest.raises(IncompleteSyntaxError):
+def incomplete_error(s: str, failure_msg: str):
+    with pytest.raises(IncompleteSyntaxError) as excinfo:
         get_tokens(s)
+
+    assert excinfo, failure_msg
+
+
+def scan_error(s: str, failure_msg: str):
+    with pytest.raises(ScanError) as excinfo:
+        get_tokens(s)
+
+    assert excinfo, failure_msg
 
 
 def single_token(source_text) -> Token:
@@ -45,9 +54,14 @@ def test_string():
     for ctrl_char in ("\b", "\f", "\n", "\r", "\t"):
         check_string(f'"a{ctrl_char}"', f'"a{ctrl_char}"')
 
-    incomplete_error(r'"a\X"')
+    # Broken:
+    # "a\050", "a\051" "a\052"
+    # Prescanning eagerly replaces the escape sequences with
+    # symbols "(", ")", or "*" respectively and this messes up parsing
+    # somehow.
     check_string(r'"abc"', r'"abc"')
-    incomplete_error(r'"abc')
     check_string(r'"abc(*def*)"', r'"abc(*def*)"')
     check_string(r'"a\"b\\c"', r'"a\"b\\c"')
-    incomplete_error(r'"\"')
+    incomplete_error(r'"abc', "String does not have terminating quote")
+    incomplete_error(r'"\"', "Unterminated escape sequence")
+    incomplete_error(r'"a\X"', '"X" is not a valid escape character')
