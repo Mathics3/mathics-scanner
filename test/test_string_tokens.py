@@ -51,8 +51,8 @@ def get_tokens(source_text: str):
 
 
 def test_string():
-    for ctrl_char in ("\b", "\f", "\n", "\r", "\t"):
-        check_string(f'"a{ctrl_char}"', f'"a{ctrl_char}"')
+    for escape_string in ("\b", "\f", "\n", "\r", "\t"):
+        check_string(f'"a{escape_string}"', f'"a{escape_string}"')
 
     # Broken:
     # "a\050", "a\051" "a\052"
@@ -64,4 +64,4 @@ def test_string():
     check_string(r'"a\"b\\c"', r'"a\"b\\c"')
     incomplete_error(r'"abc', "String does not have terminating quote")
     incomplete_error(r'"\"', "Unterminated escape sequence")
-    incomplete_error(r'"a\X"', '"X" is not a valid escape character')
+    scan_error(r'"a\X"', '"X" is not a valid escape character')

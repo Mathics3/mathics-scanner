@@ -47,7 +47,8 @@ class LineFeeder(metaclass=ABCMeta):
     def message(self, symbol_name: str, tag: str, *args) -> None:
         """
 
-         A Generic message appending routine. the ``self.messages`` message queue.
+        A Generic routine for appending a message to the ``self.messages`` message
+        queue.
 
         ``symbol_name`` is usually the string symbol name of the built-in function that
         is recording the error. "Syntax" error is the exception to this rule.
@@ -63,6 +64,7 @@ class LineFeeder(metaclass=ABCMeta):
 
         "Part" is the symbol_name, "partw" is the tag and args is:
         (<ListExpression: (<Integer: 10>,)>, <String: "abcde">)
+
         """
 
         if symbol_name == "Syntax":
@@ -74,7 +76,7 @@ class LineFeeder(metaclass=ABCMeta):
 
     def syntax_message(self, symbol_name: str, tag: str, *args) -> list:
         """
-        Append a syntax-message error message to the message queue.
+        Append a "Syntax" error message to the message queue.
         """
 
         if len(args) > 3:

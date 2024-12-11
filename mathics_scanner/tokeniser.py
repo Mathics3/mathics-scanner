@@ -414,19 +414,17 @@ class Tokeniser:
         self.prescanner.incomplete()
         self.code += self.prescanner.replace_escape_sequences()
 
-    def sntx_message(self, pos: Optional[int] = None, tag: Optional[str] = None):
+    def sntx_message(self, pos: Optional[int] = None):
         """
         Send a "syntx{b,f} error message to the input-reading feeder.
         """
         if pos is None:
             pos = self.pos
         pre, post = self.code[:pos], self.code[pos:].rstrip("\n")
-        if tag is None:
-            tag = "sntxb" if pos == 0 else "sntxf"
         if pos == 0:
-            self.feeder.message("Syntax", tag, post)
+            self.feeder.message("Syntax", "sntxb", post)
         else:
-            self.feeder.message("Syntax", tag, pre, post)
+            self.feeder.message("Syntax", "sntxf", pre, post)
 
     # TODO: Convert this to __next__ in the future.
     def next(self) -> Token:
@@ -551,13 +549,13 @@ class Tokeniser:
         "Break out from self.code the next token which is expected to be a String"
         start, end = self.pos, None
         self.pos += 1  # skip opening '"'
-        skipped_chars = []
+        newlines = []
         while True:
             if self.pos >= len(self.code):
                 if end is None:
                     # reached end while still inside string
                     self.incomplete()
-                    skipped_chars.append(self.pos)
+                    newlines.append(self.pos)
                 else:
                     break
             char = self.code[self.pos]
@@ -573,7 +571,7 @@ class Tokeniser:
                 if self.pos + 1 == len(self.code):
                     # We have a \ at the end of a line.
                     self.incomplete()
-                    skipped_chars.append(self.pos)
+                    newlines.append(self.pos)
 
                 # Code below is in pre-scanner. We might decide
                 # later to move that code here.
@@ -586,7 +584,7 @@ class Tokeniser:
                     # "\\" have the backslash preserved. But for other
                     # characters, the backslash is removed.
                     if self.code[self.pos + 1] not in (
-                        "b",  # bell?
+                        "b",  # word boundary?
                         "f",  # form-feed?
                         "n",  # newline
                         "r",  # carrage return
@@ -604,7 +602,7 @@ class Tokeniser:
             else:
                 self.pos += 1
 
-        indices = [start] + skipped_chars + [end]
+        indices = [start] + newlines + [end]
         result = "".join(
             self.code[indices[i] : indices[i + 1]] for i in range(len(indices) - 1)
         )
