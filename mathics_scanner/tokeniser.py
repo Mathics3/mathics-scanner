@@ -414,20 +414,22 @@ class Tokeniser:
         self.prescanner.incomplete()
         self.code += self.prescanner.replace_escape_sequences()
 
-    def sntx_message(self, pos: Optional[int] = None):
+    def sntx_message(self, pos: Optional[int] = None, tag: Optional[str] = None):
         """
         Send a "syntx{b,f} error message to the input-reading feeder.
         """
         if pos is None:
             pos = self.pos
         pre, post = self.code[:pos], self.code[pos:].rstrip("\n")
+        if tag is None:
+            tag = "sntxb" if pos == 0 else "sntxf"
         if pos == 0:
-            self.feeder.message("Syntax", "sntxb", post)
+            self.feeder.message("Syntax", tag, post)
         else:
-            self.feeder.message("Syntax", "sntxf", pre, post)
+            self.feeder.message("Syntax", tag, pre, post)
 
     # TODO: Convert this to __next__ in the future.
-    def next(self) -> "Token":
+    def next(self) -> Token:
         "Returns the next token."
         self._skip_blank()
         if self.pos >= len(self.code):
@@ -505,7 +507,7 @@ class Tokeniser:
             else:
                 break
 
-    def _token_mode(self, match: re.Match, tag: str, mode: str) -> "Token":
+    def _token_mode(self, match: re.Match, tag: str, mode: str) -> Token:
         """
         Pick out the text in ``match``, convert that into a ``Token``, and
         return that.
@@ -517,15 +519,15 @@ class Tokeniser:
         self._change_token_scanning_mode(mode)
         return Token(tag, text, match.start(0))
 
-    def t_Filename(self, match: re.Match) -> "Token":
+    def t_Filename(self, match: re.Match) -> Token:
         "Scan for ``Filename`` token and return that"
         return self._token_mode(match, "Filename", "expr")
 
-    def t_Get(self, match: re.Match) -> "Token":
+    def t_Get(self, match: re.Match) -> Token:
         "Scan for a ``Get`` token from ``match`` and return that token"
         return self._token_mode(match, "Get", "filename")
 
-    def t_Number(self, match: re.Match) -> "Token":
+    def t_Number(self, match: re.Match) -> Token:
         "Break out from ``match`` the next token which is expected to be a Number"
         text = match.group(0)
         pos = match.end(0)
@@ -537,39 +539,65 @@ class Tokeniser:
             self.pos = pos
         return Token("Number", text, match.start(0))
 
-    def t_Put(self, match: re.Match) -> "Token":
+    def t_Put(self, match: re.Match) -> Token:
         "Scan for a ``Put`` token and return that"
         return self._token_mode(match, "Put", "filename")
 
-    def t_PutAppend(self, match: re.Match) -> "Token":
+    def t_PutAppend(self, match: re.Match) -> Token:
         "Scan for a ``PutAppend`` token and return that"
         return self._token_mode(match, "PutAppend", "filename")
 
-    def t_String(self, match: re.Match) -> "Token":
+    def t_String(self, match: re.Match) -> Token:
         "Break out from self.code the next token which is expected to be a String"
         start, end = self.pos, None
         self.pos += 1  # skip opening '"'
-        newlines = []
+        skipped_chars = []
         while True:
             if self.pos >= len(self.code):
                 if end is None:
                     # reached end while still inside string
                     self.incomplete()
-                    newlines.append(self.pos)
+                    skipped_chars.append(self.pos)
                 else:
                     break
             char = self.code[self.pos]
+
+            # FIXME: This is wrong. If the previous
+            # character was \ then we don't break.
             if char == '"':
                 self.pos += 1
                 end = self.pos
                 break
 
             if char == "\\":
-                self.pos += 2
+                if self.pos + 1 == len(self.code):
+                    # We have a \ at the end of a line.
+                    self.incomplete()
+                    skipped_chars.append(self.pos)
+                else:
+                    # newlines (\n), tabs (\t) and double backslash
+                    # "\\" have the backslash preserved. But for other
+                    # characters, the backslash is removed.
+                    if self.code[self.pos + 1] not in (
+                        "b",  # bell?
+                        "f",  # form-feed?
+                        "n",  # newline
+                        "r",  # carrage return
+                        "t",  # tab
+                        "\\",  # Backslash
+                        '"',  # FIXME - Remove. Mathics3 code has bugs that rely
+                        # on this
+                    ):
+                        self.feeder.message(
+                            "Syntax", "stresc", self.code[self.pos : self.pos + 2]
+                        )
+                        return Token("String", "", start)
+
+                    self.pos += 2
             else:
                 self.pos += 1
 
-        indices = [start] + newlines + [end]
+        indices = [start] + skipped_chars + [end]
         result = "".join(
             self.code[indices[i] : indices[i + 1]] for i in range(len(indices) - 1)
         )

@@ -20,46 +20,66 @@ class LineFeeder(metaclass=ABCMeta):
         :param filename: A string that describes the source of the feeder, i.e.
                          the filename that is being feed.
         """
-        self.messages: List[str] = []
+
+        # A message is a list that starts out with a "symbol_name", like "Part",
+        # a message tag, like "partw", and a list of argument to be used in
+        # creating a message in list of messages.
+        self.messages: List[list] = []
+
         self.lineno = 0
         self.filename = filename
 
     @abstractmethod
-    def feed(self):
+    def feed(self) -> str:
         """
         Consume and return next line of code. Each line should be followed by a
         newline character. Returns '' after all lines are consumed.
         """
-
-        return ""
+        ...
 
     @abstractmethod
     def empty(self) -> bool:
         """
         Return True once all lines have been consumed.
         """
+        ...
 
-        return True
-
-    def message(self, sym: str, tag: str, *args) -> None:
-        """
-        Append a generic message of type ``sym`` to the message queue.
+    def message(self, symbol_name: str, tag: str, *args) -> None:
         """
 
-        if sym == "Syntax":
-            message = self.syntax_message(sym, tag, *args)
+         A Generic message appending routine. the ``self.messages`` message queue.
+
+        ``symbol_name`` is usually the string symbol name of the built-in function that
+        is recording the error. "Syntax" error is the exception to this rule.
+
+        ``tag`` specifies a class of errors that this error belongs to.
+
+        ``*args`` are the specific message arguments. Usually (but not here)
+        the arguments are used to fill out a template specified by ``tag``
+
+        For example, consider this message displayed:
+
+            Part::partw: Part {10} of abcde does not exist.
+
+        "Part" is the symbol_name, "partw" is the tag and args is:
+        (<ListExpression: (<Integer: 10>,)>, <String: "abcde">)
+        """
+
+        if symbol_name == "Syntax":
+            message = self.syntax_message(symbol_name, tag, *args)
         else:
-            message = [sym, tag] + list(args)
+            message = [symbol_name, tag] + list(args)
+
         self.messages.append(message)
 
-    def syntax_message(self, sym: str, tag: str, *args) -> list:
+    def syntax_message(self, symbol_name: str, tag: str, *args) -> list:
         """
-        Append a message concerning syntax errors to the message queue.
+        Append a syntax-message error message to the message queue.
         """
 
         if len(args) > 3:
             raise ValueError("Too many args.")
-        message = [sym, tag]
+        message = [symbol_name, tag]
         for i in range(3):
             if i < len(args):
                 message.append(f'"{args[i]}"')
@@ -93,7 +113,7 @@ class MultiLineFeeder(LineFeeder):
         else:
             self.lines = lines
 
-    def feed(self):
+    def feed(self) -> str:
         if self.lineno < len(self.lines):
             result = self.lines[self.lineno]
             self.lineno += 1
@@ -118,7 +138,7 @@ class SingleLineFeeder(LineFeeder):
         self.code = code
         self._empty = False
 
-    def feed(self):
+    def feed(self) -> str:
         if self._empty:
             return ""
         self._empty = True
