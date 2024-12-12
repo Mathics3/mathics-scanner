@@ -427,7 +427,7 @@ class Tokeniser:
             self.feeder.message("Syntax", "sntxf", pre, post)
 
     # TODO: Convert this to __next__ in the future.
-    def next(self) -> Token:
+    def next(self) -> "Token":
         "Returns the next token."
         self._skip_blank()
         if self.pos >= len(self.code):
@@ -505,7 +505,7 @@ class Tokeniser:
             else:
                 break
 
-    def _token_mode(self, match: re.Match, tag: str, mode: str) -> Token:
+    def _token_mode(self, match: re.Match, tag: str, mode: str) -> "Token":
         """
         Pick out the text in ``match``, convert that into a ``Token``, and
         return that.
@@ -517,15 +517,15 @@ class Tokeniser:
         self._change_token_scanning_mode(mode)
         return Token(tag, text, match.start(0))
 
-    def t_Filename(self, match: re.Match) -> Token:
+    def t_Filename(self, match: re.Match) -> "Token":
         "Scan for ``Filename`` token and return that"
         return self._token_mode(match, "Filename", "expr")
 
-    def t_Get(self, match: re.Match) -> Token:
+    def t_Get(self, match: re.Match) -> "Token":
         "Scan for a ``Get`` token from ``match`` and return that token"
         return self._token_mode(match, "Get", "filename")
 
-    def t_Number(self, match: re.Match) -> Token:
+    def t_Number(self, match: re.Match) -> "Token":
         "Break out from ``match`` the next token which is expected to be a Number"
         text = match.group(0)
         pos = match.end(0)
@@ -537,15 +537,15 @@ class Tokeniser:
             self.pos = pos
         return Token("Number", text, match.start(0))
 
-    def t_Put(self, match: re.Match) -> Token:
+    def t_Put(self, match: re.Match) -> "Token":
         "Scan for a ``Put`` token and return that"
         return self._token_mode(match, "Put", "filename")
 
-    def t_PutAppend(self, match: re.Match) -> Token:
+    def t_PutAppend(self, match: re.Match) -> "Token":
         "Scan for a ``PutAppend`` token and return that"
         return self._token_mode(match, "PutAppend", "filename")
 
-    def t_String(self, match: re.Match) -> Token:
+    def t_String(self, match: re.Match) -> "Token":
         "Break out from self.code the next token which is expected to be a String"
         start, end = self.pos, None
         self.pos += 1  # skip opening '"'
@@ -559,46 +559,13 @@ class Tokeniser:
                 else:
                     break
             char = self.code[self.pos]
-
-            # FIXME: This is wrong. If the previous
-            # character was \ then we don't break.
             if char == '"':
                 self.pos += 1
                 end = self.pos
                 break
 
             if char == "\\":
-                if self.pos + 1 == len(self.code):
-                    # We have a \ at the end of a line.
-                    self.incomplete()
-                    newlines.append(self.pos)
-
-                # Code below is in pre-scanner. We might decide
-                # later to move that code here.
-                # elif self.code[self.pos + 1] in "01234567":
-                #     # See if we have an octal number.
-                #     try_parse_base(1, 4, 8)
-
-                else:
-                    # newlines (\n), tabs (\t) and double backslash
-                    # "\\" have the backslash preserved. But for other
-                    # characters, the backslash is removed.
-                    if self.code[self.pos + 1] not in (
-                        "b",  # word boundary?
-                        "f",  # form-feed?
-                        "n",  # newline
-                        "r",  # carrage return
-                        "t",  # tab
-                        "\\",  # Backslash
-                        '"',  # FIXME - Remove. Mathics3 code has bugs that rely
-                        # on this
-                    ):
-                        self.feeder.message(
-                            "Syntax", "stresc", self.code[self.pos : self.pos + 2]
-                        )
-                        raise ScanError()
-
-                    self.pos += 2
+                self.pos += 2
             else:
                 self.pos += 1
 
