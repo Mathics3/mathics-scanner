@@ -98,7 +98,6 @@ class Prescanner(object):
                     self.feeder.message("Syntax", "sntoct2")
                 elif last == 3:
                     self.feeder.message("Syntax", "sntoct1")
-                    raise ScanError()
                 elif last == 4:
                     self.feeder.message("Syntax", "snthex")
                 else:
@@ -152,16 +151,6 @@ class Prescanner(object):
             # Stay in same line fragment, but advance the cursor position.
             self.pos = i + 1
 
-        # FIXME:
-        #  The following code is boneheadedly wrong because
-        #  the surrounding lexical context determines whether
-        #  an escape sequences should be valid or not.
-        #  For example, inside a comment, there is no such thing
-        #  as an invalid escape sequence. And this cause  \050 which is
-        #  a valid escape sequence, parenthesis, to get treated like
-        #  a grouping symbol inside of a string.
-        # ...
-        #
         # In the following loop, we look for and replace escape
         # sequences. The current character under consideration is at
         # self.code[self.pos].  When an escape sequence is found at

@@ -3,14 +3,13 @@
 Tests translation from strings to sequences of tokens.
 """
 
+import pytest
 import random
 import sys
 
-import pytest
-
-from mathics_scanner.errors import IncompleteSyntaxError, InvalidSyntaxError, ScanError
+from mathics_scanner.tokeniser import Tokeniser, Token, is_symbol_name
+from mathics_scanner.errors import ScanError, IncompleteSyntaxError, InvalidSyntaxError
 from mathics_scanner.feed import SingleLineFeeder
-from mathics_scanner.tokeniser import Token, Tokeniser, is_symbol_name
 
 
 def check_number(code):
@@ -21,6 +20,11 @@ def check_number(code):
 def check_symbol(code):
     token = single_token(code)
     assert token, Token("Symbol", code, 0)
+
+
+def check_string(code):
+    token = single_token(code)
+    assert token, Token("String", code, 0)
 
 
 def incomplete_error(string):
@@ -180,15 +184,12 @@ def test_precision():
     check_number("1.5`10")
 
 
-# String tests (with many more than those
-# below are now in test_string_token.py
-#
-# def test_string():
-#     check_string(r'"abc"')
-#     incomplete_error(r'"abc')
-#     check_string(r'"abc(*def*)"')
-#     check_string(r'"a\"b\\c"')
-#     incomplete_error(r'"\"')
+def test_string():
+    check_string(r'"abc"')
+    incomplete_error(r'"abc')
+    check_string(r'"abc(*def*)"')
+    check_string(r'"a\"b\\c"')
+    incomplete_error(r'"\"')
 
 
 def test_set():
