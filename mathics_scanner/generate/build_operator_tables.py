@@ -5,6 +5,7 @@
 import json
 import os.path as osp
 import sys
+from collections import defaultdict
 from pathlib import Path
 from typing import Dict
 
@@ -53,6 +54,7 @@ def compile_tables(
     for k, v in operator_data.items():
         operator_precedence[k] = v["precedence"]
 
+    box_operators = {}
     flat_binary_operators = {}
     left_binary_operators = {}
     miscellaneous_operators = {}
@@ -60,6 +62,7 @@ def compile_tables(
     no_meaning_postfix_operators = {}
     no_meaning_prefix_operators = {}
     nonassoc_binary_operators = {}
+    operator2string = defaultdict(list)
     postfix_operators = {}
     prefix_operators = {}
     right_binary_operators = {}
@@ -96,6 +99,9 @@ def compile_tables(
         elif affix == "Postfix":
             operator_dict = postfix_operators
 
+        if operator_info.get("box-operator", False):
+            box_operators[operator_name] = operator_info["operator"]
+
         # operator_dict tables are tied into the Mathics3
         # parser. Extend this table, for example to
         # include the operator unicode, requires
@@ -108,6 +114,12 @@ def compile_tables(
             continue
 
         unicode_char = character_info.get("unicode-equivalent", "no-unicode")
+        ascii_chars = character_info.get("ascii", "no-ascii")
+
+        if unicode_char != "no-unicode":
+            operator2string[operator_name].append(unicode_char)
+        if ascii_chars != "no-ascii":
+            operator2string[operator_name].append(ascii_chars)
 
         if operator_info.get("meaningful", True) is False and (
             character_data.get(operator_name)
@@ -128,6 +140,7 @@ def compile_tables(
                 print(f"FIXME: affix {affix} of {operator_name} not handled")
 
     return {
+        "box-operators": box_operators,
         "flat-binary-operators": flat_binary_operators,
         "left-binary-operators": left_binary_operators,
         "miscellaneous-operators": miscellaneous_operators,
@@ -135,6 +148,7 @@ def compile_tables(
         "no-meaning-postfix-operators": no_meaning_postfix_operators,
         "no-meaning-prefix-operators": no_meaning_prefix_operators,
         "non-associative-binary-operators": nonassoc_binary_operators,
+        "operator-to_string": operator2string,
         "operator-precedence": operator_precedence,
         "postfix-operators": postfix_operators,
         "prefix-operators": prefix_operators,
