@@ -222,12 +222,18 @@ def init_module():
         ("VerticalSeparator", r" \uF432 "),
     ]
 
-    for table in ("no-meaning-infix-operators",):
-        table_info = OPERATOR_DATA[table]
+    for table_name in ("box-operators", "no-meaning-infix-operators"):
+        table_info = OPERATOR_DATA[table_name]
         for operator_name, unicode in table_info.items():
             # if any([tup[0] == operator_name for tup in tokens]):
             #     print(f"Please remove {operator_name}")
-            tokens.append((operator_name, f" {unicode} "))
+
+            # Ternary operators have two character symbols
+            # in a list. For tokens, we just want the first
+            # of the pair
+            if isinstance(unicode, list):
+                unicode = unicode[0]
+            tokens.append((operator_name, rf" {unicode} "))
 
     literal_tokens = {
         "!": ["Unequal", "Factorial2", "Factorial"],

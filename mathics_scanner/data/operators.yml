@@ -111,6 +111,19 @@
 #       "non-associative-operators", "unknown" under the key "miscellaneous-operators",
 #        and None as "flat_binary_operators.
 #
+# box-operator
+# ------------
+#
+# This field exists and is set true if the operator is used in boxing. Boxing
+# operators are enclosed in \(  \) pairs.
+#
+# operator
+# --------
+#
+# This field exists for box-operators. In the future, we may expand to other operators.
+# (Non box operators are listed in fields of named-characters.)
+# It is the string vlaue for the operator.
+
 # meaningful
 # ---------
 #  This field "true" if WMA defines a meaning for the operator and "false" if not.
@@ -1911,13 +1924,12 @@ FormBox:
   WolframLanguageData-corrected: 78
   UnicodeCharacters.tr:
   UnicodeCharacters-corrected.tr: 160
-  # N-tokens: {}
-  # L-tokens: {"\\`"}
-  # O-tokens: {}
-  usage: "expr1 \\ expr2"
+  operator: "\\`"
+  usage: ["\\(`input\\)", "\\(form\\`input\\)"]
   arity: Binary
   affix: Infix
   associativity: "unknown"
+  box-operator: true
   meaningful: true
   # comments:
 
@@ -1928,13 +1940,12 @@ FractionBox:
   WolframLanguageData-corrected: 31
   UnicodeCharacters.tr:
   UnicodeCharacters-corrected.tr: 590
-  # N-tokens: {}
-  # L-tokens: {"\/"}
-  # O-tokens: {}
-  usage: "\\( expr1 \/  expr2 \\)"
+  operator: "\/"
+  usage: "\\(x\/y\\)"
   arity: Binary
   affix: Infix
   associativity: "unknown"
+  box-operator: true
   meaningful: true
   # comments:
 
@@ -2445,14 +2456,13 @@ InterpretedBox:
   WolframLanguageData-corrected: None
   UnicodeCharacters.tr: None
   UnicodeCharacters-corrected.tr: None
-  # N-tokens: None
-  # L-tokens: None
-  # O-tokens: None
-  # usage: "None"
+  operator: "\\!"
+  # usage: "\\!\(...\)"
   FullForm: None
-  arity: Binary
-  affix: Infix
+  arity: Unary
+  affix: Prefix
   associativity: null
+  box-operator: true
   meaningful: true
   # comments: None
 
@@ -4511,13 +4521,12 @@ OverscriptBox:
   WolframLanguageData-corrected: 7
   UnicodeCharacters.tr:
   UnicodeCharacters-corrected.tr: 790
-  # N-tokens: {}
-  # L-tokens: {"\&"}
-  # O-tokens: {}
-  # usage: "expr1 \& expr2"
+  operator: "\\&"
+  usage: "\\(x\\&y\\)"
   arity: Binary
   affix: Infix
   associativity: "unknown"
+  box-operator: true
   meaningful: true
   # comments:
 
@@ -4528,12 +4537,11 @@ OverunderscriptBox:
   WolframLanguageData-corrected: 7.5
   UnicodeCharacters.tr:
   UnicodeCharacters-corrected.tr: 785
-  # N-tokens: {}
-  # L-tokens: {"\&"}
-  # O-tokens: {"\%"}
-  # usage: "expr1", "\&", "expr2 \% expr3"
+  operator: ["\\+", "\\%"]
+  usage: "\\(x\\+y\\%z\\)"
   arity: Ternary
   affix: Infix
+  box-operator: true
   associativity: "unknown"
   meaningful: true
   # comments:
@@ -5079,13 +5087,12 @@ RadicalBox:
   WolframLanguageData-corrected: 22
   UnicodeCharacters.tr:
   UnicodeCharacters-corrected.tr: 640
-  # N-tokens: {"\@"}
-  # L-tokens: {}
-  # O-tokens: {"\%"}
-  # usage: "\@", "expr1 \% expr2"
+  operator: ["\\@", "\\%"]
+  usage: "\\(\\@x\\%n\\)"
   FullForm:
-  arity: Binary
+  arity: Ternary
   affix: Prefix
+  box-operator: true
   associativity: right
   meaningful: true
   # comments:
@@ -5868,14 +5875,13 @@ SqrtBox:
   WolframLanguageData-corrected: 22
   UnicodeCharacters.tr: 650
   UnicodeCharacters-corrected.tr: 640
-  # N-tokens: {"\@"}
-  # L-tokens: {}
-  # O-tokens: {}
-  # usage: "{{"\@", "expr"}}"
+  operator: "\\@"
+  usage: "\\(\\@x\\)"
   FullForm:
   arity: Unary
   affix: Prefix
   associativity: "unknown"
+  box-operator: true
   meaningful: true
   # comments:
 
@@ -6056,14 +6062,13 @@ SubscriptBox:
   WolframLanguageData-corrected: 8
   UnicodeCharacters.tr:
   UnicodeCharacters-corrected.tr: 775
-  # N-tokens: {}
-  # L-tokens: {"\_"}
-  # O-tokens: {}
-  # usage: "expr1 \_ expr2"
+  operator: "\\_"
+  usage: "\\(x\\\_y\\)"
   FullForm:
   arity: Binary
   affix: Infix
   associativity: "unknown"
+  box-operator: true
   meaningful: true
   # comments:
 
@@ -6274,20 +6279,19 @@ SuperDagger:
   meaningful: true
   # comments:
 
-SuperscriptBox:
+SubSuperscriptBox:
   precedence: 590
   WolframLanguageData: 21
   WolframLanguageData-corrected: 21
   UnicodeCharacters.tr:
   UnicodeCharacters-corrected.tr: 660
-  # N-tokens: {}
-  # L-tokens: {"\^"}
-  # O-tokens: {}
-  # usage: "expr1 \^ expr2"
+  operator: ["\_", "\\%"]
+  usage: "\\(x\_y\\%z\\)"
   FullForm:
-  arity: Binary
+  arity: Ternary
   affix: Infix
   associativity: "unknown"
+  box-operator: true
   meaningful: true
   # comments:
 
@@ -6308,6 +6312,22 @@ Superset:
   meaningful: false
   # comments:
 
+SuperscriptBox:
+  precedence: 590
+  WolframLanguageData: 21
+  WolframLanguageData-corrected: 21
+  UnicodeCharacters.tr:
+  UnicodeCharacters-corrected.tr: 660
+  operator: "\\^"
+  usage: "\\(x\\^_y\\)"
+  FullForm:
+  arity: Binary
+  affix: Infix
+  associativity: "unknown"
+  box-operator: true
+  meaningful: true
+  # comments:
+
 SupersetEqual:
   precedence: 250
   WolframLanguageData:
@@ -6323,24 +6343,6 @@ SupersetEqual:
   affix: Infix
   associativity: null
   meaningful: false
-  # comments:
-
-SupersubscriptBox:
-  Precedence-Function: 690
-  precedence: 590
-  WolframLanguageData: 21
-  WolframLanguageData-corrected: 21
-  UnicodeCharacters.tr:
-  UnicodeCharacters-corrected.tr: 660
-  # N-tokens: {}
-  # L-tokens: {"\^"}
-  # O-tokens: {"\%"}
-  # usage: "expr1", "\^", "expr2 \% expr3"
-  FullForm:
-  arity: Ternary
-  affix: Infix
-  associativity: right
-  meaningful: true
   # comments:
 
 TagSet:
@@ -6666,14 +6668,13 @@ UnderoverscriptBox:
   WolframLanguageData-corrected: 7.5
   UnicodeCharacters.tr:
   UnicodeCharacters-corrected.tr: 785
-  # N-tokens: {}
-  # L-tokens: {"\+"}
-  # O-tokens: {"\%"}
-  # usage: "expr1", "\+", "expr2 \% expr3"
+  operator: ["\\+", "\\%"]
+  usage: "\\(x\\+y\\%z\\)"
   FullForm:
   arity: Ternary
   affix: Infix
   associativity: "unknown"
+  box-operator: true
   meaningful: true
   # comments:
 
@@ -6684,13 +6685,12 @@ UnderscriptBox:
   WolframLanguageData-corrected: 7
   UnicodeCharacters.tr:
   UnicodeCharacters-corrected.tr: 790
-  # N-tokens: {}
-  # L-tokens: {"\+"}
-  # O-tokens: {}
-  usage: "expr1 \\+ expr2"
+  operator: "\\+"
+  usage: "\\(x\\+y\\)"
   FullForm:
   arity: Binary
   affix: Infix
+  box-operator: true
   associativity: "unknown"
   meaningful: true
   # comments:
