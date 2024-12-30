@@ -6933,8 +6933,10 @@ Not:
   esc-alias: '!'
   has-unicode-inverse: false
   is-letter-like: false
-  unicode-equivalent: "\u00AC"
   operator-name: Not
+  unicode-equivalent-name: NOT SIGN
+  unicode-equivalent: "\u00AC"
+  unicode-reference: https://www.compart.com/en/unicode/U+00AC
   wl-reference: https://reference.wolfram.com/language/ref/character/Not.html
   wl-unicode: "\00AC"
   wl-unicode-name: NOT SIGN
@@ -7641,7 +7643,7 @@ OptionKey:
   wl-unicode: "\uF7D2"
 
 Or:
-  amslatex: "$\\vert"  # Also $\\lor$
+  amslatex: "$\\vert$"  # Also $\\lor$
   ascii: "||"
   esc-alias: '||'
   has-unicode-inverse: false
