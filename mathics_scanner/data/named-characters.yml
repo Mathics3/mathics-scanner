@@ -7641,6 +7641,8 @@ OptionKey:
   wl-unicode: "\uF7D2"
 
 Or:
+  amslatex: "$\\vert"  # Also $\\lor$
+  ascii: "||"
   esc-alias: '||'
   has-unicode-inverse: false
   is-letter-like: false
