@@ -110,6 +110,8 @@ def init_module():
         ("LeftRowBox", r" \\\( "),
         ("RightRowBox", r" \\\) "),
         # Box Operators which are valid only inside Box delimiters
+        # FIXME: we should be able to get this from JSON.
+        # Something prevents us from matching up operators here though.
         ("InterpretedBox", r" \\\! "),
         ("SuperscriptBox", r" \\\^ "),
         ("SubscriptBox", r" \\\_ "),
