@@ -68,13 +68,13 @@ class LineFeeder(metaclass=ABCMeta):
         """
 
         if symbol_name == "Syntax":
-            message = self.syntax_message(symbol_name, tag, *args)
+            next_message = self.syntax_message(symbol_name, tag, *args)
         else:
-            message = [symbol_name, tag] + list(args)
+            next_message = [symbol_name, tag] + list(args)
 
-        self.messages.append(message)
+        self.messages.append(next_message)
 
-    def syntax_message(self, symbol_name: str, tag: str, *args) -> list:
+    def syntax_message(self, symbol_name: str, tag: str, *args) -> List[str]:
         """
         Append a "Syntax" error message to the message queue.
         """
@@ -168,11 +168,11 @@ class FileLineFeeder(LineFeeder):
 
     def feed(self) -> str:
         result = self.fileobject.readline()
-        if self.trace_fn:
-            self.trace_fn(self.lineno + 1, result)
         while result == "\n":
             result = self.fileobject.readline()
             self.lineno += 1
+            if self.trace_fn:
+                self.trace_fn(self.lineno, result)
         if result:
             self.lineno += 1
         else:
