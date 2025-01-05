@@ -378,7 +378,7 @@ class Token:
         )
 
     def __repr__(self):
-        return f"Token({self.tag}, {self.text}, {self.pos})"
+        return f"Token({repr(self.tag)}, {repr(self.text)}, {self.pos})"
 
 
 class Tokeniser:

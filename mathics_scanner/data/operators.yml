@@ -633,7 +633,7 @@ ClockwiseContourIntegral:
   # L-tokens: {}
   # O-tokens: {""}
   usage: "∲ f(x) x"
-  FullForm: Integrate[expr1, expr2]
+  # FullForm: ClockwiseContourIntegrate[expr1, expr2]
   arity: Binary
   affix: Compound
   associativity: right
@@ -1313,8 +1313,8 @@ DoubleBracketingBar:
   # N-tokens: {""}
   # L-tokens: {}
   # O-tokens: {""}
-  # usage: "expr"
-  # FullForm: "DoubleBracketingBar[expr, \[Ellipsis]]"
+  usage: "x, y, z"
+  FullForm: "DoubleBracketingBar[x, y, z]"
   arity: n-ary
   affix: Matchfix
   associativity: null
@@ -1332,7 +1332,7 @@ DoubleContourIntegral:
   # L-tokens: {}
   # O-tokens: {""}
   usage: "∯ f(x) x"
-  FullForm: Integrate[expr1, expr2]
+  FullForm: Integrate[x, x]
   arity: Binary
   affix: Compound
   associativity: right
@@ -1940,7 +1940,7 @@ FractionBox:
   WolframLanguageData-corrected: 31
   UnicodeCharacters.tr:
   UnicodeCharacters-corrected.tr: 590
-  operator: "\/"
+  operator: "\\/"
   usage: "\\(x\/y\\)"
   arity: Binary
   affix: Infix
@@ -2046,7 +2046,7 @@ FunctionApply:
   # L-tokens: {"["}
   # O-tokens: {"]"}
   usage: "f [ body ]"
-  # FullForm: "f[expr1, \[Ellipsis]]"
+  FullForm: "f[body]"
   arity: n-ary
   affix: Postfix
   associativity: left
@@ -2113,8 +2113,8 @@ Get:
   # N-tokens: {"<<"}
   # L-tokens: {}
   # O-tokens: {}
-  # usage: "<< filename"
-  # FullForm: Get["filename"]
+  usage: "<< filename"
+  FullForm: Get["filename"]
   arity: Unary
   affix: Prefix
   associativity: right
@@ -2425,8 +2425,8 @@ Integrate:
   # N-tokens: {"∫"}
   # L-tokens: {}
   # O-tokens: {""}
-  # usage: "∫", "expr1  expr2"
-  FullForm: Integrate[expr1, expr2]
+  usage: "∫ f  x"
+  FullForm: Integrate[f, x]
   arity: Binary
   affix: Compound
   associativity: right
@@ -2515,7 +2515,7 @@ InvisiblePrefixScriptBase:
   affix: Prefix
   associativity: right
   meaningful: false
-  # comments: Usage and Parse may not be correct.
+  # comments:
 
 Laplacian:
   Precedence-Function: 670
@@ -2524,15 +2524,15 @@ Laplacian:
   WolframLanguageData-corrected: 24
   UnicodeCharacters.tr: 620
   UnicodeCharacters-corrected.tr: 620
-  # N-tokens: {"∆"}
+  # N-tokens: {"∇"}
   # L-tokens: {}
   # O-tokens: {}
-  # usage: "{{"∆", "expr"}}"
+  usage: "∇^2_x"
   arity: Unary
   affix: Prefix
   associativity: right
   meaningful: true
-  # comments: Usage and Parse may not be correct.
+  # comments:
 
 LeftArrow:
   precedence: 270
@@ -2560,7 +2560,7 @@ LeftArrowBar:
   # N-tokens: {}
   # L-tokens: {"⇤"}
   # O-tokens: {}
-  # usage: "x ⇤ y"
+  usage: "x ⇤ y"
   FullForm: LeftArrowBar[x, y]
   arity: Binary
   affix: Infix
@@ -2577,7 +2577,7 @@ LeftArrowRightArrow:
   # N-tokens: {}
   # L-tokens: {"⇆"}
   # O-tokens: {}
-  # usage: "x ⇆ y"
+  usage: "x ⇆ y"
   FullForm: LeftArrowRightArrow[x, y]
   arity: Binary
   affix: Infix
@@ -2594,7 +2594,7 @@ LeftDownTeeVector:
   # N-tokens: {}
   # L-tokens: {"⥡"}
   # O-tokens: {}
-  # usage: "x ⥡ y"
+  usage: "x ⥡ y"
   FullForm: LeftDownTeeVector[x, y]
   arity: Binary
   affix: Infix
@@ -2662,7 +2662,7 @@ LeftRightVector:
   # N-tokens: {}
   # L-tokens: {"⥎"}
   # O-tokens: {}
-  # usage: "x ⥎ y"
+  usage: "x ⥎ y"
   FullForm: LeftRightVector[x, y]
   arity: Binary
   affix: Infix
@@ -2679,7 +2679,7 @@ LeftTee:
   # N-tokens: {}
   # L-tokens: {"⊣"}
   # O-tokens: {}
-  # usage: "expr1 ⊣ expr2"
+  usage: "expr1 ⊣ expr2"
   FullForm: LeftTee[expr1, expr2]
   arity: Binary
   affix: Infix
@@ -2696,7 +2696,7 @@ LeftTeeArrow:
   # N-tokens: {}
   # L-tokens: {"↤"}
   # O-tokens: {}
-  # usage: "x ↤ y"
+  usage: "x ↤ y"
   FullForm: LeftTeeArrow[x, y]
   arity: Binary
   affix: Infix
@@ -2764,7 +2764,7 @@ LeftTriangleEqual:
   # N-tokens: {}
   # L-tokens: {"⊴"}
   # O-tokens: {}
-  # usage: "x ⊴ y"
+  usage: "x ⊴ y"
   FullForm: LeftTriangleEqual[x, y]
   arity: Binary
   affix: Infix
@@ -3037,8 +3037,8 @@ List:
   # N-tokens: {"{"}
   # L-tokens: {}
   # O-tokens: {"}"}
-  # usage: "{ expr }"
-  FullForm: List[expr, \[Ellipsis]]
+  usage: "{ a, b, c }"
+  FullForm: List[a, b, c]
   arity: n-ary
   affix: Matchfix
   associativity: null
