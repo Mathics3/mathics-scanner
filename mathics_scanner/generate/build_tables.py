@@ -247,6 +247,7 @@ ALL_FIELDS = [
     "named-characters",
     "operator-names",
     "operator-to-ascii",
+    "operator-to-amslatex",
     "operator-to-precedence",
     "operator-to-unicode",
     #   "unicode-operators",  # not used yet
