@@ -49,10 +49,10 @@ def compile_tables(
     This facilitates fast access of this information by clients needing this
     information.
     """
-    operator_precedence = {}
+    operator_precedences = {}
 
     for k, v in operator_data.items():
-        operator_precedence[k] = v["precedence"]
+        operator_precedences[k] = v["precedence"]
 
     box_operators = {}
     flat_binary_operators: Dict[str, int] = {}
@@ -153,7 +153,7 @@ def compile_tables(
         "non-associative-binary-operators": nonassoc_binary_operators,
         "operator-to-amslatex": operator2amslatex,
         "operator-to_string": operator2string,
-        "operator-precedence": operator_precedence,
+        "operator-precedences": operator_precedences,
         "postfix-operators": postfix_operators,
         "prefix-operators": prefix_operators,
         "right-binary-operators": right_binary_operators,
