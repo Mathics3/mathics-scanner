@@ -32,6 +32,13 @@
 #                        equivalent that should replace other variants of it,
 #                        e.g. named character or ascii equivalent.
 #
+#   is-builtin-constant: If present, a boolean whether this is a Builtin Symbol as
+#                        defined by WMA that acts like a constant (or a nullary function).
+#                        Degree, I, Infinity, and PI are some examples such constants.
+#                        Usually, if this field is present it will be "true"; for "false"
+ #                       values (the majority), the field is omitted.
+#
+#
 #   is-letter-like: Whether or not this named-character is "letter-like", or
 #                   can be used as part of a symbol. For example \[alpha]
 #                   is letter-like. Therefore we can write: \[alpha]5 = "testing"
@@ -1986,6 +1993,7 @@ Decrement:
 Degree:
   esc-alias: deg
   has-unicode-inverse: false
+  is-builtin-constant: true
   is-letter-like: true
   unicode-equivalent: "\xB0"
   unicode-equivalent-name: DEGREE SIGN
@@ -3654,6 +3662,7 @@ ExponentialE:
   amslatex: "\\ExponentialE"
   esc-alias: ee
   has-unicode-inverse: true
+  is-builtin-constant: true
   is-letter-like: true
   unicode-equivalent: "\u2147"
   unicode-equivalent-name: DOUBLE-STRUCK ITALIC SMALL E
@@ -5854,6 +5863,7 @@ ImaginaryI:
   amslatex: "\\ComplexI"
   esc-alias: ii
   has-unicode-inverse: true
+  is-builtin-constant: true
   is-letter-like: true
   unicode-equivalent: "\u2148"
   unicode-equivalent-name: DOUBLE-STRUCK ITALIC SMALL I
@@ -5865,6 +5875,7 @@ ImaginaryJ:
   amslatex: "\\ComplexJ"
   esc-alias: jj
   has-unicode-inverse: true
+  is-builtin-constant: true
   is-letter-like: true
   unicode-equivalent: "\u2149"
   unicode-equivalent-name: DOUBLE-STRUCK ITALIC SMALL J
@@ -5905,6 +5916,7 @@ Infinity:
   amslatex: "\\infty"
   esc-alias: inf
   has-unicode-inverse: false
+  is-builtin-constant: true
   is-letter-like: true
   unicode-equivalent: "\u221E"
   unicode-equivalent-name: INFINITY
@@ -7751,6 +7763,7 @@ Pi:
   amslatex: "$\\pi$"
   esc-alias: p
   has-unicode-inverse: false
+  is-builtin-constant: true
   is-letter-like: false
   unicode-equivalent: "\u03C0"
   unicode-equivalent-name: GREEK SMALL LETTER PI

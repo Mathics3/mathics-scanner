@@ -15,6 +15,8 @@ with open(data_dir / "operators.yml", "r", encoding="utf8") as operator_f, open(
     operator_data = yaml.load(operator_f, Loader=yaml.FullLoader)
     character_data = yaml.load(character_f, Loader=yaml.FullLoader)
 
+operator_names = set(tuple(operator_data.keys()))
+
 
 def test_associativity_field():
     """
@@ -41,7 +43,6 @@ def test_operators():
             if "operator-name" in value
         ]
     )
-    operator_names = set(tuple(operator_data.keys()))
 
     left_character_operators = {
         operator_name
@@ -116,3 +117,14 @@ def test_meaningful_field():
                 "Postfix",
                 "Prefix",
             ), f"affix {affix} of {operator_name} not handled"
+
+
+def test_is_builtin_constant():
+    """
+    Check builtin constant names are operators (keys in the operator dictionary).
+    """
+    builtin_constant_names = [
+        name for name, info in character_data.items() if info.get("is_builtin_constant")
+    ]
+    for constant_name in builtin_constant_names:
+        assert constant_name in operator_names

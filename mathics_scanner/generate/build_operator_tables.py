@@ -7,7 +7,7 @@ import os.path as osp
 import sys
 from collections import defaultdict
 from pathlib import Path
-from typing import Dict
+from typing import Any, Dict, Tuple
 
 import click
 import yaml
@@ -55,25 +55,26 @@ def compile_tables(
         operator_precedence[k] = v["precedence"]
 
     box_operators = {}
-    flat_binary_operators = {}
-    left_binary_operators = {}
-    miscellaneous_operators = {}
+    flat_binary_operators: Dict[str, int] = {}
+    left_binary_operators: Dict[str, int] = {}
+    miscellaneous_operators: Dict[str, int] = {}
     no_meaning_infix_operators = {}
     no_meaning_postfix_operators = {}
     no_meaning_prefix_operators = {}
-    nonassoc_binary_operators = {}
+    nonassoc_binary_operators: Dict[str, int] = {}
     operator2string = defaultdict(list)
-    postfix_operators = {}
-    prefix_operators = {}
-    right_binary_operators = {}
-    ternary_operators = {}
+    operator2amslatex: Dict[str, str] = {}
+    postfix_operators: Dict[str, int] = {}
+    prefix_operators: Dict[str, int] = {}
+    right_binary_operators: Dict[str, int] = {}
+    ternary_operators: Dict[str, Tuple[int, int]] = {}
 
     for operator_name, operator_info in operator_data.items():
         precedence = operator_info["precedence"]
 
         affix = operator_info["affix"]
         arity = operator_info["arity"]
-        operator_dict = None
+        operator_dict: Dict[str, Any] = {}
 
         associativity = operator_info["associativity"]
         if arity == "Ternary":
@@ -118,6 +119,8 @@ def compile_tables(
 
         if unicode_char != "no-unicode":
             operator2string[operator_name].append(unicode_char)
+            if character_info.get("amslatex"):
+                operator2amslatex[unicode_char] = character_info["amslatex"]
         if ascii_chars != "no-ascii":
             operator2string[operator_name].append(ascii_chars)
 
@@ -148,6 +151,7 @@ def compile_tables(
         "no-meaning-postfix-operators": no_meaning_postfix_operators,
         "no-meaning-prefix-operators": no_meaning_prefix_operators,
         "non-associative-binary-operators": nonassoc_binary_operators,
+        "operator-to-amslatex": operator2amslatex,
         "operator-to_string": operator2string,
         "operator-precedence": operator_precedence,
         "postfix-operators": postfix_operators,
