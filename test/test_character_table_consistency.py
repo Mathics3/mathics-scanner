@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from mathics_scanner.characters import replace_wl_with_plain_text as wl_to_unicode
 from mathics_scanner.characters import replace_unicode_with_wl as unicode_to_wl
-
+from mathics_scanner.characters import replace_wl_with_plain_text as wl_to_unicode
 from mathics_scanner.load import (
-    load_mathics_character_yaml,
     load_mathics_character_json,
+    load_mathics_character_yaml,
 )
 
 yaml_data = load_mathics_character_yaml()
@@ -30,7 +29,7 @@ def test_roundtrip():
             if uni != wl:
                 assert (
                     uni == wl_to_unicode_dict[wl]
-                ), f"key {k} unicode {uni}, {wl_to_unicode[uni]}"
+                ), f"key {k} unicode {uni}, {wl_to_unicode(uni)}"
 
                 assert (
                     uni in unicode_to_wl_dict
@@ -38,7 +37,7 @@ def test_roundtrip():
 
                 assert (
                     unicode_to_wl_dict[uni] == wl
-                ), f"key {k} unicode {uni}, {wl_to_unicode[uni]}"
+                ), f"key {k} unicode {uni}, {wl_to_unicode(uni)}"
 
 
 def test_counts():

@@ -111,14 +111,14 @@ def compile_tables(data: dict) -> dict:
     # operator-to-unicode dictionary entry
     operator_to_precedence = {
         v["operator-name"]: v["precedence"]
-        for k, v in data.items()
+        for v in data.values()
         if "operator-name" in v and "precedence" in v
     }
 
     # operator-to-unicode dictionary entry
     operator_to_unicode = {
         v["operator-name"]: v.get("unicode-equivalent", v.get("ascii"))
-        for k, v in data.items()
+        for v in data.values()
         if "operator-name" in v and ("unicode-equivalent" in v or "ascii" in v)
     }
 
@@ -161,6 +161,12 @@ def compile_tables(data: dict) -> dict:
     ascii_operator_to_unicode = {}
     ascii_operator_to_wl_unicode = {}
 
+    builtin_constants = {
+        v["unicode-equivalent"]: k
+        for k, v in data.items()
+        if v.get("is-builtin-constant")
+    }
+
     for operator_name in operator_names:
         # Operators with ASCII sequences list entry
         v = data[operator_name]
@@ -181,7 +187,7 @@ def compile_tables(data: dict) -> dict:
     # unicode-to-operator dictionary entry
     unicode_to_operator = {
         v.get("unicode-equivalent", v.get("ascii")): v["operator-name"]
-        for k, v in data.items()
+        for v in data.values()
         if "operator-name" in v
     }
     # Conversion from WL to the fully qualified names dictionary entry
@@ -210,6 +216,7 @@ def compile_tables(data: dict) -> dict:
         "ascii-operator-to-character-symbol": ascii_operator_to_character_symbol,
         "ascii-operator-to-unicode": ascii_operator_to_unicode,
         "ascii-operator-to-wl-unicode": ascii_operator_to_wl_unicode,
+        "builtin-constants": builtin_constants,
         "letterlikes": letterlikes,
         "named-characters": named_characters,
         "operator-names": operator_names,

@@ -35,6 +35,7 @@ def test_yaml_field_names():
             "ascii",
             "esc-alias",
             "has-unicode-inverse",
+            "is-builtin-constant",
             "is-letter-like",
             "operator-name",
             "precedence",
