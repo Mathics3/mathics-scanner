@@ -53,6 +53,24 @@ base_names_pattern = r"((?![0-9])([0-9${0}{1}{2}])+)".format(
 )
 full_names_pattern = r"(`?{0}(`{0})*)".format(base_names_pattern)
 
+# Table of correspondneces between a Mathics3 token name (or "tag")
+# and WMA CodeTokenize name
+MATHICS3_TAG_TO_CODETOKENIZE: Dict[str, str] = {
+    "Equal": "EqualEqual",
+    "MessageName": "ColonColon",
+    "RawLeftAssociation": "LessBar",
+    "RawLeftBrace": "OpenCurly",
+    "RawLeftBracket": "OpenSquare",
+    "RawRightAssociation": "BarGreater",
+    "RawRightBrace": "CloseCurly",
+    "RawRightBracket": "CloseSquare",
+    "Rule": "MinusGreater",
+    "ReplaceAll": "SlashDot",
+    "SameQ": "EqualEqualEqual",
+    "Set": "Equal",
+    "SetDelayed": "ColonEqual",
+}
+
 
 def compile_pattern(pattern):
     """Compile a pattern from a regular expression"""
@@ -377,8 +395,18 @@ class Token:
             self.tag == other.tag and self.text == other.text and self.pos == other.pos
         )
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"Token({repr(self.tag)}, {repr(self.text)}, {self.pos})"
+
+    @property
+    def code_tokenize_format(self) -> str:
+        """
+        Format token more like the way CodeTokenize of CodeParser does.
+        """
+        token_name = MATHICS3_TAG_TO_CODETOKENIZE.get(self.tag, self.tag)
+        if token_name not in ("String", "Symbol"):
+            token_name = f"Token`{token_name}"
+        return f"LeafNode[{token_name}, {repr(self.text)}, {self.pos}]"
 
 
 class Tokeniser:

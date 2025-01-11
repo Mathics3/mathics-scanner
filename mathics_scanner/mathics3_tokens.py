@@ -129,7 +129,7 @@ class TerminalShell(LineFeeder):
         return input(prompt)
 
 
-def tokenizer_loop(feeder: FileLineFeeder):
+def tokenizer_loop(feeder: FileLineFeeder, code_tokenize_format: bool):
     """
     A read eval/loop for things having file input `feeder`.
     """
@@ -140,18 +140,20 @@ def tokenizer_loop(feeder: FileLineFeeder):
             token = tokeniser.next()
             if token.tag == "END":
                 break
+            elif code_tokenize_format:
+                print("  ", token.code_tokenize_format)
             else:
                 print("  ", token)
 
 
-def interactive_eval_loop(shell: TerminalShell):
+def interactive_eval_loop(shell: TerminalShell, code_tokenize_format: bool):
     """
     A read eval/loop for an interactive session.
     `shell` is a shell session
     """
     while True:
         try:
-            tokens(shell.feed())
+            tokens(shell.feed(), code_tokenize_format)
         except KeyboardInterrupt:
             print("\nKeyboardInterrupt")
         except EOFError:
@@ -165,12 +167,14 @@ def interactive_eval_loop(shell: TerminalShell):
             shell.reset_lineno()
 
 
-def tokens(code):
+def tokens(code, code_tokenize_format: bool):
     tokeniser = Tokeniser(SingleLineFeeder(code))
     while True:
         token = tokeniser.next()
         if token.tag == "END":
             break
+        elif code_tokenize_format:
+            print(token.code_tokenize_format)
         else:
             print(token)
 
@@ -210,6 +214,13 @@ def main():
     )
 
     argparser.add_argument(
+        "--CodeTokenize",
+        "-C",
+        help="show tokens more like the way CodeTokenize does",
+        action="store_true",
+    )
+
+    argparser.add_argument(
         "--quiet", "-q", help="don't print message at startup", action="store_true"
     )
 
@@ -243,10 +254,10 @@ def main():
 
     if args.FILE is not None:
         feeder = FileLineFeeder(args.FILE)
-        tokenizer_loop(feeder)
+        tokenizer_loop(feeder, args.CodeTokenize)
 
     else:
-        interactive_eval_loop(shell)
+        interactive_eval_loop(shell, args.CodeTokenize)
 
 
 if __name__ == "__main__":
