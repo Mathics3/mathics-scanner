@@ -53,11 +53,22 @@ base_names_pattern = r"((?![0-9])([0-9${0}{1}{2}])+)".format(
 )
 full_names_pattern = r"(`?{0}(`{0})*)".format(base_names_pattern)
 
+# FIXME incorportate the below table in to Function/Operators YAML
 # Table of correspondneces between a Mathics3 token name (or "tag")
 # and WMA CodeTokenize name
 MATHICS3_TAG_TO_CODETOKENIZE: Dict[str, str] = {
+    "AddTo": "PlusEqual",
+    "Alternatives": "Bar",
+    "And": "AmpAmp",
+    "Apply": "AtAt",
+    "ApplyList": "AtAtAt",
+    "Divide": "Slash",
     "Equal": "EqualEqual",
+    "Function": "Amp",
     "MessageName": "ColonColon",
+    "Or": "BarBar",
+    "Postfix": "SlashSlash",
+    "RawComma": "Comma",
     "RawLeftAssociation": "LessBar",
     "RawLeftBrace": "OpenCurly",
     "RawLeftBracket": "OpenSquare",
@@ -65,10 +76,15 @@ MATHICS3_TAG_TO_CODETOKENIZE: Dict[str, str] = {
     "RawRightBrace": "CloseCurly",
     "RawRightBracket": "CloseSquare",
     "Rule": "MinusGreater",
+    "RuleDelayed": "ColonGreater",
     "ReplaceAll": "SlashDot",
+    "ReplaceRepeated": "SlashSlashDot",
     "SameQ": "EqualEqualEqual",
     "Set": "Equal",
     "SetDelayed": "ColonEqual",
+    "Slot": "Hash",
+    "SlotSequence": "HashHash",
+    "Times": "Star",
 }
 
 
