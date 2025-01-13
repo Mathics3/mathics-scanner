@@ -86,20 +86,16 @@ class TerminalShell(LineFeeder):
 
     def get_in_prompt(self):
         next_line_number = self.get_last_line_number() + 1
-        if self.lineno > 0:
-            return " " * len("{0}[{1}]:= ".format(self.in_prefix, next_line_number))
-        else:
-            return "{2}{0}[{3}{1}{4}]:= {5}".format(
-                self.in_prefix, next_line_number, *self.incolors
-            )
+        self.lineno = next_line_number
+        return "{1}{0}[{2}{3}]:= {4}".format(self.in_prefix, *self.incolors)
 
     def get_out_prompt(self, form=None):
         line_number = self.get_last_line_number()
         if form:
-            return "{3}{0}[{4}{1}{5}]//{2}= {6}".format(
+            return "{2}{0}[{3}{4}]//{1}= {5}".format(
                 self.out_prefix, line_number, form, *self.outcolors
             )
-        return "{2}{0}[{3}{1}{4}]= {5}".format(
+        return "{1}{0}[{2}{3}]= {4}".format(
             self.out_prefix, line_number, *self.outcolors
         )
 
