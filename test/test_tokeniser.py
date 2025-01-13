@@ -5,6 +5,7 @@ Tests translation from strings to sequences of tokens.
 
 import random
 import sys
+from typing import List
 
 import pytest
 
@@ -13,44 +14,44 @@ from mathics_scanner.feed import SingleLineFeeder
 from mathics_scanner.tokeniser import Token, Tokeniser, is_symbol_name
 
 
-def check_number(code):
-    token = single_token(code)
-    assert token, Token("Number", code, 0)
+def check_number(source_code: str):
+    token = single_token(source_code)
+    assert token, Token("Number", source_code, 0)
 
 
-def check_symbol(code):
-    token = single_token(code)
-    assert token, Token("Symbol", code, 0)
+def check_symbol(source_code: str):
+    token = single_token(source_code)
+    assert token, Token("Symbol", source_code, 0)
 
 
-def incomplete_error(string):
+def incomplete_error(error_message: str):
     with pytest.raises(IncompleteSyntaxError):
-        tokens(string)
+        tokens(error_message)
 
 
-def invalid_error(string):
+def invalid_error(error_message: str):
     with pytest.raises(InvalidSyntaxError):
-        tokens(string)
+        tokens(error_message)
 
 
-def scan_error(string):
+def scan_error(error_message):
     with pytest.raises(ScanError):
-        tokens(string)
+        tokens(error_message)
 
 
-def single_token(code):
-    toks = tokens(code)
+def single_token(source_code) -> Token:
+    toks = tokens(source_code)
     assert len(toks) == 1
     token = toks[0]
     return token
 
 
-def tags(code):
-    return [token.tag for token in tokens(code)]
+def tags(source_code):
+    return [token.tag for token in tokens(source_code)]
 
 
-def tokens(code):
-    tokeniser = Tokeniser(SingleLineFeeder(code))
+def tokens(source_code) -> List[Token]:
+    tokeniser = Tokeniser(SingleLineFeeder(source_code))
     tokens = []
     while True:
         token = tokeniser.next()
