@@ -1834,7 +1834,7 @@ Cup:
   wl-unicode-name: SMILE
 
 CupCap:
-  amslatex: '\stackrel{\smile}{\frown}'
+  amslatex: '\stackrel{\smile}{\frown}' # WMA uses \overset instead of \stackrel does not work in the latexdoc.
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: CupCap
