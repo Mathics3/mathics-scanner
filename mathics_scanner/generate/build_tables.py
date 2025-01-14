@@ -184,12 +184,20 @@ def compile_tables(data: dict) -> dict:
                 "wl-unicode", v.get("ascii")
             )
 
+    # unicode-to-amslatex dictionary entry
+    unicode_to_amslatex = {
+        character_info["unicode-equivalent"]: character_info["amslatex"]
+        for character_info in data.values()
+        if character_info.get("unicode-equivalent") and character_info.get("amslatex")
+    }
+
     # unicode-to-operator dictionary entry
     unicode_to_operator = {
         v.get("unicode-equivalent", v.get("ascii")): v["operator-name"]
         for v in data.values()
         if "operator-name" in v
     }
+
     # Conversion from WL to the fully qualified names dictionary entry
     wl_to_ascii_dict = {
         v["wl-unicode"]: get_plain_text(k, v, use_unicode=False)
@@ -223,6 +231,7 @@ def compile_tables(data: dict) -> dict:
         "operator-to-precedence": operator_to_precedence,
         "operator-to-ascii": operator_to_ascii,
         "operator-to-unicode": operator_to_unicode,
+        "unicode-to-amslatex": unicode_to_amslatex,
         "unicode-operators": unicode_to_operator,
         "unicode-to-wl-dict": unicode_to_wl_dict,
         "unicode-to-wl-re": unicode_to_wl_re,
