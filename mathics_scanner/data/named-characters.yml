@@ -6781,7 +6781,7 @@ MinLimit:
   wl-unicode: "\uF43A"
 
 MinusPlus:
-  amslatex: \mp'
+  amslatex: '\mp'
   esc-alias: -+
   has-unicode-inverse: false
   is-letter-like: false

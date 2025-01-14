@@ -293,7 +293,6 @@ ALL_FIELDS = [
     "data_dir", type=click.Path(readable=True), default=DEFAULT_DATA_DIR, required=False
 )
 def main(field, output, data_dir):
-    print(f"writting field,{field}, into ",output)
     with open(data_dir / "named-characters.yml", "r", encoding="utf8") as i, open(
         output, "w"
     ) as o:
