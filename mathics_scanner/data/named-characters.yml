@@ -788,11 +788,12 @@ CapitalDelta:
   wl-unicode-name: GREEK CAPITAL LETTER DELTA
 
 CapitalDifferentialD:
-  amslatex: "\\CapitalDifferentialD"
+  amslatex: '\mathbb{D}'
   ascii: "d"
   esc-alias: DD
   has-unicode-inverse: true
   is-letter-like: true
+  operator-name: CapitalDifferentialD
   unicode-equivalent: "\u2145"
   unicode-equivalent-name: DOUBLE-STRUCK ITALIC CAPITAL D
   unicode-reference: https://www.compart.com/en/unicode/U+2145
@@ -2106,7 +2107,7 @@ DifferenceDelta:
 # That it does not follow the AMS unicode convention
 # \u2146
 DifferentialD:
-  amslatex: "\\DifferentialD"
+  amslatex: '\,d'
   esc-alias: dd
   has-unicode-inverse: true
   # This can't be letter-like because it is used in derivatives as a function
@@ -3558,7 +3559,6 @@ Epsilon:
   wl-unicode-name: GREEK LUNATE EPSILON SYMBOL
 
 Equal:
-  amslatex: "\\eqeq"
   ascii: "=="
   esc-alias: "=="
   has-unicode-inverse: true
@@ -6994,7 +6994,7 @@ NotCupCap:
   wl-unicode-name: NOT EQUIVALENT TO
 
 NotDoubleVerticalBar:
-  amslatex: "\\unparallel"
+  amslatex: '\nparallel'
   esc-alias: '!||'
   has-unicode-inverse: false
   is-letter-like: false
@@ -7289,7 +7289,7 @@ NotPrecedesTilde:
   wl-unicode-name: PRECEDES BUT NOT EQUIVALENT TO
 
 NotReverseElement:
-  amslatex: "\\nni"
+  amslatex: '\not{\ni}'
   esc-alias: '!mem'
   has-unicode-inverse: false
   is-letter-like: false
@@ -7759,6 +7759,7 @@ Perpendicular:
   amslatex: '\perp'
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: Perpendicular
   unicode-equivalent: "\u27C2"
   unicode-equivalent-name: PERPENDICULAR
   unicode-reference: https://www.compart.com/en/unicode/U+27C2
@@ -8576,6 +8577,7 @@ RightTeeArrow:
   amslatex: '\vdash'
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: RightTeeArrow
   unicode-equivalent: "\u21A6"
   unicode-equivalent-name: RIGHTWARDS ARROW FROM BAR
   unicode-reference: https://www.compart.com/en/unicode/U+21A6
@@ -8728,7 +8730,7 @@ Rule:
   wl-unicode: "\uF522"
 
 RuleDelayed:
-  amslatex: "\\ruledelayed"
+  amslatex: ':\to'
   ascii: ":>"
   esc-alias: ":>"
   has-unicode-inverse: true
@@ -9559,6 +9561,7 @@ SmallCircle:
   esc-alias: sc
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: "SmallCircle"
   unicode-equivalent: "\u2218"
   unicode-equivalent-name: RING OPERATOR
   unicode-reference: https://www.compart.com/en/unicode/U+2218
@@ -9655,9 +9658,11 @@ Sqrt:
   wl-unicode-name: SQUARE ROOT
 
 Square:
+  amslatex: '\square'
   esc-alias: sq
   has-unicode-inverse: true
   is-letter-like: false
+  operator-name: Square
   unicode-equivalent: "\u25AB"
   unicode-equivalent-name: WHITE SMALL SQUARE
   unicode-reference: https://www.compart.com/en/unicode/U+25AB
@@ -9735,10 +9740,11 @@ SquareUnion:
   wl-unicode-name: SQUARE CUP
 
 Star:
-  amslatex: "\\star"
+  amslatex: '\star'
   esc-alias: star
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: "Star"
   unicode-equivalent: "\u22C6"
   unicode-equivalent-name: STAR OPERATOR
   unicode-reference: https://www.compart.com/en/unicode/U+22C6
@@ -10294,7 +10300,7 @@ UpArrowBar:
   wl-unicode-name: UPWARDS ARROW TO BAR
 
 UpArrowDownArrow:
-  amslatex: "\\updownarrows"
+  amslatex: "\\updownarrow"
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: UpArrowDownArrow
@@ -10351,7 +10357,7 @@ UpTee:
   wl-unicode-name: UP TACK
 
 UpTeeArrow:
-  amslatex: "\\MapsUp"
+  amslatex: '\underline{\uparrow}'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: UpTeeArrow
@@ -10363,7 +10369,7 @@ UpTeeArrow:
   wl-unicode-name: UPWARDS ARROW FROM BAR
 
 UpperLeftArrow:
-  amslatex: "\\nwarrow"
+  amslatex: '\nwarrow'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: UpperLeftArrow
@@ -10375,7 +10381,7 @@ UpperLeftArrow:
   wl-unicode-name: NORTH WEST ARROW
 
 UpperRightArrow:
-  amslatex: "\\nearrow"
+  amslatex: '\nearrow'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: UpperRightArrow
@@ -10425,7 +10431,7 @@ Uranus:
   wl-unicode-name: URANUS
 
 Vee:
-  amslatex: "\\vee"
+  amslatex: '\vee'
   esc-alias: v
   has-unicode-inverse: false
   is-letter-like: false
@@ -10452,6 +10458,7 @@ VerticalBar:
   esc-alias: ' |'
   has-unicode-inverse: true
   is-letter-like: false
+  operator-name: VerticalBar
   unicode-equivalent: "\u2758"
   unicode-equivalent-name: VERTICAL BAR
   unicode-reference: https://www.compart.com/en/unicode/U+2758
