@@ -793,7 +793,6 @@ CapitalDifferentialD:
   esc-alias: DD
   has-unicode-inverse: true
   is-letter-like: true
-  operator-name: CapitalDifferentialD
   unicode-equivalent: "\u2145"
   unicode-equivalent-name: DOUBLE-STRUCK ITALIC CAPITAL D
   unicode-reference: https://www.compart.com/en/unicode/U+2145
