@@ -11,9 +11,6 @@
 #    heuristics includes it. Example: ✕ (U+2715, "Multiplication X") can be used for Times but is in the Dingbats Block and is thus excluded.
 # 4. All typographical variants of "plain"/"regular" symbols are be excluded unless included by a previous heuristic.
 #    For example, all Full Width variants, bold variants, italic variants, and so forth are excluded.
-# 5. Unicode symbols cannot be overloaded, i.e. should not be used for more than one underlying function.
-#    For example, ≫ (U+226B, "Much Greater-Than") is already used for GreaterGreater and therefore should not be an alias for >> for Put.
-#    Likewise, ≪ (U+226A, "Much Less-Than") for Get, ∷ (U+2237, "Proportion") for MessageName, etc.
 #
 # Field definitions
 # =================
@@ -8139,6 +8136,7 @@ RawRightBrace:
   is-letter-like: false
   unicode-equivalent: '}'
   unicode-equivalent-name: RIGHT CURLY BRACKET
+  unicode-reference: https://www.compart.com/en/unicode/U+007D
   wl-reference: https://reference.wolfram.com/language/ref/character/RawRightBrace.html
   wl-unicode: '}'
   wl-unicode-name: RIGHT CURLY BRACKET
@@ -8148,6 +8146,7 @@ RawRightBracket:
   is-letter-like: false
   unicode-equivalent: ']'
   unicode-equivalent-name: RIGHT SQUARE BRACKET
+  unicode-reference: https://www.compart.com/en/unicode/U+005D
   wl-reference: https://reference.wolfram.com/language/ref/character/RawRightBracket.html
   wl-unicode: ']'
   wl-unicode-name: RIGHT SQUARE BRACKET
@@ -8157,6 +8156,7 @@ RawRightParenthesis:
   is-letter-like: false
   unicode-equivalent: )
   unicode-equivalent-name: RIGHT PARENTHESIS
+  unicode-reference: https://www.compart.com/en/unicode/U+0029
   wl-reference: https://reference.wolfram.com/language/ref/character/RawRightParenthesis.html
   wl-unicode: )
   wl-unicode-name: RIGHT PARENTHESIS
@@ -8166,6 +8166,7 @@ RawSemicolon:
   is-letter-like: false
   unicode-equivalent: ;
   unicode-equivalent-name: SEMICOLON
+  unicode-reference: https://www.compart.com/en/unicode/U+003B
   wl-reference: https://reference.wolfram.com/language/ref/character/RawSemicolon.html
   wl-unicode: ;
   wl-unicode-name: SEMICOLON
@@ -8177,6 +8178,7 @@ RawSlash:
   is-letter-like: false
   unicode-equivalent: /
   unicode-equivalent-name: SOLIDUS
+  unicode-reference: https://www.compart.com/en/unicode/U+002F
   wl-reference: https://reference.wolfram.com/language/ref/character/RawSlash.html
   wl-unicode: /
   wl-unicode-name: SOLIDUS
@@ -8186,6 +8188,7 @@ RawSpace:
   is-letter-like: false
   unicode-equivalent: ' '
   unicode-equivalent-name: SPACE
+  unicode-reference: https://www.compart.com/en/unicode/U+0020
   wl-reference: https://reference.wolfram.com/language/ref/character/RawSpace.html
   wl-unicode: ' '
   wl-unicode-name: SPACE
@@ -8195,6 +8198,7 @@ RawStar:
   is-letter-like: false
   unicode-equivalent: '*'
   unicode-equivalent-name: ASTERISK
+  unicode-reference: https://www.compart.com/en/unicode/U+002A
   wl-reference: https://reference.wolfram.com/language/ref/character/RawStar.html
   wl-unicode: '*'
   wl-unicode-name: ASTERISK
@@ -8203,6 +8207,7 @@ RawTab:
   has-unicode-inverse: false
   is-letter-like: false
   unicode-equivalent: "\t"
+  unicode-reference: https://www.compart.com/en/unicode/U+0009
   wl-reference: https://reference.wolfram.com/language/ref/character/RawTab.html
   wl-unicode: "\t"
 
@@ -8219,6 +8224,7 @@ RawUnderscore:
   has-unicode-inverse: false
   is-letter-like: false
   unicode-equivalent-name: LOW LINE
+  unicode-reference: https://www.compart.com/en/unicode/U+005F
   wl-reference: https://reference.wolfram.com/language/ref/character/RawUnderscore.html
   wl-unicode: _
   wl-unicode-name: LOW LINE
@@ -8229,6 +8235,7 @@ RawVerticalBar:
   has-unicode-inverse: false
   is-letter-like: false
   unicode-equivalent-name: VERTICAL LINE
+  unicode-reference: https://www.compart.com/en/unicode/U+007C
   wl-reference: https://reference.wolfram.com/language/ref/character/RawVerticalBar.html
   wl-unicode: '|'
   wl-unicode-name: VERTICAL LINE
@@ -8239,6 +8246,7 @@ RegisteredTrademark:
   is-letter-like: true
   unicode-equivalent: "\xAE"
   unicode-equivalent-name: REGISTERED SIGN
+  unicode-reference: https://www.compart.com/en/unicode/U+00AE
   wl-reference: https://reference.wolfram.com/language/ref/character/RegisteredTrademark.html
   wl-unicode: "\xAE"
   wl-unicode-name: REGISTERED SIGN
@@ -10453,6 +10461,7 @@ Venus:
   wl-unicode-name: FEMALE SIGN
 
 VerticalBar:
+  amslatex: '\shortmid'
   ascii: '|'
   esc-alias: ' |'
   has-unicode-inverse: true
@@ -10653,6 +10662,7 @@ Xi:
   is-letter-like: false
   unicode-equivalent: "\u03BE"
   unicode-equivalent-name: GREEK SMALL LETTER XI
+  unicode-reference: https://www.compart.com/en/unicode/U+03BE
   wl-reference: https://reference.wolfram.com/language/ref/character/Xi.html
   wl-unicode: "\u03BE"
   wl-unicode-name: GREEK SMALL LETTER XI
@@ -10684,6 +10694,7 @@ YAcute:
   is-letter-like: true
   unicode-equivalent: "\xFD"
   unicode-equivalent-name: LATIN SMALL LETTER Y WITH ACUTE
+  unicode-reference: https://www.compart.com/en/unicode/U+00FD
   wl-reference: https://reference.wolfram.com/language/ref/character/YAcute.html
   wl-unicode: "\xFD"
   wl-unicode-name: LATIN SMALL LETTER Y WITH ACUTE
@@ -10694,6 +10705,7 @@ YDoubleDot:
   is-letter-like: true
   unicode-equivalent: "\xFF"
   unicode-equivalent-name: LATIN SMALL LETTER Y WITH DIAERESIS
+  unicode-reference: https://www.compart.com/en/unicode/U+00FF
   wl-reference: https://reference.wolfram.com/language/ref/character/YDoubleDot.html
   wl-unicode: "\xFF"
   wl-unicode-name: LATIN SMALL LETTER Y WITH DIAERESIS
@@ -10703,6 +10715,7 @@ Yen:
   is-letter-like: true
   unicode-equivalent: "\xA5"
   unicode-equivalent-name: YEN SIGN
+  unicode-reference: https://www.compart.com/en/unicode/U+00A5
   wl-reference: https://reference.wolfram.com/language/ref/character/Yen.html
   wl-unicode: "\xA5"
   wl-unicode-name: YEN SIGN
@@ -10714,6 +10727,7 @@ ZHacek:
   is-letter-like: true
   unicode-equivalent: "\u017E"
   unicode-equivalent-name: LATIN SMALL LETTER Z WITH CARON
+  unicode-reference: https://www.compart.com/en/unicode/U+017E
   wl-reference: https://reference.wolfram.com/language/ref/character/ZHacek.html
   wl-unicode: "\u017E"
   wl-unicode-name: LATIN SMALL LETTER Z WITH CARON
@@ -10725,6 +10739,7 @@ Zeta:
   is-letter-like: false
   unicode-equivalent: "\u03B6"
   unicode-equivalent-name: GREEK SMALL LETTER ZETA
+  unicode-reference: https://www.compart.com/en/unicode/U+03B6
   wl-reference: https://reference.wolfram.com/language/ref/character/Zeta.html
   wl-unicode: "\u03B6"
   wl-unicode-name: GREEK SMALL LETTER ZETA
