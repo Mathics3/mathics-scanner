@@ -53,6 +53,59 @@ base_names_pattern = r"((?![0-9])([0-9${0}{1}{2}])+)".format(
 )
 full_names_pattern = r"(`?{0}(`{0})*)".format(base_names_pattern)
 
+# FIXME incorportate the below table in to Function/Operators YAML
+# Table of correspondneces between a Mathics3 token name (or "tag")
+# and WMA CodeTokenize name
+MATHICS3_TAG_TO_CODETOKENIZE: Dict[str, str] = {
+    "AddTo": "PlusEqual",
+    "Alternatives": "Bar",
+    "And": "AmpAmp",
+    "Apply": "AtAt",
+    "ApplyList": "AtAtAt",
+    "Cap": "LongName`Cap",
+    "Cup": "LongName`Cup",
+    "Decrement": "MinusMinus",
+    "Divide": "Slash",
+    "DivideBy": "SlashEqual",
+    "Equal": "EqualEqual",
+    "Factorial": "Bang",
+    "Factorial2": "BangBang",
+    "Function": "Amp",
+    "Get": "LessLess",
+    "Increment": "PlusPlus",
+    "Infix": "Tilde",
+    "Information": "QuesionQuestion",
+    "InterpretedBox": "LinearSequence`Bang",
+    "MessageName": "ColonColon",
+    "Or": "BarBar",
+    "Pattern": "Under",
+    "PatternTest": "Question",
+    "Postfix": "SlashSlash",
+    "Prefix": "At",
+    "Put": "GreaterGreater",
+    "RawComma": "Comma",
+    "RawLeftAssociation": "LessBar",
+    "RawLeftBrace": "OpenCurly",
+    "RawLeftBracket": "OpenSquare",
+    "RawRightAssociation": "BarGreater",
+    "RawRightBrace": "CloseCurly",
+    "RawRightBracket": "CloseSquare",
+    "RightRowBox": "CloseParen",
+    "Rule": "MinusGreater",
+    "RuleDelayed": "ColonGreater",
+    "ReplaceAll": "SlashDot",
+    "ReplaceRepeated": "SlashSlashDot",
+    "SameQ": "EqualEqualEqual",
+    "Set": "Equal",
+    "SetDelayed": "ColonEqual",
+    "Slot": "Hash",
+    "SlotSequence": "HashHash",
+    "SubtractFrom": "MinusEqual",
+    "Times": "Star",
+    "TimesBy": "StarEqual",
+    "Unequal": "BangEqual",
+}
+
 
 def compile_pattern(pattern):
     """Compile a pattern from a regular expression"""
@@ -377,8 +430,18 @@ class Token:
             self.tag == other.tag and self.text == other.text and self.pos == other.pos
         )
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"Token({repr(self.tag)}, {repr(self.text)}, {self.pos})"
+
+    @property
+    def code_tokenize_format(self) -> str:
+        """
+        Format token more like the way CodeTokenize of CodeParser does.
+        """
+        token_name = MATHICS3_TAG_TO_CODETOKENIZE.get(self.tag, self.tag)
+        if token_name not in ("String", "Symbol"):
+            token_name = f"Token`{token_name}"
+        return f"LeafNode[{token_name}, {repr(self.text)}, {self.pos}]"
 
 
 class Tokeniser:
