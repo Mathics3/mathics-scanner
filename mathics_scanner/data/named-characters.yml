@@ -761,7 +761,7 @@ CapitalChi:
   wl-unicode-name: GREEK CAPITAL LETTER CHI
 
 CapitalDHacek:
-  amslatex: "\\v{D}"
+  amslatex: '\v{D}'
   esc-alias: Dv
   has-unicode-inverse: false
   is-letter-like: true
@@ -773,7 +773,7 @@ CapitalDHacek:
   wl-unicode-name: LATIN CAPITAL LETTER D WITH CARON
 
 CapitalDelta:
-  amslatex: "\\Delta"
+  amslatex: '\Delta'
   esc-alias: D
   has-unicode-inverse: true
   is-letter-like: true
@@ -831,7 +831,7 @@ CapitalEBar:
   wl-unicode-name: LATIN CAPITAL LETTER E WITH MACRON
 
 CapitalECup:
-  amslatex: "\\u{E}"
+  amslatex: '\u{E}'
   esc-alias: Eu
   has-unicode-inverse: false
   is-letter-like: true
@@ -864,7 +864,7 @@ CapitalEGrave:
   wl-unicode-name: LATIN CAPITAL LETTER E WITH GRAVE
 
 CapitalEHacek:
-  amslatex: "\\v{E}"
+  amslatex: '\v{E}'
   esc-alias: Ev
   has-unicode-inverse: false
   is-letter-like: true
@@ -918,7 +918,7 @@ CapitalEth:
   wl-unicode-name: LATIN CAPITAL LETTER ETH
 
 CapitalGamma:
-  amslatex: "\\Gamma"
+  amslatex: '\Gamma'
   esc-alias: G
   has-unicode-inverse: false
   is-letter-like: true
@@ -941,7 +941,7 @@ CapitalIAcute:
   wl-unicode-name: LATIN CAPITAL LETTER I WITH ACUTE
 
 CapitalICup:
-  amslatex: "\\u{I}"
+  amslatex: '\u{I}'
   esc-alias: Iu
   has-unicode-inverse: false
   is-letter-like: true
@@ -1017,7 +1017,7 @@ CapitalKoppa:
   wl-unicode-name: GREEK LETTER KOPPA
 
 CapitalLSlash:
-  amslatex: "\\L{}"
+  amslatex: '\L{}'
   esc-alias: L/
   has-unicode-inverse: false
   is-letter-like: true
@@ -1029,7 +1029,7 @@ CapitalLSlash:
   wl-unicode-name: LATIN CAPITAL LETTER L WITH STROKE
 
 CapitalLambda:
-  amslatex: "\\Lambda"
+  amslatex: '\Lambda'
   esc-alias: L
   has-unicode-inverse: false
   is-letter-like: true
@@ -1052,7 +1052,7 @@ CapitalMu:
   wl-unicode-name: GREEK CAPITAL LETTER MU
 
 CapitalNHacek:
-  amslatex: "\\v{N}"
+  amslatex: '\v{N}'
   esc-alias: Nv
   has-unicode-inverse: false
   is-letter-like: true
@@ -1150,7 +1150,7 @@ CapitalOHat:
   wl-unicode-name: LATIN CAPITAL LETTER O WITH CIRCUMFLEX
 
 CapitalOSlash:
-  amslatex: "\\O{}"
+  amslatex: '\O{}'
   esc-alias: O/
   has-unicode-inverse: true
   is-letter-like: true
@@ -1171,7 +1171,7 @@ CapitalOTilde:
   wl-unicode-name: LATIN CAPITAL LETTER O WITH TILDE
 
 CapitalOmega:
-  amslatex: "\\Omega"
+  amslatex: '\Omega'
   esc-alias: O
   has-unicode-inverse: false
   is-letter-like: true
@@ -1194,7 +1194,7 @@ CapitalOmicron:
   wl-unicode-name: GREEK CAPITAL LETTER OMICRON
 
 CapitalPhi:
-  amslatex: "\\Phi"
+  amslatex: '\Phi'
   esc-alias: Ph
   has-unicode-inverse: false
   is-letter-like: true
@@ -1218,7 +1218,7 @@ CapitalPi:
   wl-unicode-name: GREEK CAPITAL LETTER PI
 
 CapitalPsi:
-  amslatex: "\\Psi"
+  amslatex: '\Psi'
   esc-alias: Ps
   has-unicode-inverse: false
   is-letter-like: true
@@ -1230,7 +1230,7 @@ CapitalPsi:
   wl-unicode-name: GREEK CAPITAL LETTER PSI
 
 CapitalRHacek:
-  amslatex: "\\v{R}"
+  amslatex: '\v{R}'
   esc-alias: Rv
   has-unicode-inverse: false
   is-letter-like: true
@@ -1253,7 +1253,7 @@ CapitalRho:
   wl-unicode-name: GREEK CAPITAL LETTER RHO
 
 CapitalSHacek:
-  amslatex: "\\v{S}"
+  amslatex: '\v{S}'
   esc-alias: Sv
   has-unicode-inverse: false
   is-letter-like: true
@@ -1276,7 +1276,7 @@ CapitalSampi:
   wl-unicode-name: GREEK LETTER SAMPI
 
 CapitalSigma:
-  amslatex: "\\Sigma"
+  amslatex: '\Sigma'
   esc-alias: S
   has-unicode-inverse: false
   is-letter-like: true
@@ -1299,7 +1299,7 @@ CapitalStigma:
   wl-unicode-name: GREEK LETTER STIGMA
 
 CapitalTHacek:
-  amslatex: "\\v{T}"
+  amslatex: '\v{T}'
   esc-alias: Tv
   has-unicode-inverse: false
   is-letter-like: true
@@ -1322,7 +1322,7 @@ CapitalTau:
   wl-unicode-name: GREEK CAPITAL LETTER TAU
 
 CapitalTheta:
-  amslatex: "\\Theta"
+  amslatex: '\Theta'
   esc-alias: Th
   has-unicode-inverse: false
   is-letter-like: true
@@ -1408,7 +1408,7 @@ CapitalURing:
   wl-unicode-name: LATIN CAPITAL LETTER U WITH RING ABOVE
 
 CapitalUpsilon:
-  amslatex: "\\Upsilon"
+  amslatex: '\Upsilon'
   esc-alias: U
   has-unicode-inverse: false
   is-letter-like: true
@@ -1420,7 +1420,7 @@ CapitalUpsilon:
   wl-unicode-name: GREEK CAPITAL LETTER UPSILON
 
 CapitalXi:
-  amslatex: "\\Xi"
+  amslatex: '\Xi'
   esc-alias: X
   has-unicode-inverse: false
   is-letter-like: true
@@ -1443,7 +1443,7 @@ CapitalYAcute:
   wl-unicode-name: LATIN CAPITAL LETTER Y WITH ACUTE
 
 CapitalZHacek:
-  amslatex: "\\v{Z}"
+  amslatex: '\v{Z}'
   esc-alias: Zv
   has-unicode-inverse: false
   is-letter-like: true
@@ -1539,7 +1539,7 @@ Checkmark:
   wl-unicode-name: CHECK MARK
 
 Chi:
-  amslatex: "\\chi"
+  amslatex: '\chi'
   esc-alias: ch
   has-unicode-inverse: false
   is-letter-like: true
@@ -1551,7 +1551,7 @@ Chi:
   wl-unicode-name: GREEK SMALL LETTER CHI
 
 CircleDot:
-  amslatex: "\\odot"
+  amslatex: '\odot'
   esc-alias: c.
   has-unicode-inverse: false
   is-letter-like: false
@@ -1564,7 +1564,7 @@ CircleDot:
   wl-unicode-name: CIRCLED DOT OPERATOR
 
 CircleMinus:
-  amslatex: "\\ominus"
+  amslatex: '\ominus'
   esc-alias: c-
   has-unicode-inverse: false
   is-letter-like: false
@@ -1590,7 +1590,7 @@ CirclePlus:
   wl-unicode-name: CIRCLED PLUS
 
 CircleTimes:
-  amslatex: "\\otimes"
+  amslatex: '\otimes'
   esc-alias: c*
   has-unicode-inverse: false
   is-letter-like: false
@@ -1755,7 +1755,7 @@ Continuation:
   wl-unicode: "\uF3B1"
 
 ContourIntegral:
-  amslatex: "\\oint"
+  amslatex: '\oint'
   esc-alias: cint
   has-unicode-inverse: false
   is-letter-like: false
@@ -1775,7 +1775,7 @@ ControlKey:
   wl-unicode: "\uF763"
 
 Coproduct:
-  amslatex: "\\coprod"
+  amslatex: '\coprod'
   esc-alias: coprod
   has-unicode-inverse: false
   is-letter-like: false
@@ -1819,7 +1819,7 @@ Cross:
   wl-unicode: "\uF4A0"
 
 Cup:
-  amslatex: "\\cup"
+  amslatex: '\cup'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Cup
@@ -1929,7 +1929,7 @@ Currency:
   wl-unicode-name: CURRENCY SIGN
 
 DHacek:
-  amslatex: "\\v{d}"
+  amslatex: '\v{d}'
   esc-alias: dv
   has-unicode-inverse: false
   is-letter-like: true
@@ -1940,7 +1940,7 @@ DHacek:
   wl-unicode-name: LATIN SMALL LETTER D WITH CARON
 
 Dagger:
-  amslatex: "\\dagger"
+  amslatex: '\dagger'
   esc-alias: dg
   has-unicode-inverse: false
   is-letter-like: false
@@ -1951,7 +1951,7 @@ Dagger:
   wl-unicode-name: DAGGER
 
 Dalet:
-  amslatex: "\\daleth"
+  amslatex: '\daleth'
   esc-alias: da
   has-unicode-inverse: false
   is-letter-like: false
@@ -2007,7 +2007,7 @@ Degree:
   wl-unicode-name: DEGREE SIGN
 
 Del:
-  amslatex: "\\nabla"
+  amslatex: '\nabla'
   esc-alias: del
   has-unicode-inverse: false
   is-letter-like: false
@@ -2027,7 +2027,7 @@ DeleteKey:
   wl-unicode: "\uF7D0"
 
 Delta:
-  amslatex: "\\delta"
+  amslatex: '\delta'
   esc-alias: d
   has-unicode-inverse: false
   is-letter-like: false
@@ -2132,7 +2132,7 @@ Digamma:
 # When there is a tag over the edge, WL uses a bold variant
 # of the symbol.
 DirectedEdge:
-  amslatex: "\\rightarrow"
+  amslatex: '\rightarrow'
   esc-alias: de
   has-unicode-inverse: false
   is-letter-like: false
@@ -2282,7 +2282,7 @@ DottedSquare:
   wl-unicode: "\uF751"
 
 DoubleContourIntegral:
-  amslatex: "\\oiint"
+  amslatex: '\oiint'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: DoubleContourIntegral
@@ -2294,7 +2294,7 @@ DoubleContourIntegral:
   wl-unicode-name: SURFACE INTEGRAL
 
 DoubleDagger:
-  amslatex: "\\ddagger"
+  amslatex: '\ddagger'
   esc-alias: ddg
   has-unicode-inverse: false
   is-letter-like: false
@@ -2315,7 +2315,7 @@ DoubleDot:
   wl-unicode-name: DIAERESIS
 
 DoubleDownArrow:
-  amslatex: "\\Downarrow"
+  amslatex: '\Downarrow'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: DoubleDownArrow
@@ -2327,7 +2327,7 @@ DoubleDownArrow:
   wl-unicode-name: DOWNWARDS DOUBLE ARROW
 
 DoubleLeftArrow:
-  amslatex: "\\Leftarrow"
+  amslatex: '\Leftarrow'
   esc-alias: ' <='
   has-unicode-inverse: false
   is-letter-like: false
@@ -2340,7 +2340,7 @@ DoubleLeftArrow:
   wl-unicode-name: LEFTWARDS DOUBLE ARROW
 
 DoubleLeftRightArrow:
-  amslatex: "\\Leftrightarrow"
+  amslatex: '\Leftrightarrow'
   esc-alias: <=>
   has-unicode-inverse: false
   is-letter-like: false
@@ -2415,7 +2415,7 @@ DoublePrime:
   wl-unicode-name: DOUBLE PRIME
 
 DoubleRightArrow:
-  amslatex: "\\Rightarrow"
+  amslatex: '\Rightarrow'
   esc-alias: ' =>'
   has-unicode-inverse: false
   is-letter-like: false
@@ -3060,7 +3060,7 @@ DoubleStruckZero:
   wl-unicode: "\uF7DB"
 
 DoubleUpArrow:
-  amslatex: "\\Uparrow"
+  amslatex: '\Uparrow'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: DoubleUpArrow
@@ -3072,7 +3072,7 @@ DoubleUpArrow:
   wl-unicode-name: UPWARDS DOUBLE ARROW
 
 DoubleUpDownArrow:
-  amslatex: "\\Updownarrow"
+  amslatex: '\Updownarrow'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: DoubleUpDownArrow
@@ -3084,7 +3084,7 @@ DoubleUpDownArrow:
   wl-unicode-name: UP DOWN DOUBLE ARROW
 
 DoubleVerticalBar:
-  amslatex: "\\parallel"
+  amslatex: '\parallel'
   esc-alias: ' ||'
   has-unicode-inverse: false
   is-letter-like: false
@@ -3097,7 +3097,7 @@ DoubleVerticalBar:
   wl-unicode-name: PARALLEL TO
 
 DoubledGamma:
-  amslatex: "\\mathbb{\\gamma}"
+  amslatex: '\mathbb{\gamma}'
   esc-alias: gg
   has-unicode-inverse: true
   is-letter-like: true
@@ -3119,7 +3119,7 @@ DoubledPi:
   wl-unicode: "\uF749"
 
 DownArrow:
-  amslatex: "\\downarrow"
+  amslatex: '\downarrow'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: DownArrow
@@ -3326,7 +3326,7 @@ EBar:
   wl-unicode-name: LATIN SMALL LETTER E WITH MACRON
 
 ECup:
-  amslatex: "\\u{e}"
+  amslatex: '\u{e}'
   esc-alias: eu
   has-unicode-inverse: false
   is-letter-like: true
@@ -3360,7 +3360,7 @@ EGrave:
   wl-unicode-name: LATIN SMALL LETTER E WITH GRAVE
 
 EHacek:
-  amslatex: "\\v{e}"
+  amslatex: '\v{e}'
   esc-alias: ev
   has-unicode-inverse: false
   is-letter-like: true
@@ -3468,7 +3468,7 @@ EmptyRectangle:
   wl-unicode-name: WHITE VERTICAL RECTANGLE
 
 EmptySet:
-  amslatex: "\\varnothing"
+  amslatex: '\varnothing'
   esc-alias: es
   has-unicode-inverse: false
   is-letter-like: false
@@ -3628,7 +3628,7 @@ EscapeKey:
   wl-unicode: "\uF769"
 
 Eta:
-  amslatex: "\\eta"
+  amslatex: '\eta'
   esc-alias: et
   has-unicode-inverse: false
   is-letter-like: false
@@ -3659,7 +3659,7 @@ Euro:
   wl-unicode-name: EURO SIGN
 
 Exists:
-  amslatex: "\\exists"
+  amslatex: '\exists'
   esc-alias: ex
   has-unicode-inverse: false
   is-letter-like: false
@@ -3672,7 +3672,7 @@ Exists:
   wl-unicode-name: THERE EXISTS
 
 # ExpectationE:
-# #  amslatex: "\\ExpectationE"
+# #  amslatex: '\ExpectationE'
 # #  esc-alias: ee
 # #  has-unicode-inverse: true
 # #  is-letter-like: true
@@ -3683,7 +3683,7 @@ Exists:
 #   wl-unicode: "\uF2D3"
 
 ExponentialE:
-  amslatex: "\\ExponentialE"
+  amslatex: '\ExponentialE'
   esc-alias: ee
   has-unicode-inverse: true
   is-builtin-constant: true
@@ -4972,7 +4972,7 @@ FreakedSmiley:
 # unicode for each has to be different. Here we add
 # "LONG".
 Function:
-  amslatex: "\\mathsto"
+  amslatex: '\mathsto'
   ascii: "|->"
   has-unicode-inverse: false
   is-letter-like: false
@@ -5019,7 +5019,7 @@ Get:
   operator-name: Get
 
 Gimel:
-  amslatex: "\\gimel"
+  amslatex: '\gimel'
   esc-alias: gi
   has-unicode-inverse: false
   is-letter-like: false
@@ -5081,7 +5081,7 @@ GothicCapitalB:
   wl-unicode: "\uF78B"
 
 GothicCapitalC:
-  amslatex: "\\mathfrak{C}"
+  amslatex: '\mathfrak{C}'
   esc-alias: goC
   has-unicode-inverse: false
   is-letter-like: true
@@ -5735,7 +5735,7 @@ GreaterTilde:
   wl-unicode-name: GREATER-THAN OR EQUIVALENT TO
 
 HBar:
-  amslatex: "\\hbar"
+  amslatex: '\hbar'
   esc-alias: hb
   has-unicode-inverse: false
   is-letter-like: true
@@ -5847,7 +5847,7 @@ IAcute:
   wl-unicode-name: LATIN SMALL LETTER I WITH ACUTE
 
 ICup:
-  amslatex: "\\u{i}"
+  amslatex: '\u{i}'
   esc-alias: iu
   has-unicode-inverse: false
   is-letter-like: true
@@ -5892,7 +5892,7 @@ IHat:
   wl-unicode-name: LATIN SMALL LETTER I WITH CIRCUMFLEX
 
 ImaginaryI:
-  amslatex: "\\ComplexI"
+  amslatex: '\ComplexI'
   esc-alias: ii
   has-unicode-inverse: true
   is-builtin-constant: true
@@ -5904,7 +5904,7 @@ ImaginaryI:
   wl-unicode: "\uF74E"
 
 ImaginaryJ:
-  amslatex: "\\ComplexJ"
+  amslatex: '\ComplexJ'
   esc-alias: jj
   has-unicode-inverse: true
   is-builtin-constant: true
@@ -5926,7 +5926,7 @@ ImplicitPlus:
   wl-unicode: "\uF39E"
 
 Implies:
-  amslatex: "\\Rightarrow"
+  amslatex: '\Rightarrow'
   esc-alias: =>
   has-unicode-inverse: true
   is-letter-like: false
@@ -5945,7 +5945,7 @@ IndentingNewLine:
   wl-unicode: "\uF3A3"
 
 Infinity:
-  amslatex: "\\infty"
+  amslatex: '\infty'
   esc-alias: inf
   has-unicode-inverse: false
   is-builtin-constant: true
@@ -5961,7 +5961,7 @@ Infinity:
 # See also RawTilde
 Infix:
   ascii: "~"
-  amslatex: "\\textasciitilde"
+  amslatex: '\textasciitilde'
   has-unicode-inverse: false
   is-letter-like: false
 
@@ -5972,7 +5972,7 @@ Information:
   operator-name: Information
 
 Integral:
-  amslatex: "\\int"
+  amslatex: '\int'
   esc-alias: int
   has-unicode-inverse: false
   is-letter-like: false
@@ -5985,7 +5985,7 @@ Integral:
   wl-unicode-name: INTEGRAL
 
 InterpretedBox:
-  ascii: "\\!"
+  ascii: '\!'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: InterpretedBox
@@ -6058,7 +6058,7 @@ InvisibleTimes:
   wl-unicode-name: INVISIBLE TIMES
 
 Iota:
-  amslatex: "\\iota"
+  amslatex: '\iota'
   esc-alias: i
   has-unicode-inverse: false
   is-letter-like: false
@@ -6079,7 +6079,7 @@ Jupiter:
   wl-unicode-name: JUPITER
 
 Kappa:
-  amslatex: "\\kappa"
+  amslatex: '\kappa'
   esc-alias: k
   has-unicode-inverse: false
   is-letter-like: false
@@ -6106,7 +6106,7 @@ Koppa:
   wl-unicode-name: GREEK SMALL LETTER KOPPA
 
 LSlash:
-  amslatex: "\\l{}"
+  amslatex: '\l{}'
   esc-alias: l/
   has-unicode-inverse: false
   is-letter-like: true
@@ -6117,7 +6117,7 @@ LSlash:
   wl-unicode-name: LATIN SMALL LETTER L WITH STROKE
 
 Lambda:
-  amslatex: "\\lambda"
+  amslatex: '\lambda'
   esc-alias: l
   has-unicode-inverse: false
   is-letter-like: false
@@ -6145,7 +6145,7 @@ LeftAngleBracket:
   wl-unicode-name: LEFT-POINTING ANGLE BRACKET
 
 LeftArrow:
-  amslatex: "\\leftarrow"
+  amslatex: '\leftarrow'
   esc-alias: <-
   has-unicode-inverse: false
   is-letter-like: false
@@ -6170,7 +6170,7 @@ LeftArrowBar:
   wl-unicode-name: LEFTWARDS ARROW TO BAR
 
 LeftArrowRightArrow:
-  amslatex: "\\leftrightarrows"
+  amslatex: '\leftrightarrows'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: LeftArrowRightArrow
@@ -6317,7 +6317,7 @@ LeftPointer:
   wl-unicode-name: BLACK LEFT-POINTING SMALL TRIANGLE
 
 LeftRightArrow:
-  amslatex: "\\leftrightarrow"
+  amslatex: '\leftrightarrow'
   esc-alias: <->
   has-unicode-inverse: false
   is-letter-like: false
@@ -6363,7 +6363,7 @@ LeftTee:
   wl-unicode-name: LEFT TACK
 
 LeftTeeArrow:
-  amslatex: "\\mapsfrom"
+  amslatex: '\mapsfrom'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: LeftTeeArrow
@@ -6387,7 +6387,7 @@ LeftTeeVector:
   wl-unicode-name: LEFTWARDS HARPOON WITH BARB UP FROM BAR
 
 LeftTriangle:
-  amslatex: "\\triangleleft"
+  amslatex: '\triangleleft'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: LeftTriangle
@@ -6447,7 +6447,7 @@ LeftUpTeeVector:
   wl-unicode-name: UPWARDS HARPOON WITH BARB LEFT FROM BAR
 
 LeftUpVector:
-  amslatex: "\\upharpoonleft"
+  amslatex: '\upharpoonleft'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: LeftUpVector
@@ -6681,7 +6681,7 @@ LongRightArrow:
   wl-unicode-name: LONG RIGHTWARDS ARROW
 
 LowerLeftArrow:
-  amslatex: "\\swarrow"
+  amslatex: '\swarrow'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: LowerLeftArrow
@@ -6693,7 +6693,7 @@ LowerLeftArrow:
   wl-unicode-name: SOUTH WEST ARROW
 
 LowerRightArrow:
-  amslatex: "\\searrow"
+  amslatex: '\searrow'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: LowerRightArrow
@@ -6747,7 +6747,7 @@ MathematicaIcon:
   wl-unicode: "\uF757"
 
 MeasuredAngle:
-  amslatex: "\\measuredangle"
+  amslatex: '\measuredangle'
   has-unicode-inverse: false
   is-letter-like: false
   unicode-equivalent: "\u2221"
@@ -6844,7 +6844,7 @@ Mu:
   wl-unicode-name: GREEK SMALL LETTER MU
 
 NHacek:
-  amslatex: "\\v{n}"
+  amslatex: '\v{n}'
   esc-alias: nv
   has-unicode-inverse: false
   is-letter-like: true
@@ -7050,7 +7050,7 @@ NotDoubleVerticalBar:
   wl-unicode-name: NOT PARALLEL TO
 
 NotElement:
-  amslatex: "\\notin"
+  amslatex: '\notin'
   esc-alias: '!el'
   has-unicode-inverse: false
   is-letter-like: false
@@ -7582,7 +7582,7 @@ NotVerticalBar:
   wl-unicode: "\uF3D1"
 
 Nu:
-  amslatex: "\\nu"
+  amslatex: '\nu'
   esc-alias: n
   has-unicode-inverse: false
   is-letter-like: false
@@ -7692,7 +7692,7 @@ OTilde:
   wl-unicode-name: LATIN SMALL LETTER O WITH TILDE
 
 Omega:
-  amslatex: "\\omega"
+  amslatex: '\omega'
   esc-alias: o
   has-unicode-inverse: false
   is-letter-like: false
@@ -7803,7 +7803,7 @@ Paragraph:
 # https://en.wikipedia.org/wiki/%E2%88%82 seems
 # to agree here.
 PartialD:
-  amslatex: "\\partial"
+  amslatex: '\partial'
   esc-alias: pd
   has-unicode-inverse: false
   is-letter-like: false
@@ -7944,6 +7944,7 @@ PreIncrement:
   operator-name: PreIncrement
 
 Precedes:
+  amslatex: '\prec'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Precedes
@@ -7955,6 +7956,7 @@ Precedes:
   wl-unicode-name: PRECEDES
 
 PrecedesEqual:
+  amslatex: '\preceq'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: PrecedesEqual
@@ -7966,6 +7968,7 @@ PrecedesEqual:
   wl-unicode-name: PRECEDES ABOVE SINGLE-LINE EQUALS SIGN
 
 PrecedesSlantEqual:
+  amslatex: '\preccurlyeq' # WMA reports \precurlyeq, typo?
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: PrecedesSlantEqual
@@ -7977,6 +7980,7 @@ PrecedesSlantEqual:
   wl-unicode-name: PRECEDES OR EQUAL TO
 
 PrecedesTilde:
+  amslatex: '\precsim'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: PrecedesTilde
@@ -8019,6 +8023,7 @@ Product:
   wl-unicode-name: N-ARY PRODUCT
 
 Proportion:
+  ascii: '::'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Proportion
@@ -8397,6 +8402,7 @@ ReverseElement:
   wl-unicode-name: CONTAINS AS MEMBER
 
 ReverseEquilibrium:
+  amslatex: '\leftrightharpoons'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: ReverseEquilibrium
@@ -8419,6 +8425,7 @@ ReversePrime:
   wl-unicode-name: REVERSED PRIME
 
 ReverseUpEquilibrium:
+  amslatex: '\downharpoonleft\upharpoonright' # in wma, \downharpoon\upharpoon
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: ReverseUpEquilibrium
@@ -8477,6 +8484,7 @@ RightArrow:
   wl-unicode-name: RIGHTWARDS ARROW
 
 RightArrowBar:
+  amslatex: '\rightarrow |'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: RightArrowBar
@@ -8488,7 +8496,7 @@ RightArrowBar:
   wl-unicode-name: RIGHTWARDS ARROW TO BAR
 
 RightArrowLeftArrow:
-  amslatex: "\\rightleftarrows"
+  amslatex: '\rightleftarrows'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: RightArrowLeftArrow
@@ -8562,6 +8570,7 @@ RightDoubleBracketingBar:
   wl-unicode: "\uF606"
 
 RightDownTeeVector:
+  amslatex: '\bar{\downharpoonright}' # WMA \bar{doenharpoonright}, maybe a typo.
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: RightDownTeeVector
@@ -8573,6 +8582,7 @@ RightDownTeeVector:
   wl-unicode-name: DOWNWARDS HARPOON WITH BARB RIGHT FROM BAR
 
 RightDownVector:
+  amslatex: '\underline{\downharpoonright}'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: RightDownVector
@@ -8648,6 +8658,7 @@ RightSkeleton:
   wl-unicode: "\uF762"
 
 RightTee:
+  amslatex: '\vdash'
   esc-alias: rT
   has-unicode-inverse: false
   operator-name: RightTee
@@ -8672,6 +8683,7 @@ RightTeeArrow:
   wl-unicode-name: RIGHTWARDS ARROW FROM BAR
 
 RightTeeVector:
+  amslatex: '|\rightharpoonup'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: RightTeeVector
@@ -8683,7 +8695,7 @@ RightTeeVector:
   wl-unicode-name: RIGHTWARDS HARPOON WITH BARB UP FROM BAR
 
 RightTriangle:
-  amslatex: "\\triangleright"
+  amslatex: '\triangleright'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: RightTriangle
@@ -8695,6 +8707,7 @@ RightTriangle:
   wl-unicode-name: CONTAINS AS NORMAL SUBGROUP
 
 RightTriangleBar:
+  amslatex: '|\triangleright'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: RightTriangleBar
@@ -8706,6 +8719,7 @@ RightTriangleBar:
   wl-unicode-name: VERTICAL BAR BESIDE RIGHT TRIANGLE
 
 RightTriangleEqual:
+  amslatex: '\trianglerighteq'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: RightTriangleEqual
@@ -8717,6 +8731,7 @@ RightTriangleEqual:
   wl-unicode-name: CONTAINS AS NORMAL SUBGROUP OR EQUAL TO
 
 RightUpDownVector:
+  amslatex: '\stackrel{\upharpoonright}{\downharpoonright}' 
   has-unicode-inverse: false
   operator-name: RightUpDownVector
   is-letter-like: false
@@ -8728,6 +8743,7 @@ RightUpDownVector:
   wl-unicode-name: UP BARB RIGHT DOWN BARB RIGHT HARPOON
 
 RightUpTeeVector:
+  amslatex: '\underline{\upharpoonright}'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: RightUpTeeVector
@@ -8739,7 +8755,7 @@ RightUpTeeVector:
   wl-unicode-name: UPWARDS HARPOON WITH BARB RIGHT FROM BAR
 
 RightUpVector:
-  amslatex: "\\upharpoonright"
+  amslatex: '\upharpoonright'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: RightUpVector
@@ -8751,6 +8767,7 @@ RightUpVector:
   wl-unicode-name: UPWARDS HARPOON WITH BARB RIGHTWARDS
 
 RightUpVectorBar:
+  amslatex: '\bar{\upharpoonright}'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: RightUpVectorBar
@@ -8762,6 +8779,7 @@ RightUpVectorBar:
   wl-unicode-name: UPWARDS HARPOON WITH BARB RIGHT TO BAR
 
 RightVector:
+  amslatex: '\rightharpoonup'
   esc-alias: vec
   has-unicode-inverse: false
   is-letter-like: false
@@ -8774,6 +8792,7 @@ RightVector:
   wl-unicode-name: RIGHTWARDS HARPOON WITH BARB UPWARDS
 
 RightVectorBar:
+  amslatex: '\rightharpoonup |'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: RightVectorBar
@@ -8786,6 +8805,7 @@ RightVectorBar:
 
 # Note: not the same as \[Superset]
 RoundImplies:
+  amslatex: '\text{RoundImplies}[a,b]'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: RoundImplies
@@ -8947,7 +8967,7 @@ ScriptCapitalA:
   wl-unicode: "\uF770"
 
 ScriptCapitalB:
-  amslatex: "\\mathcal{B}"
+  amslatex: '\mathcal{B}'
   esc-alias: scB
   has-unicode-inverse: false
   is-letter-like: true
@@ -8979,7 +8999,7 @@ ScriptCapitalD:
   wl-unicode: "\uF773"
 
 ScriptCapitalE:
-  amslatex: "\\mathcal{E}"
+  amslatex: '\mathcal{E}'
   esc-alias: scE
   has-unicode-inverse: false
   is-letter-like: true
@@ -8991,7 +9011,7 @@ ScriptCapitalE:
   wl-unicode-name: SCRIPT CAPITAL E
 
 ScriptCapitalF:
-  amslatex: "\\mathcal{F}"
+  amslatex: '\mathcal{F}'
   esc-alias: scF
   has-unicode-inverse: false
   is-letter-like: true
@@ -9066,7 +9086,7 @@ ScriptCapitalL:
   wl-unicode-name: SCRIPT CAPITAL L
 
 ScriptCapitalM:
-  amslatex: "\\mathcal{M}"
+  amslatex: '\mathcal{M}'
   esc-alias: scM
   has-unicode-inverse: false
   is-letter-like: true
@@ -9237,7 +9257,7 @@ ScriptDotlessJ:
   wl-unicode: "\uF731"
 
 ScriptE:
-  amslatex: "\\mathcal{e}"
+  amslatex:  '\mathcal{e}'
   esc-alias: sce
   has-unicode-inverse: false
   is-letter-like: true
@@ -9369,7 +9389,7 @@ ScriptNine:
   wl-unicode: "\uF7F9"
 
 ScriptO:
-  amslatex: "\\mathcal{o}"
+  amslatex: '\mathcal{o}'
   esc-alias: sco
   has-unicode-inverse: false
   is-letter-like: true
@@ -9601,7 +9621,7 @@ ShortRightArrow:
   wl-unicode: "\uF525"
 
 ShortUpArrow:
-  amslatex: "\\uparrow"
+  amslatex: '\uparrow'
   has-unicode-inverse: true
   is-letter-like: false
   unicode-equivalent: "\u2191"
@@ -9611,7 +9631,7 @@ ShortUpArrow:
   wl-unicode: "\uF52A"
 
 Sigma:
-  amslatex: "\\sigma"
+  amslatex: '\sigma'
   esc-alias: s
   has-unicode-inverse: false
   is-letter-like: false
@@ -9720,7 +9740,7 @@ SpanFromLeft:
   wl-unicode: "\uF3BA"
 
 SphericalAngle:
-  amslatex: "\\sphericalangle"
+  amslatex: '\sphericalangle'
   has-unicode-inverse: false
   is-letter-like: false
   unicode-equivalent: "\u2222"
@@ -9731,7 +9751,7 @@ SphericalAngle:
   wl-unicode-name: SPHERICAL ANGLE
 
 Sqrt:
-  amslatex: "\\sqrt"
+  amslatex: '\sqrt'
   esc-alias: sqrt
   has-unicode-inverse: false
   is-letter-like: false
@@ -9756,6 +9776,7 @@ Square:
   wl-unicode: "\uF520"
 
 SquareIntersection:
+  amslatex: '\sqcap'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: SquareIntersection
@@ -9767,7 +9788,7 @@ SquareIntersection:
   wl-unicode-name: SQUARE CAP
 
 SquareSubset:
-  amslatex: "\\sqsubset"
+  amslatex: '\sqsubset'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: SquareSubset
@@ -9779,7 +9800,7 @@ SquareSubset:
   wl-unicode-name: SQUARE IMAGE OF
 
 SquareSubsetEqual:
-  amslatex: "\\sqsubseteq"
+  amslatex: '\sqsubseteq'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: SquareSubsetEqual
@@ -9791,7 +9812,7 @@ SquareSubsetEqual:
   wl-unicode-name: SQUARE IMAGE OF OR EQUAL TO
 
 SquareSuperset:
-  amslatex: "\\sqsupset"
+  amslatex: '\sqsupset'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: SquareSuperset
@@ -9803,7 +9824,7 @@ SquareSuperset:
   wl-unicode-name: SQUARE ORIGINAL OF
 
 SquareSupersetEqual:
-  amslatex: "\\sqsupseteq"
+  amslatex: '\sqsupseteq'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: SquareSupersetEqual
@@ -9815,6 +9836,7 @@ SquareSupersetEqual:
   wl-unicode-name: SQUARE ORIGINAL OF OR EQUAL TO
 
 SquareUnion:
+  amslatex: '\sqcup'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: SquareUnion
@@ -9870,7 +9892,7 @@ StringJoin:
   operator-name: StringJoin
 
 Subset:
-  amslatex: "\\subset"
+  amslatex: '\subset'
   esc-alias: sub
   has-unicode-inverse: false
   is-letter-like: false
@@ -9883,7 +9905,7 @@ Subset:
   wl-unicode-name: SUBSET OF
 
 SubsetEqual:
-  amslatex: "\\subseteq"
+  amslatex: '\subseteq'
   esc-alias: sub=
   has-unicode-inverse: false
   is-letter-like: false
@@ -9902,6 +9924,7 @@ SubtractFrom:
   operator-name: SubtractFrom
 
 Succeeds:
+  amslatex: '\succ'
   has-unicode-inverse: false
   is-letter-like: false
   unicode-equivalent: "\u227B"
@@ -9913,6 +9936,7 @@ Succeeds:
   wl-unicode-name: SUCCEEDS
 
 SucceedsEqual:
+  amslatex: '\succeq'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: SucceedsEqual
@@ -9924,6 +9948,7 @@ SucceedsEqual:
   wl-unicode-name: SUCCEEDS ABOVE SINGLE-LINE EQUALS SIGN
 
 SucceedsSlantEqual:
+  amslatex: '\succeq'       # In WMA `$\succurlyeq`
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: SucceedsSlantEqual
@@ -9935,6 +9960,7 @@ SucceedsSlantEqual:
   wl-unicode-name: SUCCEEDS OR EQUAL TO
 
 SucceedsTilde:
+  amslatex: '\succsim'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: SucceedsTilde
@@ -9946,6 +9972,7 @@ SucceedsTilde:
   wl-unicode-name: SUCCEEDS OR EQUIVALENT TO
 
 SuchThat:
+  amslatex: '\backepsilon'
   esc-alias: st
   has-unicode-inverse: false
   is-letter-like: false
@@ -9958,7 +9985,7 @@ SuchThat:
   wl-unicode-name: SMALL CONTAINS AS MEMBER
 
 Sum:
-  amslatex: "\\sum"
+  amslatex: '\sum'
   esc-alias: sum
   has-unicode-inverse: false
   is-letter-like: false
@@ -9971,6 +9998,7 @@ Sum:
   wl-unicode-name: N-ARY SUMMATION
 
 Superset:
+  amslatex: '\supset'
   esc-alias: sup
   has-unicode-inverse: false
   is-letter-like: false
@@ -9983,6 +10011,7 @@ Superset:
   wl-unicode-name: SUPERSET OF
 
 SupersetEqual:
+  amslatex: '\supseteq'
   esc-alias: sup=
   has-unicode-inverse: false
   is-letter-like: false
@@ -10007,7 +10036,7 @@ SystemsModelDelay:
   wl-unicode: "\uF3AF"
 
 THacek:
-  amslatex: "\\v{t}"
+  amslatex: '\v{t}'
   esc-alias: tv
   has-unicode-inverse: false
   is-letter-like: true
@@ -10031,7 +10060,7 @@ TagSet:
   operator-name: TagSet
 
 Tau:
-  amslatex: "\\tau"
+  amslatex: '\tau'
   esc-alias: t
   has-unicode-inverse: false
   is-letter-like: false
@@ -10067,6 +10096,7 @@ TensorWedge:
   wl-unicode: "\uF3DB"
 
 Therefore:
+  amslatex: '\therefore'
   esc-alias: tf
   has-unicode-inverse: false
   is-letter-like: false
@@ -10079,7 +10109,7 @@ Therefore:
   wl-unicode-name: THEREFORE
 
 Theta:
-  amslatex: "\\theta"
+  amslatex: '\theta'
   esc-alias: th
   has-unicode-inverse: false
   is-letter-like: false
@@ -10121,6 +10151,7 @@ Thorn:
 # so it is not the same as RawTilde.
 # Yes, it is confusing.
 Tilde:
+  amslatex: '\sim'
   esc-alias: '~'
   has-unicode-inverse: false
   is-letter-like: false
@@ -10146,6 +10177,7 @@ TildeEqual:
   wl-unicode-name: ASYMPTOTICALLY EQUAL TO
 
 TildeFullEqual:
+  amslatex: '\cong'
   esc-alias: ~==
   has-unicode-inverse: false
   is-letter-like: false
@@ -10158,6 +10190,7 @@ TildeFullEqual:
   wl-unicode-name: APPROXIMATELY EQUAL TO
 
 TildeTilde:
+  amslatex: '\approx'
   esc-alias: ~~
   has-unicode-inverse: false
   is-letter-like: false
@@ -10170,7 +10203,7 @@ TildeTilde:
   wl-unicode-name: ALMOST EQUAL TO
 
 Times:
-  amslatex: "\\times"
+  amslatex: '\times'
   ascii: '*'
   esc-alias: '*'
   has-unicode-inverse: false
@@ -10334,6 +10367,7 @@ UnsameQ:
   operator-name: UnsameQ
 
 Union:
+  amslatex: '\cup'
   esc-alias: un
   has-unicode-inverse: false
   is-letter-like: false
@@ -10346,6 +10380,7 @@ Union:
   wl-unicode-name: N-ARY UNION
 
 UnionPlus:
+  amslatex: '\uplus'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: UnionPlus
@@ -10363,7 +10398,7 @@ Unset:
   operator-name: Unset
 
 UpArrow:
-  amslatex: "\\uparrow"
+  amslatex: '\uparrow'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: UpArrow
@@ -10375,6 +10410,7 @@ UpArrow:
   wl-unicode-name: UPWARDS ARROW
 
 UpArrowBar:
+  amslatex: '\bar{\uparrow}'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: UpArrowBar
@@ -10386,7 +10422,7 @@ UpArrowBar:
   wl-unicode-name: UPWARDS ARROW TO BAR
 
 UpArrowDownArrow:
-  amslatex: "\\updownarrow"
+  amslatex: '\updownarrow'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: UpArrowDownArrow
@@ -10398,7 +10434,7 @@ UpArrowDownArrow:
   wl-unicode-name: UPWARDS ARROW LEFTWARDS OF DOWNWARDS ARROW
 
 UpDownArrow:
-  amslatex: "\\updownarrow"
+  amslatex: '\updownarrow'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: UpDownArrow
@@ -10410,6 +10446,7 @@ UpDownArrow:
   wl-unicode-name: UP DOWN ARROW
 
 UpEquilibrium:
+  amslatex: '\upharpoonleft \downharpoonright'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: UpEquilibrium
@@ -10431,6 +10468,7 @@ UpPointer:
   wl-unicode-name: BLACK UP-POINTING SMALL TRIANGLE
 
 UpTee:
+  amslatex: '\bot'
   esc-alias: uT
   has-unicode-inverse: false
   is-letter-like: false
@@ -10479,7 +10517,7 @@ UpperRightArrow:
   wl-unicode-name: NORTH EAST ARROW
 
 Upsilon:
-  amslatex: "\\upsilon"
+  amslatex: '\upsilon'
   esc-alias: u
   has-unicode-inverse: false
   is-letter-like: false
@@ -10582,6 +10620,7 @@ VerticalSeparator:
   wl-unicode: "\uF432"
 
 VerticalTilde:
+  amslatex: '\wr'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: VerticalTilde
@@ -10629,7 +10668,7 @@ WatchIcon:
   wl-unicode-name: WATCH
 
 Wedge:
-  amslatex: "\\wedge"
+  amslatex: '\wedge'
   esc-alias: ^
   has-unicode-inverse: false
   is-letter-like: false
@@ -10735,7 +10774,7 @@ WolframLanguageLogoCircle:
   wl-unicode: "\uF11F"
 
 Xi:
-  amslatex: "\\xi"
+  amslatex: '\xi'
   esc-alias: x
   has-unicode-inverse: false
   is-letter-like: false
