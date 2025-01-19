@@ -3131,6 +3131,7 @@ DownArrow:
   wl-unicode-name: DOWNWARDS ARROW
 
 DownArrowBar:
+  amslatex: '\underline{\downarrow}'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: DownArrowBar
@@ -3142,6 +3143,7 @@ DownArrowBar:
   wl-unicode-name: DOWNWARDS ARROW TO BAR
 
 DownArrowUpArrow:
+  amslatex: '\downarrow \uparrow'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: DownArrowUpArrow
@@ -3172,6 +3174,7 @@ DownExclamation:
   wl-unicode-name: INVERTED EXCLAMATION MARK
 
 DownLeftRightVector:
+  amslatex: '\leftharpoondown \rightharpoondown'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: DownLeftRightVector
@@ -3183,6 +3186,7 @@ DownLeftRightVector:
   wl-unicode-name: LEFT BARB DOWN RIGHT BARB DOWN HARPOON
 
 DownLeftTeeVector:
+  amslatex: '\leftharpoondown |'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: DownLeftTeeVector
@@ -3194,7 +3198,7 @@ DownLeftTeeVector:
   wl-unicode-name: LEFTWARDS HARPOON WITH BARB DOWN FROM BAR
 
 DownLeftVector:
-  amslatex: "\\leftharpoondown"
+  amslatex: '\leftharpoondown'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: DownLeftVector
@@ -3206,6 +3210,7 @@ DownLeftVector:
   wl-unicode-name: LEFTWARDS HARPOON WITH BARB DOWNWARDS
 
 DownLeftVectorBar:
+  amslatex: '|\leftharpoondown'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: DownLeftVectorBar
@@ -3237,6 +3242,7 @@ DownQuestion:
   wl-unicode-name: INVERTED QUESTION MARK
 
 DownRightTeeVector:
+  amslatex: '|\rightharpoondown'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: DownRightTeeVector
@@ -3248,6 +3254,7 @@ DownRightTeeVector:
   wl-unicode-name: RIGHTWARDS HARPOON WITH BARB DOWN FROM BAR
 
 DownRightVector:
+  amslatex: '\rightharpoondown'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: DownRightVector
@@ -3259,6 +3266,7 @@ DownRightVector:
   wl-unicode-name: RIGHTWARDS HARPOON WITH BARB DOWNWARDS
 
 DownRightVectorBar:
+  amslatex: '\rightharpoondown |'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: DownRightVectorBar
@@ -3270,6 +3278,7 @@ DownRightVectorBar:
   wl-unicode-name: RIGHTWARDS HARPOON WITH BARB DOWN TO BAR
 
 DownTee:
+  amslatex: '\top'
   esc-alias: dT
   has-unicode-inverse: false
   is-letter-like: false
@@ -3567,6 +3576,7 @@ Equal:
   wl-unicode: "\uF431"
 
 EqualTilde:
+  amslatex: '\eqsim'
   esc-alias: =~
   has-unicode-inverse: false
   is-letter-like: false
@@ -3579,6 +3589,7 @@ EqualTilde:
   wl-unicode-name: MINUS TILDE
 
 Equilibrium:
+  amslatex: '\rightleftharpoons'
   esc-alias: equi
   has-unicode-inverse: false
   is-letter-like: false
@@ -3591,6 +3602,7 @@ Equilibrium:
   wl-unicode-name: RIGHTWARDS HARPOON OVER LEFTWARDS HARPOON
 
 Equivalent:
+#  amslatex: '\unicode{29e6}'
   esc-alias: equiv
   has-unicode-inverse: true
   is-letter-like: false
@@ -5649,6 +5661,7 @@ GreaterEqual:
   wl-unicode-name: GREATER-THAN OR EQUAL TO
 
 GreaterEqualLess:
+  amslatex: 'a\gtreqless b'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: GreaterEqualLess
@@ -5660,6 +5673,7 @@ GreaterEqualLess:
   wl-unicode-name: GREATER-THAN EQUAL TO OR LESS-THAN
 
 GreaterFullEqual:
+  amslatex: '\geqq'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: GreaterFullEqual
@@ -5671,6 +5685,7 @@ GreaterFullEqual:
   wl-unicode-name: GREATER-THAN OVER EQUAL TO
 
 GreaterGreater:
+  amslatex: '\gg'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: GreaterGreater
@@ -5682,6 +5697,7 @@ GreaterGreater:
   wl-unicode-name: MUCH GREATER-THAN
 
 GreaterLess:
+  amslatex: '\gtrless'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: GreaterLess
@@ -5693,6 +5709,7 @@ GreaterLess:
   wl-unicode-name: GREATER-THAN OR LESS-THAN
 
 GreaterSlantEqual:
+  amslatex: '\geq'
   esc-alias: '>/'
   has-unicode-inverse: false
   operator-name: GreaterSlantEqual
@@ -5705,6 +5722,7 @@ GreaterSlantEqual:
   wl-unicode-name: GREATER-THAN OR SLANTED EQUAL TO
 
 GreaterTilde:
+  amslatex: '\gtrsim' # In WMA, '\gtrsin' which seems a typo... 
   esc-alias: '>~'
   has-unicode-inverse: false
   operator-name: GreaterTilde
@@ -5781,6 +5799,7 @@ HorizontalLine:
   wl-unicode-name: BOX DRAWINGS LIGHT HORIZONTAL
 
 HumpDownHump:
+  amslatex: '\Bumpeq'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: HumpDownHump
@@ -5792,6 +5811,7 @@ HumpDownHump:
   wl-unicode-name: GEOMETRICALLY EQUIVALENT TO
 
 HumpEqual:
+  amslatex: '\bumpeq'
   esc-alias: h=
   has-unicode-inverse: false
   is-letter-like: false
@@ -6138,6 +6158,7 @@ LeftArrow:
   wl-unicode-name: LEFTWARDS ARROW
 
 LeftArrowBar:
+  amslatex: '|\leftarrow'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: LeftArrowBar
@@ -6215,6 +6236,7 @@ LeftDoubleBracketingBar:
   wl-unicode: "\uF605"
 
 LeftDownTeeVector:
+  amslatex: '\bar{\downharpoonleft}'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: LeftDownTeeVector
@@ -6226,6 +6248,7 @@ LeftDownTeeVector:
   wl-unicode-name: DOWNWARDS HARPOON WITH BARB LEFT FROM BAR
 
 LeftDownVector:
+  amslatex: '\downharpoonleft'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: LeftDownVector
@@ -6237,6 +6260,7 @@ LeftDownVector:
   wl-unicode-name: DOWNWARDS HARPOON WITH BARB LEFTWARDS
 
 LeftDownVectorBar:
+  amslatex: '\underline{\downharpoonleft}'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: LeftDownVectorBar
@@ -6306,6 +6330,7 @@ LeftRightArrow:
   wl-unicode-name: LEFT RIGHT ARROW
 
 LeftRightVector:
+  amslatex: '\leftharpoonup \rightharpoonup'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: LeftRightVector
@@ -6325,6 +6350,7 @@ LeftSkeleton:
   wl-unicode: "\uF761"
 
 LeftTee:
+  amslatex: '\dashv'
   esc-alias: lT
   has-unicode-inverse: false
   is-letter-like: false
@@ -6349,6 +6375,7 @@ LeftTeeArrow:
   wl-unicode-name: LEFTWARDS ARROW FROM BAR
 
 LeftTeeVector:
+  amslatex: '\leftharpoonup |'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: LeftTeeVector
@@ -6372,6 +6399,7 @@ LeftTriangle:
   wl-unicode-name: NORMAL SUBGROUP OF
 
 LeftTriangleBar:
+  amslatex: '\triangleleft |'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: LeftTriangleBar
@@ -6383,6 +6411,7 @@ LeftTriangleBar:
   wl-unicode-name: LEFT TRIANGLE BESIDE VERTICAL BAR
 
 LeftTriangleEqual:
+  amslatex: '\trianglelefteq'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: LeftTriangleEqual
@@ -6394,6 +6423,7 @@ LeftTriangleEqual:
   wl-unicode-name: NORMAL SUBGROUP OF OR EQUAL TO
 
 LeftUpDownVector:
+  amslatex: '\stackrel{\upharpoonleft}{\downharpoonleft}' # In WMA, \overset instead \stackrel
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: LeftUpDownVector
@@ -6405,6 +6435,7 @@ LeftUpDownVector:
   wl-unicode-name: UP BARB LEFT DOWN BARB LEFT HARPOON
 
 LeftUpTeeVector:
+  amslatex: '\underline{\upharpoonleft}'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: LeftUpTeeVector
@@ -6428,6 +6459,7 @@ LeftUpVector:
   wl-unicode-name: UPWARDS HARPOON WITH BARB LEFTWARDS
 
 LeftUpVectorBar:
+  amslatex: '\bar{\upharpoonleft}'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: LeftUpVectorBar
@@ -6439,6 +6471,7 @@ LeftUpVectorBar:
   wl-unicode-name: UPWARDS HARPOON WITH BARB LEFT TO BAR
 
 LeftVector:
+  amslatex: '\leftharpoonup'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: LeftVector
@@ -6450,6 +6483,7 @@ LeftVector:
   wl-unicode-name: LEFTWARDS HARPOON WITH BARB UPWARDS
 
 LeftVectorBar:
+  amslatex: '|\leftharpoonup'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: LeftVectorBar
@@ -6491,6 +6525,7 @@ LessEqual:
   wl-unicode-name: LESS-THAN OR EQUAL TO
 
 LessEqualGreater:
+  amslatex: '\lesseqgtr'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: LessEqualGreater
@@ -6502,6 +6537,7 @@ LessEqualGreater:
   wl-unicode-name: LESS-THAN EQUAL TO OR GREATER-THAN
 
 LessFullEqual:
+  amslatex: '\leqq'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: LessFullEqual
@@ -6513,6 +6549,7 @@ LessFullEqual:
   wl-unicode-name: LESS-THAN OVER EQUAL TO
 
 LessGreater:
+  amslatex: '\lessgtr'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: LessGreater
@@ -6524,6 +6561,7 @@ LessGreater:
   wl-unicode-name: LESS-THAN OR GREATER-THAN
 
 LessLess:
+  amslatex: '\ll'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: LessLess
@@ -6535,6 +6573,7 @@ LessLess:
   wl-unicode-name: MUCH LESS-THAN
 
 LessSlantEqual:
+  amslatex: '\leq'
   esc-alias: </
   has-unicode-inverse: false
   operator-name: LessSlantEqual
@@ -6547,6 +6586,7 @@ LessSlantEqual:
   wl-unicode-name: LESS-THAN OR SLANTED EQUAL TO
 
 LessTilde:
+  amslatex: '\lesssim'
   esc-alias: <~
   has-unicode-inverse: false
   is-letter-like: false
@@ -6602,6 +6642,7 @@ LongEqual:
   wl-unicode: "\uF7D9"
 
 LongLeftArrow:
+  amslatex: '\longleftarrow'
   esc-alias: <--
   has-unicode-inverse: false
   is-letter-like: false
@@ -6614,6 +6655,7 @@ LongLeftArrow:
   wl-unicode-name: LONG LEFTWARDS ARROW
 
 LongLeftRightArrow:
+  amslatex: '\longleftrightarrow'
   esc-alias: <-->
   has-unicode-inverse: false
   is-letter-like: false
@@ -6626,6 +6668,7 @@ LongLeftRightArrow:
   wl-unicode-name: LONG LEFT RIGHT ARROW
 
 LongRightArrow:
+  amslatex: '\longrightarrow'
   esc-alias: -->
   has-unicode-inverse: false
   is-letter-like: false
@@ -6882,6 +6925,7 @@ Neptune:
   wl-unicode-name: NEPTUNE
 
 NestedGreaterGreater:
+  amslatex: '\gg'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: NestedGreaterGreater
@@ -6893,6 +6937,7 @@ NestedGreaterGreater:
   wl-unicode-name: DOUBLE NESTED GREATER-THAN
 
 NestedLessLess:
+  amslatex: '\ll'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: NestedLessLess
@@ -6967,6 +7012,7 @@ Not:
   wl-unicode-name: NOT SIGN
 
 NotCongruent:
+  amslatex: '\not{\equiv}'
   esc-alias: '!==='
   has-unicode-inverse: false
   is-letter-like: false
@@ -6979,6 +7025,7 @@ NotCongruent:
   wl-unicode-name: NOT IDENTICAL TO
 
 NotCupCap:
+  amslatex: '\not{\stackrel{\smile}{\frown}}'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: NotCupCap
@@ -7050,6 +7097,7 @@ NotExists:
   wl-unicode-name: THERE DOES NOT EXIST
 
 NotGreater:
+  amslatex: '\ngtr'
   esc-alias: '!>'
   has-unicode-inverse: false
   is-letter-like: false
@@ -7062,6 +7110,7 @@ NotGreater:
   wl-unicode-name: NOT GREATER-THAN
 
 NotGreaterEqual:
+  amslatex: '\ngeq'
   esc-alias: '!>='
   has-unicode-inverse: false
   is-letter-like: false
@@ -7074,6 +7123,7 @@ NotGreaterEqual:
   wl-unicode-name: NEITHER GREATER-THAN NOR EQUAL TO
 
 NotGreaterFullEqual:
+  amslatex: '\ngeqq'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: NotGreaterFullEqual
@@ -7085,13 +7135,16 @@ NotGreaterFullEqual:
   wl-unicode-name: GREATER-THAN BUT NOT EQUAL TO
 
 NotGreaterGreater:
+  amslatex: '\not{\gg}'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: NotGreaterGreater
+  unicode-equivalent: "\uF427"
   wl-reference: https://reference.wolfram.com/language/ref/character/NotGreaterGreater.html
   wl-unicode: "\uF427"
 
 NotGreaterLess:
+  amslatex: '\not{\gtrless}'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: NotGreaterLess
@@ -7110,6 +7163,7 @@ NotGreaterSlantEqual:
   wl-unicode: "\uF429"
 
 NotGreaterTilde:
+  amslatex: '\not{\gtrsim}'
   esc-alias: '!>~'
   has-unicode-inverse: false
   is-letter-like: false
@@ -7135,6 +7189,7 @@ NotHumpEqual:
   wl-unicode: "\uF401"
 
 NotLeftTriangle:
+  amslatex: '\ntriangleleft'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: NotLeftTriangle
@@ -7152,6 +7207,7 @@ NotLeftTriangleBar:
   wl-unicode: "\uF412"
 
 NotLeftTriangleEqual:
+  amslatex: '\ntrianglelefteq'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: NotLeftTriangleEqual
@@ -7163,6 +7219,7 @@ NotLeftTriangleEqual:
   wl-unicode-name: NOT NORMAL SUBGROUP OF OR EQUAL TO
 
 NotLess:
+  amslatex: '\nless'
   esc-alias: '!<'
   has-unicode-inverse: false
   is-letter-like: false
@@ -7175,6 +7232,7 @@ NotLess:
   wl-unicode-name: NOT LESS-THAN
 
 NotLessEqual:
+  amslatex: '\nleq'
   esc-alias: '!<='
   has-unicode-inverse: false
   is-letter-like: false
@@ -7187,6 +7245,7 @@ NotLessEqual:
   wl-unicode-name: NEITHER LESS-THAN NOR EQUAL TO
 
 NotLessFullEqual:
+  amslatex: '\nleqq'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: NotLessFullEqual
@@ -7198,6 +7257,7 @@ NotLessFullEqual:
   wl-unicode-name: LESS-THAN BUT NOT EQUAL TO
 
 NotLessGreater:
+  amslatex: '\not{\lessgtr}'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: NotLessGreater
@@ -7222,6 +7282,7 @@ NotLessSlantEqual:
   wl-unicode: "\uF424"
 
 NotLessTilde:
+  amslatex: '\not{\lesssim}'
   esc-alias: '!<~'
   has-unicode-inverse: false
   is-letter-like: false
@@ -7246,6 +7307,7 @@ NotNestedLessLess:
   wl-unicode: "\uF423"
 
 NotPrecedes:
+  amslatex: '\nprec'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: NotPrecedes
@@ -7263,6 +7325,7 @@ NotPrecedesEqual:
   wl-unicode: "\uF42B"
 
 NotPrecedesSlantEqual:
+  amslatex: '\not{\preccurlyeq}'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: NotPrecedesSlantEqual
@@ -7274,6 +7337,7 @@ NotPrecedesSlantEqual:
   wl-unicode-name: DOES NOT PRECEDE OR EQUAL
 
 NotPrecedesTilde:
+  amslatex: '\not{\precsim}'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: NotPrecedesTilde
@@ -7298,6 +7362,7 @@ NotReverseElement:
   wl-unicode-name: DOES NOT CONTAIN AS MEMBER
 
 NotRightTriangle:
+  amslatex: '\ntriangleright'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: NotRightTriangle
@@ -7315,6 +7380,7 @@ NotRightTriangleBar:
   wl-unicode: "\uF413"
 
 NotRightTriangleEqual:
+  amslatex: '\ntrianglerighteq'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: NotRightTriangleEqual
@@ -7332,6 +7398,7 @@ NotSquareSubset:
   wl-unicode: "\uF42E"
 
 NotSquareSubsetEqual:
+  amslatex: '\not{\sqsubseteq}'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: NotSquareSubsetEqual
@@ -7343,6 +7410,7 @@ NotSquareSubsetEqual:
   wl-unicode-name: NOT SQUARE IMAGE OF OR EQUAL TO
 
 NotSquareSuperset:
+  amslatex: '\not{\sqsupseteq}'
   has-unicode-inverse: false
   is-letter-like: false
   wl-reference: https://reference.wolfram.com/language/ref/character/NotSquareSuperset.html
@@ -7360,6 +7428,7 @@ NotSquareSupersetEqual:
   wl-unicode-name: NOT SQUARE ORIGINAL OF OR EQUAL TO
 
 NotSubset:
+  amslatex: '\not{\subset}'
   esc-alias: '!sub'
   has-unicode-inverse: false
   is-letter-like: false
@@ -7372,6 +7441,7 @@ NotSubset:
   wl-unicode-name: NOT A SUBSET OF
 
 NotSubsetEqual:
+  amslatex: '\nsubseteq'
   esc-alias: '!sub='
   has-unicode-inverse: false
   is-letter-like: false
@@ -7384,6 +7454,7 @@ NotSubsetEqual:
   wl-unicode-name: NEITHER A SUBSET OF NOR EQUAL TO
 
 NotSucceeds:
+  amslatex: '\nsucc'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: NotSucceeds
@@ -7402,6 +7473,7 @@ NotSucceedsEqual:
   wl-unicode: "\uF42D"
 
 NotSucceedsSlantEqual:
+  amslatex: '\not{\succeq}'  # in WMA, \succurlyeq, typo?
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: NotSucceedsSlantEqual
@@ -7413,6 +7485,7 @@ NotSucceedsSlantEqual:
   wl-unicode-name: DOES NOT SUCCEED OR EQUAL
 
 NotSucceedsTilde:
+  amslatex: '\not{\succsim}'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: NotSucceedsTilde
@@ -7424,6 +7497,7 @@ NotSucceedsTilde:
   wl-unicode-name: SUCCEEDS BUT NOT EQUIVALENT TO
 
 NotSuperset:
+  amslatex: '\not{\supset}'
   esc-alias: '!sup'
   has-unicode-inverse: false
   is-letter-like: false
@@ -7436,6 +7510,7 @@ NotSuperset:
   wl-unicode-name: NOT A SUPERSET OF
 
 NotSupersetEqual:
+  amslatex: '\nsupseteq'
   esc-alias: '!sup='
   has-unicode-inverse: false
   is-letter-like: false
@@ -7448,6 +7523,7 @@ NotSupersetEqual:
   wl-unicode-name: NEITHER A SUPERSET OF NOR EQUAL TO
 
 NotTilde:
+  amslatex: '\not{\sim}'
   esc-alias: '!~'
   has-unicode-inverse: false
   is-letter-like: false
@@ -7460,6 +7536,7 @@ NotTilde:
   wl-unicode-name: NOT TILDE
 
 NotTildeEqual:
+  amslatex: '\not{\simeq}'
   esc-alias: '!~='
   has-unicode-inverse: false
   is-letter-like: false
@@ -7472,6 +7549,7 @@ NotTildeEqual:
   wl-unicode-name: NOT ASYMPTOTICALLY EQUAL TO
 
 NotTildeFullEqual:
+  amslatex: '\ncong'
   esc-alias: '!~=='
   has-unicode-inverse: false
   is-letter-like: false
@@ -7484,6 +7562,7 @@ NotTildeFullEqual:
   wl-unicode-name: NEITHER APPROXIMATELY NOR ACTUALLY EQUAL TO
 
 NotTildeTilde:
+  amslatex: '\not{\approx}'
   esc-alias: '!~~'
   has-unicode-inverse: false
   is-letter-like: false
