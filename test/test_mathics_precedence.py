@@ -97,7 +97,7 @@ SYMBOLS_SORTED_BY_PRECEDENCE = [
     # RoundImplies[a,UpTee[b,c]],
     # But in Mathics as
     # UpTee[RoundImplies[a, b], c]
-    #    "RoundImplies", # WMA->240, Mathics->200, Must be ~193
+    "RoundImplies",  # WMA->240, Mathics->200, Must be ~193
     "UpTee",  # 190   Must be ~197
     "Implies",  # 200
     "Equivalent",
