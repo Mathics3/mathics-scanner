@@ -60,6 +60,7 @@ mathics3-tokens = "mathics_scanner.mathics3_tokens:main"
 [tool.setuptools]
 packages = [
     "mathics_scanner",
+    "mathics_scanner.data",
     "mathics_scanner.generate",
 ]
 
