@@ -1,131 +1,16 @@
---- ChangeLog-spell-corrected	2024-08-08 19:19:04.496248094 -0400
-+++ ChangeLog	2024-08-08 19:21:45.572417148 -0400
-@@ -97,7 +97,7 @@
- 2023-12-17  rocky <rb@dustyfeet.com>
-
- 	* admin-tools/pyenv-versions,
--	mathics_scanner/data/named-characters.yml, test/test_tokeniser.py:
-+	mathics_scanner/data/named-characters.yml, test/test_tokeniser.py:
- 	Administrivia: typos and bump versions
-
- 2023-08-23  rocky <rb@dustyfeet.com>
-@@ -425,18 +425,18 @@
+--- ChangeLog	2025-01-25 17:55:55.908438689 -0500
++++ ChangeLog.spell-corrected	2025-01-25 17:56:29.367444130 -0500
+@@ -776,11 +775,11 @@
  2021-06-29  rocky <rb@dustyfeet.com>
 
- 	* mathics_scanner/data/named-characters.yml,
--	test/test_general_yaml_sanity.py, test/test_table_consistency.py:
-+	test/test_general_yaml_sanity.py, test/test_table_consistency.py:
- 	Appease current checker...  The checker may change in the future.
-
- 2021-06-29  rocky <rb@dustyfeet.com>
-
--	* mathics_scanner/data/named-characters.yml: We now have one more source
-+	* mathics_scanner/data/named-characters.yml: Noe one more source
+-	* mathics_scanner/data/named-characters.yml: Noe one more source
++	* mathics_scanner/data/named-characters.yml: We now have one more source
 
  2021-06-29  rocky <rb@dustyfeet.com>
 
  	* mathics_scanner/data/named-characters.yml,
  	mathics_scanner/generate/build_tables.py: Add ApplyTo and reqularize
--	unicode-equivalent Also adjust Tilde
-+	unicode-equivalent Also adust Tilde
+-	unicode-equivalent Also adust Tilde
++	unicode-equivalent Also adjust Tilde
 
  2021-06-28  rocky <rb@dustyfeet.com>
-
-@@ -457,7 +457,7 @@
-
- 2021-06-27  rocky <rb@dustyfeet.com>
-
--	* CHANGES.rst, MANIFEST.in, mathics_scanner/version.py, setup.py:
-+	* CHANGES.rst, MANIFEST.in, mathics_scanner/version.py, setup.py:
- 	Get ready for release 1.2.3
-
- 2021-06-26  rocky <rb@dustyfeet.com>
-@@ -547,7 +547,7 @@
- 	mathics_scanner/tokeniser.py, mathics_scanner/version.py, setup.py,
- 	test/test_has_unicode_inverse_sanity.py,
- 	test/test_letterlikes_sanity.py, test/test_table_consistency.py,
--	test/test_translation_regressions.py, test/test_wl_to_ascii.py:
-+	test/test_translation_regressions.py, test/test_wl_to_ascii.py:
- 	Blacken files
-
- 2021-06-21  rocky <rb@dustyfeet.com>
-@@ -588,7 +588,7 @@
-
- 	* .github/workflows/osx.yaml, .github/workflows/ubuntu.yaml,
- 	.github/workflows/windows.yml, mathics_scanner/characters.py,
--	mathics_scanner/version.py, requirements-dev.txt, setup.py:
-+	mathics_scanner/version.py, requirements-dev.txt, setup.py:
- 	Administrivia & make ujson optional * It's not clear that pyston-2.2 support ujson so make it optional * In github workflows use requirements-dev.txt * revise requirement-dev to remove click (in setup.py) and add ujson * setup.py make ujson optional * version.py: bump to dev
-
- 2021-05-14  rocky <rb@dustyfeet.com>
-@@ -788,7 +788,7 @@
-
- 	* .github/workflows/osx.yaml, Makefile,
- 	mathics_scanner/data/named-characters.yml, setup.py,
--	test/test_general_yaml_sanity.py, test/test_table_consistency.py:
-+	test/test_general_yaml_sanity.py, test/test_table_consistency.py:
- 	Start tagging operators Note: use WL name when there is no conflict for name of symbol.  A number of other small corrections: - Mark some symbols which are invertable when they are. However   this should be redone and invertability should be detected   automatically.  - small correction in macos CI - AUTHORS.txt reduced to those who worked in this, rather than
- 	  Mathics in general - in tests prefer top-level tests when that is possible (i.e. test
- 	  is not parameterized) - use relative import as "test" can be ambiguous and lead to
-@@ -889,7 +889,7 @@
-
- 2021-01-31  Pablo Emilio Escobar Gaviria <pablo-escobar@riseup.net>
-
--	* README.rst, implementation.rst, mathics_scanner/characters.py:
-+	* README.rst, implementation.rst, mathics_scanner/characters.py:
- 	Added an awfull lot of documentation
-
- 2021-01-31  Pablo Emilio Escobar Gaviria <pablo-escobar@riseup.net>
-@@ -922,7 +922,7 @@
-
- 2021-01-31  Pablo Emilio Escobar Gaviria <pablo-escobar@riseup.net>
-
--	* mathics_scanner/data/named-characters.yml, test/test_roundtrip.py:
-+	* mathics_scanner/data/named-characters.yml, test/test_roundtrip.py:
- 	Fixed another errors in the YAML table
-
- 2021-02-02  Pablo Emilio Escobar Gaviria <pablo-escobar@riseup.net>
-@@ -945,7 +945,7 @@
-
- 2021-02-01  Pablo Emilio Escobar Gaviria <pablo-escobar@riseup.net>
-
--	* mathics_scanner/errors.py, mathics_scanner/tokeniser.py:
-+	* mathics_scanner/errors.py, mathics_scanner/tokeniser.py:
- 	Documented stuff used by Mathics
-
- 2021-01-31  Pablo Emilio Escobar Gaviria <pablo-escobar@riseup.net>
-@@ -965,7 +965,7 @@
-
- 2021-01-31  Pablo Emilio Escobar Gaviria <pablo-escobar@riseup.net>
-
--	* test/test_general_yaml_sanity.py, test/test_letterlikes_sanity.py:
-+	* test/test_general_yaml_sanity.py, test/test_letterlikes_sanity.py:
- 	Improved the general tests for YAML
-
- 2021-01-31  Pablo Emilio Escobar Gaviria <pablo-escobar@riseup.net>
-@@ -994,22 +994,22 @@
-
- 2021-01-31  Pablo Emilio Escobar Gaviria <pablo-escobar@riseup.net>
-
--	* test/test_has_unicode_inverse_sanity.py, test/test_roundtrip.py:
-+	* test/test_has_unicode_inverse_sanity.py, test/test_roundtrip.py:
- 	Fixed typos
-
- 2021-01-31  Pablo Emilio Escobar Gaviria <pablo-escobar@riseup.net>
-
--	* test/test_has_unicode_inverse_sanity.py, test/test_roundtrip.py:
-+	* test/test_has_unicode_inverse_sanity.py, test/test_roundtrip.py:
- 	Improved the sanity checks for has-unicode-inverse
-
- 2021-01-31  Pablo Emilio Escobar Gaviria <pablo-escobar@riseup.net>
-
--	* test/test_has_unicode_inverse_sanity.py, test/test_roundtrip.py:
-+	* test/test_has_unicode_inverse_sanity.py, test/test_roundtrip.py:
- 	Fixed and improved the roundtrip tests
-
- 2021-01-31  Pablo Emilio Escobar Gaviria <pablo-escobar@riseup.net>
-
--	* test/test_has_unicode_inverse_sanity.py, test/test_roundtrip.py:
-+	* test/test_has_unicode_inverse_sanity.py, test/test_roundtrip.py:
- 	Added sanity check for has-unicode-inverse and fixed the reound trip
- 	tests

@@ -1,8 +1,46 @@
 CHANGES
 =======
 
+Jan 26, 2025
+
+
+1.4.0
+-----
+
+A new operator table, ``operators.yml`` was added to contain
+operator information. This information is based information from Robert Jacobson.
+
+See https://github.com/WLTools/LanguageSpec/blob/master/docs/Specification/Syntax/Operator%20Table.csv
+
+From ``operators.yml``, ``operators.json`` is created and
+this holds operator information that the Mathics3 Kernel uses.
+
+Things like operator precedence, operator arity, associativity, and
+AMSLaTeX equivalent notation are some of the information we store.
+
+All of the 100 or so unicode operators without initial builtin
+meanings, .e.g., \[Cup], \[Cap], ... have been added.
+
+The tokenizer and parser in the Mathics3 Kernel use more information
+from the YAML tables via extraction to JSON. However, more will be done in the
+future.
+
+A new utility program ``mathics3-tokens`` can be used to show
+tokenization of an input stream, with the ``-C`` or ``--CodeTokenize``
+option, the program shows the tokens more closely in the form the WMA
+CodeTokens package uses. Over time, we expect that our tokenizer will
+be more compilient with CodeTokens.
+
+``named-characters.yml`` was gone over, mostly to fill out
+information, such as URL links to unicode pages.
+
+Operator precedence values have been gone over.
+
+
 1.3.1
 ------
+
+Aug 9, 2024
 
 Python 3.8 is now the minimum Python supported. Python 3.12 supported.
 Various dependencies elsewhere force 3.8 or newer.
