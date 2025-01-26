@@ -19,6 +19,7 @@ for version in $PYVERSIONS; do
 	exit $?
     fi
     make clean && pip install -e .
+    make
     if ! make check; then
 	exit $?
     fi
