@@ -1,4 +1,3 @@
-*~
 *.c
 *.cpp
 *.egg
@@ -7,6 +6,7 @@
 *.py[cod]
 *.so
 *.stackdump
+*~
 .coverage
 .idea/
 .mypy_cache
@@ -15,8 +15,11 @@
 .settings
 .vscode
 /.cache
+/.pyodide-xbuildenv-*
 /.python-version
 /Mathics_Scanner.egg-info
+/mathics_scanner/data/character-tables.json
+/mathics_scanner/data/operators.json
 ChangeLog
 ChangeLog.orig
 ChangeLog.rej
@@ -26,7 +29,5 @@ Test/
 _Copies_/
 _Database_/
 build/
-/mathics_scanner/data/character-tables.json
-/mathics_scanner/data/operators.json
 dist/
 tmp

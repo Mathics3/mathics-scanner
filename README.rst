@@ -7,17 +7,19 @@ Mathics Character Tables and Scanner
 
 This repository really contains two things:
 
-* extensive tables describing WL symbols and operators their properties
+* extensive tables describing WL symbols, operators, and their properties
 * a tokenizer or scanner portion for the Wolfram Language.
 
-With respect to the first item, there is a commented YAML that contains a
+With respect to the first item, there are two commented YAML files that contain a
 full set of translation between:
 
 * Wolfram Language named characters,
 * Unicode/ASCII equivalents and Unicode and WL code-points,
 * AMSLaTeX equivalent names,
 * Operator name (if symbol is an operator),
+* Operator arity (if an operator)
 * Operator precedence (if an operator)
+* Operator associativity (if an operator)
 * Keyboard escape sequences for the symbol
 
 Uses
@@ -49,7 +51,7 @@ To regenerate JSON-format tables run:
 ::
 
    $ mathics3-generate-json-table
-   $ mathics3-operator-json-table
+   $ mathics3-generate-operator-json-table
 
 Without options ``mathics3-generate-json-table`` produces the maximum set of correspondences.
 
@@ -57,6 +59,14 @@ In most applications though you may need just a few of these. The
 ``--field`` option can be used to narrow the list of entries to output in JSON. Run
 ``mathics3-generate-json-table --help`` for a full list of fields.
 
+
+Utility for showing token parsing
+---------------------------------
+
+There is a command-line utility, ``mathics3-tokens`` for showing how
+an input stream is tokenized. The ``--CodeTokenize`` or ``-C`` option
+will try to show the token as it would appear using CodeTokenize. type
+``mathics3-tokens --help`` information on command-line options.
 
 Implementation
 --------------
@@ -67,15 +77,15 @@ scheme please read `Implementation <https://mathics-scanner.readthedocs.io/en/la
 Contributing
 ------------
 
-Please feel encouraged to contribute to this package or Mathics! Create your
+Please feel encouraged to contribute to this package or Mathics3! Create your
 own fork, make the desired changes, commit, and make a pull request.
 
 License
 -------
 
-Mathics is released under the GNU General Public License Version 3 (GPL3).
+Mathics3 is released under the GNU General Public License Version 3 (GPL3).
 
-.. |Workflows| image:: https://github.com/Mathics3/mathics-scanner/workflows/Mathics%20(ubuntu)/badge.svg
+.. |Workflows| image:: https://github.com/Mathics3/mathics-scanner/actions/workflows/ubuntu.yml/badge.svg
 .. |Packaging status| image:: https://repology.org/badge/vertical-allrepos/mathics-scanner.svg
 			    :target: https://repology.org/project/mathics-scanner/versions
 .. |Latest Version| image:: https://badge.fury.io/py/Mathics-Scanner.svg
