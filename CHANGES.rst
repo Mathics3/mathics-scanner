@@ -3,6 +3,11 @@ CHANGES
 
 Jan 26, 2025
 
+1.4.1
+-----
+
+Re-release to include ``operators.yml`` into tarball/wheel.
+
 
 1.4.0
 -----
