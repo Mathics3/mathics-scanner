@@ -16,23 +16,21 @@ From ``operators.yml``, ``operators.json`` is created and
 this holds operator information that the Mathics3 Kernel uses.
 
 Things like operator precedence, operator arity, associativity, and
-AMSLaTeX equivalent notation are some of the information we store.
+AMSLaTeX equivalent notation is some of the information we store.
 
-All of the 100 or so unicode operators without initial builtin
+All of the 100 or so Unicode operators without initial builtin
 meanings, .e.g., \[Cup], \[Cap], ... have been added.
 
-The tokenizer and parser in the Mathics3 Kernel use more information
-from the YAML tables via extraction to JSON. However, more will be done in the
-future.
+The tokenizer and parser in the Mathics3 Kernel use more YAML table information via JSON extraction. However, more will be done in the future.
 
 A new utility program ``mathics3-tokens`` can be used to show
 tokenization of an input stream, with the ``-C`` or ``--CodeTokenize``
 option, the program shows the tokens more closely in the form the WMA
 CodeTokens package uses. Over time, we expect that our tokenizer will
-be more compilient with CodeTokens.
+be more compiliant with CodeTokens.
 
 ``named-characters.yml`` was gone over, mostly to fill out
-information, such as URL links to unicode pages.
+information, such as URL links to Unicode pages.
 
 Operator precedence values have been gone over.
 
