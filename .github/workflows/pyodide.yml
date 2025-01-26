@@ -56,5 +56,5 @@ jobs:
 
           pip install --no-build-isolation -e .
           pip install -r requirements-dev.txt
-          python -m mathics_scanner.generate.build_tables
+          bash ./admin-tools/make-JSON-tables.sh
           make check

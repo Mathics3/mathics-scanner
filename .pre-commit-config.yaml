@@ -12,6 +12,7 @@ repos:
       stages: [pre-commit]
       exclude: ChangeLog-spell-corrected.diff
     - id: trailing-whitespace
+      exclude: ChangeLog-spell-corrected.diff
     - id: check-json
       exclude: mathics_scanner/data/character-tables.json
 -   repo: https://github.com/pycqa/isort
