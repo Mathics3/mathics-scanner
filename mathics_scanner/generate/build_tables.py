@@ -255,6 +255,7 @@ ALL_FIELDS = [
     "letterlikes",
     "named-characters",
     "operator-names",
+    "operator-to-amslatex",  # This is really an alias
     "operator-to-ascii",
     "operator-to-precedence",
     "operator-to-unicode",
@@ -302,8 +303,15 @@ def main(field, output, data_dir):
         # Precompile the tables.
         data = compile_tables(data)
 
+        # Until mathics-core is synced up, operator-to-amslatex
+        # is the same as unicode-to-ams-latex.
+        if "operator-to-amslatex" in field:
+            field = list(field)
+            field.remove("operator-to-amslatex")
+            field.append("unicode-to-amslatex")
+
         # Remove the fields that aren't wanted
-        for f in ALL_FIELDS:
+        for f in set(ALL_FIELDS) - {"operator-to-amslatex"}:
             if f not in field:
                 del data[f]
 
