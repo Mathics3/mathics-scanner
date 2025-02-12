@@ -165,7 +165,6 @@ AHat:
   wl-unicode: "\xE2"
   wl-unicode-name: LATIN SMALL LETTER A WITH CIRCUMFLEX
 
-
 # See also RawVerticalBar.
 Alternatives:
   ascii: "|"
@@ -217,6 +216,8 @@ ATilde:
   wl-unicode: "\xE3"
   wl-unicode-name: LATIN SMALL LETTER A WITH TILDE
 
+# Hebrew letter. Sometimes called alef. Used in pure mathematics to denote
+# transfinite cardinals.
 Aleph:
   amslatex: '\aleph'
   esc-alias: al
@@ -414,6 +415,8 @@ Because:
   wl-unicode: "\u2235"
   wl-unicode-name: BECAUSE
 
+# Hebrew letter. Sometimes called beth. Used in pure mathematics in
+# the theory of transfinite cardinals.
 Bet:
   amslatex: '\beth'
   esc-alias: be
@@ -3627,6 +3630,8 @@ EscapeKey:
   wl-reference: https://reference.wolfram.com/language/ref/character/EscapeKey.html
   wl-unicode: "\uF769"
 
+# Greek letter.
+# Used in TraditionalForm for DedekindEta.
 Eta:
   amslatex: '\eta'
   esc-alias: et
@@ -5018,6 +5023,8 @@ Get:
   is-letter-like: false
   operator-name: Get
 
+# Hebrew letter. Used occasionally in pure mathematics in the theory
+# of transfinite cardinals.
 Gimel:
   amslatex: '\gimel'
   esc-alias: gi
@@ -5722,7 +5729,7 @@ GreaterSlantEqual:
   wl-unicode-name: GREATER-THAN OR SLANTED EQUAL TO
 
 GreaterTilde:
-  amslatex: '\gtrsim' # In WMA, '\gtrsin' which seems a typo... 
+  amslatex: '\gtrsim' # In WMA, '\gtrsin' which seems a typo...
   esc-alias: '>~'
   has-unicode-inverse: false
   operator-name: GreaterTilde
@@ -8731,7 +8738,7 @@ RightTriangleEqual:
   wl-unicode-name: CONTAINS AS NORMAL SUBGROUP OR EQUAL TO
 
 RightUpDownVector:
-  amslatex: '\stackrel{\upharpoonright}{\downharpoonright}' 
+  amslatex: '\stackrel{\upharpoonright}{\downharpoonright}'
   has-unicode-inverse: false
   operator-name: RightUpDownVector
   is-letter-like: false
