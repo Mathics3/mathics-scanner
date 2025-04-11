@@ -517,6 +517,8 @@ class Tokeniser:
         )
         self.pos: int = 0
         self.feeder = feeder
+
+        # FIXME: remove this
         self.prescanner = Prescanner(feeder)
         self.source_text = self.prescanner.replace_escape_sequences()
         self.mode: str = "invalid"
@@ -613,6 +615,56 @@ class Tokeniser:
         self.pos = pattern_match.end(0)
         return Token(tag, text, pattern_match.start(0))
 
+    def try_parse_base(self, start_shift: int, end_shift: int, base: int) -> str:
+        r"""
+        See if characters self.pos+start_shift .. self.pos+end shift
+        can be converted to an integer in base  ``base``.
+
+        If so, chr(integer value converted from base).
+
+        However, if the conversion fails, then error messages are
+        issued and nothing is updated
+        """
+        start, end = self.pos + start_shift, self.pos + end_shift
+        result = None
+        if end <= len(self.source_text):
+            text = self.source_text[start:end]
+            try:
+                result = int(text, base)
+            except ValueError:
+                pass  # result remains None
+        if result is None:
+            last = end - start
+            if last == 2:
+                self.feeder.message("Syntax", "sntoct2")
+            elif last == 3:
+                self.feeder.message("Syntax", "sntoct1")
+            elif last == 4:
+                self.feeder.message("Syntax", "snthex")
+            else:
+                raise ValueError()
+            error_text = self.source_text[self.pos :].rstrip("\n")
+            self.feeder.message("Syntax", "sntxb", error_text)
+            raise ScanError("syntx", error_text)
+
+        return chr(result)
+
+    def try_parse_named_character(self, start_shift: int) -> Optional[str]:
+        r"""Before calling we have matched "\[".  Scan to the remaining "]" and
+        try to match what is found in-between with a known named
+        character, e.g. "Theta".  If we can match this, we store
+        the unicode character equivalent in ``line_fragments``.
+        If we can't find a named character, error messages are
+        issued and we leave ``line_fragments`` untouched.
+        """
+        named_character = self.source_text[self.pos + start_shift : self.pos + start_shift]
+        if named_character.isalpha():
+            char = named_characters.get(named_character)
+            if char is None:
+                self.feeder.message("Syntax", "sntufn", named_character)
+            else:
+                return named_character
+
     def _skip_blank(self):
         "Skip whitespace and comments"
         comment = []  # start positions of comments
@@ -703,23 +755,85 @@ class Tokeniser:
         start, end = self.pos, None
         self.pos += 1  # skip opening '"'
         newlines = []
+        source_text = self.source_text
+        result = ""
         while True:
             if self.pos >= len(self.source_text):
                 if end is None:
                     # reached end while still inside string
                     self.get_more_input()
                     newlines.append(self.pos)
+                    source_text = self.source_text
                 else:
                     break
-            char = self.source_text[self.pos]
+            char = source_text[self.pos]
             if char == '"':
                 self.pos += 1
                 end = self.pos
                 break
 
             if char == "\\":
-                self.pos += 2
+                if self.pos + 1 == len(source_text):
+                    # We have reached end of the input line before seeing a terminating
+                    # quote ("). Fetch aanother line.
+                    self.get_more_input()
+                self.pos += 1
+                c = source_text[self.pos]
+                if c == "\\":
+                    result += "\\"
+                    self.pos += 1
+                    continue
+                # https://www.wolfram.com/language/12/networking-and-system-operations/use-the-full-range-of-unicode-characters.html
+                # describes hex encoding.
+                elif c == ".":
+                    # See if we have a 2-digit hexadecimal number.
+                    # For example, \.42 is "B"
+                    result += self.try_parse_base(1, 3, 16)
+                    self.pos += 3
+                elif c == ":":
+                    # See if we have a 4-digit hexadecimal number.
+                    # For example, \:03B8" is Unicode small leter theta: θ.
+                    result += self.try_parse_base(1, 5, 16)
+                    self.pos += 5
+                elif c == "|":
+                    # See if we have a 6-digit hexadecimal number.
+                    result += self.try_parse_base(1, 7, 16)
+                elif c == "[":
+                    named_character = self.try_parse_named_character(2)
+                    if named_character is not None:
+                        result += named_character
+                        self.pos += 4  # ???
+                elif c in "01234567":
+                    # See if we have a 3-digit octal number.
+                    # For example \065 = "5"
+                    result += self.try_parse_base(0, 3, 8)
+                    self.pos += 3
+
+                # WMA escape characters \n, \t, \b, \r.
+                # Note that these are a similer to Python, but are different.
+                # In particular, Python defines "\a" to be ^G (control G),
+                # but in WMA, this is invalid.
+                elif c in "ntbfr":
+                    if c == "n":
+                        result += "\n"
+                    elif c == "t":
+                        result += "\t"
+                    elif c == "b":
+                        result += "\b"
+                    elif c == "f":
+                        result += "\f"
+                    else:
+                        assert c == "r"
+                        result += "\r"
+                    self.pos += 1
+                elif c in '!"':
+                    result += c
+                    self.pos += 1
+                else:
+                    self.sntx_invalid_esc_message(c)
+                    raise ScanError()
             else:
+                result += self.source_text[self.pos]
                 self.pos += 1
 
         indices = [start] + newlines + [end]
