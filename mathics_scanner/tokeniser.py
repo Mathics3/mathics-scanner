@@ -10,7 +10,7 @@ import re
 import string
 from typing import Dict, List, Optional, Tuple
 
-from mathics_scanner.characters import _letterlikes, _letters
+from mathics_scanner.characters import _letterlikes, _letters, named_characters
 from mathics_scanner.errors import IncompleteSyntaxError, ScanError
 from mathics_scanner.prescanner import Prescanner
 
@@ -778,61 +778,10 @@ class Tokeniser:
                     # quote ("). Fetch aanother line.
                     self.get_more_input()
                 self.pos += 1
-                c = source_text[self.pos]
-                if c == "\\":
-                    result += "\\"
-                    self.pos += 1
-                    continue
-                # https://www.wolfram.com/language/12/networking-and-system-operations/use-the-full-range-of-unicode-characters.html
-                # describes hex encoding.
-                elif c == ".":
-                    # See if we have a 2-digit hexadecimal number.
-                    # For example, \.42 is "B"
-                    result += self.try_parse_base(1, 3, 16)
-                    self.pos += 3
-                elif c == ":":
-                    # See if we have a 4-digit hexadecimal number.
-                    # For example, \:03B8" is Unicode small leter theta: θ.
-                    result += self.try_parse_base(1, 5, 16)
-                    self.pos += 5
-                elif c == "|":
-                    # See if we have a 6-digit hexadecimal number.
-                    result += self.try_parse_base(1, 7, 16)
-                    self.pos += 7
-                elif c == "[":
-                    named_character = self.try_parse_named_character(2)
-                    if named_character is not None:
-                        result += named_character
-                        self.pos += 4  # ???
-                elif c in "01234567":
-                    # See if we have a 3-digit octal number.
-                    # For example \065 = "5"
-                    result += self.try_parse_base(0, 3, 8)
-                    self.pos += 3
-
-                # WMA escape characters \n, \t, \b, \r.
-                # Note that these are a similer to Python, but are different.
-                # In particular, Python defines "\a" to be ^G (control G),
-                # but in WMA, this is invalid.
-                elif c in "ntbfr":
-                    if c == "n":
-                        result += "\n"
-                    elif c == "t":
-                        result += "\t"
-                    elif c == "b":
-                        result += "\b"
-                    elif c == "f":
-                        result += "\f"
-                    else:
-                        assert c == "r"
-                        result += "\r"
-                    self.pos += 1
-                elif c in '!"':
-                    result += c
-                    self.pos += 1
-                else:
-                    self.sntx_invalid_esc_message(c)
-                    raise ScanError()
+                escape_str, self.pos = self.prescanner.tokenize_escape_sequence(
+                    source_text, self.pos
+                )
+                result += escape_str
             else:
                 result += self.source_text[self.pos]
                 self.pos += 1
