@@ -798,6 +798,7 @@ class Tokeniser:
                 elif c == "|":
                     # See if we have a 6-digit hexadecimal number.
                     result += self.try_parse_base(1, 7, 16)
+                    self.pos += 7
                 elif c == "[":
                     named_character = self.try_parse_named_character(2)
                     if named_character is not None:
