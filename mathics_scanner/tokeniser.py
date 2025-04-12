@@ -7,7 +7,7 @@ import re
 import string
 from typing import Dict, List, Optional, Tuple
 
-from mathics_scanner.characters import _letterlikes, _letters, named_characters
+from mathics_scanner.characters import _letterlikes, _letters
 from mathics_scanner.errors import ScanError
 from mathics_scanner.prescanner import Prescanner
 
@@ -487,7 +487,7 @@ class Tokeniser:
 
     # TODO: Rename this to something that remotely makes sense?
     def incomplete(self):
-        "Get more source text from the prescanner and continue."
+        "Get another source text line from input and continue."
         self.prescanner.incomplete()
         # Note, the below is used for appending a line.
         # escape sequences are no longer replaced
@@ -504,12 +504,6 @@ class Tokeniser:
             self.feeder.message("Syntax", "sntxb", post)
         else:
             self.feeder.message("Syntax", "sntxf", pre, post)
-
-    def sntx_invalid_esc_message(self, char: str):
-        """
-        Send a "stresc" error message to the input-reading feeder.
-        """
-        self.feeder.message("Syntax", "stresc", rf"\{char}.")
 
     # TODO: Convert this to __next__ in the future.
     def next(self) -> Token:
@@ -547,55 +541,6 @@ class Tokeniser:
         text = match.group(0)
         self.pos = match.end(0)
         return Token(tag, text, match.start(0))
-
-    def try_parse_base(self, start_shift: int, end_shift: int, base: int) -> str:
-        r"""
-        See if characters self.pos+start_shift .. self.pos+end shift
-        can be converted to an integer in base  ``base``.
-
-        If so, chr(integer value converted from base).
-
-        However, if the conversion fails, then error messages are
-        issued and nothing is updated
-        """
-        start, end = self.pos + start_shift, self.pos + end_shift
-        result = None
-        if end <= len(self.code):
-            text = self.code[start:end]
-            try:
-                result = int(text, base)
-            except ValueError:
-                pass  # result remains None
-        if result is None:
-            last = end - start
-            if last == 2:
-                self.feeder.message("Syntax", "sntoct2")
-            elif last == 3:
-                self.feeder.message("Syntax", "sntoct1")
-            elif last == 4:
-                self.feeder.message("Syntax", "snthex")
-            else:
-                raise ValueError()
-            self.feeder.message("Syntax", "sntxb", self.code[self.pos :].rstrip("\n"))
-            raise ScanError()
-
-        return chr(result)
-
-    def try_parse_named_character(self, start_shift: int) -> Optional[str]:
-        r"""Before calling we have matched "\[".  Scan to the remaining "]" and
-        try to match what is found in-between with a known named
-        character, e.g. "Theta".  If we can match this, we store
-        the unicode character equivalent in ``line_fragments``.
-        If we can't find a named character, error messages are
-        issued and we leave ``line_fragments`` untouched.
-        """
-        named_character = self.code[self.pos + start_shift : self.pos + start_shift]
-        if named_character.isalpha():
-            char = named_characters.get(named_character)
-            if char is None:
-                self.feeder.message("Syntax", "sntufn", named_character)
-            else:
-                return named_character
 
     def _skip_blank(self):
         "Skip whitespace and comments"
@@ -711,61 +656,10 @@ class Tokeniser:
                     # quote ("). Fetch aanother line.
                     self.incomplete()
                 self.pos += 1
-                c = source_text[self.pos]
-                if c == "\\":
-                    result += "\\"
-                    self.pos += 1
-                    continue
-                # https://www.wolfram.com/language/12/networking-and-system-operations/use-the-full-range-of-unicode-characters.html
-                # describes hex encoding.
-                elif c == ".":
-                    # See if we have a 2-digit hexadecimal number.
-                    # For example, \.42 is "B"
-                    result += self.try_parse_base(1, 3, 16)
-                    self.pos += 3
-                elif c == ":":
-                    # See if we have a 4-digit hexadecimal number.
-                    # For example, \:03B8" is Unicode small leter theta: θ.
-                    result += self.try_parse_base(1, 5, 16)
-                    self.pos += 5
-                elif c == "|":
-                    # See if we have a 6-digit hexadecimal number.
-                    result += self.try_parse_base(1, 7, 16)
-                    self.pos += 7
-                elif c == "[":
-                    named_character = self.try_parse_named_character(2)
-                    if named_character is not None:
-                        result += named_character
-                        self.pos += 4  # ???
-                elif c in "01234567":
-                    # See if we have a 3-digit octal number.
-                    # For example \065 = "5"
-                    result += self.try_parse_base(0, 3, 8)
-                    self.pos += 3
-
-                # WMA escape characters \n, \t, \b, \r.
-                # Note that these are a similer to Python, but are different.
-                # In particular, Python defines "\a" to be ^G (control G),
-                # but in WMA, this is invalid.
-                elif c in "ntbfr":
-                    if c == "n":
-                        result += "\n"
-                    elif c == "t":
-                        result += "\t"
-                    elif c == "b":
-                        result += "\b"
-                    elif c == "f":
-                        result += "\f"
-                    else:
-                        assert c == "r"
-                        result += "\r"
-                    self.pos += 1
-                elif c in '!"':
-                    result += c
-                    self.pos += 1
-                else:
-                    self.sntx_invalid_esc_message(c)
-                    raise ScanError()
+                escape_str, self.pos = self.prescanner.tokenize_escape_sequence(
+                    source_text, self.pos
+                )
+                result += escape_str
             else:
                 result += self.code[self.pos]
                 self.pos += 1
