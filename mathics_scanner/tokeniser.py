@@ -12,7 +12,6 @@ from typing import Dict, List, Optional, Tuple
 
 from mathics_scanner.characters import _letterlikes, _letters, named_characters
 from mathics_scanner.errors import IncompleteSyntaxError, ScanError
-from mathics_scanner.prescanner import Prescanner
 
 try:
     import ujson
@@ -568,8 +567,8 @@ class Tokeniser:
             pos = self.pos
         pre, post = self.source_text[:pos], self.source_text[pos:].rstrip("\n")
         if pos == 0:
-            self.feeder.message("Syntax", "sntxb", post)
-            return "sntxb", "", post
+            self.feeder.message("Syntax", "sntxb", pre, post)
+            return "sntxb", pre, post
         else:
             self.feeder.message("Syntax", "sntxf", pre, post)
             return "sntxf", pre, post
@@ -778,9 +777,7 @@ class Tokeniser:
                     # quote ("). Fetch aanother line.
                     self.get_more_input()
                 self.pos += 1
-                escape_str, self.pos = self.prescanner.tokenize_escape_sequence(
-                    source_text, self.pos
-                )
+                escape_str, self.pos = parse_escape_sequence(source_text, self.pos)
                 result += escape_str
             else:
                 result += self.source_text[self.pos]
