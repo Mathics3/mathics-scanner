@@ -90,6 +90,7 @@ class Prescanner(object):
         self.feeder.message("Syntax", "stresc", rf"\{char}.")
 
     def tokenize_escape_sequence(self, source_text: str, pos: int) -> Tuple[str, int]:
+        """ """
         result = ""
         c = source_text[pos]
         if c == "\\":

@@ -9,6 +9,7 @@ from typing import Dict, List, Optional, Tuple
 
 from mathics_scanner.characters import _letterlikes, _letters
 from mathics_scanner.errors import ScanError
+from mathics_scanner.escape_sequences import parse_escape_sequence
 from mathics_scanner.prescanner import Prescanner
 
 try:
@@ -502,8 +503,10 @@ class Tokeniser:
         pre, post = self.code[:pos], self.code[pos:].rstrip("\n")
         if pos == 0:
             self.feeder.message("Syntax", "sntxb", post)
+            return "sntxb", (post,)
         else:
             self.feeder.message("Syntax", "sntxf", pre, post)
+            return "sntxf", (pre, post)
 
     # TODO: Convert this to __next__ in the future.
     def next(self) -> Token:
@@ -530,8 +533,8 @@ class Tokeniser:
 
         # no matching pattern found
         if match is None:
-            self.sntx_message()
-            raise ScanError(self.pos)
+            tag, args = self.sntx_message()
+            raise ScanError(tag, *args)
 
         # custom tokenisation rules defined with t_tag
         override = getattr(self, "t_" + tag, None)
@@ -656,9 +659,7 @@ class Tokeniser:
                     # quote ("). Fetch aanother line.
                     self.incomplete()
                 self.pos += 1
-                escape_str, self.pos = self.prescanner.tokenize_escape_sequence(
-                    source_text, self.pos
-                )
+                escape_str, self.pos = parse_escape_sequence(source_text, self.pos)
                 result += escape_str
             else:
                 result += self.code[self.pos]
