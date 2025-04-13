@@ -4,10 +4,10 @@ Module for "prescanning". Right now this just means replacing
 character escape sequences.
 """
 
-from typing import List, Optional, Tuple
+from typing import List, Optional
 
 from mathics_scanner.characters import named_characters
-from mathics_scanner.errors import IncompleteSyntaxError, ScanError
+from mathics_scanner.errors import IncompleteSyntaxError
 from mathics_scanner.feed import LineFeeder
 
 
@@ -88,100 +88,6 @@ class Prescanner(object):
         Send a "stresc" error message to the input-reading feeder.
         """
         self.feeder.message("Syntax", "stresc", rf"\{char}.")
-
-    def tokenize_escape_sequence(self, source_text: str, pos: int) -> Tuple[str, int]:
-        """ """
-        result = ""
-        c = source_text[pos]
-        if c == "\\":
-            return "\\", pos + 1
-
-        # https://www.wolfram.com/language/12/networking-and-system-operations/use-the-full-range-of-unicode-characters.html
-        # describes hex encoding.
-        if c == ".":
-            # See if we have a 2-digit hexadecimal number.
-            # For example, \.42 is "B"
-            result += self.try_parse_base(pos + 1, pos + 3, 16)
-            pos += 3
-        elif c == ":":
-            # See if we have a 4-digit hexadecimal number.
-            # For example, \:03B8" is Unicode small leter theta: θ.
-            result += self.try_parse_base(pos + 1, pos + 5, 16)
-            pos += 5
-        elif c == "|":
-            # See if we have a 6-digit hexadecimal number.
-            result += self.try_parse_base(pos + 1, pos + 7, 16)
-            pos += 7
-        elif c == "[":
-            named_character = self.try_parse_named_character(2)
-            if named_character is not None:
-                result += named_character
-                pos += 4  # ???
-        elif c in "01234567":
-            # See if we have a 3-digit octal number.
-            # For example \065 = "5"
-            result += self.try_parse_base(pos, pos + 3, 8)
-            pos += 3
-
-        # WMA escape characters \n, \t, \b, \r.
-        # Note that these are a similer to Python, but are different.
-        # In particular, Python defines "\a" to be ^G (control G),
-        # but in WMA, this is invalid.
-        elif c in "ntbfr":
-            if c == "n":
-                result += "\n"
-            elif c == "t":
-                result += "\t"
-            elif c == "b":
-                result += "\b"
-            elif c == "f":
-                result += "\f"
-            else:
-                assert c == "r"
-                result += "\r"
-            pos += 1
-        elif c in '!"':
-            result += c
-            pos += 1
-        else:
-            self.sntx_invalid_esc_message(c)
-            raise ScanError()
-        return result, pos
-
-    def try_parse_base(self, start_shift: int, end_shift: int, base: int) -> str:
-        r"""
-        See if characters self.pos+start_shift .. self.pos+end shift
-        can be converted to an integer in base  ``base``.
-
-        If so, chr(integer value converted from base).
-
-        However, if the conversion fails, then error messages are
-        issued and nothing is updated
-        """
-        start, end = start_shift, end_shift
-        result = None
-        if end <= len(self.input_line):
-            text = self.input_line[start:end]
-            try:
-                result = int(text, base)
-            except ValueError:
-                pass  # result remains None
-        if result is None:
-            last = end - start
-            if last == 2:
-                self.feeder.message("Syntax", "sntoct2")
-            elif last == 3:
-                self.feeder.message("Syntax", "sntoct1")
-            elif last == 4:
-                self.feeder.message("Syntax", "snthex")
-            else:
-                raise ValueError()
-            self.feeder.message(
-                "Syntax", "sntxb", self.input_line[self.pos :].rstrip("\n")
-            )
-            raise ScanError()
-
-        return chr(result)
 
     def try_parse_named_character(self, start_shift: int) -> Optional[str]:
         r"""Before calling we have matched "\[".  Scan to the remaining "]" and
