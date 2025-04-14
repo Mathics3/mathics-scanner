@@ -453,7 +453,7 @@ def is_symbol_name(text: str) -> bool:
 class Token:
     """A representation of a Wolfram-Language token.
 
-    Tokens are parsed by parser uses to build M-expressions.
+    Tokens are parsed by the parser; and are used to build M-expressions.
 
     A token has a `tag`, the class or type of the token. For example:
     a Number, Symbol, String, File, etc.
@@ -466,11 +466,6 @@ class Token:
     """
 
     def __init__(self, tag: str, text: str, pos: int):
-        """
-        :param tag: which type of token this is.
-        :param text: The actual contents of the token.
-        :param pos: The position of the token in the input feed.
-        """
         self.tag = tag
         self.text = text
         self.pos = pos
@@ -518,6 +513,7 @@ class Tokeniser:
         self.pos: int = 0
         self.feeder = feeder
         self.source_text = self.feeder.feed()
+
         self.mode: str = "invalid"
 
         # Set to True when inside box parsing.
