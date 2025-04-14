@@ -602,6 +602,8 @@ class Tokeniser:
         if override is not None:
             return override(pattern_match)
 
+        # Failing a custom tokenization rule, we use the regular expression
+        # pattern match.
         text = pattern_match.group(0)
         self.pos = pattern_match.end(0)
         return Token(tag, text, pattern_match.start(0))
@@ -671,6 +673,43 @@ class Tokeniser:
     def t_PutAppend(self, pattern_match: re.Match) -> Token:
         "Scan for a ``PutAppend`` token and return that"
         return self._token_mode(pattern_match, "PutAppend", "filename")
+
+    def t_RawBackslash(self, pattern_match: Optional[re.Match]) -> Token:
+        """Break out from ``pattern_match`` tokens which start with \\"""
+        source_text = self.source_text
+        start_pos = self.pos + 1
+        if start_pos == len(source_text):
+            # We have reached end of the input line before seeing a terminating
+            # quote ("). Fetch another line.
+            self.get_more_input()
+            self.pos += 1
+            source_text += self.source_text
+        escape_str, self.pos = parse_escape_sequence(source_text, start_pos)
+
+        # DRY with "next()"
+        # look for a matching pattern
+        indices = self.token_indices.get(escape_str[0], ())
+        pattern_match = None
+        tag = "??invalid"
+        if indices:
+            for index in indices:
+                tag, pattern = self.tokens[index]
+                pattern_match = pattern.match(escape_str, 0)
+                if pattern_match is not None:
+                    break
+        else:
+            for tag, pattern in self.tokens:
+                pattern_match = pattern.match(escape_str, start_pos)
+                if pattern_match is not None:
+                    break
+
+        # no matching pattern found
+        if pattern_match is None:
+            tag, pre, post = self.sntx_message()
+            raise ScanError(tag, pre, post)
+
+        text = pattern_match.group(0)
+        return Token(tag, text, pattern_match.start(0))
 
     def t_String(self, _: re.Match) -> Token:
         """Break out from self.source_text the next token which is expected to be a String.
