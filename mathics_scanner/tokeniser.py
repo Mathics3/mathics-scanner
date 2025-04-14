@@ -1,5 +1,8 @@
 """
-Tokenizer functions
+Mathics3 Scanner or Tokenizer module.
+
+This module reads input lines and breaks the lines into tokens.
+See classes `Token` and `Tokeniser` .
 """
 
 import os.path as osp
@@ -411,14 +414,21 @@ def is_symbol_name(text: str) -> bool:
 
 
 class Token:
-    "A representation of a Wolfram Language token."
+    """A representation of a Wolfram-Language token.
+
+    A token is what the parser uses to build an M-expression.
+
+    A token has a `tag`, the class or type of the token. For example:
+    a Number, Symbol, String, File, etc.
+
+    The token's `text` is the string contents of the token.
+
+    The token's `pos` is the integer starting offset where
+    `text` can be found inside the input string. The input string
+    is not part of the token though.
+    """
 
     def __init__(self, tag: str, text: str, pos: int):
-        """
-        :param tag: which type of token this is.
-        :param text: The actual contents of the token.
-        :param pos: The position of the token in the input feed.
-        """
         self.tag = tag
         self.text = text
         self.pos = pos
@@ -465,7 +475,7 @@ class Tokeniser:
         )
         self.pos: int = 0
         self.feeder = feeder
-        self.code = self.feeder.feed()
+        self.source_text = self.feeder.feed()
 
         self.mode: str = "invalid"
         self._change_token_scanning_mode("expr")
@@ -479,15 +489,19 @@ class Tokeniser:
         self.mode = mode
         self.tokens, self.token_indices = self.modes[mode]
 
-    # TODO: Rename this to something that remotely makes sense?
-    def incomplete(self):
+    def get_more_input(self):
         "Get another source-text line from input and continue."
 
         line: str = self.feeder.feed()
         if not line:
-            self.feeder.message("Syntax", "sntxi", self.code[self.pos :].rstrip())
+            self.feeder.message(
+                "Syntax", "sntxi", self.source_text[self.pos :].rstrip()
+            )
             raise IncompleteSyntaxError()
-        self.code += line
+        self.source_text += line
+
+    # Compatiblity for mathics-core
+    incomplete = get_more_input
 
     def sntx_message(self, pos: Optional[int] = None):
         """
@@ -495,7 +509,7 @@ class Tokeniser:
         """
         if pos is None:
             pos = self.pos
-        pre, post = self.code[:pos], self.code[pos:].rstrip("\n")
+        pre, post = self.source_text[:pos], self.source_text[pos:].rstrip("\n")
         if pos == 0:
             self.feeder.message("Syntax", "sntxb", post)
             return "sntxb", (post,)
@@ -507,22 +521,22 @@ class Tokeniser:
     def next(self) -> Token:
         "Returns the next token."
         self._skip_blank()
-        if self.pos >= len(self.code):
-            return Token("END", "", len(self.code))
+        if self.pos >= len(self.source_text):
+            return Token("END", "", len(self.source_text))
 
         # Look for a matching pattern.
-        indices = self.token_indices.get(self.code[self.pos], ())
+        indices = self.token_indices.get(self.source_text[self.pos], ())
         pattern_match: Optional[re.Match] = None
         tag = "??invalid"
         if indices:
             for index in indices:
                 tag, pattern = self.tokens[index]
-                pattern_match = pattern.match(self.code, self.pos)
+                pattern_match = pattern.match(self.source_text, self.pos)
                 if pattern_match is not None:
                     break
         else:
             for tag, pattern in self.tokens:
-                pattern_match = pattern.match(self.code, self.pos)
+                pattern_match = pattern.match(self.source_text, self.pos)
                 if pattern_match is not None:
                     break
 
@@ -544,24 +558,24 @@ class Tokeniser:
         "Skip whitespace and comments"
         comment = []  # start positions of comments
         while True:
-            if self.pos >= len(self.code):
+            if self.pos >= len(self.source_text):
                 if comment:
-                    self.incomplete()
+                    self.get_more_input()
                 else:
                     break
             if comment:
-                if self.code.startswith("(*", self.pos):
+                if self.source_text.startswith("(*", self.pos):
                     comment.append(self.pos)
                     self.pos += 2
-                elif self.code.startswith("*)", self.pos):
+                elif self.source_text.startswith("*)", self.pos):
                     comment.pop()
                     self.pos += 2
                 else:
                     self.pos += 1
-            elif self.code.startswith("(*", self.pos):
+            elif self.source_text.startswith("(*", self.pos):
                 comment.append(self.pos)
                 self.pos += 2
-            elif self.code[self.pos] in " \r\n\t":
+            elif self.source_text[self.pos] in " \r\n\t":
                 self.pos += 1
             else:
                 break
@@ -590,7 +604,7 @@ class Tokeniser:
         "Break out from ``pattern_match`` the next token which is expected to be a Number"
         text = pattern_match.group(0)
         pos = pattern_match.end(0)
-        if self.code[pos - 1 : pos + 1] == "..":
+        if self.source_text[pos - 1 : pos + 1] == "..":
             # Trailing .. should be ignored. That is, `1..` is `Repeated[1]`.
             text = text[:-1]
             self.pos = pos - 1
@@ -608,14 +622,14 @@ class Tokeniser:
 
     def t_RawBackslash(self, pattern_match: Optional[re.Match]) -> Token:
         """Break out from ``pattern_match`` tokens which start with \\"""
-        source_text = self.code
+        source_text = self.source_text
         start_pos = self.pos + 1
         if start_pos == len(source_text):
             # We have reached end of the input line before seeing a terminating
             # quote ("). Fetch another line.
-            self.incomplete()
+            self.get_more_input()
             self.pos += 1
-            source_text += self.code
+            source_text += self.source_text
         escape_str, self.pos = parse_escape_sequence(source_text, start_pos)
 
         # DRY with "next()"
@@ -644,23 +658,23 @@ class Tokeniser:
         return Token(tag, text, pattern_match.start(0))
 
     def t_String(self, pattern_match: re.Match) -> Token:
-        """Break out from self.code the next token which is expected to be a String.
+        """Break out from self.source_text the next token which is expected to be a String.
         The string value of the returned token will have double quote (") in the first and last
         postions of the returned string.
         """
         start, end = self.pos, None
         self.pos += 1  # skip opening '"'
         newlines = []
-        source_text = self.code
+        source_text = self.source_text
         result = ""
         while True:
-            if self.pos >= len(self.code):
+            if self.pos >= len(self.source_text):
                 if end is None:
                     # We have reached end of the input line before seeing a terminating
                     # quote ("). Fetch another line.
-                    self.incomplete()
+                    self.get_more_input()
                     newlines.append(self.pos)
-                    source_text = self.code
+                    source_text = self.source_text
                 else:
                     break
             char = source_text[self.pos]
@@ -673,12 +687,12 @@ class Tokeniser:
                 if self.pos + 1 == len(source_text):
                     # We have reached end of the input line before seeing a terminating
                     # quote ("). Fetch aanother line.
-                    self.incomplete()
+                    self.get_more_input()
                 self.pos += 1
                 escape_str, self.pos = parse_escape_sequence(source_text, self.pos)
                 result += escape_str
             else:
-                result += self.code[self.pos]
+                result += self.source_text[self.pos]
                 self.pos += 1
 
         return Token("String", rf'"{result}"', start)
