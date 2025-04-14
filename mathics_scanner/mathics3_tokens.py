@@ -152,8 +152,9 @@ def interactive_eval_loop(shell: TerminalShell, code_tokenize_format: bool):
         try:
             tokens(shell.feed(), code_tokenize_format)
         except ScanError:
-            print("\n\nGoodbye!\n")
-            break
+            # Ignore scanner erors. Presumably, the specific error was reported
+            # in the scanner already.
+            pass
         except KeyboardInterrupt:
             print("\nKeyboardInterrupt")
         except EOFError:
