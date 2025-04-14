@@ -467,7 +467,7 @@ class Tokeniser:
         self.pos: int = 0
         self.feeder = feeder
 
-        # FIXME: remove this
+        # FIXME: remove this.
         self.prescanner = Prescanner(feeder)
 
         # Note: escape-sequence handling is now done inside the scanner,
@@ -515,35 +515,35 @@ class Tokeniser:
         if self.pos >= len(self.code):
             return Token("END", "", len(self.code))
 
-        # look for a matching pattern
+        # Look for a matching pattern.
         indices = self.token_indices.get(self.code[self.pos], ())
-        match = None
+        pattern_match: Optional[re.Match] = None
         tag = "??invalid"
         if indices:
             for index in indices:
                 tag, pattern = self.tokens[index]
-                match = pattern.match(self.code, self.pos)
-                if match is not None:
+                pattern_match = pattern.match(self.code, self.pos)
+                if pattern_match is not None:
                     break
         else:
             for tag, pattern in self.tokens:
-                match = pattern.match(self.code, self.pos)
-                if match is not None:
+                pattern_match = pattern.match(self.code, self.pos)
+                if pattern_match is not None:
                     break
 
-        # no matching pattern found
-        if match is None:
+        # No matching pattern found.
+        if pattern_match is None:
             tag, args = self.sntx_message()
             raise ScanError(tag, *args)
 
-        # custom tokenisation rules defined with t_tag
+        # Look for custom tokenization rules; those are defined with t_tag.
         override = getattr(self, "t_" + tag, None)
         if override is not None:
-            return override(match)
+            return override(pattern_match)
 
-        text = match.group(0)
-        self.pos = match.end(0)
-        return Token(tag, text, match.start(0))
+        text = pattern_match.group(0)
+        self.pos = pattern_match.end(0)
+        return Token(tag, text, pattern_match.start(0))
 
     def _skip_blank(self):
         "Skip whitespace and comments"
@@ -587,47 +587,84 @@ class Tokeniser:
             else:
                 break
 
-    def _token_mode(self, match: re.Match, tag: str, mode: str) -> Token:
+    def _token_mode(self, pattern_match: re.Match, tag: str, mode: str) -> Token:
         """
-        Pick out the text in ``match``, convert that into a ``Token``, and
+        Pick out the text in ``pattern_match``, convert that into a ``Token``, and
         return that.
 
         Also switch token-scanning mode.
         """
-        text = match.group(0)
-        self.pos = match.end(0)
+        text = pattern_match.group(0)
+        self.pos = pattern_match.end(0)
         self._change_token_scanning_mode(mode)
-        return Token(tag, text, match.start(0))
+        return Token(tag, text, pattern_match.start(0))
 
-    def t_Filename(self, match: re.Match) -> Token:
+    def t_Filename(self, pattern_match: re.Match) -> Token:
         "Scan for ``Filename`` token and return that"
-        return self._token_mode(match, "Filename", "expr")
+        return self._token_mode(pattern_match, "Filename", "expr")
 
-    def t_Get(self, match: re.Match) -> Token:
-        "Scan for a ``Get`` token from ``match`` and return that token"
-        return self._token_mode(match, "Get", "filename")
+    def t_Get(self, pattern_match: re.Match) -> Token:
+        "Scan for a ``Get`` token from ``pattern_match`` and return that token"
+        return self._token_mode(pattern_match, "Get", "filename")
 
-    def t_Number(self, match: re.Match) -> Token:
-        "Break out from ``match`` the next token which is expected to be a Number"
-        text = match.group(0)
-        pos = match.end(0)
+    def t_Number(self, pattern_match: re.Match) -> Token:
+        "Break out from ``pattern_match`` the next token which is expected to be a Number"
+        text = pattern_match.group(0)
+        pos = pattern_match.end(0)
         if self.code[pos - 1 : pos + 1] == "..":
             # Trailing .. should be ignored. That is, `1..` is `Repeated[1]`.
             text = text[:-1]
             self.pos = pos - 1
         else:
             self.pos = pos
-        return Token("Number", text, match.start(0))
+        return Token("Number", text, pattern_match.start(0))
 
-    def t_Put(self, match: re.Match) -> Token:
+    def t_Put(self, pattern_match: re.Match) -> Token:
         "Scan for a ``Put`` token and return that"
-        return self._token_mode(match, "Put", "filename")
+        return self._token_mode(pattern_match, "Put", "filename")
 
-    def t_PutAppend(self, match: re.Match) -> Token:
+    def t_PutAppend(self, pattern_match: re.Match) -> Token:
         "Scan for a ``PutAppend`` token and return that"
-        return self._token_mode(match, "PutAppend", "filename")
+        return self._token_mode(pattern_match, "PutAppend", "filename")
 
-    def t_String(self, match: re.Match) -> Token:
+    def t_RawBackslash(self, pattern_match: Optional[re.Match]) -> Token:
+        """Break out from ``pattern_match`` tokens which start with \\"""
+        source_text = self.code
+        start_pos = self.pos + 1
+        if start_pos == len(source_text):
+            # We have reached end of the input line before seeing a terminating
+            # quote ("). Fetch another line.
+            self.incomplete()
+            self.pos += 1
+            source_text += self.code
+        escape_str, self.pos = parse_escape_sequence(source_text, start_pos)
+
+        # DRY with "next()"
+        # look for a matching pattern
+        indices = self.token_indices.get(escape_str[0], ())
+        pattern_match = None
+        tag = "??invalid"
+        if indices:
+            for index in indices:
+                tag, pattern = self.tokens[index]
+                pattern_match = pattern.match(escape_str, 0)
+                if pattern_match is not None:
+                    break
+        else:
+            for tag, pattern in self.tokens:
+                pattern_match = pattern.match(escape_str, start_pos)
+                if pattern_match is not None:
+                    break
+
+        # no matching pattern found
+        if pattern_match is None:
+            tag, args = self.sntx_message()
+            raise ScanError(tag, *args)
+
+        text = pattern_match.group(0)
+        return Token(tag, text, pattern_match.start(0))
+
+    def t_String(self, pattern_match: re.Match) -> Token:
         """Break out from self.code the next token which is expected to be a String.
         The string value of the returned token will have double quote (") in the first and last
         postions of the returned string.
@@ -641,7 +678,7 @@ class Tokeniser:
             if self.pos >= len(self.code):
                 if end is None:
                     # We have reached end of the input line before seeing a terminating
-                    # quote ("). Fetch aanother line.
+                    # quote ("). Fetch another line.
                     self.incomplete()
                     newlines.append(self.pos)
                     source_text = self.code

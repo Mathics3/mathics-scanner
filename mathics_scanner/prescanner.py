@@ -91,12 +91,12 @@ class Prescanner(object):
 
     def try_parse_named_character(self, start_shift: int) -> Optional[str]:
         r"""Before calling we have matched "\[".  Scan to the remaining "]" and
-        try to match what is found in-between with a known named
-        character, e.g. "Theta".  If we can match this, we store
-        the unicode character equivalent in ``line_fragments``.
-        If we can't find a named character, error messages are
-        issued and we leave ``line_fragments`` untouched.
-        """
+                try to match what is found in-between with a known named
+                character, e.g. "Theta".  If we can match this, we store
+                the unicode character equivalent in ``line_fragments``.
+                If we can't find a named character, error messages are
+                issued and we leave ``line_fragments`` untouched.
+        hsel"""
         named_character = self.input_line[
             self.pos + start_shift : self.pos + start_shift
         ]

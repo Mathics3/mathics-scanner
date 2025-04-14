@@ -45,9 +45,7 @@ def parse_base(source_text: str, start_shift: int, end_shift: int, base: int) ->
     return chr(result)
 
 
-def parse_named_character(
-    source_text: str, pos: int, start_shift: int
-) -> Optional[str]:
+def parse_named_character(source_text: str, start: int, finish: int) -> Optional[str]:
     r"""Before calling we have matched "\[".  Scan to the remaining "]" and
     try to match what is found in-between with a known named
     character, e.g. "Theta".  If we can match this, we store
@@ -55,13 +53,13 @@ def parse_named_character(
     If we can't find a named character, error messages are
     issued and we leave ``line_fragments`` untouched.
     """
-    named_character = source_text[pos + start_shift : pos + start_shift]
+    named_character = source_text[start:finish]
     if named_character.isalpha():
         char = named_characters.get(named_character)
         if char is None:
             raise NamedCharacterSyntaxError("sntufn", named_character)
         else:
-            return named_character
+            return char
 
 
 def parse_escape_sequence(source_text: str, pos: int) -> Tuple[str, int]:
@@ -77,24 +75,35 @@ def parse_escape_sequence(source_text: str, pos: int) -> Tuple[str, int]:
     # https://www.wolfram.com/language/12/networking-and-system-operations/use-the-full-range-of-unicode-characters.html
     # describes hex encoding.
     if c == ".":
-        # See if we have a 2-digit hexadecimal number.
-        # For example, \.42 is "B"
+        # see if we have a 2-digit hexadecimal number.
+        # for example, \.42 is "b"
         result += parse_base(source_text, pos + 1, pos + 3, 16)
         pos += 3
     elif c == ":":
-        # See if we have a 4-digit hexadecimal number.
-        # For example, \:03B8" is Unicode small leter theta: θ.
+        # see if we have a 4-digit hexadecimal number.
+        # for example, \:03b8" is unicode small leter theta: θ.
         result += parse_base(source_text, pos + 1, pos + 5, 16)
         pos += 5
     elif c == "|":
-        # See if we have a 6-digit hexadecimal number.
+        # see if we have a 6-digit hexadecimal number.
         result += parse_base(source_text, pos + 1, pos + 7, 16)
         pos += 7
     elif c == "[":
-        named_character = parse_named_character(source_text, pos, 2)
+        pos += 1
+        i = pos + 1
+        while i < len(source_text):
+            if source_text[i] == "]":
+                break
+            i += 1
+        if i == len(source_text):
+            # Note: named characters do not have \n's in them. (Is this right)?
+            # FIXME: decide what to do here.
+            raise EscapeSyntaxError("Syntax", "stresc" rf"\{c}.")
+
+        named_character = parse_named_character(source_text, pos, i)
         if named_character is not None:
             result += named_character
-            pos += 4  # ???
+            pos = i + 1
     elif c in "01234567":
         # See if we have a 3-digit octal number.
         # For example \065 = "5"
