@@ -10,8 +10,9 @@ import re
 import string
 from typing import Dict, List, Optional, Tuple
 
-from mathics_scanner.characters import _letterlikes, _letters, named_characters
+from mathics_scanner.characters import _letterlikes, _letters
 from mathics_scanner.errors import IncompleteSyntaxError, ScanError
+from mathics_scanner.escape_sequences import parse_escape_sequence
 
 try:
     import ujson
@@ -516,10 +517,9 @@ class Tokeniser:
         )
         self.pos: int = 0
         self.feeder = feeder
+        self.source_text = ""
 
-        # FIXME: remove this
-        self.prescanner = Prescanner(feeder)
-        self.source_text = self.prescanner.replace_escape_sequences()
+        # FIXME: remove this.
         self.mode: str = "invalid"
 
         # Set to True when inside box parsing.
@@ -608,61 +608,9 @@ class Tokeniser:
         if override is not None:
             return override(pattern_match)
 
-        # Failing a custom tokenization rule, we use the regular expression
-        # pattern match.
         text = pattern_match.group(0)
         self.pos = pattern_match.end(0)
         return Token(tag, text, pattern_match.start(0))
-
-    def try_parse_base(self, start_shift: int, end_shift: int, base: int) -> str:
-        r"""
-        See if characters self.pos+start_shift .. self.pos+end shift
-        can be converted to an integer in base  ``base``.
-
-        If so, chr(integer value converted from base).
-
-        However, if the conversion fails, then error messages are
-        issued and nothing is updated
-        """
-        start, end = self.pos + start_shift, self.pos + end_shift
-        result = None
-        if end <= len(self.source_text):
-            text = self.source_text[start:end]
-            try:
-                result = int(text, base)
-            except ValueError:
-                pass  # result remains None
-        if result is None:
-            last = end - start
-            if last == 2:
-                self.feeder.message("Syntax", "sntoct2")
-            elif last == 3:
-                self.feeder.message("Syntax", "sntoct1")
-            elif last == 4:
-                self.feeder.message("Syntax", "snthex")
-            else:
-                raise ValueError()
-            error_text = self.source_text[self.pos :].rstrip("\n")
-            self.feeder.message("Syntax", "sntxb", error_text)
-            raise ScanError("syntx", error_text)
-
-        return chr(result)
-
-    def try_parse_named_character(self, start_shift: int) -> Optional[str]:
-        r"""Before calling we have matched "\[".  Scan to the remaining "]" and
-        try to match what is found in-between with a known named
-        character, e.g. "Theta".  If we can match this, we store
-        the unicode character equivalent in ``line_fragments``.
-        If we can't find a named character, error messages are
-        issued and we leave ``line_fragments`` untouched.
-        """
-        named_character = self.source_text[self.pos + start_shift : self.pos + start_shift]
-        if named_character.isalpha():
-            char = named_characters.get(named_character)
-            if char is None:
-                self.feeder.message("Syntax", "sntufn", named_character)
-            else:
-                return named_character
 
     def _skip_blank(self):
         "Skip whitespace and comments"
@@ -670,23 +618,7 @@ class Tokeniser:
         while True:
             if self.pos >= len(self.source_text):
                 if comment:
-                    try:
-                        self.get_more_input()
-                    except ValueError:
-                        # `get_more_input` tries to parse substrings like `\|AAAAA`
-                        # that can be interpreted as a character reference.
-                        # To do that, it tries to get the
-                        # new line using the method
-                        # `Prescanner.replace_escape_sequences()`
-                        # Inside a comment, the special meaning of escape sequences
-                        # like `\|` should not be taken into account.
-                        #
-                        # In case of error, just let's pick the code
-                        # from the `input_line` attribute of
-                        # prescanner:
-                        self.source_text = self.prescanner.input_line
-                        # TODO: handle the corner case where the rest of the line
-                        # include escaped sequences, out of the comment.
+                    self.get_more_input()
                 else:
                     break
             if comment:
