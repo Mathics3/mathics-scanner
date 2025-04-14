@@ -8,9 +8,8 @@ import string
 from typing import Dict, List, Optional, Tuple
 
 from mathics_scanner.characters import _letterlikes, _letters
-from mathics_scanner.errors import ScanError
+from mathics_scanner.errors import IncompleteSyntaxError, ScanError
 from mathics_scanner.escape_sequences import parse_escape_sequence
-from mathics_scanner.prescanner import Prescanner
 
 try:
     import ujson
@@ -466,13 +465,7 @@ class Tokeniser:
         )
         self.pos: int = 0
         self.feeder = feeder
-
-        # FIXME: remove this.
-        self.prescanner = Prescanner(feeder)
-
-        # Note: escape-sequence handling is now done inside the scanner,
-        # not the pre-scanner.
-        self.code = self.prescanner.replace_escape_sequences()
+        self.code = self.feeder.feed()
 
         self.mode: str = "invalid"
         self._change_token_scanning_mode("expr")
@@ -488,11 +481,13 @@ class Tokeniser:
 
     # TODO: Rename this to something that remotely makes sense?
     def incomplete(self):
-        "Get another source text line from input and continue."
-        self.prescanner.incomplete()
-        # Note, the below is used for appending a line.
-        # escape sequences are no longer replaced
-        self.code += self.prescanner.replace_escape_sequences()
+        "Get another source-text line from input and continue."
+
+        line: str = self.feeder.feed()
+        if not line:
+            self.feeder.message("Syntax", "sntxi", self.code[self.pos :].rstrip())
+            raise IncompleteSyntaxError()
+        self.code += line
 
     def sntx_message(self, pos: Optional[int] = None):
         """
@@ -551,23 +546,7 @@ class Tokeniser:
         while True:
             if self.pos >= len(self.code):
                 if comment:
-                    try:
-                        self.incomplete()
-                    except ValueError:
-                        # `incomplete` tries to parse substrings like `\|AAAAA`
-                        # that can be interpreted as a character reference.
-                        # To do that, it tries to get the
-                        # new line using the method
-                        # `Prescanner.replace_escape_sequences()`
-                        # Inside a comment, the special meaning of escape sequences
-                        # like `\|` should not be taken into account.
-                        #
-                        # In case of error, just let's pick the code
-                        # from the `input_line` attribute of
-                        # prescanner:
-                        self.code = self.prescanner.input_line
-                        # TODO: handle the corner case where the rest of the line
-                        # include escaped sequences, out of the comment.
+                    self.incomplete()
                 else:
                     break
             if comment:

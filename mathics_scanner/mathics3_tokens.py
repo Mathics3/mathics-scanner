@@ -7,6 +7,7 @@ import os
 import re
 import sys
 
+from mathics_scanner.errors import ScanError
 from mathics_scanner.feed import FileLineFeeder, LineFeeder, SingleLineFeeder
 from mathics_scanner.tokeniser import Tokeniser
 from mathics_scanner.version import __version__
@@ -150,6 +151,9 @@ def interactive_eval_loop(shell: TerminalShell, code_tokenize_format: bool):
     while True:
         try:
             tokens(shell.feed(), code_tokenize_format)
+        except ScanError:
+            print("\n\nGoodbye!\n")
+            break
         except KeyboardInterrupt:
             print("\nKeyboardInterrupt")
         except EOFError:
