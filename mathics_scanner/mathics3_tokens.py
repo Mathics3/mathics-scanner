@@ -7,7 +7,11 @@ import os
 import re
 import sys
 
-from mathics_scanner.errors import ScanError
+from mathics_scanner.errors import (
+    EscapeSyntaxError,
+    NamedCharacterSyntaxError,
+    ScanError,
+)
 from mathics_scanner.feed import FileLineFeeder, LineFeeder, SingleLineFeeder
 from mathics_scanner.tokeniser import Tokeniser
 from mathics_scanner.version import __version__
@@ -74,6 +78,12 @@ class TerminalShell(LineFeeder):
 
     def empty(self):
         return False
+
+    def errmsg(self, symbol_name: str, error_tag: str, mess: str):
+        """
+        Print a tokenizer error message.
+        """
+        print(f"{symbol_name}::{error_tag}: {mess}")
 
     def feed(self):
         result = self.read_line(self.get_in_prompt()) + "\n"
@@ -149,12 +159,29 @@ def interactive_eval_loop(shell: TerminalShell, code_tokenize_format: bool):
     `shell` is a shell session
     """
     while True:
+        source_text = shell.feed()
         try:
-            tokens(shell.feed(), code_tokenize_format)
+            tokens(source_text, code_tokenize_format)
         except ScanError:
-            # Ignore scanner erors. Presumably, the specific error was reported
-            # in the scanner already.
+            shell.errmsg(
+                "Syntax",
+                "sntxi",
+                "Expression error",
+            )
             pass
+        except NamedCharacterSyntaxError:
+            shell.errmsg(
+                "Syntax",
+                "sntufn",
+                "Unknown unicode longname",
+            )
+        except EscapeSyntaxError:
+            shell.errmsg(
+                "Syntax",
+                "sntufn",
+                "Unknown unicode longname",
+            )
+
         except KeyboardInterrupt:
             print("\nKeyboardInterrupt")
         except EOFError:

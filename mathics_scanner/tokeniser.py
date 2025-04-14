@@ -416,7 +416,7 @@ def is_symbol_name(text: str) -> bool:
 class Token:
     """A representation of a Wolfram-Language token.
 
-    A token is what the parser uses to build an M-expression.
+    Tokens are parsed by parser uses to build M-expressions.
 
     A token has a `tag`, the class or type of the token. For example:
     a Number, Symbol, String, File, etc.
@@ -517,9 +517,10 @@ class Tokeniser:
             self.feeder.message("Syntax", "sntxf", pre, post)
             return "sntxf", (pre, post)
 
-    # TODO: Convert this to __next__ in the future.
+    # TODO: If this is converted this to __next__, then
+    # a tokeniser object is iterable.
     def next(self) -> Token:
-        "Returns the next token."
+        "Returns the next token from self.source_text."
         self._skip_blank()
         if self.pos >= len(self.source_text):
             return Token("END", "", len(self.source_text))
@@ -550,6 +551,8 @@ class Tokeniser:
         if override is not None:
             return override(pattern_match)
 
+        # Failing a custom tokenization rule, we use the regular expression
+        # pattern match.
         text = pattern_match.group(0)
         self.pos = pattern_match.end(0)
         return Token(tag, text, pattern_match.start(0))
@@ -657,7 +660,7 @@ class Tokeniser:
         text = pattern_match.group(0)
         return Token(tag, text, pattern_match.start(0))
 
-    def t_String(self, pattern_match: re.Match) -> Token:
+    def t_String(self, _: re.Match) -> Token:
         """Break out from self.source_text the next token which is expected to be a String.
         The string value of the returned token will have double quote (") in the first and last
         postions of the returned string.
