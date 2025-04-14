@@ -517,9 +517,7 @@ class Tokeniser:
         )
         self.pos: int = 0
         self.feeder = feeder
-        self.source_text = ""
-
-        # FIXME: remove this.
+        self.source_text = self.feeder.feed()
         self.mode: str = "invalid"
 
         # Set to True when inside box parsing.
@@ -579,7 +577,7 @@ class Tokeniser:
         "Returns the next token from self.source_text."
         self._skip_blank()
         source_text = self.source_text
-        if self.pos >= len(self.source_text):
+        if self.pos >= len(source_text):
             return Token("END", "", len(source_text))
 
         # Look for a matching pattern.
