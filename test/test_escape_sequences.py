@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+import pytest
+
+from mathics_scanner.errors import NamedCharacterSyntaxError
 from mathics_scanner.escape_sequences import parse_escape_sequence
 
 
@@ -35,3 +38,9 @@ def test_escape_sequences():
         ("[Integral]", 0, 10, "\u222b", "Another full-string named-character"),
     ):
         assert parse_escape_sequence(text, pos) == (expect_str, expect_pos), fail_msg
+
+
+def test_incomplete_named_character_sequences():
+    for text in (r"\[", r"\[Theta", r"\[Fake]", r"\[abc]"):
+        with pytest.raises(NamedCharacterSyntaxError):
+            parse_escape_sequence(text, 1)

@@ -181,7 +181,6 @@ def interactive_eval_loop(shell: TerminalShell, code_tokenize_format: bool):
                 "sntufn",
                 "Unknown unicode longname",
             )
-
         except KeyboardInterrupt:
             print("\nKeyboardInterrupt. Type Ctrl-D (EOF) to exit.")
         except EOFError:

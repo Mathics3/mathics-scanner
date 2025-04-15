@@ -17,24 +17,20 @@ def parse_base(source_text: str, start_shift: int, end_shift: int, base: int) ->
     See if characters start_shift .. end shift
     can be converted to an integer in base  ``base``.
 
-    If so, chr(integer value converted from base).
+    If so, chr(integer value converted from base) is returnd.
 
-    However, if the conversion fails, then error messages are
-    issued and nothing is updated
+    However, if the conversion fails, ScanError is raised.
     """
-    start, end = start_shift, end_shift
-    result = None
-    if end <= len(source_text):
-        text = source_text[start:end]
-        try:
-            result = int(text, base)
-        except ValueError:
-            pass  # result remains None
-    if result is None:
-        last = end - start
+    assert start_shift <= end_shift <= len(source_text)
+    text = source_text[start_shift:end_shift]
+    try:
+        result = int(text, base)
+    except ValueError:
+        last = start_shift - end_shift
         if last == 2:
             tag = "sntoct2"
         elif last == 3:
+            assert base == 8, "Only octal requires 3 digits"
             tag = "sntoct1"
         elif last == 4:
             tag = "snthex"
@@ -46,12 +42,18 @@ def parse_base(source_text: str, start_shift: int, end_shift: int, base: int) ->
 
 
 def parse_named_character(source_text: str, start: int, finish: int) -> Optional[str]:
-    r"""Before calling we have matched "\[".  Scan to the remaining "]" and
-    try to match what is found in-between with a known named
-    character, e.g. "Theta".  If we can match this, we store
-    the unicode character equivalent in ``line_fragments``.
-    If we can't find a named character, error messages are
-    issued and we leave ``line_fragments`` untouched.
+    r"""
+    Find the unicode-equivalent symbol for a string named character.
+
+    Before calling we have matched the text between "\["  and "]" of the input.
+
+    The name character is thus in source_text[start:finish].
+
+    Match this string with the known named characters,
+    e.g. "Theta".  If we can match this, then we return the unicode equivalent from the
+    `named_characters` map (which is read in from JSON but stored in a YAML file).
+
+    If we can't find the named character, rasie NamedCharacterSyntaxError.
     """
     named_character = source_text[start:finish]
     if named_character.isalpha():
@@ -63,9 +65,9 @@ def parse_named_character(source_text: str, start: int, finish: int) -> Optional
 
 
 def parse_escape_sequence(source_text: str, pos: int) -> Tuple[str, int]:
-    """
-    Given some source text `source_text` at position `pos`, return the escape sequence and the
-    follow-on position.
+    """Given some source text in `source_text` starting at offset
+    `pos`, return the escape-sequence value for this text and the
+    follow-on offset position.
     """
     result = ""
     c = source_text[pos]
@@ -98,12 +100,14 @@ def parse_escape_sequence(source_text: str, pos: int) -> Tuple[str, int]:
         if i == len(source_text):
             # Note: named characters do not have \n's in them. (Is this right)?
             # FIXME: decide what to do here.
-            raise EscapeSyntaxError("Syntax", "stresc" rf"\{c}.")
+            raise NamedCharacterSyntaxError("Syntax", "sntufn", source_text[pos:])
 
         named_character = parse_named_character(source_text, pos, i)
-        if named_character is not None:
-            result += named_character
-            pos = i + 1
+        if named_character is None:
+            raise NamedCharacterSyntaxError("Syntax", "sntufn", source_text[pos:i])
+
+        result += named_character
+        pos = i + 1
     elif c in "01234567":
         # See if we have a 3-digit octal number.
         # For example \065 = "5"

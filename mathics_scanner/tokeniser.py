@@ -684,7 +684,11 @@ class Tokeniser:
             self.get_more_input()
             self.pos += 1
             source_text += self.source_text
-        escape_str, self.pos = parse_escape_sequence(source_text, start_pos)
+        try:
+            escape_str, self.pos = parse_escape_sequence(source_text, start_pos)
+        except ScanError as scan_error:
+            self.feeder.message("Syntax", scan_error.tag, scan_error.args[0])
+            raise
 
         # DRY with "next()"
         # look for a matching pattern
