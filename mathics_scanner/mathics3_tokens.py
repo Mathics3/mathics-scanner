@@ -197,7 +197,14 @@ def interactive_eval_loop(shell: TerminalShell, code_tokenize_format: bool):
 def tokens(code, code_tokenize_format: bool):
     tokeniser = Tokeniser(SingleLineFeeder(code))
     while True:
-        token = tokeniser.next()
+        try:
+            token = tokeniser.next()
+        except ScanError as scan_error:
+            mess = ""
+            if scan_error.tag == "sntoct1":
+                mess = r"3 octal digits are required after \ to construct an 8-bit character"
+            print(f"Syntax::{scan_error.tag}: {mess}")
+            raise
         if token.tag == "END":
             break
         elif code_tokenize_format:

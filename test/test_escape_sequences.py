@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import pytest
 
-from mathics_scanner.errors import NamedCharacterSyntaxError
+from mathics_scanner.errors import NamedCharacterSyntaxError, ScanError
 from mathics_scanner.escape_sequences import parse_escape_sequence
 
 
@@ -40,7 +40,31 @@ def test_escape_sequences():
         assert parse_escape_sequence(text, pos) == (expect_str, expect_pos), fail_msg
 
 
-def test_incomplete_named_character_sequences():
+def test_invalid_named_character_sequences():
     for text in (r"\[", r"\[Theta", r"\[Fake]", r"\[abc]"):
         with pytest.raises(NamedCharacterSyntaxError):
             parse_escape_sequence(text, 1)
+
+
+def test_invalid_number_encoding():
+    for text in (
+        # Octal
+        "093",  # 9 is not in 0-7
+        "01",  # need 3 characters
+        "01",  # need 3 characters
+        # 2-character hex
+        ".",
+        ".0",
+        ".0i",  # i is not in 0-f
+        # 4-character hex
+        ":",
+        ":A",
+        ":A1",
+        ":ak",
+        ":A10",
+        ":a1g",
+        ":A1g9",
+        ":01-2",
+    ):
+        with pytest.raises(ScanError):
+            parse_escape_sequence(text, 0)
