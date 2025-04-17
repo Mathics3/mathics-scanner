@@ -21,21 +21,25 @@ def parse_base(source_text: str, start_shift: int, end_shift: int, base: int) ->
 
     However, if the conversion fails, ScanError is raised.
     """
-    assert start_shift <= end_shift <= len(source_text)
+    last = end_shift - start_shift
+    if last == 2:
+        tag = "sntoct2"
+    elif last == 3:
+        assert base == 8, "Only octal requires 3 digits"
+        tag = "sntoct1"
+    elif last in (4, 6):
+        tag = "snthex"
+    else:
+        raise ValueError()
+
+    if end_shift > len(source_text):
+        raise ScanError("Syntax", tag)
+
+    assert start_shift <= end_shift
     text = source_text[start_shift:end_shift]
     try:
         result = int(text, base)
     except ValueError:
-        last = start_shift - end_shift
-        if last == 2:
-            tag = "sntoct2"
-        elif last == 3:
-            assert base == 8, "Only octal requires 3 digits"
-            tag = "sntoct1"
-        elif last == 4:
-            tag = "snthex"
-        else:
-            raise ValueError()
         raise ScanError(tag, source_text[start_shift:].rstrip("\n"))
 
     return chr(result)
