@@ -6843,7 +6843,7 @@ Mu:
   amslatex: '\mu'
   esc-alias: m
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u03BC"
   unicode-equivalent-name: GREEK SMALL LETTER MU
   wl-reference: https://reference.wolfram.com/language/ref/character/Mu.html
