@@ -703,7 +703,7 @@ class Tokeniser:
                     break
         else:
             for tag, pattern in self.tokens:
-                pattern_match = pattern.match(escape_str, start_pos)
+                pattern_match = pattern.match(escape_str, 0)
                 if pattern_match is not None:
                     break
 
