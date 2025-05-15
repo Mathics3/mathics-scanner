@@ -17,6 +17,7 @@
 /.cache
 /.pyodide-xbuildenv-*
 /.python-version
+/ChangeLog-spell-corrected
 /Mathics_Scanner.egg-info
 /mathics_scanner/data/character-tables.json
 /mathics_scanner/data/operators.json
