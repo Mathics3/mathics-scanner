@@ -523,7 +523,7 @@ class Tokeniser:
         # no matching pattern found
         if match is None:
             self.sntx_message()
-            raise ScanError()
+            raise ScanError(self.pos)
 
         # custom tokenisation rules defined with t_tag
         override = getattr(self, "t_" + tag, None)
