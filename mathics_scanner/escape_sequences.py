@@ -139,5 +139,5 @@ def parse_escape_sequence(source_text: str, pos: int) -> Tuple[str, int]:
         result += c
         pos += 1
     else:
-        raise EscapeSyntaxError("Syntax", "stresc" rf"\{c}.")
+        raise EscapeSyntaxError("Syntax", "stresc", rf"\{c}")
     return result, pos

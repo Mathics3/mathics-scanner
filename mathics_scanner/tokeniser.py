@@ -11,7 +11,7 @@ import string
 from typing import Dict, List, Optional, Tuple
 
 from mathics_scanner.characters import _letterlikes, _letters
-from mathics_scanner.errors import IncompleteSyntaxError, ScanError
+from mathics_scanner.errors import EscapeSyntaxError, IncompleteSyntaxError, ScanError
 from mathics_scanner.escape_sequences import parse_escape_sequence
 
 try:
@@ -743,10 +743,15 @@ class Tokeniser:
             if char == "\\":
                 if self.pos + 1 == len(source_text):
                     # We have reached end of the input line before seeing a terminating
-                    # quote ("). Fetch aanother line.
+                    # quote ("). Fetch another line.
                     self.get_more_input()
                 self.pos += 1
-                escape_str, self.pos = parse_escape_sequence(source_text, self.pos)
+                try:
+                    escape_str, self.pos = parse_escape_sequence(source_text, self.pos)
+                except EscapeSyntaxError as e:
+                    self.feeder.message(e.name, *e.args)
+                    raise
+
                 result += escape_str
             else:
                 result += self.source_text[self.pos]
