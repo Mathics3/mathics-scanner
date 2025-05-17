@@ -17,6 +17,7 @@ from mathics_scanner.errors import (
     InvalidSyntaxError,
     ScanError,
     TranslateError,
+    TranslateErrorNew,
 )
 from mathics_scanner.feed import (
     FileLineFeeder,
@@ -40,6 +41,7 @@ __all__ = [
     # "Token",
     # "Tokeniser",
     "TranslateError",
+    "TranslateErrorNew",
     "__version__",
     "aliased_characters",
     # "is_symbol_name",

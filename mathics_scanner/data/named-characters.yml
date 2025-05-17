@@ -6843,7 +6843,7 @@ Mu:
   amslatex: '\mu'
   esc-alias: m
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u03BC"
   unicode-equivalent-name: GREEK SMALL LETTER MU
   wl-reference: https://reference.wolfram.com/language/ref/character/Mu.html
@@ -10119,7 +10119,7 @@ Theta:
   amslatex: '\theta'
   esc-alias: th
   has-unicode-inverse: false
-  is-letter-like: false
+  is-letter-like: true
   unicode-equivalent: "\u03B8"
   unicode-equivalent-name: GREEK SMALL LETTER THETA
   wl-reference: https://reference.wolfram.com/language/ref/character/Theta.html
