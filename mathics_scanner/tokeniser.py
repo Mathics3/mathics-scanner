@@ -606,6 +606,27 @@ class Tokeniser:
         # pattern match.
         text = pattern_match.group(0)
         self.pos = pattern_match.end(0)
+
+        if tag == "Symbol":
+            # We have to keep searching for the end of the Symbol if
+            # the next symbol is a backslash, "\", because it might be a
+            # named-letterlike character such as \[Mu] or a escape representation of number or
+            # character.
+            # abc\[Mu] is a valid 4-character symbol.
+            while self.pos < len(source_text) and source_text[self.pos] == "\\":
+                try:
+                    escape_str, next_pos = parse_escape_sequence(
+                        self.source_text, self.pos + 1
+                    )
+                except ScanError as scan_error:
+                    self.feeder.message("Syntax", scan_error.tag, scan_error.args[0])
+                    raise
+                if escape_str in _letterlikes + "0123456789":
+                    text += escape_str
+                    self.pos = next_pos
+                else:
+                    break
+
         return Token(tag, text, pattern_match.start(0))
 
     def _skip_blank(self):
@@ -690,7 +711,7 @@ class Tokeniser:
             self.feeder.message("Syntax", scan_error.tag, scan_error.args[0])
             raise
 
-        # DRY with "next()"
+        # DRY with "next()?"
         # look for a matching pattern
         indices = self.token_indices.get(escape_str[0], ())
         pattern_match = None
