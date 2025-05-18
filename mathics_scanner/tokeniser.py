@@ -619,10 +619,16 @@ class Tokeniser:
                     escape_str, next_pos = parse_escape_sequence(
                         self.source_text, self.pos + 1
                     )
-                except ScanError as scan_error:
-                    self.feeder.message("Syntax", scan_error.tag, scan_error.args[0])
+                except EscapeSyntaxError as escape_error:
+                    if self.is_inside_box:
+                        # Follow-on symbol may be a escape character that can
+                        # appear only in box constructs, e.g. \%.
+                        break
+                    self.feeder.message(
+                        "Syntax", escape_error.tag, escape_error.args[0]
+                    )
                     raise
-                if escape_str in _letterlikes + "0123456789":
+                if escape_str in _letterlikes:
                     text += escape_str
                     self.pos = next_pos
                 else:
