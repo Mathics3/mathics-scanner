@@ -486,6 +486,11 @@ class Tokeniser:
         self.source_text = self.feeder.feed()
 
         self.mode: str = "invalid"
+
+        # Set to True when inside box parsing.
+        # This has an effect on which escape operators are allowed.
+        self._is_inside_box: bool = False
+
         self._change_token_scanning_mode("expr")
 
     def _change_token_scanning_mode(self, mode: str):
@@ -508,8 +513,17 @@ class Tokeniser:
             raise IncompleteSyntaxError()
         self.source_text += line
 
-    # Compatiblity for mathics-core
-    incomplete = get_more_input
+    @property
+    def is_inside_box(self) -> bool:
+        r"""
+        Return True iff we parsing inside a RowBox, i.e. RowBox[...]
+        or \( ... \)
+        """
+        return self._is_inside_box
+
+    @is_inside_box.setter
+    def is_inside_box(self, value: bool) -> None:
+        self._is_inside_box = value
 
     def sntx_message(self, pos: Optional[int] = None) -> Tuple[str, str, str]:
         """
@@ -577,10 +591,16 @@ class Tokeniser:
                     escape_str, next_pos = parse_escape_sequence(
                         self.source_text, self.pos + 1
                     )
-                except ScanError as scan_error:
-                    self.feeder.message("Syntax", scan_error.tag, scan_error.args[0])
+                except EscapeSyntaxError as escape_error:
+                    if self.is_inside_box:
+                        # Follow-on symbol may be a escape character that can
+                        # appear only in box constructs, e.g. \%.
+                        break
+                    self.feeder.message(
+                        "Syntax", escape_error.tag, escape_error.args[0]
+                    )
                     raise
-                if escape_str in _letterlikes + "0123456789":
+                if escape_str in _letterlikes:
                     text += escape_str
                     self.pos = next_pos
                 else:
