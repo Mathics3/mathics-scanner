@@ -28,7 +28,7 @@ class IncompleteSyntaxError(TranslateError):
     pass
 
 
-class InvalidSyntaxError(TranslateError):
+class InvalidSyntaxError(TranslateErrorNew):
     """Invalid syntax"""
 
     pass

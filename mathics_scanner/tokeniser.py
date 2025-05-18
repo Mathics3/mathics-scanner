@@ -41,10 +41,18 @@ NUMBER_PATTERN = r"""
 """
 
 # TODO: Check what of this should be a part of the module interface.
-base_symbol_pattern = r"((?![0-9])([0-9${0}{1}])+)".format(_letters, _letterlikes)
-full_symbol_pattern_str = r"(`?{0}(`{0})*)".format(base_symbol_pattern)
-pattern_pattern = r"{0}?_(\.|(__?)?{0}?)?".format(full_symbol_pattern_str)
-slot_pattern = r"\#(\d+|{0})?".format(base_symbol_pattern)
+
+# The leading character of a Symbol:
+symbol_first_letter = f"{_letters}{_letterlikes}"
+
+# Regular expression string for Symbol without context parts. Note that
+# ![0-9] is too permissive, but that's handle by other means.
+base_symbol_pattern = rf"((?![0-9])([0-9${symbol_first_letter}])+)"
+
+# Symbol including context parts.
+full_symbol_pattern_str = rf"(`?{base_symbol_pattern}(`{base_symbol_pattern})*)"
+pattern_pattern = rf"{full_symbol_pattern_str}?_(\.|(__?)?{full_symbol_pattern_str}?)?"
+slot_pattern = rf"\#(\d+|{base_symbol_pattern})?"
 FILENAME_PATTERN = r"""
 (?P<quote>\"?)                              (?# Opening quotation mark)
     [a-zA-Z0-9\`/\.\\\!\-\:\_\$\*\~\?]+     (?# Literal characters)
@@ -503,19 +511,19 @@ class Tokeniser:
     # Compatiblity for mathics-core
     incomplete = get_more_input
 
-    def sntx_message(self, pos: Optional[int] = None):
+    def sntx_message(self, pos: Optional[int] = None) -> Tuple[str, str, str]:
         """
-        Send a "syntx{b,f} error message to the input-reading feeder.
+        Send a "sntx{b,f} error message to the input-reading feeder.
         """
         if pos is None:
             pos = self.pos
         pre, post = self.source_text[:pos], self.source_text[pos:].rstrip("\n")
         if pos == 0:
             self.feeder.message("Syntax", "sntxb", post)
-            return "sntxb", (post,)
+            return "sntxb", "", post
         else:
             self.feeder.message("Syntax", "sntxf", pre, post)
-            return "sntxf", (pre, post)
+            return "sntxf", pre, post
 
     # TODO: If this is converted this to __next__, then
     # a tokeniser object is iterable.
@@ -544,8 +552,8 @@ class Tokeniser:
 
         # No matching pattern found.
         if pattern_match is None:
-            tag, args = self.sntx_message()
-            raise ScanError(tag, *args)
+            tag, pre_str, post_str = self.sntx_message()
+            raise ScanError(tag, pre_str, post_str)
 
         # Look for custom tokenization rules; those are defined with t_tag.
         override = getattr(self, "t_" + tag, None)
@@ -562,7 +570,8 @@ class Tokeniser:
             # the next symbol is a backslash, "\", because it might be a
             # named-letterlike character such as \[Mu] or a escape representation of number or
             # character.
-            # abc\[Mu] is a valid 4-character symbol.
+            # abc\[Mu] is a valid 4-character Symbol. And we can have things like
+            # abc\[Mu]\[Mu]def\[Mu]1
             while self.pos < len(source_text) and source_text[self.pos] == "\\":
                 try:
                     escape_str, next_pos = parse_escape_sequence(
@@ -661,8 +670,9 @@ class Tokeniser:
             self.feeder.message("Syntax", scan_error.tag, scan_error.args[0])
             raise
 
-        # DRY with "next()?"
-        # look for a matching pattern
+        # Is there a way to DRY with "next()?"
+
+        # Look for a matching pattern.
         indices = self.token_indices.get(escape_str[0], ())
         pattern_match = None
         tag = "??invalid"
@@ -678,12 +688,34 @@ class Tokeniser:
                 if pattern_match is not None:
                     break
 
-        # no matching pattern found
+        # No matching pattern found.
         if pattern_match is None:
             tag, args = self.sntx_message()
             raise ScanError(tag, *args)
 
         text = pattern_match.group(0)
+
+        if tag == "Symbol":
+            # We have to keep searching for the end of the Symbol if
+            # the next symbol is a backslash, "\", because it might be a
+            # named-letterlike character such as \[Mu] or a escape representation of number or
+            # character.
+            # \[Mu]2 is a valid 2-character Symbol, and we can have things like
+            # \[Mu]\[Mu]def\[Mu]1.
+            while self.pos < len(source_text) and source_text[self.pos] == "\\":
+                try:
+                    escape_str, next_pos = parse_escape_sequence(
+                        self.source_text, self.pos + 1
+                    )
+                except ScanError as scan_error:
+                    self.feeder.message("Syntax", scan_error.tag, scan_error.args[0])
+                    raise
+                if escape_str in _letterlikes + "0123456789":
+                    text += escape_str
+                    self.pos = next_pos
+                else:
+                    break
+
         return Token(tag, text, pattern_match.start(0))
 
     def t_String(self, _: re.Match) -> Token:
