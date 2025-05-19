@@ -607,6 +607,7 @@ class Tokeniser:
         text = pattern_match.group(0)
         self.pos = pattern_match.end(0)
 
+        # FIXME: DRY with code in RawBackslash
         if tag == "Symbol":
             # We have to keep searching for the end of the Symbol if
             # the next symbol is a backslash, "\", because it might be a
@@ -614,7 +615,26 @@ class Tokeniser:
             # character.
             # abc\[Mu] is a valid 4-character Symbol. And we can have things like
             # abc\[Mu]\[Mu]def\[Mu]1
-            while self.pos < len(source_text) and source_text[self.pos] == "\\":
+            while True:
+                if self.pos >= len(source_text):
+                    break
+
+                # Try to extend symbol with non-escaped alphanumeric
+                # (and letterlike) symbols.
+
+                # TODO: Do we need to add context breaks? And if so,
+                # do we need to check for consecutive ``'s?
+                alphanumeric_match = re.match(
+                    f"[0-9${symbol_first_letter}]+", self.source_text[self.pos :]
+                )
+                if alphanumeric_match is not None:
+                    extension_str = alphanumeric_match.group(0)
+                    text += extension_str
+                    self.pos += len(extension_str)
+
+                if source_text[self.pos] != "\\":
+                    break
+
                 try:
                     escape_str, next_pos = parse_escape_sequence(
                         self.source_text, self.pos + 1
@@ -625,7 +645,7 @@ class Tokeniser:
                         # appear only in box constructs, e.g. \%.
                         break
                     self.feeder.message(
-                        escape_error.name, escape_error.tag, escape_error.args
+                        escape_error.name, escape_error.tag, *escape_error.args
                     )
                     raise
                 if escape_str in _letterlikes:
@@ -718,7 +738,7 @@ class Tokeniser:
             if source_text[start_pos] == "[" and source_text[self.pos - 1] == "]":
                 named_character = source_text[start_pos + 1 : self.pos - 1]
         except EscapeSyntaxError as escape_error:
-            self.feeder.message(escape_error.name, escape_error.tag, escape_error.args)
+            self.feeder.message(escape_error.name, escape_error.tag, *escape_error.args)
             raise
 
         # Is there a way to DRY with "next()?"
@@ -752,6 +772,7 @@ class Tokeniser:
         text = pattern_match.group(0)
 
         if tag == "Symbol":
+            # FIXME: DRY with code in next()
             # We have to keep searching for the end of the Symbol
             # after an escaped letterlike-symbol.  For example, \[Mu]
             # is a valid Symbol. But we can also have symbols for
@@ -776,12 +797,15 @@ class Tokeniser:
                 if source_text[self.pos] != "\\":
                     break
 
-                # Now try to extend symbol with *escaped* alphanumeric (and letterlike) symbols.
                 try:
                     escape_str, next_pos = parse_escape_sequence(
                         self.source_text, self.pos + 1
                     )
                 except EscapeSyntaxError as escape_error:
+                    if self.is_inside_box:
+                        # Follow-on symbol may be a escape character that can
+                        # appear only in box constructs, e.g. \%.
+                        break
                     self.feeder.message(
                         escape_error.name, escape_error.tag, escape_error.args
                     )
@@ -789,7 +813,6 @@ class Tokeniser:
                 if escape_str in _letterlikes + _letters + "0123456789$":
                     text += escape_str
                     self.pos = next_pos
-                    # Look to extend the symbol for further
                 else:
                     break
 
@@ -830,7 +853,7 @@ class Tokeniser:
                     escape_str, self.pos = parse_escape_sequence(source_text, self.pos)
                 except EscapeSyntaxError as escape_error:
                     self.feeder.message(
-                        escape_error.name, escape_error.tag, escape_error.args
+                        escape_error.name, escape_error.tag, *escape_error.args
                     )
                     raise
 
