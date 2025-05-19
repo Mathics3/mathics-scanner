@@ -1,5 +1,8 @@
 """
-Tokenizer functions
+Mathics3 Scanner or Tokenizer module.
+
+This module reads input lines and breaks the lines into tokens.
+See classes `Token` and `Tokeniser` .
 """
 
 import os.path as osp
@@ -8,8 +11,8 @@ import string
 from typing import Dict, List, Optional, Tuple
 
 from mathics_scanner.characters import _letterlikes, _letters
-from mathics_scanner.errors import ScanError
-from mathics_scanner.prescanner import Prescanner
+from mathics_scanner.errors import EscapeSyntaxError, IncompleteSyntaxError, ScanError
+from mathics_scanner.escape_sequences import parse_escape_sequence
 
 try:
     import ujson
@@ -20,7 +23,7 @@ except ImportError:
 OPERATOR_DATA = {}
 ROOT_DIR = osp.dirname(__file__)
 OPERATORS_TABLE_PATH = osp.join(ROOT_DIR, "data", "operators.json")
-
+NO_MEANING_OPERATORS = {}
 
 FILENAME_TOKENS: List = []
 TOKENS: List[Tuple] = []
@@ -38,10 +41,35 @@ NUMBER_PATTERN = r"""
 """
 
 # TODO: Check what of this should be a part of the module interface.
-base_symbol_pattern = r"((?![0-9])([0-9${0}{1}])+)".format(_letters, _letterlikes)
-full_symbol_pattern_str = r"(`?{0}(`{0})*)".format(base_symbol_pattern)
-pattern_pattern = r"{0}?_(\.|(__?)?{0}?)?".format(full_symbol_pattern_str)
-slot_pattern = r"\#(\d+|{0})?".format(base_symbol_pattern)
+
+#####################################
+# Symbol-related regular expressions
+#
+# In other programming languages, a "Symbol" is called an "identifier".
+#
+# What complicates things here is that Symbols can be comprised of
+# escape sequences, e.g. \[Mu] which can represent letter-like characters
+# or can be alteranate representations of alphanumeric numbers, e.g. \061.
+#
+# We don't handle escape sequences in the regexps below.  Previously,
+# escape sequences were handled in a (buggy) "pre-scanning" phase.
+#
+# This could still be done, but it would need to be integrated more
+# properly into the tokenization phase which takes into account
+# differents states or "modes" indicating the interior of comments,
+# strings, files, and Box-like constructs.
+
+# The leading character of a Symbol:
+symbol_first_letter = f"{_letters}{_letterlikes}"
+
+# Regular expression string for Symbol without context parts. Note that
+# ![0-9] is too permissive, but that's handle by other means.
+base_symbol_pattern = rf"((?![0-9])([0-9${symbol_first_letter}])+)"
+
+# Symbol including context parts.
+full_symbol_pattern_str = rf"(`?{base_symbol_pattern}(`{base_symbol_pattern})*)"
+pattern_pattern = rf"{full_symbol_pattern_str}?_(\.|(__?)?{full_symbol_pattern_str}?)?"
+slot_pattern = rf"\#(\d+|{base_symbol_pattern})?"
 FILENAME_PATTERN = r"""
 (?P<quote>\"?)                              (?# Opening quotation mark)
     [a-zA-Z0-9\`/\.\\\!\-\:\_\$\*\~\?]+     (?# Literal characters)
@@ -51,7 +79,10 @@ NAMES_WILDCARDS = "@*"
 base_names_pattern = r"((?![0-9])([0-9${0}{1}{2}])+)".format(
     _letters, _letterlikes, NAMES_WILDCARDS
 )
-full_names_pattern = r"(`?{0}(`{0})*)".format(base_names_pattern)
+full_names_pattern = rf"(`?{base_names_pattern}(`{base_names_pattern})*)"
+
+
+# End of Symbol-related regular expressions.
 
 # FIXME incorportate the below table in to Function/Operators YAML
 # Table of correspondneces between a Mathics3 token name (or "tag")
@@ -132,6 +163,13 @@ def init_module():
 
     with open(osp.join(OPERATORS_TABLE_PATH), "r", encoding="utf8") as operator_f:
         OPERATOR_DATA.update(ujson.load(operator_f))
+
+    global NO_MEANING_OPERATORS
+    NO_MEANING_OPERATORS = (
+        set(OPERATOR_DATA["no-meaning-infix-operators"].keys())
+        | set(OPERATOR_DATA["no-meaning-prefix-operators"].keys())
+        | set(OPERATOR_DATA["no-meaning-postfix-operators"].keys())
+    )
 
     tokens = [
         ("Definition", r"\? "),
@@ -411,14 +449,21 @@ def is_symbol_name(text: str) -> bool:
 
 
 class Token:
-    "A representation of a Wolfram Language token."
+    """A representation of a Wolfram-Language token.
+
+    Tokens are parsed by parser uses to build M-expressions.
+
+    A token has a `tag`, the class or type of the token. For example:
+    a Number, Symbol, String, File, etc.
+
+    The token's `text` is the string contents of the token.
+
+    The token's `pos` is the integer starting offset where
+    `text` can be found inside the input string. The input string
+    is not part of the token though.
+    """
 
     def __init__(self, tag: str, text: str, pos: int):
-        """
-        :param tag: which type of token this is.
-        :param text: The actual contents of the token.
-        :param pos: The position of the token in the input feed.
-        """
         self.tag = tag
         self.text = text
         self.pos = pos
@@ -465,9 +510,14 @@ class Tokeniser:
         )
         self.pos: int = 0
         self.feeder = feeder
-        self.prescanner = Prescanner(feeder)
-        self.code = self.prescanner.replace_escape_sequences()
+        self.source_text = self.feeder.feed()
+
         self.mode: str = "invalid"
+
+        # Set to True when inside box parsing.
+        # This has an effect on which escape operators are allowed.
+        self._is_inside_box: bool = False
+
         self._change_token_scanning_mode("expr")
 
     def _change_token_scanning_mode(self, mode: str):
@@ -479,172 +529,356 @@ class Tokeniser:
         self.mode = mode
         self.tokens, self.token_indices = self.modes[mode]
 
-    # TODO: Rename this to something that remotely makes sense?
-    def incomplete(self):
-        "Get more code from the prescanner and continue."
-        self.prescanner.incomplete()
-        self.code += self.prescanner.replace_escape_sequences()
+    def get_more_input(self):
+        "Get another source-text line from input and continue."
 
-    def sntx_message(self, pos: Optional[int] = None):
+        line: str = self.feeder.feed()
+        if not line:
+            text = self.source_text[self.pos :].rstrip()
+            self.feeder.message("Syntax", "sntxi", text)
+            raise IncompleteSyntaxError("Syntax", "sntxi", text)
+        self.source_text += line
+
+    @property
+    def is_inside_box(self) -> bool:
+        r"""
+        Return True iff we parsing inside a RowBox, i.e. RowBox[...]
+        or \( ... \)
         """
-        Send a "syntx{b,f} error message to the input-reading feeder.
+        return self._is_inside_box
+
+    @is_inside_box.setter
+    def is_inside_box(self, value: bool) -> None:
+        self._is_inside_box = value
+
+    def sntx_message(self, pos: Optional[int] = None) -> Tuple[str, str, str]:
+        """
+        Send a "sntx{b,f} error message to the input-reading feeder.
         """
         if pos is None:
             pos = self.pos
-        pre, post = self.code[:pos], self.code[pos:].rstrip("\n")
+        pre, post = self.source_text[:pos], self.source_text[pos:].rstrip("\n")
         if pos == 0:
             self.feeder.message("Syntax", "sntxb", post)
+            return "sntxb", "", post
         else:
             self.feeder.message("Syntax", "sntxf", pre, post)
+            return "sntxf", pre, post
 
-    # TODO: Convert this to __next__ in the future.
+    # TODO: If this is converted this to __next__, then
+    # a tokeniser object is iterable.
     def next(self) -> Token:
-        "Returns the next token."
+        "Returns the next token from self.source_text."
         self._skip_blank()
-        if self.pos >= len(self.code):
-            return Token("END", "", len(self.code))
+        source_text = self.source_text
+        if self.pos >= len(self.source_text):
+            return Token("END", "", len(source_text))
 
-        # look for a matching pattern
-        indices = self.token_indices.get(self.code[self.pos], ())
-        match = None
+        # Look for a matching pattern.
+        indices = self.token_indices.get(source_text[self.pos], ())
+        pattern_match: Optional[re.Match] = None
         tag = "??invalid"
         if indices:
             for index in indices:
                 tag, pattern = self.tokens[index]
-                match = pattern.match(self.code, self.pos)
-                if match is not None:
+                pattern_match = pattern.match(source_text, self.pos)
+                if pattern_match is not None:
                     break
         else:
             for tag, pattern in self.tokens:
-                match = pattern.match(self.code, self.pos)
-                if match is not None:
+                pattern_match = pattern.match(source_text, self.pos)
+                if pattern_match is not None:
                     break
 
-        # no matching pattern found
-        if match is None:
-            self.sntx_message()
-            raise ScanError(self.pos)
+        # No matching pattern found.
+        if pattern_match is None:
+            tag, pre_str, post_str = self.sntx_message()
+            raise ScanError(tag, pre_str, post_str)
 
-        # custom tokenisation rules defined with t_tag
+        # Look for custom tokenization rules; those are defined with t_tag.
         override = getattr(self, "t_" + tag, None)
         if override is not None:
-            return override(match)
+            return override(pattern_match)
 
-        text = match.group(0)
-        self.pos = match.end(0)
-        return Token(tag, text, match.start(0))
+        # Failing a custom tokenization rule, we use the regular expression
+        # pattern match.
+        text = pattern_match.group(0)
+        self.pos = pattern_match.end(0)
+
+        # The below similar to what we do in t_RawBackslash, but is is
+        # different.  First, we need to look for a closing quote
+        # ("). Also, after parsing escape sequences, we can
+        # unconditionallhy add them on to the string. That is, we
+        # don't have to check whether the returned string can be valid
+        # in a Symbol name.
+
+        if tag == "Symbol":
+            # We have to keep searching for the end of the Symbol if
+            # the next symbol is a backslash, "\", because it might be a
+            # named-letterlike character such as \[Mu] or a escape representation of number or
+            # character.
+            # abc\[Mu] is a valid 4-character Symbol. And we can have things like
+            # abc\[Mu]\[Mu]def\[Mu]1
+            while True:
+                if self.pos >= len(source_text):
+                    break
+
+                # Try to extend symbol with non-escaped alphanumeric
+                # (and letterlike) symbols.
+
+                # TODO: Do we need to add context breaks? And if so,
+                # do we need to check for consecutive ``'s?
+                alphanumeric_match = re.match(
+                    f"[0-9${symbol_first_letter}]+", self.source_text[self.pos :]
+                )
+                if alphanumeric_match is not None:
+                    extension_str = alphanumeric_match.group(0)
+                    text += extension_str
+                    self.pos += len(extension_str)
+
+                if source_text[self.pos] != "\\":
+                    break
+
+                try:
+                    escape_str, next_pos = parse_escape_sequence(
+                        self.source_text, self.pos + 1
+                    )
+                except EscapeSyntaxError as escape_error:
+                    if self.is_inside_box:
+                        # Follow-on symbol may be a escape character that can
+                        # appear only in box constructs, e.g. \%.
+                        break
+                    self.feeder.message(
+                        escape_error.name, escape_error.tag, *escape_error.args
+                    )
+                    raise
+                if escape_str in _letterlikes:
+                    text += escape_str
+                    self.pos = next_pos
+                else:
+                    break
+
+        return Token(tag, text, pattern_match.start(0))
 
     def _skip_blank(self):
         "Skip whitespace and comments"
         comment = []  # start positions of comments
         while True:
-            if self.pos >= len(self.code):
+            if self.pos >= len(self.source_text):
                 if comment:
-                    try:
-                        self.incomplete()
-                    except ValueError:
-                        # `incomplete` tries to parse substrings like `\|AAAAA`
-                        # that can be interpreted as a character reference.
-                        # To do that, it tries to get the
-                        # new line using the method
-                        # `Prescanner.replace_escape_sequences()`
-                        # Inside a comment, the special meaning of escape sequences
-                        # like `\|` should not be taken into account.
-                        #
-                        # In case of error, just let's pick the code
-                        # from the `input_line` attribute of
-                        # prescanner:
-                        self.code = self.prescanner.input_line
-                        # TODO: handle the corner case where the rest of the line
-                        # include escaped sequences, out of the comment.
+                    self.get_more_input()
                 else:
                     break
             if comment:
-                if self.code.startswith("(*", self.pos):
+                if self.source_text.startswith("(*", self.pos):
                     comment.append(self.pos)
                     self.pos += 2
-                elif self.code.startswith("*)", self.pos):
+                elif self.source_text.startswith("*)", self.pos):
                     comment.pop()
                     self.pos += 2
                 else:
                     self.pos += 1
-            elif self.code.startswith("(*", self.pos):
+            elif self.source_text.startswith("(*", self.pos):
                 comment.append(self.pos)
                 self.pos += 2
-            elif self.code[self.pos] in " \r\n\t":
+            elif self.source_text[self.pos] in " \r\n\t":
                 self.pos += 1
             else:
                 break
 
-    def _token_mode(self, match: re.Match, tag: str, mode: str) -> Token:
+    def _token_mode(self, pattern_match: re.Match, tag: str, mode: str) -> Token:
         """
-        Pick out the text in ``match``, convert that into a ``Token``, and
+        Pick out the text in ``pattern_match``, convert that into a ``Token``, and
         return that.
 
         Also switch token-scanning mode.
         """
-        text = match.group(0)
-        self.pos = match.end(0)
+        text = pattern_match.group(0)
+        self.pos = pattern_match.end(0)
         self._change_token_scanning_mode(mode)
-        return Token(tag, text, match.start(0))
+        return Token(tag, text, pattern_match.start(0))
 
-    def t_Filename(self, match: re.Match) -> Token:
+    def t_Filename(self, pattern_match: re.Match) -> Token:
         "Scan for ``Filename`` token and return that"
-        return self._token_mode(match, "Filename", "expr")
+        return self._token_mode(pattern_match, "Filename", "expr")
 
-    def t_Get(self, match: re.Match) -> Token:
-        "Scan for a ``Get`` token from ``match`` and return that token"
-        return self._token_mode(match, "Get", "filename")
+    def t_Get(self, pattern_match: re.Match) -> Token:
+        "Scan for a ``Get`` token from ``pattern_match`` and return that token"
+        return self._token_mode(pattern_match, "Get", "filename")
 
-    def t_Number(self, match: re.Match) -> Token:
-        "Break out from ``match`` the next token which is expected to be a Number"
-        text = match.group(0)
-        pos = match.end(0)
-        if self.code[pos - 1 : pos + 1] == "..":
+    def t_Number(self, pattern_match: re.Match) -> Token:
+        "Break out from ``pattern_match`` the next token which is expected to be a Number"
+        text = pattern_match.group(0)
+        pos = pattern_match.end(0)
+        if self.source_text[pos - 1 : pos + 1] == "..":
             # Trailing .. should be ignored. That is, `1..` is `Repeated[1]`.
             text = text[:-1]
             self.pos = pos - 1
         else:
             self.pos = pos
-        return Token("Number", text, match.start(0))
+        return Token("Number", text, pattern_match.start(0))
 
-    def t_Put(self, match: re.Match) -> Token:
+    def t_Put(self, pattern_match: re.Match) -> Token:
         "Scan for a ``Put`` token and return that"
-        return self._token_mode(match, "Put", "filename")
+        return self._token_mode(pattern_match, "Put", "filename")
 
-    def t_PutAppend(self, match: re.Match) -> Token:
+    def t_PutAppend(self, pattern_match: re.Match) -> Token:
         "Scan for a ``PutAppend`` token and return that"
-        return self._token_mode(match, "PutAppend", "filename")
+        return self._token_mode(pattern_match, "PutAppend", "filename")
 
-    def t_String(self, match: re.Match) -> Token:
-        "Break out from self.code the next token which is expected to be a String"
+    def t_RawBackslash(self, pattern_match: Optional[re.Match]) -> Token:
+        """Break out from ``pattern_match`` tokens which start with \\"""
+        source_text = self.source_text
+        start_pos = self.pos + 1
+        named_character = ""
+        if start_pos == len(source_text):
+            # We have reached end of the input line before seeing a termination
+            # of backslash. Fetch another line.
+            self.get_more_input()
+            self.pos += 1
+            source_text += self.source_text
+        try:
+            escape_str, self.pos = parse_escape_sequence(source_text, start_pos)
+            if source_text[start_pos] == "[" and source_text[self.pos - 1] == "]":
+                named_character = source_text[start_pos + 1 : self.pos - 1]
+        except EscapeSyntaxError as escape_error:
+            self.feeder.message(escape_error.name, escape_error.tag, *escape_error.args)
+            raise
+
+        # Is there a way to DRY with "next()?
+
+        if named_character != "":
+            if named_character in NO_MEANING_OPERATORS:
+                return Token(named_character, escape_str, start_pos - 1)
+
+        # Look for a pattern matching leading context \.
+
+        indices = self.token_indices.get(escape_str[0], ())
+        pattern_match = None
+        tag = "??invalid"
+        if indices:
+            for index in indices:
+                tag, pattern = self.tokens[index]
+                pattern_match = pattern.match(escape_str, 0)
+                if pattern_match is not None:
+                    break
+        else:
+            for tag, pattern in self.tokens:
+                pattern_match = pattern.match(escape_str, 0)
+                if pattern_match is not None:
+                    break
+
+        # No matching found.
+        if pattern_match is None:
+            tag, pre, post = self.sntx_message()
+            raise ScanError(tag, pre, post)
+
+        text = pattern_match.group(0)
+
+        # Is there a way to DRY with t_String?"
+        # See t_String for differences.
+
+        if tag == "Symbol":
+            # FIXME: DRY with code in next()
+            # We have to keep searching for the end of the Symbol
+            # after an escaped letterlike-symbol.  For example, \[Mu]
+            # is a valid Symbol. But we can also have symbols for
+            # \[Mu]\[Theta], \[Mu]1, \[Mu]1a, \[Mu]\.42, \[Mu]\061, or \[Mu]\061abc
+            while True:
+                if self.pos >= len(source_text):
+                    break
+
+                # Try to extend symbol with non-escaped alphanumeric
+                # (and letterlike) symbols.
+
+                # TODO: Do we need to add context breaks? And if so,
+                # do we need to check for consecutive ``'s?
+                alphanumeric_match = re.match(
+                    f"[0-9${symbol_first_letter}]+", source_text[self.pos :]
+                )
+                if alphanumeric_match is not None:
+                    extension_str = alphanumeric_match.group(0)
+                    text += extension_str
+                    self.pos += len(extension_str)
+
+                if source_text[self.pos] != "\\":
+                    break
+
+                try:
+                    escape_str, next_pos = parse_escape_sequence(
+                        self.source_text, self.pos + 1
+                    )
+                except EscapeSyntaxError as escape_error:
+                    if self.is_inside_box:
+                        # Follow-on symbol may be a escape character that can
+                        # appear only in box constructs, e.g. \%.
+                        break
+                    self.feeder.message(
+                        escape_error.name, escape_error.tag, escape_error.args
+                    )
+                    raise
+                if re.match(base_symbol_pattern, escape_str):
+                    text += escape_str
+                    self.pos = next_pos
+                else:
+                    break
+
+        return Token(tag, text, pattern_match.start(0))
+
+    def t_String(self, _: re.Match) -> Token:
+        """Break out from self.source_text the next token which is expected to be a String.
+        The string value of the returned token will have double quote (") in the first and last
+        postions of the returned string.
+        """
         start, end = self.pos, None
         self.pos += 1  # skip opening '"'
         newlines = []
+        source_text = self.source_text
+        result = ""
+
+        # The below similar to what we do in t_RawBackslash, but is is
+        # different.  First, we need to look for a closing quote
+        # ("). Also, after parsing escape sequences, we can
+        # unconditionallhy add them on to the string. That is, we
+        # don't have to check whether the returned string can be valid
+        # in a Symbol name.
+
         while True:
-            if self.pos >= len(self.code):
+            if self.pos >= len(source_text):
                 if end is None:
-                    # reached end while still inside string
-                    self.incomplete()
+                    # We have reached end of the input line before seeing a terminating
+                    # quote ("). Fetch another line.
+                    self.get_more_input()
                     newlines.append(self.pos)
+                    source_text = self.source_text
                 else:
                     break
-            char = self.code[self.pos]
+            char = source_text[self.pos]
             if char == '"':
                 self.pos += 1
                 end = self.pos
                 break
 
             if char == "\\":
-                self.pos += 2
+                if self.pos + 1 == len(source_text):
+                    # We have reached end of the input line before seeing a terminating
+                    # quote ("). Fetch another line.
+                    self.get_more_input()
+                self.pos += 1
+                try:
+                    escape_str, self.pos = parse_escape_sequence(source_text, self.pos)
+                except EscapeSyntaxError as escape_error:
+                    self.feeder.message(
+                        escape_error.name, escape_error.tag, *escape_error.args
+                    )
+                    raise
+
+                result += escape_str
             else:
+                result += self.source_text[self.pos]
                 self.pos += 1
 
-        indices = [start] + newlines + [end]
-        result = "".join(
-            self.code[indices[i] : indices[i + 1]] for i in range(len(indices) - 1)
-        )
-        return Token("String", result, start)
+        return Token("String", rf'"{result}"', start)
 
 
 # Call the function that initializes the dictionaries.
