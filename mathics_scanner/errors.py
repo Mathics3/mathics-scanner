@@ -22,7 +22,7 @@ class EscapeSyntaxError(TranslateErrorNew):
     pass
 
 
-class IncompleteSyntaxError(TranslateError):
+class IncompleteSyntaxError(TranslateErrorNew):
     """More characters were expected to form a valid token"""
 
     pass
