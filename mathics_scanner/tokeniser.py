@@ -625,7 +625,7 @@ class Tokeniser:
                         # appear only in box constructs, e.g. \%.
                         break
                     self.feeder.message(
-                        "Syntax", escape_error.tag, escape_error.args[0]
+                        escape_error.name, escape_error.tag, escape_error.args
                     )
                     raise
                 if escape_str in _letterlikes:
@@ -706,21 +706,29 @@ class Tokeniser:
         """Break out from ``pattern_match`` tokens which start with \\"""
         source_text = self.source_text
         start_pos = self.pos + 1
+        named_character = ""
         if start_pos == len(source_text):
-            # We have reached end of the input line before seeing a terminating
-            # quote ("). Fetch another line.
+            # We have reached end of the input line before seeing a termination
+            # of backslash. Fetch another line.
             self.get_more_input()
             self.pos += 1
             source_text += self.source_text
         try:
             escape_str, self.pos = parse_escape_sequence(source_text, start_pos)
-        except ScanError as scan_error:
-            self.feeder.message("Syntax", scan_error.tag, scan_error.args[0])
+            if source_text[start_pos] == "[" and source_text[self.pos - 1] == "]":
+                named_character = source_text[start_pos + 1 : self.pos - 1]
+        except EscapeSyntaxError as escape_error:
+            self.feeder.message(escape_error.name, escape_error.tag, escape_error.args)
             raise
 
         # Is there a way to DRY with "next()?"
 
-        # Look for a matching pattern.
+        if named_character != "":
+            if named_character in NO_MEANING_OPERATORS:
+                return Token(named_character, escape_str, start_pos - 1)
+
+        # Look for a pattern matching leading context \.
+
         indices = self.token_indices.get(escape_str[0], ())
         pattern_match = None
         tag = "??invalid"
@@ -736,7 +744,7 @@ class Tokeniser:
                 if pattern_match is not None:
                     break
 
-        # No matching pattern found.
+        # No matching found.
         if pattern_match is None:
             tag, pre, post = self.sntx_message()
             raise ScanError(tag, pre, post)
@@ -744,23 +752,44 @@ class Tokeniser:
         text = pattern_match.group(0)
 
         if tag == "Symbol":
-            # We have to keep searching for the end of the Symbol if
-            # the next symbol is a backslash, "\", because it might be a
-            # named-letterlike character such as \[Mu] or a escape representation of number or
-            # character.
-            # \[Mu]2 is a valid 2-character Symbol, and we can have things like
-            # \[Mu]\[Mu]def\[Mu]1.
-            while self.pos < len(source_text) and source_text[self.pos] == "\\":
+            # We have to keep searching for the end of the Symbol
+            # after an escaped letterlike-symbol.  For example, \[Mu]
+            # is a valid Symbol. But we can also have symbols for
+            # \[Mu]\[Theta], \[Mu]1, \[Mu]1a, \[Mu]\.42, \[Mu]\061, or \[Mu]\061abc
+            while True:
+                if self.pos >= len(source_text):
+                    break
+
+                # Try to extend symbol with non-escaped alphanumeric
+                # (and letterlike) symbols.
+
+                # TODO: Do we need to add context breaks? And if so,
+                # do we need to check for consecutive ``'s?
+                alphanumeric_match = re.match(
+                    f"[0-9${symbol_first_letter}]+", self.source_text[self.pos :]
+                )
+                if alphanumeric_match is not None:
+                    extension_str = alphanumeric_match.group(0)
+                    text += extension_str
+                    self.pos += len(extension_str)
+
+                if source_text[self.pos] != "\\":
+                    break
+
+                # Now try to extend symbol with *escaped* alphanumeric (and letterlike) symbols.
                 try:
                     escape_str, next_pos = parse_escape_sequence(
                         self.source_text, self.pos + 1
                     )
-                except ScanError as scan_error:
-                    self.feeder.message("Syntax", scan_error.tag, scan_error.args[0])
+                except EscapeSyntaxError as escape_error:
+                    self.feeder.message(
+                        escape_error.name, escape_error.tag, escape_error.args
+                    )
                     raise
-                if escape_str in _letterlikes + "0123456789":
+                if escape_str in _letterlikes + _letters + "0123456789$":
                     text += escape_str
                     self.pos = next_pos
+                    # Look to extend the symbol for further
                 else:
                     break
 
@@ -799,8 +828,10 @@ class Tokeniser:
                 self.pos += 1
                 try:
                     escape_str, self.pos = parse_escape_sequence(source_text, self.pos)
-                except EscapeSyntaxError as e:
-                    self.feeder.message(e.name, *e.args)
+                except EscapeSyntaxError as escape_error:
+                    self.feeder.message(
+                        escape_error.name, escape_error.tag, escape_error.args
+                    )
                     raise
 
                 result += escape_str
