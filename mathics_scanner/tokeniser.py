@@ -605,7 +605,13 @@ class Tokeniser:
         text = pattern_match.group(0)
         self.pos = pattern_match.end(0)
 
-        # FIXME: DRY with code in RawBackslash
+        # The below similar to what we do in t_RawBackslash, but is is
+        # different.  First, we need to look for a closing quote
+        # ("). Also, after parsing escape sequences, we can
+        # unconditionallhy add them on to the string. That is, we
+        # don't have to check whether the returned string can be valid
+        # in a Symbol name.
+
         if tag == "Symbol":
             # We have to keep searching for the end of the Symbol if
             # the next symbol is a backslash, "\", because it might be a
@@ -739,7 +745,7 @@ class Tokeniser:
             self.feeder.message(escape_error.name, escape_error.tag, *escape_error.args)
             raise
 
-        # Is there a way to DRY with "next()?"
+        # Is there a way to DRY with "next()?
 
         if named_character != "":
             if named_character in NO_MEANING_OPERATORS:
@@ -769,6 +775,9 @@ class Tokeniser:
 
         text = pattern_match.group(0)
 
+        # Is there a way to DRY with t_String?"
+        # See t_String for differences.
+
         if tag == "Symbol":
             # FIXME: DRY with code in next()
             # We have to keep searching for the end of the Symbol
@@ -785,7 +794,7 @@ class Tokeniser:
                 # TODO: Do we need to add context breaks? And if so,
                 # do we need to check for consecutive ``'s?
                 alphanumeric_match = re.match(
-                    f"[0-9${symbol_first_letter}]+", self.source_text[self.pos :]
+                    f"[0-9${symbol_first_letter}]+", source_text[self.pos :]
                 )
                 if alphanumeric_match is not None:
                     extension_str = alphanumeric_match.group(0)
@@ -808,7 +817,7 @@ class Tokeniser:
                         escape_error.name, escape_error.tag, escape_error.args
                     )
                     raise
-                if escape_str in _letterlikes + _letters + "0123456789$":
+                if re.match(base_symbol_pattern, escape_str):
                     text += escape_str
                     self.pos = next_pos
                 else:
@@ -826,8 +835,16 @@ class Tokeniser:
         newlines = []
         source_text = self.source_text
         result = ""
+
+        # The below similar to what we do in t_RawBackslash, but is is
+        # different.  First, we need to look for a closing quote
+        # ("). Also, after parsing escape sequences, we can
+        # unconditionallhy add them on to the string. That is, we
+        # don't have to check whether the returned string can be valid
+        # in a Symbol name.
+
         while True:
-            if self.pos >= len(self.source_text):
+            if self.pos >= len(source_text):
                 if end is None:
                     # We have reached end of the input line before seeing a terminating
                     # quote ("). Fetch another line.
