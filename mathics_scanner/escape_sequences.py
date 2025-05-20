@@ -131,9 +131,9 @@ def parse_escape_sequence(source_text: str, pos: int) -> Tuple[str, int]:
             result += "\b"
         elif c == "f":
             result += "\f"
-        elif c == "$":
+        elif c in '$"':
             # I don't know why \$ is defined, but it is!
-            result += r"\$"
+            result += rf"\{c}"
         else:
             assert c == "r"
             result += "\r"

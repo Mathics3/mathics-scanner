@@ -776,6 +776,7 @@ class Tokeniser:
             raise ScanError(tag, pre, post)
 
         text = pattern_match.group(0)
+        start_pos = pattern_match.start(0)
 
         # Is there a way to DRY with t_String?"
         # See t_String for differences.
@@ -819,13 +820,17 @@ class Tokeniser:
                         escape_error.name, escape_error.tag, escape_error.args
                     )
                     raise
-                if re.match(base_symbol_pattern, escape_str):
+                if re.match(interior_symbol_pattern, escape_str):
                     text += escape_str
                     self.pos = next_pos
                 else:
                     break
 
-        return Token(tag, text, pattern_match.start(0))
+        elif tag == "String":
+            self.feeder.message("Syntax", "sntxi", text)
+            raise IncompleteSyntaxError("Syntax", "sntxi", text)
+
+        return Token(tag, text, start_pos)
 
     def t_String(self, _: re.Match) -> Token:
         """Break out from self.source_text the next token which is expected to be a String.
