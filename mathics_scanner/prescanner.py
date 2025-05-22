@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+
+# Note: this module will be remove or rewritten drastically in the near future.
 """
 Module for "prescanning". Right now this just means replacing
 character escape sequences.
@@ -44,11 +46,14 @@ class Prescanner(object):
         """
         return self.feeder.feed()
 
-    def incomplete(self):
+    def get_more_input(self):
+        "Get another source-text line from input and continue."
+
         line: str = self.feed()
         if not line:
-            self.feeder.message("Syntax", "sntxi", self.input_line[self.pos :].rstrip())
-            raise IncompleteSyntaxError()
+            text = self.input_line[self.pos :].rstrip()
+            self.feeder.message("Syntax", "sntxi", text)
+            raise IncompleteSyntaxError("Syntax", "sntxi", text)
         self.input_line += line
 
     def replace_escape_sequences(self) -> str:
@@ -105,7 +110,7 @@ class Prescanner(object):
                 self.feeder.message(
                     "Syntax", "sntxb", self.input_line[self.pos :].rstrip("\n")
                 )
-                raise ScanError()
+                raise ScanError("Syntax", "sntxb")
 
             # Add text from prior line fragment as well
             # as the escape sequence, a character, from the escape sequence
@@ -127,7 +132,7 @@ class Prescanner(object):
             i = self.pos + start_shift
             while True:
                 if i == len(self.input_line):
-                    self.incomplete()
+                    self.get_more_input()
                 if self.input_line[i] == "]":
                     break
                 i += 1
@@ -162,7 +167,7 @@ class Prescanner(object):
             if self.input_line[self.pos] == "\\":
                 # Look for and handle an escape sequence.
                 if self.pos + 1 == len(self.input_line):
-                    self.incomplete()
+                    self.get_more_input()
                 c = self.input_line[self.pos + 1]
                 if c == "|":
                     try_parse_base(2, 8, 16)
@@ -179,7 +184,7 @@ class Prescanner(object):
                     try_parse_base(1, 4, 8)
                 elif c == "\n":
                     if self.pos + 2 == len(self.input_line):
-                        self.incomplete()
+                        self.get_more_input()
                     line_fragments.append(
                         self.input_line[self.fragment_start : self.pos]
                     )
