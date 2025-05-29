@@ -1,7 +1,13 @@
 # -*- coding: utf-8 -*-
 
 
-class TranslateErrorNew(Exception):
+class ScannerError(Exception):
+    """Some sort of error in the scanning or tokenization phase parsing Mathics3.
+
+    There are more specific kinds of exceptions subclassed from this
+    exception class.
+    """
+
     def __init__(self, tag: str, *args):
         super().__init__()
         self.name = "Syntax"
@@ -9,38 +15,25 @@ class TranslateErrorNew(Exception):
         self.args = args
 
 
-class TranslateError(Exception):
-    """
-    A generic class of tokenization errors. This exception is subclassed by other
-    tokenization errors
-    """
-
-
-class EscapeSyntaxError(TranslateErrorNew):
+class EscapeSyntaxError(ScannerError):
     """Escape sequence syntax error"""
 
     pass
 
 
-class IncompleteSyntaxError(TranslateErrorNew):
+class IncompleteSyntaxError(ScannerError):
     """More characters were expected to form a valid token"""
 
     pass
 
 
-class InvalidSyntaxError(TranslateErrorNew):
+class InvalidSyntaxError(ScannerError):
     """Invalid syntax"""
 
     pass
 
 
-class NamedCharacterSyntaxError(TranslateErrorNew):
+class NamedCharacterSyntaxError(EscapeSyntaxError):
     """Named character syntax error"""
-
-    pass
-
-
-class ScanError(TranslateErrorNew):
-    """A generic scanning error"""
 
     pass

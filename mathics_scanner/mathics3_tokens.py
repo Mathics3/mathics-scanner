@@ -10,7 +10,7 @@ import sys
 from mathics_scanner.errors import (
     EscapeSyntaxError,
     NamedCharacterSyntaxError,
-    ScanError,
+    ScannerError,
 )
 from mathics_scanner.feed import FileLineFeeder, LineFeeder, SingleLineFeeder
 from mathics_scanner.tokeniser import Tokeniser
@@ -162,25 +162,30 @@ def interactive_eval_loop(shell: TerminalShell, code_tokenize_format: bool):
         try:
             source_text = shell.feed()
             tokens(source_text, code_tokenize_format)
-        except ScanError:
-            shell.errmsg(
-                "Syntax",
-                "sntxi",
-                "Expression error",
-            )
-            pass
         except NamedCharacterSyntaxError:
             shell.errmsg(
                 "Syntax",
                 "sntufn",
                 "Unknown unicode longname",
             )
+        # This has to come after NamedCharacterSyntaxError
+        # since that is a subclass EscapeSyntaxError
         except EscapeSyntaxError:
             shell.errmsg(
                 "Syntax",
                 "sntufn",
                 "Unknown unicode longname",
             )
+        # This has to come after NamedCharacterSyntaxError and
+        # EscapeSyntaxError since those are subclasses of
+        # ScannerError
+        except ScannerError:
+            shell.errmsg(
+                "Syntax",
+                "sntxi",
+                "Expression error",
+            )
+            pass
         except KeyboardInterrupt:
             print("\nKeyboardInterrupt. Type Ctrl-D (EOF) to exit.")
         except EOFError:
@@ -199,7 +204,7 @@ def tokens(code, code_tokenize_format: bool):
     while True:
         try:
             token = tokeniser.next()
-        except ScanError as scan_error:
+        except ScannerError as scan_error:
             mess = ""
             if scan_error.tag == "sntoct1":
                 mess = r"3 octal digits are required after \ to construct an 8-bit character"

@@ -16,7 +16,7 @@ from mathics_scanner.errors import (
     IncompleteSyntaxError,
     InvalidSyntaxError,
     NamedCharacterSyntaxError,
-    ScanError,
+    ScannerError,
 )
 from mathics_scanner.escape_sequences import parse_escape_sequence
 
@@ -612,7 +612,7 @@ class Tokeniser:
         # No matching pattern found.
         if pattern_match is None:
             tag, pre_str, post_str = self.sntx_message()
-            raise ScanError(tag, pre_str, post_str)
+            raise ScannerError(tag, pre_str, post_str)
 
         # Look for custom tokenization rules; those are defined with t_tag.
         override = getattr(self, "t_" + tag, None)
@@ -790,7 +790,7 @@ class Tokeniser:
         # No matching found.
         if pattern_match is None:
             tag, pre, post = self.sntx_message()
-            raise ScanError(tag, pre, post)
+            raise ScannerError(tag, pre, post)
 
         text = pattern_match.group(0)
         start_pos = pattern_match.start(0)

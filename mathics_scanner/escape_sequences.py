@@ -8,7 +8,7 @@ from mathics_scanner.characters import named_characters
 from mathics_scanner.errors import (
     EscapeSyntaxError,
     NamedCharacterSyntaxError,
-    ScanError,
+    ScannerError,
 )
 
 
@@ -19,7 +19,7 @@ def parse_base(source_text: str, start_shift: int, end_shift: int, base: int) ->
 
     If so, chr(integer value converted from base) is returnd.
 
-    However, if the conversion fails, ScanError is raised.
+    However, if the conversion fails, ScannerError is raised.
     """
     last = end_shift - start_shift
     if last == 2:
@@ -33,14 +33,14 @@ def parse_base(source_text: str, start_shift: int, end_shift: int, base: int) ->
         raise ValueError()
 
     if end_shift > len(source_text):
-        raise ScanError("Syntax", tag)
+        raise ScannerError("Syntax", tag)
 
     assert start_shift <= end_shift
     text = source_text[start_shift:end_shift]
     try:
         result = int(text, base)
     except ValueError:
-        raise ScanError(tag, source_text[start_shift:].rstrip("\n"))
+        raise ScannerError(tag, source_text[start_shift:].rstrip("\n"))
 
     return chr(result)
 

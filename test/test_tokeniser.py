@@ -9,7 +9,11 @@ from typing import List
 
 import pytest
 
-from mathics_scanner.errors import IncompleteSyntaxError, InvalidSyntaxError, ScanError
+from mathics_scanner.errors import (
+    IncompleteSyntaxError,
+    InvalidSyntaxError,
+    ScannerError,
+)
 from mathics_scanner.feed import SingleLineFeeder
 from mathics_scanner.tokeniser import Token, Tokeniser, is_symbol_name
 
@@ -34,8 +38,8 @@ def invalid_error(error_message: str):
         tokens(error_message)
 
 
-def scan_error(error_message):
-    with pytest.raises(ScanError):
+def scanner_error(error_message):
+    with pytest.raises(ScannerError):
         tokens(error_message)
 
 
@@ -137,7 +141,7 @@ def test_is_symbol():
 
 
 def test_accuracy():
-    scan_error("1.5``")
+    scanner_error("1.5``")
     check_number("1.0``20")
     check_number("1.0``0")
     check_number("1.4``-20")
