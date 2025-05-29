@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import pytest
 
-from mathics_scanner.errors import NamedCharacterSyntaxError, ScannerError
+from mathics_scanner.errors import NamedCharacterSyntaxError, SyntaxError
 from mathics_scanner.escape_sequences import parse_escape_sequence
 
 
@@ -66,5 +66,5 @@ def test_invalid_number_encoding():
         ":A1g9",
         ":01-2",
     ):
-        with pytest.raises(ScannerError):
+        with pytest.raises(SyntaxError):
             parse_escape_sequence(text, 0)

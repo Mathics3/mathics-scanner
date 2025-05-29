@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
-class ScannerError(Exception):
+class SyntaxError(Exception):
     """Some sort of error in the scanning or tokenization phase parsing Mathics3.
 
     There are more specific kinds of exceptions subclassed from this
@@ -15,19 +15,19 @@ class ScannerError(Exception):
         self.args = args
 
 
-class EscapeSyntaxError(ScannerError):
+class EscapeSyntaxError(SyntaxError):
     """Escape sequence syntax error"""
 
     pass
 
 
-class IncompleteSyntaxError(ScannerError):
+class IncompleteSyntaxError(SyntaxError):
     """More characters were expected to form a valid token"""
 
     pass
 
 
-class InvalidSyntaxError(ScannerError):
+class InvalidSyntaxError(SyntaxError):
     """Invalid syntax"""
 
     pass

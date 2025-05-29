@@ -12,7 +12,7 @@ import pytest
 from mathics_scanner.errors import (
     IncompleteSyntaxError,
     InvalidSyntaxError,
-    ScannerError,
+    SyntaxError,
 )
 from mathics_scanner.feed import SingleLineFeeder
 from mathics_scanner.tokeniser import Token, Tokeniser, is_symbol_name
@@ -39,7 +39,7 @@ def invalid_error(error_message: str):
 
 
 def scanner_error(error_message):
-    with pytest.raises(ScannerError):
+    with pytest.raises(SyntaxError):
         tokens(error_message)
 
 

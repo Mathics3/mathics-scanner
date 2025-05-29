@@ -15,7 +15,7 @@ from mathics_scanner.characters import (
 from mathics_scanner.errors import (
     IncompleteSyntaxError,
     InvalidSyntaxError,
-    ScannerError,
+    SyntaxError,
 )
 from mathics_scanner.feed import (
     FileLineFeeder,
@@ -34,7 +34,7 @@ __all__ = [
     "InvalidSyntaxError",
     "LineFeeder",
     "MultiLineFeeder",
-    "ScannerError",
+    "SyntaxError",
     "SingleLineFeeder",
     # "Token",
     # "Tokeniser",

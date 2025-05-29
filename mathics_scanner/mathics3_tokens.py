@@ -10,7 +10,7 @@ import sys
 from mathics_scanner.errors import (
     EscapeSyntaxError,
     NamedCharacterSyntaxError,
-    ScannerError,
+    SyntaxError,
 )
 from mathics_scanner.feed import FileLineFeeder, LineFeeder, SingleLineFeeder
 from mathics_scanner.tokeniser import Tokeniser
@@ -178,8 +178,8 @@ def interactive_eval_loop(shell: TerminalShell, code_tokenize_format: bool):
             )
         # This has to come after NamedCharacterSyntaxError and
         # EscapeSyntaxError since those are subclasses of
-        # ScannerError
-        except ScannerError:
+        # SyntaxError
+        except SyntaxError:
             shell.errmsg(
                 "Syntax",
                 "sntxi",
@@ -204,7 +204,7 @@ def tokens(code, code_tokenize_format: bool):
     while True:
         try:
             token = tokeniser.next()
-        except ScannerError as scan_error:
+        except SyntaxError as scan_error:
             mess = ""
             if scan_error.tag == "sntoct1":
                 mess = r"3 octal digits are required after \ to construct an 8-bit character"
