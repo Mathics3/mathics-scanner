@@ -459,7 +459,9 @@ def is_symbol_name(text: str) -> bool:
 class Token:
     """A representation of a Wolfram-Language token.
 
-    Tokens are parsed by the parser; and are used to build M-expressions.
+    A Token is the next level of parsing abstraction above a raw input
+    Mathics input string. A sequence of tokens is the input for the
+    Mathics3 parser.
 
     A token has a `tag`, the class or type of the token. For example:
     a Number, Symbol, String, File, etc.
@@ -746,7 +748,7 @@ class Tokeniser:
         return self._token_mode(pattern_match, "PutAppend", "filename")
 
     def t_RawBackslash(self, pattern_match: Optional[re.Match]) -> Token:
-        """Break out from ``pattern_match`` tokens which start with \\"""
+        r"""Break out from ``pattern_match`` tokens which start with a backslash, '\'."""
         source_text = self.source_text
         start_pos = self.pos + 1
         named_character = ""
