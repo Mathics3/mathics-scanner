@@ -34,7 +34,7 @@ class InvalidSyntaxError(TranslateErrorNew):
     pass
 
 
-class NamedCharacterSyntaxError(TranslateError):
+class NamedCharacterSyntaxError(TranslateErrorNew):
     """Named character syntax error"""
 
     pass

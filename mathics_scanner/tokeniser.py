@@ -11,7 +11,13 @@ import string
 from typing import Dict, List, Optional, Tuple
 
 from mathics_scanner.characters import _letterlikes, _letters
-from mathics_scanner.errors import EscapeSyntaxError, IncompleteSyntaxError, ScanError
+from mathics_scanner.errors import (
+    EscapeSyntaxError,
+    IncompleteSyntaxError,
+    InvalidSyntaxError,
+    NamedCharacterSyntaxError,
+    ScanError,
+)
 from mathics_scanner.escape_sequences import parse_escape_sequence
 
 try:
@@ -553,19 +559,29 @@ class Tokeniser:
     def is_inside_box(self, value: bool) -> None:
         self._is_inside_box = value
 
-    def sntx_message(self, pos: Optional[int] = None) -> Tuple[str, str, str]:
+    def sntx_message(self, start_pos: Optional[int] = None) -> Tuple[str, int, int]:
+        """Send a "sntx{b,f} error message to the input-reading
+        feeder.
+
+        The tag ("sntxb" or "sntxf"), position of the error, and blank-stripped
+        position to the end line are returned.
         """
-        Send a "sntx{b,f} error message to the input-reading feeder.
-        """
-        if pos is None:
-            pos = self.pos
-        pre, post = self.source_text[:pos], self.source_text[pos:].rstrip("\n")
-        if pos == 0:
-            self.feeder.message("Syntax", "sntxb", pre, post)
-            return "sntxb", pre, post
+        if start_pos is None:
+            start_pos = self.pos
+        trailing_fragment = self.source_text[start_pos:].strip()
+        end_pos = start_pos + len(trailing_fragment)
+        if start_pos == 0:
+            self.feeder.message("Syntax", "sntxb", trailing_fragment)
+            tag = "sntxb"
         else:
-            self.feeder.message("Syntax", "sntxf", pre, post)
-            return "sntxf", pre, post
+            self.feeder.message(
+                "Syntax",
+                "sntxf",
+                self.source_text[:start_pos].strip(),
+                trailing_fragment,
+            )
+            tag = "syntx"
+        return tag, start_pos, end_pos
 
     # TODO: If this is converted this to __next__, then
     # a tokeniser object is iterable.
@@ -573,6 +589,7 @@ class Tokeniser:
         "Returns the next token from self.source_text."
         self._skip_blank()
         source_text = self.source_text
+
         if self.pos >= len(source_text):
             return Token("END", "", len(source_text))
 
@@ -645,7 +662,7 @@ class Tokeniser:
                     escape_str, next_pos = parse_escape_sequence(
                         self.source_text, self.pos + 1
                     )
-                except EscapeSyntaxError as escape_error:
+                except (EscapeSyntaxError, NamedCharacterSyntaxError) as escape_error:
                     if self.is_inside_box:
                         # Follow-on symbol may be a escape character that can
                         # appear only in box constructs, e.g. \%.
@@ -739,16 +756,16 @@ class Tokeniser:
             self.get_more_input()
             self.pos += 1
             source_text += self.source_text
+
         try:
             escape_str, self.pos = parse_escape_sequence(source_text, start_pos)
             if source_text[start_pos] == "[" and source_text[self.pos - 1] == "]":
                 named_character = source_text[start_pos + 1 : self.pos - 1]
-        except EscapeSyntaxError as escape_error:
+        except (EscapeSyntaxError, NamedCharacterSyntaxError) as escape_error:
             self.feeder.message(escape_error.name, escape_error.tag, *escape_error.args)
             raise
 
         # Is there a way to DRY with "next()?
-
         if named_character != "":
             if named_character in NO_MEANING_OPERATORS:
                 return Token(named_character, escape_str, start_pos - 1)
@@ -811,7 +828,7 @@ class Tokeniser:
                     escape_str, next_pos = parse_escape_sequence(
                         self.source_text, self.pos + 1
                     )
-                except EscapeSyntaxError as escape_error:
+                except (EscapeSyntaxError, NamedCharacterSyntaxError) as escape_error:
                     if self.is_inside_box:
                         # Follow-on symbol may be a escape character that can
                         # appear only in box constructs, e.g. \%.
@@ -828,16 +845,16 @@ class Tokeniser:
 
         elif tag == "String":
             self.feeder.message("Syntax", "sntxi", text)
-            raise IncompleteSyntaxError("Syntax", "sntxi", text)
+            raise InvalidSyntaxError("Syntax", "sntxi", text)
 
         return Token(tag, text, start_pos)
 
-    def t_String(self, _: re.Match) -> Token:
+    def t_String(self, _: Optional[re.Match]) -> Token:
         """Break out from self.source_text the next token which is expected to be a String.
         The string value of the returned token will have double quote (") in the first and last
         postions of the returned string.
         """
-        start, end = self.pos, None
+        end = None
         self.pos += 1  # skip opening '"'
         newlines = []
         source_text = self.source_text
@@ -846,7 +863,7 @@ class Tokeniser:
         # The below similar to what we do in t_RawBackslash, but is is
         # different.  First, we need to look for a closing quote
         # ("). Also, after parsing escape sequences, we can
-        # unconditionallhy add them on to the string. That is, we
+        # unconditionally add them on to the string. That is, we
         # don't have to check whether the returned string can be valid
         # in a Symbol name.
 
@@ -873,7 +890,7 @@ class Tokeniser:
                 self.pos += 1
                 try:
                     escape_str, self.pos = parse_escape_sequence(source_text, self.pos)
-                except EscapeSyntaxError as escape_error:
+                except (EscapeSyntaxError, NamedCharacterSyntaxError) as escape_error:
                     self.feeder.message(
                         escape_error.name, escape_error.tag, *escape_error.args
                     )
@@ -884,12 +901,10 @@ class Tokeniser:
                 result += self.source_text[self.pos]
                 self.pos += 1
 
-        indices = [start] + newlines + [end]
-        result = "".join(
-            self.source_text[indices[i] : indices[i + 1]]
-            for i in range(len(indices) - 1)
-        )
-        return Token("String", result, start)
+        # FIXME: rethink whether we really need quotes at the beginning and
+        # and of a string and redo. This will include revising whatever calls
+        # parser.unescape string().
+        return Token("String", f'"{result}"', self.pos)
 
 
 # Call the function that initializes the dictionaries.
