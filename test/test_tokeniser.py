@@ -10,6 +10,7 @@ from typing import List
 import pytest
 
 from mathics_scanner.errors import (
+    EscapeSyntaxError,
     IncompleteSyntaxError,
     InvalidSyntaxError,
     SyntaxError,
@@ -26,6 +27,11 @@ def check_number(source_code: str):
 def check_symbol(source_code: str):
     token = single_token(source_code)
     assert token, Token("Symbol", source_code, 0)
+
+
+def escape_syntax_error(error_message: str):
+    with pytest.raises(EscapeSyntaxError):
+        tokens(error_message)
 
 
 def incomplete_error(error_message: str):
@@ -94,12 +100,8 @@ def test_association():
     ]
 
 
-@pytest.mark.skip("Backslash needs to be hanndled outside of prescanner")
 def test_backslash():
-    assert tokens("\\[Backslash]") == [Token("Backslash", "\u2216", 0)]
-
-    assert tokens("\\ a") == [Token("RawBackslash", "\\", 0), Token("Symbol", "a", 2)]
-
+    assert tokens(r"\[Backslash]") == [Token("Backslash", "\u2216", 0)]
     incomplete_error("\\")
 
 
