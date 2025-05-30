@@ -11,6 +11,14 @@ def test_escape_sequences():
         ("\\\\", 0, 1, "\\", "backslash"),
         ("abc \\\\", 5, 6, "\\", "backslash at end"),
         ("abc \\\\n", 5, 6, "\\", "backslash in middle"),
+        (
+            r"\
+abc",
+            1,
+            2,
+            "\n",
+            "backslashed at end of line",
+        ),
         # Octal
         (r"050", 0, 3, chr(0o50), "character at beginning"),
         (r"a\051", 2, 5, chr(0o51), "Octal character in middle"),
