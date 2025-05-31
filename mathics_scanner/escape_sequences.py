@@ -57,7 +57,7 @@ def parse_named_character(source_text: str, start: int, finish: int) -> Optional
     e.g. "Theta".  If we can match this, then we return the unicode equivalent from the
     `named_characters` map (which is read in from JSON but stored in a YAML file).
 
-    If we can't find the named character, rasie NamedCharacterSyntaxError.
+    If we can't find the named character, raise NamedCharacterSyntaxError.
     """
     named_character = source_text[start:finish]
     if named_character.isalpha():

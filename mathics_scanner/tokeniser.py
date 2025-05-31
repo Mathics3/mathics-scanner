@@ -459,8 +459,8 @@ def is_symbol_name(text: str) -> bool:
 class Token:
     """A representation of a Wolfram-Language token.
 
-    A Token is the next level of parsing abstraction above a raw input
-    Mathics input string. A sequence of tokens is the input for the
+    A Token is the next level of parsing abstraction above a raw
+    Mathics3 input string. A sequence of tokens is the input for the
     Mathics3 parser.
 
     A token has a `tag`, the class or type of the token. For example:
@@ -469,8 +469,7 @@ class Token:
     The token's `text` is the string contents of the token.
 
     The token's `pos` is the integer starting offset where
-    `text` can be found inside the input string. The input string
-    is not part of the token though.
+    `text` can be found inside the full input string.
     """
 
     def __init__(self, tag: str, text: str, pos: int):
