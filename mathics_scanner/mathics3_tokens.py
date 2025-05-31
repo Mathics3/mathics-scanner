@@ -7,6 +7,11 @@ import os
 import re
 import sys
 
+from mathics_scanner.errors import (
+    EscapeSyntaxError,
+    NamedCharacterSyntaxError,
+    ScanError,
+)
 from mathics_scanner.feed import FileLineFeeder, LineFeeder, SingleLineFeeder
 from mathics_scanner.tokeniser import Tokeniser
 from mathics_scanner.version import __version__
@@ -73,6 +78,12 @@ class TerminalShell(LineFeeder):
 
     def empty(self):
         return False
+
+    def errmsg(self, symbol_name: str, error_tag: str, mess: str):
+        """
+        Print a tokenizer error message.
+        """
+        print(f"{symbol_name}::{error_tag}: {mess}")
 
     def feed(self):
         result = self.read_line(self.get_in_prompt()) + "\n"
@@ -149,9 +160,29 @@ def interactive_eval_loop(shell: TerminalShell, code_tokenize_format: bool):
     """
     while True:
         try:
-            tokens(shell.feed(), code_tokenize_format)
+            source_text = shell.feed()
+            tokens(source_text, code_tokenize_format)
+        except ScanError:
+            shell.errmsg(
+                "Syntax",
+                "sntxi",
+                "Expression error",
+            )
+            pass
+        except NamedCharacterSyntaxError:
+            shell.errmsg(
+                "Syntax",
+                "sntufn",
+                "Unknown unicode longname",
+            )
+        except EscapeSyntaxError:
+            shell.errmsg(
+                "Syntax",
+                "sntufn",
+                "Unknown unicode longname",
+            )
         except KeyboardInterrupt:
-            print("\nKeyboardInterrupt")
+            print("\nKeyboardInterrupt. Type Ctrl-D (EOF) to exit.")
         except EOFError:
             print("\n\nGoodbye!\n")
             break
@@ -166,7 +197,14 @@ def interactive_eval_loop(shell: TerminalShell, code_tokenize_format: bool):
 def tokens(code, code_tokenize_format: bool):
     tokeniser = Tokeniser(SingleLineFeeder(code))
     while True:
-        token = tokeniser.next()
+        try:
+            token = tokeniser.next()
+        except ScanError as scan_error:
+            mess = ""
+            if scan_error.tag == "sntoct1":
+                mess = r"3 octal digits are required after \ to construct an 8-bit character"
+            print(f"Syntax::{scan_error.tag}: {mess}")
+            raise
         if token.tag == "END":
             break
         elif code_tokenize_format:
