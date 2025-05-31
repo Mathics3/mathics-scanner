@@ -12,10 +12,19 @@ from mathics_scanner.feed import SingleLineFeeder
 from mathics_scanner.tokeniser import Token, Tokeniser
 
 
-def check_string(source_text, expected_text: str, message: Optional[str] = ""):
+def check_string(
+    source_text,
+    expected_text: str,
+    message: Optional[str] = "",
+    expected_tag: Optional[str] = None,
+):
     token = single_token(source_text)
     assert token is not None
-    assert token.tag == "String"
+
+    if expected_tag is None:
+        expected_tag = "String"
+    assert token.tag == expected_tag
+
     if message:
         assert token.text == expected_text, message
     else:
@@ -36,7 +45,7 @@ def escape_scan_error(s: str, failure_msg: str):
     assert excinfo, failure_msg
 
 
-def single_token(source_text) -> Token:
+def single_token(source_text: str) -> Token:
     tokens = get_tokens(source_text)
     assert len(tokens) == 1
     token = tokens[0]
@@ -56,23 +65,24 @@ def get_tokens(source_text: str):
 
 
 def test_string():
-    # # Number conversions for binary, octal, hexadecimal
-    # check_string(r'"\\c"', '"\\c"', "escaped backslash at beginning of string")
-    # check_string(r'"a\\b"', r'"a\b"', "escaped backslash")
-    # check_string(r'"\102"', '"B"', "Octal number test")
-    # check_string(r'"q\.b4"', '"q´"')
+    # Number conversions for binary, octal, hexadecimal
+    check_string(r'"a\\b"', r'"a\b"', "escaped backslash in a string")
+    check_string(r'"\102"', '"B"', "Octal number test in a string")
+    check_string(r'"q\.b4"', '"q´"', "2-digit hexadecimal number in a string")
 
-    # # All valid ASCII-like control escape sequences
-    # for escape_string in ("\b", "\f", "\n", "\r", "\t"):
-    #     check_string(f'"a{escape_string}"', f'"a{escape_string}"')
+    check_string(r'"\\c"', '"\\c"', "escaped backslash at beginning of string")
 
-    # check_string(r'"abc"', r'"abc"')
-    # check_string(r'"abc(*def*)"', r'"abc(*def*)"')
-    # # check_string(r'"a\"b\\c"', r'"a\\"b\c"')
-    # incomplete_error(r'"abc', "String does not have terminating quote")
-    # incomplete_error(r'"\"', "Unterminated escape sequence")
+    # All valid ASCII-like control escape sequences
+    for escape_string in ("\b", "\f", "\n", "\r", "\t"):
+        check_string(f'"a{escape_string}"', f'"a{escape_string}"')
+
+    check_string(r'"\ abc"', '" abc"', "Escaped space in a string is valid")
+    check_string(r'"abc(*def*)"', r'"abc(*def*)"')
+    # check_string(r'"a\"b\\c"', r'"a\\"b\c"')
+    incomplete_error(r'"abc', "String does not have terminating quote")
+    incomplete_error(r'"\"', "Unterminated escape sequence")
+
     escape_scan_error(r'"a\g"', "Unknown string escape \\g")
-
     escape_scan_error(r'"a\X"', '"X" is not a valid escape character')
 
 
@@ -84,13 +94,17 @@ def test_octal():
     check_string(r'"a\050"', r'"a("', "Octal '(' in string")
     check_string(r'"a\051"', r'"a)"', "Octal ')' in string")
     check_string(r'"a\052"', r'"a*"', "Octal '*' in string")
-    # FIXME: add tests ouside of string
 
 
 def test_hexadecimal_dot():
     check_string(r'"\.30"', '"0"', "2-digit hexadecimal ASCII number 0")
     check_string(r'"\.42"', '"B"', "2-digit hexadecimal ASCII capital B")
-    # FIXME: add tests ouside of string
+    check_string(
+        r"\.42\.30",
+        "B0",
+        "hexademimal encoding of identifier in expression context",
+        "Symbol",
+    )
 
 
 def test_hexadecimal_colon():
@@ -101,13 +115,17 @@ def test_hexadecimal_colon():
     )
     check_string(
         r'"\:03b8"',
-        '"\u03B8"',
+        '"\u03b8"',
         "4-digit hexadecimal number test with lowercase alpha lettter",
     )
     check_string(r'"\:0030"', '"0"')
-    # FIXME:
-    # check_string(r"\:03b8", "\u03B8", "4-digit hexadecimal number test with lowercase alpha lettter")
+    check_string(
+        r"\:03b8",
+        "\u03b8",
+        "4-digit hexadecimal number test with lowercase alpha letter",
+        "Symbol",
+    )
 
 
 def test_hexadecimal_vbar():
-    check_string(r'"\|01D451"', '"\U0001D451"')
+    check_string(r'"\|01D451"', '"\U0001d451"')

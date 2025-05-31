@@ -122,9 +122,11 @@ def parse_escape_sequence(source_text: str, pos: int) -> Tuple[str, int]:
     # Note that these are a similer to Python, but are different.
     # In particular, Python defines "\a" to be ^G (control G),
     # but in WMA, this is invalid.
-    elif c in "ntbfr$\n":
+    elif c in "ntbfr $\n":
         if c in "n\n":
             result += "\n"
+        elif c == " ":
+            result += " "
         elif c == "t":
             result += "\t"
         elif c == "b":
