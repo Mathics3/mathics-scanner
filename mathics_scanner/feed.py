@@ -130,14 +130,14 @@ class MultiLineFeeder(LineFeeder):
 class SingleLineFeeder(LineFeeder):
     "A feeder that feeds all the code as a single line."
 
-    def __init__(self, code: str, filename=""):
+    def __init__(self, source_text: str, filename=""):
         """
         :param code: The source of the feeder (a string).
         :param filename: A string that describes the source of the feeder, i.e.
                          the filename that is being feed.
         """
         super().__init__(filename)
-        self.code = code
+        self.source_text = source_text
         self._empty = False
 
     def feed(self) -> str:
@@ -145,7 +145,7 @@ class SingleLineFeeder(LineFeeder):
             return ""
         self._empty = True
         self.lineno += 1
-        return self.code
+        return self.source_text
 
     def empty(self) -> bool:
         return self._empty

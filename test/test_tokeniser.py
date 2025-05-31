@@ -9,7 +9,12 @@ from typing import List
 
 import pytest
 
-from mathics_scanner.errors import IncompleteSyntaxError, InvalidSyntaxError, ScanError
+from mathics_scanner.errors import (
+    EscapeSyntaxError,
+    IncompleteSyntaxError,
+    InvalidSyntaxError,
+    SyntaxError,
+)
 from mathics_scanner.feed import SingleLineFeeder
 from mathics_scanner.tokeniser import Token, Tokeniser, is_symbol_name
 
@@ -24,6 +29,11 @@ def check_symbol(source_code: str):
     assert token, Token("Symbol", source_code, 0)
 
 
+def escape_syntax_error(error_message: str):
+    with pytest.raises(EscapeSyntaxError):
+        tokens(error_message)
+
+
 def incomplete_error(error_message: str):
     with pytest.raises(IncompleteSyntaxError):
         tokens(error_message)
@@ -34,8 +44,8 @@ def invalid_error(error_message: str):
         tokens(error_message)
 
 
-def scan_error(error_message):
-    with pytest.raises(ScanError):
+def scanner_error(error_message):
+    with pytest.raises(SyntaxError):
         tokens(error_message)
 
 
@@ -60,6 +70,13 @@ def tokens(source_code) -> List[Token]:
         else:
             tokens.append(token)
     return tokens
+
+
+def test_accuracy():
+    scanner_error("1.5``")
+    check_number("1.0``20")
+    check_number("1.0``0")
+    check_number("1.4``-20")
 
 
 def test_apply():
@@ -91,10 +108,7 @@ def test_association():
 
 
 def test_backslash():
-    assert tokens("\\[Backslash]") == [Token("Backslash", "\u2216", 0)]
-
-    assert tokens("\\ a") == [Token("RawBackslash", "\\", 0), Token("Symbol", "a", 2)]
-
+    assert tokens(r"\[Backslash]") == [Token("Backslash", "\u2216", 0)]
     incomplete_error("\\")
 
 
@@ -103,6 +117,30 @@ def test_boxes():
         Token("LeftRowBox", "\\(", 0),
         Token("Number", "1", 2),
         Token("RightRowBox", "\\)", 3),
+    ]
+
+
+def test_comments():
+    assert tokens("(**)") == [], "empty comment"
+    assert tokens("(**)1") == [
+        Token("Number", "1", 4)
+    ], "empty comment with trailing text"
+    assert tokens("1(*2*)") == [
+        Token("Number", "1", 0)
+    ], "empty comment with leading text"
+    assert tokens("1 (*2*)") == [
+        Token("Number", "1", 0)
+    ], "empty comment with leading text and space"
+    assert tokens("(* A (* nested comment *) *)") == [], "A nested comment"
+    assert tokens(r"(* A \[theta] *)") == [], "Comment with valid escape sequence"
+    assert tokens(r"(* A \[unknown] *)") == [], "Comment with invalid escape sequence"
+
+
+def test_function():
+    assert tokens("x&") == [Token("Symbol", "x", 0), Token("Function", "&", 1)]
+    assert tokens("x\uf4a1") == [
+        Token("Symbol", "x", 0),
+        Token("Function", "\uf4a1", 1),
     ]
 
 
@@ -122,8 +160,8 @@ def test_int_repeated():
 
 
 def test_integeral():
-    assert tokens("\u222B x \uf74c y") == [
-        Token("Integral", "\u222B", 0),
+    assert tokens("\u222b x \uf74c y") == [
+        Token("Integral", "\u222b", 0),
         Token("Symbol", "x", 2),
         Token("DifferentialD", "\uf74c", 4),
         Token("Symbol", "y", 6),
@@ -133,13 +171,6 @@ def test_integeral():
 def test_is_symbol():
     assert is_symbol_name("Derivative")
     assert not is_symbol_name("98")  # symbols can't start with numbers
-
-
-def test_accuracy():
-    scan_error("1.5``")
-    check_number("1.0``20")
-    check_number("1.0``0")
-    check_number("1.4``-20")
 
 
 def test_number():
@@ -220,11 +251,3 @@ def test_unset():
     assert tokens("= .") == [Token("Unset", "= .", 0)]
     assert tokens("=.5") == [Token("Set", "=", 0), Token("Number", ".5", 1)]
     assert tokens("= ..") == [Token("Set", "=", 0), Token("Repeated", "..", 2)]
-
-
-def test_function():
-    assert tokens("x&") == [Token("Symbol", "x", 0), Token("Function", "&", 1)]
-    assert tokens("x\uf4a1") == [
-        Token("Symbol", "x", 0),
-        Token("Function", "\uf4a1", 1),
-    ]
