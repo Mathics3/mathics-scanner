@@ -65,6 +65,10 @@ def get_tokens(source_text: str):
 
 
 def test_string():
+    # Plain strings
+    check_string('""', '""', "Null string")
+    check_string('"abc"', '"abc"', "Simple sequence")
+
     # Number conversions for binary, octal, hexadecimal
     check_string(r'"a\\b"', r'"a\b"', "escaped backslash in a string")
     check_string(r'"\102"', '"B"', "Octal number test in a string")

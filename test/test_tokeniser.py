@@ -72,6 +72,13 @@ def tokens(source_code) -> List[Token]:
     return tokens
 
 
+def test_accuracy():
+    scanner_error("1.5``")
+    check_number("1.0``20")
+    check_number("1.0``0")
+    check_number("1.4``-20")
+
+
 def test_apply():
     assert tokens("f // x") == [
         Token("Symbol", "f", 0),
@@ -113,6 +120,30 @@ def test_boxes():
     ]
 
 
+def test_comments():
+    assert tokens("(**)") == [], "empty comment"
+    assert tokens("(**)1") == [
+        Token("Number", "1", 4)
+    ], "empty comment with trailing text"
+    assert tokens("1(*2*)") == [
+        Token("Number", "1", 0)
+    ], "empty comment with leading text"
+    assert tokens("1 (*2*)") == [
+        Token("Number", "1", 0)
+    ], "empty comment with leading text and space"
+    assert tokens("(* A (* nested comment *) *)") == [], "A nested comment"
+    assert tokens(r"(* A \[theta] *)") == [], "Comment with valid escape sequence"
+    assert tokens(r"(* A \[unknown] *)") == [], "Comment with invalid escape sequence"
+
+
+def test_function():
+    assert tokens("x&") == [Token("Symbol", "x", 0), Token("Function", "&", 1)]
+    assert tokens("x\uf4a1") == [
+        Token("Symbol", "x", 0),
+        Token("Function", "\uf4a1", 1),
+    ]
+
+
 def test_information():
     assert tokens("??Sin") == [Token("Information", "??", 0), Token("Symbol", "Sin", 2)]
 
@@ -129,8 +160,8 @@ def test_int_repeated():
 
 
 def test_integeral():
-    assert tokens("\u222B x \uf74c y") == [
-        Token("Integral", "\u222B", 0),
+    assert tokens("\u222b x \uf74c y") == [
+        Token("Integral", "\u222b", 0),
         Token("Symbol", "x", 2),
         Token("DifferentialD", "\uf74c", 4),
         Token("Symbol", "y", 6),
@@ -140,13 +171,6 @@ def test_integeral():
 def test_is_symbol():
     assert is_symbol_name("Derivative")
     assert not is_symbol_name("98")  # symbols can't start with numbers
-
-
-def test_accuracy():
-    scanner_error("1.5``")
-    check_number("1.0``20")
-    check_number("1.0``0")
-    check_number("1.4``-20")
 
 
 def test_number():
@@ -227,11 +251,3 @@ def test_unset():
     assert tokens("= .") == [Token("Unset", "= .", 0)]
     assert tokens("=.5") == [Token("Set", "=", 0), Token("Number", ".5", 1)]
     assert tokens("= ..") == [Token("Set", "=", 0), Token("Repeated", "..", 2)]
-
-
-def test_function():
-    assert tokens("x&") == [Token("Symbol", "x", 0), Token("Function", "&", 1)]
-    assert tokens("x\uf4a1") == [
-        Token("Symbol", "x", 0),
-        Token("Function", "\uf4a1", 1),
-    ]
