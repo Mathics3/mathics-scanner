@@ -8,7 +8,7 @@ See classes `Token` and `Tokeniser` .
 import os.path as osp
 import re
 import string
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional, Set, Tuple
 
 from mathics_scanner.characters import _letterlikes, _letters
 from mathics_scanner.errors import (
@@ -25,17 +25,38 @@ try:
 except ImportError:
     import json as ujson  # type: ignore[no-redef]
 
-
-OPERATOR_DATA = {}
+# Where we get operator data...
 ROOT_DIR = osp.dirname(__file__)
 OPERATORS_TABLE_PATH = osp.join(ROOT_DIR, "data", "operators.json")
+
+##############################################
+# The below get initialized in by init_module()
+# from operator data
+##############################################
+OPERATOR_DATA = {}
 NO_MEANING_OPERATORS = {}
+
+# String of the final character of a "box-operators" value,
+# This is used in t_String for escape-sequence handling.
+BOXING_CONSTRUCT_SUFFIXES: Set[str] = {
+    "%",
+    "/",
+    "@",
+    "+",
+    "_",
+    "&",
+    "!",
+    "^",
+    "`",
+    "(",
+    ")",
+}
 
 FILENAME_TOKENS: List = []
 TOKENS: List[Tuple] = []
 TOKEN_INDICES: Dict = {}
 
-
+##############################################
 # special patterns
 NUMBER_PATTERN = r"""
 ( (?# Two possible forms depending on whether base is specified)
@@ -62,7 +83,7 @@ NUMBER_PATTERN = r"""
 #
 # This could still be done, but it would need to be integrated more
 # properly into the tokenization phase which takes into account
-# differents states or "modes" indicating the interior of comments,
+# different states or "modes" indicating the interior of comments,
 # strings, files, and Box-like constructs.
 
 # The leading character of a Symbol:
@@ -171,6 +192,12 @@ def init_module():
 
     with open(osp.join(OPERATORS_TABLE_PATH), "r", encoding="utf8") as operator_f:
         OPERATOR_DATA.update(ujson.load(operator_f))
+
+    global BOXING_CONSTRUCT_SUFFIXES
+
+    BOXING_CONSTRUCT_SUFFIXES = set(
+        [op_str[-1] for op_str in OPERATOR_DATA["box-operators"].values()]
+    ) | set([")", "("])
 
     global NO_MEANING_OPERATORS
     NO_MEANING_OPERATORS = (
@@ -853,7 +880,7 @@ class Tokeniser:
     def t_String(self, _: Optional[re.Match]) -> Token:
         """Break out from self.source_text the next token which is expected to be a String.
         The string value of the returned token will have double quote (") in the first and last
-        postions of the returned string.
+        positions of the returned string.
         """
         end = None
         self.pos += 1  # skip opening '"'
@@ -866,7 +893,7 @@ class Tokeniser:
         # ("). Also, after parsing escape sequences, we can
         # unconditionally add them on to the string. That is, we
         # don't have to check whether the returned string can be valid
-        # in a Symbol name.
+        # in a Symbol name or as a boxing construct
 
         while True:
             if self.pos >= len(source_text):
@@ -898,12 +925,24 @@ class Tokeniser:
                     raise
 
                 # This has to come after NamedCharacterSyntaxError since
-                # that is a subclass of this
-                except EscapeSyntaxError:
-                    # If there is an invalid escape character inside a string,
-                    # we preserve what was given.
-                    result += "\\" + self.source_text[self.pos]
-                    self.pos += 1
+                # that is a subclass of this.
+                except EscapeSyntaxError as escape_error:
+                    escaped_char = self.source_text[self.pos]
+                    if escaped_char in BOXING_CONSTRUCT_SUFFIXES:
+                        # If there is boxing construct matched, we
+                        # preserve what was given, but do not tokenize
+                        # the construct. "\(" remains "\(" and is not
+                        # turned into IntepretBox".
+                        result += "\\" + escaped_char
+                        self.pos += 1
+                    else:
+                        # Not something that can be a boxing construct.
+                        # So here, we'll report an error as we do with
+                        # NamedCharacterSyntaxError.
+                        self.feeder.message(
+                            escape_error.name, escape_error.tag, *escape_error.args
+                        )
+                        raise
 
                 else:
                     result += escape_str

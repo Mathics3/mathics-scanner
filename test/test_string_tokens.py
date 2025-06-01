@@ -92,8 +92,8 @@ def test_string():
     incomplete_error(r'"abc', "String does not have terminating quote")
     incomplete_error(r'"\"', "Unterminated escape sequence")
 
-    # escape_scan_error(r'"a\g"', "Unknown string escape \\g")
-    # escape_scan_error(r'"a\X"', '"X" is not a valid escape character')
+    escape_scan_error(r'"a\g"', "Unknown string escape \\g")
+    escape_scan_error(r'"a\X"', '"X" is not a valid escape character')
 
 
 # https://www.wolfram.com/language/12/networking-and-system-operations/use-the-full-range-of-unicode-characters.html
