@@ -68,7 +68,7 @@
 #               the named character. If it is the same as unicode-equivalent
 #               it should be omitted
 #
-#   wl-unicode-name: The name of the character corresponding to `wl-unicode`, if it exists. If it is the same as unicode-equivalent-name it can be omitted.
+#   wl-unicode-name: The name of the character corresponding to `wl-unicode`, if it exists.
 #                    It will mentioned in Wolfram Language docs if it exists.
 #
 # Sources:
@@ -6627,6 +6627,16 @@ LightBulb:
   is-letter-like: true
   wl-reference: https://reference.wolfram.com/language/ref/character/LightBulb.html
   wl-unicode: "\uF723"
+
+LineSeparator:
+  has-unicode-inverse: false
+  is-letter-like: false
+  unicode-equivalent: "\u2028"
+  unicode-equivalent-name: LINE SEPARATOR
+  unicode-reference: https://www.compart.com/en/unicode/U+2028
+  wl-reference: https://reference.wolfram.com/language/ref/character/LineSeparator.html
+  wl-unicode: "\u2028"
+  wl-unicode-name: LINE SEPARATOR
 
 LongDash:
   esc-alias: --

@@ -5,6 +5,7 @@ This module reads input lines and breaks the lines into tokens.
 See classes `Token` and `Tokeniser` .
 """
 
+import itertools
 import os.path as osp
 import re
 import string
@@ -38,6 +39,8 @@ NO_MEANING_OPERATORS = {}
 
 # String of the final character of a "box-operators" value,
 # This is used in t_String for escape-sequence handling.
+# The below is roughly correct, but we overwrite this
+# from operators.json data in init_module()
 BOXING_CONSTRUCT_SUFFIXES: Set[str] = {
     "%",
     "/",
@@ -48,6 +51,7 @@ BOXING_CONSTRUCT_SUFFIXES: Set[str] = {
     "!",
     "^",
     "`",
+    "*",
     "(",
     ")",
 }
@@ -196,8 +200,13 @@ def init_module():
     global BOXING_CONSTRUCT_SUFFIXES
 
     BOXING_CONSTRUCT_SUFFIXES = set(
-        [op_str[-1] for op_str in OPERATOR_DATA["box-operators"].values()]
-    ) | set([")", "("])
+        [
+            op_str[-1]
+            for op_str in itertools.chain.from_iterable(
+                OPERATOR_DATA["box-operators"].values()
+            )
+        ]
+    ) | set(["*", ")", "("])
 
     global NO_MEANING_OPERATORS
     NO_MEANING_OPERATORS = (
