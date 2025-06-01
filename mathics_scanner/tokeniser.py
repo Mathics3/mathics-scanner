@@ -891,13 +891,22 @@ class Tokeniser:
                 self.pos += 1
                 try:
                     escape_str, self.pos = parse_escape_sequence(source_text, self.pos)
-                except (EscapeSyntaxError, NamedCharacterSyntaxError) as escape_error:
+                except NamedCharacterSyntaxError as escape_error:
                     self.feeder.message(
                         escape_error.name, escape_error.tag, *escape_error.args
                     )
                     raise
 
-                result += escape_str
+                # This has to come after NamedCharacterSyntaxError since
+                # that is a subclass of this
+                except EscapeSyntaxError:
+                    # If there is an invalid escape character inside a string,
+                    # we preserve what was given.
+                    result += "\\" + self.source_text[self.pos]
+                    self.pos += 1
+
+                else:
+                    result += escape_str
             else:
                 result += self.source_text[self.pos]
                 self.pos += 1
