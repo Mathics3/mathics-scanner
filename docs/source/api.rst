@@ -10,7 +10,7 @@ Tokenization
 
 Tokenization is performed by the ``Tokeniser`` class. The ``next`` method
 consumes characters from a feeder and returns a token if the tokenization
-succeeds. If the tokenization fails an instance of ``TranslateError`` is
+succeeds. If the tokenization fails an instance of ``SyntaxError`` is
 raised.
 
 .. autoclass:: Tokeniser(object)
