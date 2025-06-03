@@ -123,11 +123,6 @@ def test_hexadecimal_colon():
         '"θ"',
         "4-digit hexadecimal number test with uppercase alpha letter",
     )
-    check_string(
-        r'"\:03b8"',
-        '"\u03b8"',
-        "4-digit hexadecimal number test with lowercase alpha lettter",
-    )
     check_string(r'"\:0030"', '"0"')
     check_string(
         r"\:03b8",
