@@ -7,6 +7,8 @@ methods for returning one line code at a time.
 from abc import ABCMeta, abstractmethod
 from typing import Callable, List, Optional
 
+from mathics_scanner.location import MATHICS3_PATHS, ContainerKind, SourceTextLocations
+
 
 class LineFeeder(metaclass=ABCMeta):
     """An abstract representation for reading lines of characters, a
@@ -15,10 +17,11 @@ class LineFeeder(metaclass=ABCMeta):
     as well to store messages regarding tokenization errors.
     """
 
-    def __init__(self, filename: str):
+    def __init__(self, container, container_kind=ContainerKind.UNKNOWN):
         """
-        :param filename: A string that describes the source of the feeder, i.e.
-                         the filename that is being feed.
+        :param container_name: A string that describes the source of
+          the feeder, i.e. the file path that is being feed, or the
+          Python source code path, or an open terminal shell stream.
         """
 
         # A message is a list that starts out with a "symbol_name", like "Part",
@@ -26,8 +29,19 @@ class LineFeeder(metaclass=ABCMeta):
         # creating a message in list of messages.
         self.messages: List[list] = []
 
-        self.lineno = 0
-        self.filename = filename
+        self.lineno: int = 0
+        self.container = container
+        self.container_kind = container_kind
+        self.source_text: Optional[str] = None
+        self.container_index = 0
+        self.source_positions = SourceTextLocations()
+
+        if container_kind == ContainerKind.FILE:
+            if container in MATHICS3_PATHS:
+                self.container_index = MATHICS3_PATHS.index(container)
+            else:
+                self.container_index = len(MATHICS3_PATHS)
+                MATHICS3_PATHS.append(container)
 
     @abstractmethod
     def feed(self) -> str:
@@ -88,7 +102,7 @@ class LineFeeder(metaclass=ABCMeta):
             else:
                 message.append('""')
         message.append(str(self.lineno))
-        message.append(f'"{self.filename}"')
+        message.append(f'"{self.container}"')
         assert len(message) == 7
         return message
 
@@ -102,18 +116,20 @@ class LineFeeder(metaclass=ABCMeta):
 class MultiLineFeeder(LineFeeder):
     "A feeder that feeds one line at a time."
 
-    def __init__(self, lines, filename=""):
+    def __init__(self, lines, container, container_kind=ContainerKind.UNKNOWN):
         """
         :param lines: The source of the feeder (a string).
-        :param filename: A string that describes the source of the feeder, i.e.
-                         the filename that is being feed.
+        :param container_name: A string that describes the source of the feeder,
+          i.e. the file path that is being feed.
         """
-        super(MultiLineFeeder, self).__init__(filename)
+        super(MultiLineFeeder, self).__init__(container, container_kind)
         self.lineno = 0
         if isinstance(lines, str):
             self.lines = lines.splitlines(True)
         else:
             self.lines = lines
+
+        # self.source_positions.containers.append(container)
 
     def feed(self) -> str:
         if self.lineno < len(self.lines):
@@ -130,13 +146,13 @@ class MultiLineFeeder(LineFeeder):
 class SingleLineFeeder(LineFeeder):
     "A feeder that feeds all the code as a single line."
 
-    def __init__(self, source_text: str, filename=""):
+    def __init__(self, source_text, container, container_kind=ContainerKind.UNKNOWN):
         """
-        :param code: The source of the feeder (a string).
+        :param source_text: The source of the feeder (a string).
         :param filename: A string that describes the source of the feeder, i.e.
                          the filename that is being feed.
         """
-        super().__init__(filename)
+        super().__init__(container, container_kind)
         self.source_text = source_text
         self._empty = False
 
@@ -160,16 +176,19 @@ class FileLineFeeder(LineFeeder):
         :param filename: A string that describes the source of the feeder,
                            i.e.  the filename that is being feed.
         """
-        super().__init__(fileobject.name)
+        super().__init__(fileobject.name, container_kind=ContainerKind.FILE)
         self.fileobject = fileobject
         self.lineno = 0
         self.eof = False
         self.trace_fn = trace_fn
+        self.source_text = ""
 
     def feed(self) -> str:
         result = self.fileobject.readline()
+        self.source_text += result
         while result == "\n":
             result = self.fileobject.readline()
+            self.source_text += result
             self.lineno += 1
             if self.trace_fn:
                 self.trace_fn(self.lineno, result)
