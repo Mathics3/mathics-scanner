@@ -124,6 +124,7 @@ class MultiLineFeeder(LineFeeder):
         """
         super(MultiLineFeeder, self).__init__(container, container_kind)
         self.lineno = 0
+
         if isinstance(lines, str):
             self.lines = lines.splitlines(True)
         else:
@@ -146,7 +147,9 @@ class MultiLineFeeder(LineFeeder):
 class SingleLineFeeder(LineFeeder):
     "A feeder that feeds all the code as a single line."
 
-    def __init__(self, source_text, container, container_kind=ContainerKind.UNKNOWN):
+    def __init__(
+        self, source_text: str, container, container_kind=ContainerKind.UNKNOWN
+    ):
         """
         :param source_text: The source of the feeder (a string).
         :param filename: A string that describes the source of the feeder, i.e.
@@ -188,8 +191,9 @@ class FileLineFeeder(LineFeeder):
         self.source_text += result
         while result == "\n":
             result = self.fileobject.readline()
-            self.source_text += result
             self.lineno += 1
+            self.source_text += result
+
             if self.trace_fn:
                 self.trace_fn(self.lineno, result)
         if result:

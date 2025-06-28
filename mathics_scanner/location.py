@@ -17,8 +17,11 @@ class Container(NamedTuple):
 
 
 class SourceRange(NamedTuple):
-    start: int  # starting offset in bytes
-    end: int  # offset
+    # All values are 0 origin. (0 is the frist number used).
+    start_line: int
+    start_pos: int
+    end_line: int
+    end_pos: int
     container: int
 
 
@@ -29,7 +32,7 @@ class SourceTextLocations(NamedTuple):
     positions: List[Union[SourceRange, MethodType]] = []
 
 
-# True if we want to keep track of positiosn as we scan an parse.
+# True if we want to keep track of positions as we scan an parse.
 # This can be useful in debugging. It can also add a lot memory in
 # saving position information.
 TRACK_LOCATIONS: bool = True
@@ -39,3 +42,16 @@ TRACK_LOCATIONS: bool = True
 # For example:
 #   ["mathics/autoload/rules/Bessel.m", "mathics/autoload/rules/Element.m", ... ]
 MATHICS3_PATHS: List[str] = []
+
+
+def get_location(loc: Union[SourceRange, MethodType]) -> str:
+    """
+    Given Location ``loc`` return a string representation of that
+    """
+    if isinstance(loc, MethodType):
+        func = loc.__func__
+        doc = func.__doc__
+        code = func.__code__
+        return f"{doc} in file {code.co_filename} around line {code.co_firstlineno}"
+
+    return "???"
