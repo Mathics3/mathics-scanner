@@ -9,6 +9,7 @@ import pytest
 
 from mathics_scanner.errors import EscapeSyntaxError, IncompleteSyntaxError
 from mathics_scanner.feed import SingleLineFeeder
+from mathics_scanner.location import ContainerKind
 from mathics_scanner.tokeniser import Token, Tokeniser
 
 
@@ -53,7 +54,9 @@ def single_token(source_text: str) -> Token:
 
 
 def get_tokens(source_text: str):
-    tokeniser = Tokeniser(SingleLineFeeder(source_text))
+    tokeniser = Tokeniser(
+        SingleLineFeeder(source_text, "<get_tokens>", ContainerKind.STRING)
+    )
     tokens = []
     while True:
         token = tokeniser.next()

@@ -2,12 +2,13 @@
 
 import tempfile
 
-from mathics_scanner.feed import SingleLineFeeder, MultiLineFeeder, FileLineFeeder
+from mathics_scanner.feed import FileLineFeeder, MultiLineFeeder, SingleLineFeeder
+from mathics_scanner.location import ContainerKind
 
 
 def test_multi():
     """Test MultiLineFeeder class"""
-    feeder = MultiLineFeeder("abc\ndef")
+    feeder = MultiLineFeeder("abc\ndef", "<test_multi>", ContainerKind.STRING)
     feeder.feed() == "abc\n", "MultiLineFeeder reads first line"
     feeder.feed() == "def", "reads second line"
     feeder.feed() == "", "Returns '' when no more lines"
@@ -16,7 +17,7 @@ def test_multi():
 
 def test_single():
     """Test SingleLineFeeder class"""
-    feeder = SingleLineFeeder("abc\ndef")
+    feeder = SingleLineFeeder("abc\ndef", "<test_single>", ContainerKind.STRING)
     assert feeder.feed() == "abc\ndef", "SingleLineFeeder returns multiple lines"
     assert feeder.empty(), "SingleLineFeeder detects feeder empty condition"
     assert feeder.feed() == ""

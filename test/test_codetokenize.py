@@ -6,11 +6,14 @@ Tests translation from strings to sequences of tokens in CodeTokenize format.
 from typing import List
 
 from mathics_scanner.feed import SingleLineFeeder
+from mathics_scanner.location import ContainerKind
 from mathics_scanner.tokeniser import Token, Tokeniser
 
 
-def tokens(code: str) -> List[Token]:
-    tokeniser = Tokeniser(SingleLineFeeder(code))
+def tokens(source_text: str) -> List[Token]:
+    tokeniser = Tokeniser(
+        SingleLineFeeder(source_text, "<tokens>", ContainerKind.STRING)
+    )
     tokens = []
     while True:
         token = tokeniser.next()
