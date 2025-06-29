@@ -44,6 +44,7 @@ TRACK_LOCATIONS: bool = True
 MATHICS3_PATHS: List[str] = []
 
 
+# FIXME: this isn't fully formed yet.
 def get_location(loc: Union[SourceRange, MethodType]) -> str:
     """
     Given Location ``loc`` return a string representation of that
@@ -55,3 +56,19 @@ def get_location(loc: Union[SourceRange, MethodType]) -> str:
         return f"{doc} in file {code.co_filename} around line {code.co_firstlineno}"
 
     return "???"
+
+
+def get_location_file_line(loc: Union[SourceRange, MethodType]) -> Tuple[str, int]:
+    """
+    Return the container name (often a filename) and starting line number for
+    a location ``loc``.
+    """
+    if isinstance(loc, MethodType):
+        func = loc.__func__
+        code = func.__code__
+        filename = code.co_filename
+        line_number = code.co_firstlineno
+    else:
+        filename = MATHICS3_PATHS[loc.container]
+        line_number = loc.start_line
+    return filename, line_number
