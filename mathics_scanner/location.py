@@ -1,6 +1,6 @@
 from enum import Enum
 from types import MethodType
-from typing import List, NamedTuple, Tuple, Union
+from typing import List, NamedTuple, Set, Tuple, Union
 
 
 class ContainerKind(Enum):
@@ -17,7 +17,7 @@ class Container(NamedTuple):
 
 
 class SourceRange(NamedTuple):
-    # All values are 0 origin. (0 is the frist number used).
+    # All values are 0 origin. (0 is the first number used).
     start_line: int
     start_pos: int
     end_line: int
@@ -35,13 +35,16 @@ class SourceTextLocations(NamedTuple):
 # True if we want to keep track of positions as we scan an parse.
 # This can be useful in debugging. It can also add a lot memory in
 # saving position information.
-TRACK_LOCATIONS: bool = True
+TRACK_LOCATIONS: bool = False
 
 # List of all Mathics3 files seen. We use the index in the list as a short
 # representation of the file path.
 # For example:
 #   ["mathics/autoload/rules/Bessel.m", "mathics/autoload/rules/Element.m", ... ]
 MATHICS3_PATHS: List[str] = []
+
+# Set of Mathics3 Builtin evaluation methods seen.
+EVAL_METHODS: Set[MethodType] = set([])
 
 
 # FIXME: this isn't fully formed yet.
