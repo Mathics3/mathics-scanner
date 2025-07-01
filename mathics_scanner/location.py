@@ -25,13 +25,6 @@ class SourceRange(NamedTuple):
     container: int
 
 
-SourceTextPosition: Union[SourceRange, MethodType]
-
-
-class SourceTextLocations(NamedTuple):
-    positions: List[Union[SourceRange, MethodType]] = []
-
-
 # True if we want to keep track of positions as we scan an parse.
 # This can be useful in debugging. It can also add a lot memory in
 # saving position information.
