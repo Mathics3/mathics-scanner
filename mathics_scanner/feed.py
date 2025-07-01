@@ -5,9 +5,11 @@ methods for returning one line code at a time.
 """
 
 from abc import ABCMeta, abstractmethod
-from typing import Callable, List, Optional
+from types import MethodType
+from typing import Callable, List, Optional, Union
 
-from mathics_scanner.location import MATHICS3_PATHS, ContainerKind, SourceTextLocations
+import mathics_scanner
+from mathics_scanner.location import MATHICS3_PATHS, ContainerKind, SourceRange
 
 
 class LineFeeder(metaclass=ABCMeta):
@@ -33,15 +35,20 @@ class LineFeeder(metaclass=ABCMeta):
         self.container = container
         self.container_kind = container_kind
         self.source_text: Optional[str] = None
-        self.container_index = 0
-        self.source_positions = SourceTextLocations()
 
-        if container_kind == ContainerKind.FILE:
-            if container in MATHICS3_PATHS:
-                self.container_index = MATHICS3_PATHS.index(container)
-            else:
-                self.container_index = len(MATHICS3_PATHS)
-                MATHICS3_PATHS.append(container)
+        self.container_index = -1
+
+        # FIXME: I think this isn't necessary.
+        self.source_positions: List[Union[SourceRange, MethodType]] = []
+
+        # Note: fully qualified name is needed to pick up dynamic changes
+        if mathics_scanner.location.TRACK_LOCATIONS and container:
+            if container_kind == ContainerKind.FILE:
+                if container in MATHICS3_PATHS:
+                    self.container_index = MATHICS3_PATHS.index(container)
+                else:
+                    self.container_index = len(MATHICS3_PATHS)
+                    MATHICS3_PATHS.append(container)
 
     @abstractmethod
     def feed(self) -> str:
@@ -129,8 +136,6 @@ class MultiLineFeeder(LineFeeder):
             self.lines = lines.splitlines(True)
         else:
             self.lines = lines
-
-        # self.source_positions.containers.append(container)
 
     def feed(self) -> str:
         if self.lineno < len(self.lines):
