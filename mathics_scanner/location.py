@@ -25,6 +25,14 @@ class SourceRange(NamedTuple):
     container: int
 
 
+class SourceRange2(NamedTuple):
+    # All values are 0 origin. (0 is the first number used).
+    start_line: int
+    start_pos: int
+    end_pos: int
+    container: int
+
+
 # True if we want to keep track of positions as we scan an parse.
 # This can be useful in debugging. It can also add a lot memory in
 # saving position information.
@@ -41,7 +49,7 @@ EVAL_METHODS: Set[MethodType] = set([])
 
 
 # FIXME: this isn't fully formed yet.
-def get_location(loc: Union[SourceRange, MethodType]) -> str:
+def get_location(loc: Union[SourceRange, SourceRange2, MethodType]) -> str:
     """
     Given Location ``loc`` return a string representation of that
     """
@@ -54,7 +62,9 @@ def get_location(loc: Union[SourceRange, MethodType]) -> str:
     return "???"
 
 
-def get_location_file_line(loc: Union[SourceRange, MethodType]) -> Tuple[str, int]:
+def get_location_file_line(
+    loc: Union[SourceRange, SourceRange2, MethodType]
+) -> Tuple[str, int]:
     """
     Return the container name (often a filename) and starting line number for
     a location ``loc``.
