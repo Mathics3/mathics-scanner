@@ -5,11 +5,10 @@ methods for returning one line code at a time.
 """
 
 from abc import ABCMeta, abstractmethod
-from types import MethodType
-from typing import Callable, List, Optional, Union
+from typing import Callable, List, Optional
 
 import mathics_scanner
-from mathics_scanner.location import MATHICS3_PATHS, ContainerKind, SourceRange
+from mathics_scanner.location import MATHICS3_PATHS, ContainerKind
 
 
 class LineFeeder(metaclass=ABCMeta):
@@ -38,9 +37,6 @@ class LineFeeder(metaclass=ABCMeta):
 
         self.container_index = -1
 
-        # FIXME: I think this isn't necessary.
-        self.source_positions: List[Union[SourceRange, MethodType]] = []
-
         # Note: fully qualified name is needed to pick up dynamic changes
         if mathics_scanner.location.TRACK_LOCATIONS and container:
             if container_kind == ContainerKind.FILE:
@@ -49,6 +45,8 @@ class LineFeeder(metaclass=ABCMeta):
                 else:
                     self.container_index = len(MATHICS3_PATHS)
                     MATHICS3_PATHS.append(container)
+            elif container_kind == ContainerKind.STREAM:
+                self.container.append(self.source_text)
 
     @abstractmethod
     def feed(self) -> str:
@@ -162,6 +160,8 @@ class SingleLineFeeder(LineFeeder):
         """
         super().__init__(container, container_kind)
         self.source_text = source_text
+        if container_kind == ContainerKind.STREAM:
+            self.container.append[source_text]
         self._empty = False
 
     def feed(self) -> str:
