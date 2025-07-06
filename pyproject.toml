@@ -67,6 +67,8 @@ packages = [
 [tool.setuptools.package-data]
 "mathics_scanner" = [
     "data/named-characters.yml",
+    "data/operators.yml",
+    "data/operators.json",
     "data/*.csv",
     "data/character-tables.json",  # List this explicitly since it is needed
     "data/*.json",
