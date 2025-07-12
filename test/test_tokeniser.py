@@ -16,6 +16,7 @@ from mathics_scanner.errors import (
     SyntaxError,
 )
 from mathics_scanner.feed import SingleLineFeeder
+from mathics_scanner.location import ContainerKind
 from mathics_scanner.tokeniser import Token, Tokeniser, is_symbol_name
 
 
@@ -61,7 +62,9 @@ def tags(source_code):
 
 
 def tokens(source_code) -> List[Token]:
-    tokeniser = Tokeniser(SingleLineFeeder(source_code))
+    tokeniser = Tokeniser(
+        SingleLineFeeder(source_code, "<tokens>", ContainerKind.STRING)
+    )
     tokens = []
     while True:
         token = tokeniser.next()
