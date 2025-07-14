@@ -121,6 +121,15 @@ def test_boxes():
         Token("Number", "1", 2),
         Token("RightRowBox", "\\)", 3),
     ]
+    assert tokens("\\(\\*RowBox[a]\\)") == [
+        Token("LeftRowBox", "\\(", 0),
+        Token("BoxInputEscape", "\\*", 2),
+        Token("Symbol", "RowBox", 4),
+        Token("RawLeftBracket", "[", 10),
+        Token("Symbol", "a", 11),
+        Token("RawRightBracket", "]", 12),
+        Token("RightRowBox", "\\)", 13),
+    ]
 
 
 def test_comments():
