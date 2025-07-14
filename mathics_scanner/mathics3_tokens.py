@@ -1,6 +1,7 @@
 """
 Command-line routine to how scanner tokenizes text.
 """
+
 import argparse
 import locale
 import os
@@ -13,6 +14,7 @@ from mathics_scanner.errors import (
     SyntaxError,
 )
 from mathics_scanner.feed import FileLineFeeder, LineFeeder, SingleLineFeeder
+from mathics_scanner.location import ContainerKind
 from mathics_scanner.tokeniser import Tokeniser
 from mathics_scanner.version import __version__
 
@@ -199,8 +201,10 @@ def interactive_eval_loop(shell: TerminalShell, code_tokenize_format: bool):
             shell.reset_lineno()
 
 
-def tokens(code, code_tokenize_format: bool):
-    tokeniser = Tokeniser(SingleLineFeeder(code))
+def tokens(source_text: str, code_tokenize_format: bool):
+    tokeniser = Tokeniser(
+        SingleLineFeeder(source_text, "<Mathics3-tokens>", ContainerKind.STRING)
+    )
     while True:
         try:
             token = tokeniser.next()
