@@ -2433,23 +2433,26 @@ Integrate:
   meaningful: true
   # comments:
 
-InterpretationBox:
-  Precedence-Function: 670
-  precedence: 695
-  WolframLanguageData:
-  WolframLanguageData-corrected: 7.6
-  UnicodeCharacters.tr:
-  UnicodeCharacters-corrected.tr: 780
-  # N-tokens: {"\*"}
-  # L-tokens: {}
-  # O-tokens: {}
-  # usage: "\( \*  expr \)"
-  arity: Unary
-  affix: Prefix
-  associativity: right
-  meaningful: true
-  # comments:
+# InterpretationBox is Builtin Function, but it has no operator symbol
+# as far as I can tell. It is *not* \*
+# InterpretationBox:
+#   Precedence-Function: 670
+#   precedence: 695
+#   WolframLanguageData:
+#   WolframLanguageData-corrected: 7.6
+#   UnicodeCharacters.tr:
+#   UnicodeCharacters-corrected.tr: 780
+#   # N-tokens: {"\*"}
+#   # L-tokens: {}
+#   # O-tokens: {}
+#   # usage: "\( \*  expr \)"
+#   arity: Unary
+#   affix: Prefix
+#   associativity: right
+#   meaningful: true
+#   # comments:
 
+# The name "InterpretedBox" is not an official official name,
 InterpretedBox:
   precedence: 670
   WolframLanguageData: None
