@@ -4,6 +4,8 @@ CHANGES
 2.0.0
 -----
 
+Supports Python 3.13. Python 3.8 support dropped.
+
 Note: There are incompatible changes. Use with Mathics-core 9.0.0 or greater.
 
 Support for saving token position information was started. This is in
@@ -14,15 +16,17 @@ Scanning was revised to handle more kinds of escape sequences and to
 be sensitive to their placement inside and outside a string. This is in module
 ``mathics_scanner.escape_sequences``.
 
-Scanner Exception handling was revised to capture more of the position
-and tag information that raised a SyntaxError.
-
 Tokenization support for Box Input operator ``\*`` was added.
-
-Revise to support 3.13's ``pyproject.toml``. Support for 3.8 has been dropped.
 
 Small YML changes were made to reflect a better understanding of boxing
 operators. In particular, ``\*`` is not a (prefix) operator.
+
+Internals
+++++++++
+
+Mathics scanner exceptions of class TranslateError are incompatible
+with previous versions, and now store error parameters, "name", "tag", and
+"args".
 
 
 1.4.1
@@ -152,7 +156,7 @@ nice to do when there is no conflict.
 1.1.0
 -----
 
-* Add operator-name, and ASCII fields. See named-characters.yml for a description of these
+* Add operator-name and ASCII fields. See named-characters.yml for a description of these
 * Add some whitespace characters like IndentingNewLine and RawReadLine
 * Improve testing
 * Fix some small tagging based on testing
@@ -165,7 +169,7 @@ Note: not all operators have been tagged, so expect another release soon when th
 -----
 
 * The scanner split off from Mathics3.
-* Tables added for converting between WL names and Unicode, ASCII and character properties. See ``implementation.rst`` for details.
+* Tables added for converting between WL names and Unicode, ASCII, and character properties. See ``implementation.rst`` for details.
 * Code and docstring gone over.
 
-See git in github repository https://github.com/Mathics/Mathics before Jan 18, 2021 for older history information.
+See git in github repository https://github.com/Mathics/Mathics before Jan 18, 2021, for older history information.
