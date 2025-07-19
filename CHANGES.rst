@@ -42,14 +42,14 @@ operator information. This information is based on information from Robert Jacob
 
 See https://github.com/WLTools/LanguageSpec/blob/master/docs/Specification/Syntax/Operator%20Table.csv
 
-From ``operators.yml``, ``operators.json`` is created and
+From ``operators.yml``, ``operators.json`` is created, and
 This holds operator information that the Mathics3 Kernel uses.
 
 Things like operator precedence, operator arity, associativity, and
 AMSLaTeX equivalent notation is some of the information we store.
 
-All of the 100 or so Unicode operators without an initial builtin
-meanings, .e.g., \[Cup], \[Cap], ... have been added.
+All of the 100 or so Unicode operators without an initial built-in
+meaning, .e.g., \[Cup], \[Cap], ... have been added.
 
 The tokenizer and parser in the Mathics3 Kernel use more YAML table information via JSON extraction. However, more will be done in the future.
 
