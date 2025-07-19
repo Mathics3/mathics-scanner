@@ -33,7 +33,7 @@ jobs:
         git clone --depth 1 https://github.com/Mathics3/mathics-scanner.git
         (cd mathics-scanner && pip install -e .)
         # Until next Mathics3/mathics-core release is out...
-        git clone --depth 1 --branch BoxInputEscape https://github.com/Mathics3/mathics-core.git
+        git clone --depth 1 https://github.com/Mathics3/mathics-core.git
         cd mathics-core/
         make PIP_INSTALL_OPTS='[full]'
         # pip install Mathics3[full]
