@@ -1,10 +1,35 @@
 CHANGES
 =======
 
-Jan 26, 2025
+2.0.0
+-----
+
+Note: there are incompatible changes. Use with Mathics-core 9.0.0 or greater.
+
+Support for saving token position information was started. This is in
+module ``mathics_scanner.location``. Additional location information is saved when
+``mathics_scanner.location.TRACK_LOCATIONS`` is set to ``True``.
+
+Scanning was revised to handle more kinds of escape sequences and to
+be sensitive to their placement inside and outside a string. This is in module
+``mathics_scanner.escape_sequences``.
+
+Scanner Exception handling was revised to capture more of the position
+and tag information that raised a SyntaxError.
+
+Tokenization support for Box Input operator ``\*`` was added.
+
+Revise to support 3.13's pyproject.toml Support for 3.8 has been dropped.
+
+Small YML changes were made to reflect a better understanding boxing
+operators. In particular ``\*`` is not a (prefix) operator.
+
 
 1.4.1
 -----
+
+Jan 26, 2025
+
 
 Re-release to include ``operators.yml`` into tarball/wheel.
 
