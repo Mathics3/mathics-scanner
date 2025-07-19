@@ -10,8 +10,8 @@ This repository really contains two things:
 * extensive tables describing WL symbols, operators, and their properties
 * a tokenizer or scanner portion for the Wolfram Language.
 
-With respect to the first item, there are two commented YAML files that contain a
-full set of translation between:
+Concerning the first item, there are two commented YAML files that contain a
+full set of translations between:
 
 * Wolfram Language named characters,
 * Unicode/ASCII equivalents and Unicode and WL code-points,
@@ -25,14 +25,14 @@ full set of translation between:
 Uses
 ----
 
-The scanner and character tables are used inside `Mathics <https://mathics.org>`_. However information can
+The scanner and character tables are used inside `Mathics3 <https://mathics.org>`_. However information can
 also be used by other programs for tokenizing and formatting Wolfram Language code.
 
 For example, tables are used in `mathics-pygments <https://pypi.org/project/Mathics-Scanner/>`_, a Pygments-based
 lexer and highlighter for Mathematica/Wolfram Language source code.
 
-This library may be useful if you need to work with Wolfram Language
-named character and convert them to various formats.
+This library may be useful if you need to work with the Wolfram Language
+named character and convert it to various formats.
 
 Usage
 -----
@@ -46,16 +46,16 @@ Usage
   ``\[FormalA]``) and Wolfram's internal representation use the
   ``m̀athics_scanner.characters.named_characters`` dictionary.
 
-To regenerate JSON-format tables run:
+To regenerate JSON-format tables, run:
 
 ::
 
    $ mathics3-generate-json-table
    $ mathics3-generate-operator-json-table
 
-Without options ``mathics3-generate-json-table`` produces the maximum set of correspondences.
+Without options, ``mathics3-generate-json-table`` produces the maximum set of correspondences.
 
-In most applications though you may need just a few of these. The
+In most applications, though, you may need just a few of these. The
 ``--field`` option can be used to narrow the list of entries to output in JSON. Run
 ``mathics3-generate-json-table --help`` for a full list of fields.
 
@@ -63,7 +63,7 @@ In most applications though you may need just a few of these. The
 Utility for showing token parsing
 ---------------------------------
 
-There is a command-line utility, ``mathics3-tokens`` for showing how
+There is a command-line utility, ``mathics3-tokens``, for showing how
 an input stream is tokenized. The ``--CodeTokenize`` or ``-C`` option
 will try to show the token as it would appear using CodeTokenize. type
 ``mathics3-tokens --help`` information on command-line options.
