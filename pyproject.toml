@@ -15,7 +15,7 @@ dependencies = [
     "chardet",    # Used in mathics_scanner.feed
     "click",      # Using in CLI: mathics3-generate-json-table
 ]
-requires-python = ">=3.8"
+requires-python = ">=3.9"
 readme = "README.rst"
 license = {text = "GPL-3.0-only"}
 keywords = ["Mathematica", "Wolfram", "Interpreter", "Shell", "Math", "CAS"]
@@ -27,11 +27,11 @@ classifiers = [
     "Intended Audience :: Science/Research",
     "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
     "Programming Language :: Python",
-    "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: Implementation :: CPython",
     "Programming Language :: Python :: Implementation :: PyPy",
     "Topic :: Scientific/Engineering",
