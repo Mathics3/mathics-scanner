@@ -956,14 +956,19 @@ class Tokeniser:
                         result += "\\" + escaped_char
                         self.pos += 1
                     else:
-                        # Not something that can be a boxing construct.
-                        # So here, we'll report an error as we do with
-                        # NamedCharacterSyntaxError.
-                        self.feeder.message(
-                            escape_error.name, escape_error.tag, *escape_error.args
-                        )
-                        raise
-
+                        # Not something that can be a boxing
+                        # construct.  Some characters like "{", and
+                        # "}" are allowed to follow a "\" in the
+                        # String context, but any other character is
+                        # an error.
+                        if self.source_text[self.pos] in ["{", "}"]:
+                            result += "\\" + escaped_char
+                            self.pos += 1
+                        else:
+                            self.feeder.message(
+                                escape_error.name, escape_error.tag, *escape_error.args
+                            )
+                            raise
                 else:
                     result += escape_str
             else:

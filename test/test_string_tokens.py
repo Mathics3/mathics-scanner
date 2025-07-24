@@ -86,6 +86,14 @@ def test_string():
     check_string(r'"\ abc"', '" abc"', "Escaped space in a string is valid")
     check_string(r'"abc(*def*)"', r'"abc(*def*)"')
 
+    # Example found in usage string for FCSetPauliSigmaScheme of
+    # FeynCalc.
+    check_string(
+        r'"$\{\\sigma^i, \\sigma^j \}$."',
+        r'"$\{\sigma^i, \sigma^j \}$."',
+        "Escaped braces inside a string are ok",
+    )
+
     check_string(
         r'"\(a \+\)"',
         r'"\(a \+\)"',
