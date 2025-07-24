@@ -741,6 +741,15 @@ class Tokeniser:
                 self.pos += 2
             elif self.source_text[self.pos] in " \r\n\t":
                 self.pos += 1
+            elif (
+                self.source_text[self.pos] == "\\"
+                and self.pos + 2 == len(self.source_text)
+                and self.source_text[self.pos + 1] == "\n"
+            ):
+                # We have a backslashed \n probably in order to split
+                # a long Mathics3 source-text line.  Treat this as
+                # whitespace.
+                self.pos += 2
             else:
                 break
 

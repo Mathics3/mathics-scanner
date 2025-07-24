@@ -15,7 +15,7 @@ from mathics_scanner.errors import (
     InvalidSyntaxError,
     SyntaxError,
 )
-from mathics_scanner.feed import SingleLineFeeder
+from mathics_scanner.feed import MultiLineFeeder, SingleLineFeeder
 from mathics_scanner.location import ContainerKind
 from mathics_scanner.tokeniser import Token, Tokeniser, is_symbol_name
 
@@ -43,6 +43,17 @@ def incomplete_error(error_message: str):
 def invalid_error(error_message: str):
     with pytest.raises(InvalidSyntaxError):
         tokens(error_message)
+
+
+def multiline_tokens(tokenizer) -> List[Token]:
+    tokens = []
+    while True:
+        token = tokenizer.next()
+        if token.tag == "END":
+            break
+        else:
+            tokens.append(token)
+    return tokens
 
 
 def scanner_error(error_message):
@@ -110,7 +121,8 @@ def test_association():
     ]
 
 
-def test_backslash():
+def test_backslash_named_character():
+    r"""Tests \[Backslash] named character"""
     assert tokens(r"\[Backslash]") == [Token("Backslash", "\u2216", 0)]
     incomplete_error("\\")
 
@@ -183,6 +195,24 @@ def test_integeral():
 def test_is_symbol():
     assert is_symbol_name("Derivative")
     assert not is_symbol_name("98")  # symbols can't start with numbers
+
+
+def test_multiline_backslash():
+    source_code = "a = \\\n5"
+    tokenizer = Tokeniser(
+        MultiLineFeeder(source_code, "<mltokens>", ContainerKind.STRING)
+    )
+
+    assert multiline_tokens(tokenizer) == [
+        Token("Symbol", "a", 0),
+        Token("Set", "=", 2),
+    ]
+    tokenizer.source_text = tokenizer.feeder.feed()
+    tokenizer.pos = 0
+    assert multiline_tokens(tokenizer) == [
+        Token("Number", "5", 0),
+    ]
+    assert tokenizer.feeder.empty(), "Feeder should note two two lines have been read"
 
 
 def test_number():

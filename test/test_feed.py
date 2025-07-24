@@ -9,9 +9,9 @@ from mathics_scanner.location import ContainerKind
 def test_multi():
     """Test MultiLineFeeder class"""
     feeder = MultiLineFeeder("abc\ndef", "<test_multi>", ContainerKind.STRING)
-    feeder.feed() == "abc\n", "MultiLineFeeder reads first line"
-    feeder.feed() == "def", "reads second line"
-    feeder.feed() == "", "Returns '' when no more lines"
+    assert feeder.feed() == "abc\n", "MultiLineFeeder reads first line"
+    assert feeder.feed() == "def", "reads second line"
+    assert feeder.feed() == "", "Returns '' when no more lines"
     assert feeder.empty(), "MultiLineFeeder detects feeder empty condition"
 
 
