@@ -5,7 +5,7 @@
 # https://github.com/WLTools/LanguageSpec/blob/master/docs/Specification/Syntax/Operator%20Table.csv
 #
 # Some operator information attached to individual character names can
-# be found in file named-characters.yml.
+# be found in file "named-characters.yml".
 #
 # For a description of many of the fields below, see
 #  https://www.robertjacobson.dev/posts/2018-09-03-generalizing-pemdas-what-is-an-operator/
@@ -15,7 +15,7 @@
 # Operator Precedence
 # ----------------------
 #
-# We have two kinds of operator precedence values listed: "precedence" which is used
+# We have two kinds of operator precedence values listed: "precedence," which is used
 # in Mathics3 (core), and an optional "Precedence-Function" which can be used
 # to match WMA builtin-function Precedence[] values.
 
@@ -42,7 +42,7 @@
 # value for each operator indicated by the "precedence" field.
 #
 # But please note that boxing operators and their precedece should be
-# though of as distinct from expression operators and their
+# thought of as distinct from expression operators and their
 # precedence. The two generally do not mix in an expression. Boxing is
 # a separate phase which is run after expression evaluation.
 #
@@ -107,9 +107,9 @@
 # associativity
 # --------------
 #
-#  When two or more of the same operator is used, which group to
-#  evaluate first. This value is used in the Mathics3 parser. The
-#  value should be one of:
+#  When two or more of the same operator are used, which group should be
+#  evaluated first? The associativity value determines this and is used by the Mathics3 parser. An
+#  associativity value should be one of:
 #
 #       - None
 #       - left
@@ -117,23 +117,23 @@
 #       - right
 #       - unknown
 #
-#       an operator tagged as "left" will appear in JSON tables under the key
-#       "left-binary-operators", "right" will appear in JSON table under the key
-#       "right-binary-operators", "non-associative" under the key
-#       "non-associative-operators", "unknown" under the key "miscellaneous-operators",
-#        and None as "flat_binary_operators".
+#  An operator tagged as "left" will appear in JSON tables under the key
+#  "left-binary-operators", "right" will appear in the JSON table under the key
+#  "right-binary-operators", "non-associative" under the key
+#  "non-associative-operators", "unknown" under the key "miscellaneous-operators",
+#   and None as "flat_binary_operators".
 #
 # box-operator
 # ------------
 #
-# This field exists and is set true if the operator is used in boxing. Boxing
+# This field exists and is set to true if the operator is used in boxing. Boxing
 # operators are enclosed in \(  \) pairs.
 #
 # operator
 # --------
 #
 # This field exists for box-operators. In the future, we may expand to other operators.
-# (Non box operators are listed in fields of named-characters.)
+# (Non-box operators are listed in fields of named-characters.)
 # It is the string value for the operator.
 
 # meaningful
@@ -321,7 +321,7 @@ Because:
   affix: Infix
   associativity: left
   meaningful: false
-  # comments: Precedence of Therefore and Because are swapped in notebook versus ToExpression.
+  # comments: Precedence of Therefore and Because are swapped in the Wolfram notebook compared to the way they appear in ToExpression.
 
 BlackLenticularBracket:
   Precedence-Function: 670
@@ -2445,7 +2445,7 @@ Integrate:
   meaningful: true
   # comments:
 
-# InterpretationBox is Builtin Function, but it has no operator symbol
+# InterpretationBox is a Builtin Function, but it has no operator symbol
 # as far as I can tell. It is *not* \*
 # InterpretationBox:
 #   Precedence-Function: 670
@@ -2464,7 +2464,7 @@ Integrate:
 #   meaningful: true
 #   # comments:
 
-# The name "InterpretedBox" is not an official official name,
+# The name "InterpretedBox" is not an official name,
 InterpretedBox:
   precedence: 670
   WolframLanguageData: None
@@ -3261,7 +3261,7 @@ Minus:
   affix: Prefix
   associativity: right
   meaningful: true
-  # comments: Operator Notations includes usages with invisible unicode characters.
+  # comments: Operator Notations includes usages with invisible Unicode characters.
 
 MinusPlus:
   precedence: 310
@@ -4438,7 +4438,7 @@ NumberPrecision:
   affix: Infix
   associativity: null
   meaningful: true
-  # comments: Specifies the precision of number, where s is a positive decimal expressed without using ^^ or `. Any magnitude must come after `."
+  # comments: Specifies the precision of "number", where "s" is a positive decimal expressed without using ^^ or `. Any magnitude must come after "`."
 
 NumberPrecisionPostfix:
   Precedence-Function: 670
@@ -4456,7 +4456,7 @@ NumberPrecisionPostfix:
   affix: Postfix
   associativity: left
   meaningful: true
-  # comments: Specifies the precision of number to be $MachinePrecision. Any magnitude must come after `."
+  # comments: Specifies the precision of "number" to be $MachinePrecision. Any magnitude must come after `."
 
 Optional:
   precedence: 140
@@ -4821,7 +4821,7 @@ Plus:
   affix: Infix
   associativity: null
   meaningful: true
-  # comments: Operator Notations includes usages with invisible unicode characters.
+  # comments: Operator Notations includes usages with invisible Unicode characters.
 
 PlusMinus:
   precedence: 310
@@ -5128,7 +5128,7 @@ RawBackquote:
   affix: Infix
   associativity: null
   meaningful: true
-  # comments: Specifies the accuracy (in number of digits to the right of decimal) of number, where s is a positive decimal expressed without using ^^ or `. A magnitude must come after ``.
+  # comments: Specifies the accuracy (in number of digits to the right of decimal) of "number", where s is a positive decimal expressed without using ^^ or `. A magnitude must come after ``.
 
 Repeated:
   precedence: 170
@@ -6550,7 +6550,7 @@ Times:
   affix: Infix
   associativity: null
   meaningful: true
-  # comments: Operator Notations includes usages with invisible unicode characters.
+  # comments: Operator Notations includes usages with invisible Unicode characters.
 
 TimesBy:
   precedence: 100
