@@ -34,6 +34,18 @@
 # Note: When there was a mismatch between Jacobson's table and the old
 # Mathics code, we've used the old Mathics code.
 #
+# Boxing Operator Precedence
+# ---------------------------
+#
+# WMA uses operators, like \/ (FractionBox) or \_ (SubscriptBox), in
+# Boxing Expressions. Like any other operator, there is a precedence
+# value for each operator indicated by the "precedence" field.
+#
+# But please note that boxing operators and their precedece shoudl be
+# though of as distinct from expression operators and their
+# precedence. The two generally do not mix in an expression. Boxing is
+# a separate phase which is run after expression evaluation.
+#
 #
 # arity (https://en.wikipedia.org/wiki/Arity)
 # -------------------------------------------
