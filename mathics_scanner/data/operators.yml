@@ -41,7 +41,7 @@
 # Boxing Expressions. Like any other operator, there is a precedence
 # value for each operator indicated by the "precedence" field.
 #
-# But please note that boxing operators and their precedece shoudl be
+# But please note that boxing operators and their precedece should be
 # though of as distinct from expression operators and their
 # precedence. The two generally do not mix in an expression. Boxing is
 # a separate phase which is run after expression evaluation.
@@ -56,7 +56,7 @@
 #  - NullAry (0 arguments),
 #  - Unary (1 argument),
 #  - Binary (2 arguments)
-#  - Infix (2 or more arguments; Binary is a special case of Infix having exactly 2 argumetns)
+#  - Infix (2 or more arguments; Binary is a special case of Infix having exactly 2 arguments)
 #  - Ternary (3 arguments)
 #  - n-ary (n arguments)
 #
@@ -71,7 +71,7 @@
 # -------------------
 #
 #  This integer field is optional and only used when there is a
-#  discrepency between what WMA reports when using the function
+#  discrepancy between what WMA reports when using the function
 #  Precedence[] and what Mathics3 requires, we note that here.
 #
 #   WolframLanguageData: a "PrecedenceRanks" value returned using:
@@ -118,7 +118,7 @@
 #       - unknown
 #
 #       an operator tagged as "left" will appear in JSON tables under the key
-#       "left-binary-operators", "right" will appar in JSON table under the key
+#       "left-binary-operators", "right" will appear in JSON table under the key
 #       "right-binary-operators", "non-associative" under the key
 #       "non-associative-operators", "unknown" under the key "miscellaneous-operators",
 #        and None as "flat_binary_operators".
@@ -134,7 +134,7 @@
 #
 # This field exists for box-operators. In the future, we may expand to other operators.
 # (Non box operators are listed in fields of named-characters.)
-# It is the string vlaue for the operator.
+# It is the string value for the operator.
 
 # meaningful
 # ---------
@@ -825,7 +825,7 @@ ContextPathSeparator:
   affix:
   associativity: null
   meaningful: true
-  # comments: Functions similiar to decimal point for numbers: either contextpath1 or contextpath2 may be empty, but not both at the same time.
+  # comments: Functions similar to decimal point for numbers: either contextpath1 or contextpath2 may be empty, but not both at the same time.
 
 ContourIntegral:
   Precedence-Function: 670
