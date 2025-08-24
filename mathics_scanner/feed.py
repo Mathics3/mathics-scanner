@@ -107,7 +107,12 @@ class LineFeeder(metaclass=ABCMeta):
             else:
                 message.append('""')
         message.append(str(self.lineno))
-        message.append(f'"{self.container}"')
+        if self.container:
+            message.append(f'"{self.container}"')
+        elif len(args) == 2:
+            message.append(f'"{(args[1].rstrip())}"')
+        else:
+            message.append("")
         assert len(message) == 7
         return message
 
