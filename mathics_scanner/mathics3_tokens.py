@@ -176,7 +176,7 @@ def interactive_eval_loop(shell: TerminalShell, code_tokenize_format: bool):
             shell.errmsg(
                 "Syntax",
                 "sntufn",
-                "Unknown unicode longname",
+                "Unknown escape sequence",
             )
         # This has to come after NamedCharacterSyntaxError and
         # EscapeSyntaxError since those are subclasses of

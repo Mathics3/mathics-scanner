@@ -63,7 +63,7 @@ def parse_named_character(source_text: str, start: int, finish: int) -> Optional
     if named_character.isalpha():
         char = named_characters.get(named_character)
         if char is None:
-            raise NamedCharacterSyntaxError("sntufn", named_character)
+            raise NamedCharacterSyntaxError("sntufn", named_character, source_text)
         else:
             return char
 
