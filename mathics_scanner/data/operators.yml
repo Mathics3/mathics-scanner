@@ -1953,7 +1953,7 @@ FractionBox:
   UnicodeCharacters.tr:
   UnicodeCharacters-corrected.tr: 590
   operator: "\\/"
-  usage: "\\(x\/y\\)"
+  usage: "\\(x\\/y\\)"
   arity: Binary
   affix: Infix
   associativity: "unknown"
