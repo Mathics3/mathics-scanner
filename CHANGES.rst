@@ -4,7 +4,7 @@ CHANGES
 2.0.0
 -----
 
-Supports Python 3.13. Python 3.8 support dropped.
+Supports Python 3.13. Python 3.8 and 3.9 support dropped.
 
 Note: There are incompatible changes. Use with Mathics-core 9.0.0 or greater.
 
@@ -28,6 +28,11 @@ Mathics scanner exceptions of class TranslateError are incompatible
 with previous versions, and now store error parameters, "name", "tag", and
 "args".
 
+Bugs Fixed
+++++++++++
+
+#. #125 Hex escape sequence in string literal doesn't work.
+#. #136 Is YAML file valid?
 
 1.4.1
 -----
