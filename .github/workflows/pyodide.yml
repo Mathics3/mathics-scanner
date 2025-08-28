@@ -1,6 +1,6 @@
 # Copied from SymPy https://github.com/sympy/sympy/pull/27183
 
-name: Mathics3 (Pyodide)
+name: Mathics3 Scanner (Pyodide)
 
 on:
   push:
@@ -12,13 +12,13 @@ jobs:
   pyodide-test:
     runs-on: ubuntu-latest
     env:
-      PYODIDE_VERSION: 0.27.0a2
+      PYODIDE_VERSION: 0.28.2
       # PYTHON_VERSION and EMSCRIPTEN_VERSION are determined by PYODIDE_VERSION.
       # The appropriate versions can be found in the Pyodide repodata.json
       # "info" field, or in Makefile.envs:
       # https://github.com/pyodide/pyodide/blob/main/Makefile.envs#L2
-      PYTHON_VERSION: 3.12.1
-      EMSCRIPTEN_VERSION: 3.1.58
+      PYTHON_VERSION: 3.13.2
+      EMSCRIPTEN_VERSION: 4.0.9
       NODE_VERSION: 20
     steps:
       - name: Checkout
@@ -52,7 +52,13 @@ jobs:
           # Activate the virtual environment
           source .venv-pyodide/bin/activate
           pip install "setuptools" PyYAML click packaging pytest
+
+          # We should comment out after next mathics-core release
+          python -m pip install --no-build-isolation --no-deps -e git+https://github.com/Mathics3/mathics-core#egg=Mathics3
+          # python -m pip Mathics3
+
           pip install --no-build-isolation -e .
+
           pip install -r requirements-dev.txt
           bash ./admin-tools/make-JSON-tables.sh
           make check
