@@ -4,7 +4,7 @@ CHANGES
 2.0.0
 -----
 
-Supports Python 3.13. Python 3.8 and 3.9 support dropped.
+Supports Python 3.13. Python 3.8 and 3.9 support has been dropped.
 
 Note: There are incompatible changes. Use with Mathics-core 9.0.0 or greater.
 
@@ -13,8 +13,7 @@ module ``mathics_scanner.location``. Additional location information is saved wh
 ``mathics_scanner.location.TRACK_LOCATIONS`` is set to ``True``.
 
 Scanning was revised to handle more kinds of escape sequences and to
-be sensitive to their placement inside and outside a string. This is in module
-``mathics_scanner.escape_sequences``.
+be sensitive to their placement inside and outside a string. This is in module ``mathics_scanner.escape_sequences``.
 
 Tokenization support for Box Input operator ``\*`` was added.
 
@@ -22,9 +21,9 @@ Small YML changes were made to reflect a better understanding of boxing
 operators. In particular, ``\*`` is not a (prefix) operator.
 
 Internals
-++++++++
++++++++++
 
-Mathics scanner exceptions of class TranslateError are incompatible
+Mathics3 scanner exceptions of class TranslateError are incompatible
 with previous versions, and now store error parameters, "name", "tag", and
 "args".
 
@@ -64,8 +63,7 @@ The tokenizer and parser in the Mathics3 Kernel use more YAML table information 
 
 A new utility program, ``mathics3-tokens`` can be used to show
 tokenization of an input stream, with the ``-C`` or ``--CodeTokenize``
-option, the program shows the tokens more closely in the form that the WMA
-CodeTokens package uses. Over time, we expect that our tokenizer will
+option, the program shows the tokens more closely in the form that the WMA CodeTokens package uses. Over time, we expect that our tokenizer will
 be more compliant with CodeTokens.
 
 ``named-characters.yml`` was gone over, mostly to fill out
@@ -95,7 +93,7 @@ Various dependencies elsewhere force 3.8 or newer.
 * Support double backslash (``\\``) as a single backslash character (``\``).
 * Correct Unicode for ScriptN and ScriptCapitalN
 * Correct several is-letter-like entries.
-* Accept \u21A6 as symbol for Function.
+* Accept \u21A6 as a symbol for Function.
 * Change the precedence of ``|->``(``Function`` symbol) to 800 so it isn't interpreted as a ``|``
   followed by ``->``
 * ASCII operator tables can now be generated
@@ -110,7 +108,7 @@ Various dependencies elsewhere force 3.8 or newer.
 * Start adding AMSLateX names.
 * Add ``ApplyTo``, and ``Factorial2``.
 * Adjust ``Tilde``, and ``Factorial``.
-* Regularize unicode equivalents.
+* Regularize Unicode equivalents.
 * Add named-characters.yml to distribution packages; Issue #32.
 * Use SPDX identifier in license; PR #31.
 
