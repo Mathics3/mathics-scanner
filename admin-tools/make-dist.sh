@@ -18,16 +18,6 @@ cd ..
 source mathics_scanner/version.py
 echo $__version__
 
-for pyversion in $PYVERSIONS; do
-    if ! pyenv local $pyversion ; then
-	exit $?
-    fi
-    # pip bdist_egg create too-general wheels. So
-    # we narrow that by moving the generated wheel.
-
-    rm -fr build
-    python setup.py bdist_egg
-done
 python setup.py bdist_wheel
 python ./setup.py sdist
 finish
