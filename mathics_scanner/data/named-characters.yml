@@ -40,14 +40,14 @@
 #                   can be used as part of a symbol. For example \[alpha]
 #                   is letter-like. Therefore we can write: \[alpha]5 = "testing"
 #
-#   operator-name: If present, this symbol is a Mathics operator with
+#   operator-name: If present, this symbol is a Mathics3 operator with
 #                  whose class name is the given name. For example, the
 #                  Divide operator, "/" is here.  But some symbols like
 #                  "`" or "." inside a number could be considered
 #                  either an operator or as part of a lexical symbol.
 #                  "operators.yml" may contain use these symbols, while here we
 #                  might not (or we might). Also, from an operator
-#                  prespective, an operator name like "Association"
+#                  perspective, an operator name like "Association"
 #                  might have *two* (bracketing) symbols associated
 #                  here: "LeftAssociation" and "RightAssociation".
 #                  More operator information can be found in
@@ -62,9 +62,9 @@
 #                            unicode names that we check against. So if the character
 #                            or unicode symbol is not in that, don't use it here.
 #
-#   wl-reference: HTML link to the Wolfram Langauge & System document for character.
+#   wl-reference: HTML link to the Wolfram Language & System document for character.
 #
-#   wl-unicode: The unicode code point used by Mathics internally to represent
+#   wl-unicode: The unicode code point used by Mathics3 internally to represent
 #               the named character. If it is the same as unicode-equivalent
 #               it should be omitted
 #
@@ -4965,7 +4965,7 @@ FreakedSmiley:
 
 # IMPORTANT!
 # ----------
-# For the Mathics Parser to work circa 2021...
+# For the Mathics3 Parser to work circa 2021...
 # If there is a unicode operator, as we have here for "Function", then
 # the YAML key *has* to be the operator name. ("Function" here).
 #
@@ -5964,7 +5964,7 @@ Infinity:
   wl-unicode: "\u221E"
   wl-unicode-name: INFINITY
 
-# Infix isn't really an operator
+# This is the default infix symbol used in boxing/formatting Infix[] expressions.
 # See also RawTilde
 Infix:
   ascii: "~"
@@ -7939,6 +7939,7 @@ Pluto:
   wl-unicode: "\u2647"
   wl-unicode-name: PLUTO
 
+# This is the default postfix operator character used when boxing/formatting Postfix[] expressions.
 Postfix:
   ascii: "//"
   has-unicode-inverse: false
@@ -8008,12 +8009,11 @@ PrecedesTilde:
   wl-unicode: "\u227E"
   wl-unicode-name: PRECEDES OR EQUIVALENT TO
 
-# Prefix isn't really an operator
-# Prefix:
-#  ascii: "@"
-#  has-unicode-inverse: false
-#  is-letter-like: false
-#  operator-name: Prefix
+# This is the default prefix operator character used when boxing/formatting Prefix[] expressions.
+Prefix:
+ ascii: "@"
+ has-unicode-inverse: false
+ is-letter-like: false
 
 Prime:
   esc-alias: ''''
@@ -10163,10 +10163,8 @@ Thorn:
   wl-unicode: "\xFE"
   wl-unicode-name: LATIN SMALL LETTER THORN
 
-# See also operator Infix.
 # Tilde has no built-in meaning per the documentation,
 # so it is not the same as RawTilde.
-# Yes, it is confusing.
 Tilde:
   amslatex: '\sim'
   esc-alias: '~'
