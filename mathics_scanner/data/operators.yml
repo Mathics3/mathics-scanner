@@ -461,8 +461,7 @@ BlankSequenceHead:
   # comments:
 
 BoxGroup:
-  Precedence-Function: 670
-  precedence: 760
+  precedence: 670
   WolframLanguageData:
   WolframLanguageData-corrected: 1
   UnicodeCharacters.tr:

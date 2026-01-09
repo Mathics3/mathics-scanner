@@ -152,7 +152,7 @@ def compile_tables(
         "no-meaning-prefix-operators": no_meaning_prefix_operators,
         "non-associative-binary-operators": nonassoc_binary_operators,
         "operator-to-amslatex": operator2amslatex,
-        "operator-to_string": operator2string,
+        "operator-to-string": operator2string,
         "operator-precedences": operator_precedences,
         "postfix-operators": postfix_operators,
         "prefix-operators": prefix_operators,
