@@ -7751,10 +7751,11 @@ OpenCurlyQuote:
   wl-unicode: "\u2018"
   wl-unicode-name: LEFT SINGLE QUOTATION MARK
 
-Option:
+Optional:
   ascii: ":"
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: Optional
 
 OptionKey:
   esc-alias: opt
