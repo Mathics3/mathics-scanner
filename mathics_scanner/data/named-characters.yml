@@ -7751,17 +7751,18 @@ OpenCurlyQuote:
   wl-unicode: "\u2018"
   wl-unicode-name: LEFT SINGLE QUOTATION MARK
 
-Option:
-  ascii: ":"
-  has-unicode-inverse: false
-  is-letter-like: false
-
 OptionKey:
   esc-alias: opt
   has-unicode-inverse: false
   is-letter-like: false
   wl-reference: https://reference.wolfram.com/language/ref/character/OptionKey.html
   wl-unicode: "\uF7D2"
+
+Optional:
+  ascii: ":"
+  has-unicode-inverse: false
+  is-letter-like: false
+  operator-name: Optional
 
 Or:
   amslatex: '\vert'  # Also $\\lor$
