@@ -37,6 +37,7 @@ def test_yaml_field_names():
             "has-unicode-inverse",
             "is-builtin-constant",
             "is-letter-like",
+            "latex",
             "operator-name",
             "precedence",
             "unicode-equivalent",
@@ -50,7 +51,6 @@ def test_yaml_field_names():
 
 
 def test_amslatex():
-    amslatex_seen = set()
     dup_amslatex = set(["\\Rightarrow", "\\rightarrow", "\\uparrow"])
     for k, v in yaml_data.items():
         a = v.get("amslatex", None)

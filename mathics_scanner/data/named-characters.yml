@@ -15,30 +15,41 @@
 # Field definitions
 # =================
 #
-#   amslatex: If present, the AMSLaTeX name of the symbol. AMSLaTeX symbols
-#             are a superset of normal LaTeX symbols. If the replacement
-#             is surrounded in "$" then this symbol can only be used in
-#             Math mode.
+#   amslatex: If present, the AMSLaTeX control sequence producing the
+#             character. AMSLaTeX symbols are a superset of normal
+#             LaTeX symbols. AMSLaTeX are only available in a
+#             math-mode environment (inline math or display math).
+#             See also latex.
 #
-#   ascii: If present, the ASCII equivalent. In some cases this may be more
-#          than one character. For example "->" or "===".
+#   ascii: If present, the ASCII equivalent. In some cases this may be
+#          more than one character. For example "->" or "===".
 #
 #   esc-alias: The ESC sequence alias of the named character, if it exists.
 #
-#   has-unicode-inverse: Whether or not this named character has a unicode
-#                        equivalent that should replace other variants of it,
-#                        e.g. named character or ascii equivalent.
+#   has-unicode-inverse: Whether or not this named character has a
+#                        unicode equivalent that should replace other
+#                        variants of it, e.g. named character or ascii
+#                        equivalent.
 #
-#   is-builtin-constant: If present, a boolean whether this is a Builtin Symbol as
-#                        defined by WMA that acts like a constant (or a nullary function).
-#                        Degree, I, Infinity, and PI are some examples such constants.
-#                        Usually, if this field is present it will be "true"; for "false"
- #                       values (the majority), the field is omitted.
+#   is-builtin-constant: If present, a boolean whether this is a
+#                        Builtin Symbol as defined by WMA that acts
+#                        like a constant (or a nullary function).
+#                        Degree, I, Infinity, and PI are some examples
+#                        such constants.  Usually, if this field is
+#                        present it will be "true"; for "false" values
+#                        (the majority), the field is omitted.
 #
 #
-#   is-letter-like: Whether or not this named-character is "letter-like", or
-#                   can be used as part of a symbol. For example \[alpha]
-#                   is letter-like. Therefore we can write: \[alpha]5 = "testing"
+#   is-letter-like: Whether or not this named-character is
+#                   "letter-like", or can be used as part of a
+#                   symbol. For example \[alpha] is
+#                   letter-like. Therefore we can write: \[alpha]5 =
+#                   "testing"
+#
+#   latex: If present, the LaTeX control sequence that can be used in
+#          a text-mode (as opposed to a math-mode) environment. If a
+#          control-sequence can be to both text-mode and math-mode and
+#          then the same control sequence also appears in amslatex.
 #
 #   operator-name: If present, this symbol is a Mathics3 operator with
 #                  whose class name is the given name. For example, the
@@ -78,11 +89,17 @@
 #   https://github.com/rsmenon/pygments-mathematica
 #   https://reference.wolfram.com/language/tutorial/OperatorInputForms.html
 
+# Important coding note below for fields with strings containing a backslash.
+#
+#     amslatex: "\\={a}" is correct; *double* backslash inside *double* quotes
+#     amslatex: '\={a}'  is correct; *single* backlslash inside *single* quotes
+#     amslatex: "\={a}"  is incorrect; \= is an invalid escape sequence.
+
 AAcute:
-  amslatex: "\\'{a}"
   esc-alias: a'
   has-unicode-inverse: false
   is-letter-like: true
+  latex: "\\'{a}"
   unicode-equivalent: "\xE1"
   unicode-equivalent-name: LATIN SMALL LETTER A WITH ACUTE
   unicode-reference: https://www.compart.com/en/unicode/U+00E1
@@ -143,10 +160,10 @@ AE:
   wl-unicode-name: LATIN SMALL LETTER AE
 
 AGrave:
-  amslatex: "\\`{a}"
   esc-alias: a`
   has-unicode-inverse: false
   is-letter-like: true
+  latex: "\\`{a}"
   unicode-equivalent: "\xE0"
   unicode-equivalent-name: LATIN SMALL LETTER A WITH GRAVE
   unicode-reference: https://www.compart.com/en/unicode/U+00E0
@@ -543,10 +560,10 @@ Bullet:
   wl-unicode-name: BULLET
 
 CAcute:
-  amslatex: "\\'{c}"
   esc-alias: c'
   has-unicode-inverse: true
   is-letter-like: true
+  latex: "\\'{c}"
   unicode-equivalent: "\u0107"
   unicode-equivalent-name: LATIN SMALL LETTER C WITH ACUTE
   unicode-reference: https://www.compart.com/en/unicode/U+0107
@@ -555,10 +572,10 @@ CAcute:
   wl-unicode-name: LATIN SMALL LETTER C WITH ACUTE
 
 CCedilla:
-  amslatex: '\c{c}'
   esc-alias: c
   has-unicode-inverse: false
   is-letter-like: true
+  latex: '\c{c}'
   unicode-equivalent: "\xE7"
   unicode-equivalent-name: LATIN SMALL LETTER C WITH CEDILLA
   unicode-reference: https://www.compart.com/en/unicode/U+00E7
@@ -567,10 +584,10 @@ CCedilla:
   wl-unicode-name: LATIN SMALL LETTER C WITH CEDILLA
 
 CHacek:
-  amslatex: '\v{c}'
   esc-alias: cv
   has-unicode-inverse: false
   is-letter-like: true
+  latex: '\v{c}'
   unicode-equivalent: "\u010D"
   unicode-equivalent-name: LATIN SMALL LETTER C WITH CARON
   unicode-reference: https://www.compart.com/en/unicode/U+010D
@@ -601,10 +618,10 @@ Cap:
   wl-unicode-name: FROWN
 
 CapitalAAcute:
-  amslatex: "\\'{A}"
   esc-alias: A'
   has-unicode-inverse: false
   is-letter-like: true
+  latex: "\\'{A}"
   unicode-equivalent: "\xC1"
   unicode-equivalent-name: LATIN CAPITAL LETTER A WITH ACUTE
   wl-reference: https://reference.wolfram.com/language/ref/character/CapitalAAcute.html
@@ -656,10 +673,10 @@ CapitalAE:
   wl-unicode-name: LATIN CAPITAL LETTER AE
 
 CapitalAGrave:
-  amslatex: "\\`{A}"
   esc-alias: A`
   has-unicode-inverse: true
   is-letter-like: true
+  latex: "\\`{A}"
   unicode-equivalent: "\xC0"
   unicode-equivalent-name: LATIN CAPITAL LETTER A WITH GRAVE
   wl-reference: https://reference.wolfram.com/language/ref/character/CapitalAGrave.html
@@ -719,10 +736,10 @@ CapitalBeta:
   wl-unicode-name: GREEK CAPITAL LETTER BETA
 
 CapitalCAcute:
-  amslatex: "\\'{C}"
   esc-alias: C'
   has-unicode-inverse: true
   is-letter-like: true
+  latex: "\\'{C}"
   unicode-equivalent: "\u0106"
   unicode-equivalent-name: LATIN CAPITAL LETTER C WITH ACUTE
   unicode-reference: https://www.compart.com/en/unicode/U+0106
@@ -731,8 +748,10 @@ CapitalCAcute:
   wl-unicode-name: LATIN CAPITAL LETTER C WITH ACUTE
 
 CapitalCCedilla:
+  amslatex: '\c{C}'
   esc-alias: C
   has-unicode-inverse: false
+  latex: '\c{C}'
   is-letter-like: true
   unicode-equivalent: "\xC7"
   unicode-equivalent-name: LATIN CAPITAL LETTER C WITH CEDILLA
@@ -741,10 +760,10 @@ CapitalCCedilla:
   wl-unicode-name: LATIN CAPITAL LETTER C WITH CEDILLA
 
 CapitalCHacek:
-  amslatex: '\v{C}'
   esc-alias: Cv
   has-unicode-inverse: true
   is-letter-like: true
+  latex: "\v{C}"
   unicode-equivalent: "\u010C"
   unicode-equivalent-name: LATIN CAPITAL LETTER C WITH CARON
   unicode-reference: https://www.compart.com/en/unicode/U+010C
@@ -764,10 +783,10 @@ CapitalChi:
   wl-unicode-name: GREEK CAPITAL LETTER CHI
 
 CapitalDHacek:
-  amslatex: '\v{D}'
   esc-alias: Dv
   has-unicode-inverse: false
   is-letter-like: true
+  latex: "\v{D}"
   unicode-equivalent: "\u010E"
   unicode-equivalent-name: LATIN CAPITAL LETTER D WITH CARON
   unicode-reference: https://www.compart.com/en/unicode/U+010E
@@ -811,10 +830,10 @@ CapitalDigamma:
   wl-unicode-name: GREEK LETTER DIGAMMA
 
 CapitalEAcute:
-  amslatex: "\\'{E}"
   esc-alias: E'
   has-unicode-inverse: false
   is-letter-like: true
+  latex: "\\'{E}"
   unicode-equivalent: "\xC9"
   unicode-equivalent-name: LATIN CAPITAL LETTER E WITH ACUTE
   wl-reference: https://reference.wolfram.com/language/ref/character/CapitalEAcute.html
@@ -822,10 +841,10 @@ CapitalEAcute:
   wl-unicode-name: LATIN CAPITAL LETTER E WITH ACUTE
 
 CapitalEBar:
-  amslatex: "\\={E}"
   esc-alias: E-
   has-unicode-inverse: false
   is-letter-like: true
+  latex: "\\={E}"
   unicode-equivalent: "\u0112"
   unicode-equivalent-name: LATIN CAPITAL LETTER E WITH MACRON
   unicode-reference: https://www.compart.com/en/unicode/U+0112
@@ -856,10 +875,10 @@ CapitalEDoubleDot:
   wl-unicode-name: LATIN CAPITAL LETTER E WITH DIAERESIS
 
 CapitalEGrave:
-  amslatex: "\\`{E}"
   esc-alias: E`
   has-unicode-inverse: false
   is-letter-like: true
+  latex: "\\`{E}"
   unicode-equivalent: "\xC8"
   unicode-equivalent-name: LATIN CAPITAL LETTER E WITH GRAVE
   wl-reference: https://reference.wolfram.com/language/ref/character/CapitalEGrave.html
@@ -867,10 +886,10 @@ CapitalEGrave:
   wl-unicode-name: LATIN CAPITAL LETTER E WITH GRAVE
 
 CapitalEHacek:
-  amslatex: '\v{E}'
   esc-alias: Ev
   has-unicode-inverse: false
   is-letter-like: true
+  latex: "\v{E}"
   unicode-equivalent: "\u011A"
   unicode-equivalent-name: LATIN CAPITAL LETTER E WITH CARON
   unicode-reference: https://www.compart.com/en/unicode/U+011A
@@ -933,10 +952,10 @@ CapitalGamma:
   wl-unicode-name: GREEK CAPITAL LETTER GAMMA
 
 CapitalIAcute:
-  amslatex: "\\'{I}"
   esc-alias: I'
   has-unicode-inverse: false
   is-letter-like: true
+  latex: "\\'{I}"
   unicode-equivalent: "\xCD"
   unicode-equivalent-name: LATIN CAPITAL LETTER I WITH ACUTE
   wl-reference: https://reference.wolfram.com/language/ref/character/CapitalIAcute.html
@@ -966,10 +985,10 @@ CapitalIDoubleDot:
   wl-unicode-name: LATIN CAPITAL LETTER I WITH DIAERESIS
 
 CapitalIGrave:
-  amslatex: "\\`{I}"
   esc-alias: I`
   has-unicode-inverse: false
   is-letter-like: true
+  latex: "\\`{I}"
   unicode-equivalent: "\xCC"
   unicode-equivalent-name: LATIN CAPITAL LETTER I WITH GRAVE
   wl-reference: https://reference.wolfram.com/language/ref/character/CapitalIGrave.html
@@ -1055,10 +1074,10 @@ CapitalMu:
   wl-unicode-name: GREEK CAPITAL LETTER MU
 
 CapitalNHacek:
-  amslatex: '\v{N}'
   esc-alias: Nv
   has-unicode-inverse: false
   is-letter-like: true
+  latex: "\v{N}"
   unicode-equivalent: "\u0147"
   unicode-equivalent-name: LATIN CAPITAL LETTER N WITH CARON
   unicode-reference: https://www.compart.com/en/unicode/U+0147
@@ -1088,10 +1107,10 @@ CapitalNu:
   wl-unicode-name: GREEK CAPITAL LETTER NU
 
 CapitalOAcute:
-  amslatex: "\\'{O}"
   esc-alias: O'
   has-unicode-inverse: false
   is-letter-like: true
+  latex: "\\'{O}"
   unicode-equivalent: "\xD3"
   unicode-equivalent-name: LATIN CAPITAL LETTER O WITH ACUTE
   wl-reference: https://reference.wolfram.com/language/ref/character/CapitalOAcute.html
@@ -1131,10 +1150,10 @@ CapitalOE:
   wl-unicode-name: LATIN CAPITAL LIGATURE OE
 
 CapitalOGrave:
-  amslatex: "\\`{O}"
   esc-alias: O`
   has-unicode-inverse: false
   is-letter-like: true
+  latex: "\\`{O}"
   unicode-equivalent: "\xD2"
   unicode-equivalent-name: LATIN CAPITAL LETTER O WITH GRAVE
   wl-reference: https://reference.wolfram.com/language/ref/character/CapitalOGrave.html
@@ -1142,10 +1161,10 @@ CapitalOGrave:
   wl-unicode-name: LATIN CAPITAL LETTER O WITH GRAVE
 
 CapitalOHat:
-  amslatex: "\\^{O}"
   esc-alias: O^
   has-unicode-inverse: false
   is-letter-like: true
+  latex: "\\^{O}"
   unicode-equivalent: "\xD4"
   unicode-equivalent-name: LATIN CAPITAL LETTER O WITH CIRCUMFLEX
   wl-reference: https://reference.wolfram.com/language/ref/character/CapitalOHat.html
@@ -1233,9 +1252,9 @@ CapitalPsi:
   wl-unicode-name: GREEK CAPITAL LETTER PSI
 
 CapitalRHacek:
-  amslatex: '\v{R}'
   esc-alias: Rv
   has-unicode-inverse: false
+  latex: "\v{R}"
   is-letter-like: true
   unicode-equivalent: "\u0158"
   unicode-equivalent-name: LATIN CAPITAL LETTER R WITH CARON
@@ -1256,10 +1275,10 @@ CapitalRho:
   wl-unicode-name: GREEK CAPITAL LETTER RHO
 
 CapitalSHacek:
-  amslatex: '\v{S}'
   esc-alias: Sv
   has-unicode-inverse: false
   is-letter-like: true
+  latex: "\v{S}"
   unicode-equivalent: "\u0160"
   unicode-equivalent-name: LATIN CAPITAL LETTER S WITH CARON
   unicode-reference: https://www.compart.com/en/unicode/U+0160
@@ -1302,10 +1321,10 @@ CapitalStigma:
   wl-unicode-name: GREEK LETTER STIGMA
 
 CapitalTHacek:
-  amslatex: '\v{T}'
   esc-alias: Tv
   has-unicode-inverse: false
   is-letter-like: true
+  latex: "\v{T}"
   unicode-equivalent: "\u0164"
   unicode-equivalent-name: LATIN CAPITAL LETTER T WITH CARON
   unicode-reference: https://www.compart.com/en/unicode/U+0164
@@ -1347,10 +1366,10 @@ CapitalThorn:
   wl-unicode-name: LATIN CAPITAL LETTER THORN
 
 CapitalUAcute:
-  amslatex: "\\'{U}"
   esc-alias: U'
   has-unicode-inverse: false
   is-letter-like: true
+  latex: "\\'{U}"
   unicode-equivalent: "\xDA"
   unicode-equivalent-name: LATIN CAPITAL LETTER U WITH ACUTE
   wl-reference: https://reference.wolfram.com/language/ref/character/CapitalUAcute.html
@@ -1379,10 +1398,10 @@ CapitalUDoubleDot:
   wl-unicode-name: LATIN CAPITAL LETTER U WITH DIAERESIS
 
 CapitalUGrave:
-  amslatex: "\\`{U}"
   esc-alias: U`
   has-unicode-inverse: false
   is-letter-like: true
+  latex: "\\`{U}"
   unicode-equivalent: "\xD9"
   unicode-equivalent-name: LATIN CAPITAL LETTER U WITH GRAVE
   wl-reference: https://reference.wolfram.com/language/ref/character/CapitalUGrave.html
@@ -1435,10 +1454,10 @@ CapitalXi:
   wl-unicode-name: GREEK CAPITAL LETTER XI
 
 CapitalYAcute:
-  amslatex: "\\'{Y}"
   esc-alias: Y'
   has-unicode-inverse: false
   is-letter-like: true
+  latex: "\\'{Y}"
   unicode-equivalent: "\xDD"
   unicode-equivalent-name: LATIN CAPITAL LETTER Y WITH ACUTE
   wl-reference: https://reference.wolfram.com/language/ref/character/CapitalYAcute.html
@@ -1446,10 +1465,10 @@ CapitalYAcute:
   wl-unicode-name: LATIN CAPITAL LETTER Y WITH ACUTE
 
 CapitalZHacek:
-  amslatex: '\v{Z}'
   esc-alias: Zv
   has-unicode-inverse: false
   is-letter-like: true
+  latex: "\v{Z}"
   unicode-equivalent: "\u017D"
   unicode-equivalent-name: LATIN CAPITAL LETTER Z WITH CARON
   unicode-reference: https://www.compart.com/en/unicode/U+017D
@@ -1932,10 +1951,10 @@ Currency:
   wl-unicode-name: CURRENCY SIGN
 
 DHacek:
-  amslatex: '\v{d}'
   esc-alias: dv
   has-unicode-inverse: false
   is-letter-like: true
+  latex: "\v{d}"
   unicode-equivalent: "\u010F"
   unicode-equivalent-name: LATIN SMALL LETTER D WITH CARON
   unicode-reference: https://www.compart.com/en/unicode/U+010F
@@ -3306,10 +3325,10 @@ DownTeeArrow:
   wl-unicode-name: DOWNWARDS ARROW FROM BAR
 
 EAcute:
-  amslatex: "\\'{e}"
   esc-alias: e'
   has-unicode-inverse: false
   is-letter-like: true
+  latex: "\\'{e}"
   unicode-equivalent: "\xE9"
   unicode-equivalent-name: LATIN SMALL LETTER E WITH ACUTE
   unicode-reference: https://www.compart.com/en/unicode/U+00E9
@@ -3318,10 +3337,10 @@ EAcute:
   wl-unicode-name: LATIN SMALL LETTER E WITH ACUTE
 
 EBar:
-  amslatex: "\\={e}"
   esc-alias: e-
   has-unicode-inverse: false
   is-letter-like: true
+  latex: "\\={e}"
   unicode-equivalent: "\u0113"
   unicode-equivalent-name: LATIN SMALL LETTER E WITH MACRON
   wl-reference: https://reference.wolfram.com/language/ref/character/EBar.html
@@ -3329,10 +3348,10 @@ EBar:
   wl-unicode-name: LATIN SMALL LETTER E WITH MACRON
 
 ECup:
-  amslatex: '\u{e}'
   esc-alias: eu
   has-unicode-inverse: false
   is-letter-like: true
+  latex: '\u{e}'
   unicode-equivalent: "\u0115"
   unicode-equivalent-name: LATIN SMALL LETTER E WITH BREVE
   wl-reference: https://reference.wolfram.com/language/ref/character/ECup.html
@@ -3351,10 +3370,10 @@ EDoubleDot:
   wl-unicode-name: LATIN SMALL LETTER E WITH DIAERESIS
 
 EGrave:
-  amslatex: "\\`{e}"
   esc-alias: e`
   has-unicode-inverse: false
   is-letter-like: true
+  latex: "\\`{e}"
   unicode-equivalent: "\xE8"
   unicode-equivalent-name: LATIN SMALL LETTER E WITH GRAVE
   unicode-reference: https://www.compart.com/en/unicode/U+00E8
@@ -3363,10 +3382,10 @@ EGrave:
   wl-unicode-name: LATIN SMALL LETTER E WITH GRAVE
 
 EHacek:
-  amslatex: '\v{e}'
   esc-alias: ev
   has-unicode-inverse: false
   is-letter-like: true
+  latex: '\v{e}'
   unicode-equivalent: "\u011B"
   unicode-equivalent-name: LATIN SMALL LETTER E WITH CARON
   wl-reference: https://reference.wolfram.com/language/ref/character/EHacek.html
@@ -5668,7 +5687,7 @@ GreaterEqual:
   wl-unicode-name: GREATER-THAN OR EQUAL TO
 
 GreaterEqualLess:
-  amslatex: 'a\gtreqless b'
+  amslatex: '\gtreqless'
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: GreaterEqualLess
@@ -5842,10 +5861,10 @@ Hyphen:
   wl-unicode-name: HYPHEN
 
 IAcute:
-  amslatex: "\\'{i}"
   esc-alias: i'
   has-unicode-inverse: false
   is-letter-like: true
+  latex: "\\'{i}"
   unicode-equivalent: "\xED"
   unicode-equivalent-name: LATIN SMALL LETTER I WITH ACUTE
   unicode-reference: https://www.compart.com/en/unicode/U+00ED
@@ -5854,9 +5873,9 @@ IAcute:
   wl-unicode-name: LATIN SMALL LETTER I WITH ACUTE
 
 ICup:
-  amslatex: '\u{i}'
   esc-alias: iu
   has-unicode-inverse: false
+  latex: '\u{i}'
   is-letter-like: true
   unicode-equivalent: "\u012D"
   unicode-equivalent-name: LATIN SMALL LETTER I WITH BREVE
@@ -5876,10 +5895,10 @@ IDoubleDot:
   wl-unicode-name: LATIN SMALL LETTER I WITH DIAERESIS
 
 IGrave:
-  amslatex: "\\`{i}"
   esc-alias: i`
   has-unicode-inverse: false
   is-letter-like: true
+  latex: "\\`{i}"
   unicode-equivalent: "\xEC"
   unicode-equivalent-name: LATIN SMALL LETTER I WITH GRAVE
   unicode-reference: https://www.compart.com/en/unicode/U+00EC
@@ -6861,10 +6880,10 @@ Mu:
   wl-unicode-name: GREEK SMALL LETTER MU
 
 NHacek:
-  amslatex: '\v{n}'
   esc-alias: nv
   has-unicode-inverse: false
   is-letter-like: true
+  latex: "\v{n}"
   unicode-equivalent: "\u0148"
   unicode-equivalent-name: LATIN SMALL LETTER N WITH CARON
   wl-reference: https://reference.wolfram.com/language/ref/character/NHacek.html
@@ -7625,10 +7644,10 @@ NumberSign:
   wl-unicode: "\uF724"
 
 OAcute:
-  amslatex: "\\'{o}"
   esc-alias: o'
   has-unicode-inverse: false
   is-letter-like: true
+  latex: "\\'{o}"
   unicode-equivalent: "\xF3"
   unicode-equivalent-name: LATIN SMALL LETTER O WITH ACUTE
   wl-reference: https://reference.wolfram.com/language/ref/character/OAcute.html
@@ -7666,10 +7685,10 @@ OE:
   wl-unicode-name: LATIN SMALL LIGATURE OE
 
 OGrave:
-  amslatex: "\\`{o}"
   esc-alias: o`
   has-unicode-inverse: false
   is-letter-like: true
+  latex: "\\`{o}"
   unicode-equivalent: "\xF2"
   unicode-equivalent-name: LATIN SMALL LETTER O WITH GRAVE
   wl-reference: https://reference.wolfram.com/language/ref/character/OGrave.html
@@ -7677,10 +7696,10 @@ OGrave:
   wl-unicode-name: LATIN SMALL LETTER O WITH GRAVE
 
 OHat:
-  amslatex: "\\^{o}"
   esc-alias: o^
   has-unicode-inverse: false
   is-letter-like: true
+  latex: "\\^{o}"
   unicode-equivalent: "\xF4"
   unicode-equivalent-name: LATIN SMALL LETTER O WITH CIRCUMFLEX
   wl-reference: https://reference.wolfram.com/language/ref/character/OHat.html
@@ -7688,10 +7707,10 @@ OHat:
   wl-unicode-name: LATIN SMALL LETTER O WITH CIRCUMFLEX
 
 OSlash:
-  amslatex: "\\o{}"
   esc-alias: o/
   has-unicode-inverse: false
   is-letter-like: true
+  latex: "\\o{}"
   unicode-equivalent: "\xF8"
   unicode-equivalent-name: LATIN SMALL LETTER O WITH STROKE
   wl-reference: https://reference.wolfram.com/language/ref/character/OSlash.html
@@ -8099,10 +8118,10 @@ QuarterNote:
   wl-unicode-name: QUARTER NOTE
 
 RHacek:
-  amslatex: '\v{r}'
   esc-alias: rv
   has-unicode-inverse: false
   is-letter-like: true
+  latex: "\v{r}"
   unicode-equivalent: "\u0159"
   unicode-equivalent-name: LATIN SMALL LETTER R WITH CARON
   wl-reference: https://reference.wolfram.com/language/ref/character/RHacek.html
@@ -8867,10 +8886,10 @@ RuleDelayed:
   wl-unicode: "\uF51F"
 
 SHacek:
-  amslatex: "\v{s}"
   esc-alias: sv
   has-unicode-inverse: false
   is-letter-like: true
+  latex: "\v{s}"
   unicode-equivalent: "\u0161"
   unicode-equivalent-name: LATIN SMALL LETTER S WITH CARON
   wl-reference: https://reference.wolfram.com/language/ref/character/SHacek.html
@@ -10054,9 +10073,9 @@ SystemsModelDelay:
   wl-unicode: "\uF3AF"
 
 THacek:
-  amslatex: '\v{t}'
   esc-alias: tv
   has-unicode-inverse: false
+  latex: "\v{t}"
   is-letter-like: true
   unicode-equivalent: "\u0165"
   unicode-equivalent-name: LATIN SMALL LETTER T WITH CARON
@@ -10268,10 +10287,10 @@ TripleDot:
   wl-unicode: "\uF758"
 
 UAcute:
-  amslatex: "\\'{u}"
   esc-alias: u'
   has-unicode-inverse: false
   is-letter-like: true
+  latex: "\\'{u}"
   unicode-equivalent: "\xFA"
   unicode-equivalent-name: LATIN SMALL LETTER U WITH ACUTE
   wl-reference: https://reference.wolfram.com/language/ref/character/UAcute.html
@@ -10299,10 +10318,10 @@ UDoubleDot:
   wl-unicode-name: LATIN SMALL LETTER U WITH DIAERESIS
 
 UGrave:
-  amslatex: "\\`{u}"
   esc-alias: u`
   has-unicode-inverse: false
   is-letter-like: true
+  latex: "\\`{u}"
   unicode-equivalent: "\xF9"
   unicode-equivalent-name: LATIN SMALL LETTER U WITH GRAVE
   wl-reference: https://reference.wolfram.com/language/ref/character/UGrave.html
@@ -10822,10 +10841,10 @@ Xor:
   wl-unicode-name: XOR
 
 YAcute:
-  amslatex: "\\'{y}"
   esc-alias: y'
   has-unicode-inverse: false
   is-letter-like: true
+  latex: "\\'{y}"
   unicode-equivalent: "\xFD"
   unicode-equivalent-name: LATIN SMALL LETTER Y WITH ACUTE
   unicode-reference: https://www.compart.com/en/unicode/U+00FD
@@ -10855,10 +10874,10 @@ Yen:
   wl-unicode-name: YEN SIGN
 
 ZHacek:
-  amslatex: '\v{z}'
   esc-alias: zv
   has-unicode-inverse: false
   is-letter-like: true
+  latex: "\v{z}"
   unicode-equivalent: "\u017E"
   unicode-equivalent-name: LATIN SMALL LETTER Z WITH CARON
   unicode-reference: https://www.compart.com/en/unicode/U+017E
