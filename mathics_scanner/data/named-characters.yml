@@ -6224,7 +6224,7 @@ LeftDoubleBracket:
   esc-alias: '[['
   has-unicode-inverse: false
   is-letter-like: false
-  operator-name: LeftPart
+  operator-name: LeftDoubleBracket
   unicode-equivalent: "\u301A"
   unicode-equivalent-name: LEFT WHITE SQUARE BRACKET
   wl-reference: https://reference.wolfram.com/language/ref/character/LeftDoubleBracket.html
@@ -8569,7 +8569,7 @@ RightDoubleBracket:
   esc-alias: ']]'
   has-unicode-inverse: false
   is-letter-like: false
-  operator-name: RightPart
+  operator-name: RightDoubleBracket
   unicode-equivalent: "\u301B"
   unicode-equivalent-name: RIGHT WHITE SQUARE BRACKET
   wl-reference: https://reference.wolfram.com/language/ref/character/RightDoubleBracket.html
