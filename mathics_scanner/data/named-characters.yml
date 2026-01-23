@@ -47,8 +47,8 @@
 #                   "testing"
 #
 #   latex: If present, the LaTeX control sequence that can be used in
-#          a text-mode (as opposed to a math-mode) environment. If a
-#          control-sequence can be to both text-mode and math-mode and
+#          a text-mode (as opposed to a math-mode) environment. When a
+#          control-sequence is both allowed in text-mode and math-mode,
 #          then the same control sequence also appears in amslatex.
 #
 #   operator-name: If present, this symbol is a Mathics3 operator with
