@@ -17,26 +17,26 @@
 #
 #   amslatex: If present, the AMSLaTeX control sequence producing the
 #             character. AMSLaTeX symbols are a superset of normal
-#             LaTeX symbols. AMSLaTeX are only available in a
+#             LaTeX symbols. AMSLaTeX is only available in a
 #             math-mode environment (inline math or display math).
 #             See also latex.
 #
-#   ascii: If present, the ASCII equivalent. In some cases this may be
-#          more than one character. For example "->" or "===".
+#   ascii: If present, the ASCII equivalent. In some cases, this may be
+#          more than one character. For example, "->" or "===".
 #
 #   esc-alias: The ESC sequence alias of the named character, if it exists.
 #
 #   has-unicode-inverse: Whether or not this named character has a
 #                        unicode equivalent that should replace other
-#                        variants of it, e.g. named character or ascii
+#                        variants of it, e.g., named character or ASCII
 #                        equivalent.
 #
-#   is-builtin-constant: If present, a boolean whether this is a
+#   is-builtin-constant: If present, a boolean indicating whether this is a
 #                        Builtin Symbol as defined by WMA that acts
 #                        like a constant (or a nullary function).
 #                        Degree, I, Infinity, and PI are some examples
 #                        such constants.  Usually, if this field is
-#                        present it will be "true"; for "false" values
+#                        present, it will be "true"; for "false" values
 #                        (the majority), the field is omitted.
 #
 #
@@ -56,7 +56,7 @@
 #                  Divide operator, "/" is here.  But some symbols like
 #                  "`" or "." inside a number could be considered
 #                  either an operator or as part of a lexical symbol.
-#                  "operators.yml" may contain use these symbols, while here we
+#                  "operators.yml" may contain use of these symbols, while here we
 #                  might not (or we might). Also, from an operator
 #                  perspective, an operator name like "Association"
 #                  might have *two* (bracketing) symbols associated
@@ -68,19 +68,19 @@
 #   unicode-equivalent: A unicode equivalent for the named-character, if it
 #                       exists. If it is the same as "ascii", please omit.
 #
-#   unicode-equivalent-name: The name of the unicode equivalent, if it exists.
+#   unicode-equivalent-name: The name of the Unicode equivalent, if it exists.
 #                            The Python module unicodedata contains a list of
 #                            unicode names that we check against. So if the character
 #                            or unicode symbol is not in that, don't use it here.
 #
 #   wl-reference: HTML link to the Wolfram Language & System document for character.
 #
-#   wl-unicode: The unicode code point used by Mathics3 internally to represent
-#               the named character. If it is the same as unicode-equivalent
+#   wl-unicode: The Unicode code point used by Mathics3 internally to represent
+#               the named character. If it is the same as the Unicode equivalent,
 #               it should be omitted
 #
 #   wl-unicode-name: The name of the character corresponding to `wl-unicode`, if it exists.
-#                    It will mentioned in Wolfram Language docs if it exists.
+#                    It will be mentioned in Wolfram Language docs if it exists.
 #
 # Sources:
 #   https://www.compart.com/en/unicode
