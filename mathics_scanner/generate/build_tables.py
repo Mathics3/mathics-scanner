@@ -153,6 +153,11 @@ def compile_tables(data: dict) -> dict:
         if "wl-unicode" in v
     }
 
+    # WL to AMS LaTeX characters
+    amslatex_named_characters = {
+        k: v.get("amslatex") for k, v in data.items() if "amslatex" in v
+    }
+
     operator_names = sorted([k for k, v in data.items() if "operator-name" in v])
 
     ascii_operators = []
@@ -219,6 +224,7 @@ def compile_tables(data: dict) -> dict:
 
     return {
         "aliased-characters": aliased_characters,
+        "amslatex-named-characters": amslatex_named_characters,
         "ascii-operators": ascii_operators,
         "ascii-operator-to-symbol": ascii_operator_to_symbol,
         "ascii-operator-to-character-symbol": ascii_operator_to_character_symbol,
