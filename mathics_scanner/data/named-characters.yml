@@ -763,7 +763,7 @@ CapitalCHacek:
   esc-alias: Cv
   has-unicode-inverse: true
   is-letter-like: true
-  latex: "\v{C}"
+  latex: "\\v{C}"
   unicode-equivalent: "\u010C"
   unicode-equivalent-name: LATIN CAPITAL LETTER C WITH CARON
   unicode-reference: https://www.compart.com/en/unicode/U+010C
@@ -786,7 +786,7 @@ CapitalDHacek:
   esc-alias: Dv
   has-unicode-inverse: false
   is-letter-like: true
-  latex: "\v{D}"
+  latex: "\\v{D}"
   unicode-equivalent: "\u010E"
   unicode-equivalent-name: LATIN CAPITAL LETTER D WITH CARON
   unicode-reference: https://www.compart.com/en/unicode/U+010E
@@ -889,7 +889,7 @@ CapitalEHacek:
   esc-alias: Ev
   has-unicode-inverse: false
   is-letter-like: true
-  latex: "\v{E}"
+  latex: "\\v{E}"
   unicode-equivalent: "\u011A"
   unicode-equivalent-name: LATIN CAPITAL LETTER E WITH CARON
   unicode-reference: https://www.compart.com/en/unicode/U+011A
@@ -1077,7 +1077,7 @@ CapitalNHacek:
   esc-alias: Nv
   has-unicode-inverse: false
   is-letter-like: true
-  latex: "\v{N}"
+  latex: "\\v{N}"
   unicode-equivalent: "\u0147"
   unicode-equivalent-name: LATIN CAPITAL LETTER N WITH CARON
   unicode-reference: https://www.compart.com/en/unicode/U+0147
@@ -1254,7 +1254,7 @@ CapitalPsi:
 CapitalRHacek:
   esc-alias: Rv
   has-unicode-inverse: false
-  latex: "\v{R}"
+  latex: "\\v{R}"
   is-letter-like: true
   unicode-equivalent: "\u0158"
   unicode-equivalent-name: LATIN CAPITAL LETTER R WITH CARON
@@ -1278,7 +1278,7 @@ CapitalSHacek:
   esc-alias: Sv
   has-unicode-inverse: false
   is-letter-like: true
-  latex: "\v{S}"
+  latex: "\\v{S}"
   unicode-equivalent: "\u0160"
   unicode-equivalent-name: LATIN CAPITAL LETTER S WITH CARON
   unicode-reference: https://www.compart.com/en/unicode/U+0160
@@ -1324,7 +1324,7 @@ CapitalTHacek:
   esc-alias: Tv
   has-unicode-inverse: false
   is-letter-like: true
-  latex: "\v{T}"
+  latex: "\\v{T}"
   unicode-equivalent: "\u0164"
   unicode-equivalent-name: LATIN CAPITAL LETTER T WITH CARON
   unicode-reference: https://www.compart.com/en/unicode/U+0164
@@ -1468,7 +1468,7 @@ CapitalZHacek:
   esc-alias: Zv
   has-unicode-inverse: false
   is-letter-like: true
-  latex: "\v{Z}"
+  latex: "\\v{Z}"
   unicode-equivalent: "\u017D"
   unicode-equivalent-name: LATIN CAPITAL LETTER Z WITH CARON
   unicode-reference: https://www.compart.com/en/unicode/U+017D
@@ -1954,7 +1954,7 @@ DHacek:
   esc-alias: dv
   has-unicode-inverse: false
   is-letter-like: true
-  latex: "\v{d}"
+  latex: "\\v{d}"
   unicode-equivalent: "\u010F"
   unicode-equivalent-name: LATIN SMALL LETTER D WITH CARON
   unicode-reference: https://www.compart.com/en/unicode/U+010F
@@ -6883,7 +6883,7 @@ NHacek:
   esc-alias: nv
   has-unicode-inverse: false
   is-letter-like: true
-  latex: "\v{n}"
+  latex: "\\v{n}"
   unicode-equivalent: "\u0148"
   unicode-equivalent-name: LATIN SMALL LETTER N WITH CARON
   wl-reference: https://reference.wolfram.com/language/ref/character/NHacek.html
@@ -8121,7 +8121,7 @@ RHacek:
   esc-alias: rv
   has-unicode-inverse: false
   is-letter-like: true
-  latex: "\v{r}"
+  latex: "\\v{r}"
   unicode-equivalent: "\u0159"
   unicode-equivalent-name: LATIN SMALL LETTER R WITH CARON
   wl-reference: https://reference.wolfram.com/language/ref/character/RHacek.html
@@ -8889,7 +8889,7 @@ SHacek:
   esc-alias: sv
   has-unicode-inverse: false
   is-letter-like: true
-  latex: "\v{s}"
+  latex: "\\v{s}"
   unicode-equivalent: "\u0161"
   unicode-equivalent-name: LATIN SMALL LETTER S WITH CARON
   wl-reference: https://reference.wolfram.com/language/ref/character/SHacek.html
@@ -10075,7 +10075,7 @@ SystemsModelDelay:
 THacek:
   esc-alias: tv
   has-unicode-inverse: false
-  latex: "\v{t}"
+  latex: "\\v{t}"
   is-letter-like: true
   unicode-equivalent: "\u0165"
   unicode-equivalent-name: LATIN SMALL LETTER T WITH CARON
@@ -10877,7 +10877,7 @@ ZHacek:
   esc-alias: zv
   has-unicode-inverse: false
   is-letter-like: true
-  latex: "\v{z}"
+  latex: "\\v{z}"
   unicode-equivalent: "\u017E"
   unicode-equivalent-name: LATIN SMALL LETTER Z WITH CARON
   unicode-reference: https://www.compart.com/en/unicode/U+017E
