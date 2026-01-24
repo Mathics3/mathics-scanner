@@ -275,11 +275,14 @@ DEFAULT_DATA_DIR = Path(osp.normpath(osp.dirname(__file__)), "..", "data")
 
 ALL_FIELDS = [
     "aliased-characters",
+    "amslatex-named-characters",
     "ascii-operators",
     "ascii-operator-to-character-symbol",
     "ascii-operator-to-symbol",
     "ascii-operator-to-unicode",
     "ascii-operator-to-wl-unicode",
+    # "builtin-constants",  # not used yet
+    "latex-named-characters",
     "letterlikes",
     "named-characters",
     "operator-names",
@@ -291,9 +294,10 @@ ALL_FIELDS = [
     "unicode-to-amslatex",
     "unicode-to-wl-dict",
     "unicode-to-wl-re",
-    "wl-to-amslatex",
     "wl-to-ascii-dict",
     "wl-to-ascii-re",
+    "wl-to-amslatex",
+    "wl-to-latex",
     "wl-to-unicode-dict",
     "wl-to-unicode-re",
 ]
