@@ -292,6 +292,7 @@ ALL_FIELDS = [
     "operator-to-unicode",
     #   "unicode-operators",  # not used yet
     "unicode-to-amslatex",
+    "unicode-to-latex",
     "unicode-to-wl-dict",
     "unicode-to-wl-re",
     "wl-to-ascii-dict",
