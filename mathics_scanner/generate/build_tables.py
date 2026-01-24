@@ -101,11 +101,18 @@ def compile_tables(data: dict) -> dict:
         if "esc-alias" in v
     }
 
-    # WL to AMS LaTeX characters
+    # WL to AMS LaTeX (math mode) characters
     wl_to_amslatex = {
         v["wl-unicode"]: v.get("amslatex")
         for v in data.values()
         if "amslatex" in v and "wl-unicode" in v
+    }
+
+    # WL to LaTeX text-mode characters
+    wl_to_latex = {
+        v["wl-unicode"]: v.get("latex")
+        for v in data.values()
+        if "latex" in v and "wl-unicode" in v
     }
 
     # operator-to-unicode dictionary entry
@@ -153,9 +160,14 @@ def compile_tables(data: dict) -> dict:
         if "wl-unicode" in v
     }
 
-    # WL to AMS LaTeX characters
+    # WL to AMS LaTeX (math-mode) characters
     amslatex_named_characters = {
         k: v.get("amslatex") for k, v in data.items() if "amslatex" in v
+    }
+
+    # WL to LaTeX text-mode characters
+    latex_named_characters = {
+        k: v.get("latex") for k, v in data.items() if "latex" in v
     }
 
     operator_names = sorted([k for k, v in data.items() if "operator-name" in v])
@@ -196,6 +208,13 @@ def compile_tables(data: dict) -> dict:
         if character_info.get("unicode-equivalent") and character_info.get("amslatex")
     }
 
+    # unicode-to-latex dictionary entry
+    unicode_to_latex = {
+        character_info["unicode-equivalent"]: character_info["latex"]
+        for character_info in data.values()
+        if character_info.get("unicode-equivalent") and character_info.get("latex")
+    }
+
     # unicode-to-operator dictionary entry
     unicode_to_operator = {
         v.get("unicode-equivalent", v.get("ascii")): v["operator-name"]
@@ -231,6 +250,7 @@ def compile_tables(data: dict) -> dict:
         "ascii-operator-to-unicode": ascii_operator_to_unicode,
         "ascii-operator-to-wl-unicode": ascii_operator_to_wl_unicode,
         "builtin-constants": builtin_constants,
+        "latex-named-characters": latex_named_characters,
         "letterlikes": letterlikes,
         "named-characters": named_characters,
         "operator-names": operator_names,
@@ -238,12 +258,14 @@ def compile_tables(data: dict) -> dict:
         "operator-to-ascii": operator_to_ascii,
         "operator-to-unicode": operator_to_unicode,
         "unicode-to-amslatex": unicode_to_amslatex,
+        "unicode-to-latex": unicode_to_latex,
         "unicode-operators": unicode_to_operator,
         "unicode-to-wl-dict": unicode_to_wl_dict,
         "unicode-to-wl-re": unicode_to_wl_re,
         "wl-to-ascii-dict": wl_to_ascii_dict,
         "wl-to-ascii-re": wl_to_ascii_re,
         "wl-to-amslatex": wl_to_amslatex,
+        "wl-to-latex": wl_to_latex,
         "wl-to-unicode-dict": wl_to_unicode_dict,
         "wl-to-unicode-re": wl_to_unicode_re,
     }
@@ -253,11 +275,14 @@ DEFAULT_DATA_DIR = Path(osp.normpath(osp.dirname(__file__)), "..", "data")
 
 ALL_FIELDS = [
     "aliased-characters",
+    "amslatex-named-characters",
     "ascii-operators",
     "ascii-operator-to-character-symbol",
     "ascii-operator-to-symbol",
     "ascii-operator-to-unicode",
     "ascii-operator-to-wl-unicode",
+    # "builtin-constants",  # not used yet
+    "latex-named-characters",
     "letterlikes",
     "named-characters",
     "operator-names",
@@ -269,9 +294,10 @@ ALL_FIELDS = [
     "unicode-to-amslatex",
     "unicode-to-wl-dict",
     "unicode-to-wl-re",
-    "wl-to-amslatex",
     "wl-to-ascii-dict",
     "wl-to-ascii-re",
+    "wl-to-amslatex",
+    "wl-to-latex",
     "wl-to-unicode-dict",
     "wl-to-unicode-re",
 ]
