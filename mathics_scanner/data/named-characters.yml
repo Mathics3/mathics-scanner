@@ -8866,9 +8866,11 @@ Rule:
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Rule
-  unicode-equivalent: "\u2192"
-  unicode-equivalent-name: RIGHTWARDS ARROW
-  unicode-reference: https://www.compart.com/en/unicode/U+2192
+  unicode-equivalent: "\u1F862"
+  ## It seems there are two names for this. The one used, is the one that our test checker finds.
+  # unicode-equivalent-name: WIDE-HEADED RIGHTWARDS LIGHT BARB ARROW
+  unicode-equivalent-name: GREEK SMALL LETTER ALPHA WITH PSILI AND PERISPOMENI AND YPOGEGRAMMENI + DIGIT TWO
+  unicode-reference: https://www.compart.com/en/unicode/U+1F862
   wl-reference: https://reference.wolfram.com/language/ref/character/Rule.html
   wl-unicode: "\uF522"
 
