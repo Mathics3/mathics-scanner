@@ -51,20 +51,25 @@
 #          control-sequence is both allowed in text-mode and math-mode,
 #          then the same control sequence also appears in amslatex.
 #
-#   operator-name: If present, this symbol is a Mathics3 operator with
-#                  whose class name is the given name. For example, the
-#                  Divide operator, "/" is here.  But some symbols like
-#                  "`" or "." inside a number could be considered
-#                  either an operator or as part of a lexical symbol.
-#                  "operators.yml" may contain use of these symbols, while here we
-#                  might not (or we might). Also, from an operator
+#   operator-name: If present, this symbol is a is part of some
+#                  Mathics3 operator with whose class name is the
+#                  given name. For example, the Divide operator, "/"
+#                  is here.  But some symbols like "`" or "." inside a
+#                  number could be considered either an operator or as
+#                  part of a lexical symbol.  "operators.yml" may
+#                  contain use of these symbols, while here we might
+#                  not (or we might). Also, from an operator
 #                  perspective, an operator name like "Association"
 #                  might have *two* (bracketing) symbols associated
 #                  here: "LeftAssociation" and "RightAssociation".
-#                  More operator information can be found in
-#                  file "operators.yml".
+#                  More operator information can be found in file
+#                  "operators.yml". Note that some operators like
+#                  Integrate, have several symbols, e.g. Integral and
+#                  DifferentialD used in the operator.
 #
 #
+#   unicode-block: when given, the unicode block, or named ranges of code points.
+##
 #   unicode-equivalent: A unicode equivalent for the named-character, if it
 #                       exists. If it is the same as "ascii", please omit.
 #
@@ -8867,9 +8872,8 @@ Rule:
   is-letter-like: false
   operator-name: Rule
   unicode-equivalent: "\u1F862"
-  ## It seems there are two names for this. The one used, is the one that our test checker finds.
-  # unicode-equivalent-name: WIDE-HEADED RIGHTWARDS LIGHT BARB ARROW
-  unicode-equivalent-name: GREEK SMALL LETTER ALPHA WITH PSILI AND PERISPOMENI AND YPOGEGRAMMENI + DIGIT TWO
+  unicode-equivalent-name: WIDE-HEADED RIGHTWARDS LIGHT BARB ARROW
+  unicode-block: Arrows
   unicode-reference: https://www.compart.com/en/unicode/U+1F862
   wl-reference: https://reference.wolfram.com/language/ref/character/Rule.html
   wl-unicode: "\uF522"

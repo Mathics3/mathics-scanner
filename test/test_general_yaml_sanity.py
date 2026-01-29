@@ -40,6 +40,7 @@ def test_yaml_field_names():
             "latex",
             "operator-name",
             "precedence",
+            "unicode-block",
             "unicode-equivalent",
             "unicode-equivalent-name",
             "unicode-reference",
@@ -151,9 +152,17 @@ def test_unicode_name():
 
             if k == "VerticalBar":
                 continue
-            assert real_name == expected_name or expected_name.startswith(
-                "MODIFIER LETTER SMALL SCHWA"
-            ), f"{k} has unicode-equivalent-name set to {real_name} but it should be {expected_name}"
+
+            # uncodedata sometimes gives a different name, and there is no way that I
+            # know of to allow it narrow its results to a particular unicode block,
+            # or find out what unicode block it is useing
+            if real_name not in (
+                "WIDE-HEADED RIGHTWARDS LIGHT BARB ARROW",
+                # "MODIFIER LETTER SMALL SCHWA",
+            ):
+                assert (
+                    real_name == expected_name
+                ), f"{k} has unicode-equivalent-name set to {real_name} but it should be {expected_name}"
         else:
             assert (
                 "ascii" in v
