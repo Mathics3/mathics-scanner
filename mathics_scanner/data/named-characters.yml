@@ -8872,7 +8872,7 @@ Rule:
   is-letter-like: false
   operator-name: Rule
   unicode-equivalent: "\u21FE"
-  unicode-equivalent-name: Rightwards Open-Headed Arrow
+  unicode-equivalent-name: RIGHTWARDS OPEN-HEADED ARROW
   unicode-block: Arrows
   unicode-reference: https://www.compart.com/en/unicode/U+21FE
   wl-reference: https://reference.wolfram.com/language/ref/character/Rule.html

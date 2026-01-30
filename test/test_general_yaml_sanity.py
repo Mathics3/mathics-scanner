@@ -143,9 +143,9 @@ def test_unicode_name():
                     f"{k}'s unicode-equivalent doesn't have a unicode name (it's not valid unicode)"
                 )
 
-            real_name = v.get("unicode-equivalent-name")
+            name_in_yaml = v.get("unicode-equivalent-name")
 
-            if real_name is None:
+            if name_in_yaml is None:
                 raise ValueError(
                     "{k} has a unicode equivalent but doesn't have the unicode-equivalent-name field"
                 )
@@ -153,20 +153,19 @@ def test_unicode_name():
             if k == "VerticalBar":
                 continue
 
-            # # uncodedata sometimes gives a different name, and there is no way that I
-            # # know of to allow it narrow its results to a particular unicode block,
-            # # or find out what unicode block it is useing
-            # if real_name not in (
-            #     "WIDE-HEADED RIGHTWARDS LIGHT BARB ARROW",
-            #     # "MODIFIER LETTER SMALL SCHWA",
-            # ):
-            #     assert (
-            #         real_name == expected_name
-            #     ), f"{k} has unicode-equivalent-name set to {real_name} but it should be {expected_name}"
+            # If uncodedata gives a different name, then it is possible that the same Unicode character
+            # resides in two different code blocks, and in the YAML file we used one that uncodedata uses.
+            # Sadly, since terminals use uncodedata and don't have a way to specify a specific Unicode code
+            # block like Supplimental Arrows-C.
+            assert name_in_yaml == expected_name, (
+                f"{k} has unicodedata set to {expected_name} but it YAML says it is {name_in_yaml}.\n"
+                "Change Unicode value in YAML to be unambiquous. "
+            )
         else:
-            assert (
-                "ascii" in v
-            ), f"{k} has unicode-equivalent-name set to {v['unicode-equivalent-name']} but it doesn't have a unicode or ascii equivalent"
+            assert "ascii" in v, (
+                f"{k} has unicode-equivalent-name set to {v['unicode-equivalent-name']} "
+                "but it doesn't have a Unicode or ASCII equivalent"
+            )
 
 
 def test_wl_unicode():
