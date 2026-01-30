@@ -297,7 +297,7 @@ def init_module():
         ("RepeatedNull", r" \.\.\. "),
         ("Repeated", r" \.\. "),
         ("Alternatives", r" \| "),
-        ("Rule", r" (\-\>)|\uF522 "),
+        ("Rule", r" (\-\>)| \uF522|\u21FE"),
         ("RuleDelayed", r" (\:\>)|\uF51F "),
         # https://reference.wolfram.com/language/ref/character/UndirectedEdge.html
         # The official Unicode value is \u2194
