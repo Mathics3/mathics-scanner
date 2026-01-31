@@ -290,8 +290,7 @@ def init_module():
         ("Greater", r" \> "),
         ("Less", r" \< "),
         # https://reference.wolfram.com/language/ref/character/DirectedEdge.html
-        # The official Unicode value is \u2192.
-        ("DirectedEdge", r" -> | \uf3d5|\u2192"),
+        ("DirectedEdge", r" -> | \uf3d5|\u21F4 "),
         ("Or", r" (\|\|) | \u2228 "),
         ("And", r" (\&\&) | \u2227 "),
         ("RepeatedNull", r" \.\.\. "),

@@ -158,7 +158,7 @@ def test_unicode_name():
             # Sadly, since terminals use uncodedata and don't have a way to specify a specific Unicode code
             # block like Supplimental Arrows-C.
             assert name_in_yaml == expected_name, (
-                f"{k} has unicodedata set to {expected_name} but it YAML says it is {name_in_yaml}.\n"
+                f"{k} has uncodedata set to {expected_name} but it YAML says it is {name_in_yaml}.\n"
                 "Change Unicode value in YAML to be unambiquous. "
             )
         else:

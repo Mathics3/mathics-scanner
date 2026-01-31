@@ -6,7 +6,6 @@ between Wolfram's internal representation of `named characters
 and Unicode/ASCII.
 """
 
-import os
 import os.path as osp
 import re
 
