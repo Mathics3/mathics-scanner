@@ -51,20 +51,25 @@
 #          control-sequence is both allowed in text-mode and math-mode,
 #          then the same control sequence also appears in amslatex.
 #
-#   operator-name: If present, this symbol is a Mathics3 operator with
-#                  whose class name is the given name. For example, the
-#                  Divide operator, "/" is here.  But some symbols like
-#                  "`" or "." inside a number could be considered
-#                  either an operator or as part of a lexical symbol.
-#                  "operators.yml" may contain use of these symbols, while here we
-#                  might not (or we might). Also, from an operator
+#   operator-name: If present, this symbol is a is part of some
+#                  Mathics3 operator with whose class name is the
+#                  given name. For example, the Divide operator, "/"
+#                  is here.  But some symbols like "`" or "." inside a
+#                  number could be considered either an operator or as
+#                  part of a lexical symbol.  "operators.yml" may
+#                  contain use of these symbols, while here we might
+#                  not (or we might). Also, from an operator
 #                  perspective, an operator name like "Association"
 #                  might have *two* (bracketing) symbols associated
 #                  here: "LeftAssociation" and "RightAssociation".
-#                  More operator information can be found in
-#                  file "operators.yml".
+#                  More operator information can be found in file
+#                  "operators.yml". Note that some operators like
+#                  Integrate, have several symbols, e.g. Integral and
+#                  DifferentialD used in the operator.
 #
 #
+#   unicode-block: when given, the unicode block, or named ranges of code points.
+##
 #   unicode-equivalent: A unicode equivalent for the named-character, if it
 #                       exists. If it is the same as "ascii", please omit.
 #
@@ -2150,18 +2155,18 @@ Digamma:
   wl-unicode-name: GREEK SMALL LETTER DIGAMMA
 
 # The WL symbol displays with a round dot at the left endpoint.
-# The unicode equivalent shows omits this
 # When there is a tag over the edge, WL uses a bold variant
 # of the symbol.
+# Note: not the same as \[Rule] or \[RightArrow]
 DirectedEdge:
-  amslatex: '\rightarrow'
+  amslatex: '\mathrel{\cdot\rightarrow}'
   esc-alias: de
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: DirectedEdge
-  unicode-equivalent: "\u2192"
-  unicode-equivalent-name: RIGHTWARDS ARROW
-  unicode-reference: https://www.compart.com/en/unicode/U+2192
+  unicode-equivalent: "\u21F4"
+  unicode-equivalent-name: RIGHT ARROW WITH SMALL CIRCLE
+  unicode-reference: https://www.compart.com/en/unicode/U+21F4
   wl-reference: https://reference.wolfram.com/language/ref/character/DirectedEdge.html
   wl-unicode: "\uF3D5"
 
@@ -8506,7 +8511,7 @@ RightAngleBracket:
   wl-unicode: "\u232A"
   wl-unicode-name: RIGHT-POINTING ANGLE BRACKET
 
-# Note: not the same as \[Rule]
+# Note: not the same as \[Rule] or \[DirectedEdge]
 RightArrow:
   amslatex: '\rightarrow'
   esc-alias: ' ->'
@@ -8859,16 +8864,18 @@ RoundSpaceIndicator:
   wl-reference: https://reference.wolfram.com/language/ref/character/RoundSpaceIndicator.html
   wl-unicode: "\uF3B2"
 
-# Note: not the same as \[RightArrow]
+# Note: not the same as \[RightArrow] or \[DirectedEdge]
 Rule:
+  amslatex: '\vrightarrow'
   ascii: "->"
   esc-alias: "->"
   has-unicode-inverse: false
   is-letter-like: false
   operator-name: Rule
-  unicode-equivalent: "\u2192"
-  unicode-equivalent-name: RIGHTWARDS ARROW
-  unicode-reference: https://www.compart.com/en/unicode/U+2192
+  unicode-equivalent: "\u21FE"
+  unicode-equivalent-name: RIGHTWARDS OPEN-HEADED ARROW
+  unicode-block: Arrows
+  unicode-reference: https://www.compart.com/en/unicode/U+21FE
   wl-reference: https://reference.wolfram.com/language/ref/character/Rule.html
   wl-unicode: "\uF522"
 
