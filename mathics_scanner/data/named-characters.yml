@@ -6168,6 +6168,7 @@ LeftAngleBracket:
   esc-alias: <
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: LeftAngleBracket
   unicode-equivalent: "\u2329"
   unicode-equivalent-name: LEFT-POINTING ANGLE BRACKET
   unicode-reference: https://www.compart.com/en/unicode/U+2329
