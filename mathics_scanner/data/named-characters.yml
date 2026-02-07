@@ -6164,6 +6164,7 @@ LastPage:
   wl-reference: https://reference.wolfram.com/language/ref/character/LastPage.html
   wl-unicode: "\uF7FB"
 
+# Opening part of AngleBracket[] - an operator without a builtin-meaning
 LeftAngleBracket:
   esc-alias: <
   has-unicode-inverse: false
@@ -6213,8 +6214,9 @@ LeftArrowRightArrow:
   wl-unicode: "\u21C6"
   wl-unicode-name: LEFTWARDS ARROW OVER RIGHTWARDS ARROW
 
-# Left part of "Association[]" operator
+# Opening of "Association[]" operator
 LeftAssociation:
+  amslatex: '\langle\vert'
   esc-alias: <|
   has-unicode-inverse: false
   is-letter-like: false
@@ -6222,6 +6224,7 @@ LeftAssociation:
   wl-reference: https://reference.wolfram.com/language/ref/character/LeftAssociation.html
   wl-unicode: "\uF113"
 
+# Opening of "BracketingBar[]" operator without builtin-meaning
 LeftBracketingBar:
   esc-alias: l|
   has-unicode-inverse: false
@@ -6231,7 +6234,7 @@ LeftBracketingBar:
   wl-reference: https://reference.wolfram.com/language/ref/character/LeftBracketingBar.html
   wl-unicode: "\uF603"
 
-# Left part of "Ceiling[]" operator
+# Opening of "Ceiling[]" operator
 LeftCeiling:
   esc-alias: lc
   has-unicode-inverse: false
@@ -6244,7 +6247,7 @@ LeftCeiling:
   wl-unicode: "\u2308"
   wl-unicode-name: LEFT CEILING
 
-# Left part of "Part[] operator
+# Opening of "Part[] operator
 LeftDoubleBracket:
   esc-alias: '[['
   has-unicode-inverse: false
@@ -6256,6 +6259,7 @@ LeftDoubleBracket:
   wl-unicode: "\u301A"
   wl-unicode-name: LEFT WHITE SQUARE BRACKET
 
+# Opening part of DoubleBracketingBar[] - an operator without a builtin-meaning
 LeftDoubleBracketingBar:
   esc-alias: l||
   has-unicode-inverse: false
@@ -8501,6 +8505,7 @@ RightAngle:
   wl-unicode: "\u221F"
   wl-unicode-name: RIGHT ANGLE
 
+# Closing part of AngleBracket[] - an operator without a builtin-meaning
 RightAngleBracket:
   esc-alias: '>'
   has-unicode-inverse: false
@@ -8550,8 +8555,9 @@ RightArrowLeftArrow:
   wl-unicode: "\u21C4"
   wl-unicode-name: RIGHTWARDS ARROW OVER LEFTWARDS ARROW
 
-# Right part of "Association[]" operator
+# Closing of "Association[]" operator
 RightAssociation:
+  amslatex: '\vert\rangle'
   esc-alias: '|>'
   has-unicode-inverse: false
   is-letter-like: false
@@ -8559,8 +8565,8 @@ RightAssociation:
   wl-reference: https://reference.wolfram.com/language/ref/character/RightAssociation.html
   wl-unicode: "\uF114"
 
+# Closing of "BracketingBar[]" operator without builtin-meaning
 # Note: not the same as \[VerticalBar]
-# Used in BracketingBar
 RightBracketingBar:
   esc-alias: r|
   has-unicode-inverse: false
@@ -8570,7 +8576,7 @@ RightBracketingBar:
   wl-reference: https://reference.wolfram.com/language/ref/character/RightBracketingBar.html
   wl-unicode: "\uF604"
 
-# Right part of "Ceiling[]" operator
+# Closing part of "Ceiling[]" operator
 RightCeiling:
   esc-alias: rc
   has-unicode-inverse: false
@@ -8589,7 +8595,7 @@ RightComposition:
   is-letter-like: false
   operator-name: RightComposition
 
-# Right part of "Part[] operator
+# Closing part of "Part[] operator
 RightDoubleBracket:
   esc-alias: ']]'
   has-unicode-inverse: false
@@ -8601,6 +8607,7 @@ RightDoubleBracket:
   wl-unicode: "\u301B"
   wl-unicode-name: RIGHT WHITE SQUARE BRACKET
 
+# Closing part of DoubleBracketingBar[] - an operator without a builtin-meaning
 RightDoubleBracketingBar:
   ascii: "||"
   has-unicode-inverse: false
