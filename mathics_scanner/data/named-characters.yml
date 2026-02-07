@@ -3110,6 +3110,8 @@ DoubleUpDownArrow:
   wl-unicode: "\u21D5"
   wl-unicode-name: UP DOWN DOUBLE ARROW
 
+# Note DoubleVerticalBar which sort of looks like DoubleBracketingBar
+# is an *infix* operator with no built-in meaning.
 DoubleVerticalBar:
   amslatex: '\parallel'
   esc-alias: ' ||'
@@ -7082,6 +7084,8 @@ NotCupCap:
   wl-unicode: "\u226D"
   wl-unicode-name: NOT EQUIVALENT TO
 
+# Note NotDoubleVerticalBar, like DoubleVerticalBar is an *infix*
+# operator with no built-in meaning.
 NotDoubleVerticalBar:
   amslatex: '\nparallel'
   esc-alias: '!||'
