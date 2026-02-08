@@ -17,7 +17,7 @@ jobs:
       - name: Install click, black, and isort
         run: pip install 'click==8.2.1' 'black==25.11.0'
       - name: Run black --check .
-        run: black --check .
+        run: black --check --diff .
       - name: If needed, commit black changes to the pull request
         if: failure()
         run: |
