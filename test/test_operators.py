@@ -8,9 +8,10 @@ from pathlib import Path
 import yaml
 
 data_dir = Path(osp.normpath(osp.dirname(__file__)), "..", "mathics_scanner", "data")
-with open(data_dir / "operators.yml", "r", encoding="utf8") as operator_f, open(
-    data_dir / "named-characters.yml", "r", encoding="utf8"
-) as character_f:
+with (
+    open(data_dir / "operators.yml", "r", encoding="utf8") as operator_f,
+    open(data_dir / "named-characters.yml", "r", encoding="utf8") as character_f,
+):
     # Load the YAML data.
     operator_data = yaml.load(operator_f, Loader=yaml.FullLoader)
     character_data = yaml.load(character_f, Loader=yaml.FullLoader)

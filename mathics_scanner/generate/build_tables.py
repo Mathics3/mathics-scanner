@@ -327,9 +327,10 @@ ALL_FIELDS = [
     "data_dir", type=click.Path(readable=True), default=DEFAULT_DATA_DIR, required=False
 )
 def main(field, output, data_dir):
-    with open(data_dir / "named-characters.yml", "r", encoding="utf8") as i, open(
-        output, "w"
-    ) as o:
+    with (
+        open(data_dir / "named-characters.yml", "r", encoding="utf8") as i,
+        open(output, "w") as o,
+    ):
         # Load the YAML data.
         data = yaml.load(i, Loader=yaml.FullLoader)
 

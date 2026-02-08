@@ -34,15 +34,15 @@ abc",
         (r"b\.4dXYZ", 2, 5, chr(0x4D), "two-character hex in middle"),
         # With colon (4-character hex)
         (r":0030", 0, 5, "0", "four-character hex"),
-        (r":03B5", 0, 5, "\u03B5", "four-character hex unicode uppercase"),
+        (r":03B5", 0, 5, "\u03b5", "four-character hex unicode uppercase"),
         (r":03B8", 0, 5, "\u03b8", "four-character hex unicode lowercase"),
         # With Vertical bar (6-character hex)
-        (r"|01d450", 0, 7, "\U0001D450", "six-character hex unicode lowercase"),
-        (r"|01D451", 0, 7, "\U0001D451", "six-character hex unicode uppercase"),
+        (r"|01d450", 0, 7, "\U0001d450", "six-character hex unicode lowercase"),
+        (r"|01D451", 0, 7, "\U0001d451", "six-character hex unicode uppercase"),
         # Named Characters
-        ("[Theta]", 0, 7, "\u03B8", "Named character; full string"),
-        ("abcd[CapitalPi]efg", 4, 15, "\u03A0", "Named character; internal"),
-        (r"z \[Conjugate]", 3, 14, "\uF3C8", "Named character; at end"),
+        ("[Theta]", 0, 7, "\u03b8", "Named character; full string"),
+        ("abcd[CapitalPi]efg", 4, 15, "\u03a0", "Named character; internal"),
+        (r"z \[Conjugate]", 3, 14, "\uf3c8", "Named character; at end"),
         ("[Integral]", 0, 10, "\u222b", "Another full-string named-character"),
     ):
         assert parse_escape_sequence(text, pos) == (expect_str, expect_pos), fail_msg
