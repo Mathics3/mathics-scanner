@@ -63,7 +63,7 @@ def get_location(loc: Union[SourceRange, SourceRange2, MethodType]) -> str:
 
 
 def get_location_file_line(
-    loc: Union[SourceRange, SourceRange2, MethodType]
+    loc: Union[SourceRange, SourceRange2, MethodType],
 ) -> Tuple[str, int]:
     """
     Return the container name (often a filename) and starting line number for

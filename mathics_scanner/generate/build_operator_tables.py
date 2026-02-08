@@ -177,9 +177,11 @@ DEFAULT_DATA_DIR = Path(osp.normpath(osp.dirname(__file__)), "..", "data")
     "data_dir", type=click.Path(readable=True), default=DEFAULT_DATA_DIR, required=False
 )
 def main(output, data_dir):
-    with open(data_dir / "operators.yml", "r", encoding="utf8") as operator_f, open(
-        data_dir / "named-characters.yml", "r", encoding="utf8"
-    ) as character_f, open(output, "w") as o:
+    with (
+        open(data_dir / "operators.yml", "r", encoding="utf8") as operator_f,
+        open(data_dir / "named-characters.yml", "r", encoding="utf8") as character_f,
+        open(output, "w") as o,
+    ):
         # Load the YAML data.
         operator_data = yaml.load(operator_f, Loader=yaml.FullLoader)
         character_data = yaml.load(character_f, Loader=yaml.FullLoader)
