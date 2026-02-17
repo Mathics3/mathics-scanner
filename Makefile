@@ -22,20 +22,21 @@ PIP_INSTALL_OPTS ?=
 #: Default target - same as "develop"
 all: develop
 
-mathics_scanner/data/character-tables.json: mathics_scanner/data/named-characters.yml
-	$(PIP) install -r requirements-dev.txt
-	$(PYTHON) mathics_scanner/generate/build_tables.py
+mathics_scanner/data/boxing-characters.json: mathics_scanner/data/boxing-characters.yml
+	$(PYTHON) mathics_scanner/generate/boxing_characters.py
+
+mathics_scanner/data/named-characters.json: mathics_scanner/data/named-characters.yml
+	$(PYTHON) mathics_scanner/generate/named_characters.py
 
 mathics_scanner/data/operators.json: mathics_scanner/data/operators.yml
-	$(PIP) install -r requirements-dev.txt
-	$(PYTHON) mathics_scanner/generate/build_operator_tables.py
+	$(PYTHON) mathics_scanner/generate/operators.py
 
 #: build everything needed to install
-build: mathics_scanner/data/characters.json mathics_scanner/data/operators.json
+build: mathics_scanner/data/characters.json mathics_scanner/data/named_characters.json mathics_scanner/data/operators.json
 	$(PYTHON) ./setup.py build
 
 #: Set up to run from the source tree
-develop: mathics_scanner/data/character-tables.json mathics_scanner/data/operators.json
+develop: mathics_scanner/data/boxing-characters.json mathics_scanner/data/named-characters.json mathics_scanner/data/operators.json
 	$(PIP) install -e .$(PIP_INSTALL_OPTS)
 
 #: Build distribution
@@ -56,16 +57,16 @@ check: pytest
 test: check
 
 #: Build Sphinx HTML documentation
-doc:  mathics_scanner/data/character-tables.json
+doc:  mathics_scanner/data/named-characters.json
 	make -C docs html
 
 #: Remove derived files
 clean:
 	@find . -name *.pyc -type f -delete; \
-	$(RM) -f mathics_scanner/data/character-tables.json mathics_scanner/data/operators.json || true
+	$(RM) -f mathics_scanner/data/*.json || true
 
 #: Run py.test tests. Use environment variable "o" for pytest options
-pytest: mathics_scanner/data/character-tables.json
+pytest: mathics_scanner/data/named-characters.json
 	$(PYTHON) -m pytest test $o
 
 #: Print to stdout a GNU Readline inputrc without Unicode

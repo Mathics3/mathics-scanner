@@ -51,8 +51,9 @@ full = [
 ]
 
 [project.scripts]
-mathics3-generate-json-table = "mathics_scanner.generate.build_tables:main"
-mathics3-generate-operator-json-table = "mathics_scanner.generate.build_operator_tables:main"
+mathics3-make-boxing-character-json = "mathics_scanner.generate.box_characters:main"
+mathics3-make-named-character-json = "mathics_scanner.generate.named_characters:main"
+mathics3-make-operator-json = "mathics_scanner.generate.operators:main"
 mathics3-tokens = "mathics_scanner.mathics3_tokens:main"
 
 [tool.setuptools]
@@ -64,11 +65,13 @@ packages = [
 
 [tool.setuptools.package-data]
 "mathics_scanner" = [
+    "data/boxing-characters.json",
+    "data/boxing-characters.yml",
+    "data/named-characters.json",
     "data/named-characters.yml",
     "data/operators.yml",
     "data/operators.json",
     "data/*.csv",
-    "data/character-tables.json",  # List this explicitly since it is needed
     "data/*.json",
     "data/ExampleData/*",
 ]

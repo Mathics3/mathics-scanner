@@ -249,7 +249,6 @@ def compile_tables(data: dict) -> dict:
         "ascii-operator-to-character-symbol": ascii_operator_to_character_symbol,
         "ascii-operator-to-unicode": ascii_operator_to_unicode,
         "ascii-operator-to-wl-unicode": ascii_operator_to_wl_unicode,
-        "box-characters": box_characters,
         "builtin-constants": builtin_constants,
         "latex-named-characters": latex_named_characters,
         "letterlikes": letterlikes,
@@ -282,7 +281,6 @@ ALL_FIELDS = [
     "ascii-operator-to-symbol",
     "ascii-operator-to-unicode",
     "ascii-operator-to-wl-unicode",
-    "box-characters",
     # "builtin-constants",  # not used yet
     "latex-named-characters",
     "letterlikes",
@@ -323,7 +321,7 @@ ALL_FIELDS = [
     "-o",
     show_default=True,
     type=click.Path(writable=True),
-    default=DEFAULT_DATA_DIR / "character-tables.json",
+    default=DEFAULT_DATA_DIR / "named-characters.json",
 )
 @click.argument(
     "data_dir", type=click.Path(readable=True), default=DEFAULT_DATA_DIR, required=False

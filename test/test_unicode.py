@@ -1,12 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from mathics_scanner.load import (
-    load_mathics_character_json,
-    load_mathics_character_yaml,
-)
-
-yaml_data = load_mathics_character_yaml()
-json_data = load_mathics_character_json()
+from test.helper import yaml_data
 
 
 def test_has_unicode():

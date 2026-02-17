@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from mathics_scanner.characters import replace_wl_with_plain_text
-from mathics_scanner.load import load_mathics_character_yaml
+from test.helper import yaml_data
 
-yaml_data = load_mathics_character_yaml()
+from mathics_scanner.characters import replace_wl_with_plain_text
 
 
 def wl_to_ascii(wl_input: str) -> str:

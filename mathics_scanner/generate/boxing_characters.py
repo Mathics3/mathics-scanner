@@ -83,7 +83,7 @@ ALL_FIELDS = [
     "-o",
     show_default=True,
     type=click.Path(writable=True),
-    default=DEFAULT_DATA_DIR / "box-character-tables.json",
+    default=DEFAULT_DATA_DIR / "boxing-characters.json",
 )
 @click.argument(
     "data_dir", type=click.Path(readable=True), default=DEFAULT_DATA_DIR, required=False

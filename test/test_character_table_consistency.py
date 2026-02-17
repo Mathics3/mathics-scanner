@@ -1,14 +1,9 @@
 # -*- coding: utf-8 -*-
 
+from test.helper import json_data, yaml_data
+
 from mathics_scanner.characters import replace_unicode_with_wl as unicode_to_wl
 from mathics_scanner.characters import replace_wl_with_plain_text as wl_to_unicode
-from mathics_scanner.load import (
-    load_mathics_character_json,
-    load_mathics_character_yaml,
-)
-
-yaml_data = load_mathics_character_yaml()
-json_data = load_mathics_character_json()
 
 
 def test_ascii_fields_in_json():
