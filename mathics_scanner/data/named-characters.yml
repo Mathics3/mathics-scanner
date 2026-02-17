@@ -6918,6 +6918,7 @@ Nand:
   esc-alias: nand
   has-unicode-inverse: false
   is-letter-like: false
+  operator-name: Nand
   unicode-equivalent: "\u22BC"
   unicode-equivalent-name: NAND
   unicode-reference: https://www.compart.com/en/unicode/U+22BC
