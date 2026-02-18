@@ -91,13 +91,13 @@ _wl_to_ascii_re = re.compile(NAMED_CHARACTERS_COLLECTION.get("wl-to-ascii-re", "
 # AMS LaTeX replacements
 _wl_to_amstex = NAMED_CHARACTERS_COLLECTION.get("wl-to-amstex", None)
 
-# Conversion from WL to unicode
+# Conversion from WL to Unicode
 _wl_to_unicode = NAMED_CHARACTERS_COLLECTION.get(
     "wl-to-unicode-dict", NAMED_CHARACTERS_COLLECTION.get("wl_to_ascii")
 )
 _wl_to_unicode_re = re.compile(NAMED_CHARACTERS_COLLECTION.get("wl-to-unicode-re", ""))
 
-# Conversion from unicode to WL
+# Conversion from Unicode to WL
 _unicode_to_wl = NAMED_CHARACTERS_COLLECTION.get("unicode-to-wl-dict", {})
 _unicode_to_wl_re = re.compile(NAMED_CHARACTERS_COLLECTION.get("unicode-to-wl-re", ""))
 
@@ -122,7 +122,7 @@ def replace_wl_with_plain_text(wl_input: str, use_unicode=True) -> str:
                         for the conversion.
 
     Note that the occurrences of named characters in ``wl_input`` are expect to
-    be represented by Wolfram's internal scheme. For more information Wolfram's
+    be represented by Wolfram's internal scheme. For more information on Wolfram's
     representation scheme and on our own conversion scheme, please see `Listing
     of Named Characters
     <https://reference.wolfram.com/language/guide/ListingOfNamedCharacters.html>`_
@@ -148,7 +148,7 @@ def replace_unicode_with_wl(unicode_input: str) -> str:
 
     Note that the occurrences of named characters in the output of
     ``replace_unicode_with_wl`` are represented using Wolfram's internal
-    scheme. For more information Wolfram's representation scheme and on our own
+    scheme. For more information on Wolfram's representation scheme and on our own
     conversion scheme, please see `Listing of Named Characters
     <https://reference.wolfram.com/language/guide/ListingOfNamedCharacters.html>`_
     and ``implementation.rst`` respectively.
