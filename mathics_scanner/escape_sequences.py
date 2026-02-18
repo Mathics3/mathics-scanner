@@ -28,7 +28,7 @@ def parse_base(source_text: str, start_shift: int, end_shift: int, base: int) ->
     See if characters start_shift .. end shift
     can be converted to an integer in base  ``base``.
 
-    If so, chr(integer value converted from base) is returnd.
+    If so, chr(integer value converted from base) is returned.
 
     However, if the conversion fails, SyntaxError is raised.
     """
@@ -58,14 +58,14 @@ def parse_base(source_text: str, start_shift: int, end_shift: int, base: int) ->
 
 def parse_named_character(source_text: str, start: int, finish: int) -> Optional[str]:
     r"""
-    Find the unicode-equivalent symbol for a string named character.
+    Find the Unicode equivalent symbol for a string named character.
 
-    Before calling we have matched the text between "\["  and "]" of the input.
+    Before calling, we have matched the text between "\["  and "]" of the input.
 
     The name character is thus in source_text[start:finish].
 
     Match this string with the known named characters,
-    e.g. "Theta".  If we can match this, then we return the unicode equivalent from the
+    e.g., "Theta".  If we can match this, then we return the Unicode equivalent from the
     `NAMED_CHARACTERS` map (which is read in from JSON but stored in a YAML file).
 
     If we can't find the named character, raise NamedCharacterSyntaxError.
@@ -130,7 +130,7 @@ def parse_escape_sequence(source_text: str, pos: int) -> Tuple[str, int]:
         pos += 3
 
     # WMA escape characters \n, \t, \b, \r.
-    # Note that these are a similer to Python, but are different.
+    # Note that these are similar to Python, but are different.
     # In particular, Python defines "\a" to be ^G (control G),
     # but in WMA, this is invalid.
     elif c in ESCAPE_CODES:
