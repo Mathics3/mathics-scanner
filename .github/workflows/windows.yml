@@ -28,8 +28,9 @@ jobs:
         pip install -e .
     - name: Test Mathics3
       run: |
-        # Ideally we should not have to do this.
-        python mathics_scanner/generate/build_tables.py
-        python mathics_scanner/generate/build_operator_tables.py
+        # I don't think I need this anymore:
+        # python -m mathics_scanner.generate.boxing_characters
+        # python -m mathics_scanner.generate.named_characters
+        # python -m mathics_scanner.generate.operators
         pip install -e .[dev,full]
         py.test test

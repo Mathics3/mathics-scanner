@@ -10,20 +10,7 @@ from pathlib import Path
 import click
 import yaml
 
-try:
-    from mathics_scanner.version import __version__
-except ImportError:
-    # When using build isolation
-    __version__ = "unknown"
-
-
-def get_srcdir() -> str:
-    filename = osp.normcase(osp.dirname(osp.abspath(__file__)))
-    return osp.realpath(filename)
-
-
-def read(*rnames) -> str:
-    return open(osp.join(get_srcdir(), *rnames)).read()
+from mathics_scanner.version import __version__
 
 
 def compile_tables(data: dict) -> dict:

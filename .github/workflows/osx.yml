@@ -30,5 +30,8 @@ jobs:
       run: |
         pip install -r requirements-dev.txt
         pip install -r requirements-full.txt
-        python -m mathics_scanner.generate.build_tables
+        # I don't think I need this anymore:
+        # python -m mathics_scanner.generate.boxing_characters
+        # python -m mathics_scanner.generate.named_characters
+        # python -m mathics_scanner.generate.operators
         make check

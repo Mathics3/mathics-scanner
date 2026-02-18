@@ -12,6 +12,8 @@ from typing import Any, Dict, Tuple
 import click
 import yaml
 
+from mathics_scanner.version import __version__
+
 OPERATOR_FIELDS = [
     "actual-precedence",
     "Precedence",
@@ -23,22 +25,6 @@ OPERATOR_FIELDS = [
     "associativity",
     "meaningful",
 ]
-
-
-try:
-    from mathics_scanner.version import __version__
-except ImportError:
-    # When using build isolation
-    __version__ = "unknown"
-
-
-def get_srcdir() -> str:
-    filename = osp.normcase(osp.dirname(osp.abspath(__file__)))
-    return osp.realpath(filename)
-
-
-def read(*rnames) -> str:
-    return open(osp.join(get_srcdir(), *rnames)).read()
 
 
 def compile_tables(
