@@ -99,28 +99,20 @@ class TerminalShell(LineFeeder):
 
     def get_in_prompt(self):
         next_line_number = self.get_last_line_number() + 1
-        self.lineno = next_line_number
-        return "{1}{0}[{2}{3}]:= {4}".format(self.in_prefix, *self.incolors)
+        return "{2}{0}[{3}{1}{4}]:= {5}".format(
+            self.in_prefix, next_line_number, *self.incolors
+        )
 
-    def get_out_prompt(self, form=None):
+    def get_out_prompt(self):
         line_number = self.get_last_line_number()
-        if form:
-            return "{2}{0}[{3}{4}]//{1}= {5}".format(
-                self.out_prefix, line_number, form, *self.outcolors
-            )
-        return "{1}{0}[{2}{3}]= {4}".format(
+        return "{2}{0}[{3}{1}{4}]= {5}".format(
             self.out_prefix, line_number, *self.outcolors
         )
 
-    def to_output(self, text, form=None):
+    def to_output(self, text):
         line_number = self.get_last_line_number()
         newline = "\n" + " " * len("Out[{0}]= ".format(line_number))
-        if form:
-            newline += (len(form) + 2) * " "
         return newline.join(text.splitlines())
-
-    def out_callback(self, out, fmt=None):
-        print(self.to_output(str(out), fmt))
 
     def read_line(self, prompt):
         if self.using_readline:
@@ -163,7 +155,7 @@ def interactive_eval_loop(shell: TerminalShell, code_tokenize_format: bool):
     while True:
         try:
             source_text = shell.feed()
-            tokens(source_text, code_tokenize_format)
+            tokens(shell, source_text, code_tokenize_format)
         except NamedCharacterSyntaxError:
             shell.errmsg(
                 "Syntax",
@@ -197,11 +189,11 @@ def interactive_eval_loop(shell: TerminalShell, code_tokenize_format: bool):
             print("\n\nGoodbye!\n")
             # raise to pass the error code on, e.g. Quit[1]
             raise
-        finally:
-            shell.reset_lineno()
+        # finally:
+        #     shell.reset_lineno()
 
 
-def tokens(source_text: str, code_tokenize_format: bool):
+def tokens(shell: TerminalShell, source_text: str, code_tokenize_format: bool):
     tokeniser = Tokeniser(
         SingleLineFeeder(source_text, "<Mathics3-tokens>", ContainerKind.STRING)
     )
@@ -217,9 +209,11 @@ def tokens(source_text: str, code_tokenize_format: bool):
         if token.tag == "END":
             break
         elif code_tokenize_format:
-            print(token.code_tokenize_format)
+            shell.to_output(token.code_tokenize_format)
+            # print(token.code_tokenize_format)
         else:
-            print(token)
+            mess = shell.get_out_prompt()
+            print(mess + str(token) + "\n")
 
 
 def main():
@@ -297,7 +291,7 @@ def main():
 
     if args.FILE is not None:
         feeder = FileLineFeeder(args.FILE)
-        tokenizer_loop(feeder, args.CodeTokenize)
+        tokenizer_loop(feeder, shell, args.CodeTokenize)
 
     else:
         interactive_eval_loop(shell, args.CodeTokenize)
