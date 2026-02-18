@@ -29,67 +29,68 @@
 # system markers, specifically the range 0xf7c0 to 0xf7cd.
 #
 
-# Coding note: below we use single quotes, not double quotes so that we do
-# not have to escape backslash characters.
+# Coding note: make note of quotes. Single quotes for unescaped backslashes, e.g.
+# in the ASCII field and double quotes when we do not escaped backlashes in the
+# Unicode field.
 
 LinearSyntaxAmp:
   ASCII: '\&'
   Operators: []
-  Unicode: '\uf7c7'
+  Unicode: "\uf7c7"
 
 LinearSyntaxAt:
   ASCII: '\@'
   Operators: [RadicalBox, SqrtBox]
-  Unicode: '\uf7c1'
+  Unicode: "\uf7c1"
 
 LinearSyntaxBacktick:
   ASCII: '\`'
   Operators: [FormBox]
-  Unicode: '\uf7cd'
+  Unicode: "\uf7cd"
 
 LinearSyntaxBang:
   ASCII: '\!'
   Operators:
-  Unicode: '\uf7c1'
+  Unicode: "\uf7c1"
 
 LinearSyntaxCaret:
   ASCII: '\^'
   Operators: SuperscriptBox
-  Unicode: '\uf7c6'
+  Unicode: "\uf7c6"
 
 # Note: this name does not appear in CodeParse
 LinearSyntaxCloseParen:
   ASCII: '\)'
   Operators: [RowBox]
-  Unicode: '\uf7c0'
+  Unicode: "\uf7c0"
 
 # Note: this name does not appear in CodeParse
 LinearSyntaxOpenParen:
   ASCII: '\('
   Operators: [RowBox]
-  Unicode: '\uf7cd'
+  Unicode: "\uf7cd"
 
 LinearSyntaxPercent:
   ASCII: '\%'
   Operators: [RadicalBox, SuperscriptBox, UnderOverscriptBox]
-  Unicode: '\uf7c5'
+  Unicode: "\uf7c5"
 
 LinearSyntaxPlus:
   ASCII: '\+'
   Operators: [UnderscriptBox, UnderOverscriptBox]
-  Unicode: '\uf7cb'
+  Unicode: "\uf7cb"
 
 LinearSyntaxStar:
   ASCII: '\*'
   Operators: []
-  Unicode: '\uf7c8'
+  Unicode: "\uf7c8"
 
 LinearSyntaxSlash:
   ASCII: '\/'
   Operators: [FractionBox]
-  Unicode: '\uf7cc'
+  Unicode: "\uf7cc"
 
 LinearSyntaxUnder:
   ASCII: '\_'
   Operators: [SubscriptBox, SubsuperscriptBox]
-  Unicode: '\uf7ca'
+  Unicode: "\uf7ca"

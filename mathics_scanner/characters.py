@@ -23,12 +23,34 @@ def get_srcdir() -> str:
 ROOT_DIR = get_srcdir()
 
 # Load the conversion tables from disk
-characters_path = osp.join(ROOT_DIR, "data", "named-characters.json")
-if osp.exists(characters_path):
-    with open(characters_path, "r") as f:
+named_characters_path = osp.join(ROOT_DIR, "data", "named-characters.json")
+if osp.exists(named_characters_path):
+    with open(named_characters_path, "r") as f:
         _data = ujson.load(f)
 else:
     _data = {}
+
+boxing_characters_path = osp.join(ROOT_DIR, "data", "boxing-characters.json")
+if osp.exists(boxing_characters_path):
+    with open(boxing_characters_path, "r") as f:
+        boxing_character_data = ujson.load(f)
+else:
+    boxing_characters_data = {}
+
+boxing_unicode_to_ascii = boxing_character_data.get("unicode-to-ascii", {})
+boxing_ascii_to_unicode = boxing_character_data.get("ascii-to-unicode", {})
+
+replace_to_ascii_re = re.compile(
+    "|".join(
+        re.escape(unicode_character)
+        for unicode_character in boxing_unicode_to_ascii.keys()
+    )
+)
+
+
+def replace_box_unicode_with_ascii(s: str) -> str:
+    return replace_to_ascii_re.sub(lambda m: s[m.group(0)], s)
+
 
 # Character ranges of letters
 _letters = "a-zA-Z\u00c0-\u00d6\u00d8-\u00f6\u00f8-\u0103\u0106\u0107\

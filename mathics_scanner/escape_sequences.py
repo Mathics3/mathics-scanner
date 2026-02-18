@@ -2,14 +2,16 @@
 Helper Module for tokenizing character escape sequences.
 """
 
-from typing import Optional, Tuple
+from typing import Final, Optional, Tuple
 
-from mathics_scanner.characters import named_characters
+from mathics_scanner.characters import boxing_ascii_to_unicode, named_characters
 from mathics_scanner.errors import (
     EscapeSyntaxError,
     NamedCharacterSyntaxError,
     SyntaxError,
 )
+
+BOX_OPERATOR: Final[str] = "&@`!^)(%*/_"
 
 
 def parse_base(source_text: str, start_shift: int, end_shift: int, base: int) -> str:
@@ -140,8 +142,12 @@ def parse_escape_sequence(source_text: str, pos: int) -> Tuple[str, int]:
             assert c == "r"
             result += "\r"
         pos += 1
-    elif c in '!"':
-        result += c
+    elif c in BOX_OPERATOR:
+        if (boxed_character := boxing_ascii_to_unicode.get("\\" + c)) is not None:
+            # Replace \ in result with Unicode representing the two ASCII characters.
+            result = result[:-1] + boxed_character
+        else:
+            raise EscapeSyntaxError("stresc", rf"\{c}")
         pos += 1
     else:
         raise EscapeSyntaxError("stresc", rf"\{c}")

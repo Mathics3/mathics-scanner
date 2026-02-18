@@ -8,6 +8,7 @@ import os
 import re
 import sys
 
+from mathics_scanner.characters import replace_box_unicode_with_ascii
 from mathics_scanner.errors import (
     EscapeSyntaxError,
     NamedCharacterSyntaxError,
@@ -209,10 +210,13 @@ def tokens(shell: TerminalShell, source_text: str, code_tokenize_format: bool):
         if token.tag == "END":
             break
         elif code_tokenize_format:
-            shell.to_output(token.code_tokenize_format)
-            # print(token.code_tokenize_format)
+            mess = shell.get_out_prompt()
+            print(
+                mess + replace_box_unicode_with_ascii(token.code_tokenize_format) + "\n"
+            )
         else:
             mess = shell.get_out_prompt()
+            token.text = replace_box_unicode_with_ascii(token.text)
             print(mess + str(token) + "\n")
 
 
