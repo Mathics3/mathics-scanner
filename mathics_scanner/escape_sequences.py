@@ -17,7 +17,7 @@ BOX_OPERATOR: Final[str] = "&@`!^)(%*/_"
 
 # The second character, or character after backslash ("\") that
 # are valid in a Mathics3 escaped character.
-ESCAPE_CODES: Final[str] = "ntbfr $\n"
+ESCAPE_CODES: Final[str] = 'ntbfr" $\n'
 
 # Valid digits in an Octal string
 OCTAL_DIGITS: Final[str] = "01234567"
