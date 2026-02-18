@@ -4,14 +4,23 @@ Helper Module for tokenizing character escape sequences.
 
 from typing import Final, Optional, Tuple
 
-from mathics_scanner.characters import boxing_ascii_to_unicode, named_characters
+from mathics_scanner.characters import BOXING_ASCII_TO_UNICODE, NAMED_CHARACTERS
 from mathics_scanner.errors import (
     EscapeSyntaxError,
     NamedCharacterSyntaxError,
     SyntaxError,
 )
 
+# The second character, or character after backslash ("\") using
+# Boxing expression syntax.
 BOX_OPERATOR: Final[str] = "&@`!^)(%*/_"
+
+# The second character, or character after backslash ("\") that
+# are valid in a Mathics3 escaped character.
+ESCAPE_CODES: Final[str] = "ntbfr $\n"
+
+# Valid digits in an Octal string
+OCTAL_DIGITS: Final[str] = "01234567"
 
 
 def parse_base(source_text: str, start_shift: int, end_shift: int, base: int) -> str:
@@ -57,13 +66,13 @@ def parse_named_character(source_text: str, start: int, finish: int) -> Optional
 
     Match this string with the known named characters,
     e.g. "Theta".  If we can match this, then we return the unicode equivalent from the
-    `named_characters` map (which is read in from JSON but stored in a YAML file).
+    `NAMED_CHARACTERS` map (which is read in from JSON but stored in a YAML file).
 
     If we can't find the named character, raise NamedCharacterSyntaxError.
     """
     named_character = source_text[start:finish]
     if named_character.isalpha():
-        char = named_characters.get(named_character)
+        char = NAMED_CHARACTERS.get(named_character)
         if char is None:
             raise NamedCharacterSyntaxError("sntufn", named_character, source_text)
         else:
@@ -114,7 +123,7 @@ def parse_escape_sequence(source_text: str, pos: int) -> Tuple[str, int]:
 
         result += named_character
         pos = i + 1
-    elif c in "01234567":
+    elif c in OCTAL_DIGITS:
         # See if we have a 3-digit octal number.
         # For example \065 = "5"
         result += parse_base(source_text, pos, pos + 3, 8)
@@ -124,7 +133,7 @@ def parse_escape_sequence(source_text: str, pos: int) -> Tuple[str, int]:
     # Note that these are a similer to Python, but are different.
     # In particular, Python defines "\a" to be ^G (control G),
     # but in WMA, this is invalid.
-    elif c in "ntbfr $\n":
+    elif c in ESCAPE_CODES:
         if c in "n\n":
             result += "\n"
         elif c == " ":
@@ -143,7 +152,7 @@ def parse_escape_sequence(source_text: str, pos: int) -> Tuple[str, int]:
             result += "\r"
         pos += 1
     elif c in BOX_OPERATOR:
-        if (boxed_character := boxing_ascii_to_unicode.get("\\" + c)) is not None:
+        if (boxed_character := BOXING_ASCII_TO_UNICODE.get("\\" + c)) is not None:
             # Replace \ in result with Unicode representing the two ASCII characters.
             result = result[:-1] + boxed_character
         else:

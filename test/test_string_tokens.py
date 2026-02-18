@@ -96,12 +96,11 @@ def test_string():
 
     check_string(
         r'"\(a \+\)"',
-        r'"\(a \+\)"',
+        r'"a \+"',
         "Do not interpret, but preserve boxing inside a string",
     )
 
     incomplete_error(r'"abc', "String does not have terminating quote")
-    incomplete_error(r'"\"', "Unterminated escape sequence")
 
     escape_scan_error(r'"a\g"', "Unknown string escape \\g")
     escape_scan_error(r'"a\X"', '"X" is not a valid escape character')

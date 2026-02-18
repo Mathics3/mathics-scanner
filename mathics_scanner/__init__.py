@@ -7,8 +7,8 @@ named characters, their Unicode/ASCII equivalents and code-points.
 """
 
 from mathics_scanner.characters import (
+    NAMED_CHARACTERS,
     aliased_characters,
-    named_characters,
     replace_unicode_with_wl,
     replace_wl_with_plain_text,
 )
@@ -34,6 +34,7 @@ __all__ = [
     "InvalidSyntaxError",
     "LineFeeder",
     "MultiLineFeeder",
+    "NAMED_CHARACTERS",
     "SyntaxError",
     "SingleLineFeeder",
     # "Token",
@@ -41,7 +42,6 @@ __all__ = [
     "__version__",
     "aliased_characters",
     # "is_symbol_name",
-    "named_characters",
     "replace_unicode_with_wl",
     "replace_wl_with_plain_text",
 ]
