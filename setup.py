@@ -25,6 +25,7 @@ Or, if all else fails, feel free to write to the mathics users list at
 mathics-users@googlegroups.com and ask for help.
 """
 
+import os
 import os.path as osp
 
 from setuptools import setup

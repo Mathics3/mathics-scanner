@@ -1,4 +1,4 @@
-name: Mathics3_Doctest (Mathics3 doctest)
+name: Mathics3 Doctest (Mathics3 doctest)
 
 on:
   push:
@@ -21,11 +21,16 @@ jobs:
     - name: Install OS dependencies
       run: |
         sudo apt-get update -qq && sudo apt-get install -qq liblapack-dev llvm-dev tesseract-ocr
-    - name: Install dependencies
+    - name: Install Mathics3 scanner without JSON
       run: |
         python -m pip install --upgrade pip
         pip install -e .
-    - name: Install Mathics_Scanner
+    - name: Install JSON files
+      run: |
+        python -m mathics_scanner.generate.boxing_characters
+        python -m mathics_scanner.generate.named_characters
+        python -m mathics_scanner.generate.operators
+    - name: Install Mathics Scanner
       run: |
         make
     - name: Run Mathics3 Doctests
