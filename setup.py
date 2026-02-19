@@ -54,30 +54,10 @@ class table_building_egg_info(egg_info):
                 f"Running {build_tables_program} exited with code {result.returncode}"
             )
         super().finalize_options()
-        build_tables_program = osp.join(
-            get_srcdir(), "mathics_scanner", "generate", "operators.py"
-        )
-        print(f"Building JSON tables via {build_tables_program}")
-        result = subprocess.run([sys.executable, build_tables_program], check=False)
-        if result.returncode:
-            raise RuntimeError(
-                f"Running {build_tables_program} exited with code {result.returncode}"
-            )
-        super().finalize_options()
-        build_tables_program = osp.join(
-            get_srcdir(), "mathics_scanner", "generate", "boxing_characters.py"
-        )
-        print(f"Building JSON tables via {build_tables_program}")
-        result = subprocess.run([sys.executable, build_tables_program], check=False)
-        if result.returncode:
-            raise RuntimeError(
-                f"Running {build_tables_program} exited with code {result.returncode}"
-            )
-        super().finalize_options()
 
 
 setup(
-    # cmdclass={"egg_info": table_building_egg_info},
+    cmdclass={"egg_info": table_building_egg_info},
     # don't pack Mathics in egg because of media files, etc.
     zip_safe=False,
 )
