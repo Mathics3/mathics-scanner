@@ -959,7 +959,7 @@ class Tokeniser:
                         # If there is boxing construct matched, we
                         # preserve what was given, but do not tokenize
                         # the construct. "\(" remains "\(" and is not
-                        # turned into IntepretBox".
+                        # turned into InterpretBox".
                         result += "\\" + escaped_char
                         self.pos += 1
                     else:

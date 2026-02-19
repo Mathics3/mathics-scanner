@@ -20,26 +20,29 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Install OS dependencies
       run: |
-        sudo apt-get update -qq && sudo apt-get install -qq liblapack-dev llvm-dev tesseract-ocr
+        sudo apt-get update -qq && sudo apt-get install -qq liblapack-dev llvm-dev tesseract-ocr remake
     - name: Install Mathics3 scanner without JSON
       run: |
         python -m pip install --upgrade pip
         pip install -e .
     - name: Install JSON files
       run: |
-        python -m mathics_scanner.generate.boxing_characters
-        python -m mathics_scanner.generate.named_characters
-        python -m mathics_scanner.generate.operators
-    - name: Install Mathics Scanner
-      run: |
-        pip install -r requirements-dev.txt
-        pip install -r requirements-full.txt
-    - name: Run Mathics3 Doctests
+        python -m mathics_scanner.generate.boxing_characters -o mathics_scanner/data/boxing-characters.json
+        ls -l mathics_scanner/data/boxing-characters.json
+        python -m mathics_scanner.generate.named_characters -o mathics_scanner/data/named-characters.json
+        ls -l mathics_scanner/data/named-characters.json
+        python -m mathics_scanner.generate.operators -o mathics_scanner/data/operators.json
+        ls -l mathics_scanner/data/operators.json
+    - name: Build Mathics3
       run: |
         # Until next Mathics3/mathics-core release is out...
         git clone -b add-unicode-box-characters --depth 1 https://github.com/Mathics3/mathics-core.git
         cd mathics-core/
-        make PIP_INSTALL_OPTS='[full]'
-        bash ./admin-tools/make-JSON-tables.sh
+        python -m pip install -e .[dev]
+        cp -v ../mathics_scanner/data/boxing-characters.json mathics/data/boxing-characters.json
+        cp -v ../mathics_scanner/data/named-characters.json mathics/data/named-characters.json
+        cp -v ../mathics_scanner/data/operators.json mathics/data/operators.json
         cd ..
-        MATHICS_CHARACTER_ENCODING="ASCII" make check-mathics
+    - name: Run Mathics3 tests
+      run: |
+        remake -x check-mathics
