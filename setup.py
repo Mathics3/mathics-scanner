@@ -77,7 +77,7 @@ class table_building_egg_info(egg_info):
 
 
 setup(
-    cmdclass={"egg_info": table_building_egg_info},
+    # cmdclass={"egg_info": table_building_egg_info},
     # don't pack Mathics in egg because of media files, etc.
     zip_safe=False,
 )
