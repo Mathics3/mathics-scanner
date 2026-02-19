@@ -54,7 +54,7 @@ class table_building_egg_info(egg_info):
                 raise RuntimeError(
                     f"Running {build_tables_program} exited with code {result.returncode}"
                 )
-            super().finalize_options()
+        super().finalize_options()
 
 
 setup(
