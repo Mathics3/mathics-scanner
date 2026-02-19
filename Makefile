@@ -37,7 +37,7 @@ build: mathics_scanner/data/characters.json mathics_scanner/data/named_character
 
 #: Set up to run from the source tree
 develop: mathics_scanner/data/boxing-characters.json mathics_scanner/data/named-characters.json mathics_scanner/data/operators.json
-	$(PIP) install -e .$(PIP_INSTALL_OPTS)
+	$(PIP) install --no-build-isolation -e . $(PIP_INSTALL_OPTS)
 
 #: Build distribution
 dist: admin-tools/make-dist.sh

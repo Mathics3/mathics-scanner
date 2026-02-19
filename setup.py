@@ -44,16 +44,35 @@ class table_building_egg_info(egg_info):
 
     def finalize_options(self):
         """Run program to create JSON tables"""
-        for table_program in ("boxing-character", "named-character", "operator"):
-            build_tables_program = osp.join(
-                get_srcdir(), "mathics_scanner", "generate", f"{table_program}.py"
+        build_tables_program = osp.join(
+            get_srcdir(), "mathics_scanner", "generate", "named_characters.py"
+        )
+        print(f"Building JSON tables via {build_tables_program}")
+        result = subprocess.run([sys.executable, build_tables_program], check=False)
+        if result.returncode:
+            raise RuntimeError(
+                f"Running {build_tables_program} exited with code {result.returncode}"
             )
-            print(f"Building JSON tables via {build_tables_program}")
-            result = subprocess.run([sys.executable, build_tables_program], check=False)
-            if result.returncode:
-                raise RuntimeError(
-                    f"Running {build_tables_program} exited with code {result.returncode}"
-                )
+        super().finalize_options()
+        build_tables_program = osp.join(
+            get_srcdir(), "mathics_scanner", "generate", "operators.py"
+        )
+        print(f"Building JSON tables via {build_tables_program}")
+        result = subprocess.run([sys.executable, build_tables_program], check=False)
+        if result.returncode:
+            raise RuntimeError(
+                f"Running {build_tables_program} exited with code {result.returncode}"
+            )
+        super().finalize_options()
+        build_tables_program = osp.join(
+            get_srcdir(), "mathics_scanner", "generate", "boxing_characters.py"
+        )
+        print(f"Building JSON tables via {build_tables_program}")
+        result = subprocess.run([sys.executable, build_tables_program], check=False)
+        if result.returncode:
+            raise RuntimeError(
+                f"Running {build_tables_program} exited with code {result.returncode}"
+            )
         super().finalize_options()
 
 
