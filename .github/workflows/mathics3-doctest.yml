@@ -32,11 +32,10 @@ jobs:
         python -m mathics_scanner.generate.operators
     - name: Install Mathics Scanner
       run: |
-        make
+        pip install -r requirements-dev.txt
+        pip install -r requirements-full.txt
     - name: Run Mathics3 Doctests
       run: |
-        git clone --depth 1 https://github.com/Mathics3/mathics-scanner.git
-        (cd mathics-scanner && pip install -e .)
         # Until next Mathics3/mathics-core release is out...
         git clone -b add-unicode-box-characters --depth 1 https://github.com/Mathics3/mathics-core.git
         cd mathics-core/
