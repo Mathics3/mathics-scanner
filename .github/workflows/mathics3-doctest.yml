@@ -40,6 +40,6 @@ jobs:
         git clone -b add-unicode-box-characters --depth 1 https://github.com/Mathics3/mathics-core.git
         cd mathics-core/
         make PIP_INSTALL_OPTS='[full]'
-        # pip install Mathics3[full]
+        bash ./admin-tools/make-JSON-tables.sh
         cd ..
         MATHICS_CHARACTER_ENCODING="ASCII" make check-mathics
