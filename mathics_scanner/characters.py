@@ -45,7 +45,7 @@ if osp.exists(BOXING_CHARACTERS_PATH):
     with open(BOXING_CHARACTERS_PATH, "r") as f:
         boxing_character_data = ujson.load(f)
 else:
-    boxing_characters_data = {}
+    boxing_character_data = {}
 
 BOXING_UNICODE_TO_ASCII: Final[Dict[str, str]] = boxing_character_data.get(
     "unicode-to-ascii", {}
