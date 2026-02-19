@@ -20,17 +20,14 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
         pip install -e .
-    - name: Install Mathics_Scanner
+    - name: Install JSON dependencies
       run: |
-        make
+        python -m mathics_scanner.generate.boxing_characters
+        python -m mathics_scanner.generate.named_characters
+        python -m mathics_scanner.generate.operators
     - name: Test Mathics3 Scanner
       run: |
         pip install -r requirements-dev.txt
         pip install -r requirements-full.txt
-        # Don't think I need this anymore
-        # python -m mathics_scanner.generate.boxing_characters
-        # python -m mathics_scanner.generate.named_characters
-        # python -m mathics_scanner.generate.operators
         make check
