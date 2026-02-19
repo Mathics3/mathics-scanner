@@ -258,7 +258,7 @@ def compile_tables(data: dict) -> dict:
     }
 
 
-DEFAULT_DATA_DIR = Path(osp.normpath(osp.dirname(__file__)), "..", "data")
+DEFAULT_DATA_DIR = Path(__file__).parent.parent / "data"
 
 ALL_FIELDS = [
     "aliased-characters",

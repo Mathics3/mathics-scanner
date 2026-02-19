@@ -1,4 +1,4 @@
-name: Mathics_Script (Mathics doctest)
+name: Mathics3_Doctest (Mathics3 doctest)
 
 on:
   push:
@@ -28,7 +28,7 @@ jobs:
     - name: Install Mathics_Scanner
       run: |
         make
-    - name: Test Mathics3
+    - name: Run Mathics3 Doctests
       run: |
         git clone --depth 1 https://github.com/Mathics3/mathics-scanner.git
         (cd mathics-scanner && pip install -e .)

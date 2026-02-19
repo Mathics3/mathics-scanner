@@ -25,34 +25,40 @@ Or, if all else fails, feel free to write to the mathics users list at
 mathics-users@googlegroups.com and ask for help.
 """
 
-import os
 import os.path as osp
+import subprocess
+import sys
 
 from setuptools import setup
-from setuptools.command.build_py import build_py as setuptools_build_py
+from setuptools.command.egg_info import egg_info
 
 
 def get_srcdir():
-    """return the directory of the location if this code"""
+    """Return the directory of the location if this code"""
     filename = osp.normcase(osp.dirname(osp.abspath(__file__)))
     return osp.realpath(filename)
 
 
-class build_py(setuptools_build_py):
-    def run(self):
-        for table_type in ("boxing-character", "named-character", "operator"):
-            json_data_file = osp.join("data", f"{table_type}.json")
-            json_path = osp.join("mathics-scanner", json_data_file)
-            if not osp.exists(json_path):
-                os.system(f"mathics3-make-{table_type}-json" " -o {json-path}")
-            self.distribution.package_data["Mathics-Scanner"].append(json_data_file)
-        setuptools_build_py.run(self)
+class table_building_egg_info(egg_info):
+    """This runs as part of building an sdist"""
 
+    def finalize_options(self):
+        """Run program to create JSON tables"""
+        for table_program in ("boxing-character", "named-character", "operator"):
+            build_tables_program = osp.join(
+                get_srcdir(), "mathics_scanner", "generate", f"{table_program}.py"
+            )
+            print(f"Building JSON tables via {build_tables_program}")
+            result = subprocess.run([sys.executable, build_tables_program], check=False)
+            if result.returncode:
+                raise RuntimeError(
+                    f"Running {build_tables_program} exited with code {result.returncode}"
+                )
+            super().finalize_options()
 
-CMDCLASS = {"build_py": build_py}
 
 setup(
-    cmdclass=CMDCLASS,
+    cmdclass={"egg_info": table_building_egg_info},
     # don't pack Mathics in egg because of media files, etc.
     zip_safe=False,
 )
