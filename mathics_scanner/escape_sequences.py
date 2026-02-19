@@ -79,7 +79,9 @@ def parse_named_character(source_text: str, start: int, finish: int) -> Optional
             return char
 
 
-def parse_escape_sequence(source_text: str, pos: int) -> Tuple[str, int]:
+def parse_escape_sequence(
+    source_text: str, pos: int, is_inside_box: bool
+) -> Tuple[str, int]:
     """Given some source text in `source_text` starting at offset
     `pos`, return the escape-sequence value for this text and the
     follow-on offset position.
@@ -136,6 +138,8 @@ def parse_escape_sequence(source_text: str, pos: int) -> Tuple[str, int]:
     elif c in ESCAPE_CODES:
         if c in "n\n":
             result += "\n"
+        elif c == '"':
+            result += '"'
         elif c == " ":
             result += " "
         elif c == "t":
@@ -151,12 +155,15 @@ def parse_escape_sequence(source_text: str, pos: int) -> Tuple[str, int]:
             assert c == "r"
             result += "\r"
         pos += 1
-    elif c in BOX_OPERATOR:
+    elif is_inside_box and c in BOX_OPERATOR:
         if (boxed_character := BOXING_ASCII_TO_UNICODE.get("\\" + c)) is not None:
             # Replace \ in result with Unicode representing the two ASCII characters.
             result = result[:-1] + boxed_character
         else:
             raise EscapeSyntaxError("stresc", rf"\{c}")
+        pos += 1
+    elif c in '!"':
+        result += c
         pos += 1
     else:
         raise EscapeSyntaxError("stresc", rf"\{c}")

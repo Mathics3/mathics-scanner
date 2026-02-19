@@ -566,7 +566,7 @@ class Tokeniser:
 
         # Set to True when inside box parsing.
         # This has an effect on which escape operators are allowed.
-        self._is_inside_box: bool = False
+        self.is_inside_box: bool = False
 
         self._change_token_scanning_mode("expr")
 
@@ -702,7 +702,7 @@ class Tokeniser:
 
                 try:
                     escape_str, next_pos = parse_escape_sequence(
-                        self.source_text, self.pos + 1
+                        self.source_text, self.pos + 1, self.is_inside_box
                     )
                 except (EscapeSyntaxError, NamedCharacterSyntaxError) as escape_error:
                     if self.is_inside_box:
@@ -809,7 +809,9 @@ class Tokeniser:
             source_text += self.source_text
 
         try:
-            escape_str, self.pos = parse_escape_sequence(source_text, start_pos)
+            escape_str, self.pos = parse_escape_sequence(
+                source_text, start_pos, self.is_inside_box
+            )
             if source_text[start_pos] == "[" and source_text[self.pos - 1] == "]":
                 named_character = source_text[start_pos + 1 : self.pos - 1]
         except (EscapeSyntaxError, NamedCharacterSyntaxError) as escape_error:
@@ -877,7 +879,7 @@ class Tokeniser:
 
                 try:
                     escape_str, next_pos = parse_escape_sequence(
-                        self.source_text, self.pos + 1
+                        self.source_text, self.pos + 1, self.is_inside_box
                     )
                 except (EscapeSyntaxError, NamedCharacterSyntaxError) as escape_error:
                     if self.is_inside_box:
@@ -940,7 +942,9 @@ class Tokeniser:
                     self.get_more_input()
                 self.pos += 1
                 try:
-                    escape_str, self.pos = parse_escape_sequence(source_text, self.pos)
+                    escape_str, self.pos = parse_escape_sequence(
+                        source_text, self.pos, self.is_inside_box
+                    )
                 except NamedCharacterSyntaxError as escape_error:
                     self.feeder.message(
                         escape_error.name, escape_error.tag, *escape_error.args
