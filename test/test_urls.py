@@ -1,19 +1,16 @@
 # -*- coding: utf-8 -*-
 import os
+from test.helper import yaml_data
 
 # from urllib.error import HTTPError, URLError
 from urllib.request import urlopen
 
 import pytest
 
-from mathics_scanner.load import load_mathics_character_yaml
-
-yaml_data = load_mathics_character_yaml()
-
 
 # This test is slow, so do only on request!
 @pytest.mark.skipif(
-    not os.environ.get("MATHICS_LINT"), reason="Lint checking done only when specified"
+    not os.environ.get("MATHICS3_LINT"), reason="Lint checking done only when specified"
 )
 def test_yaml_urls():
     for k, v in yaml_data.items():

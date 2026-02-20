@@ -9,9 +9,9 @@ import itertools
 import os.path as osp
 import re
 import string
-from typing import Dict, List, Optional, Set, Tuple
+from typing import Dict, Final, List, Optional, Set, Tuple
 
-from mathics_scanner.characters import _letterlikes, _letters, named_characters
+from mathics_scanner.characters import NAMED_CHARACTERS, _letterlikes, _letters
 from mathics_scanner.errors import (
     EscapeSyntaxError,
     IncompleteSyntaxError,
@@ -30,10 +30,10 @@ except ImportError:
 ROOT_DIR = osp.dirname(__file__)
 OPERATORS_TABLE_PATH = osp.join(ROOT_DIR, "data", "operators.json")
 
-##############################################
+################################################
 # The below get initialized in by init_module()
 # from operator data
-##############################################
+################################################
 OPERATOR_DATA = {}
 NO_MEANING_OPERATORS = {}
 
@@ -41,7 +41,7 @@ NO_MEANING_OPERATORS = {}
 # This is used in t_String for escape-sequence handling.
 # The below is roughly correct, but we overwrite this
 # from operators.json data in init_module()
-BOXING_CONSTRUCT_SUFFIXES: Set[str] = {
+BOXING_CONSTRUCT_SUFFIXES: Final[Set[str]] = {
     "%",
     "/",
     "@",
@@ -120,7 +120,7 @@ full_names_pattern = rf"(`?{base_names_pattern}(`{base_names_pattern})*)"
 # FIXME incorportate the below table in to Function/Operators YAML
 # Table of correspondneces between a Mathics3 token name (or "tag")
 # and WMA CodeTokenize name
-MATHICS3_TAG_TO_CODETOKENIZE: Dict[str, str] = {
+MATHICS3_TAG_TO_CODETOKENIZE: Final[Dict[str, str]] = {
     "AddTo": "PlusEqual",
     "Alternatives": "Bar",
     "And": "AmpAmp",
@@ -263,59 +263,59 @@ def init_module():
         #
         ("AddTo", r" \+\= "),
         ("Alternatives", r" \| "),
-        ("And", rf" (\&\&) | {named_characters['And']} "),
+        ("And", rf" (\&\&) | {NAMED_CHARACTERS['And']} "),
         ("Apply", r" \@\@ "),
         ("ApplyList", r" \@\@\@ "),
         ("Composition", r" \@\* "),
         ("Condition", r" \/\; "),
-        ("Conjugate", rf" {named_characters['Conjugate']} "),
+        ("Conjugate", rf" {NAMED_CHARACTERS['Conjugate']} "),
         ("ConjugateTranspose", r" \uf3c9 "),
-        ("Cross", rf" \uf4a0 | {named_characters['Cross']} "),
+        ("Cross", rf" \uf4a0 | {NAMED_CHARACTERS['Cross']} "),
         ("Decrement", r" \-\- "),
-        ("Del", rf" {named_characters['Del']} "),
+        ("Del", rf" {NAMED_CHARACTERS['Del']} "),
         ("Derivative", r" \' "),
         # ('DifferenceDelta', r' \u2206 '),
         # https://reference.wolfram.com/language/ref/character/DirectedEdge.html
-        ("DirectedEdge", rf" -> | \uf3d5 | {named_characters['DirectedEdge']} "),
+        ("DirectedEdge", rf" -> | \uf3d5 | {NAMED_CHARACTERS['DirectedEdge']} "),
         # ('DiscreteRatio', r' \uf4a4 '),
         # ('DiscreteShift', r' \uf4a3 '),
-        ("Conjugate", rf" {named_characters['Conjugate']} "),
+        ("Conjugate", rf" {NAMED_CHARACTERS['Conjugate']} "),
         ("ConjugateTranspose", r" \uf3c9 "),
-        ("DifferentialD", rf" \uf74c | {named_characters['DifferentialD']} "),
-        ("Divide", rf" \/| {named_characters['Divide']} "),
+        ("DifferentialD", rf" \uf74c | {NAMED_CHARACTERS['DifferentialD']} "),
+        ("Divide", rf" \/| {NAMED_CHARACTERS['Divide']} "),
         ("DivideBy", r" \/\=  "),
         ("Dot", r" \. "),
-        ("Element", r" {named_characters['Element']} "),
-        ("Equal", rf" (\=\=) | \uf431 | {named_characters['Equal']} | \uf7d9 "),
-        ("Equivalent", r" {named_characters['Equivalent']} "),
-        ("Exists", r" {named_characters['Exists']} "),
+        ("Element", r" {NAMED_CHARACTERS['Element']} "),
+        ("Equal", rf" (\=\=) | \uf431 | {NAMED_CHARACTERS['Equal']} | \uf7d9 "),
+        ("Equivalent", r" {NAMED_CHARACTERS['Equivalent']} "),
+        ("Exists", r" {NAMED_CHARACTERS['Exists']} "),
         ("Factorial", r" \! "),
         ("Factorial2", r" \!\! "),
-        ("ForAll", r" {named_characters['ForAll']} "),
-        ("Function", rf" \& | \uF4A1 | {named_characters['Function']} | \|-> "),
+        ("ForAll", r" {NAMED_CHARACTERS['ForAll']} "),
+        ("Function", rf" \& | \uF4A1 | {NAMED_CHARACTERS['Function']} | \|-> "),
         ("Greater", r" \> "),
-        ("GreaterEqual", rf" (\>\=) | {named_characters['GreaterEqual']} "),
+        ("GreaterEqual", rf" (\>\=) | {NAMED_CHARACTERS['GreaterEqual']} "),
         ("HermitianConjugate", r" \uf3ce "),
         ("Implies", r" \uF523 "),
         ("Increment", r" \+\+ "),
         ("Infix", r" \~ "),
         ("Information", r"\?\?"),
         ("Integral", r" \u222b "),
-        ("Intersection", rf" {named_characters['Intersection']} "),
+        ("Intersection", rf" {NAMED_CHARACTERS['Intersection']} "),
         ("Less", r" \< "),
-        ("LessEqual", rf" (\<\=) | {named_characters['LessEqual']} "),
+        ("LessEqual", rf" (\<\=) | {NAMED_CHARACTERS['LessEqual']} "),
         ("Map", r" \/\@ "),
         ("MapAll", r" \/\/\@ "),
-        # FIXME: can't use named_characters in Minus because the ASCII minus
+        # FIXME: can't use NAMED_CHARACTERS in Minus because the ASCII minus
         # causes the unicode not to appear in tables.
         ("Minus", r" \-| \u2122 "),
-        ("Nand", rf" {named_characters['Nand']} "),
+        ("Nand", rf" {NAMED_CHARACTERS['Nand']} "),
         ("NonCommutativeMultiply", r" \*\* "),
-        ("Nor", rf" {named_characters['Nor']} "),
-        ("Not", r" {named_characters['Not']} "),
-        ("NotElement", r" {named_characters['NotElement']} "),
-        ("NotExists", r" {named_characters['NotExists']} "),
-        ("Or", rf" (\|\|) | {named_characters['Or']} "),
+        ("Nor", rf" {NAMED_CHARACTERS['Nor']} "),
+        ("Not", r" {NAMED_CHARACTERS['Not']} "),
+        ("NotElement", r" {NAMED_CHARACTERS['NotElement']} "),
+        ("NotExists", r" {NAMED_CHARACTERS['NotExists']} "),
+        ("Or", rf" (\|\|) | {NAMED_CHARACTERS['Or']} "),
         # ('PartialD', r' \u2202 '),
         ("PatternTest", r" \? "),
         ("Plus", r" \+ "),
@@ -330,31 +330,31 @@ def init_module():
         ("ReplaceAll", r" \/\. "),
         ("ReplaceRepeated", r" \/\/\. "),
         ("RightComposition", r" \/\* "),
-        ("Rule", r" (\-\>)| \uF522 | {named_characters['Rule']} "),
+        ("Rule", r" (\-\>)| \uF522 | {NAMED_CHARACTERS['Rule']} "),
         ("RuleDelayed", r" (\:\>)|\uF51F "),
         ("SameQ", r" \=\=\= "),
         ("Semicolon", r" \; "),
         ("Set", r" \= "),
         ("SetDelayed", r" \:\= "),
-        ("Square", rf" \uf520 | {named_characters['Square']}"),
+        ("Square", rf" \uf520 | {NAMED_CHARACTERS['Square']}"),
         ("StringExpression", r" \~\~ "),
         ("StringJoin", r" \<\> "),
         ("SubtractFrom", r" \-\=  "),
         # ('Sum', r' \u2211 '),
         ("TagSet", r" \/\: "),
-        ("Times", rf" \*|{named_characters['Times']} "),
+        ("Times", rf" \*|{NAMED_CHARACTERS['Times']} "),
         ("TimesBy", r" \*\= "),
-        ("Transpose", rf" \uf3c7 | {named_characters['Transpose']} "),
-        ("Unequal", rf" (\!\= ) | {named_characters['NotEqual']} "),
-        ("Union", rf" {named_characters['Union']} "),
+        ("Transpose", rf" \uf3c7 | {NAMED_CHARACTERS['Transpose']} "),
+        ("Unequal", rf" (\!\= ) | {NAMED_CHARACTERS['NotEqual']} "),
+        ("Union", rf" {NAMED_CHARACTERS['Union']} "),
         ("UnsameQ", r" \=\!\= "),
         ("Xnor", r" \uF4A2 "),
-        ("Xor", rf" {named_characters['Xor']} "),
+        ("Xor", rf" {NAMED_CHARACTERS['Xor']} "),
         # https://reference.wolfram.com/language/ref/character/UndirectedEdge.html
         # The official Unicode value is \u2194
         (
             "UndirectedEdge",
-            rf" (\<\-\>)|\u29DF | {named_characters['UndirectedEdge']} ",
+            rf" (\<\-\>)|\u29DF | {NAMED_CHARACTERS['UndirectedEdge']} ",
         ),
         # allow whitespace but avoid e.g. x=.01
         ("Unset", r" \=\s*\.(?!\d|\.) "),
@@ -566,7 +566,7 @@ class Tokeniser:
 
         # Set to True when inside box parsing.
         # This has an effect on which escape operators are allowed.
-        self._is_inside_box: bool = False
+        self.is_inside_box: bool = False
 
         self._change_token_scanning_mode("expr")
 
@@ -702,7 +702,7 @@ class Tokeniser:
 
                 try:
                     escape_str, next_pos = parse_escape_sequence(
-                        self.source_text, self.pos + 1
+                        self.source_text, self.pos + 1, is_in_string=False
                     )
                 except (EscapeSyntaxError, NamedCharacterSyntaxError) as escape_error:
                     if self.is_inside_box:
@@ -809,7 +809,9 @@ class Tokeniser:
             source_text += self.source_text
 
         try:
-            escape_str, self.pos = parse_escape_sequence(source_text, start_pos)
+            escape_str, self.pos = parse_escape_sequence(
+                source_text, start_pos, is_in_string=False
+            )
             if source_text[start_pos] == "[" and source_text[self.pos - 1] == "]":
                 named_character = source_text[start_pos + 1 : self.pos - 1]
         except (EscapeSyntaxError, NamedCharacterSyntaxError) as escape_error:
@@ -877,7 +879,7 @@ class Tokeniser:
 
                 try:
                     escape_str, next_pos = parse_escape_sequence(
-                        self.source_text, self.pos + 1
+                        self.source_text, self.pos + 1, is_in_string=False
                     )
                 except (EscapeSyntaxError, NamedCharacterSyntaxError) as escape_error:
                     if self.is_inside_box:
@@ -940,7 +942,9 @@ class Tokeniser:
                     self.get_more_input()
                 self.pos += 1
                 try:
-                    escape_str, self.pos = parse_escape_sequence(source_text, self.pos)
+                    escape_str, self.pos = parse_escape_sequence(
+                        source_text, self.pos, is_in_string=True
+                    )
                 except NamedCharacterSyntaxError as escape_error:
                     self.feeder.message(
                         escape_error.name, escape_error.tag, *escape_error.args
@@ -955,7 +959,7 @@ class Tokeniser:
                         # If there is boxing construct matched, we
                         # preserve what was given, but do not tokenize
                         # the construct. "\(" remains "\(" and is not
-                        # turned into IntepretBox".
+                        # turned into InterpretBox".
                         result += "\\" + escaped_char
                         self.pos += 1
                     else:

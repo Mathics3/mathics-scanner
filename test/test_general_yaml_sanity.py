@@ -2,10 +2,7 @@
 
 import re
 import unicodedata
-
-from mathics_scanner.load import load_mathics_character_yaml
-
-yaml_data = load_mathics_character_yaml()
+from test.helper import yaml_data
 
 
 def check_attr_is_invertible(attr: str):

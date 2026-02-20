@@ -1,0 +1,96 @@
+# Information about Wolfram Language boxing characters used in the
+# string representation of Boxing Expressions.
+#
+#
+# All of the key names *except* \! and \* are associated with
+# some box operator.
+#
+#
+# Fields
+# ======
+#
+#
+# ASCII (string)
+# --------------
+#
+# The character representation in ASCII.
+#
+# Operators
+# -----------
+#
+# When the string is part of a Boxing operator, the Boxing
+# operator name(s) are given.
+#
+# Unicode
+# -------
+#
+# The representation in Unicode. All Unicode characters fall into the
+# Private Use Area of Unicode that Wolfram uses for its own internal
+# system markers, specifically the range 0xf7c0 to 0xf7cd.
+#
+
+# Coding note: make note of quotes. Single quotes for unescaped backslashes, e.g.
+# in the ASCII field and double quotes when we do not escaped backlashes in the
+# Unicode field.
+
+LinearSyntaxAmp:
+  ASCII: '\&'
+  Operators: []
+  Unicode: "\uf7c7"
+
+LinearSyntaxAt:
+  ASCII: '\@'
+  Operators: [RadicalBox, SqrtBox]
+  Unicode: "\uf7c1"
+
+LinearSyntaxBacktick:
+  ASCII: '\`'
+  Operators: [FormBox]
+  Unicode: "\uf7cd"
+
+LinearSyntaxBang:
+  ASCII: '\!'
+  Operators:
+  Unicode: "\uf7c1"
+
+LinearSyntaxCaret:
+  ASCII: '\^'
+  Operators: SuperscriptBox
+  Unicode: "\uf7c6"
+
+# Note: this name does not appear in CodeParse
+LinearSyntaxCloseParen:
+  ASCII: '\)'
+  Operators: [RowBox]
+  Unicode: "\uf7c0"
+
+# Note: this name does not appear in CodeParse
+LinearSyntaxOpenParen:
+  ASCII: '\('
+  Operators: [RowBox]
+  Unicode: "\uf7c9"
+
+LinearSyntaxPercent:
+  ASCII: '\%'
+  Operators: [RadicalBox, SuperscriptBox, UnderOverscriptBox]
+  Unicode: "\uf7c5"
+
+LinearSyntaxPlus:
+  ASCII: '\+'
+  Operators: [UnderscriptBox, UnderOverscriptBox]
+  Unicode: "\uf7cb"
+
+LinearSyntaxStar:
+  ASCII: '\*'
+  Operators: []
+  Unicode: "\uf7c8"
+
+LinearSyntaxSlash:
+  ASCII: '\/'
+  Operators: [FractionBox]
+  Unicode: "\uf7cc"
+
+LinearSyntaxUnder:
+  ASCII: '\_'
+  Operators: [SubscriptBox, SubsuperscriptBox]
+  Unicode: "\uf7ca"

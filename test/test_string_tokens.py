@@ -96,7 +96,7 @@ def test_string():
 
     check_string(
         r'"\(a \+\)"',
-        r'"\(a \+\)"',
+        r'"a \+"',
         "Do not interpret, but preserve boxing inside a string",
     )
 

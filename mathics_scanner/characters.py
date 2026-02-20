@@ -1,13 +1,16 @@
 # -*- coding: utf-8 -*-
-"""
-The ``mathics_scanner.characters`` module consists mostly of translation tables
-between Wolfram's internal representation of `named characters
+"""This module consists mostly of translation tables between Wolfram's
+internal representation of `named characters
 <https://reference.wolfram.com/language/tutorial/InputAndOutputInNotebooks.html#4718>`_
 and Unicode/ASCII.
+
+It also contains Unicode translation tables for the syntax used in
+Boxing operators and Boxing expressions.
 """
 
 import os.path as osp
 import re
+from typing import Dict, Final
 
 try:
     import ujson
@@ -16,22 +19,56 @@ except ImportError:
 
 
 def get_srcdir() -> str:
-    filename = osp.normcase(osp.dirname(osp.abspath(__file__)))
-    return osp.realpath(filename)
+    """Return the OS normalized real directory path for where this
+    code currently resides on disk."""
+    directory_path = osp.normcase(osp.dirname(osp.abspath(__file__)))
+    return osp.realpath(directory_path)
 
 
-ROOT_DIR = get_srcdir()
+ROOT_DIR: Final[str] = get_srcdir()
+
 
 # Load the conversion tables from disk
-characters_path = osp.join(ROOT_DIR, "data", "character-tables.json")
-if osp.exists(characters_path):
-    with open(characters_path, "r") as f:
-        _data = ujson.load(f)
+
+NAMED_CHARACTERS_PATH: Final[str] = osp.join(ROOT_DIR, "data", "named-characters.json")
+if osp.exists(NAMED_CHARACTERS_PATH):
+    with open(NAMED_CHARACTERS_PATH, "r") as f:
+        NAMED_CHARACTERS_COLLECTION = ujson.load(f)
 else:
-    _data = {}
+    NAMED_CHARACTERS_COLLECTION = {}
+
+BOXING_CHARACTERS_PATH: Final[str] = osp.join(
+    ROOT_DIR, "data", "boxing-characters.json"
+)
+
+if osp.exists(BOXING_CHARACTERS_PATH):
+    with open(BOXING_CHARACTERS_PATH, "r") as f:
+        boxing_character_data = ujson.load(f)
+else:
+    boxing_character_data = {}
+
+BOXING_UNICODE_TO_ASCII: Final[Dict[str, str]] = boxing_character_data.get(
+    "unicode-to-ascii", {}
+)
+BOXING_ASCII_TO_UNICODE: Final[Dict[str, str]] = boxing_character_data.get(
+    "ascii-to-unicode", {}
+)
+
+replace_to_ascii_re = re.compile(
+    "|".join(
+        re.escape(unicode_character)
+        for unicode_character in BOXING_UNICODE_TO_ASCII.keys()
+    )
+)
+
+
+def replace_box_unicode_with_ascii(input_string):
+    return "".join(BOXING_UNICODE_TO_ASCII.get(char, char) for char in input_string)
+
 
 # Character ranges of letters
-_letters = "a-zA-Z\u00c0-\u00d6\u00d8-\u00f6\u00f8-\u0103\u0106\u0107\
+_letters: Final[str] = (
+    "a-zA-Z\u00c0-\u00d6\u00d8-\u00f6\u00f8-\u0103\u0106\u0107\
 \u010c-\u010f\u0112-\u0115\u011a-\u012d\u0131\u0141\u0142\u0147\u0148\
 \u0150-\u0153\u0158-\u0161\u0164\u0165\u016e-\u0171\u017d\u017e\
 \u0391-\u03a1\u03a3-\u03a9\u03b1-\u03c9\u03d1\u03d2\u03d5\u03d6\
@@ -40,37 +77,44 @@ _letters = "a-zA-Z\u00c0-\u00d6\u00d8-\u00f6\u00f8-\u0103\u0106\u0107\
 \uf6ba-\uf6bc\uf6be\uf6bf\uf6c1-\uf700\uf730\uf731\uf770\uf772\uf773\
 \uf776\uf779\uf77a\uf77d-\uf780\uf782-\uf78b\uf78d-\uf78f\uf790\
 \uf793-\uf79a\uf79c-\uf7a2\uf7a4-\uf7bd\uf800-\uf833\ufb01\ufb02"
+)
 
 # Character ranges of letterlikes
-_letterlikes = _data.get("letterlikes", {})
+_letterlikes: Final[Dict[str, str]] = NAMED_CHARACTERS_COLLECTION.get("letterlikes", {})
 
 # Conversion from WL to the fully qualified names
-_wl_to_ascii = _data.get("wl-to-ascii-dict", {})
-_wl_to_ascii_re = re.compile(_data.get("wl-to-ascii-re", ""))
+_wl_to_ascii: Final[Dict[str, str]] = NAMED_CHARACTERS_COLLECTION.get(
+    "wl-to-ascii-dict", {}
+)
+_wl_to_ascii_re = re.compile(NAMED_CHARACTERS_COLLECTION.get("wl-to-ascii-re", ""))
 
 # AMS LaTeX replacements
-_wl_to_amstex = _data.get("wl-to-amstex", None)
+_wl_to_amstex = NAMED_CHARACTERS_COLLECTION.get("wl-to-amstex", None)
 
-# Conversion from WL to unicode
-_wl_to_unicode = _data.get("wl-to-unicode-dict", _data.get("wl_to_ascii"))
-_wl_to_unicode_re = re.compile(_data.get("wl-to-unicode-re", ""))
+# Conversion from WL to Unicode
+_wl_to_unicode = NAMED_CHARACTERS_COLLECTION.get(
+    "wl-to-unicode-dict", NAMED_CHARACTERS_COLLECTION.get("wl_to_ascii")
+)
+_wl_to_unicode_re = re.compile(NAMED_CHARACTERS_COLLECTION.get("wl-to-unicode-re", ""))
 
-# Conversion from unicode to WL
-_unicode_to_wl = _data.get("unicode-to-wl-dict", {})
-_unicode_to_wl_re = re.compile(_data.get("unicode-to-wl-re", ""))
+# Conversion from Unicode to WL
+_unicode_to_wl = NAMED_CHARACTERS_COLLECTION.get("unicode-to-wl-dict", {})
+_unicode_to_wl_re = re.compile(NAMED_CHARACTERS_COLLECTION.get("unicode-to-wl-re", ""))
 
 # All supported named characters
-named_characters = _data.get("named-characters", {})
+NAMED_CHARACTERS: Final[Dict[str, str]] = NAMED_CHARACTERS_COLLECTION.get(
+    "named-characters", {}
+)
 
 # ESC sequence aliases
-aliased_characters = _data.get("aliased-characters", {})
+aliased_characters = NAMED_CHARACTERS_COLLECTION.get("aliased-characters", {})
 
 
 # Deprecated
 def replace_wl_with_plain_text(wl_input: str, use_unicode=True) -> str:
     """
     The Wolfram Language uses specific Unicode characters to represent Wolfram
-    Language named characters. This functions replaces all occurrences of such
+    Language named characters. This function replaces all occurrences of such
     characters with their corresponding Unicode/ASCII equivalents.
 
     :param wl_input: The string whose characters will be replaced.
@@ -78,8 +122,8 @@ def replace_wl_with_plain_text(wl_input: str, use_unicode=True) -> str:
                         for the conversion.
 
     Note that the occurrences of named characters in ``wl_input`` are expect to
-    be represented by Wolfram's internal scheme. For more information Wolfram's
-    representation scheme and on our own conversion scheme please see `Listing
+    be represented by Wolfram's internal scheme. For more information on Wolfram's
+    representation scheme and on our own conversion scheme, please see `Listing
     of Named Characters
     <https://reference.wolfram.com/language/guide/ListingOfNamedCharacters.html>`_
     and ``implementation.rst`` respectively.
@@ -87,7 +131,7 @@ def replace_wl_with_plain_text(wl_input: str, use_unicode=True) -> str:
     r = _wl_to_unicode_re if use_unicode else _wl_to_ascii_re
     d = _wl_to_unicode if use_unicode else _wl_to_ascii
 
-    # The below on when use_unicode is False will sometime test on "ascii" twice.
+    # The below, when use_unicode is False, will sometimes test on "ascii" twice.
     # But this routine should be deprecated.
     return r.sub(lambda m: d.get(m.group(0), _wl_to_ascii.get(m.group(0))), wl_input)
 
@@ -96,7 +140,7 @@ def replace_wl_with_plain_text(wl_input: str, use_unicode=True) -> str:
 def replace_unicode_with_wl(unicode_input: str) -> str:
     """
     The Wolfram Language uses specific Unicode characters to represent Wolfram
-    Language named characters. This functions replaces all occurrences of the
+    Language named characters. This function replaces all occurrences of the
     corresponding Unicode equivalents of such characters with the characters
     themselves.
 
@@ -104,8 +148,8 @@ def replace_unicode_with_wl(unicode_input: str) -> str:
 
     Note that the occurrences of named characters in the output of
     ``replace_unicode_with_wl`` are represented using Wolfram's internal
-    scheme. For more information Wolfram's representation scheme and on our own
-    conversion scheme please see `Listing of Named Characters
+    scheme. For more information on Wolfram's representation scheme and on our own
+    conversion scheme, please see `Listing of Named Characters
     <https://reference.wolfram.com/language/guide/ListingOfNamedCharacters.html>`_
     and ``implementation.rst`` respectively.
     """

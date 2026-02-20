@@ -1,4 +1,4 @@
-name: Mathics_Script (ubuntu)
+name: Mathics3 Scanner (ubuntu)
 
 on:
   push:
@@ -18,16 +18,17 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
-    - name: Install dependencies
+    - name: Install Mathics3 scanner without JSON files
       run: |
         python -m pip install --upgrade pip
         pip install -e .
-    - name: Install Mathics_Scanner
+    - name: Install JSON files
       run: |
-        make
+        python -m mathics_scanner.generate.boxing_characters
+        python -m mathics_scanner.generate.named_characters
+        python -m mathics_scanner.generate.operators
     - name: Test Mathics3 Scanner
       run: |
         pip install -r requirements-dev.txt
         pip install -r requirements-full.txt
-        python -m mathics_scanner.generate.build_tables
         make check
