@@ -45,7 +45,7 @@ abc",
         (r"z \[Conjugate]", 3, 14, "\uf3c8", "Named character; at end"),
         ("[Integral]", 0, 10, "\u222b", "Another full-string named-character"),
     ):
-        assert parse_escape_sequence(text, pos, is_inside_box=False) == (
+        assert parse_escape_sequence(text, pos, is_in_string=False) == (
             expect_str,
             expect_pos,
         ), fail_msg
@@ -54,7 +54,7 @@ abc",
 def test_invalid_named_character_sequences():
     for text in (r"\[", r"\[Theta", r"\[Fake]", r"\[abc]"):
         with pytest.raises(NamedCharacterSyntaxError):
-            parse_escape_sequence(text, 1, is_inside_box=False)
+            parse_escape_sequence(text, 1, is_in_string=False)
 
 
 def test_invalid_number_encoding():
@@ -78,4 +78,4 @@ def test_invalid_number_encoding():
         ":01-2",
     ):
         with pytest.raises(SyntaxError):
-            parse_escape_sequence(text, 0, is_inside_box=False)
+            parse_escape_sequence(text, 0, is_in_string=False)
