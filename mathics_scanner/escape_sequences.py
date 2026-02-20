@@ -80,7 +80,7 @@ def parse_named_character(source_text: str, start: int, finish: int) -> Optional
 
 
 def parse_escape_sequence(
-    source_text: str, pos: int, is_inside_box: bool
+    source_text: str, pos: int, is_in_string: bool
 ) -> Tuple[str, int]:
     """Given some source text in `source_text` starting at offset
     `pos`, return the escape-sequence value for this text and the
@@ -155,7 +155,7 @@ def parse_escape_sequence(
             assert c == "r"
             result += "\r"
         pos += 1
-    elif is_inside_box and c in BOX_OPERATOR:
+    elif is_in_string and c in BOX_OPERATOR:
         if (boxed_character := BOXING_ASCII_TO_UNICODE.get("\\" + c)) is not None:
             # Replace \ in result with Unicode representing the two ASCII characters.
             result = result[:-1] + boxed_character

@@ -68,7 +68,7 @@ LinearSyntaxCloseParen:
 LinearSyntaxOpenParen:
   ASCII: '\('
   Operators: [RowBox]
-  Unicode: "\uf7cd"
+  Unicode: "\uf7c9"
 
 LinearSyntaxPercent:
   ASCII: '\%'

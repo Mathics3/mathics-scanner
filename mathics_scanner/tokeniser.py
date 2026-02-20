@@ -702,7 +702,7 @@ class Tokeniser:
 
                 try:
                     escape_str, next_pos = parse_escape_sequence(
-                        self.source_text, self.pos + 1, self.is_inside_box
+                        self.source_text, self.pos + 1, is_in_string=False
                     )
                 except (EscapeSyntaxError, NamedCharacterSyntaxError) as escape_error:
                     if self.is_inside_box:
@@ -810,7 +810,7 @@ class Tokeniser:
 
         try:
             escape_str, self.pos = parse_escape_sequence(
-                source_text, start_pos, self.is_inside_box
+                source_text, start_pos, is_in_string=False
             )
             if source_text[start_pos] == "[" and source_text[self.pos - 1] == "]":
                 named_character = source_text[start_pos + 1 : self.pos - 1]
@@ -879,7 +879,7 @@ class Tokeniser:
 
                 try:
                     escape_str, next_pos = parse_escape_sequence(
-                        self.source_text, self.pos + 1, self.is_inside_box
+                        self.source_text, self.pos + 1, is_in_string=False
                     )
                 except (EscapeSyntaxError, NamedCharacterSyntaxError) as escape_error:
                     if self.is_inside_box:
@@ -943,7 +943,7 @@ class Tokeniser:
                 self.pos += 1
                 try:
                     escape_str, self.pos = parse_escape_sequence(
-                        source_text, self.pos, self.is_inside_box
+                        source_text, self.pos, is_in_string=True
                     )
                 except NamedCharacterSyntaxError as escape_error:
                     self.feeder.message(
