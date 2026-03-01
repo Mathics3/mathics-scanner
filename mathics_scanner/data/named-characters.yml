@@ -5963,6 +5963,7 @@ Implies:
   esc-alias: =>
   has-unicode-inverse: true
   is-letter-like: false
+  operator-name: Implies
   unicode-equivalent: "\u21D2"
   unicode-equivalent-name: RIGHTWARDS DOUBLE ARROW
   unicode-reference: https://www.compart.com/en/unicode/U+21D2
