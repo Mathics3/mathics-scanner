@@ -51,7 +51,7 @@ LinearSyntaxBacktick:
 LinearSyntaxBang:
   ASCII: '\!'
   Operators:
-  Unicode: "\uf7c1"
+  Unicode: "\uf7c2"
 
 LinearSyntaxCaret:
   ASCII: '\^'
