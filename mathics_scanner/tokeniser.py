@@ -11,7 +11,12 @@ import re
 import string
 from typing import Dict, Final, List, Optional, Set, Tuple
 
-from mathics_scanner.characters import NAMED_CHARACTERS, _letterlikes, _letters
+from mathics_scanner.characters import (
+    NAME_TO_WL_UNICODE,
+    NAMED_CHARACTERS,
+    _letterlikes,
+    _letters,
+)
 from mathics_scanner.errors import (
     EscapeSyntaxError,
     IncompleteSyntaxError,
@@ -268,47 +273,57 @@ def init_module():
         ("ApplyList", r" \@\@\@ "),
         ("Composition", r" \@\* "),
         ("Condition", r" \/\; "),
-        ("Conjugate", rf" {NAMED_CHARACTERS['Conjugate']} "),
-        ("ConjugateTranspose", r" \uf3c9 "),
-        ("Cross", rf" \uf4a0 | {NAMED_CHARACTERS['Cross']} "),
+        ("Conjugate", f" {NAMED_CHARACTERS['Conjugate']} "),
+        ("ConjugateTranspose", f" {NAME_TO_WL_UNICODE['ConjugateTranspose']} "),
+        ("Cross", f" {NAME_TO_WL_UNICODE['Cross']} | {NAMED_CHARACTERS['Cross']} "),
         ("Decrement", r" \-\- "),
         ("Del", rf" {NAMED_CHARACTERS['Del']} "),
         ("Derivative", r" \' "),
         # ('DifferenceDelta', r' \u2206 '),
         # https://reference.wolfram.com/language/ref/character/DirectedEdge.html
-        ("DirectedEdge", rf" -> | \uf3d5 | {NAMED_CHARACTERS['DirectedEdge']} "),
+        (
+            "DirectedEdge",
+            f" -> | {NAME_TO_WL_UNICODE['DirectedEdge']} | {NAMED_CHARACTERS['DirectedEdge']} ",
+        ),
         # ('DiscreteRatio', r' \uf4a4 '),
         # ('DiscreteShift', r' \uf4a3 '),
-        ("Conjugate", rf" {NAMED_CHARACTERS['Conjugate']} "),
-        ("ConjugateTranspose", r" \uf3c9 "),
-        ("DifferentialD", rf" \uf74c | {NAMED_CHARACTERS['DifferentialD']} "),
+        ("Conjugate", f" {NAMED_CHARACTERS['Conjugate']} "),
+        ("ConjugateTranspose", f" {NAME_TO_WL_UNICODE['ConjugateTranspose']} "),
+        (
+            "DifferentialD",
+            f" {NAME_TO_WL_UNICODE['DifferentialD']} | {NAMED_CHARACTERS['DifferentialD']} ",
+        ),
         ("Divide", rf" \/| {NAMED_CHARACTERS['Divide']} "),
         ("DivideBy", r" \/\=  "),
         ("Dot", r" \. "),
         ("Element", r" {NAMED_CHARACTERS['Element']} "),
-        ("Equal", rf" (\=\=) | \uf431 | {NAMED_CHARACTERS['Equal']} | \uf7d9 "),
+        (
+            "Equal",
+            rf" (\=\=) | {NAME_TO_WL_UNICODE['Equal']} | {NAMED_CHARACTERS['Equal']} | \uf7d9 ",
+        ),
         ("Equivalent", r" {NAMED_CHARACTERS['Equivalent']} "),
         ("Exists", r" {NAMED_CHARACTERS['Exists']} "),
         ("Factorial", r" \! "),
         ("Factorial2", r" \!\! "),
         ("ForAll", r" {NAMED_CHARACTERS['ForAll']} "),
-        ("Function", rf" \& | \uF4A1 | {NAMED_CHARACTERS['Function']} | \|-> "),
+        (
+            "Function",
+            rf" \& | {NAME_TO_WL_UNICODE['Function']} | {NAMED_CHARACTERS['Function']} | \|-> ",
+        ),
         ("Greater", r" \> "),
         ("GreaterEqual", rf" (\>\=) | {NAMED_CHARACTERS['GreaterEqual']} "),
-        ("HermitianConjugate", r" \uf3ce "),
-        ("Implies", r" \uF523 "),
+        ("HermitianConjugate", r" {NAME_TO_WL_UNICODE['HermtianConjugate']} "),
+        ("Implies", rf" {NAME_TO_WL_UNICODE['Implies']} "),
         ("Increment", r" \+\+ "),
         ("Infix", r" \~ "),
         ("Information", r"\?\?"),
-        ("Integral", r" \u222b "),
+        ("Integral", f" {NAME_TO_WL_UNICODE['Integral']} "),
         ("Intersection", rf" {NAMED_CHARACTERS['Intersection']} "),
         ("Less", r" \< "),
         ("LessEqual", rf" (\<\=) | {NAMED_CHARACTERS['LessEqual']} "),
         ("Map", r" \/\@ "),
         ("MapAll", r" \/\/\@ "),
-        # FIXME: can't use NAMED_CHARACTERS in Minus because the ASCII minus
-        # causes the unicode not to appear in tables.
-        ("Minus", r" \-| \u2122 "),
+        ("Minus", r" \-| {NAME_TO_WL_UNICODE['Minus']} "),
         ("Nand", rf" {NAMED_CHARACTERS['Nand']} "),
         ("NonCommutativeMultiply", r" \*\* "),
         ("Nor", rf" {NAMED_CHARACTERS['Nor']} "),
@@ -330,13 +345,16 @@ def init_module():
         ("ReplaceAll", r" \/\. "),
         ("ReplaceRepeated", r" \/\/\. "),
         ("RightComposition", r" \/\* "),
-        ("Rule", r" (\-\>)| \uF522 | {NAMED_CHARACTERS['Rule']} "),
-        ("RuleDelayed", r" (\:\>)|\uF51F "),
+        (
+            "Rule",
+            r" (\-\>)| {NAME_TO_WL_UNICODE['Rule'']} | {NAMED_CHARACTERS['Rule']} ",
+        ),
+        ("RuleDelayed", r" (\:\>)| {NAME_TO_WL_UNICODE['RuleDelayed']} "),
         ("SameQ", r" \=\=\= "),
         ("Semicolon", r" \; "),
         ("Set", r" \= "),
         ("SetDelayed", r" \:\= "),
-        ("Square", rf" \uf520 | {NAMED_CHARACTERS['Square']}"),
+        ("Square", rf" {NAME_TO_WL_UNICODE['Square']} | {NAMED_CHARACTERS['Square']}"),
         ("StringExpression", r" \~\~ "),
         ("StringJoin", r" \<\> "),
         ("SubtractFrom", r" \-\=  "),
@@ -344,23 +362,26 @@ def init_module():
         ("TagSet", r" \/\: "),
         ("Times", rf" \*|{NAMED_CHARACTERS['Times']} "),
         ("TimesBy", r" \*\= "),
-        ("Transpose", rf" \uf3c7 | {NAMED_CHARACTERS['Transpose']} "),
+        (
+            "Transpose",
+            rf" {NAME_TO_WL_UNICODE['Transpose']} | {NAMED_CHARACTERS['Transpose']} ",
+        ),
         ("Unequal", rf" (\!\= ) | {NAMED_CHARACTERS['NotEqual']} "),
         ("Union", rf" {NAMED_CHARACTERS['Union']} "),
         ("UnsameQ", r" \=\!\= "),
-        ("Xnor", r" \uF4A2 "),
+        ("Xnor", r" {NAME_TO_WL_UNICODE['Xnor']} "),
         ("Xor", rf" {NAMED_CHARACTERS['Xor']} "),
         # https://reference.wolfram.com/language/ref/character/UndirectedEdge.html
         # The official Unicode value is \u2194
         (
             "UndirectedEdge",
-            rf" (\<\-\>)|\u29DF | {NAMED_CHARACTERS['UndirectedEdge']} ",
+            rf" (\<\-\>)|{NAME_TO_WL_UNICODE['UndirectedEdge']} | {NAMED_CHARACTERS['UndirectedEdge']} ",
         ),
         # allow whitespace but avoid e.g. x=.01
         ("Unset", r" \=\s*\.(?!\d|\.) "),
         ("UpSet", r" \^\= "),
         ("UpSetDelayed", r" \^\:\= "),
-        ("VerticalSeparator", r" \uF432 "),
+        ("VerticalSeparator", r" {NAME_TO_WL_UNICODE['VerticalSeparator']} "),
     ]
 
     for table_name in ("box-operators", "no-meaning-infix-operators"):

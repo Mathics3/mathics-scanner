@@ -106,6 +106,10 @@ NAMED_CHARACTERS: Final[Dict[str, str]] = NAMED_CHARACTERS_COLLECTION.get(
     "named-characters", {}
 )
 
+NAME_TO_WL_UNICODE: Final[Dict[str, str]] = NAMED_CHARACTERS_COLLECTION.get(
+    "name-to-wl-unicode", {}
+)
+
 # ESC sequence aliases
 aliased_characters = NAMED_CHARACTERS_COLLECTION.get("aliased-characters", {})
 
