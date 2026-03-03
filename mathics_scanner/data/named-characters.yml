@@ -10845,6 +10845,7 @@ Xi:
 Xnor:
   esc-alias: xnor
   has-unicode-inverse: false
+  operator-name: Xnor
   is-letter-like: false
   wl-reference: https://reference.wolfram.com/language/ref/character/Xnor.html
   wl-unicode: "\uF4A2"

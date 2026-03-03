@@ -369,7 +369,7 @@ def init_module():
         ("Unequal", rf" (\!\= ) | {NAMED_CHARACTERS['NotEqual']} "),
         ("Union", rf" {NAMED_CHARACTERS['Union']} "),
         ("UnsameQ", r" \=\!\= "),
-        ("Xnor", r" {NAME_TO_WL_UNICODE['Xnor']} "),
+        ("Xnor", rf" {NAME_TO_WL_UNICODE['Xnor']} "),
         ("Xor", rf" {NAMED_CHARACTERS['Xor']} "),
         # https://reference.wolfram.com/language/ref/character/UndirectedEdge.html
         # The official Unicode value is \u2194
