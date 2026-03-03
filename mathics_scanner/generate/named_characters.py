@@ -3,7 +3,6 @@
 # format used by the library internally
 
 import json
-import os.path as osp
 import re
 import sys
 from pathlib import Path
@@ -218,6 +217,11 @@ def compile_tables(data: dict) -> dict:
     wl_to_ascii_dict = {k: v for k, v in wl_to_ascii_dict.items() if k != v}
     wl_to_ascii_re = re_from_keys(wl_to_ascii_dict)
 
+    # Conversion from Character Name to WL unicode
+    name_to_wl_unicode = {
+        name: info["wl-unicode"] for name, info in data.items() if "wl-unicode" in info
+    }
+
     # Conversion from wl to unicode dictionary entry
     # We filter the dictionary after it's first created to redundant entries
     wl_to_unicode_dict = {
@@ -239,6 +243,7 @@ def compile_tables(data: dict) -> dict:
         "builtin-constants": builtin_constants,
         "latex-named-characters": latex_named_characters,
         "letterlikes": letterlikes,
+        "name-to-wl-unicode": name_to_wl_unicode,
         "named-characters": named_characters,
         "operator-names": operator_names,
         "operator-to-precedence": operator_to_precedence,
@@ -271,6 +276,7 @@ ALL_FIELDS = [
     # "builtin-constants",  # not used yet
     "latex-named-characters",
     "letterlikes",
+    "name-to-wl-unicode",
     "named-characters",
     "operator-names",
     "operator-to-amslatex",  # This is really an alias

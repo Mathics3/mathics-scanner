@@ -47,10 +47,10 @@ dist: admin-tools/make-dist.sh
 install: build
 	$(PYTHON) setup.py install
 
-#: Run unit tests and Mathics doctest
-check-full: pytest check-mathics
+#: Run unit tests and Mathics3 doctest
+check-full: pytest check-mathics3
 
-#: Run unit tests and Mathics doctest
+#: Run unit tests and Mathics3 doctest
 check: pytest
 
 #: Same as check
@@ -77,8 +77,8 @@ inputrc-no-unicode:
 inputrc-unicode:
 	$(PYTHON) -m mathics_scanner.generate.rl_inputrc inputrc-unicode
 
-#: Run Mathics core checks
-check-mathics:
+#: Run Mathics3 core checks
+check-mathics3:
 	MATHICS_CHARACTER_ENCODING="ASCII" $(PYTHON) -m mathics.docpipeline $o
 	pytest test/test_mathics_precedence.py
 
