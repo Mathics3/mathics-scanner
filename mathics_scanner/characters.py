@@ -28,6 +28,8 @@ def get_srcdir() -> str:
 
 in_generating_tables=os.environ.get("MATHICS3_TABLE_GENERATION", False)
 
+in_generating_tables = os.environ.get("MATHICS3_TABLE_GENERATION", False)
+
 JSON_DATA_DIR: Final[str] = osp.join(get_srcdir(), "data")
 
 # FIXME: We need to tolerate loading this *before* tables get generated.
@@ -52,10 +54,15 @@ else:
         print(
             "Warning: Mathics3 named character information are missing; "
             f"expected to be in {NAMED_CHARACTERS_PATH}"
+<<<<<<< HEAD
             )
         print(
             "Please run the " "mathics_scanner/generate/named_characters.py script"
             )
+=======
+        )
+        print("Please run the " "mathics_scanner/generate/named_characters.py script")
+>>>>>>> 5d5a879 (Add mode where it is OK for no JSON files...)
     NAMED_CHARACTERS_COLLECTION = {}
 
 OPERATORS_TABLE_PATH = osp.join(JSON_DATA_DIR, "operators.json")
@@ -140,7 +147,13 @@ _letters: Final[str] = (
 _letterlikes: Final[Dict[str, str]] = NAMED_CHARACTERS_COLLECTION.get("letterlikes", {})
 
 # Conversion from WL to the fully qualified names
+<<<<<<< HEAD
 _wl_to_ascii: Final[Dict[str, str]] = NAMED_CHARACTERS_COLLECTION.get("wl-to-ascii-dict", {})
+=======
+_wl_to_ascii: Final[Dict[str, str]] = NAMED_CHARACTERS_COLLECTION.get(
+    "wl-to-ascii-dict", {}
+)
+>>>>>>> 5d5a879 (Add mode where it is OK for no JSON files...)
 _wl_to_ascii_re: Final[re.Pattern] = re.compile(
     NAMED_CHARACTERS_COLLECTION.get("wl-to-ascii-re", "")
 )
@@ -149,13 +162,25 @@ _wl_to_ascii_re: Final[re.Pattern] = re.compile(
 _wl_to_amstex = NAMED_CHARACTERS_COLLECTION.get("wl-to-amslatex", {})
 
 # Conversion from WL to Unicode
+<<<<<<< HEAD
 _wl_to_unicode: Final[Dict[str, str]] = NAMED_CHARACTERS_COLLECTION.get("wl-to-unicode-dict", {})
+=======
+_wl_to_unicode: Final[Dict[str, str]] = NAMED_CHARACTERS_COLLECTION.get(
+    "wl-to-unicode-dict", {}
+)
+>>>>>>> 5d5a879 (Add mode where it is OK for no JSON files...)
 _wl_to_unicode_re: Final[re.Pattern] = re.compile(
     NAMED_CHARACTERS_COLLECTION.get("wl-to-unicode-re", "")
 )
 
 # Conversion from Unicode to WL
+<<<<<<< HEAD
 _unicode_to_wl: Final[Dict[str, str]] = NAMED_CHARACTERS_COLLECTION.get("unicode-to-wl-dict", {})
+=======
+_unicode_to_wl: Final[Dict[str, str]] = NAMED_CHARACTERS_COLLECTION.get(
+    "unicode-to-wl-dict", {}
+)
+>>>>>>> 5d5a879 (Add mode where it is OK for no JSON files...)
 _unicode_to_wl_re: Final[re.Pattern] = re.compile(
     NAMED_CHARACTERS_COLLECTION.get("unicode-to-wl-re", "")
 )
