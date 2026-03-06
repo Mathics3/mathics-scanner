@@ -397,21 +397,35 @@ def init_module():
                 unicode = unicode[0]
             tokens.append((operator_name, rf" {unicode} "))
 
-    literal_tokens = {
-        "!": ["Unequal", "Factorial2", "Factorial"],
-        '"': ["String"],
-        "#": ["SlotSequence", "Slot"],
-        "%": ["Out"],
-        "&": ["And", "Function"],
-        "'": ["Derivative"],
-        "(": ["RawLeftParenthesis"],
-        ")": ["RawRightParenthesis"],
-        "*": ["NonCommutativeMultiply", "TimesBy", "Times"],
-        "+": ["Increment", "AddTo", "Plus"],
-        ",": ["RawComma"],
-        "-": ["Decrement", "SubtractFrom", "Rule", "Minus"],
-        ".": ["Number", "RepeatedNull", "Repeated", "Dot"],
-        "/": [
+    # The format below string character mapping to a list of possible
+    # Token tag names. For the tag name we try to use
+    literal_tokens: Dict[str, Tuple[str]] = {
+        "!": ("Unequal", "Factorial2", "Factorial"),
+        '"': ("String",),
+        "#": ("SlotSequence", "Slot"),
+        "%": ("Out",),
+        "&": ("And", "Function"),
+        "'": ("Derivative",),
+        "(": ("RawLeftParenthesis",),
+        ")": [
+            "RawRightParenthesis",
+        ],
+        "*": ("NonCommutativeMultiply", "TimesBy", "Times"),
+        "+": ("Increment", "AddTo", "Plus"),
+        ",": ("RawComma",),
+        "-": (
+            "Decrement",
+            "SubtractFrom",
+            "Rule",
+            "Minus",
+        ),
+        ".": (
+            "Number",
+            "RepeatedNull",
+            "Repeated",
+            "Dot",
+        ),
+        "/": (
             "MapAll",
             "Map",
             "DivideBy",
@@ -422,23 +436,23 @@ def init_module():
             "TagSet",
             "Condition",
             "Divide",
-        ],
-        ":": ["MessageName", "RuleDelayed", "SetDelayed", "RawColon"],
-        ";": ["Span", "Semicolon"],
-        "<": [
+        ),
+        ":": ("MessageName", "RuleDelayed", "SetDelayed", "RawColon"),
+        ";": ("Span", "Semicolon"),
+        "<": (
             "RawLeftAssociation",
             "UndirectedEdge",
             "Get",
             "StringJoin",
             "LessEqual",
             "Less",
-        ],
-        "=": ["SameQ", "UnsameQ", "Equal", "Unset", "Set"],
-        ">": ["PutAppend", "Put", "GreaterEqual", "Greater"],
-        "?": ["Information", "PatternTest"],
-        "@": ["ApplyList", "Apply", "Composition", "Prefix"],
-        "[": ["RawLeftBracket"],
-        "\\": [
+        ),
+        "=": ("SameQ", "UnsameQ", "Equal", "Unset", "Set"),
+        ">": ("PutAppend", "Put", "GreaterEqual", "Greater"),
+        "?": ("Information", "PatternTest"),
+        "@": ("ApplyList", "Apply", "Composition", "Prefix"),
+        "[": ("RawLeftBracket",),
+        "\\": (
             "BoxInputEscape",
             "LeftRowBox",
             "RightRowBox",
@@ -453,22 +467,32 @@ def init_module():
             "RadicalBox",
             "FormBox",
             "RawBackslash",
-        ],
-        "]": ["RawRightBracket"],
-        "^": ["UpSetDelayed", "UpSet", "Power"],
-        "_": ["Pattern"],
-        "`": ["Pattern", "Symbol"],
-        "|": ["RawRightAssociation", "Or", "Alternatives", "Function"],
-        "{": ["RawLeftBrace"],
-        "}": ["RawRightBrace"],
-        "~": ["StringExpression", "Infix"],
+        ),
+        "]": ("RawRightBracket",),
+        "^": (
+            "UpSetDelayed",
+            "UpSet",
+            "Power",
+        ),
+        "_": ("Pattern",),
+        "`": (
+            "Pattern",
+            "Symbol",
+        ),
+        "|": ("RawRightAssociation", "Or", "Alternatives", "Function"),
+        "{": ("RawLeftBrace",),
+        "}": ("RawRightBrace",),
+        "~": (
+            "StringExpression",
+            "Infix",
+        ),
     }
 
     for c in string.ascii_letters:
-        literal_tokens[c] = ["Pattern", "Symbol"]
+        literal_tokens[c] = ("Pattern", "Symbol")
 
     for c in string.digits:
-        literal_tokens[c] = ["Number"]
+        literal_tokens[c] = ("Number",)
 
     filename_tokens = [("Filename", FILENAME_PATTERN)]
 
