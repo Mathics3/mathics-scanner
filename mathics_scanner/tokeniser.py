@@ -6,7 +6,6 @@ See classes `Token` and `Tokeniser` .
 """
 
 import itertools
-import os.path as osp
 import re
 import string
 from typing import Dict, Final, List, Optional, Set, Tuple
@@ -14,6 +13,8 @@ from typing import Dict, Final, List, Optional, Set, Tuple
 from mathics_scanner.characters import (
     NAME_TO_WL_UNICODE,
     NAMED_CHARACTERS,
+    OPERATOR_DATA,
+    OPERATORS_TABLE_PATH,
     _letterlikes,
     _letters,
 )
@@ -26,20 +27,10 @@ from mathics_scanner.errors import (
 )
 from mathics_scanner.escape_sequences import parse_escape_sequence
 
-try:
-    import ujson
-except ImportError:
-    import json as ujson  # type: ignore[no-redef]
-
-# Where we get operator data...
-ROOT_DIR = osp.dirname(__file__)
-OPERATORS_TABLE_PATH = osp.join(ROOT_DIR, "data", "operators.json")
-
 ################################################
 # The below get initialized in by init_module()
 # from operator data
 ################################################
-OPERATOR_DATA = {}
 NO_MEANING_OPERATORS = {}
 
 # String of the final character of a "box-operators" value,
@@ -189,19 +180,6 @@ def init_module():
     # Load Mathics3 character information from JSON. The JSON is built from
     # named-characters.yml
 
-    if not osp.exists(OPERATORS_TABLE_PATH):
-        print(
-            "Warning: Mathics3 Operator information are missing; "
-            f"expected to be in {OPERATORS_TABLE_PATH}"
-        )
-        print(
-            "Please run the " "mathics_scanner/generate/build_operator_tables.py script"
-        )
-        return
-
-    with open(osp.join(OPERATORS_TABLE_PATH), "r", encoding="utf8") as operator_f:
-        OPERATOR_DATA.update(ujson.load(operator_f))
-
     global BOXING_CONSTRUCT_SUFFIXES
 
     BOXING_CONSTRUCT_SUFFIXES = set(
@@ -220,7 +198,7 @@ def init_module():
         | set(OPERATOR_DATA["no-meaning-postfix-operators"].keys())
     )
 
-    tokens = [
+    tokens: List[Tuple[str, ...]] = [
         ("BoxInputEscape", r" \\[*]"),
         ("Definition", r"\? "),
         ("Get", r"\<\<"),
@@ -506,7 +484,7 @@ def init_module():
     FILENAME_TOKENS.extend(compile_tokens(filename_tokens))
 
 
-def find_indices(literals: dict) -> dict:
+def find_indices(literals: dict) -> Dict[str, Tuple[int, ...]]:
     "find indices of literal tokens"
 
     literal_indices = {}
