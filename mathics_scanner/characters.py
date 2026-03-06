@@ -9,6 +9,7 @@ translation tables for the syntax used in Boxing operators and Boxing
 expressions.
 """
 
+import os
 import os.path as osp
 import re
 from typing import Dict, Final
@@ -26,68 +27,88 @@ def get_srcdir() -> str:
     return osp.realpath(directory_path)
 
 
+in_generating_tables = os.environ.get("MATHICS3_TABLE_GENERATION", False)
+
 JSON_DATA_DIR: Final[str] = osp.join(get_srcdir(), "data")
+
+# FIXME: We need to tolerate loading this *before* tables get generated.
+# because table generation may imports via importing __version__ which
+# causes variables here to be
+# might not run through table generation.
+#
+# That is why we use "get" to set default values and use "print"
+# instead of raising an error.
+
 
 ########################################
 # Load the conversion tables from disk.
 
 NAMED_CHARACTERS_PATH: Final[str] = osp.join(JSON_DATA_DIR, "named-characters.json")
-if not osp.exists(NAMED_CHARACTERS_PATH):
-    raise RuntimeError(
-        "Mathics3 named character information is missing; "
-        f"expected to be in {NAMED_CHARACTERS_PATH}\n"
-        "Please run the mathics_scanner/generate/operators.py script"
-    )
 
-with open(NAMED_CHARACTERS_PATH, "r") as f:
-    NAMED_CHARACTERS_COLLECTION = ujson.load(f)
+if osp.exists(NAMED_CHARACTERS_PATH):
+    with open(NAMED_CHARACTERS_PATH, "r") as f:
+        NAMED_CHARACTERS_COLLECTION = ujson.load(f)
+else:
+    if not in_generating_tables:
+        print(
+            "Warning: Mathics3 named character information are missing; "
+            f"expected to be in {NAMED_CHARACTERS_PATH}"
+        )
+        print("Please run the " "mathics_scanner/generate/named_characters.py script")
+    NAMED_CHARACTERS_COLLECTION = {}
 
 OPERATORS_TABLE_PATH = osp.join(JSON_DATA_DIR, "operators.json")
 
-if not osp.exists(OPERATORS_TABLE_PATH):
-    raise RuntimeError(
-        "Mathics3 Operator information are missing; "
-        f"expected to be in {OPERATORS_TABLE_PATH}\n"
-        "Please run the mathics_scanner/generate/named_characters.py script"
-    )
+if osp.exists(OPERATORS_TABLE_PATH):
+    with open(osp.join(OPERATORS_TABLE_PATH), "r", encoding="utf8") as operator_f:
+        OPERATOR_DATA = ujson.load(operator_f)
+else:
+    if not in_generating_tables:
+        print(
+            "Mathics3 Operator information are missing; "
+            f"expected to be in {OPERATORS_TABLE_PATH}\n"
+            "Please run the mathics_scanner/generate/operators.py script"
+        )
+    OPERATOR_DATA = {}
 
-with open(osp.join(OPERATORS_TABLE_PATH), "r", encoding="utf8") as operator_f:
-    OPERATOR_DATA = ujson.load(operator_f)
 
 BOXING_CHARACTERS_PATH: Final[str] = osp.join(JSON_DATA_DIR, "boxing-characters.json")
 
-if not osp.exists(BOXING_CHARACTERS_PATH):
-    raise RuntimeError(
-        "Mathics3 Boxing Character information are missing; "
-        f"expected to be in {BOXING_CHARACTERS_PATH}\n"
-        "Please run the mathics_scanner/generate/named_characters.py script"
-    )
+if osp.exists(BOXING_CHARACTERS_PATH):
+    with open(BOXING_CHARACTERS_PATH, "r") as f:
+        BOXING_CHARACTER_DATA = ujson.load(f)
+else:
+    if not in_generating_tables:
+        print(
+            "Mathics3 boxing character information are missing; "
+            f"expected to be in {BOXING_CHARACTERS_PATH}\n"
+            "Please run the mathics_scanner/generate/boxing_characters.py script"
+        )
+    BOXING_CHARACTER_DATA = {}
 
-with open(BOXING_CHARACTERS_PATH, "r") as f:
-    BOXING_CHARACTER_DATA = ujson.load(f)
 
 ########################################
 # Fill in tables from read-in JSON.
 
 # ESC sequence aliases:
-ALIASED_CHARACTERS: Final[Dict[str, str]] = NAMED_CHARACTERS_COLLECTION[
-    "aliased-characters"
-]
+ALIASED_CHARACTERS: Final[Dict[str, str]] = NAMED_CHARACTERS_COLLECTION.get(
+    "aliased-characters", {}
+)
 
-BOXING_UNICODE_TO_ASCII: Final[Dict[str, str]] = BOXING_CHARACTER_DATA[
-    "unicode-to-ascii"
-]
-BOXING_ASCII_TO_UNICODE: Final[Dict[str, str]] = BOXING_CHARACTER_DATA[
-    "ascii-to-unicode"
-]
+BOXING_UNICODE_TO_ASCII: Final[Dict[str, str]] = BOXING_CHARACTER_DATA.get(
+    "unicode-to-ascii", {}
+)
+BOXING_ASCII_TO_UNICODE: Final[Dict[str, str]] = BOXING_CHARACTER_DATA.get(
+    "ascii-to-unicode", {}
+)
 
 # All supported named characters:
-NAMED_CHARACTERS: Final[Dict[str, str]] = NAMED_CHARACTERS_COLLECTION[
-    "named-characters"
-]
-NAME_TO_WL_UNICODE: Final[Dict[str, str]] = NAMED_CHARACTERS_COLLECTION[
-    "name-to-wl-unicode"
-]
+NAMED_CHARACTERS: Final[Dict[str, str]] = NAMED_CHARACTERS_COLLECTION.get(
+    "named-characters", {}
+)
+NAME_TO_WL_UNICODE: Final[Dict[str, str]] = NAMED_CHARACTERS_COLLECTION.get(
+    "name-to-wl-unicode", {}
+)
 
 replace_to_ascii_re = re.compile(
     "|".join(
@@ -115,27 +136,33 @@ _letters: Final[str] = (
 )
 
 # Character ranges of letterlikes
-_letterlikes: Final[Dict[str, str]] = NAMED_CHARACTERS_COLLECTION["letterlikes"]
+_letterlikes: Final[Dict[str, str]] = NAMED_CHARACTERS_COLLECTION.get("letterlikes", {})
 
 # Conversion from WL to the fully qualified names
-_wl_to_ascii: Final[Dict[str, str]] = NAMED_CHARACTERS_COLLECTION["wl-to-ascii-dict"]
+_wl_to_ascii: Final[Dict[str, str]] = NAMED_CHARACTERS_COLLECTION.get(
+    "wl-to-ascii-dict", {}
+)
 _wl_to_ascii_re: Final[re.Pattern] = re.compile(
-    NAMED_CHARACTERS_COLLECTION["wl-to-ascii-re"]
+    NAMED_CHARACTERS_COLLECTION.get("wl-to-ascii-re", "")
 )
 
 # AMS LaTeX replacements
-_wl_to_amstex = NAMED_CHARACTERS_COLLECTION["wl-to-amslatex"]
+_wl_to_amstex = NAMED_CHARACTERS_COLLECTION.get("wl-to-amslatex", {})
 
 # Conversion from WL to Unicode
-_wl_to_unicode = NAMED_CHARACTERS_COLLECTION["wl-to-unicode-dict"]
+_wl_to_unicode: Final[Dict[str, str]] = NAMED_CHARACTERS_COLLECTION.get(
+    "wl-to-unicode-dict", {}
+)
 _wl_to_unicode_re: Final[re.Pattern] = re.compile(
     NAMED_CHARACTERS_COLLECTION.get("wl-to-unicode-re", "")
 )
 
 # Conversion from Unicode to WL
-_unicode_to_wl = NAMED_CHARACTERS_COLLECTION["unicode-to-wl-dict"]
+_unicode_to_wl: Final[Dict[str, str]] = NAMED_CHARACTERS_COLLECTION.get(
+    "unicode-to-wl-dict", {}
+)
 _unicode_to_wl_re: Final[re.Pattern] = re.compile(
-    NAMED_CHARACTERS_COLLECTION["unicode-to-wl-re"]
+    NAMED_CHARACTERS_COLLECTION.get("unicode-to-wl-re", "")
 )
 
 
