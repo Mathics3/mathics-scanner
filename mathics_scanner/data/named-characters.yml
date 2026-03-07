@@ -7766,7 +7766,7 @@ Omicron:
   wl-unicode-name: GREEK SMALL LETTER OMICRON
 
 OpenCurlyDoubleQuote:
-  esc-alias: '["'
+  esc-alias: '{"'
   has-unicode-inverse: false
   is-letter-like: false
   unicode-equivalent: "\u201C"
@@ -7777,7 +7777,7 @@ OpenCurlyDoubleQuote:
   wl-unicode-name: LEFT DOUBLE QUOTATION MARK
 
 OpenCurlyQuote:
-  esc-alias: '['''
+  esc-alias: '{'''
   has-unicode-inverse: false
   is-letter-like: false
   unicode-equivalent: "\u2018"
@@ -8231,27 +8231,37 @@ RawLeftBracket:
   ascii: '['
   has-unicode-inverse: false
   is-letter-like: false
+  wl-reference: https://reference.wolfram.com/language/ref/character/RawLeftBracket.html
+  wl-unicode: "\u005B"
 
 RawLeftParenthesis:
   ascii: '('
   has-unicode-inverse: false
   is-letter-like: false
+  wl-reference: https://reference.wolfram.com/language/ref/character/RawLeftParenthesis.html
+  wl-unicode: "\u0028"
 
 RawNumberSign:
   ascii: "#"
   has-unicode-inverse: false
   is-letter-like: false
+  wl-reference: https://reference.wolfram.com/language/ref/character/RawNumberSign.html
+  wl-unicode: "\u0023"
 
 RawPercent:
   ascii: "%"
   has-unicode-inverse: false
   is-letter-like: false
+  wl-reference: https://reference.wolfram.com/language/ref/character/RawPercent.html
+  wl-unicode: "\u0025"
 
 # See also PatternTest
 RawQuestion:
   ascii: "?"
   has-unicode-inverse: false
   is-letter-like: false
+  wl-reference: https://reference.wolfram.com/language/ref/character/RawQuestion.html
+  wl-unicode: "\u003F"
 
 RawQuote:
   ascii: "'"
