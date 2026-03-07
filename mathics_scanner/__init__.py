@@ -7,8 +7,8 @@ named characters, their Unicode/ASCII equivalents and code-points.
 """
 
 from mathics_scanner.characters import (
+    ALIASED_CHARACTERS,
     NAMED_CHARACTERS,
-    aliased_characters,
     replace_unicode_with_wl,
     replace_wl_with_plain_text,
 )
@@ -29,18 +29,18 @@ from mathics_scanner.feed import (
 from mathics_scanner.version import __version__
 
 __all__ = [
+    "ALIASED_CHARACTERS",
     "FileLineFeeder",
     "IncompleteSyntaxError",
     "InvalidSyntaxError",
     "LineFeeder",
     "MultiLineFeeder",
     "NAMED_CHARACTERS",
-    "SyntaxError",
     "SingleLineFeeder",
+    "SyntaxError",
     # "Token",
     # "Tokeniser",
     "__version__",
-    "aliased_characters",
     # "is_symbol_name",
     "replace_unicode_with_wl",
     "replace_wl_with_plain_text",
