@@ -8223,9 +8223,11 @@ RawGreater:
 RawLeftBrace:
   ascii: "{"
   has-unicode-inverse: false
+  is-letter-like: false
   operator-name: LeftList
   wl-reference: https://reference.wolfram.com/language/ref/character/RawLeftBrace.html
-  is-letter-like: false
+  wl-unicode: "\u007B"
+  wl-unicode-name: RawLeftBrace
 
 RawLeftBracket:
   ascii: '['
@@ -8233,6 +8235,7 @@ RawLeftBracket:
   is-letter-like: false
   wl-reference: https://reference.wolfram.com/language/ref/character/RawLeftBracket.html
   wl-unicode: "\u005B"
+  wl-unicode-name: RawLeftBracket
 
 RawLeftParenthesis:
   ascii: '('
@@ -8240,6 +8243,7 @@ RawLeftParenthesis:
   is-letter-like: false
   wl-reference: https://reference.wolfram.com/language/ref/character/RawLeftParenthesis.html
   wl-unicode: "\u0028"
+  wl-unicode-name: RawLeftParenthesis
 
 RawNumberSign:
   ascii: "#"
@@ -8247,6 +8251,7 @@ RawNumberSign:
   is-letter-like: false
   wl-reference: https://reference.wolfram.com/language/ref/character/RawNumberSign.html
   wl-unicode: "\u0023"
+  wl-unicode-name: RawNumberSign
 
 RawPercent:
   ascii: "%"
@@ -8254,6 +8259,7 @@ RawPercent:
   is-letter-like: false
   wl-reference: https://reference.wolfram.com/language/ref/character/RawPercent.html
   wl-unicode: "\u0025"
+  wl-unicode-name: RawPercent
 
 # See also PatternTest
 RawQuestion:
@@ -8262,15 +8268,16 @@ RawQuestion:
   is-letter-like: false
   wl-reference: https://reference.wolfram.com/language/ref/character/RawQuestion.html
   wl-unicode: "\u003F"
+  wl-unicode-name: RawQuestion
 
 RawQuote:
   ascii: "'"
   has-unicode-inverse: false
   is-letter-like: false
   unicode-equivalent-name: APOSTROPHE
-  wl-reference: https://reference.wolfram.com/language/ref/character/RawLeftBrace.html
-  wl-unicode: "'"
-  wl-unicode-name: APOSTROPHE
+  wl-reference: https://reference.wolfram.com/language/ref/character/RawQuote.html
+  wl-unicode: "\u0027"
+  wl-unicode-name: RawQuote
 
 RawReturn:
   has-unicode-inverse: true
@@ -8287,7 +8294,7 @@ RawRightBrace:
   unicode-reference: https://www.compart.com/en/unicode/U+007D
   wl-reference: https://reference.wolfram.com/language/ref/character/RawRightBrace.html
   wl-unicode: '}'
-  wl-unicode-name: RIGHT CURLY BRACKET
+  wl-unicode-name: RawRightBrace
 
 RawRightBracket:
   has-unicode-inverse: false
