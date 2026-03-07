@@ -190,16 +190,25 @@ def test_unicode_operators():
         if "operator-name" not in v:
             continue
         operator_name = v["operator-name"]
-        assert (
-            k == operator_name
-        ), f"Section name {k} should match operator-name {operator_name} or be explicitly excluded when a section has an operator"
+        assert k == operator_name, (
+            f"Section name {k} should match operator-name {operator_name} or be "
+            "explicitly excluded when a section has an operator"
+        )
 
 
 def test_wl_unicode_name():
-    for k, v in yaml_data.items():
+    seen_wl_unicode = {}
+    seen_wl_unicode_name = {}
+    for name, v in yaml_data.items():
         if "wl-unicode" not in v:
             continue
+
         wl = v["wl-unicode"]
+        assert wl not in seen_wl_unicode, (
+            f"Section {name}'s wl-unicode {hex(ord(wl))} has already been used "
+            f"in '{seen_wl_unicode[wl]}'"
+        )
+        seen_wl_unicode[wl] = name
 
         try:
             expected_name = unicodedata.name(wl)
@@ -208,12 +217,33 @@ def test_wl_unicode_name():
 
         real_name = v.get("wl-unicode-name")
 
+        assert real_name not in seen_wl_unicode_name, (
+            f"Section {name}'s wl-unicode-name '{real_name}' has already been used in "
+            f"'{seen_wl_unicode_name[real_name]}'"
+        )
+        seen_wl_unicode_name[real_name] = name
+
         if real_name is None:
-            raise ValueError(f"Section {k}'s wl-unicode has a name but it isn't listed")
+            raise ValueError(
+                f"Section {name}'s wl-unicode has a name but it isn't listed"
+            )
+
+        # The WL name does not match the unicodedata name here:
+        if expected_name in (
+            "APOSTROPHE",
+            "LEFT CURLY BRACKET",
+            "LEFT PARENTHESIS",
+            "LEFT SQUARE BRACKET",
+            "NUMBER SIGN",
+            "PERCENT SIGN",
+            "QUESTION MARK",
+            "RIGHT CURLY BRACKET",
+        ):
+            continue
 
         assert (
             real_name == expected_name
-        ), f"Section {k} has wl-unicode-name set to {real_name} but it should be {expected_name}"
+        ), f"Section {name} has wl-unicode-name set to {real_name} but it should be {expected_name}"
 
 
 def test_general_yaml_sanity():

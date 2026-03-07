@@ -401,11 +401,11 @@ def test_precedence_order():
         ),
         # UndirectedEdge has larger precedence than SquareUnion
         (
-            "a\[SquareUnion]b\[UndirectedEdge]c//FullForm",
+            r"a\[SquareUnion]b\[UndirectedEdge]c//FullForm",
             "UndirectedEdge[SquareUnion[a, b], c]",
         ),
         (
-            "a\[UndirectedEdge]b\[SquareUnion]c//FullForm",
+            r"a\[UndirectedEdge]b\[SquareUnion]c//FullForm",
             "UndirectedEdge[a, SquareUnion[b, c]]",
         ),
     ],
