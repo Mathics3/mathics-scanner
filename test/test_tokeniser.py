@@ -113,11 +113,11 @@ def test_apply():
 
 def test_association():
     assert tokens("<|x -> m|>") == [
-        Token("RawLeftAssociation", "<|", 0),
+        Token("LessBar", "<|", 0),
         Token("Symbol", "x", 2),
         Token("Rule", "->", 4),
         Token("Symbol", "m", 7),
-        Token("RawRightAssociation", "|>", 8),
+        Token("BarGreater", "|>", 8),
     ]
 
 
