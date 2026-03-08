@@ -122,7 +122,9 @@ FULL_SYMBOL_PATTERN_STR: Final[str] = (
 )
 
 # Same thing as above but adding @* for Names[] patterns
-FULL_SYMBOL_PATTERN_WITH_NAMES_PATTERN_STR: Final[str] = rf"""
+FULL_SYMBOL_PATTERN_WITH_NAMES_PATTERN_STR: Final[
+    str
+] = rf"""
 (?P<quote>\"?)                              (?# Opening quotation mark)
     (`?{base_symbol_pattern_with_names_pattern}
     (`{base_symbol_pattern_with_names_pattern})*)
@@ -482,7 +484,8 @@ def init_module():
             "UnsameQ",
             "Equal",
             "Unset",
-            "Set"),
+            "Set",
+        ),
         ">": (
             # Note that "Greater" has to come last.
             "PutAppend",
@@ -579,13 +582,16 @@ def find_indices(literals: dict) -> Dict[str, Tuple[int, ...]]:
 
 
 FULL_SYMBOL_PATTERN_RE: re.Pattern = compile_pattern(FULL_SYMBOL_PATTERN_STR)
-FULL_SYMBOL_PATTERN_WITH_NAMES_PATTERN_RE: Final[str] = compile_pattern(FULL_SYMBOL_PATTERN_WITH_NAMES_PATTERN_STR)
+FULL_SYMBOL_PATTERN_WITH_NAMES_PATTERN_RE: Final[str] = compile_pattern(
+    FULL_SYMBOL_PATTERN_WITH_NAMES_PATTERN_STR
+)
+
 
 # rocky: The coding using compile_tokens below is a bit obfucscated.
-# We start out with strings like FILENAME_PATTERN which then gets put
-# in a list then we convert the list to re.Patterns the compile_tokens
+# We start with strings like FILENAME_PATTERN which then gets put
+# in a list, then we convert the list to `re.Patterns` the compile_tokens
 # below.  The compiled regexp's for the individual pattern strings are
-# not associated with variable names, but are justre.Patterns just
+# not associated with variable names, but are just `re.Pattern` that
 # appear in some token "token_list" structure.  FIXME: come up with a
 # more transparent way to code this.
 def compile_tokens(token_list):
