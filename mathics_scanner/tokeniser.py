@@ -2,7 +2,7 @@
 Mathics3 Scanner or Tokenizer module.
 
 This module reads input lines and breaks the lines into tokens.
-See classes `Token` and `Tokeniser` .
+See classes `Token` and `Tokeniser`.
 """
 
 import itertools
@@ -113,8 +113,8 @@ full_names_pattern = rf"(`?{base_names_pattern}(`{base_names_pattern})*)"
 
 # End of Symbol-related regular expressions.
 
-# FIXME incorportate the below table in to Function/Operators YAML
-# Table of correspondneces between a Mathics3 token name (or "tag")
+# FIXME incorporate the below table into Function/Operators YAML
+# Table of correspondences between a Mathics3 token name (or "tag")
 # and WMA CodeTokenize name
 MATHICS3_TAG_TO_CODETOKENIZE: Final[Dict[str, str]] = {
     "AddTo": "PlusEqual",
@@ -134,7 +134,7 @@ MATHICS3_TAG_TO_CODETOKENIZE: Final[Dict[str, str]] = {
     "Get": "LessLess",
     "Increment": "PlusPlus",
     "Infix": "Tilde",
-    "Information": "QuesionQuestion",
+    "Information": "QuestionQuestion",
     "InterpretedBox": "LinearSequence`Bang",
     "MessageName": "ColonColon",
     "Or": "BarBar",
@@ -374,7 +374,7 @@ def init_module():
             tokens.append((operator_name, rf" {unicode} "))
 
     # The format below string character mapping to a list of possible
-    # Token tag names. For the tag name we try to use
+    # Token tag names. For the tag name, we try to use
     literal_tokens: Dict[str, Tuple[str]] = {
         "!": ("Unequal", "Factorial2", "Factorial"),
         '"': ("String",),
@@ -414,7 +414,7 @@ def init_module():
         ":": ("MessageName", "RuleDelayed", "SetDelayed", "RawColon"),
         ";": ("Span", "Semicolon"),
         "<": (
-            # Note this list in in priority order. "Less" (one character)
+            # Note this list is in priority order. "Less" (one character)
             # has to come *last*.
             "LessBar",
             "UndirectedEdge",
@@ -514,7 +514,7 @@ def is_symbol_name(text: str) -> bool:
     Returns ``True`` if ``text`` is a valid identifier. Otherwise returns
     ``False``.
     """
-    # Can't we just call match here?
+    # Can't we just call `match` here?
     return FULL_SYMBOL_PATTERN_RE.sub("", text) == ""
 
 
@@ -563,7 +563,7 @@ class Token:
 class Tokeniser:
     """
     This converts input strings from a feeder and
-    produces tokens of the Wolfram Language which can then be used in parsing.
+    produces tokens of the Wolfram Language, which can then be used in parsing.
     """
 
     # TODO: Check if this dict should be updated using the init_module function
@@ -593,7 +593,7 @@ class Tokeniser:
 
     def _change_token_scanning_mode(self, mode: str):
         """
-        Set the kinds of tokens that be will expected on the next token scan.
+        Set the kinds of tokens that will be expected on the next token scan.
         See class variable "modes" above for the dictionary
         of token-scanning modes.
         """
@@ -613,7 +613,7 @@ class Tokeniser:
     @property
     def is_inside_box(self) -> bool:
         r"""
-        Return True iff we parsing inside a RowBox, i.e. RowBox[...]
+        Return True iff we are parsing inside a RowBox, i.e., RowBox[...]
         or \( ... \)
         """
         return self._is_inside_box
@@ -687,11 +687,11 @@ class Tokeniser:
         text = pattern_match.group(0)
         self.pos = pattern_match.end(0)
 
-        # The below similar to what we do in t_RawBackslash, but is is
+        # The below is similar to what we do in t_RawBackslash, but it is
         # different.  First, we need to look for a closing quote
         # ("). Also, after parsing escape sequences, we can
-        # unconditionallhy add them on to the string. That is, we
-        # don't have to check whether the returned string can be valid
+        # unconditionally add them onto the string. That is, we
+        # don't have to check whether the returned string can be a valid
         # in a Symbol name.
 
         if tag == "Symbol":
@@ -823,7 +823,7 @@ class Tokeniser:
         start_pos = self.pos + 1
         named_character = ""
         if start_pos == len(source_text):
-            # We have reached end of the input line before seeing a termination
+            # We have reached the end of the input line before seeing a termination
             # of backslash. Fetch another line.
             self.get_more_input()
             self.pos += 1
@@ -904,7 +904,7 @@ class Tokeniser:
                     )
                 except (EscapeSyntaxError, NamedCharacterSyntaxError) as escape_error:
                     if self.is_inside_box:
-                        # Follow-on symbol may be a escape character that can
+                        # Follow-on symbol may be an escape character that can
                         # appear only in box constructs, e.g. \%.
                         break
                     self.feeder.message(
@@ -925,7 +925,7 @@ class Tokeniser:
 
     def t_String(self, _: Optional[re.Match]) -> Token:
         """Break out from self.source_text the next token which is expected to be a String.
-        The string value of the returned token will have double quote (") in the first and last
+        The string value of the returned token will have a double quote (") in the first and last
         positions of the returned string.
         """
         end = None
@@ -934,10 +934,10 @@ class Tokeniser:
         source_text = self.source_text
         result = ""
 
-        # The below similar to what we do in t_RawBackslash, but is is
+        # The below is similar to what we do in t_RawBackslash, but it is
         # different.  First, we need to look for a closing quote
         # ("). Also, after parsing escape sequences, we can
-        # unconditionally add them on to the string. That is, we
+        # unconditionally add them onto the string. That is, we
         # don't have to check whether the returned string can be valid
         # in a Symbol name or as a boxing construct
 
@@ -958,7 +958,7 @@ class Tokeniser:
 
             if char == "\\":
                 if self.pos + 1 == len(source_text):
-                    # We have reached end of the input line before seeing a terminating
+                    # We have reached the end of the input line before seeing a terminating
                     # quote ("). Fetch another line.
                     self.get_more_input()
                 self.pos += 1

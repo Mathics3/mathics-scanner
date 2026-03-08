@@ -21,13 +21,13 @@ class LineFeeder(metaclass=ABCMeta):
     def __init__(self, container, container_kind=ContainerKind.UNKNOWN):
         """
         :param container_name: A string that describes the source of
-          the feeder, i.e. the file path that is being feed, or the
+          the feeder, i.e., the file path that is being feed, or the
           Python source code path, or an open terminal shell stream.
         """
 
         # A message is a list that starts out with a "symbol_name", like "Part",
-        # a message tag, like "partw", and a list of argument to be used in
-        # creating a message in list of messages.
+        # a message tag, like "partw", and a list of arguments to be used in
+        # creating a message in a list of messages.
         self.messages: List[list] = []
 
         self.lineno: int = 0
@@ -51,8 +51,9 @@ class LineFeeder(metaclass=ABCMeta):
     @abstractmethod
     def feed(self) -> str:
         """
-        Consume and return next line of code. Each line should be followed by a
-        newline character. Returns '' after all lines are consumed.
+        Consume and return the next line of code. A newline character
+        should follow each line.
+        Returns '' after all lines are consumed.
         """
         ...
 
@@ -81,7 +82,7 @@ class LineFeeder(metaclass=ABCMeta):
 
             Part::partw: Part {10} of abcde does not exist.
 
-        "Part" is the symbol_name, "partw" is the tag and args is:
+        "Part" is the symbol_name, "partw" is the tag, and args is:
         (<ListExpression: (<Integer: 10>,)>, <String: "abcde">)
 
         """
@@ -160,8 +161,8 @@ class SingleLineFeeder(LineFeeder):
     ):
         """
         :param source_text: The source of the feeder (a string).
-        :param filename: A string that describes the source of the feeder, i.e.
-                         the filename that is being feed.
+        :param filename: A string that describes the source of the feeder, i.e.,
+                         the filename that is being fed.
         """
         super().__init__(container, container_kind)
         self.source_text = source_text
@@ -187,7 +188,7 @@ class FileLineFeeder(LineFeeder):
         """
         :param fileobject: The source of the feeder (a string).
         :param filename: A string that describes the source of the feeder,
-                           i.e.  the filename that is being feed.
+                           i.e.,  the filename that is being fed.
         """
         super().__init__(fileobject.name, container_kind=ContainerKind.FILE)
         self.fileobject = fileobject
