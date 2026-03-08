@@ -11,12 +11,12 @@ import string
 from typing import Dict, Final, List, Optional, Set, Tuple
 
 from mathics_scanner.characters import (
+    LETTERLIKES,
+    LETTERS,
     NAME_TO_WL_UNICODE,
     NAMED_CHARACTERS,
     OPERATOR_DATA,
     OPERATORS_TABLE_PATH,
-    _letterlikes,
-    _letters,
 )
 from mathics_scanner.errors import (
     EscapeSyntaxError,
@@ -100,7 +100,7 @@ NAMES_WILDCARDS: Final[str] = "@*"
 # "with_names_pattern" suffix.
 
 # The leading character of a Symbol:
-symbol_first_letter: Final[str] = f"{_letters}{_letterlikes}"
+symbol_first_letter: Final[str] = f"{LETTERS}{LETTERLIKES}"
 
 # Same thing as above but adding @* for Names[] patterns
 symbol_first_letter_with_names_pattern: Final[str] = (
@@ -140,7 +140,7 @@ FILENAME_PATTERN = r"""
 """
 
 base_names_pattern = r"((?![0-9])([0-9${0}{1}{2}])+)".format(
-    _letters, _letterlikes, NAMES_WILDCARDS
+    LETTERS, LETTERLIKES, NAMES_WILDCARDS
 )
 full_names_pattern = rf"(`?{base_names_pattern}(`{base_names_pattern})*)"
 
@@ -829,7 +829,7 @@ class Tokeniser:
                         escape_error.name, escape_error.tag, *escape_error.args
                     )
                     raise
-                if escape_str in _letterlikes:
+                if escape_str in LETTERLIKES:
                     text += escape_str
                     self.pos = next_pos
                 else:
