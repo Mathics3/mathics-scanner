@@ -187,7 +187,7 @@ class FileLineFeeder(LineFeeder):
         """
         :param fileobject: The source of the feeder (a string).
         :param filename: A string that describes the source of the feeder,
-                           i.e.  the filename that is being feed.
+                           i.e.,  the filename that is being fed.
         """
         super().__init__(fileobject.name, container_kind=ContainerKind.FILE)
         self.fileobject = fileobject
