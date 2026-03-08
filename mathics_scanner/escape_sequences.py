@@ -100,7 +100,7 @@ def parse_escape_sequence(
         pos += 3
     elif c == ":":
         # see if we have a 4-digit hexadecimal number.
-        # for example, \:03b8" is unicode small leter theta: θ.
+        # for example, \:03b8" is the Unicode for small letter theta: θ.
         result += parse_base(source_text, pos + 1, pos + 5, 16)
         pos += 5
     elif c == "|":
