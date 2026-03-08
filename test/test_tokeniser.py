@@ -169,7 +169,10 @@ def test_function():
 
 
 def test_information():
-    assert tokens("??Sin") == [Token("Information", "??", 0), Token("Symbol", "Sin", 2)]
+    assert tokens("??Sin") == [
+        Token("Information", "??", 0),
+        Token("NamePattern", "Sin", 2),
+    ]
 
     assert tokens("? ?Sin") == [
         Token("PatternTest", "?", 0),

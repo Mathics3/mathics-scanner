@@ -2,7 +2,7 @@
 Mathics3 Scanner or Tokenizer module.
 
 This module reads input lines and breaks the lines into tokens.
-See classes `Token` and `Tokeniser`.
+See classes `Token` and `Tokeniser` .
 """
 
 import itertools
@@ -27,17 +27,17 @@ from mathics_scanner.errors import (
 )
 from mathics_scanner.escape_sequences import parse_escape_sequence
 
-################################################
-# The below get initialized in by init_module()
-# from operator data
-################################################
+#####################################################
+# The below get (re)initialized in by init_module()
+# from operator data.
+#######################################################
 NO_MEANING_OPERATORS = {}
 
 # String of the final character of a "box-operators" value,
 # This is used in t_String for escape-sequence handling.
 # The below is roughly correct, but we overwrite this
 # from operators.json data in init_module()
-BOXING_CONSTRUCT_SUFFIXES: Final[Set[str]] = {
+BOXING_CONSTRUCT_SUFFIXES: Set[str] = {
     "%",
     "/",
     "@",
@@ -52,7 +52,9 @@ BOXING_CONSTRUCT_SUFFIXES: Final[Set[str]] = {
     ")",
 }
 
+# The below are intialized in init_module().
 FILENAME_TOKENS: List = []
+NAME_PATTERN_TOKENS: List = []
 TOKENS: List[Tuple] = []
 TOKEN_INDICES: Dict = {}
 
@@ -66,6 +68,13 @@ NUMBER_PATTERN = r"""
 (``?(\+|-)?(\d+\.?\d*|\d*\.?\d+)|`)?        (?# Precision / Accuracy)
 (\*\^(\+|-)?\d+)?                           (?# Exponent)
 """
+
+# The additional characters that can appear as Names[] metacharacters.
+# For those who are curious (it is not needed in pattern matching)
+#  * matches zero or more
+#  @ matches one or more but not uppercase letters
+# This is described in https://reference.wolfram.com/language/ref/Names.html
+NAMES_WILDCARDS: Final[str] = "@*"
 
 # TODO: Check what of this should be a part of the module interface.
 
@@ -86,25 +95,48 @@ NUMBER_PATTERN = r"""
 # different states or "modes" indicating the interior of comments,
 # strings, files, and Box-like constructs.
 
+# Extra pattern maching symbols are allowed in a Names[] pattern argument
+# or a ?? (Information operator) argument. These variables have the
+# "with_names_pattern" suffix.
+
 # The leading character of a Symbol:
-symbol_first_letter = f"{_letters}{_letterlikes}"
+symbol_first_letter: Final[str] = f"{_letters}{_letterlikes}"
+
+# Same thing as above but adding @* for Names[] patterns
+symbol_first_letter_with_names_pattern: Final[str] = (
+    symbol_first_letter + NAMES_WILDCARDS
+)
 
 # Regular expression string for Symbol without context parts. Note that
 # ![0-9] is too permissive, but that's handle by other means.
-base_symbol_pattern = rf"((?![0-9])([0-9${symbol_first_letter}])+)"
+base_symbol_pattern: Final[str] = rf"((?![0-9])([0-9${symbol_first_letter}])+)"
+base_symbol_pattern_with_names_pattern: Final[str] = (
+    rf"((?![0-9])([0-9${symbol_first_letter_with_names_pattern}])+)"
+)
 
-interior_symbol_pattern = rf"([0-9${symbol_first_letter}]+)"
+interior_symbol_pattern: Final[str] = rf"([0-9${symbol_first_letter}]+)"
 
 # Symbol including context parts.
-full_symbol_pattern_str = rf"(`?{base_symbol_pattern}(`{base_symbol_pattern})*)"
-pattern_pattern = rf"{full_symbol_pattern_str}?_(\.|(__?)?{full_symbol_pattern_str}?)?"
+FULL_SYMBOL_PATTERN_STR: Final[str] = (
+    rf"(`?{base_symbol_pattern}(`{base_symbol_pattern})*)"
+)
+
+# Same thing as above but adding @* for Names[] patterns
+FULL_SYMBOL_PATTERN_WITH_NAMES_PATTERN_STR: Final[str] = rf"""
+(?P<quote>\"?)                              (?# Opening quotation mark)
+    (`?{base_symbol_pattern_with_names_pattern}
+    (`{base_symbol_pattern_with_names_pattern})*)
+(?P=quote)                                  (?# Closing quotation mark)
+"""
+
+pattern_pattern = rf"{FULL_SYMBOL_PATTERN_STR}?_(\.|(__?)?{FULL_SYMBOL_PATTERN_STR}?)?"
 slot_pattern = rf"\#(\d+|{base_symbol_pattern})?"
 FILENAME_PATTERN = r"""
 (?P<quote>\"?)                              (?# Opening quotation mark)
     [a-zA-Z0-9\`/\.\\\!\-\:\_\$\*\~\?]+     (?# Literal characters)
 (?P=quote)                                  (?# Closing quotation mark)
 """
-NAMES_WILDCARDS = "@*"
+
 base_names_pattern = r"((?![0-9])([0-9${0}{1}{2}])+)".format(
     _letters, _letterlikes, NAMES_WILDCARDS
 )
@@ -165,14 +197,14 @@ MATHICS3_TAG_TO_CODETOKENIZE: Final[Dict[str, str]] = {
 }
 
 
-def compile_pattern(pattern):
-    """Compile a pattern from a regular expression"""
+def compile_pattern(pattern: str) -> re.Pattern:
+    """Compile a pattern from a regular expression in verbose mode"""
     return re.compile(pattern, re.VERBOSE)
 
 
 def init_module():
     """
-    Initialize the module using the information
+    Initialize the module using global variables above and from information
     stored in the JSON tables.
     """
     # Load Mathics3 character information from JSON. The JSON is built from
@@ -220,7 +252,7 @@ def init_module():
         ("SlotSequence", r"\#\#\d*"),
         ("Span", r" \;\; "),
         ("String", r'"'),
-        ("Symbol", full_symbol_pattern_str),
+        ("Symbol", FULL_SYMBOL_PATTERN_STR),
         #
         # Enclosing Box delimiters
         #
@@ -373,12 +405,27 @@ def init_module():
                 unicode = unicode[0]
             tokens.append((operator_name, rf" {unicode} "))
 
-    # The format below string character mapping to a list of possible
-    # Token tag names. For the tag name, we try to use
+    # The format below maps a string character to a tuple of possible
+    # Token tag names. For the tag name, we try to use CodeTokenize
+    # names.
+
+    # Note the tuple is in priority order. In particular, tokens
+    # associated with a single character tokens like Factorial (!), has to
+    # come after both Unequal (!=), and Factorial2 (!!).
+
     literal_tokens: Dict[str, Tuple[str]] = {
-        "!": ("Unequal", "Factorial2", "Factorial"),
+        "!": (
+            # Note that "Factorial" has to come last.
+            "Unequal",
+            "Factorial2",
+            "Factorial",
+        ),
         '"': ("String",),
-        "#": ("SlotSequence", "Slot"),
+        "#": (
+            # Note that "Slot" has to come last.
+            "SlotSequence",
+            "Slot",
+        ),
         "%": ("Out",),
         "&": ("And", "Function"),
         "'": ("Derivative",),
@@ -388,18 +435,21 @@ def init_module():
         "+": ("Increment", "AddTo", "Plus"),
         ",": ("RawComma",),
         "-": (
+            # Note that "Minus" has to come last.
             "Decrement",
             "SubtractFrom",
             "Rule",
             "Minus",
         ),
         ".": (
+            # Note that "Dot" has to come last.
             "Number",
             "RepeatedNull",
             "Repeated",
             "Dot",
         ),
         "/": (
+            # Note that "Divide" has to come last.
             "MapAll",
             "Map",
             "DivideBy",
@@ -412,10 +462,13 @@ def init_module():
             "Divide",
         ),
         ":": ("MessageName", "RuleDelayed", "SetDelayed", "RawColon"),
-        ";": ("Span", "Semicolon"),
+        ";": (
+            # Note that "Semicolon" has to come last.
+            "Span",
+            "Semicolon",
+        ),
         "<": (
-            # Note this list is in priority order. "Less" (one character)
-            # has to come *last*.
+            # Note that "Less" has to come last.
             "LessBar",
             "UndirectedEdge",
             "Get",
@@ -423,12 +476,29 @@ def init_module():
             "LessEqual",
             "Less",
         ),
-        "=": ("SameQ", "UnsameQ", "Equal", "Unset", "Set"),
-        ">": ("PutAppend", "Put", "GreaterEqual", "Greater"),
-        "?": ("Information", "PatternTest"),
+        "=": (
+            # Note that "Set" has to come last.
+            "SameQ",
+            "UnsameQ",
+            "Equal",
+            "Unset",
+            "Set"),
+        ">": (
+            # Note that "Greater" has to come last.
+            "PutAppend",
+            "Put",
+            "GreaterEqual",
+            "Greater",
+        ),
+        "?": (
+            # Note that "PatternTest" has to come last.
+            "Information",
+            "PatternTest",
+        ),
         "@": ("ApplyList", "Apply", "Composition", "Prefix"),
         "[": ("RawLeftBracket",),
         "\\": (
+            # Note that "RawBackSlash" has to come last.
             "BoxInputEscape",
             "LeftRowBox",
             "RightRowBox",
@@ -446,6 +516,7 @@ def init_module():
         ),
         "]": ("RawRightBracket",),
         "^": (
+            # Note that "Power" has to come last.
             "UpSetDelayed",
             "UpSet",
             "Power",
@@ -459,6 +530,7 @@ def init_module():
         "{": ("OpenCurly",),
         "}": ("CloseCurly",),
         "~": (
+            # Note that "Infix" has to come last.
             "StringExpression",
             "Infix",
         ),
@@ -470,7 +542,12 @@ def init_module():
     for c in string.digits:
         literal_tokens[c] = ("Number",)
 
+    # The token and its matching pattern in filename mode.
     filename_tokens = [("Filename", FILENAME_PATTERN)]
+
+    # The token and its matching pattern in a Names[] pattern argument
+    # or a ?? (Information operator) argument.
+    name_pattern_tokens = [("NamePattern", FULL_SYMBOL_PATTERN_WITH_NAMES_PATTERN_STR)]
 
     # Reset the global variables
     TOKENS.clear()
@@ -480,6 +557,7 @@ def init_module():
     TOKENS.extend(compile_tokens(tokens))
     TOKEN_INDICES.update(find_indices(literal_tokens))
     FILENAME_TOKENS.extend(compile_tokens(filename_tokens))
+    NAME_PATTERN_TOKENS.extend(compile_tokens(name_pattern_tokens))
 
 
 def find_indices(literals: dict) -> Dict[str, Tuple[int, ...]]:
@@ -500,13 +578,20 @@ def find_indices(literals: dict) -> Dict[str, Tuple[int, ...]]:
     return literal_indices
 
 
+FULL_SYMBOL_PATTERN_RE: re.Pattern = compile_pattern(FULL_SYMBOL_PATTERN_STR)
+FULL_SYMBOL_PATTERN_WITH_NAMES_PATTERN_RE: Final[str] = compile_pattern(FULL_SYMBOL_PATTERN_WITH_NAMES_PATTERN_STR)
+
+# rocky: The coding using compile_tokens below is a bit obfucscated.
+# We start out with strings like FILENAME_PATTERN which then gets put
+# in a list then we convert the list to re.Patterns the compile_tokens
+# below.  The compiled regexp's for the individual pattern strings are
+# not associated with variable names, but are justre.Patterns just
+# appear in some token "token_list" structure.  FIXME: come up with a
+# more transparent way to code this.
 def compile_tokens(token_list):
     """Compile a list of tokens into a list
     of tuples of the form (tag, compiled_pattern)"""
     return [(tag, compile_pattern(pattern)) for tag, pattern in token_list]
-
-
-FULL_SYMBOL_PATTERN_RE: re.Pattern = compile_pattern(full_symbol_pattern_str)
 
 
 def is_symbol_name(text: str) -> bool:
@@ -567,7 +652,11 @@ class Tokeniser:
     """
 
     # TODO: Check if this dict should be updated using the init_module function
-    modes = {"expr": (TOKENS, TOKEN_INDICES), "filename": (FILENAME_TOKENS, {})}
+    modes = {
+        "expr": (TOKENS, TOKEN_INDICES),
+        "filename": (FILENAME_TOKENS, {}),
+        "name-pattern": (NAME_PATTERN_TOKENS, {}),
+    }
 
     def __init__(self, feeder):
         """
@@ -790,12 +879,20 @@ class Tokeniser:
         return Token(tag, text, pattern_match.start(0))
 
     def t_Filename(self, pattern_match: re.Match) -> Token:
-        "Scan for ``Filename`` token and return that"
+        """
+        Scan for ``Filename`` token in "expr" mode, and return that token.
+        """
         return self._token_mode(pattern_match, "Filename", "expr")
 
     def t_Get(self, pattern_match: re.Match) -> Token:
         "Scan for a ``Get`` token from ``pattern_match`` and return that token"
         return self._token_mode(pattern_match, "Get", "filename")
+
+    def t_Information(self, pattern_match: re.Match) -> Token:
+        """
+        Scan for ``Information`` token in "name-pattern" mode, and return that token.
+        """
+        return self._token_mode(pattern_match, "Information", "name-pattern")
 
     def t_Number(self, pattern_match: re.Match) -> Token:
         "Break out from ``pattern_match`` the next token which is expected to be a Number"

@@ -39,7 +39,7 @@ def test_CodeTokenize():
             "??Times",
             [
                 "LeafNode[Token`QuestionQuestion, '??', 0]",
-                "LeafNode[Symbol, 'Times', 2]",
+                "LeafNode[Token`NamePattern, 'Times', 2]",
             ],
         ),
         (
