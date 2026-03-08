@@ -3,6 +3,7 @@
 # format used by the library internally
 
 import json
+import os
 import os.path as osp
 import sys
 from pathlib import Path
@@ -10,7 +11,9 @@ from pathlib import Path
 import click
 import yaml
 
-from mathics_scanner.version import __version__
+# Silence warnings about JSON tables not existing
+os.environ["MATHICS3_TABLE_GENERATION"] = "true"
+from mathics_scanner.version import __version__  # noqa
 
 
 def compile_tables(data: dict) -> dict:
