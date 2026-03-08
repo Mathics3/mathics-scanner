@@ -2,7 +2,7 @@
 Mathics3 Scanner or Tokenizer module.
 
 This module reads input lines and breaks the lines into tokens.
-See classes `Token` and `Tokeniser` .
+See classes `Token` and `Tokeniser`.
 """
 
 import itertools
