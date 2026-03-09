@@ -97,14 +97,14 @@ NAMES_WILDCARDS: Final[str] = "@*"
 # different states or "modes" indicating the interior of comments,
 # strings, files, and Box-like constructs.
 
-# Extra pattern maching symbols are allowed in a Names[] pattern argument
-# or a ?? (Information operator) argument. These variables have the
+# Extra pattern maching symbols are allowed in the operand for prefix
+# operator "??", and "?" (Information). These variables have the
 # "with_names_pattern" suffix.
 
 # The leading character of a Symbol:
 symbol_first_letter: Final[str] = f"{LETTERS}{LETTERLIKES}"
 
-# Same thing as above but adding @* for Names[] patterns
+# Same thing as above, but adding @* for NamesPattern-type patterns.
 symbol_first_letter_with_names_pattern: Final[str] = (
     symbol_first_letter + NAMES_WILDCARDS
 )
@@ -123,7 +123,7 @@ FULL_SYMBOL_PATTERN_STR: Final[str] = (
     rf"(`?{base_symbol_pattern}(`{base_symbol_pattern})*)"
 )
 
-# Same thing as above but adding @* for Names[] patterns
+# Same thing as above, but adding @* for NamesPattern-type patterns.
 FULL_SYMBOL_PATTERN_WITH_NAMES_PATTERN_STR: Final[
     str
 ] = rf"""
