@@ -412,7 +412,7 @@ def init_module():
 
     # Note the tuple is in priority order. In particular, tokens
     # associated with a single character tokens like Factorial (!), has to
-    # come after both Unequal (!=), and Factorial2 (!!).
+    # come after both Unequal (!=), and Factorial2 (!!) to ensure all the candidates be considered.
 
     literal_tokens: Dict[str, Tuple[str]] = {
         "!": (
