@@ -99,21 +99,21 @@ NAMES_WILDCARDS: Final[str] = "@*"
 
 # Extra pattern maching symbols are allowed in the operand for prefix
 # operator "??", and "?" (Information). These variables have the
-# "with_names_pattern" suffix.
+# "with_names_wildcard" suffix.
 
 # The leading character of a Symbol:
 symbol_first_letter: Final[str] = f"{LETTERS}{LETTERLIKES}"
 
 # Same thing as above, but adding @* for NamesPattern-type patterns.
-symbol_first_letter_with_names_pattern: Final[str] = (
+symbol_first_letter_with_names_wildcard: Final[str] = (
     symbol_first_letter + NAMES_WILDCARDS
 )
 
 # Regular expression string for Symbol without context parts. Note that
 # ![0-9] is too permissive, but that's handle by other means.
 base_symbol_pattern: Final[str] = rf"((?![0-9])([0-9${symbol_first_letter}])+)"
-base_symbol_pattern_with_names_pattern: Final[str] = (
-    rf"((?![0-9])([0-9${symbol_first_letter_with_names_pattern}])+)"
+base_symbol_pattern_with_names_wildcard: Final[str] = (
+    rf"((?![0-9])([0-9${symbol_first_letter_with_names_wildcard}])+)"
 )
 
 interior_symbol_pattern: Final[str] = rf"([0-9${symbol_first_letter}]+)"
@@ -124,12 +124,12 @@ FULL_SYMBOL_PATTERN_STR: Final[str] = (
 )
 
 # Same thing as above, but adding @* for NamesPattern-type patterns.
-FULL_SYMBOL_PATTERN_WITH_NAMES_PATTERN_STR: Final[
+FULL_SYMBOL_PATTERN_WITH_NAMES_WILDCARD_STR: Final[
     str
 ] = rf"""
 (?P<quote>\"?)                              (?# Opening quotation mark)
-    (`?{base_symbol_pattern_with_names_pattern}
-    (`{base_symbol_pattern_with_names_pattern})*)
+    (`?{base_symbol_pattern_with_names_wildcard}
+    (`{base_symbol_pattern_with_names_wildcard})*)
 (?P=quote)                                  (?# Closing quotation mark)
 """
 
@@ -559,7 +559,7 @@ def init_module():
 
     # The token and its matching pattern in a Names[] pattern argument
     # or a ?? (Information operator) argument.
-    name_pattern_tokens = [("NamePattern", FULL_SYMBOL_PATTERN_WITH_NAMES_PATTERN_STR)]
+    name_pattern_tokens = [("NamePattern", FULL_SYMBOL_PATTERN_WITH_NAMES_WILDCARD_STR)]
 
     # Reset the global variables
     TOKENS.clear()
@@ -591,8 +591,8 @@ def find_indices(literals: dict) -> Dict[str, Tuple[int, ...]]:
 
 
 FULL_SYMBOL_PATTERN_RE: re.Pattern = compile_pattern(FULL_SYMBOL_PATTERN_STR)
-FULL_SYMBOL_PATTERN_WITH_NAMES_PATTERN_RE: Final[str] = compile_pattern(
-    FULL_SYMBOL_PATTERN_WITH_NAMES_PATTERN_STR
+FULL_SYMBOL_PATTERN_WITH_NAMES_WILDCARD_RE: Final[str] = compile_pattern(
+    FULL_SYMBOL_PATTERN_WITH_NAMES_WILDCARD_STR
 )
 
 

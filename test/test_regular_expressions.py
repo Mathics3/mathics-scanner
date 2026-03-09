@@ -7,7 +7,7 @@ import re
 from mathics_scanner.tokeniser import (
     FILENAME_PATTERN,
     FULL_SYMBOL_PATTERN_STR,
-    FULL_SYMBOL_PATTERN_WITH_NAMES_PATTERN_RE,
+    FULL_SYMBOL_PATTERN_WITH_NAMES_WILDCARD_RE,
     NUMBER_PATTERN,
     compile_pattern,
 )
@@ -44,11 +44,11 @@ def test_filename_patterns():
 def test_symbol_patterns():
     for symbol in ("xX", "context`name", "`name" "`context`name"):
         check_pattern(FULL_SYMBOL_PATTERN_STR, symbol, "Symbol")
-        check_pattern(FULL_SYMBOL_PATTERN_WITH_NAMES_PATTERN_RE, symbol, "Symbols")
+        check_pattern(FULL_SYMBOL_PATTERN_WITH_NAMES_WILDCARD_RE, symbol, "Symbols")
 
 
 def test_name_patterns():
     for symbol in ("*", "Foo*.wl", "Foo@", '"Bar"'):
         check_pattern(
-            FULL_SYMBOL_PATTERN_WITH_NAMES_PATTERN_RE, symbol, "Names Patterns"
+            FULL_SYMBOL_PATTERN_WITH_NAMES_WILDCARD_RE, symbol, "Names Patterns"
         )
