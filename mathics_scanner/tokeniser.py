@@ -409,12 +409,20 @@ def init_module():
             tokens.append((operator_name, rf" {unicode} "))
 
     # The format below maps a string character to a tuple of possible
-    # Token tag names. For the tag name, we try to use CodeTokenize
-    # names.
+    # Token tag names.
 
-    # Note the tuple is in priority order. In particular, tokens
-    # associated with a single character tokens like Factorial (!), has to
-    # come after both Unequal (!=), and Factorial2 (!!) to ensure all the candidates be considered.
+    # For the tag name, we try to use CodeTokenize names. However in
+    # some situations this is not feasibile, given how our scanner and
+    # parser interact. In particular, the parser needs precedence
+    # information for binary operators. To get this, it is convenient
+    # to work off the operator name indicated by token value. So a
+    # token tag of "PatternTest" (for binary operators) is more
+    # convenient than "?" and a lookup of the binary operator name.
+
+    # Note that the tuple below is in priority order. In particular,
+    # tokens associated with a single character tokens like Factorial
+    # (!), has to come after both Unequal (!=), and Factorial2 (!!) to
+    # ensure all the candidates be considered.
 
     literal_tokens: Dict[str, Tuple[str]] = {
         "!": (
