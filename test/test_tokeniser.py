@@ -170,7 +170,7 @@ def test_function():
 
 def test_information():
     assert tokens("??Sin") == [
-        Token("Information", "??", 0),
+        Token("QuestionQuestion", "??", 0),
         Token("NamePattern", "Sin", 2),
     ]
 

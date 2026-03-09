@@ -168,7 +168,6 @@ MATHICS3_TAG_TO_CODETOKENIZE: Final[Dict[str, str]] = {
     "Get": "LessLess",
     "Increment": "PlusPlus",
     "Infix": "Tilde",
-    "Information": "QuestionQuestion",
     "InterpretedBox": "LinearSequence`Bang",
     "MessageName": "ColonColon",
     "Or": "BarBar",
@@ -234,7 +233,7 @@ def init_module():
         ("BoxInputEscape", r" \\[*]"),
         ("Definition", r"\? "),
         ("Get", r"\<\<"),
-        ("Information", r"\?\? "),
+        ("QuestionQuestion", r"\?\? "),
         ("MessageName", r" \:\: "),
         ("Number", NUMBER_PATTERN),
         ("Out", r"\%(\%+|\d+)?"),
@@ -326,7 +325,7 @@ def init_module():
         ("Implies", rf" {NAME_TO_WL_UNICODE['Implies']} "),
         ("Increment", r" \+\+ "),
         ("Infix", r" \~ "),
-        ("Information", r"\?\?"),
+        ("QuestionQuestion", r"\?\?"),
         ("Integral", f" {NAME_TO_WL_UNICODE['Integral']} "),
         ("Intersection", rf" {NAMED_CHARACTERS['Intersection']} "),
         ("Less", r" \< "),
@@ -495,7 +494,7 @@ def init_module():
         ),
         "?": (
             # Note that "PatternTest" has to come last.
-            "Information",
+            "QuestionQuestion",
             "PatternTest",
         ),
         "@": ("ApplyList", "Apply", "Composition", "Prefix"),
@@ -894,11 +893,19 @@ class Tokeniser:
         "Scan for a ``Get`` token from ``pattern_match`` and return that token"
         return self._token_mode(pattern_match, "Get", "filename")
 
-    def t_Information(self, pattern_match: re.Match) -> Token:
+    # FIXME: Add after we figure out how to deal with prefix ? (Information)
+    # versus infix PatternTest.
+    # def t_Question(self, pattern_match: re.Match) -> Token:
+    #     """
+    #     Scan for ``Question`` token in "name-pattern" mode, and return that token.
+    #     """
+    #     return self._token_mode(pattern_match, "Question", "name-pattern")
+
+    def t_QuestionQuestion(self, pattern_match: re.Match) -> Token:
         """
-        Scan for ``Information`` token in "name-pattern" mode, and return that token.
+        Scan for ``QuestionQuestion`` token in "name-pattern" mode, and return that token.
         """
-        return self._token_mode(pattern_match, "Information", "name-pattern")
+        return self._token_mode(pattern_match, "QuestionQuestion", "name-pattern")
 
     def t_Number(self, pattern_match: re.Match) -> Token:
         "Break out from ``pattern_match`` the next token which is expected to be a Number"
