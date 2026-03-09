@@ -683,9 +683,9 @@ class Tokeniser:
         # This has an effect on which escape operators are allowed.
         self.is_inside_box: bool = False
 
-        self._change_token_scanning_mode("expr")
+        self.change_token_scanning_mode("expr")
 
-    def _change_token_scanning_mode(self, mode: str):
+    def change_token_scanning_mode(self, mode: str):
         """
         Set the kinds of tokens that will be expected on the next token scan.
         See class variable "modes" above for the dictionary
@@ -880,7 +880,7 @@ class Tokeniser:
         """
         text = pattern_match.group(0)
         self.pos = pattern_match.end(0)
-        self._change_token_scanning_mode(mode)
+        self.change_token_scanning_mode(mode)
         return Token(tag, text, pattern_match.start(0))
 
     def t_Filename(self, pattern_match: re.Match) -> Token:
@@ -892,20 +892,6 @@ class Tokeniser:
     def t_Get(self, pattern_match: re.Match) -> Token:
         "Scan for a ``Get`` token from ``pattern_match`` and return that token"
         return self._token_mode(pattern_match, "Get", "filename")
-
-    # FIXME: Add after we figure out how to deal with prefix ? (Information)
-    # versus infix PatternTest.
-    # def t_Question(self, pattern_match: re.Match) -> Token:
-    #     """
-    #     Scan for ``Question`` token in "name-pattern" mode, and return that token.
-    #     """
-    #     return self._token_mode(pattern_match, "Question", "name-pattern")
-
-    def t_QuestionQuestion(self, pattern_match: re.Match) -> Token:
-        """
-        Scan for ``QuestionQuestion`` token in "name-pattern" mode, and return that token.
-        """
-        return self._token_mode(pattern_match, "QuestionQuestion", "name-pattern")
 
     def t_Number(self, pattern_match: re.Match) -> Token:
         "Break out from ``pattern_match`` the next token which is expected to be a Number"
@@ -926,6 +912,19 @@ class Tokeniser:
     def t_PutAppend(self, pattern_match: re.Match) -> Token:
         "Scan for a ``PutAppend`` token and return that"
         return self._token_mode(pattern_match, "PutAppend", "filename")
+
+    # THINK ABOUT:
+    # The routine below is not strictly needed since the *parser* now sets the token mode.
+    # However, in standalone token reading, that is, without the parser,
+    # having this will give more correct answers. In particular,
+    # it makes mathics3-tokens give more correct answers, and
+    # test_tokeniser has a test that ??X identifies X as a NamePattern.
+    # If this is removed, test_information() of test_tokeniser should be changed.
+    def t_QuestionQuestion(self, pattern_match: re.Match) -> Token:
+        """
+        Scan for ``QuestionQuestion`` token in "name-pattern" mode, and return that token.
+        """
+        return self._token_mode(pattern_match, "QuestionQuestion", "name-pattern")
 
     def t_RawBackslash(self, pattern_match: Optional[re.Match]) -> Token:
         r"""Break out from ``pattern_match`` tokens which start with a backslash, '\'."""
