@@ -69,7 +69,9 @@ NUMBER_PATTERN = r"""
 (\*\^(\+|-)?\d+)?                           (?# Exponent)
 """
 
-# The additional characters that can appear as Names[] metacharacters.
+# The additional characters that can appear as metacharacters in
+# the Information prefix operators ?? and ?.
+#
 # For those who are curious (it is not needed in pattern matching)
 #  * matches zero or more
 #  @ matches one or more but not uppercase letters
