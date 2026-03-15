@@ -178,8 +178,6 @@ MATHICS3_TAG_TO_CODETOKENIZE: Final[Dict[str, str]] = {
     "Postfix": "SlashSlash",
     "Prefix": "At",
     "Put": "GreaterGreater",
-    "RawRightBrace": "CloseCurly",
-    "RightRowBox": "CloseParen",
     "Rule": "MinusGreater",
     "RuleDelayed": "ColonGreater",
     "ReplaceAll": "SlashDot",
