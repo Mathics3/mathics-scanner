@@ -178,7 +178,6 @@ MATHICS3_TAG_TO_CODETOKENIZE: Final[Dict[str, str]] = {
     "Postfix": "SlashSlash",
     "Prefix": "At",
     "Put": "GreaterGreater",
-    "RawLeftBracket": "OpenSquare",
     "RawRightBrace": "CloseCurly",
     "RawRightBracket": "CloseSquare",
     "RightRowBox": "CloseParen",
@@ -243,8 +242,8 @@ def init_module():
         ("PutAppend", r"\>\>\>"),
         ("LessBar", r" \<\| "),
         ("OpenCurly", r" \{ "),
-        ("RawLeftBracket", r" \[ "),
         ("OpenParen", r" \( "),
+        ("OpenSquare", r" \[ "),
         ("BarGreater", r" \|\> "),
         ("CloseCurly", r" \} "),
         ("RawRightBracket", r" \] "),
@@ -506,7 +505,7 @@ def init_module():
             "PatternTest",
         ),
         "@": ("ApplyList", "Apply", "Composition", "Prefix"),
-        "[": ("RawLeftBracket",),
+        "[": ("OpenSquare",),
         "\\": (
             # Note that "RawBackSlash" has to come last.
             "BoxInputEscape",
