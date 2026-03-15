@@ -178,7 +178,6 @@ MATHICS3_TAG_TO_CODETOKENIZE: Final[Dict[str, str]] = {
     "Postfix": "SlashSlash",
     "Prefix": "At",
     "Put": "GreaterGreater",
-    "RawComma": "Comma",
     "RawLeftBrace": "OpenCurly",
     "RawLeftBracket": "OpenSquare",
     "RawRightBrace": "CloseCurly",
@@ -233,6 +232,7 @@ def init_module():
 
     tokens: List[Tuple[str, ...]] = [
         ("BoxInputEscape", r" \\[*]"),
+        ("Comma", r" \, "),
         ("Definition", r"\? "),
         ("Get", r"\<\<"),
         ("QuestionQuestion", r"\?\? "),
@@ -242,7 +242,6 @@ def init_module():
         ("Pattern", pattern_pattern),
         ("Put", r"\>\>"),
         ("PutAppend", r"\>\>\>"),
-        ("RawComma", r" \, "),
         ("LessBar", r" \<\| "),
         ("OpenCurly", r" \{ "),
         ("RawLeftBracket", r" \[ "),
@@ -444,7 +443,7 @@ def init_module():
         ")": ("CloseParen",),
         "*": ("NonCommutativeMultiply", "TimesBy", "Times"),
         "+": ("Increment", "AddTo", "Plus"),
-        ",": ("RawComma",),
+        ",": ("Comma",),
         "-": (
             # Note that "Minus" has to come last.
             "Decrement",
