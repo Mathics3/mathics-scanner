@@ -179,7 +179,6 @@ MATHICS3_TAG_TO_CODETOKENIZE: Final[Dict[str, str]] = {
     "Prefix": "At",
     "Put": "GreaterGreater",
     "RawRightBrace": "CloseCurly",
-    "RawRightBracket": "CloseSquare",
     "RightRowBox": "CloseParen",
     "Rule": "MinusGreater",
     "RuleDelayed": "ColonGreater",
@@ -246,7 +245,7 @@ def init_module():
         ("OpenSquare", r" \[ "),
         ("BarGreater", r" \|\> "),
         ("CloseCurly", r" \} "),
-        ("RawRightBracket", r" \] "),
+        ("CloseSquare", r" \] "),
         ("CloseParen", r" \) "),
         ("Slot", slot_pattern),
         ("SlotSequence", r"\#\#\d*"),
@@ -523,7 +522,7 @@ def init_module():
             "FormBox",
             "RawBackslash",
         ),
-        "]": ("RawRightBracket",),
+        "]": ("CloseSquare",),
         "^": (
             # Note that "Power" has to come last.
             "UpSetDelayed",
