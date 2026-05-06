@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # This script reads the data from named-characters and converts it to the
-# format used by the library internally
+# format used by the library internally.
 
 import ast
 import json
@@ -12,7 +12,7 @@ from pathlib import Path
 import click
 import yaml
 
-# Silence warnings about JSON tables not existing
+# Silence warnings about JSON tables not existing.
 os.environ["MATHICS3_TABLE_GENERATION"] = "true"
 
 try:
@@ -36,10 +36,10 @@ def build_unicode_to_ascii_table(data):
     """
     result = {}
     for key, entry in data.items():
-        # First, look at the ascii entry
+        # First, look at the "ascii" entry.
         ascii_equiv = entry.get("ascii", None)
-        # If there is no ascii entry, try with
-        # esc-alias
+        # If there is no "ascii" entry, try with
+        # "esc-alias"
         if ascii_equiv is None:
             ascii_equiv = entry.get("esc-alias", None)
         # otherwise, use the NameCharacter form:
@@ -48,14 +48,14 @@ def build_unicode_to_ascii_table(data):
 
         unicode_equivalent = entry.get("unicode-equivalent", None)
         if unicode_equivalent is not None:
-            # not already an ascii character
+            # Not already an ASCII character.
             if unicode_equivalent != ascii_equiv and (
                 len(unicode_equivalent) != 1 or ord(unicode_equivalent) > 127
             ):
                 result[unicode_equivalent] = ascii_equiv
         wl_unicode = entry.get("wl-unicode", None)
         if wl_unicode is not None and wl_unicode not in result:
-            # not ascii
+            # not ASCII.
             if wl_unicode != ascii_equiv and (
                 len(wl_unicode) != 1 or ord(wl_unicode) > 127
             ):
