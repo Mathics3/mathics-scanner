@@ -7,7 +7,6 @@ For the easiest installation just type the following command (you'll probably
 need root privileges):
 
     pip install -e .
-
 """
 
 import os

@@ -2,6 +2,7 @@
 # This script reads the data from named-characters and converts it to the
 # format used by the library internally
 
+import ast
 import json
 import os
 import re
@@ -26,6 +27,7 @@ except ImportError:
     ][0]
     __version__ = ast.literal_eval(version_line.split("=")[1].strip().split("#")[0])
 from mathics_scanner.version import __version__  # noqa
+=======
 
 
 def build_unicode_to_ascii_table(data):
