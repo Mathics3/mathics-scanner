@@ -1,66 +1,54 @@
-CHANGES
-=======
+# CHANGES
 
-10.0.0
-------
+## 10.0.0
 
 April 18, 2026
 
-Supports Python 3.14. Python 3.10 support has been dropped. While Python 3.10 may still work, it is not supported.
+Supports Python 3.14. Python 3.10 support has been dropped. While Python 3.10 may still work, but it is not supported.
 
-More YAML/JSON tables added. mathics-core now imports values via ``mathics.characters``. Previously it
-created JSON files on its own.
+More YAML/JSON tables added. mathics-core now imports values via `mathics.characters`. Previously, it created JSON files on its own.
 
-#. `PR #173 <https://github.com/Mathics3/mathics-core/pull/173>`_  Python 3.14 supported. Python 3.10 support has been dropped. (It may still work, but is not supported.)
-#. `PR #158 <https://github.com/Mathics3/mathics-core/pull/158>`_  Name Pattern token introduced to handle ``?`` and ``??`` operands.
-#. `PR #156 <https://github.com/Mathics3/mathics-core/pull/156>`_  Token names align more closely with ``CodeParser`Tokenize``.
-#. `PR #149 <https://github.com/Mathics3/mathics-core/pull/142>`_  Add YAML/JSON table for box grouping characters
-#. `PR #147 <https://github.com/Mathics3/mathics-core/pull/147>`_  Disambiguate Unicode for \[Rule] and \[DirectedEdge].
-#. `PR #145 <https://github.com/Mathics3/mathics-core/pull/145>`_  Add Unicode to ASCII conversion table to named characters
+1.  [PR \#158](https://github.com/Mathics3/mathics-core/pull/158) Name Pattern token introduced to handle `?` and `??` operands.
+1.  [PR \#156](https://github.com/Mathics3/mathics-core/pull/156) Token names align more closely with `` CodeParser`Tokenize ``.
+4.  [PR \#149](https://github.com/Mathics3/mathics-core/pull/142) Add  YAML/JSON table for box grouping characters
+5.  [PR \#147](https://github.com/Mathics3/mathics-core/pull/147) Disambiguate Unicode for \[Rule\] and \[DirectedEdge\].
+6.  [PR \#145](https://github.com/Mathics3/mathics-core/pull/145) Add   Unicode to ASCII conversion table to named characters
 
-Corrections to YAML table entries, e.g. "latex" field additional/corrections in named characters.
+Corrections to YAML table entries, e.g., "latex" field; additional/corrections in named characters.
 
 Numerous spelling corrections were performed over the code.
 
-The name ``Mathics3`` replaces ``Mathics``. ``Mathics`` was the monolithic
-Python 2-ish code. Mathics3 has rewritten a number of major
+The name `Mathics3` replaces `Mathics`. `Mathics` was the monolithic Python 2-ish code. Mathics3 has rewritten several major
 subcomponents, and the scanner and the character and operators tables in YAML are now in this repository.
+
 
 2.0.0
 -----
+
+August 28, 2025
 
 Supports Python 3.13. Python 3.8 and 3.9 support has been dropped.
 
 Note: There are incompatible changes. Use with Mathics-core 9.0.0 or greater.
 
-Support for saving token position information was started. This is in
-module ``mathics_scanner.location``. Additional location information is saved when
-``mathics_scanner.location.TRACK_LOCATIONS`` is set to ``True``.
+Support for saving token position information was started. This is in module ``mathics_scanner.location``. Additional location information is saved when ``mathics_scanner.location.TRACK_LOCATIONS`` is set to ``True``.
 
-Scanning was revised to handle more kinds of escape sequences and to
-be sensitive to their placement inside and outside a string. This is in module ``mathics_scanner.escape_sequences``.
+Scanning was revised to handle more kinds of escape sequences and to be sensitive to their placement inside and outside a string. This is in module ``mathics_scanner.escape_sequences``.
 
 Tokenization support for Box Input operator ``\*`` was added.
 
-Small YML changes were made to reflect a better understanding of boxing
-operators. In particular, ``\*`` is not a (prefix) operator.
-
-More AMSLaTeX translations added for named characters.
-
-Handle escape sequences in string literals.
+Small YML changes were made to reflect a better understanding of boxing operators. In particular, ``\*`` is not a (prefix) operator.
 
 Internals
-+++++++++
+---------
 
-Mathics3 scanner exceptions of class TranslateError are incompatible
-with previous versions, and now store error parameters, "name", "tag", and
-"args".
+Mathics3 scanner exceptions of class TranslateError are incompatible with previous versions, and now store error parameters, "name", "tag", and "args".
 
 Bugs Fixed
-++++++++++
+----------
 
-#. #125 Hex escape sequence in string literal doesn't work.
-#. #136 Is YAML file valid?
+* #125 Hex escape sequence in string literal doesn't work.
+* #136 Is the YAML file valid?
 
 1.4.1
 -----
@@ -68,7 +56,7 @@ Bugs Fixed
 Jan 26, 2025
 
 
-Re-release to include ``operators.yml`` into the tarball/wheel.
+Re-release to include `operators.yml` into the tarball/wheel.
 
 
 1.4.0
@@ -106,16 +94,18 @@ Operator precedence values have been gone over.
 
 Aug 9, 2024
 
-Python 3.8 is now the minimum Python supported. Python 3.12 is supported.
+Python 3.8 is now the minimum Python supported. Python 3.12 supported.
 Various dependencies elsewhere force 3.8 or newer.
 
 
 * Packaging was redone to be able to support Python 3.12.
-* Files now follow current Python black formatting and ``isort`` import ordering
-* Some Python code linting
+* Files now follow current Python black formatting and isort import ordering
+* Some Python code linting.
 
 1.3.0
 ------
+
+Feb 25, 2025
 
 * Add escape-code sequence for 32-bit Unicode. Issue #48.
 * Correct ``Infix`` and ``Tilde`` character symbols
@@ -135,10 +125,11 @@ Various dependencies elsewhere force 3.8 or newer.
 -----
 
 * Start adding AMSLateX names.
-* Add ``ApplyTo``, and ``Factorial2``.
-* Adjust ``Tilde``, and ``Factorial``.
+* Add `ApplyTo`
+* Add `Factorial2`.  PR #30
+* Adjust `Tilde`, and `Factorial`.
 * Regularize Unicode equivalents.
-* Add named-characters.yml to distribution packages; Issue #32.
+* Add `named-characters.yml `to distribution packages; Issue #32.
 * Use SPDX identifier in license; PR #31.
 
 1.2.2-1.2.3
@@ -152,10 +143,10 @@ Many thanks to Victor the packager for AUR for pointing this out.
 -----
 
 * Add tables for operator precedence.
-* Start to add AMSLaTeX symbols. (A future release will finish this)
-* Revise ``README.rst``.
-* Some small corrections: ``Implies``
-* Make ``ujson`` optional
+* Start to add AMSLaTeX symbols. (A future release will finish this.)
+* Revise `README.rst.`
+* Some small corrections: `Implies`.
+* Make `ujson ` optional.
 
 
 1.2.0
