@@ -28,7 +28,7 @@ Uses
 The scanner and character tables are used inside `Mathics3 <https://mathics.org>`_. However information can
 also be used by other programs for tokenizing and formatting Wolfram Language code.
 
-For example, tables are used in `mathics-pygments <https://pypi.org/project/Mathics-Scanner/>`_, a Pygments-based
+For example, tables are used in `mathics-pygments <https://pypi.org/project/Mathics3-pygments/>`_, a Pygments-based
 lexer and highlighter for Mathematica/Wolfram Language source code.
 
 This library may be useful if you need to work with the Wolfram Language
@@ -64,7 +64,8 @@ Implementation
 --------------
 
 For notes on the implementation of the packages or details on the conversion
-scheme, please read `Scanning <https:/https://mathics-development-guide.readthedocs.io/en/latest/code-overview/scanning.html>`_.
+scheme, please read `Mathics3 scanner's documentation <https://mathics3-scanner-and-yaml-tables-for-characters-and-operators.readthedocs.io/en/latest/>`_ or
+`Scanning section <https://mathics-development-guide.readthedocs.io/en/latest/code-overview/scanning.html>`_ of the Mathics3 User and Developers Guide.
 
 Contributing
 ------------

@@ -54,7 +54,7 @@ full = [
 mathics3-make-boxing-character-json = "mathics_scanner.generate.boxing_characters:main"
 mathics3-make-named-character-json = "mathics_scanner.generate.named_characters:main"
 mathics3-make-operator-json = "mathics_scanner.generate.operators:main"
-mathics3-code-tokenize = "mathics_scanner.mathics3_code_tokenize:main"
+mathics3-codeparser-tokenize = "mathics_scanner.mathics3_code_tokenize:main"
 
 [tool.setuptools]
 packages = [
@@ -67,7 +67,7 @@ packages = [
 "mathics_scanner" = [
     "data/boxing-characters.json",
     "data/boxing-characters.yml",
-    "daa/grouping-characters.yml",
+    "data/grouping-characters.yml",
     "data/named-characters.json",
     "data/named-characters.yml",
     "data/operators.yml",

@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# This scripts reads the data from named-characters and converts it to the
+# This script reads the data from named-characters and converts it to the
 # format used by the library internally
 
 import json
@@ -13,6 +13,18 @@ import yaml
 
 # Silence warnings about JSON tables not existing
 os.environ["MATHICS3_TABLE_GENERATION"] = "true"
+
+try:
+    from mathics_scanner.version import __version__  # noqa
+except ImportError:
+    import ast
+
+    version_file = Path(__file__).parent.parent / "version.py"
+    version_content = version_file.read_text()
+    version_line = [
+        line for line in version_content.split("\n") if line.startswith("__version__")
+    ][0]
+    __version__ = ast.literal_eval(version_line.split("=")[1].strip().split("#")[0])
 from mathics_scanner.version import __version__  # noqa
 
 

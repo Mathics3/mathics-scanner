@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-This is the tokeniser or scanner portion for the Wolfram Language.
+This is the tokenizer or scanner portion for the Wolfram Language.
 
 As such, it also contains a full set of translation between Wolfram Language
 named characters, their Unicode/ASCII equivalents and code-points.
