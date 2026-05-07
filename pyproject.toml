@@ -58,6 +58,13 @@ mathics3-make-named-character-json = "mathics_scanner.generate.named_characters:
 mathics3-make-operator-json = "mathics_scanner.generate.operators:main"
 mathics3-codeparser-tokenize = "mathics_scanner.mathics3_code_tokenize:main"
 
+[tool.codespell]
+# Point to your custom ignore file
+ignore-words = "codespell-ignore.txt"
+
+# Exclude directories or files that often trigger false positives
+skip = "*.pyd,*.pyc,./.git,./.venv,./build"
+
 [tool.setuptools]
 packages = [
     "mathics_scanner",

@@ -8,6 +8,7 @@ GIT2CL ?= admin-tools/git2cl
 PYTHON ?= python
 PIP ?= pip3
 RM  ?= rm
+BASH ?= /bin/bash
 PIP_INSTALL_OPTS ?=
 
 .PHONY: all build \
@@ -42,7 +43,7 @@ develop: mathics_scanner/data/boxing-characters.json mathics_scanner/data/named-
 
 #: Build distribution
 dist: admin-tools/make-dist.sh
-	$(SHELL) admin-tools/make-dist.sh
+	$(BASH) admin-tools/make-dist.sh
 
 #: Install Mathics3-scanner
 install: build
