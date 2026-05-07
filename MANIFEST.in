@@ -4,7 +4,7 @@ include ChangeLog
 include COPYING.txt
 include FUTURE.rst
 include Makefile
-include mathics_scanner/data/named-characters.yml
+include mathics_scanner/data/*.yml
 include requirements-full.txt
 include requirements-dev.txt
 recursive-include mathics_scanner *.py

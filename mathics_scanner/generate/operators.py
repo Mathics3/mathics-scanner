@@ -28,6 +28,8 @@ except ImportError:
     ][0]
     __version__ = ast.literal_eval(version_line.split("=")[1].strip().split("#")[0])
 
+from mathics_scanner.version import __version__  # noqa
+
 OPERATOR_FIELDS = [
     "actual-precedence",
     "Precedence",

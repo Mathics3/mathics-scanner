@@ -18,6 +18,6 @@ cd ..
 source mathics_scanner/version.py
 echo $__version__
 
-python -m build --wheel
-python ./setup.py sdist
+python -m build --wheel --no-isolation
+python -m build --sdist --no-isolation
 finish

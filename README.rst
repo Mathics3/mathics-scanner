@@ -78,7 +78,7 @@ License
 
 Mathics3 is released under the GNU General Public License Version 3 (GPL3).
 
-.. |Workflows| image:: https://github.com/Mathics3/mathics-scanner/actions/workflows/ubuntu.yml/badge.svg
+.. |Workflows| image:: https://github.com/Mathics3/Mathics3-scanner/actions/workflows/ubuntu.yml/badge.svg
 .. |Packaging status| image:: https://repology.org/badge/vertical-allrepos/mathics-scanner.svg
 			    :target: https://repology.org/project/mathics-scanner/versions
 .. |Latest Version| image:: https://badge.fury.io/py/Mathics-Scanner.svg
