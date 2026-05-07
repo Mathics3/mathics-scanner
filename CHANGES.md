@@ -1,5 +1,11 @@
 # CHANGES
 
+## 10.0.1
+
+May 6, 2026
+
+Revise due to packaging missing a yaml file. Some small changes since release have been added too.
+
 ## 10.0.0
 
 April 18, 2026
