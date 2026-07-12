@@ -40,7 +40,9 @@ classifiers = [
 dynamic = ["version"]
 
 [project.urls]
-Homepage = "https://mathics.org/"
+Homepage = "https://github.com/Mathics3/Mathics3-scanner"
+Changelog = "https://github.com/Mathics3/Mathics3-scanner/blob/master/Changes.md"
+Downloads = "https://github.com/Mathics3/Mathics3-scanner/releases"
 
 [project.optional-dependencies]
 dev = [
