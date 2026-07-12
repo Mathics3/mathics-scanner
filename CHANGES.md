@@ -4,7 +4,7 @@
 
 May 6, 2026
 
-Revise due to packaging missing a yaml file. Some small changes since release have been added too.
+Revise due to packaging missing a YAML file. Some small changes since release have been added too.
 
 ## 10.0.0
 
@@ -28,8 +28,7 @@ The name `Mathics3` replaces `Mathics`. `Mathics` was the monolithic Python 2-is
 subcomponents, and the scanner and the character and operators tables in YAML are now in this repository.
 
 
-2.0.0
------
+## 2.0.0
 
 August 28, 2025
 
@@ -56,8 +55,8 @@ Bugs Fixed
 * #125 Hex escape sequence in string literal doesn't work.
 * #136 Is the YAML file valid?
 
-1.4.1
------
+## 1.4.1
+
 
 Jan 26, 2025
 
@@ -65,8 +64,8 @@ Jan 26, 2025
 Re-release to include `operators.yml` into the tarball/wheel.
 
 
-1.4.0
------
+## 1.4.0
+
 
 A new operator table, ``operators.yml`` was added to contain
 operator information. This information is based on information from Robert Jacobson.
@@ -95,8 +94,8 @@ information, such as URL links to Unicode pages.
 Operator precedence values have been gone over.
 
 
-1.3.1
-------
+## 1.3.1
+
 
 Aug 9, 2024
 
@@ -108,8 +107,8 @@ Various dependencies elsewhere force 3.8 or newer.
 * Files now follow current Python black formatting and isort import ordering
 * Some Python code linting.
 
-1.3.0
-------
+## 1.3.0
+
 
 Feb 25, 2025
 
@@ -127,8 +126,8 @@ Feb 25, 2025
 * Python 3.11 operation verified
 
 
-1.2.4
------
+## 1.2.4
+
 
 * Start adding AMSLateX names.
 * Add `ApplyTo`
@@ -138,15 +137,14 @@ Feb 25, 2025
 * Add `named-characters.yml `to distribution packages; Issue #32.
 * Use SPDX identifier in license; PR #31.
 
-1.2.2-1.2.3
------
+## 1.2.2-1.2.3
+
 
 Redo for packaging problems.
 
 Many thanks to Victor the packager for AUR for pointing this out.
 
-1.2.1
------
+## 1.2.1
 
 * Add tables for operator precedence.
 * Start to add AMSLaTeX symbols. (A future release will finish this.)
@@ -155,14 +153,13 @@ Many thanks to Victor the packager for AUR for pointing this out.
 * Make `ujson ` optional.
 
 
-1.2.0
------
+## 1.2.0
+
 
 Tag unicode operators that have no definition and add the ability to dump them. This is useful for mathics-pygments.
 
 
-1.1.2
------
+## 1.1.2
 
 Release 1.1.1 introduced a small bad interaction with Mathics3 and the
 unicode infix form of ``Function[]``.
@@ -175,15 +172,13 @@ used the name Function, which precluded using it for the Unicode, where
 it is mandatory. For ASCII operators, it isn't necessary, but still
 nice to do when there is no conflict.
 
-1.1.1
------
+## 1.1.1
 
 * Finish adding operator names.
 * Generate ``IndentingNewline`` (``\n``) properly in GNU Readline inputrc tables.
 * Adjust expectation on test since there can be duplicate function operators (for ``Apply`` and ``Function``).
 
-1.1.0
------
+## 1.1.0
 
 * Add operator-name and ASCII fields. See named-characters.yml for a description of these
 * Add some whitespace characters like IndentingNewLine and RawReadLine
@@ -194,8 +189,7 @@ nice to do when there is no conflict.
 Note: not all operators have been tagged, so expect another release soon when that's done.
 
 
-1.0.0
------
+## 1.0.0
 
 * The scanner split off from Mathics3.
 * Tables added for converting between WL names and Unicode, ASCII, and character properties. See ``implementation.rst`` for details.

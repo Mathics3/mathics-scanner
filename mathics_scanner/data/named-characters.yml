@@ -7992,6 +7992,24 @@ OverParenthesis:
   wl-unicode: "\uFE35"
   wl-unicode-name: PRESENTATION FORM FOR VERTICAL LEFT PARENTHESIS
 
+# Note that while \[PageBreakAbove] is tolerated, it is not documented as Character,
+# but instead only as an option.
+PageBreakAbove:
+  # esc-alias: pba ? No escape exists here.
+  has-unicode-inverse: false
+  is-letter-like: false
+  wl-reference: https://reference.wolfram.com/language/ref/PageBreakAbove.html
+  wl-unicode: "\uF3BD"
+
+# Note that while \[PageBreakBelow] is tolerated, it is not documented as Character.
+# but instead only as an option.
+PageBreakBelow:
+  # esc-alias: pbb ? No escape exists here.
+  has-unicode-inverse: false
+  is-letter-like: false
+  wl-reference: https://reference.wolfram.com/language/ref/PageBreakBelow.html
+  wl-unicode: "\uF3BE"
+
 Paragraph:
   has-unicode-inverse: false
   is-letter-like: true
